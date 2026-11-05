@@ -1,0 +1,151 @@
+{
+  "$defs": {
+    "FlexibleCommitment": {
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "category": {
+          "title": "Category",
+          "type": "string"
+        },
+        "days": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Days",
+          "type": "array"
+        },
+        "start": {
+          "description": "HH:MM",
+          "title": "Start",
+          "type": "string"
+        },
+        "duration_min": {
+          "exclusiveMinimum": 0,
+          "title": "Duration Min",
+          "type": "integer"
+        },
+        "movable": {
+          "default": true,
+          "title": "Movable",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "category",
+        "days",
+        "start",
+        "duration_min"
+      ],
+      "title": "FlexibleCommitment",
+      "type": "object"
+    },
+    "HardConstraint": {
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "recurrence": {
+          "description": "Ex.: 'WED 10:00-12:00' ou 'ONCE 2026-11-11 23:59'",
+          "title": "Recurrence",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "recurrence"
+      ],
+      "title": "HardConstraint",
+      "type": "object"
+    },
+    "Preferences": {
+      "properties": {
+        "no_events_before": {
+          "default": "08:00",
+          "title": "No Events Before",
+          "type": "string"
+        },
+        "no_events_after": {
+          "default": "23:00",
+          "title": "No Events After",
+          "type": "string"
+        },
+        "protect_weekend": {
+          "default": true,
+          "title": "Protect Weekend",
+          "type": "boolean"
+        }
+      },
+      "title": "Preferences",
+      "type": "object"
+    },
+    "Priority": {
+      "properties": {
+        "category": {
+          "title": "Category",
+          "type": "string"
+        },
+        "weight": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Weight",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "category",
+        "weight"
+      ],
+      "title": "Priority",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "hard_constraints": {
+      "items": {
+        "$ref": "#/$defs/HardConstraint"
+      },
+      "title": "Hard Constraints",
+      "type": "array"
+    },
+    "priorities": {
+      "items": {
+        "$ref": "#/$defs/Priority"
+      },
+      "title": "Priorities",
+      "type": "array"
+    },
+    "flexible_commitments": {
+      "items": {
+        "$ref": "#/$defs/FlexibleCommitment"
+      },
+      "title": "Flexible Commitments",
+      "type": "array"
+    },
+    "preferences": {
+      "$ref": "#/$defs/Preferences"
+    }
+  },
+  "required": [
+    "hard_constraints",
+    "priorities",
+    "flexible_commitments",
+    "preferences"
+  ],
+  "title": "Profile",
+  "type": "object"
+}

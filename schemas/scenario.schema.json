@@ -1,0 +1,222 @@
+{
+  "$defs": {
+    "Annotation": {
+      "description": "Anota\u00e7\u00e3o independente de um autor.",
+      "properties": {
+        "author": {
+          "title": "Author",
+          "type": "string"
+        },
+        "decision": {
+          "enum": [
+            "act",
+            "defer"
+          ],
+          "title": "Decision",
+          "type": "string"
+        },
+        "acceptable_outcomes": {
+          "description": "Descri\u00e7\u00e3o curta de resultados aceit\u00e1veis (texto livre).",
+          "items": {
+            "type": "string"
+          },
+          "title": "Acceptable Outcomes",
+          "type": "array"
+        },
+        "event_importance": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Event Importance",
+          "type": "integer"
+        },
+        "conflict_level": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Conflict Level",
+          "type": "integer"
+        },
+        "expected_impact": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Expected Impact",
+          "type": "integer"
+        },
+        "notes": {
+          "default": "",
+          "title": "Notes",
+          "type": "string"
+        }
+      },
+      "required": [
+        "author",
+        "decision",
+        "event_importance",
+        "conflict_level",
+        "expected_impact"
+      ],
+      "title": "Annotation",
+      "type": "object"
+    },
+    "CalendarEvent": {
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "start": {
+          "description": "ISO 8601 sem fuso, ex.: 2026-11-11T18:00",
+          "title": "Start",
+          "type": "string"
+        },
+        "end": {
+          "title": "End",
+          "type": "string"
+        },
+        "category": {
+          "default": "other",
+          "title": "Category",
+          "type": "string"
+        },
+        "importance": {
+          "default": 3,
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Importance",
+          "type": "integer"
+        },
+        "fixed": {
+          "default": false,
+          "title": "Fixed",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "start",
+        "end"
+      ],
+      "title": "CalendarEvent",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "id": {
+      "title": "Id",
+      "type": "string"
+    },
+    "family": {
+      "title": "Family",
+      "type": "string"
+    },
+    "category": {
+      "enum": [
+        "hard",
+        "soft",
+        "ambiguous"
+      ],
+      "title": "Category",
+      "type": "string"
+    },
+    "difficulty": {
+      "enum": [
+        "easy",
+        "medium",
+        "hard"
+      ],
+      "title": "Difficulty",
+      "type": "string"
+    },
+    "split": {
+      "enum": [
+        "train",
+        "test"
+      ],
+      "title": "Split",
+      "type": "string"
+    },
+    "user_request": {
+      "title": "User Request",
+      "type": "string"
+    },
+    "now": {
+      "description": "Data/hora simulada do pedido, ISO 8601",
+      "title": "Now",
+      "type": "string"
+    },
+    "calendar": {
+      "items": {
+        "$ref": "#/$defs/CalendarEvent"
+      },
+      "title": "Calendar",
+      "type": "array"
+    },
+    "annotations": {
+      "items": {
+        "$ref": "#/$defs/Annotation"
+      },
+      "title": "Annotations",
+      "type": "array"
+    },
+    "reference_decision": {
+      "anyOf": [
+        {
+          "enum": [
+            "act",
+            "defer"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "R\u00f3tulo final ap\u00f3s resolver desacordos.",
+      "title": "Reference Decision"
+    },
+    "annotation_status": {
+      "default": "draft",
+      "enum": [
+        "draft",
+        "annotated",
+        "adjudicated"
+      ],
+      "title": "Annotation Status",
+      "type": "string"
+    },
+    "draft_label": {
+      "anyOf": [
+        {
+          "enum": [
+            "act",
+            "defer"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Pr\u00e9-r\u00f3tulo sugerido ao criar o cen\u00e1rio. N\u00c3O \u00e9 anota\u00e7\u00e3o humana; serve s\u00f3 de ponto de partida para os autores.",
+      "title": "Draft Label"
+    }
+  },
+  "required": [
+    "id",
+    "family",
+    "category",
+    "difficulty",
+    "split",
+    "user_request",
+    "now",
+    "calendar"
+  ],
+  "title": "Scenario",
+  "type": "object"
+}

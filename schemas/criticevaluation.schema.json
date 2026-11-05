@@ -1,0 +1,63 @@
+{
+  "$defs": {
+    "CriticScores": {
+      "properties": {
+        "reasoning": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Reasoning",
+          "type": "integer"
+        },
+        "coherence": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Coherence",
+          "type": "integer"
+        },
+        "alternatives": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Alternatives",
+          "type": "integer"
+        },
+        "clarity": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Clarity",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "reasoning",
+        "coherence",
+        "alternatives",
+        "clarity"
+      ],
+      "title": "CriticScores",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "scores": {
+      "$ref": "#/$defs/CriticScores"
+    },
+    "weaknesses": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Weaknesses",
+      "type": "array"
+    },
+    "feedback": {
+      "title": "Feedback",
+      "type": "string"
+    }
+  },
+  "required": [
+    "scores",
+    "weaknesses",
+    "feedback"
+  ],
+  "title": "CriticEvaluation",
+  "type": "object"
+}

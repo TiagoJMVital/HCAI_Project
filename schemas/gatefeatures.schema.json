@@ -1,0 +1,62 @@
+{
+  "properties": {
+    "scenario_id": {
+      "title": "Scenario Id",
+      "type": "string"
+    },
+    "critic_score": {
+      "title": "Critic Score",
+      "type": "number"
+    },
+    "change_type": {
+      "enum": [
+        "add",
+        "move",
+        "delete"
+      ],
+      "title": "Change Type",
+      "type": "string"
+    },
+    "event_importance": {
+      "maximum": 5,
+      "minimum": 1,
+      "title": "Event Importance",
+      "type": "integer"
+    },
+    "conflict_level": {
+      "maximum": 5,
+      "minimum": 1,
+      "title": "Conflict Level",
+      "type": "integer"
+    },
+    "expected_impact": {
+      "maximum": 5,
+      "minimum": 1,
+      "title": "Expected Impact",
+      "type": "integer"
+    },
+    "defer": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "R\u00f3tulo: 1=defer, 0=act",
+      "title": "Defer"
+    }
+  },
+  "required": [
+    "scenario_id",
+    "critic_score",
+    "change_type",
+    "event_importance",
+    "conflict_level",
+    "expected_impact"
+  ],
+  "title": "GateFeatures",
+  "type": "object"
+}

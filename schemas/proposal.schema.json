@@ -1,0 +1,155 @@
+{
+  "$defs": {
+    "Alternative": {
+      "properties": {
+        "option": {
+          "title": "Option",
+          "type": "string"
+        },
+        "rejected_because": {
+          "title": "Rejected Because",
+          "type": "string"
+        }
+      },
+      "required": [
+        "option",
+        "rejected_because"
+      ],
+      "title": "Alternative",
+      "type": "object"
+    },
+    "Change": {
+      "properties": {
+        "type": {
+          "enum": [
+            "add",
+            "move",
+            "delete"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "event_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Event Id"
+        },
+        "title": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Title"
+        },
+        "from_start": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "From Start"
+        },
+        "to_start": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "To Start"
+        },
+        "to_end": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "To End"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "Change",
+      "type": "object"
+    },
+    "Rationale": {
+      "properties": {
+        "constraints": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Constraints",
+          "type": "array"
+        },
+        "priorities": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Priorities",
+          "type": "array"
+        },
+        "alternatives_considered": {
+          "items": {
+            "$ref": "#/$defs/Alternative"
+          },
+          "title": "Alternatives Considered",
+          "type": "array"
+        },
+        "summary": {
+          "title": "Summary",
+          "type": "string"
+        }
+      },
+      "required": [
+        "constraints",
+        "priorities",
+        "alternatives_considered",
+        "summary"
+      ],
+      "title": "Rationale",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "changes": {
+      "items": {
+        "$ref": "#/$defs/Change"
+      },
+      "title": "Changes",
+      "type": "array"
+    },
+    "rationale": {
+      "$ref": "#/$defs/Rationale"
+    }
+  },
+  "required": [
+    "changes",
+    "rationale"
+  ],
+  "title": "Proposal",
+  "type": "object"
+}
