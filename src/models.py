@@ -113,6 +113,19 @@ class Change(BaseModel):
     to_start: Optional[str] = None
     to_end: Optional[str] = None
 
+    @model_validator(mode="after")
+    def _required_fields(self):
+        required = {
+            "add": ("title", "to_start"),
+            "move": ("event_id", "to_start"),
+            "delete": ("event_id",),
+        }[self.type]
+        missing = [field for field in required
+                   if not isinstance(getattr(self, field), str) or not getattr(self, field).strip()]
+        if missing:
+            raise ValueError(f"{self.type} requer: {', '.join(missing)}")
+        return self
+
 
 class Alternative(BaseModel):
     option: str

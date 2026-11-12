@@ -1,7 +1,7 @@
 """Proposer: gera proposta de calendário + justificação explícita."""
 from __future__ import annotations
 
-from llm import DEFAULT_MODEL, generate_structured
+from llm import Provider, get_provider
 from models import CalendarEvent, Profile, Proposal, Scenario
 
 SYSTEM = """You are a personal calendar assistant. Given the user's request, their
@@ -49,8 +49,9 @@ def build_prompt(profile: Profile, scenario: Scenario) -> str:
     )
 
 
-def propose(profile: Profile, scenario: Scenario, *, model: str = DEFAULT_MODEL,
-            feedback: str | None = None, previous: Proposal | None = None) -> Proposal:
+def propose(profile: Profile, scenario: Scenario, *, model: str | None = None,
+            feedback: str | None = None, previous: Proposal | None = None,
+            provider: Provider | None = None) -> Proposal:
     """Gera uma proposta. `feedback`/`previous` serão usados pelo Critic (passo 5)."""
     prompt = build_prompt(profile, scenario)
     if feedback and previous:
@@ -58,4 +59,5 @@ def propose(profile: Profile, scenario: Scenario, *, model: str = DEFAULT_MODEL,
             f"\n\nYOUR PREVIOUS PROPOSAL:\n{previous.model_dump_json(indent=1)}\n\n"
             f"REVIEWER FEEDBACK:\n{feedback}\n\nRevise the proposal and rationale."
         )
-    return generate_structured(prompt, Proposal, system=SYSTEM, model=model)
+    client = provider or get_provider(role="PROPOSER", model=model)
+    return client.generate_structured(prompt, Proposal, system=SYSTEM)

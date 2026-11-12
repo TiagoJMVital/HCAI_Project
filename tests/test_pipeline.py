@@ -3,6 +3,9 @@ import json
 import sys
 from pathlib import Path
 
+import pytest
+from pydantic import ValidationError
+
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 
@@ -73,3 +76,35 @@ def test_prompt_mentions_request_and_fixed():
     s = scen("soft_gym_01")
     t = build_prompt(profile, s)
     assert s.user_request in t and "[FIXED]" in t
+
+
+@pytest.mark.parametrize("fields", [
+    {"type": "add", "title": "Study"},
+    {"type": "add", "to_start": "2026-11-11T18:00"},
+    {"type": "move", "event_id": "gym_wed"},
+    {"type": "move", "to_start": "2026-11-11T18:00"},
+    {"type": "delete"},
+])
+def test_change_requires_operational_fields(fields):
+    with pytest.raises(ValidationError):
+        Change.model_validate(fields)
+
+
+def test_old_false_success_cannot_be_parsed():
+    old = json.loads((ROOT / "eval" / "results" / "A" / "soft_gym_01.json").read_text())
+    with pytest.raises(ValidationError):
+        Proposal.model_validate(old["proposal"])
+
+
+def test_no_op_and_duplicate_add_cannot_act():
+    s = scen("soft_gym_01")
+    no_op = prop(Change(type="move", event_id="gym_wed", to_start="2026-11-11T18:00"))
+    problems = find_violations(s.calendar, no_op, profile)
+    assert any("sem alteração" in item for item in problems)
+    assert rule_based_decision(no_op, s.calendar, problems)[0] == "defer"
+
+    duplicate = prop(Change(type="add", event_id="gym_wed", title="Extra",
+                            to_start="2026-11-11T20:00"))
+    problems = find_violations(s.calendar, duplicate, profile)
+    assert any("já existe" in item for item in problems)
+    assert rule_based_decision(duplicate, s.calendar, problems)[0] == "defer"

@@ -54,8 +54,14 @@ def find_violations(
     """
     problems: list[str] = []
     by_id = {e.id: e for e in original}
+    added_ids: set[str] = set()
 
-    for c in proposal.changes:
+    for i, c in enumerate(proposal.changes):
+        if c.type == "add":
+            added_id = c.event_id or f"new_{i}"
+            if added_id in by_id or added_id in added_ids:
+                problems.append(f"event_id já existe: {added_id}")
+            added_ids.add(added_id)
         if c.type in ("move", "delete") and c.event_id not in by_id:
             problems.append(f"event_id inexistente: {c.event_id}")
         elif c.type in ("move", "delete") and by_id[c.event_id].fixed:
@@ -66,10 +72,20 @@ def find_violations(
                     _dt(field)
                 except ValueError:
                     problems.append(f"data inválida: {field}")
+        if c.to_start and c.to_end:
+            try:
+                if _dt(c.to_end) <= _dt(c.to_start):
+                    problems.append(f"duração não positiva: {c.event_id or c.title}")
+            except ValueError:
+                pass
     if problems:
         return problems  # não faz sentido simular com dados inválidos
 
     after = apply_changes(original, proposal.changes)
+    if proposal.changes and {e.id: e.model_dump() for e in after} == {
+        e.id: e.model_dump() for e in original
+    }:
+        problems.append("sem alteração efetiva")
     fixed_ids = {e.id for e in original if e.fixed}
     touched = {c.event_id for c in proposal.changes if c.event_id} | {
         e.id for e in after if e.id not in by_id

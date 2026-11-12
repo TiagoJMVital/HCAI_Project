@@ -10,6 +10,7 @@ from collections import defaultdict
 from pathlib import Path
 
 from models import Profile, Scenario
+from benchmark import validate_benchmark, grouped_train_folds
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -39,6 +40,15 @@ def main() -> int:
         if len(splits) > 1:
             print(f"ERRO: família '{fam}' aparece em treino E teste (fuga de dados)")
             errors += 1
+    benchmark_errors, rows = validate_benchmark(ROOT)
+    for message in benchmark_errors:
+        print("ERRO BENCHMARK:", message)
+    errors += len(benchmark_errors)
+    if not benchmark_errors:
+        bases = len({row["base_id"] for row in rows})
+        print(f"Manifesto OK: {bases} bases, {len(rows)} variantes")
+        folds = grouped_train_folds(rows, n_splits=3)
+        print(f"{len(folds)} folds agrupados disponíveis apenas no treino")
     if errors == 0:
         print("Separação treino/teste por família OK")
     return 1 if errors else 0
