@@ -2,7 +2,7 @@
 
 ## Local environment
 
-Open `HCAI_Project` as the VS Code WSL workspace. From that repository root, use Python **3.12 or newer**; the inspected local environment uses Python 3.14.4. `requirements.txt` specifies compatible ranges for Pydantic v2, Requests, python-dotenv and pytest, not a fully pinned lockfile. `git` is needed to inspect working-tree state. Ollama, n8n and Google credentials are **not** required for local tests. Do not install or run them merely to reproduce the automated suite.
+Open `HCAI_Project` as the VS Code WSL workspace. From that repository root, use Python **3.12 or newer**; the inspected local environment uses Python 3.14.4. `requirements.txt` specifies compatible ranges for Pydantic v2, Requests, python-dotenv, pytest and Streamlit, not a fully pinned lockfile. [Streamlit's installation documentation](https://docs.streamlit.io/get-started/installation/command-line) lists Python 3.14 as supported. `git` is needed to inspect working-tree state. Ollama, n8n and Google credentials are **not** required for local tests or annotation. Do not install or run them merely to reproduce the automated suite.
 
 ```bash
 cd /home/cfaeatb/projetos/HCAI-Project/HCAI_Project
@@ -21,6 +21,19 @@ uv pip install --python .venv/bin/python -r requirements.txt
 
 After setup, use `.venv/bin/python` in commands if the shell is not activated. `requirements.txt` is the dependency source of truth. The `.venv/`, `.env`, `data/annotation_work/`, `data/gate_datasets/` and `eval/runs/` paths are ignored by Git; `.env.example` is deliberately tracked. Check with `git check-ignore .env .venv/`. Never commit keys or private calendar exports.
 
+## Local annotation app
+
+From the WSL2 repository root, after installing dependencies:
+
+```bash
+source .venv/bin/activate
+streamlit run annotation_app.py --server.address 127.0.0.1
+```
+
+Open the local URL shown by Streamlit, usually `http://localhost:8501`, in the Windows browser. The app uses the existing JSON packets/forms, requires no IAedu call and does not access Google Calendar. It prepares missing blank forms without replacing existing ones. The selected author sees only their forms until the paired comparison area is unlocked for a completed item. See [Annotation protocol](04_ANNOTATION_PROTOCOL.md) for draft saving, completion, defer reasons and adjudication. Stop the local server with `Ctrl+C` in the WSL terminal.
+
+The weekly calendar uses Streamlit's built-in [`st.html`](https://docs.streamlit.io/develop/api-reference/text/st.html) with escaped, sanitized HTML/CSS and **no JavaScript or additional calendar dependency**. Previous/Next week controls and the Original/Proposed switch are native Streamlit widgets. The calendar is read-only and highlights only intervals identified by the limited deterministic parser described in the annotation protocol.
+
 ## IAedu configuration
 
 Copy `.env.example` to `.env` and fill `.env` locally in VS Code. Set `LLM_PROVIDER=iaedu`, `PROPOSER_LLM_PROVIDER=iaedu`, `CRITIC_LLM_PROVIDER=iaedu`, `IAEDU_API_KEY`, `IAEDU_API_ENDPOINT` (portal-provided HTTPS `/stream` URL), `IAEDU_CHANNEL_ID` (portal's GPT-5.5 channel) and model labels. **Do not paste secrets into a chat, terminal output, issue or committed file.** The model label does not select the deployed model; the channel does. The provider sends `x-api-key` and multipart form fields, reconstructs streamed tokens and validates JSON locally. Each request gets a fresh thread ID.
@@ -37,7 +50,7 @@ python src/validate_data.py
 python -m pytest -q tests
 ```
 
-Expected validator summary for the current benchmark: valid profile, **41 scenarios**, **20 bases**, **41 variants**, three training-only grouped folds and family split OK. `make_benchmark.py` regenerates synthetic files, so avoid it if you are examining uncommitted scenario edits; inspect `git status` first. The current local suite passes 41 tests. Its provider tests use mocked responses and do not prove live API availability.
+Expected validator summary for the current benchmark: valid profile, **41 scenarios**, **20 bases**, **41 variants**, three training-only grouped folds and family split OK. `make_benchmark.py` regenerates synthetic files, so avoid it if you are examining uncommitted scenario edits; inspect `git status` first. The current local suite passes 54 tests. Its provider tests use mocked responses and do not prove live API availability.
 
 ## Live synthetic checks and individual A/B runs
 

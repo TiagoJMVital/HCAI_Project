@@ -119,6 +119,8 @@ def _complete_proposal(root, author, pid, decision):
     form.scheduling_acceptable = True
     form.intervention_impact = 2
     form.intervention_risk = 2
+    if decision == "defer":
+        form.defer_reason_primary = "confirmation_required"
     path.write_text(form.model_dump_json(indent=2))
 
 
@@ -190,6 +192,7 @@ def test_two_phase_blinding_adjudication_and_gate_dataset(benchmark_root):
     pa.scheduling_acceptable = True
     pa.intervention_impact = 2
     pa.intervention_risk = 4
+    pa.defer_reason_primary = "high_impact"
     pa.resolved_by = ["author_a", "author_b"]
     proposal_path.write_text(pa.model_dump_json())
     rows = build_rows(benchmark_root)

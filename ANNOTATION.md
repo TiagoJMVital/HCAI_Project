@@ -19,6 +19,72 @@ e `author_b` são pseudónimos; cada autor abre apenas a sua pasta durante a fas
 independente. O filesystem, por si só, não impede que um autor veja a pasta do
 outro. Partilhar formulários só depois de ambos os bloquearem como `complete`.
 
+## Interface web local (WSL2)
+
+Depois de instalar as dependências de `requirements.txt` no `.venv`, executar na
+raiz do repositório:
+
+```bash
+source .venv/bin/activate
+streamlit run annotation_app.py --server.address 127.0.0.1
+```
+
+Abrir no navegador do Windows o endereço local mostrado no terminal, normalmente
+`http://localhost:8501`. A interface prepara os mesmos pacotes e formulários JSON
+que os comandos CLI abaixo. Selecionar `author_a` ou `author_b` na barra lateral;
+a seleção é apenas separação operacional, **não** autenticação. Cada autor deve
+trabalhar apenas na própria pasta. A aplicação não consulta o IAedu.
+
+Em **Cenários**, escolher o item, consultar o calendário e o perfil, preencher
+listas no editor de linhas (adicionar/remover), e clicar **Guardar rascunho**.
+O calendário semanal visual abre com a semana do cenário, de segunda a domingo,
+com horas em formato de 24 horas. As setas navegam entre semanas. As cores
+distinguem categorias, e cada bloco indica também se o evento é fixo ou flexível.
+Passar o cursor sobre um bloco mostra detalhes; a tabela cronológica original
+permanece em **Ver eventos em tabela**. A faixa âmbar tracejada identifica apenas
+intervalos explícitos que o parser limitado consegue determinar. Eventos com
+contorno cruzam temporalmente esse intervalo; essa coincidência **não prova**
+violação de uma restrição rígida. Se o pedido for vago, aparece
+**Intervalo não identificado automaticamente**, sem seleção inventada.
+O rascunho admite campos incompletos e reaparece ao voltar ao item. **Validar e
+concluir** aplica o mesmo modelo Pydantic que a CLI; erros são mostrados sem
+guardar uma conclusão inválida. O filtro e os contadores mostram progresso e
+formulários que precisam de correção. Guardar antes de mudar de item. Uma
+anotação já concluída exige confirmação explícita para ser alterada. Se outro
+processo alterar o ficheiro entretanto, recarregar o item antes de guardar.
+Depois de um consenso concluído, a interface bloqueia alterações aos formulários
+individuais desse item para não criar uma referência adjudicada desatualizada.
+
+Em **Propostas**, a aplicação só abre os pacotes quando a adjudicação do cenário
+correspondente estiver completa. Mostra apenas cenário, consenso de cenário e
+proposta final/justificação. As pontuações, decisões das regras, rótulos
+preliminares, histórico, modelo e split ficam ocultos. Para `defer`, escolher
+um motivo principal obrigatório, motivos adicionais opcionais e, quando houver
+`clarification_required`, uma pergunta específica opcional. As categorias são
+`clarification_required`, `confirmation_required`, `high_impact`,
+`third_party_impact` e `preference_conflict`. Uma proposta marcada como
+inaceitável não pode receber `act`. Propostas inválidas devem ser corrigidas ou
+rejeitadas; a confirmação humana não as torna válidas.
+
+Quando a proposta final passa a validação estrutural e operacional já existente,
+é possível alternar entre **Calendário original** e **Calendário proposto**.
+Adições e movimentos são assinalados; eliminações e posições anteriores aparecem
+esbatidas apenas como referência, não como eventos ativos. Se as verificações
+falharem, a vista proposta não é apresentada como aplicada. A pré-visualização
+não altera ficheiros nem garante satisfação integral do pedido; o validador
+determinístico cobre apenas parte das restrições.
+
+Os novos formulários de proposta usam `annotation_version=2`; ficheiros antigos
+sem este campo continuam legíveis como versão 1. Os motivos de deferimento são
+metadados explicativos, **não** features do gate nem novas classes de decisão.
+
+Em **Comparação e adjudicação**, só aparecem itens concluídos pelos dois autores.
+Comparar respostas, discutir desacordos e preencher o consenso manualmente;
+ambos devem confirmar a resolução. A aplicação reutiliza `compare`,
+`prepare_adjudications` e `validate_adjudications` do workflow. Os formulários
+individuais permanecem inalterados durante a adjudicação. Cohen's kappa pode ser
+indefinido ou pouco estável num piloto pequeno.
+
 ## Fase A — cenário
 
 ```bash
@@ -103,6 +169,10 @@ Cada autor preenche em `proposal/forms/<proposal_id>.json`:
 - `intervention_impact` e `intervention_risk`: escala 1–5 para esta proposta.
 - `risk_factors` e `ambiguity_notes`: consequências, terceiros afetados e
   informação em falta. Depois, `status="complete"`.
+- Nos formulários de versão 2, `defer_reason_primary` é obrigatório quando a
+  decisão é `defer`; `defer_reason_additional` e `clarification_question` são
+  opcionais. A pergunta só se aplica quando um motivo é
+  `clarification_required`. Estes campos não entram nas features preditivas.
 
 Os autores não recebem o rótulo preliminar do cenário nem a decisão das regras.
 Uma proposta estruturalmente inviável ou fora dos resultados aceitáveis deve

@@ -16,6 +16,10 @@ from proposal_catalog import load_sources
 ROOT = Path(__file__).resolve().parent.parent
 Phase = Literal["scenario", "proposal"]
 Decision = Literal["act", "defer"]
+DeferReason = Literal["clarification_required", "confirmation_required",
+                      "high_impact", "third_party_impact", "preference_conflict"]
+DEFER_REASONS = ("clarification_required", "confirmation_required", "high_impact",
+                 "third_party_impact", "preference_conflict")
 
 
 def _text_items(items: list[str]) -> bool:
@@ -54,6 +58,11 @@ class ProposalAnnotation(BaseModel):
     intervention_risk: int | None = Field(default=None, ge=1, le=5)
     risk_factors: list[str] = Field(default_factory=list)
     ambiguity_notes: str = ""
+    # Missing in historic JSON means v1. New UI/CLI forms use v2.
+    annotation_version: int = Field(default=1, ge=1)
+    defer_reason_primary: DeferReason | None = None
+    defer_reason_additional: list[DeferReason] = Field(default_factory=list)
+    clarification_question: str = ""
 
     @model_validator(mode="after")
     def _complete(self):
@@ -65,6 +74,9 @@ class ProposalAnnotation(BaseModel):
             raise ValueError("proposta completa requer rótulo, razão, adequação, impacto e risco")
         if self.status == "complete" and self.decision == "act" and self.scheduling_acceptable is not True:
             raise ValueError("act exige proposta de scheduling aceitável")
+        _check_defer_metadata(self.annotation_version, self.status, self.decision,
+                              self.defer_reason_primary, self.defer_reason_additional,
+                              self.clarification_question)
         return self
 
 
@@ -105,6 +117,10 @@ class ProposalAdjudication(BaseModel):
     intervention_risk: int | None = Field(default=None, ge=1, le=5)
     risk_factors: list[str] = Field(default_factory=list)
     resolved_by: list[str] = Field(default_factory=list)
+    annotation_version: int = Field(default=1, ge=1)
+    defer_reason_primary: DeferReason | None = None
+    defer_reason_additional: list[DeferReason] = Field(default_factory=list)
+    clarification_question: str = ""
 
     @model_validator(mode="after")
     def _complete(self):
@@ -118,7 +134,25 @@ class ProposalAdjudication(BaseModel):
             raise ValueError("adjudicação de proposta incompleta")
         if self.status == "complete" and self.final_decision == "act" and self.scheduling_acceptable is not True:
             raise ValueError("act exige proposta de scheduling aceitável")
+        _check_defer_metadata(self.annotation_version, self.status, self.final_decision,
+                              self.defer_reason_primary, self.defer_reason_additional,
+                              self.clarification_question)
         return self
+
+
+def _check_defer_metadata(version: int, status: str, decision: Decision | None,
+                          primary: DeferReason | None, additional: list[DeferReason],
+                          question: str) -> None:
+    if version < 2:
+        return  # Historical completed forms remain readable without new fields.
+    if len(additional) != len(set(additional)) or primary in additional:
+        raise ValueError("motivos de deferimento repetidos")
+    if decision != "defer" and (primary is not None or additional or question.strip()):
+        raise ValueError("motivos de deferimento só se aplicam à decisão defer")
+    if status == "complete" and decision == "defer" and primary is None:
+        raise ValueError("defer requer um motivo principal")
+    if question.strip() and "clarification_required" not in ({primary} | set(additional)):
+        raise ValueError("pergunta de esclarecimento requer clarification_required")
 
 
 def _safe_id(value: str) -> str:
@@ -191,7 +225,7 @@ def prepare_proposals(root: Path, annotator_id: str) -> int:
                   "final_proposal": source["final_proposal"]}
         _write_if_absent(work / "packets" / f"{pid}.json", packet)
         form = ProposalAnnotation(proposal_id=pid, scenario_id=sid,
-                                  annotator_id=annotator_id)
+                                  annotator_id=annotator_id, annotation_version=2)
         _write_if_absent(work / "forms" / f"{pid}.json", form.model_dump())
     return len(sources)
 
@@ -275,7 +309,8 @@ def prepare_adjudications(root: Path, phase: Phase, annotator_a: str,
                 raise ValueError(f"cenário divergente na proposta: {item_id}")
             form = ProposalAdjudication(proposal_id=item_id,
                                         scenario_id=a[item_id].scenario_id,
-                                        annotator_ids=[annotator_a, annotator_b])
+                                        annotator_ids=[annotator_a, annotator_b],
+                                        annotation_version=2)
         _write_if_absent(path, form.model_dump())
     return len(ids)
 

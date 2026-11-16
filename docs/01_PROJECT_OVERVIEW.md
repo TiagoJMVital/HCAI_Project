@@ -16,9 +16,9 @@ All current `act` decisions are **simulated decisions**. No Google Calendar even
 
 ## Current implementation
 
-Python modules in `src/` implement Pydantic contracts, proposal generation, critique, partial operational validation, fixed autonomy rules, benchmark generation and the two-stage annotation workflow. `eval/` contains A/B runners and offline comparison/quality tools. `data/benchmark_manifest.json` describes 20 semantic bases and 41 scenario variants. The local LLM integration uses the institutional IAedu channel labelled GPT-5.5; Ollama remains a selectable alternative. The repository has four automated test files. See [Architecture](02_ARCHITECTURE.md), [Benchmark](03_BENCHMARK.md), and [Setup and testing](06_SETUP_AND_TESTING.md).
+Python modules in `src/` implement Pydantic contracts, proposal generation, critique, partial operational validation, fixed autonomy rules, benchmark generation and the two-stage annotation workflow. `eval/` contains A/B runners and offline comparison/quality tools. `data/benchmark_manifest.json` describes 20 semantic bases and 41 scenario variants. The local LLM integration uses the institutional IAedu channel labelled GPT-5.5; Ollama remains a selectable alternative. The repository has six automated test files. See [Architecture](02_ARCHITECTURE.md), [Benchmark](03_BENCHMARK.md), and [Setup and testing](06_SETUP_AND_TESTING.md).
 
-Verified at this documentation update: 41 local tests pass and the benchmark validator reports 41 scenarios, 20 bases and three grouped training folds. The automated tests use simulated provider responses; they do not constitute a full API or scientific evaluation. Existing local A/B records for `soft_gym_01` are isolated demonstrations, not matched repeated trials. There are no completed human scenario or proposal adjudications and no gate training dataset.
+Verified at this documentation update: 54 local tests pass and the benchmark validator reports 41 scenarios, 20 bases and three grouped training folds. The automated tests use simulated provider responses; they do not constitute a full API or scientific evaluation. Existing local A/B records for `soft_gym_01` are isolated demonstrations, not matched repeated trials. There are no completed human scenario or proposal adjudications and no gate training dataset.
 
 ## Decisions since the proposal
 

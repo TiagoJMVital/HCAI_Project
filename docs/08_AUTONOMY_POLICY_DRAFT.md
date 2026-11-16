@@ -8,6 +8,47 @@
 2. **Critic gate in B/C:** A proposal below the Critic acceptance threshold is deferred by the pipeline and is not a gate-training example under the current catalog. A high score establishes only the Critic's assessment of visible reasoning, not calendar safety.
 3. **Human autonomy judgement for a valid proposal:** Decide `act` only if the action is sufficiently specified, low enough in consequence, reversible where relevant, and authorized by explicit user preferences or a clear request. Decide `defer` if the user must choose among meaningful trade-offs or if impact/uncertainty/third-party effects exceed agreed bounds. State what extra confirmation would resolve it.
 
+## Defer Reasons and Clarification Requirements
+
+A `defer` decision indicates that a valid proposal should not be executed without further human involvement. However, not all deferments have the same underlying cause.
+
+To support consistent human annotation and future analysis of the Learning-to-Defer system, annotators should identify one or more reasons for deferring a proposal.
+
+| Reason | Description | Example |
+|---|---|---|
+| `clarification_required` | Essential information is missing or the user's request is insufficiently specified. | The user requests clearing a morning but does not explain whether missing a fixed class is acceptable. |
+| `confirmation_required` | The proposed changes are valid but require explicit user approval. | Rescheduling an important personal appointment. |
+| `high_impact` | The proposal has significant consequences or is difficult to reverse. | Cancelling a prepaid commitment or substantially reorganizing the week. |
+| `third_party_impact` | The proposal affects other people, shared commitments or external arrangements. | Moving a meeting involving multiple participants. |
+| `preference_conflict` | The proposal involves a meaningful trade-off between user preferences without sufficient prior authorization. | Cancelling a preferred gym session to create additional study time. |
+
+### Annotation principles
+
+- Multiple defer reasons may apply to the same proposal.
+- Annotators should identify the primary reason and optionally additional reasons.
+- These reasons are explanatory metadata, not separate prediction classes.
+- The Learning-to-Defer gate retains the binary `act/defer` objective defined in the project proposal.
+- A missing piece of information should only trigger `clarification_required` when it could materially affect the decision.
+- A request for clarification should preferably identify the specific information needed, rather than asking several generic questions.
+- Invalid proposals must be rejected or corrected through the validation process and must not be treated as ordinary valid-proposal deferments.
+- Annotators must not infer defer reasons from the Critic score or the baseline rule-based decision.
+
+### Clarification versus confirmation
+
+Clarification and confirmation serve different purposes:
+
+**Clarification:** The assistant lacks information needed to determine an appropriate action.
+
+**Confirmation:** The assistant has enough information to formulate a valid proposal but should not execute it without explicit authorization.
+
+Both result in `defer`, but they should be distinguished during annotation and subsequent qualitative evaluation.
+
+### Scope of the current implementation
+
+These categories are now explanatory fields in versioned proposal annotation forms, with a mandatory primary reason for new completed `defer` forms. Historical forms remain compatible. They do not imply that the current system supports interactive clarification dialogues, and they are excluded from predictive gate features.
+
+The implementation of follow-up questions, if adopted, should remain compatible with the original A/B/C experimental design and should not introduce additional prediction classes without a documented methodological justification.
+
 ## Factors to discuss and record
 
 | Factor | Lower-autonomy concern | Possible support for `act` |
