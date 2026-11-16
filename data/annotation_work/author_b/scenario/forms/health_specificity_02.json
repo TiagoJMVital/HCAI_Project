@@ -1,0 +1,22 @@
+{
+  "scenario_id": "health_specificity_02",
+  "annotator_id": "author_b",
+  "status": "complete",
+  "hard_constraints": [
+    "Only the physiotherapy appointment (Thu 2026-11-12 15:00-16:00) is to be moved; its 1-hour duration is kept.",
+    "The new start time must be on Fri 2026-11-13 at 11:00 or later.",
+    "The new slot should be free: the only existing event on Friday is Gym 18:00-19:00.",
+    "No event may start before 08:00 or end after 23:00; weekends are protected."
+  ],
+  "acceptable_outcomes": [
+    "Physiotherapy moved to Fri 2026-11-13, 1 hour, starting at 11:00 or later and not overlapping Gym 18:00-19:00 (for example 11:00-17:00 start, or a start from 19:00 ending by 23:00). No other event is changed."
+  ],
+  "impact_factors": [
+    "Health category (profile priority 5), but a routine appointment (importance 2).",
+    "Third party: the clinic must have the new slot, which the assistant cannot check.",
+    "One flexible event moved; no fixed event is touched.",
+    "Easy to reverse, since the original slot is known."
+  ],
+  "ambiguity_present": false,
+  "ambiguity_notes": "Day and earliest time are given explicitly. The exact hour within 'after 11:00' is a free choice and does not change whether the request is satisfied."
+}
