@@ -1,5 +1,7 @@
 # Roadmap and decision log
 
+> **Current v2 status:** Implemented: strict scenario parsing, explicit family-safe import, matched A/B v2 runner adapters, immutable B proposal catalog, partial timezone-aware validation, direct independent proposal forms, comparison/consensus, Streamlit before/after review and eligibility-filtered gate export. Legacy data remain intact. Next: agree on new family coverage and split assignments; collect diverse real B proposals; pilot independent review on training families; freeze the policy, features and analysis plan; plan paired A/B repetitions on new inputs; then train and evaluate C. Neither the reference example nor mock tests are scientific results.
+
 This is a status map, not evidence that the scientific hypotheses have been confirmed. The source of requirements is the [Project Proposal](../../HCAI_Project_Proposal.pdf), especially §§3–5. The [traceability table](01_PROJECT_OVERVIEW.md#proposal-traceability) relates those requirements to code, tests and next actions.
 
 ## Completed as software, subject to stated limits
@@ -11,7 +13,8 @@ This is a status map, not evidence that the scientific hypotheses have been conf
 | A runner with fixed-rule autonomy | `eval/run_config_a.py`, `src/rules.py` | Synthetic, simulated action only. |
 | B Critic and bounded refinement | `src/critic.py`, `src/pipeline_b.py`, `eval/run_config_b.py` | One recorded synthetic live scenario; no aggregate evidence. |
 | Synthetic benchmark and family split | `src/make_benchmark.py`, `src/benchmark.py`, 41 JSON scenarios | Three training families only; private-calendar part of proposal absent. |
-| Two-stage annotation and gate-data preparation tools | `src/annotation_workflow.py`, `src/proposal_catalog.py`, `src/gate_dataset.py` | No completed human adjudications, no gate dataset export. |
+| Archived two-stage annotation tools | `src/annotation_workflow.py`, `src/proposal_catalog.py`, `src/gate_dataset.py` | Preserved for historical access; no longer required for v2. |
+| Direct v2 proposal review and export tools | `src/annotation_v2.py`, `src/proposal_catalog_v2.py`, `src/gate_dataset_v2.py`, `annotation_app.py` | Mock-tested only; no real human adjudications or gate dataset. |
 
 ## Partially complete
 
@@ -24,8 +27,8 @@ This is a status map, not evidence that the scientific hypotheses have been conf
 
 | Priority / phase | Concrete work | Depends on | Completion criterion |
 | --- | --- | --- | --- |
-| 1. Policy and pilot | Both authors review policy draft; annotate 5–6 **training** scenario packets and available concrete proposals independently; discuss discrepancies; freeze form instructions | Current benchmark and annotation tools | Written, dated protocol decision; completed pilot forms and disagreement notes; test families unchanged |
-| 2. Formal training references | Predeclare collection frequency; collect accepted B proposals across training families; complete two-author scenario/proposal annotations and adjudications | Phase 1 | Every selected training proposal has both independent forms and adjudicated label; agreement reported with limits |
+| 1. Policy and pilot | Both authors review policy draft; review a few concrete proposals from **training** families independently; discuss discrepancies; freeze form instructions | Imported v2 scenarios and generated B proposals | Written, dated protocol decision; completed pilot reviews and disagreement notes; test families unchanged |
+| 2. Formal training references | Predeclare collection frequency; collect B proposals across training families; complete two-author direct proposal reviews and adjudications | Phase 1 | Every selected eligible training proposal has both independent forms and adjudicated label; quality rejections and exclusions reported |
 | 3. Quality evaluation | Add defensible objective checks; define human scheduling/rationale rubric and blind assessment process; audit validator coverage | Phase 1; can partly run in parallel with phase 2 | Checks/rubric frozen; invalid, unknown and acceptable cases separated in evaluation output |
 | 4. Gate design freeze | Review proposed features for leakage/availability, grouped folds and class diversity **on training data**; predeclare classifier, threshold and metrics | Phases 1–2 | Feature and analysis specification fixed before test labels are inspected |
 | 5. Configuration C | Train on training-family proposal rows; integrate gate after B acceptance while preserving deterministic safety; test fallback on errors | Phase 4 | C runs on synthetic cases, with matched B proposal path, reproducible model artifact and passing safety tests |
@@ -36,7 +39,7 @@ Do not use held-out labels to rewrite fixed autonomy rules, tune features, choos
 
 ## Questions for both authors
 
-1. What exact boundary separates an invalid proposal to correct/reject from a valid proposal requiring confirmation? Should formal proposal forms add an explicit invalidity field, given the current `scheduling_acceptable` field and `act/defer` contract?
+1. What exact boundary separates a technically invalid proposal, a scheduling-quality rejection and a valid proposal requiring confirmation? The v2 form separates quality `no` from binary autonomy; decide how to document disputed validator findings.
 2. What impact/risk scale anchors and third-party rules should the annotation handbook use? How should repeated borderline cases be resolved consistently?
 3. How many proposals per training scenario, how many A/B/C repetitions and what sampling/stop rule are feasible under IAedu quota? Freeze these before collection.
 4. Should A proposals also be independently annotated for a direct A/B autonomy analysis? The current gate catalog intentionally imports accepted B proposals only.

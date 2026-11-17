@@ -342,6 +342,8 @@ def render_week_html(events: list[ViewEvent], week_start: date,
                 label += " · Adicionado"
             elif status == "moved":
                 label += " · Movido"
+            elif status == "preserved":
+                label += " · Preservado"
             elif status == "removed":
                 label += " · Removido (referência)"
             elif status == "previous_position":

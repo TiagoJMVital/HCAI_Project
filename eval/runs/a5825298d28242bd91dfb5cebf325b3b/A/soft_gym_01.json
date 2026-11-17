@@ -1,0 +1,79 @@
+{
+  "scenario_id": "soft_gym_01",
+  "category": "soft",
+  "provider": "iaedu",
+  "model": "GPT-5.5",
+  "generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request"
+  },
+  "proposal": {
+    "changes": [
+      {
+        "type": "move",
+        "event_id": "gym_wed",
+        "title": "Gym",
+        "from_start": "2026-11-11T18:00",
+        "to_start": "2026-11-12T18:00",
+        "to_end": "2026-11-12T19:00"
+      },
+      {
+        "type": "add",
+        "event_id": "hcai_project_wed_1",
+        "title": "HCAI project work",
+        "from_start": null,
+        "to_start": "2026-11-11T18:00",
+        "to_end": "2026-11-11T20:00"
+      },
+      {
+        "type": "add",
+        "event_id": "hcai_project_tue_1",
+        "title": "HCAI project work",
+        "from_start": null,
+        "to_start": "2026-11-10T20:00",
+        "to_end": "2026-11-10T22:00"
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "No fixed events were moved, deleted, or overlapped: Machine Learning class, HCAI class, Agents lab, and the project deadline remain unchanged.",
+        "All proposed work blocks stay within the preference window of 08:00 to 23:00.",
+        "Weekends are kept free.",
+        "The Wednesday project block avoids the fixed HCAI class from 10:00 to 12:00 and the fixed 23:59 deadline.",
+        "The moved gym session stays on a weekday and does not overlap any existing event."
+      ],
+      "priorities": [
+        "The HCAI project deadline is an academic deadline with priority 5, so it takes precedence over gym, which has priority 2.",
+        "The Wednesday gym session is flexible and low priority, so moving it is the smallest disruption that frees time on the due date.",
+        "A Tuesday evening project block adds focused work time before the deadline without moving any fixed commitments."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Delete the Wednesday gym session entirely.",
+          "rejected_because": "Moving it to Thursday preserves the health/gym commitment while still freeing Wednesday evening for the project."
+        },
+        {
+          "option": "Schedule project work after 23:00 on Wednesday, close to the deadline.",
+          "rejected_because": "This would violate the preference of no events after 23:00 and leaves too little buffer before the 23:59 deadline."
+        },
+        {
+          "option": "Move a fixed class to create a longer daytime project block.",
+          "rejected_because": "Fixed events cannot be moved or overlapped."
+        }
+      ],
+      "summary": "The plan frees the most relevant time by moving the flexible, lower-priority Wednesday gym session to Thursday and reserving Wednesday 18:00–20:00 for HCAI project work. It also adds a Tuesday 20:00–22:00 project block to create earlier progress before the Wednesday deadline."
+    }
+  },
+  "violations": [],
+  "decision": "defer",
+  "reasons": [
+    "mais de 2 mudanças"
+  ],
+  "status": "proposal_ready",
+  "seconds": 12.1
+}

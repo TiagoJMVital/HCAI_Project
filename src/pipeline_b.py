@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from typing import Callable
 
 from calendar_ops import find_violations
 from critic import critique
@@ -40,7 +41,9 @@ def _review_feedback(evaluation: CriticEvaluation) -> str:
 
 
 def run_config_b(profile: Profile, scenario: Scenario, *, proposer_provider: Provider,
-                 critic_provider: Provider, settings: CriticSettings | None = None) -> dict:
+                 critic_provider: Provider, settings: CriticSettings | None = None,
+                 proposer_fn: Callable | None = None,
+                 validator_fn: Callable | None = None) -> dict:
     """Uma proposta inicial e até `max_refinements` revisões, sem escrita externa."""
     settings = settings or CriticSettings()
     record = {
@@ -65,7 +68,7 @@ def run_config_b(profile: Profile, scenario: Scenario, *, proposer_provider: Pro
                 "proposal": None, "validation": None, "critic_evaluation": None}
         record["iterations"].append(item)
         try:
-            proposal = propose(profile, scenario, provider=proposer_provider,
+            proposal = (proposer_fn or propose)(profile, scenario, provider=proposer_provider,
                                previous=previous, feedback=feedback)
         except LLMError as exc:
             record.update(status="proposer_error", error=str(exc),
@@ -79,7 +82,7 @@ def run_config_b(profile: Profile, scenario: Scenario, *, proposer_provider: Pro
         record["refinements"] = revision
         previous = proposal
         try:
-            violations = find_violations(scenario.calendar, proposal, profile)
+            violations = (validator_fn or find_violations)(scenario.calendar, proposal, profile)
         except Exception:  # a falha do validador nunca autoriza uma ação
             record.update(status="validation_error", error="falha da validação determinística",
                           error_stage="validation", safe_action="no_autonomous_action")

@@ -1,5 +1,13 @@
 # Synthetic benchmark
 
+## Independent schema v2 extension
+
+The original 20 bases/41 variants remain unchanged in `data/scenarios/`. New inputs are imported separately into `data/scenarios_v2/`; split assignments live in `data/benchmark_v2_manifest.json`. The supplied [`scenario_v2_example.json`](../../scenario_v2_example.json) is a reference example, not an automatically imported or labelled case. Validate it with `python src/benchmark_v2.py validate ../scenario_v2_example.json`; import explicitly with `python src/benchmark_v2.py import ../scenario_v2_example.json --split train` after deciding its family split. Existing scenarios are never auto-converted, as that would invent profile fields or timezones.
+
+**Required contract:** `schema_version: "2.0"`, `scenario_id`, `family_id`, `profile`, `now`, `calendar: {events: [...]}`, `user_request`. Profile requires `profile_id`, `description`, IANA `timezone`, 1–5 `priorities` map, typed `hard_constraints`, weighted `soft_preferences` and `autonomy_preferences`. Events require `id`, `title`, timezone-aware ISO `start/end`, `category`, 1–5 `importance`, `fixed`, `participants` and `description`. Typed hard rules are currently `protect_events_by_category` (`event_categories`), `protect_events_by_id` (`event_ids`) and `daily_time_window` (`start/end`). Unknown rule types are rejected until supported. Event IDs must be unique, rule event references resolve, start precedes end and offsets agree with the profile timezone. Intentional calendar overlaps are allowed. Scenarios contain no labels, expected solutions or human decisions. Profiles need not represent students.
+
+The split is metadata outside the scenario. Freeze new family definitions and planned train/test assignments before collection. All variants in one family stay in one split; test labels stay locked until the model and analysis plan are frozen. The supplied example alone is not an adequate benchmark. The inventory below describes the older corpus.
+
 ## Inventory and provenance
 
 `src/make_seed_scenarios.py` produced the original ten synthetic cases. `src/make_benchmark.py` preserves them and builds the current manifest in `data/benchmark_manifest.json`: **20 semantic base scenarios, 41 variants, six families**. A base groups variants of one scheduling situation; a family groups related bases and is the train/test separation unit. `data/scenarios/<scenario_id>.json` holds each request, simulated time, calendar and scenario metadata. `data/profile.json` holds common priorities, hard constraints, flexible commitments and scheduling preferences.

@@ -1,5 +1,7 @@
 # Draft autonomy policy for author discussion
 
+> **Current schema v2 clarification:** Annotators first record `scheduling_acceptable=yes/no`. A `no` is a quality rejection with **no** autonomy label. Only `yes` proceeds to `act/defer`; the five defer reasons remain explanatory metadata, never predictive features. Advance scenario annotation is no longer mandatory. The examples below remain hypotheses for discussion, never ground truth.
+
 **Status: discussion draft.** The following rules and examples are hypotheses to help two authors agree on annotation criteria. They are **not** human labels, a trained gate, or a change to `src/rules.py`. The proposal's central question is whether a **specific valid proposal** may be acted on autonomously. Event topic alone should not determine the answer.
 
 ## Decision order

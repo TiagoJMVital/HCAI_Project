@@ -1,5 +1,7 @@
 # Experimental design and evidence boundaries
 
+> **Schema v2 methodological update:** The gate label belongs to an adjudicated **concrete final B proposal**. Advance scenario annotation is no longer required. Authors judge scheduling acceptability first; only acceptable proposals receive `act/defer`. The exporter records exclusions for technical failures, below-threshold B outputs, missing consensus and quality rejections. Number of scenarios is therefore not the number of eligible gate examples. Critic rationale scores remain separate from scheduling quality and autonomy. Any instruction below to annotate scenarios first describes the archived workflow. Legacy A/B logic is intact. `eval/run_config_a_v2.py` and `eval/run_config_b_v2.py` share the same v2 Proposer adapter, technical validator and fixed autonomy rules; a controlled paired repetition plan and sufficient v2 corpus are still required before scientific A/B claims.
+
 ## Research comparisons from the proposal
 
 The [Project Proposal](../../HCAI_Project_Proposal.pdf), §§4–5, proposes an ablation: **A vs B** isolates the added Critic and revision loop; **B vs C** isolates replacing fixed autonomy rules with a learned Learning-to-Defer gate, with the same Proposer–Critic process. A is one Proposer proposal plus fixed rules; B adds critique/revision then uses those same rules; C is future work. The planned hypotheses concern scheduling quality, rationale quality and calibrated autonomy. A higher Critic score alone establishes none of these.
@@ -12,7 +14,7 @@ For valid comparisons, use the same scenario inputs, profile, Proposer provider/
 | --- | --- | --- |
 | Structural validity | Pydantic proposal/change fields | Implemented; regression tests |
 | Operational applicability and hard constraints | In-memory change application and `find_violations`; rate of compliant proposals | Partial checks; no full constraint engine |
-| Request satisfaction / scheduling quality | Agreement with independently annotated **sets of acceptable outcomes**, not exact timestamp matching | Partial objective checks for five scenarios; human reference absent |
+| Request satisfaction / scheduling quality | Human `scheduling_acceptable=yes/no` on a concrete proposal, supplemented by defensible objective checks; multiple schedules may be acceptable | v2 review field implemented; no real human reference; partial legacy objective checks for five scenarios |
 | Rationale quality | Independent human rubric: coherence, clarity, trade-off justification, alternatives; compare initial/final B rationale | Critic score and history recorded; human rubric not yet applied |
 | Critic refinement | Four dimension scores, overall score, revisions to threshold, failure rate, stratified by difficulty | Recorded for B; only isolated real run, no aggregate study |
 | Autonomy | Against adjudicated proposal-level labels: defer precision, recall, F1, deferral rate and unsafe autonomy rate | Labels and C absent; fixed-rule decisions recorded |
@@ -23,7 +25,7 @@ The proposal's Table 1 expected behaviors and Figures 2–3 are **illustrative t
 
 ## Human assessment and repetitions
 
-Two authors should annotate scenario constraints and acceptable outcomes independently, then concrete B proposals independently, followed by documented adjudication. For rationale quality, define and freeze a separate human rubric before assessing initial versus final B rationales; keep it distinct from Critic scoring and autonomy labelling. Blind assessors to configuration/iteration where the rubric permits; an initial/final comparison may still reveal textual clues, so record that limitation.
+Two authors should review each final B proposal independently: record scheduling acceptability first and `act/defer` only for acceptable proposals, then adjudicate. There is no required advance scenario annotation in v2. For rationale quality, define and freeze a separate human rubric before assessing initial versus final B rationales; keep it distinct from Critic scoring and autonomy labelling. The current v2 review UI shows Critic scores/iterations as requested, which may bias human judgments; record that limitation or run a separately designed blinded assessment. An initial/final comparison may reveal textual clues even with masking.
 
 The proposal does not fix a number of LLM repetitions, confidence interval method, or random seed policy. Recommended decision before data collection: choose a feasible, predeclared number of repeated runs per scenario and configuration, with paired `experiment_id`/`repeat_index`, a fixed provider/channel and the generation parameters actually exposed by that provider. Since IAedu may not expose temperature or seed control through this protocol, record that fact rather than claim determinism. Preserve all outputs and failures, report dispersion at the family and scenario levels, and avoid treating many near-identical variants as independent observations.
 
@@ -35,7 +37,7 @@ Three families are reserved for training/development and three for final test. T
 
 1. Agree on the draft autonomy policy and run the training-only annotation pilot.
 2. Collect enough accepted B proposals from training families with a predeclared sampling rule; preserve rejected/error runs separately for pipeline analysis. Decide whether and when to annotate A proposals for an independent A/B autonomy comparison, because the current gate catalog imports only accepted B proposals.
-3. Complete independent scenario and proposal annotations and adjudication; inspect agreement and class diversity **on training data**.
+3. Complete independent **proposal** reviews and adjudication; inspect quality rejections, agreement and class diversity **on training data**. No advance scenario forms are required.
 4. Expand objective request checks where defensible, and implement the human scheduling/rationale rubrics. A pass on five partial checks is not full scheduling validity.
 5. Freeze a realistic, repeated A/B/C evaluation plan. Implement and train C using train families only, then evaluate held-out families once, with uncertainty and error analysis.
 6. Decide whether the originally proposed Google Calendar and n8n components are required for the final demonstrator. Any use of private calendars needs a separate consent and privacy protocol.

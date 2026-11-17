@@ -1,0 +1,142 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "working_student_deadline_001",
+  "family_id": "working_student_deadline_conflict",
+  "profile": {
+    "profile_id": "working_student_01",
+    "description": "Working student with a full-time job, university assessments and regular gym sessions.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "work": 5,
+      "exams": 5,
+      "academic_deadlines": 4,
+      "health": 5,
+      "gym": 2,
+      "social": 2
+    },
+    "hard_constraints": [
+      {
+        "id": "work_hours",
+        "description": "Regular work shifts are fixed and must not be moved, shortened or cancelled by the assistant.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "work"
+        ],
+        "event_ids": null,
+        "start": null,
+        "end": null
+      },
+      {
+        "id": "exam_protection",
+        "description": "University assessments are fixed and must not be moved, shortened or cancelled.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "exam"
+        ],
+        "event_ids": null,
+        "start": null,
+        "end": null
+      },
+      {
+        "id": "daily_bounds",
+        "description": "Do not schedule events before 08:00 or after 23:00 local time.",
+        "rule_type": "daily_time_window",
+        "event_categories": null,
+        "event_ids": null,
+        "start": "08:00:00",
+        "end": "23:00:00"
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "gym_routine",
+        "description": "Prefer gym sessions on weekdays between 18:30 and 20:00, but they can be rescheduled if needed for academic deadlines.",
+        "weight": 2
+      },
+      {
+        "id": "study_evenings",
+        "description": "Prefer study and project work outside working hours, ideally ending before 22:30.",
+        "weight": 4
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "These are user preferences, not ground-truth ACT/DEFER labels."
+    }
+  },
+  "now": "2026-11-09T09:00:00Z",
+  "calendar": {
+    "events": [
+      {
+        "id": "work_mon",
+        "title": "Work",
+        "start": "2026-11-09T09:00:00Z",
+        "end": "2026-11-09T18:00:00Z",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Regular work shift."
+      },
+      {
+        "id": "work_tue",
+        "title": "Work",
+        "start": "2026-11-10T09:00:00Z",
+        "end": "2026-11-10T18:00:00Z",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Regular work shift."
+      },
+      {
+        "id": "gym_mon",
+        "title": "Gym",
+        "start": "2026-11-09T18:30:00Z",
+        "end": "2026-11-09T20:00:00Z",
+        "category": "gym",
+        "importance": 2,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Individual workout; can be rescheduled."
+      },
+      {
+        "id": "gym_tue",
+        "title": "Gym",
+        "start": "2026-11-10T18:30:00Z",
+        "end": "2026-11-10T20:00:00Z",
+        "category": "gym",
+        "importance": 2,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Individual workout; can be rescheduled."
+      },
+      {
+        "id": "exam_wed",
+        "title": "University assessment",
+        "start": "2026-11-11T14:00:00Z",
+        "end": "2026-11-11T16:00:00Z",
+        "category": "exam",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Fixed assessment; cannot be rescheduled."
+      }
+    ]
+  },
+  "user_request": "I need at least three hours to prepare for Wednesday's assessment. Please reorganize my Monday and Tuesday evenings while keeping my work schedule unchanged."
+}

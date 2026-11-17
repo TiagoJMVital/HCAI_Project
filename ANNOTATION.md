@@ -1,243 +1,65 @@
-# Protocolo definitivo de anotação: cenário e proposta
+# Current human annotation protocol (scenario schema 2.0)
 
-## Unidade do rótulo e ordem das fases
+The unit of judgement is a **concrete final proposal**, identified by `proposal_id`. A scenario has no human label or expected answer in its JSON. The former two-stage workflow is retained in `src/annotation_workflow.py`, `src/annotation_ui.py`, `src/gate_dataset.py` and `data/annotation_work/` for historical access. It is **not a prerequisite** for schema v2 annotation. No old forms or results are migrated automatically.
 
-O rótulo para Learning-to-Defer pertence a **uma proposta concreta**, identificada
-por `proposal_id`. Um cenário pode originar várias propostas e rótulos diferentes.
-A anotação de cenário descreve restrições, ambiguidades e resultados aceitáveis;
-**não contém `act/defer`**. Os dois autores anotam independentemente cada fase.
+## 1. Prepare an independent scenario
 
-Ordem obrigatória:
+Use [`scenario_v2_example.json`](../scenario_v2_example.json) as a data-format example. A v2 scenario has `schema_version`, `scenario_id`, `family_id`, `profile`, `now`, `calendar.events` and `user_request`; see [the benchmark document](docs/03_BENCHMARK.md) for the full profile/event fields. Timestamps require an ISO 8601 offset consistent with the profile's IANA timezone. Calendar overlaps are permitted because they may be intentional benchmark conflicts. Do not place labels, expected schedules or human evaluations in scenario files.
 
-1. Anotar e adjudicar o cenário (fase A).
-2. Gerar/importar propostas B aceites pelo Critic, sem alterar B.
-3. Preparar pacotes de proposta, anotar e adjudicar cada proposta (fase B).
-4. Exportar o dataset de treino do gate. Manter o teste reservado.
+From `HCAI_Project/`:
 
-O espaço local `data/annotation_work/` é ignorado pelo Git. Os IDs `author_a`
-e `author_b` são pseudónimos; cada autor abre apenas a sua pasta durante a fase
-independente. O filesystem, por si só, não impede que um autor veja a pasta do
-outro. Partilhar formulários só depois de ambos os bloquearem como `complete`.
+```bash
+python src/benchmark_v2.py validate ../scenario_v2_example.json
+python src/benchmark_v2.py import ../scenario_v2_example.json --split train
+python src/benchmark_v2.py validate
+```
 
-## Interface web local (WSL2)
+Choose the split **before** importing a family. The importer refuses a family split across train/test, including a conflict with an identically named legacy family. It refuses to overwrite an imported scenario. The v2 manifest at `data/benchmark_v2_manifest.json` contains only IDs and split assignments; scenarios live separately in `data/scenarios_v2/`. Keep all variants of a family in one split. Test families remain reserved.
 
-Depois de instalar as dependências de `requirements.txt` no `.venv`, executar na
-raiz do repositório:
+## 2. Generate or import one B proposal
+
+Generation is an **explicit command**; opening Streamlit never calls a model. The following command makes real requests to the configured provider, so run it only when API use is authorized:
+
+```bash
+python eval/run_config_b_v2.py --only working_student_deadline_001
+python src/proposal_catalog_v2.py eval/runs/<run_id>/B_v2/working_student_deadline_001.json
+```
+
+For an already generated v2 B result, run only the second command. The importer checks the result's scenario/family/profile/split, final proposal and iteration history, recalculates technical validation, assigns a deterministic unique `proposal_id`, and writes an immutable artifact in `data/proposal_sources_v2/`. It stores provider/model, prompt hashes, Critic score, iterations, validation and run metadata. A technically invalid final proposal may remain available for a **quality rejection**; it cannot silently become a gate training example. B's own fixed-rule decision is not the human label.
+
+The Proposer receives the complete v2 context. The Critic receives only the structured proposal and its rationale, never the original request, calendar or profile through a separate channel. For v2, the Proposer prompt asks for timezone-aware change timestamps. The original A/B runners, prompts, rules and legacy scenarios are unchanged.
+
+## 3. Evaluate independently in the web interface
 
 ```bash
 source .venv/bin/activate
 streamlit run annotation_app.py --server.address 127.0.0.1
 ```
 
-Abrir no navegador do Windows o endereço local mostrado no terminal, normalmente
-`http://localhost:8501`. A interface prepara os mesmos pacotes e formulários JSON
-que os comandos CLI abaixo. Selecionar `author_a` ou `author_b` na barra lateral;
-a seleção é apenas separação operacional, **não** autenticação. Cada autor deve
-trabalhar apenas na própria pasta. A aplicação não consulta o IAedu.
+Open the local URL printed by Streamlit in the Windows browser (usually `http://localhost:8501`). In **Propostas v2**, select `author_a` or `author_b`; filter by profile, family and state; select a proposal or use the previous/next buttons. Read the request, complete profile, weekly original calendar, final changes, rationale, technical validation and Critic score/iterations. Switch to the proposed calendar only if the in-memory simulation passed. Fixed/flexible labels and added/moved/removed styles remain visible. Added events have neutral preview metadata because the current `Proposal` contract lacks category and participants. The displayed Critic score evaluates reasoning, not scheduling validity. The author selector is operational separation, **not authentication**; do not inspect the other author's file while annotating.
 
-Em **Cenários**, escolher o item, consultar o calendário e o perfil, preencher
-listas no editor de linhas (adicionar/remover), e clicar **Guardar rascunho**.
-O calendário semanal visual abre com a semana do cenário, de segunda a domingo,
-com horas em formato de 24 horas. As setas navegam entre semanas. As cores
-distinguem categorias, e cada bloco indica também se o evento é fixo ou flexível.
-Passar o cursor sobre um bloco mostra detalhes; a tabela cronológica original
-permanece em **Ver eventos em tabela**. A faixa âmbar tracejada identifica apenas
-intervalos explícitos que o parser limitado consegue determinar. Eventos com
-contorno cruzam temporalmente esse intervalo; essa coincidência **não prova**
-violação de uma restrição rígida. Se o pedido for vago, aparece
-**Intervalo não identificado automaticamente**, sem seleção inventada.
-O rascunho admite campos incompletos e reaparece ao voltar ao item. **Validar e
-concluir** aplica o mesmo modelo Pydantic que a CLI; erros são mostrados sem
-guardar uma conclusão inválida. O filtro e os contadores mostram progresso e
-formulários que precisam de correção. Guardar antes de mudar de item. Uma
-anotação já concluída exige confirmação explícita para ser alterada. Se outro
-processo alterar o ficheiro entretanto, recarregar o item antes de guardar.
-Depois de um consenso concluído, a interface bloqueia alterações aos formulários
-individuais desse item para não criar uma referência adjudicada desatualizada.
+The author form is saved in `data/annotation_work_v2/<author>/<proposal_id>.json`. Save incomplete drafts at any point; drafts reload when revisiting the proposal. Save before navigating away. Completion requires:
 
-Em **Propostas**, a aplicação só abre os pacotes quando a adjudicação do cenário
-correspondente estiver completa. Mostra apenas cenário, consenso de cenário e
-proposta final/justificação. As pontuações, decisões das regras, rótulos
-preliminares, histórico, modelo e split ficam ocultos. Para `defer`, escolher
-um motivo principal obrigatório, motivos adicionais opcionais e, quando houver
-`clarification_required`, uma pergunta específica opcional. As categorias são
-`clarification_required`, `confirmation_required`, `high_impact`,
-`third_party_impact` e `preference_conflict`. Uma proposta marcada como
-inaceitável não pode receber `act`. Propostas inválidas devem ser corrigidas ou
-rejeitadas; a confirmação humana não as torna válidas.
+1. `scheduling_acceptable = yes/no`.
+2. If **yes**, `autonomy_decision = act/defer`. If **no**, leave the autonomy decision empty: this is a quality rejection, not a `DEFER` label.
+3. A nonempty `primary_reason` and `justification`. For `defer`, the primary reason must be one of `clarification_required`, `confirmation_required`, `high_impact`, `third_party_impact`, `preference_conflict`; additional reasons are optional. For `act` or a quality rejection, the primary reason is free text.
 
-Quando a proposta final passa a validação estrutural e operacional já existente,
-é possível alternar entre **Calendário original** e **Calendário proposto**.
-Adições e movimentos são assinalados; eliminações e posições anteriores aparecem
-esbatidas apenas como referência, não como eventos ativos. Se as verificações
-falharem, a vista proposta não é apresentada como aplicada. A pré-visualização
-não altera ficheiros nem garante satisfação integral do pedido; o validador
-determinístico cobre apenas parte das restrições.
+Completion is checked by Pydantic. A saved complete review needs explicit confirmation before an edit; a completed consensus freezes the individual reviews. Files are written atomically and revision checked to prevent silent concurrent overwrites. Drafts and consensus are separate from the immutable proposal artifact.
 
-Os novos formulários de proposta usam `annotation_version=2`; ficheiros antigos
-sem este campo continuam legíveis como versão 1. Os motivos de deferimento são
-metadados explicativos, **não** features do gate nem novas classes de decisão.
+## 4. Compare and adjudicate
 
-Em **Comparação e adjudicação**, só aparecem itens concluídos pelos dois autores.
-Comparar respostas, discutir desacordos e preencher o consenso manualmente;
-ambos devem confirmar a resolução. A aplicação reutiliza `compare`,
-`prepare_adjudications` e `validate_adjudications` do workflow. Os formulários
-individuais permanecem inalterados durante a adjudicação. Cohen's kappa pode ser
-indefinido ou pouco estável num piloto pequeno.
+After both authors finish a proposal, open **Consenso v2**. The page shows their completed reviews side by side, disagreement fields, observed `act/defer` agreement and Cohen's kappa where calculable. A small or single-class sample may make kappa undefined or unstable. Discuss disagreements, fill the consensus fields and identify who adjudicated. The consensus is stored separately in `data/annotation_work_v2/adjudications/<proposal_id>.json`, with SHA-256 references to both original reviews. The interface never copies an author's decision as consensus automatically. Original reviews remain intact.
 
-## Fase A — cenário
+## 5. Export supervised examples
 
 ```bash
-python src/annotation_workflow.py prepare-scenarios author_a
-python src/annotation_workflow.py prepare-scenarios author_b
+python src/gate_dataset_v2.py --split train
+# Only after the feature extractor, classifier and evaluation policy are frozen:
+python src/gate_dataset_v2.py --split test --unlock-test
 ```
 
-Cada autor recebe `scenario/packets/<scenario_id>.json` e
-`scenario/forms/<scenario_id>.json`. O pacote contém pedido, calendário
-sintético, hora simulada e preferências. **Não** contém família, split,
-`draft_label`, resultados A/B ou decisões de outro autor.
+Output is `data/gate_datasets_v2/<split>.jsonl`, with a parallel `.exclusions.json` explaining each omitted proposal. Eligible rows require a technically valid final proposal, an accepted B run, two completed independent reviews, a completed consensus and `scheduling_acceptable=yes`. A quality rejection has no gate label. Features use proposal/context variables and Critic score; IDs and split are metadata outside `features`. Human decisions, reasons and justifications never enter predictive features. There is no classifier training in this workflow. Use `grouped_folds` from `src/gate_dataset_v2.py` only on training rows for family-grouped validation.
 
-No formulário, preencher `hard_constraints`, uma ou várias descrições em
-`acceptable_outcomes`, `impact_factors`, `ambiguity_present` e, se aplicável,
-`ambiguity_notes`. Descrever várias soluções aceitáveis quando existirem, sem
-exigir igualdade com uma agenda única. Alterar `status` para `complete` só ao
-terminar. O formulário de cenário não pede decisão de autonomia.
+## Scientific limits
 
-Após os dois autores concluírem:
-
-```bash
-python src/annotation_workflow.py compare scenario author_a author_b
-python src/annotation_workflow.py prepare-adjudications scenario author_a author_b
-```
-
-Comparar manualmente descrições de resultados, restrições e ambiguidades. A
-comparação textual automática só assinala divergências literais após normalizar
-maiúsculas e espaços; não identifica equivalência semântica. Ambos os autores
-preenchem `adjudications/scenario/<scenario_id>.json` com o consenso,
-`resolution_rationale`, `resolved_by=["author_a","author_b"]` e
-`status="complete"`. O código não copia respostas automaticamente.
-
-```bash
-python src/annotation_workflow.py validate-adjudications scenario author_a author_b
-```
-
-## Gerar e importar propostas para anotação
-
-A configuração B é a fonte de propostas. Executar apenas o lote e a frequência
-aprovados para o estudo; **este procedimento não inicia experiências em massa**.
-Exemplo de um único cenário, quando se decidir recolher mais uma proposta:
-
-```bash
-python eval/run_config_b.py --only soft_gym_01 --experiment-id annotation-pilot --repeat-index 0
-python src/proposal_catalog.py eval/runs/<run_id>/B/soft_gym_01.json
-```
-
-Substituir `<run_id>` pelo diretório mostrado pelo executor. O importador só
-aceita um registo B `proposal_ready` com aprovação do Critic. Cria
-`data/proposal_sources/<proposal_id>.json` com ligação a cenário, base, família,
-split, execução, modelos, score e **histórico completo de revisões**. O ID é
-derivado do run ID, cenário e proposta final; repetir a importação é idempotente.
-Propostas que falharam o limiar do Critic não entram no conjunto de treino do
-gate, pois B já as defere antes de chegar ao gate.
-
-O catálogo é material de proveniência, **não** é um pacote para anotadores.
-Os anotadores não devem abrir `eval/runs/`, `data/proposal_sources/` ou os
-resultados de outras configurações até concluírem os seus formulários.
-
-## Fase B — proposta concreta
-
-Depois da adjudicação do cenário correspondente:
-
-```bash
-python src/annotation_workflow.py prepare-proposals author_a
-python src/annotation_workflow.py prepare-proposals author_b
-```
-
-O pacote em `proposal/packets/<proposal_id>.json` mostra o cenário original,
-o consenso de restrições/resultados aceitáveis da fase A e **só a proposta
-final com a sua justificação**. Omite decisões das regras fixas, pré-rótulos,
-score/feedback do Critic, histórico de refinamento, modelo, split e resultados
-de outras configurações.
-
-Cada autor preenche em `proposal/forms/<proposal_id>.json`:
-
-- `decision`: `act` se **esta proposta concreta** pode ser aplicada sem
-  confirmação; `defer` se requer confirmação ou correção antes de agir.
-- `decision_rationale`: motivo específico, incluindo o que a proposta alteraria.
-- `scheduling_acceptable`: se as mudanças satisfazem um resultado aceitável
-  da fase A; isto é distinto de autorizar autonomia.
-- `intervention_impact` e `intervention_risk`: escala 1–5 para esta proposta.
-- `risk_factors` e `ambiguity_notes`: consequências, terceiros afetados e
-  informação em falta. Depois, `status="complete"`.
-- Nos formulários de versão 2, `defer_reason_primary` é obrigatório quando a
-  decisão é `defer`; `defer_reason_additional` e `clarification_question` são
-  opcionais. A pergunta só se aplica quando um motivo é
-  `clarification_required`. Estes campos não entram nas features preditivas.
-
-Os autores não recebem o rótulo preliminar do cenário nem a decisão das regras.
-Uma proposta estruturalmente inviável ou fora dos resultados aceitáveis deve
-ser assinalada como tal; o rótulo de autonomia não substitui a avaliação da
-qualidade do scheduling.
-
-Após ambos completarem a fase B:
-
-```bash
-python src/annotation_workflow.py compare proposal author_a author_b
-python src/annotation_workflow.py prepare-adjudications proposal author_a author_b
-```
-
-A comparação calcula concordância observada e Cohen's kappa para `act/defer`
-quando definido, e assinala diferenças de aceitabilidade, impacto e risco.
-Kappa é indefinido sem pares ou quando a concordância esperada é 1; com poucos
-exemplos, não o interpretar isoladamente. Os autores preenchem manualmente
-`adjudications/proposal/<proposal_id>.json` com `final_decision`, razão,
-aceitabilidade, impacto, risco, `resolved_by` e `status="complete"`.
-
-```bash
-python src/annotation_workflow.py validate-adjudications proposal author_a author_b
-```
-
-## Dataset do gate e separação experimental
-
-Quando as duas fases estiverem completas e adjudicadas para todas as propostas
-de treino importadas:
-
-```bash
-python src/gate_dataset.py --split train
-```
-
-O ficheiro local `data/gate_datasets/train.jsonl` contém metadados de
-proveniência (`scenario_id`, `proposal_id`, `base_id`, `family`, `split`, `run_id`,
-modelos), `critic_score`, `features` preditivas e `label` adjudicado da **proposta**.
-IDs, família e split ficam fora de `features`. O extrator atual usa apenas
-proposta final, score do Critic e calendário sintético: tipo e número de
-mudanças, importância dos eventos tocados, sobreposições no calendário original,
-impacto heurístico e categoria sensível. Não usa rótulos, pré-rótulos ou escalas
-humanas como features. Estas heurísticas têm de ser congeladas antes de ver os
-rótulos das famílias de teste.
-
-O comando recusa exportar se faltar qualquer anotação independente ou
-adjudicação de uma proposta do split selecionado. `--split test` exige
-`--unlock-test` explícito e deve ser usado **só depois** de congelar features,
-classificador e hiperparâmetros. Todas as propostas da mesma base pertencem à
-mesma família/split; validação cruzada e treino devem agrupar por família ou,
-  no mínimo, por base, nunca por linha individual. A função
-  `grouped_gate_folds` prepara folds por família para linhas de treino e
-  verifica que propostas da mesma base ficam juntas.
-
-## Riscos a controlar antes da recolha completa
-
-- Existem 41 variantes, mas só três famílias de treino; a validação cruzada
-  agrupada é instável e cada fold pode omitir uma categoria inteira.
-- Nos dez cenários originais, os pré-rótulos são enviesados por categoria:
-  os dois casos rígidos têm `act` e os três ambíguos têm `defer`. Os restantes
-  31 cenários não têm pré-rótulo. Estes valores **não são ground truth**.
-- Recolher propostas B aceites para casos de baixo e alto impacto nas famílias
-  de treino; verificar a diversidade **apenas depois** das anotações de treino.
-  Se faltar diversidade, ampliar famílias de treino ou recolher mais propostas
-  com um protocolo fixado. Não usar rótulos de teste para selecionar exemplos,
-  regras, features ou limiares.
-- Uma mesma proposta final pode ser parecida com outra do mesmo cenário-base.
-  Manter todas no mesmo grupo evita fuga entre treino e avaliação.
-- Os formulários de cenário fornecem resultados aceitáveis em texto livre; a
-  correspondência com uma proposta concreta exige julgamento humano.
+Typed v2 checks cover references, timezone offsets, fixed/category/id protection, positive durations, daily windows and protected-event overlaps. Descriptions in natural language, soft preferences, request satisfaction, correctness of inferred add-event metadata and autonomy suitability are **not automatically proven**. In particular, a technically applicable proposal can still be marked `scheduling_acceptable=no`. Do not call an invalid proposal a normal `DEFER` example. Keep test families untouched while developing policy or feature definitions. The [autonomy policy draft](docs/08_AUTONOMY_POLICY_DRAFT.md) is discussion guidance, never ground truth.

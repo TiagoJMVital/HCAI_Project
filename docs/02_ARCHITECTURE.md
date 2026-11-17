@@ -1,5 +1,11 @@
 # Architecture and data contracts
 
+## Active schema v2 extension
+
+`src/scenario_v2.py` validates independent timezone-aware inputs; `src/benchmark_v2.py` imports them with a separate family-split manifest. `src/proposer_v2.py` feeds the complete v2 context to the same structured `Proposal` contract. `eval/run_config_a_v2.py` and `eval/run_config_b_v2.py` share that adapter, validator and unchanged fixed rules; B reuses `run_config_b`. The **unchanged Critic** still receives only the proposal and rationale. The original `src/proposer.py` prompt, legacy A/B runners, rules and data remain unchanged.
+
+`src/calendar_v2.py` simulates changes with aware timestamps, checking typed protections, references, duration, daily windows and overlap with protected events. Added events use neutral fallback category, importance and participants because `Proposal.Change` lacks those fields. Natural-language constraint descriptions, soft preferences and request satisfaction remain unverified. `src/proposal_catalog_v2.py` stores B artifacts; `src/annotation_v2.py` stores direct independent reviews and consensus; `src/gate_dataset_v2.py` exports eligible adjudicated examples with exclusion reasons. See [the active protocol](04_ANNOTATION_PROTOCOL.md). The sections below describe the legacy A/B path unless explicitly marked v2.
+
 ## System boundary
 
 `eval/run_config_a.py` and `eval/run_config_b.py` load a synthetic `Scenario` and `Profile`, call the selected LLM provider, and write JSON records under `eval/runs/<run_id>/A/` or `/B/`. `src/calendar_ops.py` simulates changes in memory. There is no real calendar write path. The proposal's n8n orchestration and Google Calendar API are not yet present.

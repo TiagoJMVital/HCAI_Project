@@ -234,16 +234,17 @@ def test_streamlit_pages_open_with_temporary_benchmark(local_root, tmp_path):
     )
     app = AppTest.from_file(wrapper, default_timeout=10).run()
     assert not app.exception
+    app.sidebar.radio[0].set_value("Arquivo: cenários antigos").run()
     assert app.header[0].value == "Fase A · Cenários"
     assert any("09/11/2026" in button.label for button in app.button)
     next_week = next(button for button in app.button if button.label == "Semana seguinte →")
     next_week.click().run()
     assert not app.exception
     assert any("16/11/2026" in button.label for button in app.button)
-    app.sidebar.radio[0].set_value("Propostas").run()
+    app.sidebar.radio[0].set_value("Arquivo: propostas antigas").run()
     assert not app.exception
     assert any("fase B só fica disponível" in item.value for item in app.info)
-    app.sidebar.radio[0].set_value("Comparação e adjudicação").run()
+    app.sidebar.radio[0].set_value("Arquivo: comparação antiga").run()
     assert not app.exception
     assert any("respostas individuais permanecem ocultas" in item.value for item in app.info)
     app.sidebar.radio[0].set_value("Guia de autonomia").run()
@@ -261,6 +262,7 @@ def test_navigation_after_draft_save_and_author_switch(local_root, tmp_path):
         "annotation_app.main()\n"
     )
     app = AppTest.from_file(wrapper, default_timeout=10).run()
+    app.sidebar.radio[0].set_value("Arquivo: cenários antigos").run()
     assert next(x.value for x in app.selectbox if x.label == "Cenário") == "amb_health_01"
     next(x for x in app.text_area if x.label == "Notas sobre ambiguidade").set_value(
         "Rascunho temporário de teste").run()
