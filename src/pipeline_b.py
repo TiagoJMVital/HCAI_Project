@@ -4,11 +4,9 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Callable
 
-from calendar_ops import find_violations
 from critic import critique
 from llm import LLMError, Provider
-from models import CriticEvaluation, Profile, Proposal, Scenario
-from proposer import propose
+from models import CriticEvaluation, Proposal
 from rules import rule_based_decision
 
 
@@ -40,10 +38,10 @@ def _review_feedback(evaluation: CriticEvaluation) -> str:
             f"Actionable feedback: {evaluation.feedback}")
 
 
-def run_config_b(profile: Profile, scenario: Scenario, *, proposer_provider: Provider,
+def run_config_b(profile, scenario, *, proposer_provider: Provider,
                  critic_provider: Provider, settings: CriticSettings | None = None,
-                 proposer_fn: Callable | None = None,
-                 validator_fn: Callable | None = None) -> dict:
+                 proposer_fn: Callable,
+                 validator_fn: Callable) -> dict:
     """Uma proposta inicial e até `max_refinements` revisões, sem escrita externa."""
     settings = settings or CriticSettings()
     record = {
@@ -68,7 +66,7 @@ def run_config_b(profile: Profile, scenario: Scenario, *, proposer_provider: Pro
                 "proposal": None, "validation": None, "critic_evaluation": None}
         record["iterations"].append(item)
         try:
-            proposal = (proposer_fn or propose)(profile, scenario, provider=proposer_provider,
+            proposal = proposer_fn(profile, scenario, provider=proposer_provider,
                                previous=previous, feedback=feedback)
         except LLMError as exc:
             record.update(status="proposer_error", error=str(exc),
@@ -82,7 +80,7 @@ def run_config_b(profile: Profile, scenario: Scenario, *, proposer_provider: Pro
         record["refinements"] = revision
         previous = proposal
         try:
-            violations = (validator_fn or find_violations)(scenario.calendar, proposal, profile)
+            violations = validator_fn(scenario.calendar, proposal, profile)
         except Exception:  # a falha do validador nunca autoriza uma ação
             record.update(status="validation_error", error="falha da validação determinística",
                           error_stage="validation", safe_action="no_autonomous_action")

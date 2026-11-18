@@ -7,7 +7,7 @@ import os
 import tempfile
 from pathlib import Path
 
-from scenario_v2 import V2Scenario, load_manifest, load_scenario
+from scenario_v2 import load_manifest, load_scenario
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -32,15 +32,10 @@ def import_scenario(root: Path, source: Path, split: str) -> Path:
         raise ValueError("split must be train or test")
     scenario = load_scenario(source)
     rows = load_manifest(root)
-    legacy_manifest = root / "data" / "benchmark_manifest.json"
-    if legacy_manifest.exists():
-        legacy_rows = json.loads(legacy_manifest.read_text(encoding="utf-8"))["scenarios"]
-        if any(row["family"] == scenario.family_id and row["split"] != split for row in legacy_rows):
-            raise ValueError("family conflicts with the reserved legacy train/test split")
     if any(row["family_id"] == scenario.family_id and row["split"] != split for row in rows):
         raise ValueError("family already assigned to the opposite split")
-    target = root / "data" / "scenarios_v2" / f"{scenario.scenario_id}.json"
-    manifest = root / "data" / "benchmark_v2_manifest.json"
+    target = root / "data" / "scenarios" / f"{scenario.scenario_id}.json"
+    manifest = root / "data" / "benchmark_manifest.json"
     if target.exists() or any(row["scenario_id"] == scenario.scenario_id for row in rows):
         raise ValueError("scenario already imported; existing data will not be overwritten")
     # Preserve the validated contract, without changing or inventing scientific fields.

@@ -1,63 +1,30 @@
-# Architecture and data contracts
+# Architecture
 
-## Active schema v2 extension
-
-`src/scenario_v2.py` validates independent timezone-aware inputs; `src/benchmark_v2.py` imports them with a separate family-split manifest. `src/proposer_v2.py` feeds the complete v2 context to the same structured `Proposal` contract. `eval/run_config_a_v2.py` and `eval/run_config_b_v2.py` share that adapter, validator and unchanged fixed rules; B reuses `run_config_b`. The **unchanged Critic** still receives only the proposal and rationale. The original `src/proposer.py` prompt, legacy A/B runners, rules and data remain unchanged.
-
-`src/calendar_v2.py` simulates changes with aware timestamps, checking typed protections, references, duration, daily windows and overlap with protected events. Added events use neutral fallback category, importance and participants because `Proposal.Change` lacks those fields. Natural-language constraint descriptions, soft preferences and request satisfaction remain unverified. `src/proposal_catalog_v2.py` stores B artifacts; `src/annotation_v2.py` stores direct independent reviews and consensus; `src/gate_dataset_v2.py` exports eligible adjudicated examples with exclusion reasons. See [the active protocol](04_ANNOTATION_PROTOCOL.md). The sections below describe the legacy A/B path unless explicitly marked v2.
-
-## System boundary
-
-`eval/run_config_a.py` and `eval/run_config_b.py` load a synthetic `Scenario` and `Profile`, call the selected LLM provider, and write JSON records under `eval/runs/<run_id>/A/` or `/B/`. `src/calendar_ops.py` simulates changes in memory. There is no real calendar write path. The proposal's n8n orchestration and Google Calendar API are not yet present.
+## Flow
 
 ```mermaid
 flowchart LR
-  S[Scenario: request + simulated calendar] --> P[Proposer]
-  U[Preference profile] --> P
-  L[IAedu or Ollama provider] --> P
-  P --> V[Pydantic + deterministic checks]
-  V -->|A| R[Fixed autonomy rules]
-  V -->|B valid| C[Critic: proposal + rationale only]
-  V -->|B invalid, revisions left| P
-  C -->|below threshold, revisions left| P
-  C -->|accepted| R
-  C -->|limit reached| D[Defer]
-  V -->|technical failure| E[Error: no action]
-  R --> O[JSON result: simulated Act/Defer]
-  D --> O
-  E --> O
+  S[Scenario 2.0: profile, calendar, request, now] --> P[Proposer]
+  P --> V[Deterministic validation]
+  V --> A[A: fixed autonomy rules]
+  V --> K[B: Critic, proposal + rationale only]
+  K -->|feedback if below threshold| P
+  K -->|accepted| R[B: same fixed rules]
+  K -->|revision limit| D[Defer]
+  R --> O[Run result]
+  A --> O
+  O --> I[Explicit B proposal import]
+  I --> H[Two independent human reviews]
+  H --> C[Adjudication]
+  C --> G[Eligible gate dataset export]
 ```
 
-## Contracts and responsibilities
+`src/scenario_v2.py` validates the schema `2.0` profile/calendar/request; `src/proposer_v2.py` adapts it for the existing structured `Proposal` contract in `src/models.py`. The Proposer receives the complete scenario. `src/llm.py` selects IAedu or Ollama from configuration; API credentials stay in ignored `.env` or environment. `src/critic.py` receives only the proposal and its rationale. It does not receive the source profile, calendar, original request, annotation or labels through a separate channel. The Critic scores reasoning, coherence, alternatives and clarity from 1 to 5, supplies feedback, and does not certify calendar constraints.
 
-| Component | Input | Output and responsibility |
-| --- | --- | --- |
-| `src/models.py` | JSON objects | Pydantic v2 `Profile`, `Scenario`, `Change`, `Proposal`, `CriticEvaluation`; validates required fields for `add` (`title`, `to_start`), `move` (`event_id`, `to_start`) and `delete` (`event_id`). `Rationale` carries constraints, priorities, alternatives and summary. |
-| `src/proposer.py` | User request, synthetic calendar, profile; on revision, previous proposal and feedback | A structured `Proposal`. The same function and prompt serve A and B. It is instructed to respect fixed events and preferences, but instructions alone are not guarantees. |
-| `src/calendar_ops.py` | Original calendar, proposal, profile | `find_violations` and in-memory `apply_changes`. Rejects invalid references/dates/durations, moving/deleting fixed events, changed-event overlap with fixed events, out-of-hours/weekend changes and some ineffective or duplicate changes. Coverage is partial. |
-| `src/critic.py` | Structured proposal, including its rationale | `CriticEvaluation` with four scores from 1–5, weaknesses and actionable feedback. No direct request, calendar or profile parameter. It judges statements visible in the proposal, not actual calendar correctness. |
-| `src/pipeline_b.py` | Same scenario and profile, Proposer/Critic providers, `CriticSettings` | Initial proposal plus at most three revisions by default; every iteration records proposal, validation and, if valid, Critic evaluation. |
-| `src/rules.py` | Final proposal, original calendar, violations | `act` or `defer` plus reasons; shared unchanged by A and B. |
-| `src/llm.py` | Prompt and target Pydantic class | A provider protocol with `generate_structured` and `generation_config`; IAedu and Ollama implementations. |
+`src/pipeline_b.py` runs the B loop with a threshold of 4.0 and at most three **revisions after the initial proposal**. It passes the previous proposal and Critic feedback to the Proposer. It records each iteration and technical failures. `src/calendar_v2.py` validates change fields, references, timing, protected events and computable constraints, and simulates applicable changes in memory. Natural-language constraints not encoded as executable rules remain unverified. `src/rules.py` applies the same fixed autonomy logic in A and B; invalid proposals cannot act. B below threshold defers. Technical failures are recorded separately from a legitimate defer.
 
-`Scenario` still contains legacy `annotations`, `reference_decision` and `draft_label` fields. Current human labels reside instead in the two-phase workflow; `draft_label` is preliminary generator metadata and must never be treated as ground truth. `GateFeatures` in `src/models.py` is an older contract; the current prepared predictive schema is `GatePredictors` in `src/gate_dataset.py`. Neither constitutes a trained gate.
+`eval/run_config_a_v2.py` and `eval/run_config_b_v2.py` execute one imported scenario explicitly and save unique run JSON under `eval/runs/<run_id>/A|B/`; the prior `B_v2` run remains readable. `src/proposal_catalog_v2.py` imports a B result as an immutable artifact in `data/proposals/`. `annotation_app.py` and `src/annotation_v2_ui.py` present the scenario, technical report, final proposal and original/proposed read-only weekly calendars. Failed simulations leave the original calendar intact. `src/annotation_v2.py` validates independent reviews, comparison and consensus in `data/annotations/`; `src/gate_dataset_v2.py` exports eligible rows only. The UI does not call the LLM when opened.
 
-## A and B execution
+## Safety and evidence boundaries
 
-**A:** validate a single LLM `Proposal` with Pydantic, run `find_violations`, then call `rule_based_decision`. The result contains proposal, violations, decision, reasons, provider/model/generation metadata, status and duration. A can return `defer` for an invalid proposal; the status remains `invalid_proposal`, distinct from a successful ready proposal. `LLMError` yields `llm_error` and no decision. The current A runner does not wrap every possible validator exception; a validator crash is not a successful action.
-
-**B:** `CriticSettings` defaults to mean score ≥4.0/5, minimum dimension ≥1 and up to three revisions. Revision index 0 is the initial proposal, indices 1–3 are revisions. Each proposal is deterministically checked before critique. Invalid proposals receive validator feedback for another revision and, at the limit, `deferred_invalid_proposal`. Valid proposals go to the Critic. A below-threshold score produces feedback for another revision or `deferred_critic_threshold` at the limit. Once accepted, B calls the *same* `rule_based_decision` as A. `proposer_error`, `critic_error` and `validation_error` record `safe_action=no_autonomous_action`; these are technical failures, not valid human deferrals. B stores initial/final proposals, all iterations, score, revision count, final decision and duration.
-
-The Critic's average is a rationale score. It is not a scheduling quality score. The deterministic validator does not prove semantic request satisfaction either; `src/quality_checks.py` keeps structural, applicability, constraints, request satisfaction, rationale quality and autonomy appropriateness separate.
-
-## LLM providers and configuration
-
-`get_provider(role=...)` selects `PROPOSER_LLM_PROVIDER` or `CRITIC_LLM_PROVIDER`, falling back to `LLM_PROVIDER`. A/B default to the same provider/model; the B CLI permits a separate Critic for a future controlled experiment. Compare A and B only with matched Proposer settings. The IAedu provider sends an HTTPS multipart POST with `x-api-key`, `channel_id`, a new UUID `thread_id`, `user_info={}` and `message`. `requests` generates the multipart boundary; no incomplete `Content-Type` is set. The client assembles streaming `token` events, applies a prompt-based JSON format instruction, extracts a JSON object and validates it locally with Pydantic. It has bounded invalid-JSON retries, connection/read timeouts and sanitized HTTP/communication errors. It does not rely on an OpenAI-compatible API or native JSON Schema enforcement.
-
-The Ollama alternative posts to `/api/generate` with an Ollama JSON Schema format and validates the response. Both providers satisfy the same interface. Provider/model and available generation settings are written to run records. The IAedu model label is metadata; the actual channel controls the deployed model. See [Setup and testing](06_SETUP_AND_TESTING.md) for safe configuration.
-
-## Fixed autonomy and failure boundaries
-
-`rule_based_decision` defers for any violation, no concrete changes, more than two changes, any deletion, touched event importance ≥4, or touched categories `health`, `supervisor_meeting` and `social`. Otherwise it returns `act`. These rules are a baseline, not an approved final policy. The category list cannot stand in for a proposal-specific human judgement. [Autonomy policy draft](08_AUTONOMY_POLICY_DRAFT.md) discusses richer factors without changing the code.
-
-The only implemented fallback on provider or validation failure is **no autonomous action** with an error status. There is no automatic switch from IAedu to Ollama and no real calendar side effect. Human confirmation handling is not implemented; `defer` is a recorded decision only.
+Structural validity, computable hard constraints, scheduling acceptability and autonomy are distinct judgments. A technically invalid proposal cannot become an `act` or a normal supervised gate example. Human reviewers can mark an otherwise technical proposal as unacceptable; this is a quality rejection with no autonomy label. Critic scores are rationale assessments, not scheduling or autonomy ground truth. The future C gate must use only permitted pre-label features and keep test families locked during training.

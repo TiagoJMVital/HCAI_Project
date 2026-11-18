@@ -26,7 +26,7 @@ def run_one(root: Path, scenario_id: str, provider, *, experiment_id: str | None
     row = next((r for r in load_manifest(root) if r["scenario_id"] == scenario_id), None)
     if row is None:
         raise ValueError("v2 scenario not imported")
-    scenario = load_scenario(root / "data" / "scenarios_v2" / f"{scenario_id}.json")
+    scenario = load_scenario(root / "data" / "scenarios" / f"{scenario_id}.json")
     run_id = uuid.uuid4().hex
     started = time.monotonic()
     record = {"schema_version": "2.0", "configuration": "A", "run_id": run_id,
@@ -53,7 +53,7 @@ def run_one(root: Path, scenario_id: str, provider, *, experiment_id: str | None
         record.update(status="validation_error", error="technical validation failed",
                       safe_action="no_autonomous_action")
     record["seconds"] = round(time.monotonic() - started, 3)
-    target = root / "eval" / "runs" / run_id / "A_v2" / f"{scenario_id}.json"
+    target = root / "eval" / "runs" / run_id / "A" / f"{scenario_id}.json"
     atomic_json(target, record)
     return target
 

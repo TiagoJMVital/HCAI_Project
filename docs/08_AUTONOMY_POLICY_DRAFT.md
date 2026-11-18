@@ -1,6 +1,6 @@
 # Draft autonomy policy for author discussion
 
-> **Current schema v2 clarification:** Annotators first record `scheduling_acceptable=yes/no`. A `no` is a quality rejection with **no** autonomy label. Only `yes` proceeds to `act/defer`; the five defer reasons remain explanatory metadata, never predictive features. Advance scenario annotation is no longer mandatory. The examples below remain hypotheses for discussion, never ground truth.
+> **Current schema v2 clarification:** Annotators first record `scheduling_acceptable=yes/no`. A `no` is a quality rejection with **no** autonomy label. Only `yes` proceeds to `act/defer`; the five defer reasons remain explanatory metadata, never predictive features. Advance scenario annotation is not part of the active workflow. The examples below remain hypotheses for discussion, never ground truth.
 
 **Status: discussion draft.** The following rules and examples are hypotheses to help two authors agree on annotation criteria. They are **not** human labels, a trained gate, or a change to `src/rules.py`. The proposal's central question is whether a **specific valid proposal** may be acted on autonomously. Event topic alone should not determine the answer.
 
@@ -47,7 +47,7 @@ Both result in `defer`, but they should be distinguished during annotation and s
 
 ### Scope of the current implementation
 
-These categories are now explanatory fields in versioned proposal annotation forms, with a mandatory primary reason for new completed `defer` forms. Historical forms remain compatible. They do not imply that the current system supports interactive clarification dialogues, and they are excluded from predictive gate features.
+These categories are now explanatory fields in versioned proposal annotation forms, with a mandatory primary reason for completed `defer` forms. Historical forms remain in the local archive. They do not imply that the current system supports interactive clarification dialogues, and they are excluded from predictive gate features.
 
 The implementation of follow-up questions, if adopted, should remain compatible with the original A/B/C experimental design and should not introduce additional prediction classes without a documented methodological justification.
 
@@ -87,4 +87,4 @@ Training needs examples of both `act` and `defer` to estimate a boundary and exp
 
 ## Pilot discussion checklist
 
-Use the six suggested training scenarios in [Annotation protocol](04_ANNOTATION_PROTOCOL.md#small-annotation-pilot-before-formal-collection). Ask each author to write the reason for `act/defer` **for each concrete proposal**, identify any invalid proposal separately, and mark what additional user information would change the judgement. Compare independently completed forms, review disagreements and refine the definitions before formal labelling. Do not alter test families or fixed baseline rules based on this pilot.
+Use a small, preselected set of training-family proposals as described in [Annotation protocol](04_ANNOTATION_PROTOCOL.md). Ask each author to write the reason for `act/defer` **for each concrete proposal**, identify any invalid proposal separately, and mark what additional user information would change the judgement. Compare independently completed forms, review disagreements and refine the definitions before formal labelling. Do not alter test families or fixed baseline rules based on this pilot.

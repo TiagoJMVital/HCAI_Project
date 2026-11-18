@@ -35,7 +35,7 @@ def local_packet(scenario) -> dict:
 
 
 def preview(root: Path, source: dict) -> tuple[dict, list, list | None, dict]:
-    scenario = load_scenario(root / "data" / "scenarios_v2" / f"{source['scenario_id']}.json")
+    scenario = load_scenario(root / "data" / "scenarios" / f"{source['scenario_id']}.json")
     proposal = Proposal.model_validate(source["final_proposal"])
     after, validation = simulate(scenario, proposal)
     packet = local_packet(scenario)

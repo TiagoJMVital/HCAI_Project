@@ -30,7 +30,7 @@ def run_one(root: Path, scenario_id: str, proposer_provider, critic_provider,
     row = next((r for r in rows if r["scenario_id"] == scenario_id), None)
     if row is None:
         raise ValueError("v2 scenario not imported")
-    source = load_scenario(root / "data" / "scenarios_v2" / f"{scenario_id}.json")
+    source = load_scenario(root / "data" / "scenarios" / f"{scenario_id}.json")
     runtime = V2RuntimeScenario(source)
     started = time.monotonic()
     record = run_config_b(source.profile, runtime, proposer_provider=proposer_provider,
@@ -48,7 +48,7 @@ def run_one(root: Path, scenario_id: str, proposer_provider, critic_provider,
     if record["final_proposal"] is not None:
         _, report = simulate(source, Proposal.model_validate(record["final_proposal"]))
         record["technical_validation"] = report
-    out = root / "eval" / "runs" / record["run_id"] / "B_v2" / f"{scenario_id}.json"
+    out = root / "eval" / "runs" / record["run_id"] / "B" / f"{scenario_id}.json"
     atomic_json(out, record)
     return out
 

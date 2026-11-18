@@ -1,7 +1,7 @@
 """Read-only weekly calendar view data and deliberately narrow request parsing.
 
 This module is presentation-only: it does not edit scenarios, proposals or labels.
-All datetimes in current synthetic scenarios are local, timezone-naive ISO strings.
+The v2 UI passes local, timezone-naive display copies of timezone-aware inputs.
 """
 from __future__ import annotations
 
@@ -10,11 +10,6 @@ import re
 from dataclasses import dataclass
 from datetime import date, datetime, time, timedelta
 from typing import Iterable
-
-from pydantic import ValidationError
-
-from calendar_ops import apply_changes, find_violations
-from models import CalendarEvent, Profile, Proposal
 
 HOUR_PX = 48
 DAY_PX = 24 * HOUR_PX
@@ -183,12 +178,11 @@ def view_events(calendar: list[dict], *, status_by_id: dict[str, str] | None = N
     status_by_id = status_by_id or {}
     result = []
     for raw in calendar:
-        event = CalendarEvent.model_validate(raw)
-        result.append(ViewEvent(event.id, event.title,
-                                datetime.fromisoformat(event.start),
-                                datetime.fromisoformat(event.end),
-                                event.category, event.importance, event.fixed,
-                                status_by_id.get(event.id, "unchanged")))
+        result.append(ViewEvent(raw["id"], raw["title"],
+                                datetime.fromisoformat(raw["start"]),
+                                datetime.fromisoformat(raw["end"]),
+                                raw["category"], raw["importance"], raw["fixed"],
+                                status_by_id.get(raw["id"], "unchanged")))
     return result
 
 
@@ -280,37 +274,6 @@ def interval_segments(interval: Interval | None, week_start: date) -> list[dict]
 
 def _clock(minute: int) -> str:
     return f"{minute // 60:02d}:{minute % 60:02d}"
-
-
-def proposed_events(packet: dict) -> tuple[list[ViewEvent] | None, list[str]]:
-    """Return a preview only after existing structural/operational checks pass."""
-    try:
-        proposal = Proposal.model_validate(packet["final_proposal"])
-        profile = Profile.model_validate(packet["scenario"]["profile"])
-        original = [CalendarEvent.model_validate(raw) for raw in packet["scenario"]["calendar"]]
-        if not proposal.changes:
-            return None, ["a proposta não contém alterações"]
-        violations = find_violations(original, proposal, profile)
-        if violations:
-            return None, violations
-        after = apply_changes(original, proposal.changes)
-    except (ValidationError, KeyError, TypeError, ValueError) as exc:
-        return None, [f"a proposta não passou na validação para pré-visualização ({type(exc).__name__})"]
-    original_by_id = {event.id: event for event in original}
-    after_by_id = {event.id: event for event in after}
-    status = {}
-    for event_id in after_by_id:
-        if event_id not in original_by_id:
-            status[event_id] = "added"
-        elif (after_by_id[event_id].start, after_by_id[event_id].end) != (
-                original_by_id[event_id].start, original_by_id[event_id].end):
-            status[event_id] = "moved"
-    result = view_events([event.model_dump() for event in after], status_by_id=status)
-    for event_id, event in original_by_id.items():
-        if event_id not in after_by_id or status.get(event_id) == "moved":
-            ghost_status = "removed" if event_id not in after_by_id else "previous_position"
-            result.extend(view_events([event.model_dump()], status_by_id={event_id: ghost_status}))
-    return result, []
 
 
 def render_week_html(events: list[ViewEvent], week_start: date,

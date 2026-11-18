@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parent.parent
 def catalog(root: Path) -> list[dict]:
     rows = []
     manifest = {row["scenario_id"]: row for row in load_manifest(root)}
-    for path in sorted((root / "data" / "proposal_sources_v2").glob("*.json")):
+    for path in sorted((root / "data" / "proposals").glob("*.json")):
         artifact = json.loads(path.read_text(encoding="utf-8"))
         if artifact["proposal_id"] != path.stem or artifact["scenario_id"] not in manifest:
             raise ValueError(f"invalid v2 catalog item: {path.name}")
@@ -49,7 +49,7 @@ def import_result(root: Path, result_path: Path) -> Path:
     row = manifest.get(sid)
     if row is None or any(record.get(key) != row[key] for key in ("profile_id", "split")) or record.get("family") != row["family_id"]:
         raise ValueError("result provenance differs from imported scenario")
-    scenario = load_scenario(root / "data" / "scenarios_v2" / f"{sid}.json")
+    scenario = load_scenario(root / "data" / "scenarios" / f"{sid}.json")
     _, validation = simulate(scenario, proposal)
     identity = {"scenario_id": sid, "run_id": record["run_id"], "proposal": proposal.model_dump()}
     pid = "v2p_" + hashlib.sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest()[:24]
@@ -74,7 +74,7 @@ def import_result(root: Path, result_path: Path) -> Path:
                 "source_status": record.get("status"),
                 "final_proposal": proposal.model_dump(), "technical_validation": validation,
                 "source_result_sha256": hashlib.sha256(result_path.read_bytes()).hexdigest()}
-    target = root / "data" / "proposal_sources_v2" / f"{pid}.json"
+    target = root / "data" / "proposals" / f"{pid}.json"
     if target.exists():
         if json.loads(target.read_text(encoding="utf-8")) != artifact:
             raise ValueError("proposal identity collision or changed source")

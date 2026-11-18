@@ -46,7 +46,7 @@ def build_rows(root: Path, *, split: str = "train", unlock_test: bool = False) -
             continue
         pid = source["proposal_id"]
         reason = None
-        scenario = load_scenario(root / "data" / "scenarios_v2" / f"{source['scenario_id']}.json")
+        scenario = load_scenario(root / "data" / "scenarios" / f"{source['scenario_id']}.json")
         proposal = Proposal.model_validate(source["final_proposal"])
         _, validation = simulate(scenario, proposal)
         if not validation["valid"]:
@@ -106,7 +106,7 @@ def main() -> None:
                         help="only after freezing features, classifier and evaluation policy")
     args = parser.parse_args()
     rows, exclusions = build_rows(ROOT, split=args.split, unlock_test=args.unlock_test)
-    out = ROOT / "data" / "gate_datasets_v2" / f"{args.split}.jsonl"
+    out = ROOT / "data" / "gate_datasets" / f"{args.split}.jsonl"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text("".join(json.dumps(row, ensure_ascii=False) + "\n" for row in rows), encoding="utf-8")
     report = out.with_suffix(".exclusions.json")

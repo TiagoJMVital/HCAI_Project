@@ -1,5 +1,7 @@
 """Synthetic-only v2 workflow tests. All writes use pytest temporary directories."""
 import json
+import hashlib
+import shutil
 import sys
 from pathlib import Path
 
@@ -74,7 +76,7 @@ def test_v2_schema_and_multi_profile(imported):
     raw["profile"]["description"] = "Healthcare worker with rotating shifts"
     assert V2Scenario.model_validate(raw).profile.profile_id == "healthcare_worker_02"
     assert load_manifest(root)[0]["split"] == "train"
-    assert len(list((root / "data/scenarios_v2").glob("*.json"))) == 1
+    assert len(list((root / "data/scenarios").glob("*.json"))) == 1
 
 
 @pytest.mark.parametrize("edit", [
@@ -101,7 +103,7 @@ def test_intentional_original_overlap_is_allowed(imported):
     assert V2Scenario.model_validate(raw)
 
 
-def test_family_split_and_legacy_preservation(imported):
+def test_family_split_and_active_scenario_directory(imported):
     root, scenario = imported
     raw = scenario.model_dump(mode="json")
     raw["scenario_id"] = "second_variant"
@@ -111,7 +113,7 @@ def test_family_split_and_legacy_preservation(imported):
         import_scenario(root, path, "test")
     import_scenario(root, path, "train")
     assert len(load_manifest(root)) == 2
-    assert not (root / "data/scenarios").exists()
+    assert len(list((root / "data/scenarios").glob("*.json"))) == 2
     folds = grouped_folds([
         {"split": "train", "family_id": "family_a", "proposal_id": "p1"},
         {"split": "train", "family_id": "family_a", "proposal_id": "p2"},
@@ -279,3 +281,43 @@ def test_v2_streamlit_navigation_and_author_isolation(imported, tmp_path):
     app.sidebar.selectbox[0].set_value("author_b").run()
     assert not app.exception
     assert load_review(root, "author_b", first)[0].justification == ""
+
+
+def test_existing_imported_scenario_proposal_and_draft_survive_ui(tmp_path):
+    """Exercise the migrated real artifact through the UI on a disposable copy."""
+    paths = [
+        "data/benchmark_manifest.json",
+        "data/scenarios/working_student_deadline_001.json",
+        "data/proposals/v2p_7ab98da4402d9ddb5133850a.json",
+        "data/annotations/author_a/v2p_7ab98da4402d9ddb5133850a.json",
+    ]
+    originals = {}
+    for relative in paths:
+        source_path = ROOT / relative
+        originals[relative] = hashlib.sha256(source_path.read_bytes()).hexdigest()
+        target = tmp_path / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source_path, target)
+    assert load_manifest(tmp_path)[0]["scenario_id"] == "working_student_deadline_001"
+    source = catalog(tmp_path)[0]
+    pid = source["proposal_id"]
+    assert source["scenario_id"] == "working_student_deadline_001"
+    assert load_review(tmp_path, "author_a", pid)[0].status == "draft"
+    wrapper = tmp_path / "existing_ui.py"
+    wrapper.write_text(f"import sys\nsys.path.insert(0, {str(ROOT)!r})\n"
+                       f"from pathlib import Path\nimport annotation_app\n"
+                       f"annotation_app.ROOT = Path({str(tmp_path)!r})\nannotation_app.main()\n")
+    app = AppTest.from_file(wrapper, default_timeout=10).run()
+    assert not app.exception
+    assert next(x for x in app.selectbox if x.label == "Proposta").value == pid
+    next(x for x in app.text_area if x.label == "Justificação obrigatória para concluir").set_value("Disposable draft").run()
+    next(x for x in app.button if x.label == "Guardar rascunho").click().run()
+    assert load_review(tmp_path, "author_a", pid)[0].justification == "Disposable draft"
+    app.sidebar.selectbox[0].set_value("author_b").run()
+    assert not app.exception
+    assert load_review(tmp_path, "author_b", pid)[0].justification == ""
+    app.sidebar.selectbox[0].set_value("author_a").run()
+    assert not app.exception
+    assert load_review(tmp_path, "author_a", pid)[0].justification == "Disposable draft"
+    assert all(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest() == digest
+               for relative, digest in originals.items())

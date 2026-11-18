@@ -5,7 +5,8 @@ comparação que o gate aprendido (configuração C) tem de superar.
 """
 from __future__ import annotations
 
-from models import CalendarEvent, Proposal
+from models import Proposal
+from scenario_v2 import V2Event
 
 SENSITIVE_CATEGORIES = {"health", "supervisor_meeting", "social"}
 IMPORTANCE_THRESHOLD = 4
@@ -13,7 +14,7 @@ MAX_CHANGES = 2
 
 
 def rule_based_decision(
-    proposal: Proposal, calendar: list[CalendarEvent], violations: list[str]
+    proposal: Proposal, calendar: list[V2Event], violations: list[str]
 ) -> tuple[str, list[str]]:
     reasons: list[str] = []
     by_id = {e.id: e for e in calendar}

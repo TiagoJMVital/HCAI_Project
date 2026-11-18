@@ -1,4 +1,4 @@
-"""Versioned, timezone-aware benchmark input. Legacy Scenario remains unchanged."""
+"""Versioned, timezone-aware benchmark input for the active scenario contract."""
 from __future__ import annotations
 
 import json
@@ -193,10 +193,10 @@ def load_scenario(path: Path) -> V2Scenario:
 
 
 def load_manifest(root: Path) -> list[dict]:
-    path = root / "data" / "benchmark_v2_manifest.json"
+    path = root / "data" / "benchmark_manifest.json"
     if not path.exists():
-        if list((root / "data" / "scenarios_v2").glob("*.json")):
-            raise ValueError("v2 scenarios exist without a manifest")
+        if list((root / "data" / "scenarios").glob("*.json")):
+            raise ValueError("scenarios exist without a manifest")
         return []
     document = json.loads(path.read_text(encoding="utf-8"))
     if document.get("schema_version") != "2.0":
@@ -205,27 +205,20 @@ def load_manifest(root: Path) -> list[dict]:
     if not isinstance(rows, list):
         raise ValueError("v2 manifest scenarios must be a list")
     ids, families, profiles = set(), {}, {}
-    legacy_path = root / "data" / "benchmark_manifest.json"
-    legacy_splits = {}
-    if legacy_path.exists():
-        for legacy in json.loads(legacy_path.read_text(encoding="utf-8"))["scenarios"]:
-            legacy_splits.setdefault(legacy["family"], set()).add(legacy["split"])
     for row in rows:
         sid, family, split = row["scenario_id"], row["family_id"], row["split"]
         if sid in ids or split not in ("train", "test") or (family in families and families[family] != split):
             raise ValueError("duplicate scenario or family split leakage in v2 manifest")
-        if family in legacy_splits and legacy_splits[family] != {split}:
-            raise ValueError("v2 family conflicts with reserved legacy split")
         ids.add(sid)
         families[family] = split
-        scenario = load_scenario(root / "data" / "scenarios_v2" / f"{sid}.json")
+        scenario = load_scenario(root / "data" / "scenarios" / f"{sid}.json")
         if scenario.scenario_id != sid or scenario.family_id != family or scenario.profile.profile_id != row["profile_id"]:
             raise ValueError(f"v2 manifest mismatch: {sid}")
         serialized_profile = scenario.profile.model_dump(mode="json")
         if row["profile_id"] in profiles and profiles[row["profile_id"]] != serialized_profile:
             raise ValueError(f"profile_id reused with different contents: {row['profile_id']}")
         profiles[row["profile_id"]] = serialized_profile
-    files = {item.stem for item in (root / "data" / "scenarios_v2").glob("*.json")}
+    files = {item.stem for item in (root / "data" / "scenarios").glob("*.json")}
     if files != ids:
         raise ValueError("v2 scenario files and manifest IDs differ")
     return rows

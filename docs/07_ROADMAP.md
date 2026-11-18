@@ -1,49 +1,18 @@
-# Roadmap and decision log
+# Roadmap
 
-> **Current v2 status:** Implemented: strict scenario parsing, explicit family-safe import, matched A/B v2 runner adapters, immutable B proposal catalog, partial timezone-aware validation, direct independent proposal forms, comparison/consensus, Streamlit before/after review and eligibility-filtered gate export. Legacy data remain intact. Next: agree on new family coverage and split assignments; collect diverse real B proposals; pilot independent review on training families; freeze the policy, features and analysis plan; plan paired A/B repetitions on new inputs; then train and evaluate C. Neither the reference example nor mock tests are scientific results.
+## Completed engineering work
 
-This is a status map, not evidence that the scientific hypotheses have been confirmed. The source of requirements is the [Project Proposal](../../HCAI_Project_Proposal.pdf), especially §§3–5. The [traceability table](01_PROJECT_OVERVIEW.md#proposal-traceability) relates those requirements to code, tests and next actions.
+- Schema `2.0` standalone scenario validation/import with family split checks (`src/scenario_v2.py`, `src/benchmark_v2.py`).
+- Shared structured Proposer/Critic contracts, IAedu and Ollama providers, deterministic calendar simulation, fixed-rule A/B decisions, Critic refinement loop and unique runs (`src/`, `eval/`).
+- Direct proposal catalog, Streamlit before/after weekly calendar, independent author forms, comparison/adjudication and gate dataset export (`src/proposal_catalog_v2.py`, `annotation_app.py`, `src/annotation_v2.py`, `src/gate_dataset_v2.py`).
+- Preservation of prior 41-scenario corpus, old annotations and results in a verified local archive. The active benchmark holds one v2 scenario/proposal and one author draft.
 
-## Completed as software, subject to stated limits
+## Pending scientific work, in dependency order
 
-| Work | Evidence | Limit |
-| --- | --- | --- |
-| Shared Pydantic scenario, proposal and Critic contracts | `src/models.py`; local tests | Structural typing does not prove semantic scheduling quality. |
-| IAedu structured-generation provider and selectable Ollama alternative | `src/llm.py`, `tests/test_llm.py` | Mock tests and isolated live checks; no API availability guarantee. |
-| A runner with fixed-rule autonomy | `eval/run_config_a.py`, `src/rules.py` | Synthetic, simulated action only. |
-| B Critic and bounded refinement | `src/critic.py`, `src/pipeline_b.py`, `eval/run_config_b.py` | One recorded synthetic live scenario; no aggregate evidence. |
-| Synthetic benchmark and family split | `src/make_benchmark.py`, `src/benchmark.py`, 41 JSON scenarios | Three training families only; private-calendar part of proposal absent. |
-| Archived two-stage annotation tools | `src/annotation_workflow.py`, `src/proposal_catalog.py`, `src/gate_dataset.py` | Preserved for historical access; no longer required for v2. |
-| Direct v2 proposal review and export tools | `src/annotation_v2.py`, `src/proposal_catalog_v2.py`, `src/gate_dataset_v2.py`, `annotation_app.py` | Mock-tested only; no real human adjudications or gate dataset. |
+1. **Benchmark expansion (high):** create diverse independent schema `2.0` cases across profiles and families, freeze train/test assignment, validate all inputs. Completion: documented scenario coverage and no family split leakage.
+2. **Annotation policy and pilot (medium):** agree on quality/autonomy rubrics, whether Critic metadata stays visible, and review a small training-family sample independently. Completion: both authors can apply the protocol consistently; disagreements and changes are recorded without touching test families.
+3. **Paired A/B study (high):** freeze provider settings, generate repeated paired outputs, import final B proposals, evaluate scheduling and rationale separately. Completion: reproducible run manifest, independent quality assessment and uncertainty reporting.
+4. **Formal proposal review (high):** two author reviews plus adjudication for eligible B proposals. Completion: valid consensus with traceable original forms and class-diverse training labels without fabricated examples.
+5. **Configuration C (high):** freeze features and policy, train only on training families, tune with grouped folds, then unlock and evaluate on held-out families. Completion: calibrated Act/Defer results, safety/error analysis and A/B/C comparison.
 
-## Partially complete
-
-- **Operational safety:** `find_violations` catches several concrete failures, but does not model every hard/soft constraint, third-party consequence or full request meaning. Extend and test before claiming safe automation.
-- **Scheduling quality:** `data/objective_checks.json` covers only five requests with partial machine-checkable conditions. Human acceptable-outcome assessment is still needed.
-- **Experimental records:** A/B runners capture run/model/proposal/decision/duration and B iterations; an offline pairer exists. Repeated, controlled comparisons and independent human scoring have not happened.
-- **Autonomy policy:** fixed rules exist as a baseline; the [discussion draft](08_AUTONOMY_POLICY_DRAFT.md) is not a human-adjudicated policy.
-
-## Recommended sequence and dependencies
-
-| Priority / phase | Concrete work | Depends on | Completion criterion |
-| --- | --- | --- | --- |
-| 1. Policy and pilot | Both authors review policy draft; review a few concrete proposals from **training** families independently; discuss discrepancies; freeze form instructions | Imported v2 scenarios and generated B proposals | Written, dated protocol decision; completed pilot reviews and disagreement notes; test families unchanged |
-| 2. Formal training references | Predeclare collection frequency; collect B proposals across training families; complete two-author direct proposal reviews and adjudications | Phase 1 | Every selected eligible training proposal has both independent forms and adjudicated label; quality rejections and exclusions reported |
-| 3. Quality evaluation | Add defensible objective checks; define human scheduling/rationale rubric and blind assessment process; audit validator coverage | Phase 1; can partly run in parallel with phase 2 | Checks/rubric frozen; invalid, unknown and acceptable cases separated in evaluation output |
-| 4. Gate design freeze | Review proposed features for leakage/availability, grouped folds and class diversity **on training data**; predeclare classifier, threshold and metrics | Phases 1–2 | Feature and analysis specification fixed before test labels are inspected |
-| 5. Configuration C | Train on training-family proposal rows; integrate gate after B acceptance while preserving deterministic safety; test fallback on errors | Phase 4 | C runs on synthetic cases, with matched B proposal path, reproducible model artifact and passing safety tests |
-| 6. Controlled evaluation | Repeated A/B/C runs using frozen settings; score scheduling, rationale and autonomy separately; finally unlock held-out family labels | Phases 3–5 | Complete run ledger, all failures retained, uncertainty and family-level results reported without test tuning |
-| 7. Deliverable scope | Decide whether and how n8n/Google Calendar/private calendar data are required; implement only with privacy and authorization plan | Author and course decision | Explicit scope decision and, if required, safe integration tests |
-
-Do not use held-out labels to rewrite fixed autonomy rules, tune features, choose a gate model or select showcase examples. If more data are needed after a test-set audit, version the benchmark and report that separately.
-
-## Questions for both authors
-
-1. What exact boundary separates a technically invalid proposal, a scheduling-quality rejection and a valid proposal requiring confirmation? The v2 form separates quality `no` from binary autonomy; decide how to document disputed validator findings.
-2. What impact/risk scale anchors and third-party rules should the annotation handbook use? How should repeated borderline cases be resolved consistently?
-3. How many proposals per training scenario, how many A/B/C repetitions and what sampling/stop rule are feasible under IAedu quota? Freeze these before collection.
-4. Should A proposals also be independently annotated for a direct A/B autonomy analysis? The current gate catalog intentionally imports accepted B proposals only.
-5. Is a Python-only orchestration and synthetic-calendar demonstrator sufficient for the course, or must n8n and Google Calendar from the proposal be delivered? If private calendars are used, what consent, minimization and storage rules apply?
-6. What human rationale rubric and uncertainty-reporting method will be adopted before viewing outputs? What constitutes a meaningful improvement beyond Critic self-scoring?
-
-These are methodological decisions, not settings to infer from existing preliminary labels.
+External calendar writes, n8n automation and conversational clarification are not in the current implementation. Decide their scope explicitly rather than treating them as already tested. Never use old generator pre-labels as human ground truth.

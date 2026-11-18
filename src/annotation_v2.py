@@ -1,4 +1,4 @@
-"""Direct, independent proposal evaluation; legacy two-stage forms stay untouched."""
+"""Direct, independent proposal evaluation for the active workflow."""
 from __future__ import annotations
 
 import hashlib
@@ -8,7 +8,7 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
-from annotation_workflow import cohens_kappa
+from agreement import cohens_kappa
 from benchmark_v2 import atomic_json
 from proposal_catalog_v2 import catalog
 
@@ -89,11 +89,11 @@ class ProposalConsensus(BaseModel):
 def _path(root: Path, author: str, proposal_id: str) -> Path:
     if author not in AUTHORS:
         raise ValueError("unknown author")
-    return root / "data" / "annotation_work_v2" / author / f"{proposal_id}.json"
+    return root / "data" / "annotations" / author / f"{proposal_id}.json"
 
 
 def _consensus_path(root: Path, proposal_id: str) -> Path:
-    return root / "data" / "annotation_work_v2" / "adjudications" / f"{proposal_id}.json"
+    return root / "data" / "annotations" / "adjudicated" / f"{proposal_id}.json"
 
 
 def _source(root: Path, proposal_id: str) -> dict:

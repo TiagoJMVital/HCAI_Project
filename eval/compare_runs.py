@@ -11,8 +11,10 @@ ROOT = Path(__file__).resolve().parent.parent
 
 def collect(runs_root: Path, experiment_id: str) -> list[dict]:
     grouped: dict[tuple[str, int], dict] = defaultdict(dict)
-    for path in sorted(runs_root.glob("*/[AB]/*.json")):
+    for path in sorted(runs_root.glob("*/*/*.json")):
         record = json.loads(path.read_text(encoding="utf-8"))
+        if record.get("schema_version") != "2.0" or record.get("configuration") not in ("A", "B"):
+            continue
         if record.get("experiment_id") != experiment_id:
             continue
         config = record.get("configuration", path.parent.name)
