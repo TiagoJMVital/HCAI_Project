@@ -24,6 +24,12 @@ python src/proposal_catalog_v2.py eval/runs/<run_id>/B/<scenario_id>.json
 
 The first two commands call the configured LLM; the last command only reads a result. A historical result may be under `B_v2/` and is accepted by the importer. The B result and immutable imported artifact retain the proposal, rationale, Critic history/scores, validation report and run/provider metadata. Importing a technically invalid proposal is possible for quality review; it cannot become an eligible gate example. Imported artifacts are in `data/proposals/`; the result remains in `eval/runs/`. Opening the UI never generates proposals.
 
+New B runs additionally record the complete in-memory result calendar for each Critic-evaluated iteration. The Critic sees it with the structured proposal, rationale, timezone and limited validation report; original request and full profile stay outside the Critic input. Historical B artifacts lack this optional field and remain readable without conversion. The Streamlit iteration expander shows the feedback, per-iteration result calendar and final unresolved weaknesses when present.
+
+Runs marked `critic_policy_version=plausibility_review_v1` require a structured plausibility review on every new Critic response. The UI shows severity, explicit revision decision, evidence, suggested improvement, numeric result and revision cause. Older artifacts show the plausibility assessment as **unavailable**, not as `revision_required=false`. A review requested by the Critic is independent of a human `act/defer` annotation; below-policy B outputs are excluded from normal gate training by the existing exporter.
+
+In current B runs, each revised iteration also records the prior Critic concern, feedback to the Proposer, and whether the operations or rationale changed. The Proposer may retain operations after re-evaluating the practical concern; inspect its rationale and the next Critic judgment to see whether the doubt remains. These records describe the review process, not a verified improvement in scheduling. The Critic still has no direct access to the original request or full profile.
+
 ## Independent review in Streamlit
 
 ```bash

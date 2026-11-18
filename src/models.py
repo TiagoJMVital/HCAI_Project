@@ -7,7 +7,7 @@ from __future__ import annotations
 
 from typing import Literal, Optional
 
-from pydantic import BaseModel, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, model_validator
 
 ChangeType = Literal["add", "move", "delete"]
 
@@ -58,12 +58,41 @@ class CriticScores(BaseModel):
     clarity: int = Field(ge=1, le=5)
 
 
+class PlausibilityReview(BaseModel):
+    """Contextual recommendation; severity alone never decides revision."""
+    model_config = ConfigDict(extra="forbid")
+
+    revision_required: StrictBool
+    severity: Literal["none", "low", "moderate", "high"]
+    reason: str
+    suggested_improvement: str
+
+    @model_validator(mode="after")
+    def consistent_revision(self):
+        if self.revision_required:
+            if self.severity in {"none", "low"}:
+                raise ValueError("required revision needs moderate or high severity")
+            if not self.reason.strip() or not self.suggested_improvement.strip():
+                raise ValueError("required revision needs evidence and an actionable suggestion")
+        elif self.severity != "none" and not self.reason.strip():
+            raise ValueError("observed plausibility risk needs a reason")
+        return self
+
+
 class CriticEvaluation(BaseModel):
+    """Read historical responses; absence means not assessed, never no risk."""
     scores: CriticScores
     weaknesses: list[str]
     feedback: str
+    plausibility_review: PlausibilityReview | None = None
 
     @property
     def overall(self) -> float:
         s = self.scores
         return round((s.reasoning + s.coherence + s.alternatives + s.clarity) / 4, 2)
+
+
+class CurrentCriticEvaluation(CriticEvaluation):
+    """Required output schema for all new Critic calls."""
+    model_config = ConfigDict(extra="forbid")
+    plausibility_review: PlausibilityReview

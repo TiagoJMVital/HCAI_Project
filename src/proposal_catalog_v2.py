@@ -8,7 +8,8 @@ from pathlib import Path
 
 from benchmark_v2 import atomic_json
 from calendar_v2 import simulate
-from models import Proposal
+from critic import final_calendar_view
+from models import CurrentCriticEvaluation, Proposal
 from scenario_v2 import load_manifest, load_scenario
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -51,6 +52,36 @@ def import_result(root: Path, result_path: Path) -> Path:
         raise ValueError("result provenance differs from imported scenario")
     scenario = load_scenario(root / "data" / "scenarios" / f"{sid}.json")
     _, validation = simulate(scenario, proposal)
+    # New outcome-aware runs carry optional calendars. Recompute them from the
+    # imported scenario and each structured proposal before trusting the audit
+    # trail. Older runs have no such fields and remain unchanged.
+    original_ids = {event.id for event in scenario.calendar.events}
+    for step in record["iterations"]:
+        if record.get("critic_policy_version") == "plausibility_review_v1" and step.get("critic_evaluation") is not None:
+            raw_evaluation = {k: v for k, v in step["critic_evaluation"].items() if k != "overall"}
+            current = CurrentCriticEvaluation.model_validate(raw_evaluation)
+            policy = step.get("acceptance_policy")
+            if not isinstance(policy, dict) or policy.get("plausibility_revision_required") != current.plausibility_review.revision_required:
+                raise ValueError("new Critic result missing or inconsistent acceptance policy")
+        if step.get("result_calendar") is None:
+            if record.get("critic_input_version") == "final_calendar_v1" and step.get("critic_evaluation") is not None:
+                raise ValueError("Critic evaluation missing its result calendar")
+            continue
+        step_proposal = Proposal.model_validate(step["proposal"])
+        step_events, step_validation = simulate(scenario, step_proposal)
+        if step_events is None or not step_validation["valid"] or step["result_calendar"] != final_calendar_view(
+                step_events, step_proposal, original_ids=original_ids,
+                timezone=scenario.profile.timezone):
+            raise ValueError("iteration result calendar differs from deterministic simulation")
+    if (record.get("critic_input_version") == "final_calendar_v1"
+            and record.get("status") == "proposal_ready" and record.get("final_result_calendar") is None):
+        raise ValueError("accepted proposal missing its final result calendar")
+    if record.get("final_result_calendar") is not None:
+        final_events, final_validation = simulate(scenario, proposal)
+        if final_events is None or not final_validation["valid"] or record["final_result_calendar"] != final_calendar_view(
+                final_events, proposal, original_ids=original_ids,
+                timezone=scenario.profile.timezone):
+            raise ValueError("final result calendar differs from deterministic simulation")
     identity = {"scenario_id": sid, "run_id": record["run_id"], "proposal": proposal.model_dump()}
     pid = "v2p_" + hashlib.sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest()[:24]
     artifact = {"proposal_id": pid, "scenario_id": sid, "family_id": row["family_id"],
@@ -74,6 +105,12 @@ def import_result(root: Path, result_path: Path) -> Path:
                 "source_status": record.get("status"),
                 "final_proposal": proposal.model_dump(), "technical_validation": validation,
                 "source_result_sha256": hashlib.sha256(result_path.read_bytes()).hexdigest()}
+    # Optional audit data for runs using outcome-aware critique. Historical
+    # artifacts remain byte-compatible when their source result lacks it.
+    for field in ("critic_input_version", "critic_policy_version", "final_result_calendar", "replay_source",
+                  "unresolved_critic_weaknesses", "unresolved_plausibility_review"):
+        if field in record:
+            artifact[field] = record[field]
     target = root / "data" / "proposals" / f"{pid}.json"
     if target.exists():
         if json.loads(target.read_text(encoding="utf-8")) != artifact:

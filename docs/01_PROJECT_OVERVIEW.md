@@ -14,6 +14,8 @@ Can a human-centred calendar assistant produce useful scheduling proposals while
 
 B defers if the Critic never accepts. Neither Critic approval nor an LLM's text replaces deterministic safety checks. An `act` is a simulated decision, not an external calendar mutation. IAedu GPT-5.5 is the configured provider; Ollama remains an alternative. The code supports independent provider/model configuration for the two agents. See [architecture](02_ARCHITECTURE.md).
 
+The Critic now sees the complete calendar derived by applying each proposal virtually, as well as the operations, rationale and limited validation report. This extends B's assessment from textual coherence to practical scheduling plausibility without exposing the original request or full profile. The Critic does not impose generic transition, commute, meal or sleep constraints. A's Proposer prompt, validator and fixed autonomy rules are unchanged; C remains future work.
+
 ## Current methodological decision
 
 The active benchmark uses standalone schema `2.0` scenarios with a complete profile, calendar and request. Human reviewers judge **final concrete B proposals** directly: scheduling acceptability first, then `act/defer` if acceptable. This replaces advance scenario annotation. The choice matches the future gate's decision unit: actual proposed changes and a Critic score can vary between proposals for the same request. The scenario JSON itself contains no human label or expected schedule. Independent author reviews and adjudication remain mandatory. See [annotation protocol](04_ANNOTATION_PROTOCOL.md).

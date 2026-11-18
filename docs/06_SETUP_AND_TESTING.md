@@ -28,6 +28,8 @@ python src/benchmark_v2.py import /path/to/new_scenario.json --split train
 # The following two commands make explicit LLM calls when configured:
 python eval/run_config_a_v2.py --only <scenario_id>
 python eval/run_config_b_v2.py --only <scenario_id> --critic-threshold 4.0 --max-refinements 3
+# Optional: reuse the first proposal of a prior B run and start at the Critic.
+python eval/run_config_b_v2.py --only working_student_deadline_001 --initial-proposal-from eval/runs/e9052e6757c14820a06b89ddaf9aafe6/B/working_student_deadline_001.json
 # This import makes no LLM call:
 python src/proposal_catalog_v2.py eval/runs/<run_id>/B/<scenario_id>.json
 streamlit run annotation_app.py --server.address 127.0.0.1
@@ -35,3 +37,5 @@ python src/gate_dataset_v2.py --split train
 ```
 
 For an existing B result, use its actual path, including historical `B_v2/` if applicable. Outputs are under `eval/runs/<run_id>/A|B/`, imported artifacts under `data/proposals/`, review forms under `data/annotations/`, and gate exports under `data/gate_datasets/`. An imported proposal appears in Streamlit after a refresh. Import is idempotent for identical result content and rejects changed provenance. A missing provider key, wrong channel/endpoint or exhausted quota affects only explicit real generation; stop and diagnose rather than retrying a full benchmark. No command here writes a real calendar.
+
+The replay option makes a new run and calls the current Critic on the deterministic result calendar. Its first iteration has `proposer_source=replayed`; later revisions, if requested, use the normal Proposer with the original scenario context. `replay_source` records the source path/run ID, source run SHA-256, canonical proposal SHA-256, current scenario SHA-256 and whether the historical first-iteration result calendar matched current simulation. Source artifacts are read-only. Check these fields before comparing runs.

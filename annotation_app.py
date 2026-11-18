@@ -180,12 +180,54 @@ def _v2_scenario_and_proposal(source: dict) -> None:
     st.caption("Validação parcial: não prova satisfação do pedido nem validade das descrições em linguagem natural.")
     st.write(f"**Score final do Critic:** {source['critic_score']} · **Revisões:** {source['refinements']} · "
              f"**Estado B:** {source['source_status']}")
+    st.caption(f"Política do Critic: {source.get('critic_policy_version') or 'histórica; revisão de plausibilidade não disponível'}")
     with st.expander("Ver avaliações e iterações do Critic"):
+        st.caption("As alternativas na justificação são opções ponderadas pelo Proposer; "
+                   "apenas uma nova iteração após feedback do Critic conta como revisão. "
+                   "Os problemas por iteração são observações do Critic, não provas de resolução automática.")
         for step in source["iterations"]:
             st.write(f"**Iteração {step['index']}**")
+            if step.get("proposer_feedback"):
+                st.write("Feedback recebido antes desta revisão:", step["proposer_feedback"])
+                if step.get("operations_changed_from_previous") is not None:
+                    st.write("Operações alteradas:", step["operations_changed_from_previous"],
+                             "· Justificação alterada:", step["rationale_changed_from_previous"])
+                if step.get("prior_critic_reviews"):
+                    st.write("Dúvida anterior submetida de novo ao Critic:",
+                             step["prior_critic_reviews"][-1]["plausibility_review"]["reason"])
             st.write("Proposta:", step.get("proposal"))
             st.write("Validação antes do Critic:", step.get("validation"))
-            st.write("Avaliação do Critic:", step.get("critic_evaluation") or "sem avaliação")
+            if step.get("result_calendar"):
+                st.write("Calendário final simulado nesta iteração:",
+                         step["result_calendar"]["events"])
+            assessment = step.get("critic_evaluation")
+            st.write("Avaliação do Critic:", assessment or "sem avaliação")
+            if assessment:
+                review = assessment.get("plausibility_review")
+                policy = step.get("acceptance_policy")
+                if review is None:
+                    st.caption("Revisão estruturada de plausibilidade: não disponível nesta execução histórica.")
+                else:
+                    st.write("**Plausibilidade:** severidade", review["severity"],
+                             "· revisão necessária:", review["revision_required"])
+                    st.write("Fundamentação:", review["reason"] or "nenhuma observação relevante")
+                    if step.get("prior_critic_reviews"):
+                        st.caption("Reavaliação da dúvida anterior: "
+                                   + ("continua a exigir revisão" if review["revision_required"]
+                                      else "não exige nova revisão")
+                                   + ". Consulte a fundamentação atual; isto não prova melhoria objetiva.")
+                    if review["suggested_improvement"]:
+                        st.write("Sugestão:", review["suggested_improvement"])
+                    if policy:
+                        st.write("Critérios numéricos cumpridos:", policy["numeric_criteria_passed"])
+                        st.write("Política de aceitação aprovada:", policy["accepted"])
+                        st.write("Motivos de revisão:", policy["revision_causes"] or "nenhum")
+        if source.get("unresolved_critic_weaknesses"):
+            st.write("Problemas assinalados na última avaliação sem aceitação:",
+                     source["unresolved_critic_weaknesses"])
+        if source.get("unresolved_plausibility_review"):
+            st.write("Revisão de plausibilidade ainda não resolvida:",
+                     source["unresolved_plausibility_review"])
 
 
 def _v2_review_page(author: str) -> None:

@@ -15,7 +15,7 @@ from benchmark_v2 import import_scenario
 from calendar_v2 import simulate
 from critic import critique
 from llm import IAeduProvider, LLMError
-from models import Change, CriticEvaluation, CriticScores, Proposal, Rationale
+from models import Change, CurrentCriticEvaluation, CriticScores, PlausibilityReview, Proposal, Rationale
 from pipeline_b import CriticSettings, run_config_b
 from proposer_v2 import V2RuntimeScenario, propose_v2
 from rules import rule_based_decision
@@ -59,20 +59,20 @@ def proposal(start="2026-11-09T20:00:00+00:00", *, event_id="gym_mon"):
 
 
 def evaluation(score, feedback="Explain alternatives"):
-    return CriticEvaluation(scores=CriticScores(reasoning=score, coherence=score,
+    return CurrentCriticEvaluation(scores=CriticScores(reasoning=score, coherence=score,
                                                 alternatives=score, clarity=score),
                             weaknesses=["alternative not explained"] if score < 4 else [],
-                            feedback=feedback)
+                            feedback=feedback, plausibility_review=PlausibilityReview(
+                                revision_required=False, severity="none", reason="", suggested_improvement=""))
 
 
-def run(context, proposals, reviews, settings=None, validator=None):
+def run(context, proposals, reviews, settings=None, simulator=None):
     _, scenario = context
     proposer, critic = ScriptedProvider(proposals), ScriptedProvider(reviews)
     result = run_config_b(scenario.profile, V2RuntimeScenario(scenario),
                           proposer_provider=proposer, critic_provider=critic,
                           settings=settings, proposer_fn=propose_v2,
-                          validator_fn=validator or (lambda _cal, candidate, _profile:
-                                                     simulate(scenario, candidate)[1]["violations"]))
+                          simulate_fn=simulator or (lambda candidate: simulate(scenario, candidate)))
     return result, proposer, critic
 
 
@@ -129,7 +129,7 @@ def test_technical_failures_never_act(context):
     assert result["status"] == "proposer_error" and not critic.calls
     def broken(*args):
         raise ValueError("internal validator error")
-    result, _, critic = run(context, [proposal()], [], validator=broken)
+    result, _, critic = run(context, [proposal()], [], simulator=broken)
     assert result["status"] == "validation_error" and result["decision"] is None
     assert not critic.calls
 
@@ -145,21 +145,28 @@ def test_critic_acceptance_does_not_override_fixed_defer_rule(context):
     assert "mais de 2 mudanças" in result["reasons"]
 
 
-def test_critic_sees_only_proposal(context):
+def test_critic_sees_result_calendar_without_original_request_or_profile(context):
     root, scenario = context
     scenario.profile.description = "PRIVATE_PROFILE_MARKER"
     scenario.user_request = "PRIVATE_REQUEST_MARKER"
     result, proposer, critic = run((root, scenario), [proposal()], [evaluation(5)])
     critic_prompt, schema, system = critic.calls[0]
-    assert schema is CriticEvaluation
+    assert schema is CurrentCriticEvaluation
     assert "PRIVATE_PROFILE_MARKER" not in critic_prompt + system
     assert "PRIVATE_REQUEST_MARKER" not in critic_prompt + system
-    assert critic_prompt == "Assess this proposal and its rationale only:\n" + proposal().model_dump_json(indent=2)
+    packet = json.loads(critic_prompt.split("\n", 1)[1])
+    assert packet["proposal"] == proposal().model_dump(mode="json")
+    assert packet["final_calendar"]["timezone"] == "Europe/Lisbon"
+    assert {event["id"] for event in packet["final_calendar"]["events"]} == {
+        event.id for event in scenario.calendar.events}
+    assert next(event for event in packet["final_calendar"]["events"]
+                if event["id"] == "work_tue")["change_status"] == "preserved"
+    assert "profile" not in packet and "user_request" not in packet
     assert "PRIVATE_PROFILE_MARKER" in proposer.calls[0][0]
     assert result["status"] == "proposal_ready"
 
 
-def test_iaedu_stream_mock_carries_only_proposal(monkeypatch):
+def test_iaedu_stream_mock_carries_result_calendar(monkeypatch, context):
     captured = []
     response = Mock()
     payload = evaluation(4).model_dump_json()
@@ -173,10 +180,41 @@ def test_iaedu_stream_mock_carries_only_proposal(monkeypatch):
     monkeypatch.setattr(requests, "post", post)
     client = IAeduProvider(api_key="test-only", endpoint="https://example.invalid/stream",
                           channel_id="synthetic-channel")
-    result = critique(proposal(), provider=client)
+    scenario = context[1]
+    events, validation = simulate(scenario, proposal())
+    from critic import final_calendar_view
+    calendar = final_calendar_view(events, proposal(), original_ids={e.id for e in scenario.calendar.events},
+                                   timezone=scenario.profile.timezone)
+    result = critique(proposal(), final_calendar=calendar, technical_validation=validation, provider=client)
     assert result.overall == 4
-    assert proposal().model_dump_json(indent=2) in captured[0]["files"]["message"][1]
+    transmitted = json.loads(captured[0]["files"]["message"][1].split(
+        "Assess this structured proposal and its resulting calendar:\n", 1)[1])
+    assert transmitted["proposal"] == proposal().model_dump(mode="json")
+    assert transmitted["final_calendar"] == calendar
     assert captured[0]["headers"] == {"x-api-key": "test-only"}
+
+
+def test_iaedu_mock_rejects_new_response_without_plausibility_review(monkeypatch, context):
+    legacy = {"scores": {"reasoning": 4, "coherence": 5,
+                         "alternatives": 4, "clarity": 4},
+              "weaknesses": [], "feedback": "No revision suggested"}
+    calls = []
+    def post(url, **kwargs):
+        calls.append(kwargs)
+        response = Mock()
+        response.iter_lines.return_value = [json.dumps({"type": "token", "content": json.dumps(legacy)}).encode()]
+        return response
+    monkeypatch.setattr(requests, "post", post)
+    client = IAeduProvider(api_key="test-only", endpoint="https://example.invalid/stream",
+                          channel_id="synthetic-channel")
+    scenario = context[1]
+    events, validation = simulate(scenario, proposal())
+    from critic import final_calendar_view
+    calendar = final_calendar_view(events, proposal(), original_ids={e.id for e in scenario.calendar.events},
+                                   timezone=scenario.profile.timezone)
+    with pytest.raises(LLMError, match="respostas sem JSON válido"):
+        critique(proposal(), final_calendar=calendar, technical_validation=validation, provider=client)
+    assert len(calls) == 2
 
 
 def test_a_b_runners_and_compare_metadata(context):

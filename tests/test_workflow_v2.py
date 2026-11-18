@@ -19,7 +19,7 @@ from annotation_v2_ui import preview, records, temporal_overlaps
 from benchmark_v2 import import_scenario
 from calendar_v2 import simulate
 from gate_dataset_v2 import build_rows, features, grouped_folds
-from models import Change, CriticEvaluation, CriticScores, Proposal, Rationale
+from models import Change, CurrentCriticEvaluation, CriticScores, PlausibilityReview, Proposal, Rationale
 from proposal_catalog_v2 import catalog, import_result
 from run_config_a_v2 import run_one as run_a
 from run_config_b_v2 import run_one
@@ -56,8 +56,9 @@ def proposal():
 
 
 def accepted():
-    return CriticEvaluation(scores=CriticScores(reasoning=5, coherence=5, alternatives=5, clarity=5),
-                            weaknesses=[], feedback="Clear")
+    return CurrentCriticEvaluation(scores=CriticScores(reasoning=5, coherence=5, alternatives=5, clarity=5),
+                            weaknesses=[], feedback="Clear", plausibility_review=PlausibilityReview(
+                                revision_required=False, severity="none", reason="", suggested_improvement=""))
 
 
 def source(root):
@@ -65,6 +66,28 @@ def source(root):
     path = run_one(root, "working_student_deadline_001", proposer, critic)
     artifact = import_result(root, path)
     return json.loads(artifact.read_text()), proposer, critic
+
+
+def test_import_rejects_tampered_critic_calendar(imported):
+    root, scenario = imported
+    proposer, critic = ScriptedProvider([proposal()]), ScriptedProvider([accepted()])
+    path = run_one(root, scenario.scenario_id, proposer, critic)
+    record = json.loads(path.read_text())
+    record["iterations"][0]["result_calendar"]["events"][0]["title"] = "Tampered"
+    path.write_text(json.dumps(record))
+    with pytest.raises(ValueError, match="differs from deterministic simulation"):
+        import_result(root, path)
+
+
+def test_import_rejects_new_result_without_plausibility_review(imported):
+    root, scenario = imported
+    path = run_one(root, scenario.scenario_id,
+                   ScriptedProvider([proposal()]), ScriptedProvider([accepted()]))
+    record = json.loads(path.read_text())
+    del record["iterations"][0]["critic_evaluation"]["plausibility_review"]
+    path.write_text(json.dumps(record))
+    with pytest.raises(ValidationError):
+        import_result(root, path)
 
 
 def test_v2_schema_and_multi_profile(imported):
@@ -155,8 +178,9 @@ def test_simulation_and_critic_context(imported):
     critic_prompt = critic.calls[0][0]
     assert "working_student_01" not in critic_prompt
     assert "I need at least three hours" not in critic_prompt
-    assert "work_tue" not in critic_prompt
-    assert critic.calls[0][2] is CriticEvaluation
+    critic_packet = json.loads(critic_prompt.split("\n", 1)[1])
+    assert any(event["id"] == "work_tue" for event in critic_packet["final_calendar"]["events"])
+    assert critic.calls[0][2] is CurrentCriticEvaluation
 
 
 def test_v2_a_and_b_share_proposer_and_rules(imported):
@@ -268,6 +292,7 @@ def test_v2_streamlit_navigation_and_author_isolation(imported, tmp_path):
                        f"annotation_app.ROOT = Path({str(root)!r})\nannotation_app.main()\n")
     app = AppTest.from_file(wrapper, default_timeout=10).run()
     assert not app.exception
+    assert any("Política do Critic: plausibility_review_v1" in x.value for x in app.caption)
     assert any(x.label == "Proposta" for x in app.selectbox)
     first = next(x.value for x in app.selectbox if x.label == "Proposta")
     next(x for x in app.text_area if x.label == "Justificação obrigatória para concluir").set_value("Draft 1").run()
@@ -290,6 +315,7 @@ def test_existing_imported_scenario_proposal_and_draft_survive_ui(tmp_path):
         "data/scenarios/working_student_deadline_001.json",
         "data/proposals/v2p_7ab98da4402d9ddb5133850a.json",
         "data/annotations/author_a/v2p_7ab98da4402d9ddb5133850a.json",
+        "eval/runs/11c42b58c5344e458f690b4b5790efa8/B_v2/working_student_deadline_001.json",
     ]
     originals = {}
     for relative in paths:
@@ -301,6 +327,8 @@ def test_existing_imported_scenario_proposal_and_draft_survive_ui(tmp_path):
     assert load_manifest(tmp_path)[0]["scenario_id"] == "working_student_deadline_001"
     source = catalog(tmp_path)[0]
     pid = source["proposal_id"]
+    historical_result = tmp_path / paths[-1]
+    assert import_result(tmp_path, historical_result) == tmp_path / paths[2]
     assert source["scenario_id"] == "working_student_deadline_001"
     assert load_review(tmp_path, "author_a", pid)[0].status == "draft"
     wrapper = tmp_path / "existing_ui.py"
@@ -310,6 +338,7 @@ def test_existing_imported_scenario_proposal_and_draft_survive_ui(tmp_path):
     app = AppTest.from_file(wrapper, default_timeout=10).run()
     assert not app.exception
     assert next(x for x in app.selectbox if x.label == "Proposta").value == pid
+    assert any("revisão de plausibilidade não disponível" in x.value for x in app.caption)
     next(x for x in app.text_area if x.label == "Justificação obrigatória para concluir").set_value("Disposable draft").run()
     next(x for x in app.button if x.label == "Guardar rascunho").click().run()
     assert load_review(tmp_path, "author_a", pid)[0].justification == "Disposable draft"

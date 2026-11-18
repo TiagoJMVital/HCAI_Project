@@ -7,7 +7,7 @@
 ## Decision order
 
 1. **Validity gate:** First check structure, event references, times, fixed commitments, permitted hours and applicability. If a proposal is invalid or cannot satisfy any acceptable outcome, reject/correct it or mark it unsafe for action. Human confirmation does not make an impossible change valid. The present validator covers only part of this gate; annotators must record uncovered issues.
-2. **Critic gate in B/C:** A proposal below the Critic acceptance threshold is deferred by the pipeline and is not a gate-training example under the current catalog. A high score establishes only the Critic's assessment of visible reasoning, not calendar safety.
+2. **Critic gate in B/C:** A proposal below the Critic acceptance threshold is deferred by the pipeline and is not a gate-training example under the current catalog. A high score establishes only the Critic's assessment of the visible rationale and resulting calendar, not full request satisfaction, hard-constraint safety or autonomous-action suitability.
 3. **Human autonomy judgement for a valid proposal:** Decide `act` only if the action is sufficiently specified, low enough in consequence, reversible where relevant, and authorized by explicit user preferences or a clear request. Decide `defer` if the user must choose among meaningful trade-offs or if impact/uncertainty/third-party effects exceed agreed bounds. State what extra confirmation would resolve it.
 
 ## Defer Reasons and Clarification Requirements

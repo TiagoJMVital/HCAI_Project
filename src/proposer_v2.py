@@ -16,6 +16,15 @@ uncertainty and alternatives in the rationale. Autonomy preferences are user
 preferences, not ACT/DEFER labels. Do not choose an autonomy label. Answer only
 with JSON matching the supplied schema."""
 
+REVISION_GUIDANCE = (
+    "Re-evaluate the scheduling concern using the original request, profile and calendar above. "
+    "You may change the operations if a better feasible plan exists, or keep exactly the same "
+    "operations with a rationale that directly addresses the concern. Do not change times merely "
+    "to satisfy the reviewer. Explain uncertainty when personal details such as travel, meals or "
+    "recovery are unknown; do not invent them. Repeating technical validity alone does not answer "
+    "a practical-quality concern. Return the full structured proposal and rationale."
+)
+
 
 @dataclass(frozen=True)
 class V2RuntimeScenario:
@@ -50,5 +59,6 @@ def propose_v2(profile, scenario: V2RuntimeScenario, *, provider: Provider,
               f"Original calendar: {source.calendar.model_dump_json()}")
     if previous is not None and feedback is not None:
         prompt += (f"\nPrevious proposal: {previous.model_dump_json()}\n"
-                   f"Reviewer feedback: {feedback}\nRevise proposal and rationale.")
+                   f"Reviewer feedback: {feedback}\n"
+                   f"{REVISION_GUIDANCE}")
     return provider.generate_structured(prompt, Proposal, system=SYSTEM_V2)
