@@ -63,7 +63,8 @@ def evaluation(score, feedback="Explain alternatives"):
                                                 alternatives=score, clarity=score),
                             weaknesses=["alternative not explained"] if score < 4 else [],
                             feedback=feedback, plausibility_review=PlausibilityReview(
-                                revision_required=False, severity="none", reason="", suggested_improvement=""))
+                                revision_required=False, severity="none", reason="", suggested_improvement=""),
+                            unresolved_assumptions=[])
 
 
 def run(context, proposals, reviews, settings=None, simulator=None):

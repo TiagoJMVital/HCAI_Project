@@ -9,7 +9,7 @@ from pathlib import Path
 from benchmark_v2 import atomic_json
 from calendar_v2 import simulate
 from critic import final_calendar_view
-from models import CurrentCriticEvaluation, Proposal
+from models import CurrentCriticEvaluation, PlausibilityCriticEvaluation, Proposal
 from scenario_v2 import load_manifest, load_scenario
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -56,13 +56,22 @@ def import_result(root: Path, result_path: Path) -> Path:
     # imported scenario and each structured proposal before trusting the audit
     # trail. Older runs have no such fields and remain unchanged.
     original_ids = {event.id for event in scenario.calendar.events}
+    policy_version = record.get("critic_policy_version")
+    history = []
     for step in record["iterations"]:
-        if record.get("critic_policy_version") == "plausibility_review_v1" and step.get("critic_evaluation") is not None:
+        if policy_version in {"plausibility_review_v1", "uncertainty_review_v2"} and step.get("critic_evaluation") is not None:
             raw_evaluation = {k: v for k, v in step["critic_evaluation"].items() if k != "overall"}
-            current = CurrentCriticEvaluation.model_validate(raw_evaluation)
+            contract = (CurrentCriticEvaluation if policy_version == "uncertainty_review_v2"
+                        else PlausibilityCriticEvaluation)
+            current = contract.model_validate(raw_evaluation)
             policy = step.get("acceptance_policy")
             if not isinstance(policy, dict) or policy.get("plausibility_revision_required") != current.plausibility_review.revision_required:
                 raise ValueError("new Critic result missing or inconsistent acceptance policy")
+            if policy_version == "uncertainty_review_v2":
+                assumptions = [entry.model_dump() for entry in current.unresolved_assumptions]
+                if step.get("unresolved_assumptions") != assumptions:
+                    raise ValueError("iteration uncertainty summary differs from Critic response")
+                history.append({"iteration": step["index"], "unresolved_assumptions": assumptions})
         if step.get("result_calendar") is None:
             if record.get("critic_input_version") == "final_calendar_v1" and step.get("critic_evaluation") is not None:
                 raise ValueError("Critic evaluation missing its result calendar")
@@ -73,6 +82,13 @@ def import_result(root: Path, result_path: Path) -> Path:
                 step_events, step_proposal, original_ids=original_ids,
                 timezone=scenario.profile.timezone):
             raise ValueError("iteration result calendar differs from deterministic simulation")
+    if policy_version == "uncertainty_review_v2":
+        if record.get("uncertainty_history") != history:
+            raise ValueError("uncertainty history differs from Critic iterations")
+        last_review = record["iterations"][-1].get("critic_evaluation")
+        expected_final = (last_review["unresolved_assumptions"] if last_review is not None else None)
+        if record.get("final_unresolved_assumptions") != expected_final:
+            raise ValueError("final uncertainty summary differs from final iteration")
     if (record.get("critic_input_version") == "final_calendar_v1"
             and record.get("status") == "proposal_ready" and record.get("final_result_calendar") is None):
         raise ValueError("accepted proposal missing its final result calendar")
@@ -108,6 +124,7 @@ def import_result(root: Path, result_path: Path) -> Path:
     # Optional audit data for runs using outcome-aware critique. Historical
     # artifacts remain byte-compatible when their source result lacks it.
     for field in ("critic_input_version", "critic_policy_version", "final_result_calendar", "replay_source",
+                  "final_unresolved_assumptions", "uncertainty_history",
                   "unresolved_critic_weaknesses", "unresolved_plausibility_review"):
         if field in record:
             artifact[field] = record[field]

@@ -18,6 +18,7 @@ from annotation_v2 import (ProposalReview, ProposalConsensus, compare, load_revi
 from annotation_v2_ui import preview, records, temporal_overlaps
 from benchmark_v2 import import_scenario
 from calendar_v2 import simulate
+from critic import CRITIC_POLICY_VERSION
 from gate_dataset_v2 import build_rows, features, grouped_folds
 from models import Change, CurrentCriticEvaluation, CriticScores, PlausibilityReview, Proposal, Rationale
 from proposal_catalog_v2 import catalog, import_result
@@ -58,7 +59,8 @@ def proposal():
 def accepted():
     return CurrentCriticEvaluation(scores=CriticScores(reasoning=5, coherence=5, alternatives=5, clarity=5),
                             weaknesses=[], feedback="Clear", plausibility_review=PlausibilityReview(
-                                revision_required=False, severity="none", reason="", suggested_improvement=""))
+                                revision_required=False, severity="none", reason="", suggested_improvement=""),
+                            unresolved_assumptions=[])
 
 
 def source(root):
@@ -292,7 +294,7 @@ def test_v2_streamlit_navigation_and_author_isolation(imported, tmp_path):
                        f"annotation_app.ROOT = Path({str(root)!r})\nannotation_app.main()\n")
     app = AppTest.from_file(wrapper, default_timeout=10).run()
     assert not app.exception
-    assert any("Política do Critic: plausibility_review_v1" in x.value for x in app.caption)
+    assert any(f"Política do Critic: {CRITIC_POLICY_VERSION}" in x.value for x in app.caption)
     assert any(x.label == "Proposta" for x in app.selectbox)
     first = next(x.value for x in app.selectbox if x.label == "Proposta")
     next(x for x in app.text_area if x.label == "Justificação obrigatória para concluir").set_value("Draft 1").run()

@@ -48,7 +48,8 @@ def score(value, feedback="No material issue"):
                                                alternatives=value, clarity=value),
                             weaknesses=[] if value >= 4 else ["[plausibility] gym_mon ends when study_new begins"],
                             feedback=feedback, plausibility_review=PlausibilityReview(
-                                revision_required=False, severity="none", reason="", suggested_improvement=""))
+                                revision_required=False, severity="none", reason="", suggested_improvement=""),
+                            unresolved_assumptions=[])
 
 
 def run(source, proposals, evaluations, settings=None):
@@ -132,7 +133,9 @@ def test_compatible_back_to_back_events_do_not_trigger_universal_buffer(
     candidate = Proposal(changes=[Change(type="add", event_id="compatible_second", title=new_title,
                                          to_start="2026-11-12T20:00:00+00:00",
                                          to_end="2026-11-12T20:15:00+00:00")],
-                         rationale=add_study().rationale)
+                         rationale=Rationale(constraints=[], priorities=["keep a compact same-location sequence"],
+                                             alternatives_considered=[],
+                                             summary="The activities are both at home or online; no travel is indicated."))
     result, _, critic = run(source, [candidate], [score(4)])
     assert result["status"] == "proposal_ready"
     assert result["iterations"][0]["validation"]["violations"] == []
@@ -140,6 +143,50 @@ def test_compatible_back_to_back_events_do_not_trigger_universal_buffer(
     first = next(event for event in events if event["id"] == "compatible_first")
     second = next(event for event in events if event["id"] == "compatible_second")
     assert first["end"] == second["start"]
+
+
+def test_human_workload_review_can_continue_after_cosmetic_revision():
+    source = scenario()
+    first = add_study()
+    slight_shift = add_study("2026-11-09T20:15:00+00:00")
+    reconsidered = Proposal(
+        changes=[Change(type="add", event_id="study_new", title="Assessment preparation",
+                        to_start="2026-11-09T20:45:00+00:00",
+                        to_end="2026-11-09T22:15:00+00:00")],
+        rationale=Rationale(constraints=["keep work fixed"], priorities=["study"],
+                            alternatives_considered=[],
+                            summary="Preserve the full block with more transition time, while noting the later finish."))
+    concern = CurrentCriticEvaluation(
+        scores=CriticScores(reasoning=2, coherence=3, alternatives=4, clarity=4),
+        weaknesses=["[plausibility] The proposed activity follows a long sequence of work and exercise."],
+        feedback="Reassess whether the schedule leaves practical room for recovery and focused work.",
+        plausibility_review=PlausibilityReview(
+            revision_required=True, severity="moderate",
+            reason="The technically valid added block may be hard to use effectively after the visible workload.",
+            suggested_improvement="Reconsider the whole evening and the distribution of effort."),
+        unresolved_assumptions=[])
+    still_open = concern.model_copy(deep=True)
+    still_open.plausibility_review.reason = (
+        "A small shift does not establish that practical recovery or effective focus is possible.")
+    accepted = score(4, "The revised routine is sufficiently supported in the visible context.")
+    # These scripted judgments exercise the cycle; they do not establish real scheduling quality.
+    record, proposer, critic = run(source, [first, slight_shift, reconsidered],
+                                   [concern, still_open, accepted], CriticSettings(max_refinements=2))
+    assert all(step["validation"]["valid"] for step in record["iterations"])
+    assert [step["acceptance_policy"]["accepted"] for step in record["iterations"]] == [False, False, True]
+    assert record["status"] == "proposal_ready" and record["refinements"] == 2
+    assert "practical room for recovery" in proposer.calls[1][0]
+    assert "A small timing shift is not enough" in proposer.calls[1][0]
+    assert "small shift does not establish" in proposer.calls[2][0]
+    assert "human-centered" in critic.calls[0][2]
+    assert "realistically workable whole" in critic.calls[0][2]
+
+
+def test_critic_contract_cannot_return_calendar_operations():
+    assert "changes" not in CurrentCriticEvaluation.model_fields
+    assert "to_start" not in CurrentCriticEvaluation.model_fields
+    assert "unresolved_assumptions" in CurrentCriticEvaluation.model_fields
+    assert "Do not prescribe a new set" in SYSTEM
 
 
 def test_contextual_risk_feedback_rebuilds_outcome_on_revision():

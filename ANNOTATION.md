@@ -28,6 +28,8 @@ New B runs additionally record the complete in-memory result calendar for each C
 
 Runs marked `critic_policy_version=plausibility_review_v1` require a structured plausibility review on every new Critic response. The UI shows severity, explicit revision decision, evidence, suggested improvement, numeric result and revision cause. Older artifacts show the plausibility assessment as **unavailable**, not as `revision_required=false`. A review requested by the Critic is independent of a human `act/defer` annotation; below-policy B outputs are excluded from normal gate training by the existing exporter.
 
+New runs marked `uncertainty_review_v2` additionally show conditions the Critic could not verify. Read their subject, missing evidence and possible impact separately from the technical validation and your human autonomy judgment. A final empty list means none identified by that Critic response; an absent list in an older run means the question was not structured then. Earlier conditions remain in iteration history, with resolution unconfirmed if they disappear later. `proposal_ready` is a quality-policy outcome, not a guarantee of operational availability or authorization. The annotation form and current gate features have not changed.
+
 In current B runs, each revised iteration also records the prior Critic concern, feedback to the Proposer, and whether the operations or rationale changed. The Proposer may retain operations after re-evaluating the practical concern; inspect its rationale and the next Critic judgment to see whether the doubt remains. These records describe the review process, not a verified improvement in scheduling. The Critic still has no direct access to the original request or full profile.
 
 ## Independent review in Streamlit

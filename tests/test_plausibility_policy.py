@@ -16,7 +16,8 @@ from calendar_v2 import simulate
 from critic import CRITIC_POLICY_VERSION, critique
 from llm import LLMError
 from models import (Change, CriticEvaluation, CriticScores, CurrentCriticEvaluation,
-                    PlausibilityReview, Proposal, Rationale)
+                    PlausibilityCriticEvaluation, PlausibilityReview, Proposal, Rationale,
+                    UnresolvedAssumption)
 from pipeline_b import run_config_b
 from proposer_v2 import V2RuntimeScenario, propose_v2
 from run_config_a_v2 import run_one as run_a
@@ -53,13 +54,21 @@ def review(required=False, severity="none", reason="", suggestion=""):
                               reason=reason, suggested_improvement=suggestion)
 
 
-def evaluated(scores=(4, 5, 4, 4), plausibility=None):
+def evaluated(scores=(4, 5, 4, 4), plausibility=None, assumptions=None):
     return CurrentCriticEvaluation(
         scores=CriticScores(reasoning=scores[0], coherence=scores[1],
                             alternatives=scores[2], clarity=scores[3]),
         weaknesses=["[plausibility] new_0 follows gym_mon"] if plausibility and plausibility.reason else [],
         feedback="Review the transition only if the user's constraints permit it.",
-        plausibility_review=plausibility or review())
+        plausibility_review=plausibility or review(),
+        unresolved_assumptions=[] if assumptions is None else assumptions)
+
+
+def unknown_facility(impact="material"):
+    return UnresolvedAssumption(
+        subject="gym_mon", assumption="facility is available at the moved time",
+        evidence_gap="no operating hours are provided",
+        potential_impact=impact, verification_source="external_source")
 
 
 @pytest.fixture
@@ -126,6 +135,198 @@ def test_same_operations_can_be_accepted_after_grounded_rationale_revision(conte
     assert second_packet["prior_critic_reviews"][0]["plausibility_review"]["reason"] == concern.reason
     assert second_packet["prior_critic_reviews"][0]["proposal"]["rationale"] == first.rationale.model_dump()
     assert second_packet["proposal"]["rationale"]["summary"] == revised.rationale.summary
+
+
+def test_revised_calendar_can_resolve_old_doubt_but_trigger_new_review(context):
+    first = candidate()
+    shifted = Proposal(
+        changes=[
+            Change(type="add", title="Assessment preparation",
+                   to_start="2026-11-09T18:30:00+00:00",
+                   to_end="2026-11-09T20:30:00+00:00"),
+            Change(type="move", event_id="gym_mon",
+                   to_start="2026-11-09T21:00:00+00:00",
+                   to_end="2026-11-09T22:30:00+00:00"),
+        ],
+        rationale=Rationale(constraints=["work fixed"], priorities=["study"],
+                            alternatives_considered=[], summary="Study before gym instead."))
+    assert simulate(context[1], shifted)[1]["valid"]
+    old_risk = review(True, "moderate",
+                      "new_0 begins shortly after gym_mon; reassess transition",
+                      "Consider a workable transition")
+    new_risk = review(True, "moderate",
+                      "The old transition is resolved, but moving gym_mon to 21:00-22:30 "
+                      "after work and study may create a new fatigue risk; facility hours are unknown",
+                      "Reassess the late move and external availability without assuming it is impossible")
+    result, proposer, critic = run(context, [first, shifted, first],
+                                   [evaluated(plausibility=old_risk),
+                                    evaluated(plausibility=new_risk), evaluated()])
+    assert result["status"] == "proposal_ready" and result["refinements"] == 2
+    assert result["iterations"][1]["validation"]["valid"]
+    assert result["iterations"][1]["acceptance_policy"]["revision_causes"] == [
+        "plausibility_revision_required"]
+    assert "facility hours are unknown" in proposer.calls[2][0]
+    second_packet = json.loads(critic.calls[1][0].split("\n", 1)[1])
+    assert second_packet["prior_critic_reviews"][0]["result_calendar"] == result["iterations"][0]["result_calendar"]
+    assert second_packet["final_calendar"] == result["iterations"][1]["result_calendar"]
+    assert "two independent checks" in critic.calls[1][2]
+    assert "opening hours" in critic.calls[1][2]
+
+
+def test_external_dependency_is_uncertainty_not_technical_violation(context):
+    shifted = Proposal(
+        changes=[Change(type="move", event_id="gym_mon",
+                        to_start="2026-11-09T21:00:00+00:00",
+                        to_end="2026-11-09T22:30:00+00:00")],
+        rationale=Rationale(constraints=["work fixed"], priorities=["exercise"],
+                            alternatives_considered=[], summary="Move a flexible appointment."))
+    observation = review(False, "low",
+                         "Whether the facility is open at 21:00 is unknown; no conflict is visible",
+                         "")
+    result, _, critic = run(context, [shifted], [evaluated(plausibility=observation)])
+    assert result["iterations"][0]["validation"]["valid"]
+    assert result["iterations"][0]["acceptance_policy"]["accepted"]
+    assert result["status"] == "proposal_ready"
+    assert "unknown dependency a technical violation" in critic.calls[0][2]
+
+
+@pytest.mark.parametrize("impact", ["minor", "material"])
+def test_quality_acceptance_retains_relevant_unknown_without_forcing_autonomy(context, impact):
+    moved = Proposal(changes=[Change(type="move", event_id="gym_mon",
+                                     to_start="2026-11-09T21:00:00+00:00")],
+                     rationale=candidate().rationale)
+    uncertain, _, _ = run(context, [moved],
+                          [evaluated(plausibility=review(False, "moderate",
+                                  "External availability is unknown but further revision adds little value", ""),
+                                     assumptions=[unknown_facility(impact)])])
+    plain, _, _ = run(context, [moved], [evaluated()])
+    assert uncertain["status"] == plain["status"] == "proposal_ready"
+    assert uncertain["decision"] == plain["decision"]
+    assert uncertain["iterations"][0]["validation"]["valid"]
+    assert uncertain["final_unresolved_assumptions"][0]["potential_impact"] == impact
+    assert uncertain["uncertainty_history"][0]["iteration"] == 0
+    assert "operating hours" in unknown_facility().evidence_gap
+
+
+def test_recorded_material_uncertainty_can_lead_to_one_useful_review(context):
+    first = candidate()
+    revised = first.model_copy(deep=True)
+    revised.rationale.summary = (
+        "Reconsidered the transition using the original context. No known travel or setup "
+        "facts establish immediate feasibility; the schedule remains a conditional option.")
+    ask = review(True, "moderate",
+                 "The new study block depends on an unexamined practical transition after gym_mon; "
+                 "the Proposer may find a less dependent plan or explain available context",
+                 "Reconsider the transition and its alternatives using the original context")
+    accepted = review(False, "low",
+                      "The Proposer reconsidered the issue; no further option is supported by the "
+                      "visible evidence, although practical feasibility remains unverified", "")
+    result, proposer, critic = run(context, [first, revised],
+                                   [evaluated(plausibility=ask, assumptions=[unknown_facility()]),
+                                    evaluated(plausibility=accepted, assumptions=[unknown_facility()])])
+    assert result["status"] == "proposal_ready" and result["refinements"] == 1
+    assert result["iterations"][0]["acceptance_policy"]["revision_causes"] == [
+        "plausibility_revision_required"]
+    assert result["iterations"][1]["acceptance_policy"]["accepted"]
+    assert result["iterations"][1]["operations_changed_from_previous"] is False
+    assert result["iterations"][1]["rationale_changed_from_previous"] is True
+    assert result["final_unresolved_assumptions"][0]["subject"] == "gym_mon"
+    assert len(result["uncertainty_history"]) == 2
+    assert "Unverified conditions to reassess" in proposer.calls[1][0]
+    assert "Listing an uncertainty does not resolve it" in critic.calls[0][2]
+    assert "An objective incompatibility is NOT required" in " ".join(critic.calls[0][2].split())
+    assert "do not repeat it merely because external information is still unavailable" in " ".join(critic.calls[1][2].split())
+
+
+def test_low_severity_material_impact_needs_contextual_explanation_in_prompt(context):
+    result, _, critic = run(context, [candidate()],
+                            [evaluated(plausibility=review(False, "low",
+                                "Potential consequences are material if false, but there is no evidence "
+                                "of failure and another review is unlikely to add context", ""),
+                                assumptions=[unknown_facility()])])
+    assert result["status"] == "proposal_ready"
+    assert result["iterations"][0]["critic_evaluation"]["plausibility_review"]["severity"] == "low"
+    assert result["final_unresolved_assumptions"][0]["potential_impact"] == "material"
+    assert "When severity is low but an assumption's potential_impact is material" in critic.calls[0][2]
+
+
+def test_prior_unknown_is_preserved_without_inferred_resolution(context):
+    concern = review(True, "moderate", "new_0 may need practical transition",
+                     "Reassess timing without assuming a universal buffer")
+    result, proposer, critic = run(context, [candidate(), candidate("2026-11-09T21:00:00+00:00")],
+                                   [evaluated(plausibility=concern, assumptions=[unknown_facility()]),
+                                    evaluated()])
+    assert result["status"] == "proposal_ready" and result["refinements"] == 1
+    assert result["final_unresolved_assumptions"] == []
+    assert result["uncertainty_history"][0]["unresolved_assumptions"][0]["subject"] == "gym_mon"
+    assert result["uncertainty_history"][1]["unresolved_assumptions"] == []
+    packet = json.loads(critic.calls[1][0].split("\n", 1)[1])
+    assert packet["prior_critic_reviews"][0]["unresolved_assumptions"][0]["assumption"] == unknown_facility().assumption
+    assert "Unverified conditions to reassess" in proposer.calls[1][0]
+
+
+def test_new_contract_requires_uncertainty_list_and_old_contract_remains_readable():
+    old = PlausibilityCriticEvaluation(
+        scores=CriticScores(reasoning=4, coherence=4, alternatives=4, clarity=4),
+        weaknesses=[], feedback="Old response", plausibility_review=review())
+    assert CriticEvaluation.model_validate(old.model_dump(exclude_none=True)).unresolved_assumptions is None
+    with pytest.raises(ValidationError):
+        CurrentCriticEvaluation.model_validate(old.model_dump(exclude_none=True))
+    assert CurrentCriticEvaluation.model_validate(
+        {**old.model_dump(exclude_none=True), "unresolved_assumptions": []}).unresolved_assumptions == []
+    with pytest.raises(ValidationError):
+        UnresolvedAssumption(subject="gym_mon", assumption="open", evidence_gap="",
+                             potential_impact="material", verification_source="external_source")
+
+
+def test_importer_and_gate_features_preserve_separation(context):
+    from gate_dataset_v2 import features
+    root, source = context
+    path = run_b(root, source.scenario_id, ScriptedProvider([candidate()]),
+                 ScriptedProvider([evaluated(assumptions=[unknown_facility()])]))
+    record = json.loads(path.read_text())
+    artifact = json.loads(import_result(root, path).read_text())
+    assert artifact["final_unresolved_assumptions"] == record["final_unresolved_assumptions"]
+    assert artifact["uncertainty_history"] == record["uncertainty_history"]
+    predictors = features(source, candidate(), artifact["critic_score"])
+    assert not any("assumption" in key or "verification" in key for key in predictors)
+    record["iterations"][0]["critic_evaluation"].pop("unresolved_assumptions")
+    altered = root / "tampered_uncertainty.json"
+    altered.write_text(json.dumps(record))
+    with pytest.raises(ValidationError):
+        import_result(root, altered)
+    record = json.loads(path.read_text())
+    record["final_unresolved_assumptions"] = []
+    altered.write_text(json.dumps(record))
+    with pytest.raises(ValueError, match="final uncertainty summary"):
+        import_result(root, altered)
+
+
+def test_real_historical_v1_run_imports_without_backfilled_uncertainties(context):
+    path = ROOT / "eval/runs/de85af3de5724c3baaeacfe8a7d0de1e/B/working_student_deadline_001.json"
+    if not path.exists():
+        pytest.skip("local historical run is not checked into the repository")
+    before = path.read_bytes()
+    artifact = json.loads(import_result(context[0], path).read_text())
+    assert artifact["critic_policy_version"] == "plausibility_review_v1"
+    assert "final_unresolved_assumptions" not in artifact
+    assert "uncertainty_history" not in artifact
+    assert path.read_bytes() == before
+
+
+def test_streamlit_displays_new_uncertainty_without_claiming_execution(context, tmp_path):
+    root, source = context
+    path = run_b(root, source.scenario_id, ScriptedProvider([candidate()]),
+                 ScriptedProvider([evaluated(assumptions=[unknown_facility()])]))
+    import_result(root, path)
+    wrapper = tmp_path / "uncertainty_ui.py"
+    wrapper.write_text(f"import sys\nsys.path.insert(0, {str(ROOT)!r})\n"
+                       f"from pathlib import Path\nimport annotation_app\n"
+                       f"annotation_app.ROOT = Path({str(root)!r})\nannotation_app.main()\n")
+    app = AppTest.from_file(wrapper, default_timeout=10).run()
+    assert not app.exception
+    assert any("não garante viabilidade externa" in item.value for item in app.caption)
+    assert any("no operating hours are provided" in item.value for item in app.caption)
 
 
 def test_repeated_technical_validity_does_not_force_critic_acceptance(context):
@@ -267,5 +468,5 @@ def test_streamlit_reads_reassessment_history(context, tmp_path):
                        f"annotation_app.ROOT = Path({str(root)!r})\nannotation_app.main()\n")
     app = AppTest.from_file(wrapper, default_timeout=10).run()
     assert not app.exception
-    assert any("Política do Critic: plausibility_review_v1" in x.value for x in app.caption)
+    assert any(f"Política do Critic: {CRITIC_POLICY_VERSION}" in x.value for x in app.caption)
     assert any("Reavaliação da dúvida anterior" in x.value for x in app.caption)

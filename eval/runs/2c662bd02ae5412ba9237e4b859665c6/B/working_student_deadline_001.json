@@ -1,0 +1,956 @@
+{
+  "configuration": "B",
+  "scenario_id": "working_student_deadline_001",
+  "family": "working_student_deadline_conflict",
+  "category": "v2",
+  "proposer_provider": "iaedu",
+  "proposer_model": "GPT-5.5",
+  "proposer_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request"
+  },
+  "critic_provider": "iaedu",
+  "critic_model": "GPT-5.5",
+  "critic_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request"
+  },
+  "critic_settings": {
+    "threshold": 4.0,
+    "max_refinements": 3,
+    "min_dimension_score": 1
+  },
+  "iterations": [
+    {
+      "index": 0,
+      "proposer_feedback": null,
+      "proposer_source": "replayed",
+      "proposal": {
+        "changes": [
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Prepare for Wednesday's assessment",
+            "from_start": null,
+            "to_start": "2026-11-09T20:00:00+00:00",
+            "to_end": "2026-11-09T21:30:00+00:00"
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Prepare for Wednesday's assessment",
+            "from_start": null,
+            "to_start": "2026-11-10T20:00:00+00:00",
+            "to_end": "2026-11-10T21:30:00+00:00"
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "Work events on Monday and Tuesday are protected by the work_hours hard constraint and are left unchanged.",
+            "The Wednesday university assessment is protected by the exam_protection hard constraint and is left unchanged.",
+            "All proposed study time stays within the daily allowed window of 08:00 to 23:00 local time.",
+            "Times use the Europe/Lisbon timezone offset applicable on these dates, +00:00."
+          ],
+          "priorities": [
+            "The request requires at least three hours of preparation before Wednesday's assessment; the proposal adds exactly three hours across Monday and Tuesday evenings.",
+            "Exam preparation is prioritized because exams have the highest priority in the profile.",
+            "Gym sessions are preserved in their existing preferred weekday evening slots because enough free evening time is available afterward.",
+            "Study blocks end by 21:30, respecting the preference for study work to end before 22:30."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Move one or both gym sessions to create earlier study blocks from 18:30 onward.",
+              "rejected_because": "Not necessary to meet the three-hour preparation target, and it would disrupt the preferred gym routine without a clear benefit."
+            },
+            {
+              "option": "Schedule all three hours on Tuesday evening after gym, from 20:00 to 23:00.",
+              "rejected_because": "This would meet the hard daily bound but would violate the preference for study to end before 22:30 and creates a heavier session immediately before the assessment day."
+            },
+            {
+              "option": "Schedule preparation before work on Monday or Tuesday.",
+              "rejected_because": "The user specifically asked to reorganize Monday and Tuesday evenings, and evening slots are available without affecting protected work time."
+            }
+          ],
+          "summary": "Add two 90-minute assessment preparation blocks after the existing gym sessions on Monday and Tuesday, giving a total of three hours while leaving work, the assessment, and both gym sessions unchanged."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [
+          "new_0: added-event category, importance and participants were not supplied by the Proposal contract; preview uses neutral defaults",
+          "new_1: added-event category, importance and participants were not supplied by the Proposal contract; preview uses neutral defaults"
+        ],
+        "valid": true
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "work_mon",
+            "title": "Work",
+            "start": "2026-11-09T09:00:00+00:00",
+            "end": "2026-11-09T18:00:00+00:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Regular work shift.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_mon",
+            "title": "Gym",
+            "start": "2026-11-09T18:30:00+00:00",
+            "end": "2026-11-09T20:00:00+00:00",
+            "category": "gym",
+            "importance": 2,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Individual workout; can be rescheduled.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_0",
+            "title": "Prepare for Wednesday's assessment",
+            "start": "2026-11-09T20:00:00+00:00",
+            "end": "2026-11-09T21:30:00+00:00",
+            "category": null,
+            "importance": null,
+            "fixed": null,
+            "participants": null,
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "work_tue",
+            "title": "Work",
+            "start": "2026-11-10T09:00:00+00:00",
+            "end": "2026-11-10T18:00:00+00:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Regular work shift.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_tue",
+            "title": "Gym",
+            "start": "2026-11-10T18:30:00+00:00",
+            "end": "2026-11-10T20:00:00+00:00",
+            "category": "gym",
+            "importance": 2,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Individual workout; can be rescheduled.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_1",
+            "title": "Prepare for Wednesday's assessment",
+            "start": "2026-11-10T20:00:00+00:00",
+            "end": "2026-11-10T21:30:00+00:00",
+            "category": null,
+            "importance": null,
+            "fixed": null,
+            "participants": null,
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "exam_wed",
+            "title": "University assessment",
+            "start": "2026-11-11T14:00:00+00:00",
+            "end": "2026-11-11T16:00:00+00:00",
+            "category": "exam",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Fixed assessment; cannot be rescheduled.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Null metadata on added events means the Proposal contract did not supply it; it is not a new personal preference or hard constraint."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 5,
+          "alternatives": 4,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "[plausibility] Os novos blocos new_0 em 2026-11-09 20:00-21:30 e new_1 em 2026-11-10 20:00-21:30 começam imediatamente após gym_mon e gym_tue, ambos 18:30-20:00, depois de dias de trabalho longos, work_mon e work_tue 09:00-18:00. Não há contradição objetiva, mas a concentração trabalho + ginásio + estudo em duas noites consecutivas antes de exam_wed pode reduzir a qualidade prática do estudo.",
+          "[plausibility] A justificação preserva os ginásios porque há espaço livre depois, mas não avalia explicitamente se estudar logo após uma sessão de ginásio é adequado para preparação de avaliação, sobretudo sendo o exame uma prioridade alta e o ginásio flexível e de menor importância visível.",
+          "[preference] Poderia haver uma comparação mais explícita entre manter o ginásio intacto e deslocar uma das sessões para criar pelo menos um bloco de estudo menos tardio ou menos condicionado por fadiga; isto não é uma exigência, mas ajudaria a fundamentar melhor o trade-off."
+        ],
+        "feedback": "A proposta é tecnicamente coerente e respeita os eventos fixos visíveis. O principal ponto a rever é prático, não uma violação: os dois blocos de preparação são colocados imediatamente após ginásio, em noites já preenchidas por trabalho das 09:00 às 18:00 e treino das 18:30 às 20:00. Como a avaliação de quarta-feira é importante e o ginásio é flexível, o Proposer deveria verificar se preservar ambos os ginásios é realmente o melhor compromisso ou se uma alternativa com estudo mais cedo, deslocando ou encurtando uma sessão flexível, seria mais robusta. Se houver contexto oculto que torne o estudo pós-ginásio apropriado, a mesma operação pode ser mantida com essa explicação.",
+        "plausibility_review": {
+          "revision_required": true,
+          "severity": "moderate",
+          "reason": "A agenda resultante adiciona new_0 em 2026-11-09 20:00-21:30 e new_1 em 2026-11-10 20:00-21:30 imediatamente após gym_mon e gym_tue 18:30-20:00, ambos depois de work_mon/work_tue 09:00-18:00. Isto não é objetivamente incompatível, mas é uma dúvida prática concreta: dois blocos de estudo para uma avaliação importante ficam concentrados no fim de dois dias com trabalho e ginásio consecutivos, sem a racionalização demonstrar que a qualidade de preparação continua adequada.",
+          "suggested_improvement": "Reavaliar se a preservação integral dos dois ginásios é proporcional à prioridade da preparação para exam_wed. Examinar, com o contexto completo, se estudar logo após o ginásio é realisticamente eficaz para o utilizador ou se uma sessão de ginásio flexível poderia ser deslocada, encurtada ou trocada por um bloco de estudo menos fatigante. Não é necessário impor um intervalo fixo; basta justificar o trade-off ou ajustar caso o contexto indique que o bloco pós-ginásio é frágil."
+        },
+        "overall": 4.25
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": true,
+        "plausibility_revision_required": true,
+        "accepted": false,
+        "revision_causes": [
+          "plausibility_revision_required"
+        ]
+      },
+      "operations_changed_from_previous": null,
+      "rationale_changed_from_previous": null,
+      "prior_critic_reviews": []
+    },
+    {
+      "index": 1,
+      "proposer_feedback": "Plausibility revision required (moderate): A agenda resultante adiciona new_0 em 2026-11-09 20:00-21:30 e new_1 em 2026-11-10 20:00-21:30 imediatamente após gym_mon e gym_tue 18:30-20:00, ambos depois de work_mon/work_tue 09:00-18:00. Isto não é objetivamente incompatível, mas é uma dúvida prática concreta: dois blocos de estudo para uma avaliação importante ficam concentrados no fim de dois dias com trabalho e ginásio consecutivos, sem a racionalização demonstrar que a qualidade de preparação continua adequada. Suggested direction: Reavaliar se a preservação integral dos dois ginásios é proporcional à prioridade da preparação para exam_wed. Examinar, com o contexto completo, se estudar logo após o ginásio é realisticamente eficaz para o utilizador ou se uma sessão de ginásio flexível poderia ser deslocada, encurtada ou trocada por um bloco de estudo menos fatigante. Não é necessário impor um intervalo fixo; basta justificar o trade-off ou ajustar caso o contexto indique que o bloco pós-ginásio é frágil. The Critic lacks the full user constraints; explain if no better feasible option exists. Weaknesses: ['[plausibility] Os novos blocos new_0 em 2026-11-09 20:00-21:30 e new_1 em 2026-11-10 20:00-21:30 começam imediatamente após gym_mon e gym_tue, ambos 18:30-20:00, depois de dias de trabalho longos, work_mon e work_tue 09:00-18:00. Não há contradição objetiva, mas a concentração trabalho + ginásio + estudo em duas noites consecutivas antes de exam_wed pode reduzir a qualidade prática do estudo.', '[plausibility] A justificação preserva os ginásios porque há espaço livre depois, mas não avalia explicitamente se estudar logo após uma sessão de ginásio é adequado para preparação de avaliação, sobretudo sendo o exame uma prioridade alta e o ginásio flexível e de menor importância visível.', '[preference] Poderia haver uma comparação mais explícita entre manter o ginásio intacto e deslocar uma das sessões para criar pelo menos um bloco de estudo menos tardio ou menos condicionado por fadiga; isto não é uma exigência, mas ajudaria a fundamentar melhor o trade-off.']. Actionable feedback: A proposta é tecnicamente coerente e respeita os eventos fixos visíveis. O principal ponto a rever é prático, não uma violação: os dois blocos de preparação são colocados imediatamente após ginásio, em noites já preenchidas por trabalho das 09:00 às 18:00 e treino das 18:30 às 20:00. Como a avaliação de quarta-feira é importante e o ginásio é flexível, o Proposer deveria verificar se preservar ambos os ginásios é realmente o melhor compromisso ou se uma alternativa com estudo mais cedo, deslocando ou encurtando uma sessão flexível, seria mais robusta. Se houver contexto oculto que torne o estudo pós-ginásio apropriado, a mesma operação pode ser mantida com essa explicação.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "move",
+            "event_id": "gym_mon",
+            "title": "Gym",
+            "from_start": "2026-11-09T18:30:00+00:00",
+            "to_start": "2026-11-09T20:15:00+00:00",
+            "to_end": "2026-11-09T21:45:00+00:00"
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Prepare for Wednesday's assessment",
+            "from_start": null,
+            "to_start": "2026-11-09T18:30:00+00:00",
+            "to_end": "2026-11-09T20:00:00+00:00"
+          },
+          {
+            "type": "move",
+            "event_id": "gym_tue",
+            "title": "Gym",
+            "from_start": "2026-11-10T18:30:00+00:00",
+            "to_start": "2026-11-10T20:15:00+00:00",
+            "to_end": "2026-11-10T21:45:00+00:00"
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Prepare for Wednesday's assessment",
+            "from_start": null,
+            "to_start": "2026-11-10T18:30:00+00:00",
+            "to_end": "2026-11-10T20:00:00+00:00"
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "Work events on Monday and Tuesday are protected by the work_hours hard constraint and are left unchanged.",
+            "The Wednesday university assessment is protected by the exam_protection hard constraint and is left unchanged.",
+            "All proposed events remain within the daily allowed window of 08:00 to 23:00 local time.",
+            "Times use the Europe/Lisbon timezone offset applicable on these dates, +00:00.",
+            "Only flexible gym events are moved; no fixed or protected event is moved, shortened or cancelled."
+          ],
+          "priorities": [
+            "The request requires at least three hours of preparation before Wednesday's assessment; this proposal adds exactly three hours across Monday and Tuesday evenings.",
+            "Assessment preparation is prioritized over preserving the exact gym timing because exams have the highest priority and the gym sessions are flexible with lower visible importance.",
+            "The gym sessions are still preserved rather than deleted, supporting the user's health routine while giving preparation time the earlier evening slots.",
+            "Study blocks are placed before gym rather than immediately after gym to reduce the practical risk of lower-quality preparation caused by fatigue after work plus exercise.",
+            "Both study blocks end at 20:00, comfortably before the preferred 22:30 study cutoff."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Keep both gym sessions at 18:30 to 20:00 and study afterward from 20:00 to 21:30 on Monday and Tuesday.",
+              "rejected_because": "This is technically valid, but it concentrates assessment preparation immediately after work and gym on two consecutive evenings. Because the assessment is high priority and gym is flexible, moving the gym later gives the study time a stronger practical chance of being effective."
+            },
+            {
+              "option": "Delete or skip one gym session and schedule a longer uninterrupted study block in its place.",
+              "rejected_because": "That would create more breathing room, but deleting a health-related routine is a larger intervention than necessary because the three-hour preparation target can be met while preserving both gym sessions."
+            },
+            {
+              "option": "Schedule all three hours on Monday from 18:30 to 21:30 and move Monday gym to 21:30 to 23:00.",
+              "rejected_because": "This avoids studying after gym, but it creates one long study block after a full workday and pushes gym to the latest allowed end time, which is a more brittle evening plan."
+            },
+            {
+              "option": "Move a gym session to Wednesday after the assessment.",
+              "rejected_because": "The user asked to reorganize Monday and Tuesday evenings, and the preparation must happen before Wednesday's assessment. Keeping the adjustments within Monday and Tuesday better matches the request."
+            }
+          ],
+          "summary": "Move both flexible gym sessions later to 20:15 to 21:45 and add assessment preparation from 18:30 to 20:00 on both Monday and Tuesday. This provides three hours of preparation before the assessment, keeps work unchanged, preserves both gym sessions, and directly addresses the concern that studying immediately after gym may be less effective. Travel, meals and recovery needs are not specified, so the plan leaves only a modest 15-minute transition between study and gym; if the user needs more buffer, the next-best option would be to move or skip one gym session rather than compress preparation quality."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [
+          "new_1: added-event category, importance and participants were not supplied by the Proposal contract; preview uses neutral defaults",
+          "new_3: added-event category, importance and participants were not supplied by the Proposal contract; preview uses neutral defaults"
+        ],
+        "valid": true
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "work_mon",
+            "title": "Work",
+            "start": "2026-11-09T09:00:00+00:00",
+            "end": "2026-11-09T18:00:00+00:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Regular work shift.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_1",
+            "title": "Prepare for Wednesday's assessment",
+            "start": "2026-11-09T18:30:00+00:00",
+            "end": "2026-11-09T20:00:00+00:00",
+            "category": null,
+            "importance": null,
+            "fixed": null,
+            "participants": null,
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "gym_mon",
+            "title": "Gym",
+            "start": "2026-11-09T20:15:00+00:00",
+            "end": "2026-11-09T21:45:00+00:00",
+            "category": "gym",
+            "importance": 2,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Individual workout; can be rescheduled.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "work_tue",
+            "title": "Work",
+            "start": "2026-11-10T09:00:00+00:00",
+            "end": "2026-11-10T18:00:00+00:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Regular work shift.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_3",
+            "title": "Prepare for Wednesday's assessment",
+            "start": "2026-11-10T18:30:00+00:00",
+            "end": "2026-11-10T20:00:00+00:00",
+            "category": null,
+            "importance": null,
+            "fixed": null,
+            "participants": null,
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "gym_tue",
+            "title": "Gym",
+            "start": "2026-11-10T20:15:00+00:00",
+            "end": "2026-11-10T21:45:00+00:00",
+            "category": "gym",
+            "importance": 2,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Individual workout; can be rescheduled.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "exam_wed",
+            "title": "University assessment",
+            "start": "2026-11-11T14:00:00+00:00",
+            "end": "2026-11-11T16:00:00+00:00",
+            "category": "exam",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Fixed assessment; cannot be rescheduled.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Null metadata on added events means the Proposal contract did not supply it; it is not a new personal preference or hard constraint."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 5,
+          "alternatives": 4,
+          "clarity": 5
+        },
+        "weaknesses": [
+          "[plausibility] A dúvida anterior sobre estudar imediatamente após o ginásio foi resolvida: os novos blocos new_1 em 2026-11-09 18:30-20:00 e new_3 em 2026-11-10 18:30-20:00 passam a ocorrer antes de gym_mon e gym_tue, ambos deslocados para 20:15-21:45.",
+          "[plausibility] A nova configuração cria duas noites consecutivas com work_mon/work_tue 09:00-18:00, estudo 18:30-20:00 e ginásio 20:15-21:45. Isto é praticável no calendário visível e não é uma contradição objetiva, mas continua a ser uma carga noturna densa antes de exam_wed em 2026-11-11 14:00-16:00.",
+          "[plausibility] A transição de 15 minutos entre new_1/new_3 18:30-20:00 e gym_mon/gym_tue 20:15-21:45 pode ser apertada se houver deslocação, troca de equipamento ou preparação logística, mas esses dados não estão disponíveis. A própria proposta reconhece esta incerteza e não a trata como uma regra fixa.",
+          "[preference] Poderia ser útil explicitar que a preservação integral dos dois treinos foi considerada proporcional mesmo com o segundo ginásio a terminar às 21:45 na noite anterior à avaliação, mas o plano já evita estudar depois do exercício e mantém todos os eventos dentro de horários plausíveis."
+        ],
+        "feedback": "A revisão melhora claramente o ponto prático levantado anteriormente: a preparação para a avaliação já não fica colocada imediatamente após o ginásio. A agenda resultante é coerente com a prioridade visível da avaliação, preserva os eventos fixos e usa apenas eventos de ginásio flexíveis para abrir blocos de estudo mais cedo. A principal incerteza remanescente é prática, não técnica: duas noites seguidas com trabalho, estudo e ginásio tardio podem ser exigentes, e a transição de 15 minutos até ao ginásio pode ou não ser suficiente dependendo de localização e rotina. Como a proposta reconhece essa limitação e o resultado não apresenta uma incompatibilidade demonstrável, não vejo necessidade de nova revisão; bastaria o Proposer manter esta escolha se o contexto completo confirmar que o ginásio às 20:15 é realisticamente acessível e aceitável para o utilizador.",
+        "plausibility_review": {
+          "revision_required": false,
+          "severity": "low",
+          "reason": "A preocupação anterior foi adequadamente abordada ao mover gym_mon e gym_tue para 20:15-21:45 e ao colocar new_1 e new_3 em 18:30-20:00, antes do exercício. A agenda continua intensa em ambos os dias, com work_mon/work_tue 09:00-18:00, estudo 18:30-20:00 e ginásio 20:15-21:45, mas isso é uma dúvida de conforto e logística, não uma incompatibilidade objetiva. A transição de 15 minutos para o ginásio depende de informação não visível, e a proposta já sinaliza essa incerteza de forma razoável.",
+          "suggested_improvement": "Sem exigir nova revisão, o Proposer poderia confirmar com o contexto completo se a transição 20:00-20:15 para gym_mon/gym_tue é plausível e se terminar o ginásio às 21:45 em duas noites consecutivas continua proporcional à preparação para exam_wed. Se o contexto não indicar problema, a calendarização atual é uma solução defensável."
+        },
+        "overall": 4.5
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": true,
+        "plausibility_revision_required": false,
+        "accepted": true,
+        "revision_causes": []
+      },
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": [
+        {
+          "iteration": 0,
+          "proposal": {
+            "changes": [
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Prepare for Wednesday's assessment",
+                "from_start": null,
+                "to_start": "2026-11-09T20:00:00+00:00",
+                "to_end": "2026-11-09T21:30:00+00:00"
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Prepare for Wednesday's assessment",
+                "from_start": null,
+                "to_start": "2026-11-10T20:00:00+00:00",
+                "to_end": "2026-11-10T21:30:00+00:00"
+              }
+            ],
+            "rationale": {
+              "constraints": [
+                "Work events on Monday and Tuesday are protected by the work_hours hard constraint and are left unchanged.",
+                "The Wednesday university assessment is protected by the exam_protection hard constraint and is left unchanged.",
+                "All proposed study time stays within the daily allowed window of 08:00 to 23:00 local time.",
+                "Times use the Europe/Lisbon timezone offset applicable on these dates, +00:00."
+              ],
+              "priorities": [
+                "The request requires at least three hours of preparation before Wednesday's assessment; the proposal adds exactly three hours across Monday and Tuesday evenings.",
+                "Exam preparation is prioritized because exams have the highest priority in the profile.",
+                "Gym sessions are preserved in their existing preferred weekday evening slots because enough free evening time is available afterward.",
+                "Study blocks end by 21:30, respecting the preference for study work to end before 22:30."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Move one or both gym sessions to create earlier study blocks from 18:30 onward.",
+                  "rejected_because": "Not necessary to meet the three-hour preparation target, and it would disrupt the preferred gym routine without a clear benefit."
+                },
+                {
+                  "option": "Schedule all three hours on Tuesday evening after gym, from 20:00 to 23:00.",
+                  "rejected_because": "This would meet the hard daily bound but would violate the preference for study to end before 22:30 and creates a heavier session immediately before the assessment day."
+                },
+                {
+                  "option": "Schedule preparation before work on Monday or Tuesday.",
+                  "rejected_because": "The user specifically asked to reorganize Monday and Tuesday evenings, and evening slots are available without affecting protected work time."
+                }
+              ],
+              "summary": "Add two 90-minute assessment preparation blocks after the existing gym sessions on Monday and Tuesday, giving a total of three hours while leaving work, the assessment, and both gym sessions unchanged."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "work_mon",
+                "title": "Work",
+                "start": "2026-11-09T09:00:00+00:00",
+                "end": "2026-11-09T18:00:00+00:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Regular work shift.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_mon",
+                "title": "Gym",
+                "start": "2026-11-09T18:30:00+00:00",
+                "end": "2026-11-09T20:00:00+00:00",
+                "category": "gym",
+                "importance": 2,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Individual workout; can be rescheduled.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_0",
+                "title": "Prepare for Wednesday's assessment",
+                "start": "2026-11-09T20:00:00+00:00",
+                "end": "2026-11-09T21:30:00+00:00",
+                "category": null,
+                "importance": null,
+                "fixed": null,
+                "participants": null,
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "work_tue",
+                "title": "Work",
+                "start": "2026-11-10T09:00:00+00:00",
+                "end": "2026-11-10T18:00:00+00:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Regular work shift.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_tue",
+                "title": "Gym",
+                "start": "2026-11-10T18:30:00+00:00",
+                "end": "2026-11-10T20:00:00+00:00",
+                "category": "gym",
+                "importance": 2,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Individual workout; can be rescheduled.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_1",
+                "title": "Prepare for Wednesday's assessment",
+                "start": "2026-11-10T20:00:00+00:00",
+                "end": "2026-11-10T21:30:00+00:00",
+                "category": null,
+                "importance": null,
+                "fixed": null,
+                "participants": null,
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "exam_wed",
+                "title": "University assessment",
+                "start": "2026-11-11T14:00:00+00:00",
+                "end": "2026-11-11T16:00:00+00:00",
+                "category": "exam",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Fixed assessment; cannot be rescheduled.",
+                "origin": "existing",
+                "change_status": "preserved"
+              }
+            ],
+            "metadata_note": "Null metadata on added events means the Proposal contract did not supply it; it is not a new personal preference or hard constraint."
+          },
+          "plausibility_review": {
+            "revision_required": true,
+            "severity": "moderate",
+            "reason": "A agenda resultante adiciona new_0 em 2026-11-09 20:00-21:30 e new_1 em 2026-11-10 20:00-21:30 imediatamente após gym_mon e gym_tue 18:30-20:00, ambos depois de work_mon/work_tue 09:00-18:00. Isto não é objetivamente incompatível, mas é uma dúvida prática concreta: dois blocos de estudo para uma avaliação importante ficam concentrados no fim de dois dias com trabalho e ginásio consecutivos, sem a racionalização demonstrar que a qualidade de preparação continua adequada.",
+            "suggested_improvement": "Reavaliar se a preservação integral dos dois ginásios é proporcional à prioridade da preparação para exam_wed. Examinar, com o contexto completo, se estudar logo após o ginásio é realisticamente eficaz para o utilizador ou se uma sessão de ginásio flexível poderia ser deslocada, encurtada ou trocada por um bloco de estudo menos fatigante. Não é necessário impor um intervalo fixo; basta justificar o trade-off ou ajustar caso o contexto indique que o bloco pós-ginásio é frágil."
+          },
+          "weaknesses": [
+            "[plausibility] Os novos blocos new_0 em 2026-11-09 20:00-21:30 e new_1 em 2026-11-10 20:00-21:30 começam imediatamente após gym_mon e gym_tue, ambos 18:30-20:00, depois de dias de trabalho longos, work_mon e work_tue 09:00-18:00. Não há contradição objetiva, mas a concentração trabalho + ginásio + estudo em duas noites consecutivas antes de exam_wed pode reduzir a qualidade prática do estudo.",
+            "[plausibility] A justificação preserva os ginásios porque há espaço livre depois, mas não avalia explicitamente se estudar logo após uma sessão de ginásio é adequado para preparação de avaliação, sobretudo sendo o exame uma prioridade alta e o ginásio flexível e de menor importância visível.",
+            "[preference] Poderia haver uma comparação mais explícita entre manter o ginásio intacto e deslocar uma das sessões para criar pelo menos um bloco de estudo menos tardio ou menos condicionado por fadiga; isto não é uma exigência, mas ajudaria a fundamentar melhor o trade-off."
+          ],
+          "feedback": "A proposta é tecnicamente coerente e respeita os eventos fixos visíveis. O principal ponto a rever é prático, não uma violação: os dois blocos de preparação são colocados imediatamente após ginásio, em noites já preenchidas por trabalho das 09:00 às 18:00 e treino das 18:30 às 20:00. Como a avaliação de quarta-feira é importante e o ginásio é flexível, o Proposer deveria verificar se preservar ambos os ginásios é realmente o melhor compromisso ou se uma alternativa com estudo mais cedo, deslocando ou encurtando uma sessão flexível, seria mais robusta. Se houver contexto oculto que torne o estudo pós-ginásio apropriado, a mesma operação pode ser mantida com essa explicação."
+        }
+      ]
+    }
+  ],
+  "initial_proposal": {
+    "changes": [
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Prepare for Wednesday's assessment",
+        "from_start": null,
+        "to_start": "2026-11-09T20:00:00+00:00",
+        "to_end": "2026-11-09T21:30:00+00:00"
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Prepare for Wednesday's assessment",
+        "from_start": null,
+        "to_start": "2026-11-10T20:00:00+00:00",
+        "to_end": "2026-11-10T21:30:00+00:00"
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "Work events on Monday and Tuesday are protected by the work_hours hard constraint and are left unchanged.",
+        "The Wednesday university assessment is protected by the exam_protection hard constraint and is left unchanged.",
+        "All proposed study time stays within the daily allowed window of 08:00 to 23:00 local time.",
+        "Times use the Europe/Lisbon timezone offset applicable on these dates, +00:00."
+      ],
+      "priorities": [
+        "The request requires at least three hours of preparation before Wednesday's assessment; the proposal adds exactly three hours across Monday and Tuesday evenings.",
+        "Exam preparation is prioritized because exams have the highest priority in the profile.",
+        "Gym sessions are preserved in their existing preferred weekday evening slots because enough free evening time is available afterward.",
+        "Study blocks end by 21:30, respecting the preference for study work to end before 22:30."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Move one or both gym sessions to create earlier study blocks from 18:30 onward.",
+          "rejected_because": "Not necessary to meet the three-hour preparation target, and it would disrupt the preferred gym routine without a clear benefit."
+        },
+        {
+          "option": "Schedule all three hours on Tuesday evening after gym, from 20:00 to 23:00.",
+          "rejected_because": "This would meet the hard daily bound but would violate the preference for study to end before 22:30 and creates a heavier session immediately before the assessment day."
+        },
+        {
+          "option": "Schedule preparation before work on Monday or Tuesday.",
+          "rejected_because": "The user specifically asked to reorganize Monday and Tuesday evenings, and evening slots are available without affecting protected work time."
+        }
+      ],
+      "summary": "Add two 90-minute assessment preparation blocks after the existing gym sessions on Monday and Tuesday, giving a total of three hours while leaving work, the assessment, and both gym sessions unchanged."
+    }
+  },
+  "final_proposal": {
+    "changes": [
+      {
+        "type": "move",
+        "event_id": "gym_mon",
+        "title": "Gym",
+        "from_start": "2026-11-09T18:30:00+00:00",
+        "to_start": "2026-11-09T20:15:00+00:00",
+        "to_end": "2026-11-09T21:45:00+00:00"
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Prepare for Wednesday's assessment",
+        "from_start": null,
+        "to_start": "2026-11-09T18:30:00+00:00",
+        "to_end": "2026-11-09T20:00:00+00:00"
+      },
+      {
+        "type": "move",
+        "event_id": "gym_tue",
+        "title": "Gym",
+        "from_start": "2026-11-10T18:30:00+00:00",
+        "to_start": "2026-11-10T20:15:00+00:00",
+        "to_end": "2026-11-10T21:45:00+00:00"
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Prepare for Wednesday's assessment",
+        "from_start": null,
+        "to_start": "2026-11-10T18:30:00+00:00",
+        "to_end": "2026-11-10T20:00:00+00:00"
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "Work events on Monday and Tuesday are protected by the work_hours hard constraint and are left unchanged.",
+        "The Wednesday university assessment is protected by the exam_protection hard constraint and is left unchanged.",
+        "All proposed events remain within the daily allowed window of 08:00 to 23:00 local time.",
+        "Times use the Europe/Lisbon timezone offset applicable on these dates, +00:00.",
+        "Only flexible gym events are moved; no fixed or protected event is moved, shortened or cancelled."
+      ],
+      "priorities": [
+        "The request requires at least three hours of preparation before Wednesday's assessment; this proposal adds exactly three hours across Monday and Tuesday evenings.",
+        "Assessment preparation is prioritized over preserving the exact gym timing because exams have the highest priority and the gym sessions are flexible with lower visible importance.",
+        "The gym sessions are still preserved rather than deleted, supporting the user's health routine while giving preparation time the earlier evening slots.",
+        "Study blocks are placed before gym rather than immediately after gym to reduce the practical risk of lower-quality preparation caused by fatigue after work plus exercise.",
+        "Both study blocks end at 20:00, comfortably before the preferred 22:30 study cutoff."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Keep both gym sessions at 18:30 to 20:00 and study afterward from 20:00 to 21:30 on Monday and Tuesday.",
+          "rejected_because": "This is technically valid, but it concentrates assessment preparation immediately after work and gym on two consecutive evenings. Because the assessment is high priority and gym is flexible, moving the gym later gives the study time a stronger practical chance of being effective."
+        },
+        {
+          "option": "Delete or skip one gym session and schedule a longer uninterrupted study block in its place.",
+          "rejected_because": "That would create more breathing room, but deleting a health-related routine is a larger intervention than necessary because the three-hour preparation target can be met while preserving both gym sessions."
+        },
+        {
+          "option": "Schedule all three hours on Monday from 18:30 to 21:30 and move Monday gym to 21:30 to 23:00.",
+          "rejected_because": "This avoids studying after gym, but it creates one long study block after a full workday and pushes gym to the latest allowed end time, which is a more brittle evening plan."
+        },
+        {
+          "option": "Move a gym session to Wednesday after the assessment.",
+          "rejected_because": "The user asked to reorganize Monday and Tuesday evenings, and the preparation must happen before Wednesday's assessment. Keeping the adjustments within Monday and Tuesday better matches the request."
+        }
+      ],
+      "summary": "Move both flexible gym sessions later to 20:15 to 21:45 and add assessment preparation from 18:30 to 20:00 on both Monday and Tuesday. This provides three hours of preparation before the assessment, keeps work unchanged, preserves both gym sessions, and directly addresses the concern that studying immediately after gym may be less effective. Travel, meals and recovery needs are not specified, so the plan leaves only a modest 15-minute transition between study and gym; if the user needs more buffer, the next-best option would be to move or skip one gym session rather than compress preparation quality."
+    }
+  },
+  "final_score": 4.5,
+  "refinements": 1,
+  "critic_accepted": true,
+  "decision": "defer",
+  "reasons": [
+    "mais de 2 mudanças"
+  ],
+  "status": "proposal_ready",
+  "critic_input_version": "final_calendar_v1",
+  "critic_policy_version": "plausibility_review_v1",
+  "final_result_calendar": {
+    "timezone": "Europe/Lisbon",
+    "coverage": "all_events_in_scenario_after_simulation",
+    "events": [
+      {
+        "id": "work_mon",
+        "title": "Work",
+        "start": "2026-11-09T09:00:00+00:00",
+        "end": "2026-11-09T18:00:00+00:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Regular work shift.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_1",
+        "title": "Prepare for Wednesday's assessment",
+        "start": "2026-11-09T18:30:00+00:00",
+        "end": "2026-11-09T20:00:00+00:00",
+        "category": null,
+        "importance": null,
+        "fixed": null,
+        "participants": null,
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "gym_mon",
+        "title": "Gym",
+        "start": "2026-11-09T20:15:00+00:00",
+        "end": "2026-11-09T21:45:00+00:00",
+        "category": "gym",
+        "importance": 2,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Individual workout; can be rescheduled.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "work_tue",
+        "title": "Work",
+        "start": "2026-11-10T09:00:00+00:00",
+        "end": "2026-11-10T18:00:00+00:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Regular work shift.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_3",
+        "title": "Prepare for Wednesday's assessment",
+        "start": "2026-11-10T18:30:00+00:00",
+        "end": "2026-11-10T20:00:00+00:00",
+        "category": null,
+        "importance": null,
+        "fixed": null,
+        "participants": null,
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "gym_tue",
+        "title": "Gym",
+        "start": "2026-11-10T20:15:00+00:00",
+        "end": "2026-11-10T21:45:00+00:00",
+        "category": "gym",
+        "importance": 2,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Individual workout; can be rescheduled.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "exam_wed",
+        "title": "University assessment",
+        "start": "2026-11-11T14:00:00+00:00",
+        "end": "2026-11-11T16:00:00+00:00",
+        "category": "exam",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Fixed assessment; cannot be rescheduled.",
+        "origin": "existing",
+        "change_status": "preserved"
+      }
+    ],
+    "metadata_note": "Null metadata on added events means the Proposal contract did not supply it; it is not a new personal preference or hard constraint."
+  },
+  "replay_source": {
+    "source_path": "eval/runs/e9052e6757c14820a06b89ddaf9aafe6/B/working_student_deadline_001.json",
+    "source_run_id": "e9052e6757c14820a06b89ddaf9aafe6",
+    "source_run_sha256": "c8d741286465c42d6221c7ac7626852fbda2fc8dd0eee8f490a33b5c7a3db289",
+    "source_prompt_versions": {
+      "proposer_sha256": "ef06975753da01d193172d1c1cf6f56c8422b8af576cc1b1b6dbf52cf8374ea8",
+      "critic_sha256": "185cde468657c02dda9bc231bee557557498294702a21009a3fc6e0640d73962"
+    },
+    "source_critic_policy_version": "plausibility_review_v1",
+    "initial_proposal_sha256_canonical": "2e6054c09c0c330f196564a1765006ef7c431c3455438d607ec030e54724fecb",
+    "current_scenario_sha256": "5034fdb31f90585527cd5bda3f0694e076a376a36620e9e421d08b14f0b1f140",
+    "source_calendar_verified_against_current_simulator": true
+  },
+  "schema_version": "2.0",
+  "profile_id": "working_student_01",
+  "split": "train",
+  "run_id": "2c662bd02ae5412ba9237e4b859665c6",
+  "experiment_id": null,
+  "repeat_index": 0,
+  "generated_at": "2026-11-19T10:35:04.908543+00:00",
+  "prompt_versions": {
+    "proposer_sha256": "ef06975753da01d193172d1c1cf6f56c8422b8af576cc1b1b6dbf52cf8374ea8",
+    "proposer_revision_sha256": "2f87a999a5d733289369a6150ffecfa6cdf3f3ea50bf523bfcb8d9d149c589a7",
+    "critic_sha256": "f0bd4aeebf4e62a1f3978d222ffa7d800934e6ea765b3a523d53cb15e7b510da"
+  },
+  "seconds": 59.998,
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [
+      "new_1: added-event category, importance and participants were not supplied by the Proposal contract; preview uses neutral defaults",
+      "new_3: added-event category, importance and participants were not supplied by the Proposal contract; preview uses neutral defaults"
+    ],
+    "valid": true
+  }
+}

@@ -79,12 +79,30 @@ class PlausibilityReview(BaseModel):
         return self
 
 
+class UnresolvedAssumption(BaseModel):
+    """Unverified condition, never an autonomy decision or technical violation."""
+    model_config = ConfigDict(extra="forbid")
+
+    subject: str
+    assumption: str
+    evidence_gap: str
+    potential_impact: Literal["minor", "material", "potentially_blocking"]
+    verification_source: Literal["external_source", "user_context", "third_party", "unknown"]
+
+    @model_validator(mode="after")
+    def concrete_description(self):
+        if not all(value.strip() for value in (self.subject, self.assumption, self.evidence_gap)):
+            raise ValueError("unresolved assumption needs subject, condition and evidence gap")
+        return self
+
+
 class CriticEvaluation(BaseModel):
     """Read historical responses; absence means not assessed, never no risk."""
     scores: CriticScores
     weaknesses: list[str]
     feedback: str
     plausibility_review: PlausibilityReview | None = None
+    unresolved_assumptions: list[UnresolvedAssumption] | None = None
 
     @property
     def overall(self) -> float:
@@ -92,7 +110,12 @@ class CriticEvaluation(BaseModel):
         return round((s.reasoning + s.coherence + s.alternatives + s.clarity) / 4, 2)
 
 
-class CurrentCriticEvaluation(CriticEvaluation):
-    """Required output schema for all new Critic calls."""
+class PlausibilityCriticEvaluation(CriticEvaluation):
+    """Required fields in historical plausibility_review_v1 responses."""
     model_config = ConfigDict(extra="forbid")
     plausibility_review: PlausibilityReview
+
+
+class CurrentCriticEvaluation(PlausibilityCriticEvaluation):
+    """New uncertainty_review_v2 response; [] explicitly means none identified."""
+    unresolved_assumptions: list[UnresolvedAssumption]

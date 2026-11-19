@@ -6,6 +6,8 @@ For new B runs, each Critic iteration also records the complete calendar obtaine
 
 With Critic policy `plausibility_review_v1`, new iterations additionally store an explicit, validated plausibility revision decision and the numeric/combined acceptance outcome. Historical iterations without this review display “not available” in Streamlit. Authors must not treat Critic acceptance, requested revision, severity or score as a human autonomy label. A revision does not guarantee improved scheduling; judge the final concrete proposal directly and preserve earlier iterations for later analysis.
 
+Runs using `uncertainty_review_v2` also store structured, unverified conditions per iteration and on the final evaluation. These are Critic observations, not verified facts, technical failures or autonomy labels. A final empty list means the Critic identified none; historical absence means no structured assessment was made. Earlier conditions remain visible in the history even when the final response omits them; the UI does not automatically mark them resolved. `proposal_ready` means the Critic accepted quality under its policy, not that external resources are confirmed or that human authorization is unnecessary. The existing annotation form and gate export remain unchanged.
+
 Current B iteration history records whether operations or rationale changed after a quality-control request. The Proposer may keep the same schedule with a reasoned explanation; the next Critic review should address its earlier concern. Annotators still judge the final proposal independently of whether this exchange occurred or how many iterations it took.
 
 ## Two independent evaluations

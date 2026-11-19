@@ -41,6 +41,9 @@ def _review_feedback(evaluation: CurrentCriticEvaluation, *, numeric_passed: boo
         parts.append(f"Plausibility revision required ({review.severity}): {review.reason} "
                      f"Suggested direction: {review.suggested_improvement} "
                      "The Critic lacks the full user constraints; explain if no better feasible option exists.")
+    if evaluation.unresolved_assumptions:
+        parts.append("Unverified conditions to reassess: " +
+                     str([entry.model_dump() for entry in evaluation.unresolved_assumptions]))
     parts.append(f"Weaknesses: {evaluation.weaknesses}. Actionable feedback: {evaluation.feedback}")
     return " ".join(parts)
 
@@ -70,6 +73,8 @@ def run_config_b(profile, scenario, *, proposer_provider: Provider,
         "critic_input_version": "final_calendar_v1",
         "critic_policy_version": CRITIC_POLICY_VERSION,
         "final_result_calendar": None,
+        "final_unresolved_assumptions": None,
+        "uncertainty_history": [],
     }
     previous: Proposal | None = None
     feedback: str | None = None
@@ -101,6 +106,7 @@ def run_config_b(profile, scenario, *, proposer_provider: Provider,
             record["initial_proposal"] = item["proposal"]
         record["final_proposal"] = item["proposal"]
         record["final_result_calendar"] = None
+        record["final_unresolved_assumptions"] = None
         record["refinements"] = revision
         previous = proposal
         try:
@@ -151,6 +157,10 @@ def run_config_b(profile, scenario, *, proposer_provider: Provider,
             return record
 
         item["critic_evaluation"] = evaluation.model_dump() | {"overall": evaluation.overall}
+        assumptions = [entry.model_dump() for entry in evaluation.unresolved_assumptions]
+        item["unresolved_assumptions"] = assumptions
+        record["final_unresolved_assumptions"] = assumptions
+        record["uncertainty_history"].append({"iteration": revision, "unresolved_assumptions": assumptions})
         record["final_score"] = evaluation.overall
         numeric_passed = _numeric_passed(evaluation, settings)
         plausibility_revision_required = evaluation.plausibility_review.revision_required
@@ -171,7 +181,9 @@ def run_config_b(profile, scenario, *, proposer_provider: Provider,
         prior_reviews.append({
             "iteration": revision,
             "proposal": proposal.model_dump(mode="json"),
+            "result_calendar": result_calendar,
             "plausibility_review": evaluation.plausibility_review.model_dump(),
+            "unresolved_assumptions": assumptions,
             "weaknesses": evaluation.weaknesses,
             "feedback": evaluation.feedback,
         })

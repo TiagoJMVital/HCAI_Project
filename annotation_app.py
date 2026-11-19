@@ -180,7 +180,24 @@ def _v2_scenario_and_proposal(source: dict) -> None:
     st.caption("Validação parcial: não prova satisfação do pedido nem validade das descrições em linguagem natural.")
     st.write(f"**Score final do Critic:** {source['critic_score']} · **Revisões:** {source['refinements']} · "
              f"**Estado B:** {source['source_status']}")
+    st.caption("proposal_ready indica aceitação da qualidade pelo Critic; não garante viabilidade externa "
+               "nem constitui autorização para executar alterações.")
     st.caption(f"Política do Critic: {source.get('critic_policy_version') or 'histórica; revisão de plausibilidade não disponível'}")
+    if "final_unresolved_assumptions" in source:
+        pending = source["final_unresolved_assumptions"]
+        if pending is None:
+            st.caption("Condições externas finais: não avaliadas nesta proposta final.")
+        elif pending:
+            st.write("**Condições não verificadas na avaliação final:**")
+            for entry in pending:
+                st.write(f"{entry['subject']}: {entry['assumption']} · impacto potencial: "
+                         f"{entry['potential_impact']} · fonte de verificação: {entry['verification_source']}")
+                st.caption(f"Evidência em falta: {entry['evidence_gap']}")
+        else:
+            st.caption("O Critic não identificou condições externas por verificar na avaliação final; "
+                       "isto não certifica viabilidade operacional.")
+    else:
+        st.caption("Condições externas estruturadas: não disponíveis nesta execução histórica.")
     with st.expander("Ver avaliações e iterações do Critic"):
         st.caption("As alternativas na justificação são opções ponderadas pelo Proposer; "
                    "apenas uma nova iteração após feedback do Critic conta como revisão. "
@@ -203,6 +220,11 @@ def _v2_scenario_and_proposal(source: dict) -> None:
             assessment = step.get("critic_evaluation")
             st.write("Avaliação do Critic:", assessment or "sem avaliação")
             if assessment:
+                if "unresolved_assumptions" in assessment and assessment["unresolved_assumptions"] is not None:
+                    st.write("Condições não verificadas nesta iteração:",
+                             assessment["unresolved_assumptions"] or "nenhuma identificada")
+                else:
+                    st.caption("Condições estruturadas: não disponíveis nesta iteração histórica.")
                 review = assessment.get("plausibility_review")
                 policy = step.get("acceptance_policy")
                 if review is None:
@@ -222,6 +244,17 @@ def _v2_scenario_and_proposal(source: dict) -> None:
                         st.write("Critérios numéricos cumpridos:", policy["numeric_criteria_passed"])
                         st.write("Política de aceitação aprovada:", policy["accepted"])
                         st.write("Motivos de revisão:", policy["revision_causes"] or "nenhum")
+        history = source.get("uncertainty_history") or []
+        if len(history) > 1 and any(item["unresolved_assumptions"] for item in history[:-1]):
+            st.write("**Condições de iterações anteriores:**")
+            final_list = source.get("final_unresolved_assumptions") or []
+            for previous in history[:-1]:
+                for entry in previous["unresolved_assumptions"]:
+                    state = ("também indicada na avaliação final" if entry in final_list
+                             else "resolução não confirmada")
+                    st.write(f"Iteração {previous['iteration']} · {entry['subject']}: "
+                             f"{entry['assumption']} · {state}")
+            st.caption("O desaparecimento de uma condição da avaliação seguinte não prova que foi resolvida.")
         if source.get("unresolved_critic_weaknesses"):
             st.write("Problemas assinalados na última avaliação sem aceitação:",
                      source["unresolved_critic_weaknesses"])

@@ -51,7 +51,8 @@ def evaluation(revise=False):
         plausibility_review=PlausibilityReview(
             revision_required=revise, severity="moderate" if revise else "none",
             reason="new_0 starts directly after gym_mon at 20:00" if revise else "",
-            suggested_improvement="Consider a later start if feasible" if revise else ""))
+            suggested_improvement="Consider a later start if feasible" if revise else ""),
+        unresolved_assumptions=[])
 
 
 @pytest.fixture
@@ -147,3 +148,20 @@ def test_known_historical_run_is_replayable_read_only():
     assert all(change.to_start.endswith("20:00:00+00:00") for change in initial.changes)
     assert provenance["source_calendar_verified_against_current_simulator"]
     assert path.read_bytes() == before
+
+
+def test_historical_initial_proposal_runs_under_current_critic_contract(tmp_path):
+    source = ROOT / "eval/runs/e9052e6757c14820a06b89ddaf9aafe6/B/working_student_deadline_001.json"
+    if not source.exists():
+        pytest.skip("local historical run is not checked into the repository")
+    import_scenario(tmp_path, ROOT.parent / "scenario_v2_example.json", "train")
+    before = source.read_bytes()
+    proposer = ScriptedProvider([])
+    result_path = run_one(tmp_path, "working_student_deadline_001", proposer,
+                          ScriptedProvider([evaluation()]), initial_proposal_from=source)
+    result = json.loads(result_path.read_text())
+    assert proposer.calls == []
+    assert result["initial_proposal"] == json.loads(before)["initial_proposal"]
+    assert result["critic_policy_version"] == "uncertainty_review_v2"
+    assert result["final_unresolved_assumptions"] == []
+    assert source.read_bytes() == before

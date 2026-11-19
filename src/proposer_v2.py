@@ -14,7 +14,14 @@ in proposed changes must include ISO 8601 timezone offsets consistent with the
 profile timezone. Respect typed hard constraints and explain relevant trade-offs,
 uncertainty and alternatives in the rationale. Autonomy preferences are user
 preferences, not ACT/DEFER labels. Do not choose an autonomy label. Answer only
-with JSON matching the supplied schema."""
+with JSON matching the supplied schema. Distinguish an event's modifiability
+under known rules, a free calendar interval, and operational feasibility.
+Flexible does not mean an external venue, person or resource is available at
+every free time. Do not invent opening hours, travel times, or user routines.
+When moving an existing event, weigh its disruption and any new external
+dependency against the benefit for the request, and state material unknowns
+in the rationale. A larger change may be justified; do not minimize changes
+as a rigid rule."""
 
 REVISION_GUIDANCE = (
     "Re-evaluate the scheduling concern using the original request, profile and calendar above. "
@@ -22,7 +29,13 @@ REVISION_GUIDANCE = (
     "operations with a rationale that directly addresses the concern. Do not change times merely "
     "to satisfy the reviewer. Explain uncertainty when personal details such as travel, meals or "
     "recovery are unknown; do not invent them. Repeating technical validity alone does not answer "
-    "a practical-quality concern. Return the full structured proposal and rationale."
+    "a practical-quality concern. Reassess the whole visible routine: cumulative effort, "
+    "everyday needs, rest and whether reserved time can serve the user's objective. "
+    "A small timing shift is not enough if the underlying concern remains. "
+    "If changing operations, assess new risks, disruption, "
+    "external dependencies and trade-offs introduced by the revision; do not assume the Critic's "
+    "suggestion is an order. If keeping operations, provide grounds from the available context, "
+    "not an unsupported assertion. Return the full structured proposal and rationale."
 )
 
 
