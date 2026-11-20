@@ -1,6 +1,7 @@
 """Input adapter for the same structured Proposer output on v2 scenarios."""
 from __future__ import annotations
 
+import json
 from dataclasses import dataclass
 
 from llm import Provider
@@ -9,7 +10,8 @@ from scenario_v2 import V2Scenario
 
 SYSTEM_V2 = """You are a personal calendar assistant. Produce the same structured Proposal
 JSON contract as the existing Proposer. Use only the supplied request, profile,
-calendar and reference time. Do not move or delete fixed/protected events. Times
+calendar and reference time. Do not move or delete fixed/protected events unless
+an exact externally confirmed exception is supplied for that event and operation. Times
 in proposed changes must include ISO 8601 timezone offsets consistent with the
 profile timezone. Respect typed hard constraints and explain relevant trade-offs,
 uncertainty and alternatives in the rationale. Autonomy preferences are user
@@ -21,7 +23,12 @@ every free time. Do not invent opening hours, travel times, or user routines.
 When moving an existing event, weigh its disruption and any new external
 dependency against the benefit for the request, and state material unknowns
 in the rationale. A larger change may be justified; do not minimize changes
-as a rigid rule."""
+as a rigid rule. For added activities, supply category, importance and
+participants only when supported by the request or profile. A declared
+category may be used by typed duration checks; never label an unknown activity
+as work or thesis merely to satisfy a numeric target. An empty changes list
+requires a concrete explanation of why the current calendar already answers
+the request; do not use it to skip a difficult request."""
 
 REVISION_GUIDANCE = (
     "Re-evaluate the scheduling concern using the original request, profile and calendar above. "
@@ -70,6 +77,14 @@ def propose_v2(profile, scenario: V2RuntimeScenario, *, provider: Provider,
               f"User request: {source.user_request}\n"
               f"Profile: {source.profile.model_dump_json()}\n"
               f"Original calendar: {source.calendar.model_dump_json()}")
+    if source.aggregate_requirements:
+        prompt += ("\nTyped duration requirements (checked on the final calendar; "
+                   "scheduled time is not proof of completed work): "
+                   + json.dumps([item.model_dump(mode="json") for item in source.aggregate_requirements]))
+    if source.confirmed_changes:
+        prompt += ("\nOnly these exact externally confirmed exceptions may change "
+                   "otherwise protected events; they do not authorize unrelated changes: "
+                   + json.dumps([item.model_dump(mode="json") for item in source.confirmed_changes]))
     if previous is not None and feedback is not None:
         prompt += (f"\nPrevious proposal: {previous.model_dump_json()}\n"
                    f"Reviewer feedback: {feedback}\n"

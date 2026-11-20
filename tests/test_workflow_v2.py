@@ -70,6 +70,21 @@ def source(root):
     return json.loads(artifact.read_text()), proposer, critic
 
 
+def test_noop_b_is_reviewed_and_excluded_from_gate(imported):
+    root, scenario = imported
+    unchanged = Proposal(changes=[], rationale=Rationale(
+        constraints=[], priorities=[], alternatives_considered=[],
+        summary="The visible calendar already covers the request."))
+    proposer, critic = ScriptedProvider([unchanged]), ScriptedProvider([accepted()])
+    run = run_one(root, scenario.scenario_id, proposer, critic)
+    record = json.loads(run.read_text())
+    assert record["status"] == "proposal_ready" and record["decision"] == "defer"
+    assert len(critic.calls) == 1 and record["technical_validation"]["no_op"] is True
+    import_result(root, run)
+    rows, exclusions = build_rows(root)
+    assert rows == [] and exclusions[0]["reason"] == "no_op_requires_separate_eligibility_policy"
+
+
 def test_import_rejects_tampered_critic_calendar(imported):
     root, scenario = imported
     proposer, critic = ScriptedProvider([proposal()]), ScriptedProvider([accepted()])

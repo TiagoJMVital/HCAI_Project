@@ -18,7 +18,7 @@ from calendar_v2 import simulate  # noqa: E402
 from llm import LLMError, get_provider  # noqa: E402
 from proposer_v2 import SYSTEM_V2, V2RuntimeScenario, propose_v2  # noqa: E402
 from rules import rule_based_decision  # noqa: E402
-from scenario_v2 import load_manifest, load_scenario  # noqa: E402
+from scenario_v2 import confirmed_changes_fingerprint, load_manifest, load_scenario  # noqa: E402
 
 
 def run_one(root: Path, scenario_id: str, provider, *, experiment_id: str | None = None,
@@ -27,12 +27,17 @@ def run_one(root: Path, scenario_id: str, provider, *, experiment_id: str | None
     if row is None:
         raise ValueError("v2 scenario not imported")
     scenario = load_scenario(root / "data" / "scenarios" / f"{scenario_id}.json")
+    aggregate_fingerprint = (hashlib.sha256(json.dumps(
+        [rule.model_dump(mode="json") for rule in scenario.aggregate_requirements],
+        sort_keys=True).encode()).hexdigest() if scenario.aggregate_requirements else None)
     run_id = uuid.uuid4().hex
     started = time.monotonic()
     record = {"schema_version": "2.0", "configuration": "A", "run_id": run_id,
               "experiment_id": experiment_id, "repeat_index": repeat_index,
               "scenario_id": scenario_id, "family": scenario.family_id,
               "profile_id": scenario.profile.profile_id, "split": row["split"],
+              "aggregate_requirements_sha256": aggregate_fingerprint,
+              "confirmed_changes_sha256": confirmed_changes_fingerprint(scenario),
               "provider": provider.name, "model": provider.model,
               "generation_config": provider.generation_config(),
               "prompt_versions": {"proposer_sha256": hashlib.sha256(SYSTEM_V2.encode()).hexdigest()},

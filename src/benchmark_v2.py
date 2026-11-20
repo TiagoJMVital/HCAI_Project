@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import tempfile
@@ -28,8 +29,8 @@ def atomic_json(path: Path, payload: object) -> None:
 
 
 def import_scenario(root: Path, source: Path, split: str) -> Path:
-    if split not in {"train", "test"}:
-        raise ValueError("split must be train or test")
+    if split not in {"train", "dev", "test"}:
+        raise ValueError("split must be train, dev or test")
     scenario = load_scenario(source)
     rows = load_manifest(root)
     if any(row["family_id"] == scenario.family_id and row["split"] != split for row in rows):
@@ -41,6 +42,22 @@ def import_scenario(root: Path, source: Path, split: str) -> Path:
     # Preserve the validated contract, without changing or inventing scientific fields.
     payload = scenario.model_dump(mode="json")
     atomic_json(target, payload)
+    if scenario.aggregate_requirements:
+        from scenario_v2 import AggregateSidecar
+        canonical = json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+        sidecar = AggregateSidecar(schema_version="1.0", scenario_id=scenario.scenario_id,
+                                   scenario_sha256_canonical=hashlib.sha256(canonical).hexdigest(),
+                                   requirements=scenario.aggregate_requirements)
+        atomic_json(root / "data" / "aggregate_requirements" / f"{scenario.scenario_id}.json",
+                    sidecar.model_dump(mode="json"))
+    if scenario.confirmed_changes:
+        from scenario_v2 import ConfirmedChangesSidecar
+        canonical = json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+        sidecar = ConfirmedChangesSidecar(schema_version="1.0", scenario_id=scenario.scenario_id,
+                                          scenario_sha256_canonical=hashlib.sha256(canonical).hexdigest(),
+                                          changes=scenario.confirmed_changes)
+        atomic_json(root / "data" / "confirmed_changes" / f"{scenario.scenario_id}.json",
+                    sidecar.model_dump(mode="json"))
     rows.append({"scenario_id": scenario.scenario_id, "family_id": scenario.family_id,
                  "profile_id": scenario.profile.profile_id, "split": split})
     atomic_json(manifest, {"schema_version": "2.0", "scenarios": rows})
@@ -54,7 +71,7 @@ def main() -> None:
     validate.add_argument("path", nargs="?", type=Path, help="v2 JSON; omitted validates imported benchmark")
     imported = sub.add_parser("import")
     imported.add_argument("path", type=Path)
-    imported.add_argument("--split", choices=("train", "test"), required=True)
+    imported.add_argument("--split", choices=("train", "dev", "test"), required=True)
     args = parser.parse_args()
     try:
         if args.action == "import":

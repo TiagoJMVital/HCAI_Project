@@ -30,8 +30,8 @@ def features(scenario, proposal: Proposal, score: float) -> dict:
 
 
 def build_rows(root: Path, *, split: str = "train", unlock_test: bool = False) -> tuple[list[dict], list[dict]]:
-    if split not in {"train", "test"}:
-        raise ValueError("split must be train or test")
+    if split not in {"train", "dev", "test"}:
+        raise ValueError("split must be train, dev or test")
     if split == "test" and not unlock_test:
         raise ValueError("test remains locked until model and evaluation policy are frozen")
     manifest = load_manifest(root)
@@ -49,7 +49,9 @@ def build_rows(root: Path, *, split: str = "train", unlock_test: bool = False) -
         scenario = load_scenario(root / "data" / "scenarios" / f"{source['scenario_id']}.json")
         proposal = Proposal.model_validate(source["final_proposal"])
         _, validation = simulate(scenario, proposal)
-        if not validation["valid"]:
+        if not proposal.changes:
+            reason = "no_op_requires_separate_eligibility_policy"
+        elif not validation["valid"]:
             reason = "technical_validation_failed"
         elif source["source_status"] != "proposal_ready" or source["critic_accepted"] is not True:
             reason = "critic_not_accepted_or_run_not_ready"
@@ -101,7 +103,7 @@ def grouped_folds(rows: list[dict], n_splits: int) -> list[dict]:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Export v2 gate examples; no model training")
-    parser.add_argument("--split", choices=("train", "test"), default="train")
+    parser.add_argument("--split", choices=("train", "dev", "test"), default="train")
     parser.add_argument("--unlock-test", action="store_true",
                         help="only after freezing features, classifier and evaluation policy")
     args = parser.parse_args()

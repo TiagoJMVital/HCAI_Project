@@ -29,6 +29,9 @@ Use only goals and priorities visible in the proposal, rationale and calendar;
 do not claim to verify request satisfaction or rules outside the validation report.
 The technical validator is separate. You review practical quality, not merely
 whether events fit or the operations pass validation.
+If changes is empty, examine whether the rationale and visible calendar actually
+support the claimed no-change outcome. Question missing evidence; without the
+original request, explicitly say when request satisfaction cannot be verified.
 
 Evaluate the routine as a whole over the visible horizon. When relevant, consider:
 - cumulative physical and cognitive effort, including demanding sequences and

@@ -20,7 +20,7 @@ from llm import get_provider  # noqa: E402
 from models import Proposal  # noqa: E402
 from pipeline_b import CriticSettings, run_config_b  # noqa: E402
 from proposer_v2 import REVISION_GUIDANCE, SYSTEM_V2, V2RuntimeScenario, propose_v2  # noqa: E402
-from scenario_v2 import V2Scenario, load_manifest, load_scenario  # noqa: E402
+from scenario_v2 import V2Scenario, confirmed_changes_fingerprint, load_manifest, load_scenario  # noqa: E402
 
 
 def load_initial_proposal(root: Path, source_path: Path, scenario: V2Scenario,
@@ -40,6 +40,13 @@ def load_initial_proposal(root: Path, source_path: Path, scenario: V2Scenario,
                 "split": manifest_row["split"]}
     if any(source_run.get(key) != value for key, value in expected.items()):
         raise ValueError("initial proposal source does not match scenario, family, profile or split")
+    current_aggregate = (hashlib.sha256(json.dumps(
+        [rule.model_dump(mode="json") for rule in scenario.aggregate_requirements],
+        sort_keys=True).encode()).hexdigest() if scenario.aggregate_requirements else None)
+    if scenario.aggregate_requirements and source_run.get("aggregate_requirements_sha256") != current_aggregate:
+        raise ValueError("initial proposal source has different aggregate requirements")
+    if scenario.confirmed_changes and source_run.get("confirmed_changes_sha256") != confirmed_changes_fingerprint(scenario):
+        raise ValueError("initial proposal source has different confirmed-change authorizations")
     if not source_run.get("run_id"):
         raise ValueError("initial proposal source has no run ID")
     iterations = source_run.get("iterations")
@@ -48,7 +55,12 @@ def load_initial_proposal(root: Path, source_path: Path, scenario: V2Scenario,
             raw_proposal is None or raw_proposal != iterations[0].get("proposal")):
         raise ValueError("initial proposal is missing or differs from the first iteration")
     proposal = Proposal.model_validate(raw_proposal)
-    if proposal.model_dump(mode="json") != raw_proposal:
+    normalized = proposal.model_dump(mode="json")
+    for actual, historical in zip(normalized["changes"], raw_proposal["changes"]):
+        for optional in ("category", "importance", "participants"):
+            if optional not in historical:
+                actual.pop(optional, None)
+    if normalized != raw_proposal:
         raise ValueError("initial proposal cannot be replayed byte-for-byte as structured fields")
     simulated, validation = simulate(scenario, proposal)
     if simulated is None or not validation["valid"]:
@@ -93,6 +105,9 @@ def run_one(root: Path, scenario_id: str, proposer_provider, critic_provider,
     replay_proposal, replay_source = (load_initial_proposal(root, initial_proposal_from, source, row)
                                      if initial_proposal_from is not None else (None, None))
     runtime = V2RuntimeScenario(source)
+    aggregate_fingerprint = (hashlib.sha256(json.dumps(
+        [rule.model_dump(mode="json") for rule in source.aggregate_requirements],
+        sort_keys=True).encode()).hexdigest() if source.aggregate_requirements else None)
     started = time.monotonic()
     record = run_config_b(source.profile, runtime, proposer_provider=proposer_provider,
                           critic_provider=critic_provider, settings=settings,
@@ -101,7 +116,14 @@ def run_one(root: Path, scenario_id: str, proposer_provider, critic_provider,
                           initial_proposal=replay_proposal)
     if replay_source is not None:
         record["replay_source"] = replay_source
+        original_payload = json.loads(initial_proposal_from.read_text(encoding="utf-8"))["initial_proposal"]
+        record["initial_proposal"] = original_payload
+        record["iterations"][0]["proposal"] = original_payload
+        if record["refinements"] == 0:
+            record["final_proposal"] = original_payload
     record.update(schema_version="2.0", profile_id=source.profile.profile_id,
+                  aggregate_requirements_sha256=aggregate_fingerprint,
+                  confirmed_changes_sha256=confirmed_changes_fingerprint(source),
                   split=row["split"], run_id=uuid.uuid4().hex,
                   experiment_id=experiment_id, repeat_index=repeat_index,
                   generated_at=datetime.now(timezone.utc).isoformat(),

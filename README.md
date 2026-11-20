@@ -54,6 +54,8 @@ python -m pytest -q
 
 The active corpus currently contains **one** imported v2 scenario, imported B proposals and author drafts. The previous 20-base/41-variant benchmark, old annotations and historical results are preserved in the local SHA-256-verified archive described in [archive/README.md](archive/README.md); they are not part of the active corpus. The archive folders are ignored by Git to avoid committing duplicate files. Historical committed revisions remain accessible through Git history. No preliminary labels or old annotations become ground truth automatically.
 
+**Current 100-scenario candidate:** `../scenarios/` and `../Cenarios_v2_100_final.zip` contain the 100 strict schema `2.0` scenarios, the grouped 60/10/30 train/dev/test manifest, 20 duration sidecars and eight exact, externally confirmed change sidecars. This set has **not** been imported into the active corpus. See the [central scenario audit](docs/scenario_audit.md), [status per scenario](docs/scenario_final_status.csv), [remaining blockers](docs/scenario_final_decisions.md), and [ten-case pilot plan](docs/pilot_plan.md). Sidecars are versioned separately and bound to scenario content by SHA-256; `python src/benchmark_v2.py validate ../scenarios/80/<group>/<file>.json` validates a scenario and its sidecars. Duration checks certify scheduled time, not completed work. Exact change exceptions authorize only the named event and operation. Proposals with no operations are structurally permitted but do not prove request satisfaction; the current gate exporter excludes them pending an eligibility decision. The `dev` split is distinct from `train` and is never included in grouped training folds.
+
 ## Documentation
 
 | Document | Purpose |

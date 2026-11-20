@@ -2,13 +2,14 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import re
 from datetime import datetime, time
 from pathlib import Path
 from typing import Literal
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
+from pydantic import BaseModel, ConfigDict, Field, PrivateAttr, field_validator, model_validator
 
 
 def _iso_offset(value):
@@ -97,6 +98,77 @@ class V2HardConstraint(StrictModel):
         return self
 
 
+class DurationRequirement(StrictModel):
+    """Versioned sidecar rule; it does not change the shared scenario 2.0 JSON."""
+    id: str = Field(min_length=1)
+    kind: Literal["minimum_duration"]
+    event_category: str = Field(min_length=1)
+    start: datetime
+    end: datetime
+    minimum_minutes: int = Field(gt=0)
+    complete_horizon: bool
+
+    @field_validator("start", "end", mode="before")
+    @classmethod
+    def iso_format(cls, value):
+        return _iso_offset(value)
+
+    @model_validator(mode="after")
+    def valid_window(self):
+        if self.start.tzinfo is None or self.end.tzinfo is None or self.start >= self.end:
+            raise ValueError("aggregate window requires aware start < end")
+        return self
+
+
+class AggregateSidecar(StrictModel):
+    schema_version: Literal["1.0"]
+    scenario_id: str
+    scenario_sha256_canonical: str
+    requirements: list[DurationRequirement] = Field(min_length=1)
+
+    @model_validator(mode="after")
+    def unique_rules(self):
+        ids = [item.id for item in self.requirements]
+        if len(ids) != len(set(ids)):
+            raise ValueError("duplicate aggregate requirement id")
+        return self
+
+
+class ConfirmedEventChange(StrictModel):
+    """One externally confirmed exception for an existing protected event."""
+    event_id: str = Field(min_length=1)
+    type: Literal["move", "delete"]
+    to_start: datetime | None = None
+    to_end: datetime | None = None
+
+    @field_validator("to_start", "to_end", mode="before")
+    @classmethod
+    def iso_format(cls, value):
+        return None if value is None else _iso_offset(value)
+
+    @model_validator(mode="after")
+    def valid_target(self):
+        if self.type == "move" and (self.to_start is None or self.to_end is None or self.to_start >= self.to_end):
+            raise ValueError("confirmed move requires aware start < end")
+        if self.type == "delete" and (self.to_start is not None or self.to_end is not None):
+            raise ValueError("confirmed delete has no target time")
+        return self
+
+
+class ConfirmedChangesSidecar(StrictModel):
+    schema_version: Literal["1.0"]
+    scenario_id: str
+    scenario_sha256_canonical: str
+    changes: list[ConfirmedEventChange] = Field(min_length=1)
+
+    @model_validator(mode="after")
+    def unique_changes(self):
+        ids = [item.event_id for item in self.changes]
+        if len(ids) != len(set(ids)):
+            raise ValueError("one confirmed exception per event")
+        return self
+
+
 class V2SoftPreference(StrictModel):
     id: str = Field(min_length=1)
     description: str = Field(min_length=1)
@@ -147,6 +219,8 @@ class V2Profile(StrictModel):
 
 
 class V2Scenario(StrictModel):
+    _aggregate_requirements: list[DurationRequirement] = PrivateAttr(default_factory=list)
+    _confirmed_changes: list[ConfirmedEventChange] = PrivateAttr(default_factory=list)
     schema_version: Literal["2.0"]
     scenario_id: str = Field(min_length=1)
     family_id: str = Field(min_length=1)
@@ -154,6 +228,14 @@ class V2Scenario(StrictModel):
     now: datetime
     calendar: V2Calendar
     user_request: str = Field(min_length=1)
+
+    @property
+    def aggregate_requirements(self) -> list[DurationRequirement]:
+        return self._aggregate_requirements
+
+    @property
+    def confirmed_changes(self) -> list[ConfirmedEventChange]:
+        return self._confirmed_changes
 
     @field_validator("now", mode="before")
     @classmethod
@@ -188,8 +270,48 @@ class V2Scenario(StrictModel):
         return self
 
 
+def confirmed_changes_fingerprint(scenario: V2Scenario) -> str | None:
+    if not scenario.confirmed_changes:
+        return None
+    payload = [item.model_dump(mode="json") for item in scenario.confirmed_changes]
+    return hashlib.sha256(json.dumps(payload, sort_keys=True).encode("utf-8")).hexdigest()
+
+
 def load_scenario(path: Path) -> V2Scenario:
-    return V2Scenario.model_validate_json(path.read_text(encoding="utf-8"))
+    scenario = V2Scenario.model_validate_json(path.read_text(encoding="utf-8"))
+    canonical = json.dumps(scenario.model_dump(mode="json"), sort_keys=True,
+                           separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+    scenario_hash = hashlib.sha256(canonical).hexdigest()
+    for base in (path.parent.parent, path.parent.parent.parent):
+        sidecar_path = base / "aggregate_requirements" / f"{scenario.scenario_id}.json"
+        if not sidecar_path.exists():
+            continue
+        sidecar = AggregateSidecar.model_validate_json(sidecar_path.read_text(encoding="utf-8"))
+        if sidecar.scenario_id != scenario.scenario_id or sidecar.scenario_sha256_canonical != scenario_hash:
+            raise ValueError("aggregate sidecar does not match scenario content")
+        zone = ZoneInfo(scenario.profile.timezone)
+        if any(moment.utcoffset() != moment.astimezone(zone).utcoffset()
+               for rule in sidecar.requirements for moment in (rule.start, rule.end)):
+            raise ValueError("aggregate window timezone differs from profile")
+        scenario._aggregate_requirements = sidecar.requirements
+        break
+    for base in (path.parent.parent, path.parent.parent.parent):
+        sidecar_path = base / "confirmed_changes" / f"{scenario.scenario_id}.json"
+        if not sidecar_path.exists():
+            continue
+        sidecar = ConfirmedChangesSidecar.model_validate_json(sidecar_path.read_text(encoding="utf-8"))
+        if sidecar.scenario_id != scenario.scenario_id or sidecar.scenario_sha256_canonical != scenario_hash:
+            raise ValueError("confirmed-change sidecar does not match scenario content")
+        ids = {event.id for event in scenario.calendar.events}
+        zone = ZoneInfo(scenario.profile.timezone)
+        if any(change.event_id not in ids for change in sidecar.changes):
+            raise ValueError("confirmed-change sidecar references an unknown event")
+        if any(moment.utcoffset() != moment.astimezone(zone).utcoffset()
+               for change in sidecar.changes for moment in (change.to_start, change.to_end) if moment is not None):
+            raise ValueError("confirmed-change target timezone differs from profile")
+        scenario._confirmed_changes = sidecar.changes
+        break
+    return scenario
 
 
 def load_manifest(root: Path) -> list[dict]:
@@ -207,7 +329,7 @@ def load_manifest(root: Path) -> list[dict]:
     ids, families, profiles = set(), {}, {}
     for row in rows:
         sid, family, split = row["scenario_id"], row["family_id"], row["split"]
-        if sid in ids or split not in ("train", "test") or (family in families and families[family] != split):
+        if sid in ids or split not in ("train", "dev", "test") or (family in families and families[family] != split):
             raise ValueError("duplicate scenario or family split leakage in v2 manifest")
         ids.add(sid)
         families[family] = split

@@ -151,7 +151,7 @@ def _v2_scenario_and_proposal(source: dict) -> None:
                    + "; ".join(f"{a} / {b}" for a, b in overlap_pairs)
                    + ". Uma sobreposição não demonstra, por si só, violação de uma restrição.")
     st.caption("Calendário proposto: blocos com traço grosso = criados/movidos; blocos esbatidos = removidos/posição anterior. "
-               "As categorias de eventos adicionados usam metadados neutros, porque o contrato Proposal não fornece categoria ou participantes.")
+               "Eventos adicionados usam valores neutros para categoria, importância ou participantes quando esses metadados não forem fornecidos.")
     with st.expander("Eventos originais em tabela"):
         st.dataframe(sorted(packet["calendar"], key=lambda e: e["start"]), hide_index=True)
     left, right = st.columns(2)
@@ -167,6 +167,8 @@ def _v2_scenario_and_proposal(source: dict) -> None:
         st.write(profile.autonomy_preferences.model_dump())
     st.markdown("#### Proposta final")
     proposal = source["final_proposal"]
+    if not proposal["changes"]:
+        st.info("Proposta sem alterações: a validação estrutural não demonstra que o pedido esteja satisfeito. Avalie a justificação e o calendário.")
     for i, change in enumerate(proposal["changes"], 1):
         st.write(f"{i}. {change['type'].upper()} · {change.get('event_id') or change.get('title')} · "
                  f"{change.get('to_start') or ''} {change.get('to_end') or ''}")

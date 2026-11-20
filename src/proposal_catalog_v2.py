@@ -10,7 +10,7 @@ from benchmark_v2 import atomic_json
 from calendar_v2 import simulate
 from critic import final_calendar_view
 from models import CurrentCriticEvaluation, PlausibilityCriticEvaluation, Proposal
-from scenario_v2 import load_manifest, load_scenario
+from scenario_v2 import confirmed_changes_fingerprint, load_manifest, load_scenario
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -25,6 +25,15 @@ def catalog(root: Path) -> list[dict]:
         row = manifest[artifact["scenario_id"]]
         if any(artifact[key] != row[key] for key in ("family_id", "profile_id", "split")):
             raise ValueError(f"manifest provenance mismatch: {path.name}")
+        scenario = load_scenario(root / "data" / "scenarios" / f"{artifact['scenario_id']}.json")
+        if scenario.confirmed_changes and artifact.get("confirmed_changes_sha256") != confirmed_changes_fingerprint(scenario):
+            raise ValueError(f"confirmed-change provenance mismatch: {path.name}")
+        if scenario.aggregate_requirements:
+            aggregate_hash = hashlib.sha256(json.dumps(
+                [item.model_dump(mode="json") for item in scenario.aggregate_requirements],
+                sort_keys=True).encode()).hexdigest()
+            if artifact.get("aggregate_requirements_sha256") != aggregate_hash:
+                raise ValueError(f"aggregate provenance mismatch: {path.name}")
         Proposal.model_validate(artifact["final_proposal"])
         identity = {"scenario_id": artifact["scenario_id"], "run_id": artifact["run_id"],
                     "proposal": artifact["final_proposal"]}
@@ -51,6 +60,13 @@ def import_result(root: Path, result_path: Path) -> Path:
     if row is None or any(record.get(key) != row[key] for key in ("profile_id", "split")) or record.get("family") != row["family_id"]:
         raise ValueError("result provenance differs from imported scenario")
     scenario = load_scenario(root / "data" / "scenarios" / f"{sid}.json")
+    current_aggregate = (hashlib.sha256(json.dumps(
+        [rule.model_dump(mode="json") for rule in scenario.aggregate_requirements],
+        sort_keys=True).encode()).hexdigest() if scenario.aggregate_requirements else None)
+    if scenario.aggregate_requirements and record.get("aggregate_requirements_sha256") != current_aggregate:
+        raise ValueError("result was generated with different aggregate requirements")
+    if scenario.confirmed_changes and record.get("confirmed_changes_sha256") != confirmed_changes_fingerprint(scenario):
+        raise ValueError("result was generated with different confirmed-change authorizations")
     _, validation = simulate(scenario, proposal)
     # New outcome-aware runs carry optional calendars. Recompute them from the
     # imported scenario and each structured proposal before trusting the audit
@@ -98,7 +114,7 @@ def import_result(root: Path, result_path: Path) -> Path:
                 final_events, proposal, original_ids=original_ids,
                 timezone=scenario.profile.timezone):
             raise ValueError("final result calendar differs from deterministic simulation")
-    identity = {"scenario_id": sid, "run_id": record["run_id"], "proposal": proposal.model_dump()}
+    identity = {"scenario_id": sid, "run_id": record["run_id"], "proposal": record["final_proposal"]}
     pid = "v2p_" + hashlib.sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest()[:24]
     artifact = {"proposal_id": pid, "scenario_id": sid, "family_id": row["family_id"],
                 "profile_id": row["profile_id"], "split": row["split"],
@@ -119,8 +135,12 @@ def import_result(root: Path, result_path: Path) -> Path:
                 "critic_accepted": record.get("critic_accepted"),
                 "iterations": record["iterations"], "refinements": record.get("refinements"),
                 "source_status": record.get("status"),
-                "final_proposal": proposal.model_dump(), "technical_validation": validation,
+                "final_proposal": record["final_proposal"], "technical_validation": validation,
                 "source_result_sha256": hashlib.sha256(result_path.read_bytes()).hexdigest()}
+    if "aggregate_requirements_sha256" in record:
+        artifact["aggregate_requirements_sha256"] = record["aggregate_requirements_sha256"]
+    if "confirmed_changes_sha256" in record:
+        artifact["confirmed_changes_sha256"] = record["confirmed_changes_sha256"]
     # Optional audit data for runs using outcome-aware critique. Historical
     # artifacts remain byte-compatible when their source result lacks it.
     for field in ("critic_input_version", "critic_policy_version", "final_result_calendar", "replay_source",

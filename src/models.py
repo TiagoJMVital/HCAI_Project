@@ -19,6 +19,9 @@ class Change(BaseModel):
     from_start: Optional[str] = None
     to_start: Optional[str] = None
     to_end: Optional[str] = None
+    category: Optional[str] = None
+    importance: Optional[int] = Field(default=None, ge=1, le=5)
+    participants: Optional[list[str]] = None
 
     @model_validator(mode="after")
     def _required_fields(self):
@@ -31,6 +34,12 @@ class Change(BaseModel):
                    if not isinstance(getattr(self, field), str) or not getattr(self, field).strip()]
         if missing:
             raise ValueError(f"{self.type} requer: {', '.join(missing)}")
+        if self.category is not None and (self.type != "add" or not self.category.strip()):
+            raise ValueError("category is only allowed on add and must be nonempty")
+        if self.participants is not None and (self.type != "add" or len(self.participants) != len(set(self.participants)) or any(not p.strip() for p in self.participants)):
+            raise ValueError("participants are only allowed on add and must be unique nonempty strings")
+        if self.importance is not None and self.type != "add":
+            raise ValueError("importance is only allowed on add")
         return self
 
 
