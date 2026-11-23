@@ -253,5 +253,7 @@ def test_a_b_runners_and_compare_metadata(context):
     assert a["configuration"] == "A" and b["configuration"] == "B"
     assert a["decision"] == b["decision"] == "act"
     assert a_path.parent.name == "A" and b_path.parent.name == "B"
+    assert a_path.parents[2].name == scenario.scenario_id
+    assert b_path.parents[2].name == scenario.scenario_id
     rows = collect(root / "eval" / "runs", "paired")
     assert len(rows) == 1 and rows[0]["paired"] and rows[0]["same_proposer_model"]

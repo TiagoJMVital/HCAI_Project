@@ -70,6 +70,8 @@ def test_replay_skips_initial_proposer_and_reconstructs_calendar(prepared):
     proposer, critic = ScriptedProvider([]), ScriptedProvider([evaluation()])
     new_path = run_one(root, scenario.scenario_id, proposer, critic,
                        initial_proposal_from=source)
+    assert new_path.parts[-4] == scenario.scenario_id
+    assert new_path.parts[-2] == "B"
     result = json.loads(new_path.read_text())
     original = json.loads(source_bytes)
     assert new_path != source and source.read_bytes() == source_bytes

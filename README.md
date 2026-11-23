@@ -30,14 +30,14 @@ python src/benchmark_v2.py validate
 # Explicit LLM calls; run only when authorised and configured:
 python eval/run_config_b_v2.py --only working_student_deadline_001
 # Optional fixed initial proposal: skips the first Proposer call; the Critic still runs.
-python eval/run_config_b_v2.py --only working_student_deadline_001 --initial-proposal-from eval/runs/e9052e6757c14820a06b89ddaf9aafe6/B/working_student_deadline_001.json
+python eval/run_config_b_v2.py --only <scenario_id> --initial-proposal-from eval/runs/treino/<family>/<scenario_id>/<run_id>/B/<scenario_id>.json
 # Import the printed B result path without another LLM call:
-python src/proposal_catalog_v2.py eval/runs/<run_id>/B/working_student_deadline_001.json
+python src/proposal_catalog_v2.py eval/runs/treino/<family>/<scenario_id>/<run_id>/B/<scenario_id>.json
 streamlit run annotation_app.py --server.address 127.0.0.1
 python src/gate_dataset_v2.py --split train
 ```
 
-An existing historical B result is under `eval/runs/<run_id>/B_v2/`; its imported proposal is already in `data/proposals/`. Never re-import the included example scenario, which is already in `data/scenarios/`. A's matching command is `python eval/run_config_a_v2.py --only <scenario_id>`. Both runners can select provider and model through CLI options or `.env`. For detailed instructions, see [ANNOTATION.md](ANNOTATION.md) and [setup and testing](docs/06_SETUP_AND_TESTING.md).
+New results use `eval/runs/treino/<family>/<scenario_id>/<run_id>/A|B/<scenario_id>.json` for training, `eval/runs/avaliacao/desenvolvimento/...` for development and `eval/runs/avaliacao/teste/...` for test. Discovery and replay remain compatible with historical layouts. The final training batch is sequential and resumable: `python eval/run_training_b_v2.py --resume`; inspect its selection without provider calls with `python eval/run_training_b_v2.py --dry-run --resume`. Never re-import the included example scenario, which is already in `data/scenarios/`.
 
 `--initial-proposal-from` accepts a prior schema-2 B run JSON. It checks scenario identity and deterministic applicability, reuses its **first** proposal exactly, and stores source run/proposal and current scenario SHA-256 hashes in a new run. Only a Critic-requested revision calls the Proposer. It does not replay the old Critic response or overwrite the source. The current Critic prompt is used. See [experimental design](docs/05_EXPERIMENTAL_DESIGN.md) for comparability limits.
 

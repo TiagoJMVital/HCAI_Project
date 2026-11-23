@@ -6,18 +6,29 @@ import json
 from collections import defaultdict
 from pathlib import Path
 
+import sys
+
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "src"))
+
+from run_paths_v2 import discover_result_paths  # noqa: E402
 
 
 def collect(runs_root: Path, experiment_id: str) -> list[dict]:
     grouped: dict[tuple[str, int], dict] = defaultdict(dict)
-    for path in sorted(runs_root.glob("*/*/*.json")):
+    root = runs_root.parent.parent
+    seen: set[tuple[str, str, str]] = set()
+    for path in discover_result_paths(root):
         record = json.loads(path.read_text(encoding="utf-8"))
         if record.get("schema_version") != "2.0" or record.get("configuration") not in ("A", "B"):
             continue
         if record.get("experiment_id") != experiment_id:
             continue
         config = record.get("configuration", path.parent.name)
+        identity = (record["scenario_id"], record["run_id"], config)
+        if identity in seen:
+            continue
+        seen.add(identity)
         key = (record["scenario_id"], record.get("repeat_index", 0))
         if config in grouped[key]:
             raise ValueError(f"registos duplicados para {key} em {config}")

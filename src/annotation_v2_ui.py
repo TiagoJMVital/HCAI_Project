@@ -11,6 +11,7 @@ from calendar_view import view_events
 from models import Proposal
 from proposal_catalog_v2 import catalog
 from scenario_v2 import load_scenario
+from final_dataset_v2 import scenario_path
 
 
 def temporal_overlaps(events: list) -> list[tuple[str, str]]:
@@ -35,7 +36,7 @@ def local_packet(scenario) -> dict:
 
 
 def preview(root: Path, source: dict) -> tuple[dict, list, list | None, dict]:
-    scenario = load_scenario(root / "data" / "scenarios" / f"{source['scenario_id']}.json")
+    scenario = load_scenario(scenario_path(root, source["scenario_id"]))
     proposal = Proposal.model_validate(source["final_proposal"])
     after, validation = simulate(scenario, proposal)
     packet = local_packet(scenario)

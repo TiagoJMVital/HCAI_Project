@@ -8,16 +8,17 @@ from pathlib import Path
 
 from benchmark_v2 import atomic_json
 from calendar_v2 import simulate
-from critic import final_calendar_view
+from critic import LEGACY_RESULT_CALENDAR_VERSION, final_calendar_view
 from models import CurrentCriticEvaluation, PlausibilityCriticEvaluation, Proposal
 from scenario_v2 import confirmed_changes_fingerprint, load_manifest, load_scenario
+from final_dataset_v2 import combined_manifest, scenario_path
 
 ROOT = Path(__file__).resolve().parent.parent
 
 
 def catalog(root: Path) -> list[dict]:
     rows = []
-    manifest = {row["scenario_id"]: row for row in load_manifest(root)}
+    manifest = {row["scenario_id"]: row for row in combined_manifest(root)}
     for path in sorted((root / "data" / "proposals").glob("*.json")):
         artifact = json.loads(path.read_text(encoding="utf-8"))
         if artifact["proposal_id"] != path.stem or artifact["scenario_id"] not in manifest:
@@ -25,7 +26,7 @@ def catalog(root: Path) -> list[dict]:
         row = manifest[artifact["scenario_id"]]
         if any(artifact[key] != row[key] for key in ("family_id", "profile_id", "split")):
             raise ValueError(f"manifest provenance mismatch: {path.name}")
-        scenario = load_scenario(root / "data" / "scenarios" / f"{artifact['scenario_id']}.json")
+        scenario = load_scenario(scenario_path(root, artifact["scenario_id"]))
         if scenario.confirmed_changes and artifact.get("confirmed_changes_sha256") != confirmed_changes_fingerprint(scenario):
             raise ValueError(f"confirmed-change provenance mismatch: {path.name}")
         if scenario.aggregate_requirements:
@@ -54,12 +55,12 @@ def import_result(root: Path, result_path: Path) -> Path:
     last = next((item for item in reversed(record["iterations"]) if item.get("proposal") is not None), None)
     if last is None or Proposal.model_validate(last["proposal"]) != proposal:
         raise ValueError("final proposal disagrees with refinement history")
-    manifest = {row["scenario_id"]: row for row in load_manifest(root)}
+    manifest = {row["scenario_id"]: row for row in combined_manifest(root)}
     sid = record["scenario_id"]
     row = manifest.get(sid)
     if row is None or any(record.get(key) != row[key] for key in ("profile_id", "split")) or record.get("family") != row["family_id"]:
         raise ValueError("result provenance differs from imported scenario")
-    scenario = load_scenario(root / "data" / "scenarios" / f"{sid}.json")
+    scenario = load_scenario(scenario_path(root, sid))
     current_aggregate = (hashlib.sha256(json.dumps(
         [rule.model_dump(mode="json") for rule in scenario.aggregate_requirements],
         sort_keys=True).encode()).hexdigest() if scenario.aggregate_requirements else None)
@@ -94,9 +95,10 @@ def import_result(root: Path, result_path: Path) -> Path:
             continue
         step_proposal = Proposal.model_validate(step["proposal"])
         step_events, step_validation = simulate(scenario, step_proposal)
+        calendar_version = record.get("result_calendar_version", LEGACY_RESULT_CALENDAR_VERSION)
         if step_events is None or not step_validation["valid"] or step["result_calendar"] != final_calendar_view(
                 step_events, step_proposal, original_ids=original_ids,
-                timezone=scenario.profile.timezone):
+                timezone=scenario.profile.timezone, version=calendar_version):
             raise ValueError("iteration result calendar differs from deterministic simulation")
     if policy_version == "uncertainty_review_v2":
         if record.get("uncertainty_history") != history:
@@ -112,7 +114,8 @@ def import_result(root: Path, result_path: Path) -> Path:
         final_events, final_validation = simulate(scenario, proposal)
         if final_events is None or not final_validation["valid"] or record["final_result_calendar"] != final_calendar_view(
                 final_events, proposal, original_ids=original_ids,
-                timezone=scenario.profile.timezone):
+                timezone=scenario.profile.timezone,
+                version=record.get("result_calendar_version", LEGACY_RESULT_CALENDAR_VERSION)):
             raise ValueError("final result calendar differs from deterministic simulation")
     identity = {"scenario_id": sid, "run_id": record["run_id"], "proposal": record["final_proposal"]}
     pid = "v2p_" + hashlib.sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest()[:24]
@@ -145,7 +148,8 @@ def import_result(root: Path, result_path: Path) -> Path:
         artifact["confirmed_changes_sha256"] = record["confirmed_changes_sha256"]
     # Optional audit data for runs using outcome-aware critique. Historical
     # artifacts remain byte-compatible when their source result lacks it.
-    for field in ("critic_input_version", "critic_policy_version", "final_result_calendar", "replay_source",
+    for field in ("critic_input_version", "critic_policy_version", "result_calendar_version",
+                  "final_result_calendar", "replay_source",
                   "final_unresolved_assumptions", "uncertainty_history",
                   "unresolved_critic_weaknesses", "unresolved_plausibility_review"):
         if field in record:

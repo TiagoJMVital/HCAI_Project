@@ -26,6 +26,7 @@ from calendar_view import (
 from proposal_catalog_v2 import catalog as catalog_v2
 from run_catalog_v2 import PILOT_SCENARIO_IDS, runs as runs_v2, status_matrix
 from scenario_v2 import load_scenario as load_scenario_v2
+from final_dataset_v2 import scenario_path as scenario_path_v2
 
 st.set_page_config(page_title="HCAI · Human annotation", page_icon="📅", layout="wide")
 
@@ -114,7 +115,7 @@ def _run_metadata(run: dict) -> None:
 def _run_calendar(run: dict, *, initial: bool = False, key: str) -> None:
     raw = (run.get("initial_proposal") if initial else
            run.get("proposal") if run["configuration"] == "A" else run.get("final_proposal"))
-    scenario = load_scenario_v2(ROOT / "data" / "scenarios" / f"{run['scenario_id']}.json")
+    scenario = load_scenario_v2(scenario_path_v2(ROOT, run["scenario_id"]))
     packet = local_packet(scenario)
     original = view_events(packet["calendar"])
     if raw is None:
@@ -133,7 +134,7 @@ def _run_calendar(run: dict, *, initial: bool = False, key: str) -> None:
 
 
 def _scenario_header(scenario_id: str) -> None:
-    scenario = load_scenario_v2(ROOT / "data" / "scenarios" / f"{scenario_id}.json")
+    scenario = load_scenario_v2(scenario_path_v2(ROOT, scenario_id))
     st.subheader(f"Cenário {scenario.scenario_id}")
     st.info(scenario.user_request)
     st.caption(f"Família: {scenario.family_id} · perfil: {scenario.profile.profile_id} · "
@@ -295,7 +296,7 @@ def _v2_review_inputs(form: dict, prefix: str) -> dict:
 
 
 def _v2_scenario_and_proposal(source: dict) -> None:
-    scenario = load_scenario_v2(ROOT / "data" / "scenarios" / f"{source['scenario_id']}.json")
+    scenario = load_scenario_v2(scenario_path_v2(ROOT, source["scenario_id"]))
     st.subheader(f"Cenário {scenario.scenario_id}")
     st.info(scenario.user_request)
     profile = scenario.profile

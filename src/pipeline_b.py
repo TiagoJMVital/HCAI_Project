@@ -4,7 +4,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Callable
 
-from critic import CRITIC_POLICY_VERSION, critique, final_calendar_view
+from critic import CRITIC_POLICY_VERSION, RESULT_CALENDAR_VERSION, critique, final_calendar_view
 from llm import LLMError, Provider, RateLimitError
 from models import CurrentCriticEvaluation, Proposal
 from rules import rule_based_decision
@@ -72,6 +72,7 @@ def run_config_b(profile, scenario, *, proposer_provider: Provider,
         "decision": None, "reasons": [], "status": "running",
         "critic_input_version": "final_calendar_v1",
         "critic_policy_version": CRITIC_POLICY_VERSION,
+        "result_calendar_version": RESULT_CALENDAR_VERSION,
         "final_result_calendar": None,
         "final_unresolved_assumptions": None,
         "uncertainty_history": [],
@@ -149,7 +150,7 @@ def run_config_b(profile, scenario, *, proposer_provider: Provider,
             result_calendar = final_calendar_view(
                 result_events, proposal,
                 original_ids={event.id for event in scenario.calendar},
-                timezone=profile.timezone)
+                timezone=profile.timezone, version=RESULT_CALENDAR_VERSION)
         except Exception:
             record.update(status="validation_error", error="falha na serialização do calendário final",
                           error_stage="validation", safe_action="no_autonomous_action")

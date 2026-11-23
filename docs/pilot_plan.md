@@ -1,4 +1,4 @@
-# Controlled Proposer–Critic pilot (not executed)
+# Controlled Proposer–Critic pilot
 
 The following ten **training-family** cases were selected from [`scenario_final_status.csv`](scenario_final_status.csv). They span the requested six themes. `ready_with_uncertainty` means the uncertainty must be inspected in the run; it is not a technical guarantee or an ACT/DEFER label. No test or development family is used.
 
@@ -60,8 +60,8 @@ python eval/run_config_b_v2.py --only "$SCENARIO" --provider iaedu --critic-prov
 The runners print their exact result paths. Set `A_RESULT` and `B_RESULT` to those paths, then inspect the initial/final proposals, Critic iterations and technical validation without changing data:
 
 ```bash
-A_RESULT='eval/runs/<A_run_id>/A/working_student_makeup_class_friday_family_dinner_008.json'
-B_RESULT='eval/runs/<B_run_id>/B/working_student_makeup_class_friday_family_dinner_008.json'
+A_RESULT='eval/runs/treino/trabalhadorEstudante/working_student_makeup_class_friday_family_dinner_008/<A_run_id>/A/working_student_makeup_class_friday_family_dinner_008.json'
+B_RESULT='eval/runs/treino/trabalhadorEstudante/working_student_makeup_class_friday_family_dinner_008/<B_run_id>/B/working_student_makeup_class_friday_family_dinner_008.json'
 python - "$A_RESULT" "$B_RESULT" <<'PY'
 import json, sys
 for path in sys.argv[1:]:

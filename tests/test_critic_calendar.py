@@ -11,6 +11,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from calendar_v2 import simulate
 from critic import SYSTEM, final_calendar_view
 from models import Change, CurrentCriticEvaluation, CriticScores, PlausibilityReview, Proposal, Rationale
+from pydantic import ValidationError
 from pipeline_b import CriticSettings, run_config_b
 from proposer_v2 import V2RuntimeScenario, propose_v2
 from scenario_v2 import V2Scenario, load_scenario
@@ -104,6 +105,76 @@ def test_added_metadata_unknown_and_private_context_absent():
     assert all(added[key] is None for key in ("category", "importance", "fixed", "participants", "description"))
     assert "PRIVATE_REQUEST_MARKER" in proposer.calls[0][0]
     assert record["status"] == "proposal_ready"
+
+
+def test_validated_added_metadata_reaches_calendar_and_critic():
+    source = scenario()
+    candidate = add_study()
+    change = candidate.changes[0]
+    change.category, change.importance, change.participants = "training", 5, ["user"]
+    after, validation = simulate(source, candidate)
+    assert validation["valid"]
+    simulated = next(event for event in after if event.id == "study_new")
+    assert (simulated.category, simulated.importance, simulated.participants) == (
+        "training", 5, ["user"])
+    record, _, critic = run(source, [candidate], [score(4)])
+    calendar = packet(critic.calls[0])["final_calendar"]
+    added = next(event for event in calendar["events"] if event["id"] == "study_new")
+    assert (added["category"], added["importance"], added["participants"]) == (
+        "training", 5, ["user"])
+    assert "without inference" in calendar["metadata_note"]
+    assert record["final_result_calendar"] == calendar
+
+
+def test_partial_and_multiple_added_metadata_are_field_specific():
+    source = scenario()
+    candidate = Proposal(changes=[
+        Change(type="add", event_id="first", title="First study block",
+               to_start="2026-11-10T20:00:00+00:00", category="study"),
+        Change(type="add", event_id="second", title="Second study block",
+               to_start="2026-11-11T20:00:00+00:00", importance=4,
+               participants=["user"]),
+    ], rationale=add_study().rationale)
+    events, validation = simulate(source, candidate)
+    assert validation["valid"]
+    view = final_calendar_view(events, candidate,
+                               original_ids={event.id for event in source.calendar.events},
+                               timezone=source.profile.timezone)
+    first = next(event for event in view["events"] if event["id"] == "first")
+    second = next(event for event in view["events"] if event["id"] == "second")
+    assert (first["category"], first["importance"], first["participants"]) == (
+        "study", None, None)
+    assert (second["category"], second["importance"], second["participants"]) == (
+        None, 4, ["user"])
+    assert "first" in view["metadata_note"] and "second" in view["metadata_note"]
+
+
+@pytest.mark.parametrize("payload", [
+    {"category": ""}, {"importance": 0}, {"importance": 6},
+    {"participants": ["user", "user"]}, {"participants": [""]},
+])
+def test_invalid_added_metadata_is_rejected(payload):
+    with pytest.raises(ValidationError):
+        Change.model_validate({"type": "add", "title": "Study",
+                               "to_start": "2026-11-10T20:00:00+00:00", **payload})
+
+
+def test_move_delete_serialization_keeps_existing_metadata():
+    source = scenario()
+    candidate = Proposal(changes=[
+        Change(type="move", event_id="gym_mon", to_start="2026-11-09T20:00:00+00:00"),
+        Change(type="delete", event_id="gym_tue"),
+    ], rationale=add_study().rationale)
+    events, validation = simulate(source, candidate)
+    assert validation["valid"]
+    view = final_calendar_view(events, candidate,
+                               original_ids={event.id for event in source.calendar.events},
+                               timezone=source.profile.timezone)
+    moved = next(event for event in view["events"] if event["id"] == "gym_mon")
+    original = next(event for event in source.calendar.events if event.id == "gym_mon")
+    assert (moved["category"], moved["importance"], moved["participants"]) == (
+        original.category, original.importance, original.participants)
+    assert not any(event["id"] == "gym_tue" for event in view["events"])
 
 
 def test_consecutive_events_are_not_automatically_rejected():

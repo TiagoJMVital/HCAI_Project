@@ -7,6 +7,8 @@ from pathlib import Path
 
 from calendar_v2 import simulate
 from models import Proposal
+from final_dataset_v2 import combined_manifest, scenario_path
+from run_paths_v2 import discover_result_paths, path_identity
 from scenario_v2 import load_manifest, load_scenario
 
 PILOT_SCENARIO_IDS = (
@@ -28,11 +30,12 @@ def runs(root: Path, *, scenario_id: str | None = None,
     """Return immutable run records with their source paths, newest first."""
     if configuration not in {None, "A", "B"}:
         raise ValueError("configuration must be A or B")
-    manifest = {row["scenario_id"]: row for row in load_manifest(root)}
-    found = []
-    for path in sorted((root / "eval" / "runs").glob("*/*/*.json")):
+    manifest = {row["scenario_id"]: row for row in combined_manifest(root)}
+    found_by_identity: dict[tuple[str, str, str], tuple[dict, bytes]] = {}
+    for path in discover_result_paths(root):
         try:
-            record = json.loads(path.read_text(encoding="utf-8"))
+            raw = path.read_bytes()
+            record = json.loads(raw)
         except (OSError, json.JSONDecodeError):
             continue
         config = record.get("configuration")
@@ -48,15 +51,25 @@ def runs(root: Path, *, scenario_id: str | None = None,
                 record.get("profile_id") != row["profile_id"] or
                 record.get("split") != row["split"]):
             raise ValueError(f"run provenance mismatch: {path}")
-        if record.get("run_id") != path.parts[-3]:
-            raise ValueError(f"run ID/path mismatch: {path}")
+        identity = path_identity(root, path, record)
         item = dict(record)
         item["_path"] = str(path.relative_to(root))
-        scenario_path = root / "data" / "scenarios" / f"{sid}.json"
-        item["_active_scenario_sha256"] = hashlib.sha256(scenario_path.read_bytes()).hexdigest()
+        active_path = scenario_path(root, sid)
+        item["_active_scenario_sha256"] = hashlib.sha256(active_path.read_bytes()).hexdigest()
         item["_scenario_hash_matches"] = (record.get("scenario_sha256") == item["_active_scenario_sha256"]
                                            if record.get("scenario_sha256") else None)
-        found.append(item)
+        previous = found_by_identity.get(identity)
+        if previous is not None:
+            previous_item, previous_raw = previous
+            if previous_raw != raw:
+                raise ValueError(f"conflicting duplicate run artifacts: {previous_item['_path']} and {item['_path']}")
+            # Prefer the canonical scenario-first path when both layouts exist.
+            if len(path.relative_to(root / "eval" / "runs").parts) > len(
+                    Path(previous_item["_path"]).relative_to("eval/runs").parts):
+                found_by_identity[identity] = (item, raw)
+        else:
+            found_by_identity[identity] = (item, raw)
+    found = [item for item, _ in found_by_identity.values()]
     return sorted(found, key=lambda row: (row.get("generated_at") or "", row["run_id"]),
                   reverse=True)
 
@@ -70,7 +83,7 @@ def proposal(record: dict, *, initial: bool = False) -> Proposal | None:
 
 def preview(root: Path, record: dict, *, initial: bool = False):
     """Recompute a run proposal against the active immutable scenario."""
-    scenario = load_scenario(root / "data" / "scenarios" / f"{record['scenario_id']}.json")
+    scenario = load_scenario(scenario_path(root, record["scenario_id"]))
     selected = proposal(record, initial=initial)
     if selected is None:
         return scenario, None, None

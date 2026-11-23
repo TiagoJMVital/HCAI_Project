@@ -7,6 +7,8 @@ from zoneinfo import ZoneInfo
 from models import Proposal
 from scenario_v2 import V2Event, V2Scenario
 
+SIMULATOR_VERSION = "calendar_v2_validated_added_metadata_v2"
+
 
 def _parse(value: str, zone: ZoneInfo) -> datetime:
     moment = datetime.fromisoformat(value)
@@ -49,14 +51,14 @@ def simulate(scenario: V2Scenario, proposal: Proposal) -> tuple[list[V2Event] | 
                 events[eid] = V2Event(id=eid, title=change.title, start=start, end=end,
                                       category=change.category or "other", importance=change.importance or 3,
                                       fixed=False, participants=change.participants or ["user"],
-                                      description="Added by proposal; missing metadata uses neutral defaults")
+                                      description="Added by proposal; neutral defaults are internal when metadata is absent")
                 missing = [name for name in ("category", "importance", "participants")
                            if getattr(change, name) is None]
                 if len(missing) == 3:
                     # Preserve the exact validation report of historical proposals.
-                    warnings.append(f"{eid}: added-event category, importance and participants were not supplied by the Proposal contract; preview uses neutral defaults")
+                    warnings.append(f"{eid}: added-event category, importance and participants were not supplied; simulation uses neutral internal defaults")
                 elif missing:
-                    warnings.append(f"{eid}: missing added-event metadata ({', '.join(missing)}); preview uses neutral defaults for those fields")
+                    warnings.append(f"{eid}: missing added-event metadata ({', '.join(missing)}); simulation uses neutral internal defaults for those fields")
             else:
                 if eid not in events or eid not in original:
                     raise ValueError(f"unknown or repeated event reference: {eid}")

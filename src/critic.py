@@ -11,6 +11,8 @@ from models import CurrentCriticEvaluation, Proposal
 from scenario_v2 import V2Event
 
 CRITIC_POLICY_VERSION = "uncertainty_review_v2"
+RESULT_CALENDAR_VERSION = "validated_added_metadata_v2"
+LEGACY_RESULT_CALENDAR_VERSION = "legacy_added_metadata_null_v1"
 
 
 SYSTEM = """You are an independent human-centered quality-control reviewer of a proposed calendar.
@@ -113,32 +115,60 @@ the schema."""
 
 
 def final_calendar_view(events: list[V2Event], proposal: Proposal, *,
-                        original_ids: set[str], timezone: str) -> dict:
-    """Serialize the simulated calendar without inventing added-event metadata.
+                        original_ids: set[str], timezone: str,
+                        version: str = RESULT_CALENDAR_VERSION) -> dict:
+    """Serialize the calendar, preserving validated metadata in current runs.
 
     All simulated events are included; there is no token-based truncation.
     """
+    if version not in {RESULT_CALENDAR_VERSION, LEGACY_RESULT_CALENDAR_VERSION}:
+        raise ValueError(f"unknown result calendar version: {version}")
     zone = ZoneInfo(timezone)
     moved = {change.event_id for change in proposal.changes if change.type == "move"}
+    additions = {(change.event_id or f"new_{index}"): change
+                 for index, change in enumerate(proposal.changes) if change.type == "add"}
+    missing_metadata: dict[str, list[str]] = {}
     rows = []
     for event in events:
         added = event.id not in original_ids
+        change = additions.get(event.id) if added else None
+        if added and change is None:
+            raise ValueError(f"simulated addition has no Proposal operation: {event.id}")
+        if added and version == RESULT_CALENDAR_VERSION:
+            category = change.category
+            importance = change.importance
+            participants = change.participants
+            missing = [field for field in ("category", "importance", "participants")
+                       if getattr(change, field) is None]
+            if missing:
+                missing_metadata[event.id] = missing
+        else:
+            category = None if added else event.category
+            importance = None if added else event.importance
+            participants = None if added else event.participants
         rows.append({
             "id": event.id, "title": event.title,
             "start": event.start.astimezone(zone).isoformat(),
             "end": event.end.astimezone(zone).isoformat(),
-            "category": None if added else event.category,
-            "importance": None if added else event.importance,
+            "category": category,
+            "importance": importance,
             "fixed": None if added else event.fixed,
-            "participants": None if added else event.participants,
+            "participants": participants,
             "description": None if added else event.description,
             "origin": "proposed_addition" if added else "existing",
             "change_status": "added" if added else "moved" if event.id in moved else "preserved",
         })
+    if version == LEGACY_RESULT_CALENDAR_VERSION:
+        note = ("Null metadata on added events means the Proposal contract did not "
+                "supply it; it is not a new personal preference or hard constraint.")
+    elif missing_metadata:
+        note = ("Added-event metadata is copied only from validated Proposal fields. Null values "
+                "identify fields not supplied by the Proposal; simulator defaults are internal. "
+                f"Missing by event: {missing_metadata}")
+    else:
+        note = "Added-event metadata is copied from validated Proposal fields without inference."
     return {"timezone": timezone, "coverage": "all_events_in_scenario_after_simulation",
-            "events": rows,
-            "metadata_note": ("Null metadata on added events means the Proposal contract did not "
-                              "supply it; it is not a new personal preference or hard constraint.")}
+            "events": rows, "metadata_note": note}
 
 
 def build_critic_prompt(proposal: Proposal, *, final_calendar: dict,

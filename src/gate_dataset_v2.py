@@ -9,7 +9,8 @@ from annotation_v2 import ProposalConsensus, _consensus_path, pair
 from calendar_v2 import simulate
 from models import Proposal
 from proposal_catalog_v2 import catalog
-from scenario_v2 import load_manifest, load_scenario
+from scenario_v2 import load_scenario
+from final_dataset_v2 import combined_manifest, scenario_path
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -34,7 +35,7 @@ def build_rows(root: Path, *, split: str = "train", unlock_test: bool = False) -
         raise ValueError("split must be train, dev or test")
     if split == "test" and not unlock_test:
         raise ValueError("test remains locked until model and evaluation policy are frozen")
-    manifest = load_manifest(root)
+    manifest = combined_manifest(root)
     family_split = {}
     for entry in manifest:
         family_split.setdefault(entry["family_id"], entry["split"])
@@ -46,7 +47,7 @@ def build_rows(root: Path, *, split: str = "train", unlock_test: bool = False) -
             continue
         pid = source["proposal_id"]
         reason = None
-        scenario = load_scenario(root / "data" / "scenarios" / f"{source['scenario_id']}.json")
+        scenario = load_scenario(scenario_path(root, source["scenario_id"]))
         proposal = Proposal.model_validate(source["final_proposal"])
         _, validation = simulate(scenario, proposal)
         if not proposal.changes:

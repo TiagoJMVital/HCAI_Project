@@ -19,10 +19,10 @@ When generation is authorised, run B explicitly and import the printed result pa
 ```bash
 python eval/run_config_a_v2.py --only <scenario_id>
 python eval/run_config_b_v2.py --only <scenario_id> --critic-threshold 4.0 --max-refinements 3
-python src/proposal_catalog_v2.py eval/runs/<run_id>/B/<scenario_id>.json
+python src/proposal_catalog_v2.py eval/runs/treino/<family>/<scenario_id>/<run_id>/B/<scenario_id>.json
 ```
 
-The first two commands call the configured LLM; the last command only reads a result. A historical result may be under `B_v2/` and is accepted by the importer. The B result and immutable imported artifact retain the proposal, rationale, Critic history/scores, validation report and run/provider metadata. Importing a technically invalid proposal is possible for quality review; it cannot become an eligible gate example. Imported artifacts are in `data/proposals/`; the result remains in `eval/runs/`. Opening the UI never generates proposals.
+The first two commands call the configured LLM; the last command only reads a result. Results are grouped by scenario, then retain their unique run ID and configuration directory. A historical run-first result or `B_v2/` directory remains readable. The B result and immutable imported artifact retain the proposal, rationale, Critic history/scores, validation report and run/provider metadata. Importing a technically invalid proposal is possible for quality review; it cannot become an eligible gate example. Imported artifacts are in `data/proposals/`; the result remains in `eval/runs/`. Opening the UI never generates proposals.
 
 New B runs additionally record the complete in-memory result calendar for each Critic-evaluated iteration. The Critic sees it with the structured proposal, rationale, timezone and limited validation report; original request and full profile stay outside the Critic input. Historical B artifacts lack this optional field and remain readable without conversion. The Streamlit iteration expander shows the feedback, per-iteration result calendar and final unresolved weaknesses when present.
 

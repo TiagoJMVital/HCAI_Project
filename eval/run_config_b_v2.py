@@ -13,25 +13,31 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 
-from benchmark_v2 import atomic_json  # noqa: E402
-from calendar_v2 import simulate  # noqa: E402
-from critic import SYSTEM as CRITIC_SYSTEM, final_calendar_view  # noqa: E402
+from calendar_v2 import SIMULATOR_VERSION, simulate  # noqa: E402
+from critic import (LEGACY_RESULT_CALENDAR_VERSION, RESULT_CALENDAR_VERSION,
+                    SYSTEM as CRITIC_SYSTEM, final_calendar_view)  # noqa: E402
 from llm import get_provider  # noqa: E402
 from models import Proposal  # noqa: E402
 from pipeline_b import CriticSettings, run_config_b  # noqa: E402
 from proposer_v2 import (PROPOSER_WIRE_SCHEMA_SHA256, PROPOSER_WIRE_SCHEMA_VERSION,
                          REVISION_GUIDANCE, SYSTEM_V2, V2RuntimeScenario,
                          propose_v2)  # noqa: E402
+from run_paths_v2 import resolve_run_reference, run_result_path  # noqa: E402
+from run_completion_v2 import (TechnicalRunError, publish_completed_record,
+                               validate_completed_record)  # noqa: E402
 from scenario_v2 import V2Scenario, confirmed_changes_fingerprint, load_manifest, load_scenario  # noqa: E402
+from final_dataset_v2 import (combined_manifest, manifest_sha256,
+                              scenario_path as resolve_scenario_path)  # noqa: E402
 
 
 def load_initial_proposal(root: Path, source_path: Path, scenario: V2Scenario,
-                          manifest_row: dict) -> tuple[Proposal, dict]:
+                          manifest_row: dict, *, current_scenario_path: Path | None = None) -> tuple[Proposal, dict]:
     """Load a B run's first proposal and verify its scenario provenance.
 
     This is read-only. Any recorded first-iteration calendar is recomputed with
     the current simulator, so a changed scenario cannot silently be replayed.
     """
+    source_path = resolve_run_reference(root, source_path)
     raw_bytes = source_path.read_bytes()
     source_run = json.loads(raw_bytes)
     if (source_run.get("schema_version"), source_run.get("configuration")) != ("2.0", "B"):
@@ -72,7 +78,8 @@ def load_initial_proposal(root: Path, source_path: Path, scenario: V2Scenario,
     if calendar_verified:
         expected_calendar = final_calendar_view(
             simulated, proposal, original_ids={event.id for event in scenario.calendar.events},
-            timezone=scenario.profile.timezone)
+            timezone=scenario.profile.timezone,
+            version=source_run.get("result_calendar_version", LEGACY_RESULT_CALENDAR_VERSION))
         if first["result_calendar"] != expected_calendar or first.get("validation") != validation:
             raise ValueError("source first-iteration calendar/validation differs from current simulation")
     try:
@@ -88,8 +95,8 @@ def load_initial_proposal(root: Path, source_path: Path, scenario: V2Scenario,
         "source_prompt_versions": source_run.get("prompt_versions"),
         "source_critic_policy_version": source_run.get("critic_policy_version"),
         "initial_proposal_sha256_canonical": hashlib.sha256(canonical).hexdigest(),
-        "current_scenario_sha256": hashlib.sha256(
-            (root / "data" / "scenarios" / f"{scenario.scenario_id}.json").read_bytes()).hexdigest(),
+        "current_scenario_sha256": hashlib.sha256((current_scenario_path or
+            root / "data" / "scenarios" / f"{scenario.scenario_id}.json").read_bytes()).hexdigest(),
         "source_calendar_verified_against_current_simulator": calendar_verified,
     }
     return proposal, provenance
@@ -98,14 +105,16 @@ def load_initial_proposal(root: Path, source_path: Path, scenario: V2Scenario,
 def run_one(root: Path, scenario_id: str, proposer_provider, critic_provider,
             settings: CriticSettings | None = None, *, experiment_id: str | None = None,
             repeat_index: int = 0,
-            initial_proposal_from: Path | None = None) -> Path:
-    rows = load_manifest(root)
-    row = next((r for r in rows if r["scenario_id"] == scenario_id), None)
+            initial_proposal_from: Path | None = None,
+            manifest_row: dict | None = None, scenario_path: Path | None = None,
+            dataset_manifest_sha256: str | None = None) -> Path:
+    row = manifest_row or next((r for r in load_manifest(root) if r["scenario_id"] == scenario_id), None)
     if row is None:
         raise ValueError("v2 scenario not imported")
-    source = load_scenario(root / "data" / "scenarios" / f"{scenario_id}.json")
-    scenario_path = root / "data" / "scenarios" / f"{scenario_id}.json"
-    replay_proposal, replay_source = (load_initial_proposal(root, initial_proposal_from, source, row)
+    scenario_path = scenario_path or root / "data" / "scenarios" / f"{scenario_id}.json"
+    source = load_scenario(scenario_path)
+    replay_proposal, replay_source = (load_initial_proposal(
+        root, initial_proposal_from, source, row, current_scenario_path=scenario_path)
                                      if initial_proposal_from is not None else (None, None))
     runtime = V2RuntimeScenario(source)
     aggregate_fingerprint = (hashlib.sha256(json.dumps(
@@ -128,6 +137,9 @@ def run_one(root: Path, scenario_id: str, proposer_provider, critic_provider,
                   scenario_sha256=hashlib.sha256(scenario_path.read_bytes()).hexdigest(),
                   aggregate_requirements_sha256=aggregate_fingerprint,
                   confirmed_changes_sha256=confirmed_changes_fingerprint(source),
+                  simulator_version=SIMULATOR_VERSION,
+                  dataset_manifest_sha256=dataset_manifest_sha256 or hashlib.sha256(
+                      (root / "data" / "benchmark_manifest.json").read_bytes()).hexdigest(),
                   split=row["split"], run_id=uuid.uuid4().hex,
                   experiment_id=experiment_id, repeat_index=repeat_index,
                   generated_at=datetime.now(timezone.utc).isoformat(),
@@ -140,8 +152,9 @@ def run_one(root: Path, scenario_id: str, proposer_provider, critic_provider,
     if record["final_proposal"] is not None:
         _, report = simulate(source, Proposal.model_validate(record["final_proposal"]))
         record["technical_validation"] = report
-    out = root / "eval" / "runs" / record["run_id"] / "B" / f"{scenario_id}.json"
-    atomic_json(out, record)
+    validate_completed_record(record, "B")
+    out = run_result_path(root, scenario_id, record["run_id"], "B", manifest_row=row)
+    publish_completed_record(out, record, runs_root=root / "eval/runs")
     return out
 
 
@@ -164,11 +177,22 @@ def main() -> None:
     proposer = get_provider(role="PROPOSER", provider=args.provider, model=args.model)
     critic = get_provider(role="CRITIC", provider=args.critic_provider or proposer.name,
                           model=args.critic_model or proposer.model)
-    path = run_one(ROOT, args.only, proposer, critic,
-                   CriticSettings(threshold=args.critic_threshold,
-                                  max_refinements=args.max_refinements),
-                   experiment_id=args.experiment_id, repeat_index=args.repeat_index,
-                   initial_proposal_from=args.initial_proposal_from)
+    row = next((row for row in combined_manifest(ROOT) if row["scenario_id"] == args.only), None)
+    if row is None:
+        parser.error("scenario not found in active or final manifest")
+    final_manifest_hash = manifest_sha256(ROOT) if row.get("state") != "local" else None
+    try:
+        path = run_one(ROOT, args.only, proposer, critic,
+                       CriticSettings(threshold=args.critic_threshold,
+                                      max_refinements=args.max_refinements),
+                       experiment_id=args.experiment_id, repeat_index=args.repeat_index,
+                       initial_proposal_from=args.initial_proposal_from,
+                       manifest_row=row, scenario_path=Path(row.get("scenario_path") or
+                           resolve_scenario_path(ROOT, args.only)),
+                       dataset_manifest_sha256=final_manifest_hash)
+    except TechnicalRunError as exc:
+        print(f"NOT PUBLISHED — {exc}", file=sys.stderr)
+        raise SystemExit(2) from None
     record = json.loads(path.read_text(encoding="utf-8"))
     print(f"{path}: {record['status']}; import separately with src/proposal_catalog_v2.py")
 
