@@ -17,12 +17,14 @@ from annotation_v2 import (
     load_review as load_review_v2, pair as pair_v2,
     save_consensus as save_consensus_v2, save_review as save_review_v2,
 )
-from annotation_v2_ui import preview as preview_v2, records as records_v2, temporal_overlaps
+from annotation_v2_ui import (local_packet, preview as preview_v2, records as records_v2,
+                              temporal_overlaps)
 from calendar_view import (
     identify_requested_interval, initial_week, overlap_summary,
     render_week_html, view_events, week_after,
 )
 from proposal_catalog_v2 import catalog as catalog_v2
+from run_catalog_v2 import PILOT_SCENARIO_IDS, runs as runs_v2, status_matrix
 from scenario_v2 import load_scenario as load_scenario_v2
 
 st.set_page_config(page_title="HCAI · Human annotation", page_icon="📅", layout="wide")
@@ -74,6 +76,167 @@ def _select_neighbor(key: str, available: list[str], step: int) -> None:
     index = available.index(current) + step
     if 0 <= index < len(available):
         st.session_state[key] = available[index]
+
+
+def _run_label(run: dict) -> str:
+    when = run.get("generated_at") or "sem data"
+    return f"{when} · {run['status']} · {run['run_id']}"
+
+
+def _proposal_details(title: str, raw: dict | None) -> None:
+    st.markdown(f"#### {title}")
+    if raw is None:
+        st.info("Esta execução não produziu uma proposta estruturada.")
+        return
+    if not raw.get("changes"):
+        st.info("Proposta sem alterações; isto não prova satisfação do pedido.")
+    for index, change in enumerate(raw.get("changes", []), 1):
+        st.write(f"{index}. {change['type'].upper()} · "
+                 f"{change.get('event_id') or change.get('title')} · "
+                 f"{change.get('to_start') or ''} {change.get('to_end') or ''}")
+    rationale = raw.get("rationale") or {}
+    st.write("**Justificação:**", rationale.get("summary"))
+    st.write("**Restrições:**", rationale.get("constraints"))
+    st.write("**Prioridades:**", rationale.get("priorities"))
+    st.write("**Alternativas:**", rationale.get("alternatives_considered"))
+
+
+def _run_metadata(run: dict) -> None:
+    fields = ("run_id", "_path", "status", "generated_at", "seconds", "experiment_id",
+              "repeat_index", "provider", "model", "proposer_provider", "proposer_model",
+              "critic_provider", "critic_model", "prompt_versions", "generation_config",
+              "proposer_generation_config", "critic_generation_config", "critic_settings",
+              "scenario_sha256", "_active_scenario_sha256", "_scenario_hash_matches",
+              "aggregate_requirements_sha256", "confirmed_changes_sha256")
+    st.json({field: run.get(field) for field in fields if field in run}, expanded=False)
+
+
+def _run_calendar(run: dict, *, initial: bool = False, key: str) -> None:
+    raw = (run.get("initial_proposal") if initial else
+           run.get("proposal") if run["configuration"] == "A" else run.get("final_proposal"))
+    scenario = load_scenario_v2(ROOT / "data" / "scenarios" / f"{run['scenario_id']}.json")
+    packet = local_packet(scenario)
+    original = view_events(packet["calendar"])
+    if raw is None:
+        _weekly_calendar(packet, original, mode=f"original:{key}")
+        return
+    packet, _, proposed, recomputed = preview_v2(
+        ROOT, {"scenario_id": run["scenario_id"], "final_proposal": raw})
+    if proposed is None:
+        st.error("A proposta não pode ser aplicada; o calendário original permanece intacto.")
+        _weekly_calendar(packet, original, mode=f"original:{key}")
+    else:
+        _weekly_calendar(packet, proposed, mode=f"result:{key}")
+    if run.get("technical_validation") is not None and not initial:
+        st.write("**Validação gravada:**", run["technical_validation"])
+    st.write("**Validação recalculada:**", recomputed)
+
+
+def _scenario_header(scenario_id: str) -> None:
+    scenario = load_scenario_v2(ROOT / "data" / "scenarios" / f"{scenario_id}.json")
+    st.subheader(f"Cenário {scenario.scenario_id}")
+    st.info(scenario.user_request)
+    st.caption(f"Família: {scenario.family_id} · perfil: {scenario.profile.profile_id} · "
+               f"{scenario.profile.description} · fuso: {scenario.profile.timezone}")
+    with st.expander("Perfil, restrições e preferências"):
+        st.json(scenario.profile.model_dump(mode="json"), expanded=False)
+
+
+def _critic_history(run: dict) -> None:
+    st.markdown("#### Histórico do Critic")
+    if not run.get("iterations"):
+        st.info("Sem iterações do Critic nesta execução.")
+        return
+    for step in run["iterations"]:
+        with st.expander(f"Iteração {step.get('index')}"):
+            st.write("Feedback para o Proposer:", step.get("proposer_feedback") or "não aplicável")
+            st.write("Proposta:", step.get("proposal"))
+            st.write("Validação:", step.get("validation"))
+            st.write("Avaliação do Critic:", step.get("critic_evaluation") or "não realizada")
+            st.write("Política de aceitação:", step.get("acceptance_policy") or "não disponível")
+            st.write("Condições não verificadas:",
+                     step.get("unresolved_assumptions", "não avaliadas"))
+            if step.get("result_calendar"):
+                st.write("Calendário resultante desta iteração:", step["result_calendar"])
+
+
+def _a_results_page() -> None:
+    st.header("Resultados da configuração A · apenas leitura")
+    matrix = status_matrix(ROOT)
+    st.dataframe([{"scenario_id": row["scenario_id"], "A runs": len(row["A"]),
+                   "estado mais recente": row["A"][0]["status"] if row["A"] else "sem run"}
+                  for row in matrix], hide_index=True)
+    scenario_id = st.selectbox("Cenário piloto", PILOT_SCENARIO_IDS, key="a:scenario")
+    available = runs_v2(ROOT, scenario_id=scenario_id, configuration="A")
+    _scenario_header(scenario_id)
+    if not available:
+        st.warning("Ainda não existe uma execução A para este cenário.")
+        return
+    selected_id = st.selectbox("Execução A", [row["run_id"] for row in available],
+                               format_func=lambda rid: _run_label(next(r for r in available if r["run_id"] == rid)),
+                               key="a:run")
+    run = next(row for row in available if row["run_id"] == selected_id)
+    st.write(f"**Estado:** {run['status']} · **Decisão simulada:** "
+             f"{run.get('decision') or 'indisponível'} · **Razões:** {run.get('reasons') or []}")
+    if run.get("error"):
+        st.error(run["error"])
+    _proposal_details("Proposta final A", run.get("proposal"))
+    scenario = load_scenario_v2(ROOT / "data/scenarios" / f"{scenario_id}.json")
+    packet = local_packet(scenario)
+    st.markdown("#### Calendário original")
+    _weekly_calendar(packet, view_events(packet["calendar"]),
+                     mode=f"original:A:{run['run_id']}")
+    st.markdown("#### Calendário resultante A")
+    _run_calendar(run, key=f"A:{run['run_id']}")
+    with st.expander("Metadados da execução A"):
+        _run_metadata(run)
+
+
+def _ab_comparison_page() -> None:
+    st.header("Comparação A/B · apenas leitura")
+    st.caption("A e B fazem chamadas iniciais independentes. Diferenças entre A e B não são, por si só, efeito do Critic.")
+    scenario_id = st.selectbox("Cenário piloto", PILOT_SCENARIO_IDS, key="ab:scenario")
+    _scenario_header(scenario_id)
+    a_runs = runs_v2(ROOT, scenario_id=scenario_id, configuration="A")
+    b_runs = runs_v2(ROOT, scenario_id=scenario_id, configuration="B")
+    selectors = st.columns(2)
+    chosen = []
+    for column, label, available in zip(selectors, ("A", "B"), (a_runs, b_runs)):
+        with column:
+            if available:
+                rid = st.selectbox(f"Execução {label}", [r["run_id"] for r in available],
+                                   format_func=lambda value, rows=available: _run_label(next(r for r in rows if r["run_id"] == value)),
+                                   key=f"ab:{label}:run")
+                chosen.append(next(r for r in available if r["run_id"] == rid))
+            else:
+                st.warning(f"Sem execução {label}.")
+                chosen.append(None)
+    scenario = load_scenario_v2(ROOT / "data/scenarios" / f"{scenario_id}.json")
+    packet = local_packet(scenario)
+    st.markdown("#### Calendário original")
+    _weekly_calendar(packet, view_events(packet["calendar"]), mode=f"original:ab:{scenario_id}")
+    panels = st.columns(2)
+    for column, label, run in zip(panels, ("A", "B"), chosen):
+        with column:
+            st.subheader(f"Configuração {label}")
+            if run is None:
+                continue
+            st.write(f"**Estado:** {run['status']} · **Decisão:** {run.get('decision') or 'indisponível'}")
+            st.write("**Razões:**", run.get("reasons") or [])
+            if run.get("error"):
+                st.error(run["error"])
+            if label == "B":
+                _proposal_details("Proposta inicial B", run.get("initial_proposal"))
+            _proposal_details(f"Proposta final {label}",
+                              run.get("proposal") if label == "A" else run.get("final_proposal"))
+            st.markdown(f"#### Calendário resultante {label}")
+            _run_calendar(run, key=f"AB:{label}:{run['run_id']}")
+            with st.expander(f"Metadados {label}"):
+                _run_metadata(run)
+    if chosen[1] is not None:
+        _critic_history(chosen[1])
+        st.write("**Incertezas finais B:**",
+                 chosen[1].get("final_unresolved_assumptions", "não avaliadas"))
 
 
 def _guide() -> None:
@@ -371,15 +534,20 @@ def _v2_consensus_page() -> None:
 
 
 def main() -> None:
-    st.title("HCAI · Anotação humana")
-    st.caption("Avaliação independente de propostas finais; cenário schema 2.0.")
+    st.title("HCAI · Piloto A/B e anotação humana")
+    st.caption("Inspeção read-only de execuções e avaliação independente de propostas B.")
     with st.sidebar:
         author = st.selectbox("Avaliador ativo", AUTHORS,
                               help="Separação operacional local; não é autenticação.")
-        page = st.radio("Área", ["Propostas", "Comparação e adjudicação", "Guia de autonomia"])
+        page = st.radio("Área", ["Propostas", "Resultados A", "Comparação A/B",
+                                 "Comparação e adjudicação", "Guia de autonomia"])
         st.caption("A comparação só abre depois de ambos os autores concluírem a proposta.")
     if page == "Propostas":
         _v2_review_page(author)
+    elif page == "Resultados A":
+        _a_results_page()
+    elif page == "Comparação A/B":
+        _ab_comparison_page()
     elif page == "Comparação e adjudicação":
         _v2_consensus_page()
     else:

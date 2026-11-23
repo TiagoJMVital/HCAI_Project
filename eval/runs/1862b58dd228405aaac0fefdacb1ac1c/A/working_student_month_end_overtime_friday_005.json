@@ -1,0 +1,105 @@
+{
+  "schema_version": "2.0",
+  "configuration": "A",
+  "run_id": "1862b58dd228405aaac0fefdacb1ac1c",
+  "experiment_id": null,
+  "repeat_index": 0,
+  "scenario_id": "working_student_month_end_overtime_friday_005",
+  "family": "working_student_schedule_conflict",
+  "profile_id": "working_student_01__working_student_month_end_overtime_friday_005",
+  "split": "train",
+  "aggregate_requirements_sha256": null,
+  "confirmed_changes_sha256": null,
+  "provider": "iaedu",
+  "model": "GPT-5.5",
+  "generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request"
+  },
+  "prompt_versions": {
+    "proposer_sha256": "45d8e4e44b2e45cd8c6e4e829ce43fb6825a88e6550716e1c655d1f49034cc79"
+  },
+  "generated_at": "2026-11-22T19:44:03.510793+00:00",
+  "proposal": {
+    "changes": [
+      {
+        "type": "delete",
+        "event_id": "gym_fri",
+        "title": "Friday Gym Workout",
+        "from_start": "2027-04-30T18:00:00+01:00",
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "Friday evening seminar class_fri from 2027-04-30T19:00:00+01:00 to 2027-04-30T21:30:00+01:00 is protected and mandatory.",
+        "Friday month-end closing work runs until 2027-04-30T18:30:00+01:00 and is fixed in the supplied calendar.",
+        "Friday Gym Workout gym_fri overlaps the fixed overtime shift from 18:00 to 18:30 and also conflicts with arriving for the protected 19:00 seminar on time.",
+        "Earlier workouts this week, gym_mon, gym_wed, and gym_thu, are left unchanged as requested."
+      ],
+      "priorities": [
+        "Preserve the mandatory Friday seminar and fixed month-end work commitment.",
+        "Apply the user's explicit request to drop Friday's workout rather than moving earlier-week workouts.",
+        "Avoid modifying protected or fixed events without an externally confirmed exception.",
+        "Keep earlier health routines intact because the user specifically asked for them to stay intact."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Move the Friday workout to an earlier weekday free interval.",
+          "rejected_because": "The user specifically asked to drop Friday's workout and keep earlier workouts intact. Moving it earlier could add load or disrupt the existing week without confirming venue/resource availability."
+        },
+        {
+          "option": "Move the Friday workout to Saturday morning.",
+          "rejected_because": "Although the profile has a soft preference to compensate earlier or Saturday if overtime overlaps, the user requested dropping the Friday workout, and no Saturday calendar or gym availability was supplied."
+        },
+        {
+          "option": "Move or shorten the Friday seminar.",
+          "rejected_because": "The Friday seminar is protected by a hard constraint and mandatory, so it cannot be moved or shortened."
+        },
+        {
+          "option": "Move Friday overtime earlier or shorten it.",
+          "rejected_because": "The month-end closing overtime is fixed and externally tied to work, with no supplied exception allowing a move or deletion."
+        }
+      ],
+      "summary": "Delete only the Friday Gym Workout so the fixed month-end overtime ending at 18:30 no longer collides with the workout and the protected 19:00 seminar remains reachable in the calendar. Monday, Wednesday, and Thursday workouts are not changed."
+    }
+  },
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [],
+    "valid": true
+  },
+  "decision": "defer",
+  "reasons": [
+    "apaga evento (gym_fri)",
+    "toca em categoria sensível (health)"
+  ],
+  "status": "proposal_ready",
+  "seconds": 7.011
+}

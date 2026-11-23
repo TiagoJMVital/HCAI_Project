@@ -1,0 +1,2333 @@
+{
+  "proposal_id": "v2p_9247ca133d170a5856155e11",
+  "scenario_id": "freelancer_flexible_medical_appointment_birthday_dinner_001",
+  "family_id": "freelancer_schedule_conflict",
+  "profile_id": "freelancer_flexible_01__freelancer_flexible_medical_appointment_birthday_dinner_001",
+  "split": "train",
+  "run_id": "7f50ce280b904041bab8bd7ae79ed854",
+  "configuration": "B",
+  "generated_at": "2026-11-22T19:46:19.574621+00:00",
+  "proposer_provider": "iaedu",
+  "proposer_model": "GPT-5.5",
+  "proposer_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request"
+  },
+  "critic_provider": "iaedu",
+  "critic_model": "GPT-5.5",
+  "critic_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request"
+  },
+  "prompt_versions": {
+    "proposer_sha256": "45d8e4e44b2e45cd8c6e4e829ce43fb6825a88e6550716e1c655d1f49034cc79",
+    "proposer_revision_sha256": "3d8999560474363c55ab096e197152da0b244a3bfd2f597a7e0ad2136452ccf4",
+    "critic_sha256": "1686688cdd4bc63abb12e6633ef9dbb9b62d69b69aba1c4805a201657cc5bb34"
+  },
+  "critic_settings": {
+    "threshold": 4.0,
+    "max_refinements": 3,
+    "min_dimension_score": 1
+  },
+  "experiment_id": null,
+  "repeat_index": 0,
+  "seconds": 92.182,
+  "critic_score": 4.0,
+  "critic_accepted": true,
+  "iterations": [
+    {
+      "index": 0,
+      "proposer_feedback": null,
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "delete",
+            "event_id": "work_thu",
+            "title": "Copywriting Work Block",
+            "from_start": "2027-04-15T13:30:00+01:00",
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Copywriting Work Block",
+            "from_start": null,
+            "to_start": "2027-04-12T18:00:00+01:00",
+            "to_end": "2027-04-12T19:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Copywriting Work Block",
+            "from_start": null,
+            "to_start": "2027-04-13T17:30:00+01:00",
+            "to_end": "2027-04-13T19:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Copywriting Work Block",
+            "from_start": null,
+            "to_start": "2027-04-14T18:00:00+01:00",
+            "to_end": "2027-04-14T19:30:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Copywriting Work Block",
+            "from_start": null,
+            "to_start": "2027-04-16T17:00:00+01:00",
+            "to_end": "2027-04-16T18:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "The weekly work requirement is a minimum of 1920 minutes between 2027-04-12T00:00:00+01:00 and 2027-04-17T00:00:00+01:00.",
+            "The medical consultation on Thursday at 11:00 is fixed/protected and is not moved or deleted.",
+            "The birthday dinner on Thursday from 20:00 to 23:30 is fixed and is not moved or deleted.",
+            "Protected sleep blocks remain unchanged, including the Thursday night sleep block starting at 23:30.",
+            "Surf and gym routines remain unchanged: Monday surf, Tuesday gym, Wednesday surf, and Friday surf are preserved.",
+            "The deleted Thursday work block is flexible work under the supplied calendar, not a fixed/protected event."
+          ],
+          "priorities": [
+            "Keep mandatory health and fixed social commitments intact.",
+            "Preserve sleep exactly as scheduled.",
+            "Preserve surf/gym routines rather than using those morning blocks for work.",
+            "Redistribute the 5 hours of Thursday work across Monday, Tuesday, Wednesday, and Friday so the final calendar still contains 32 hours of scheduled copywriting work for the week.",
+            "Use free calendar intervals after existing work blocks to avoid disrupting existing routines."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Keep the Thursday 13:30-18:30 work block unchanged.",
+              "rejected_because": "Although the original calendar already totals 32 hours of work, it does not satisfy the request to redistribute Thursday's work load across Monday, Tuesday, Wednesday, and Friday around the medical appointment and birthday dinner."
+            },
+            {
+              "option": "Move the full Thursday work block as one 5-hour block to a single evening, such as Monday 18:30-23:30.",
+              "rejected_because": "This is operationally possible in a free interval, but it creates a much heavier single evening and ends immediately before protected sleep, which is a worse fit for keeping sleep and recovery intact."
+            },
+            {
+              "option": "Move or shorten surf/gym sessions to create daytime work slots.",
+              "rejected_because": "The user explicitly asked to keep surf/gym routines intact, and the existing free evening intervals can absorb the redistributed work without changing sports sessions."
+            },
+            {
+              "option": "Add work on Thursday morning before the medical appointment or after the dinner.",
+              "rejected_because": "That would not align with the user's request to redistribute the work across Monday, Tuesday, Wednesday, and Friday, and post-dinner work would conflict with protected sleep."
+            }
+          ],
+          "summary": "This proposal removes the flexible 5-hour Thursday copywriting block and redistributes exactly 5 hours across Monday, Tuesday, Wednesday, and Friday: 1 hour Monday evening, 1.5 hours Tuesday evening, 1.5 hours Wednesday evening, and 1 hour Friday evening. The final scheduled work total remains 32 hours for the week, while the fixed medical consultation, birthday dinner, protected sleep, and surf/gym routines are left unchanged. The main uncertainty is that free calendar time does not prove energy, concentration, or external availability, but copywriting is described as remote and flexible, so these additions are operationally feasible based on the supplied calendar."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true,
+        "aggregate_checks": [
+          {
+            "id": "weekly_hours",
+            "status": "pass",
+            "minutes": 1920.0,
+            "minimum_minutes": 1920,
+            "category": "work",
+            "evidence": "union of final calendar intervals"
+          }
+        ],
+        "aggregate_validation_version": "duration_total_v1"
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-04-11T23:30:00+01:00",
+            "end": "2027-04-12T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "surf_mon",
+            "title": "Morning Surf Session",
+            "start": "2027-04-12T08:00:00+01:00",
+            "end": "2027-04-12T10:00:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Surf.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_mon",
+            "title": "Copywriting Work Block",
+            "start": "2027-04-12T11:00:00+01:00",
+            "end": "2027-04-12T18:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "7 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_1",
+            "title": "Copywriting Work Block",
+            "start": "2027-04-12T18:00:00+01:00",
+            "end": "2027-04-12T19:00:00+01:00",
+            "category": null,
+            "importance": null,
+            "fixed": null,
+            "participants": null,
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-04-12T23:30:00+01:00",
+            "end": "2027-04-13T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_tue",
+            "title": "Gym Workout",
+            "start": "2027-04-13T08:00:00+01:00",
+            "end": "2027-04-13T09:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_tue",
+            "title": "Copywriting Work Block",
+            "start": "2027-04-13T10:30:00+01:00",
+            "end": "2027-04-13T17:30:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "7 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_2",
+            "title": "Copywriting Work Block",
+            "start": "2027-04-13T17:30:00+01:00",
+            "end": "2027-04-13T19:00:00+01:00",
+            "category": null,
+            "importance": null,
+            "fixed": null,
+            "participants": null,
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-04-13T23:30:00+01:00",
+            "end": "2027-04-14T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "surf_wed",
+            "title": "Morning Surf Session",
+            "start": "2027-04-14T08:00:00+01:00",
+            "end": "2027-04-14T10:00:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Surf.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_wed",
+            "title": "Copywriting Work Block",
+            "start": "2027-04-14T11:00:00+01:00",
+            "end": "2027-04-14T18:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "7 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_3",
+            "title": "Copywriting Work Block",
+            "start": "2027-04-14T18:00:00+01:00",
+            "end": "2027-04-14T19:30:00+01:00",
+            "category": null,
+            "importance": null,
+            "fixed": null,
+            "participants": null,
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-04-14T23:30:00+01:00",
+            "end": "2027-04-15T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "medical_thu",
+            "title": "Specialist Medical Consultation",
+            "start": "2027-04-15T11:00:00+01:00",
+            "end": "2027-04-15T12:30:00+01:00",
+            "category": "medical",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "doctor"
+            ],
+            "description": "Clinic visit (includes 30 min transit).",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "birthday_thu",
+            "title": "Best Friend's Birthday Dinner",
+            "start": "2027-04-15T20:00:00+01:00",
+            "end": "2027-04-15T23:30:00+01:00",
+            "category": "social",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "friends"
+            ],
+            "description": "Celebration dinner.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-04-15T23:30:00+01:00",
+            "end": "2027-04-16T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "surf_fri",
+            "title": "Morning Surf Session",
+            "start": "2027-04-16T08:00:00+01:00",
+            "end": "2027-04-16T10:00:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Surf.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_fri",
+            "title": "Copywriting Work Block",
+            "start": "2027-04-16T11:00:00+01:00",
+            "end": "2027-04-16T17:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "6 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_4",
+            "title": "Copywriting Work Block",
+            "start": "2027-04-16T17:00:00+01:00",
+            "end": "2027-04-16T18:00:00+01:00",
+            "category": null,
+            "importance": null,
+            "fixed": null,
+            "participants": null,
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          }
+        ],
+        "metadata_note": "Null metadata on added events means the Proposal contract did not supply it; it is not a new personal preference or hard constraint."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 3,
+          "alternatives": 3,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The redistribution preserves the 32-hour weekly work total, sleep, health routines, medical appointment and birthday dinner, but it does so by extending already long copywriting days into continuous-looking work stretches: Monday 11:00-19:00 after surf, Tuesday 10:30-19:00 after gym, and Wednesday 11:00-19:30 after surf.",
+          "The rationale treats free evening time after existing work blocks as the least disruptive option, but gives limited practical analysis of meals, decompression, concentration decline, or whether the added copywriting time is realistically effective after 6-7 hours of prior work and morning exercise.",
+          "The plan removes Thursday's 13:30-18:30 work block, which does create a lighter Thursday around the medical consultation and birthday dinner, but the benefit is not fully weighed against the heavier Monday-Wednesday workload pattern.",
+          "Alternatives are considered, especially avoiding one 5-hour evening block and preserving surf/gym routines, but the proposal does not appear to consider whether the redistributed blocks could be shaped to preserve more daily recovery margin while still meeting the visible weekly requirement and stated redistribution pattern.",
+          "The added events in the final calendar have null category, importance and participants despite the proposal describing them as work for the user; the metadata note says this is a contract issue rather than a preference, so this is not a human scheduling violation, but it makes the simulated calendar less self-explanatory."
+        ],
+        "feedback": "The proposal is broadly coherent and much better than concentrating the full 5 hours into one late evening. It protects the fixed medical and social commitments, keeps sleep blocks unchanged, and preserves the visible surf/gym routine. The main human-quality concern is the cumulative Monday-Wednesday pattern: each day combines morning physical activity with a long copywriting block that is extended directly into the evening, especially Tuesday 10:30-19:00 and Wednesday 11:00-19:30. That may be manageable for some people if the work blocks include flexible breaks and meals, but the rationale does not substantiate that assumption. The proposer should reconsider or better justify whether these extended continuous-looking work periods are sustainable and effective, rather than relying mainly on the fact that the calendar slots are free. A useful revision would not need to abandon the same operations if there is fuller context showing that breaks, meals and recovery are built into the work blocks; otherwise, the distribution should be reviewed for a less draining shape within the visible priorities.",
+        "plausibility_review": {
+          "revision_required": true,
+          "severity": "moderate",
+          "reason": "The proposed changes significantly increase the length of several already substantial workdays by appending work directly after existing copywriting blocks: Monday becomes 11:00-19:00 following 08:00-10:00 surf, Tuesday becomes 10:30-19:00 following 08:00-09:30 gym, and Wednesday becomes 11:00-19:30 following 08:00-10:00 surf. This is not objectively impossible, and Thursday becomes lighter, but the plan depends on the user being able to maintain useful concentration and ordinary daily needs across these long continuous-looking periods. The rationale acknowledges energy uncertainty but does not meaningfully account for it when choosing the final distribution.",
+          "suggested_improvement": "Reconsider the distribution with attention to daily recovery and whether the long copywriting blocks include practical breaks, meals and decompression. If the same schedule is kept, provide a grounded explanation from the fuller context that these extended work periods are intended to include adequate internal breaks and are sustainable for the user."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Internal breaks during copywriting blocks",
+            "assumption": "The long work intervals can include adequate breaks for meals, hydration, hygiene and mental reset without undermining the 32-hour weekly work requirement.",
+            "evidence_gap": "The calendar shows continuous copywriting blocks such as Tuesday 10:30-19:00 and Wednesday 11:00-19:30, but does not state whether these are strict productive intervals or flexible blocks with breaks included.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Evening cognitive capacity",
+            "assumption": "The user can produce effective copywriting after long daytime work periods and morning exercise on Monday, Tuesday and Wednesday.",
+            "evidence_gap": "The rationale says copywriting is remote and flexible, but gives no user-specific evidence about concentration, fatigue tolerance or preferred working rhythm after exercise and extended work.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Transition after surf and gym",
+            "assumption": "The gaps after morning exercise are sufficient for recovery, food, hygiene and any needed setup before work starts.",
+            "evidence_gap": "The calendar shows 30 minutes from Monday surf ending 10:00 to work at 11:00 only if counting the full hour, Tuesday gym ending 09:30 to work at 10:30, Wednesday surf ending 10:00 to work at 11:00, and Friday surf ending 10:00 to work at 11:00; locations and routines are not provided.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Thursday recovery value",
+            "assumption": "Removing the Thursday 13:30-18:30 work block provides enough compensating recovery or practical margin to offset heavier Monday-Wednesday evenings.",
+            "evidence_gap": "Thursday has a medical consultation 11:00-12:30 and birthday dinner 20:00-23:30, but the rationale does not discuss whether the freed daytime period is intended for recovery, preparation, travel, errands or other obligations.",
+            "potential_impact": "minor",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Metadata of added work events",
+            "assumption": "The added Copywriting Work Blocks are intended to have the same practical meaning as the original work blocks despite null category, importance and participants in the final calendar.",
+            "evidence_gap": "The proposal specifies category, importance and participants for additions, while the final calendar displays null values and notes that this reflects the Proposal contract rather than a preference or hard constraint.",
+            "potential_impact": "minor",
+            "verification_source": "unknown"
+          }
+        ],
+        "overall": 3.5
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": false,
+        "plausibility_revision_required": true,
+        "accepted": false,
+        "revision_causes": [
+          "numeric_criteria_failed",
+          "plausibility_revision_required"
+        ]
+      },
+      "operations_changed_from_previous": null,
+      "rationale_changed_from_previous": null,
+      "prior_critic_reviews": [],
+      "unresolved_assumptions": [
+        {
+          "subject": "Internal breaks during copywriting blocks",
+          "assumption": "The long work intervals can include adequate breaks for meals, hydration, hygiene and mental reset without undermining the 32-hour weekly work requirement.",
+          "evidence_gap": "The calendar shows continuous copywriting blocks such as Tuesday 10:30-19:00 and Wednesday 11:00-19:30, but does not state whether these are strict productive intervals or flexible blocks with breaks included.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Evening cognitive capacity",
+          "assumption": "The user can produce effective copywriting after long daytime work periods and morning exercise on Monday, Tuesday and Wednesday.",
+          "evidence_gap": "The rationale says copywriting is remote and flexible, but gives no user-specific evidence about concentration, fatigue tolerance or preferred working rhythm after exercise and extended work.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Transition after surf and gym",
+          "assumption": "The gaps after morning exercise are sufficient for recovery, food, hygiene and any needed setup before work starts.",
+          "evidence_gap": "The calendar shows 30 minutes from Monday surf ending 10:00 to work at 11:00 only if counting the full hour, Tuesday gym ending 09:30 to work at 10:30, Wednesday surf ending 10:00 to work at 11:00, and Friday surf ending 10:00 to work at 11:00; locations and routines are not provided.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Thursday recovery value",
+          "assumption": "Removing the Thursday 13:30-18:30 work block provides enough compensating recovery or practical margin to offset heavier Monday-Wednesday evenings.",
+          "evidence_gap": "Thursday has a medical consultation 11:00-12:30 and birthday dinner 20:00-23:30, but the rationale does not discuss whether the freed daytime period is intended for recovery, preparation, travel, errands or other obligations.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Metadata of added work events",
+          "assumption": "The added Copywriting Work Blocks are intended to have the same practical meaning as the original work blocks despite null category, importance and participants in the final calendar.",
+          "evidence_gap": "The proposal specifies category, importance and participants for additions, while the final calendar displays null values and notes that this reflects the Proposal contract rather than a preference or hard constraint.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "proposer_feedback": "Numeric Critic criteria failed. Scores: {\"reasoning\":4,\"coherence\":3,\"alternatives\":3,\"clarity\":4}. Plausibility revision required (moderate): The proposed changes significantly increase the length of several already substantial workdays by appending work directly after existing copywriting blocks: Monday becomes 11:00-19:00 following 08:00-10:00 surf, Tuesday becomes 10:30-19:00 following 08:00-09:30 gym, and Wednesday becomes 11:00-19:30 following 08:00-10:00 surf. This is not objectively impossible, and Thursday becomes lighter, but the plan depends on the user being able to maintain useful concentration and ordinary daily needs across these long continuous-looking periods. The rationale acknowledges energy uncertainty but does not meaningfully account for it when choosing the final distribution. Suggested direction: Reconsider the distribution with attention to daily recovery and whether the long copywriting blocks include practical breaks, meals and decompression. If the same schedule is kept, provide a grounded explanation from the fuller context that these extended work periods are intended to include adequate internal breaks and are sustainable for the user. The Critic lacks the full user constraints; explain if no better feasible option exists. Unverified conditions to reassess: [{'subject': 'Internal breaks during copywriting blocks', 'assumption': 'The long work intervals can include adequate breaks for meals, hydration, hygiene and mental reset without undermining the 32-hour weekly work requirement.', 'evidence_gap': 'The calendar shows continuous copywriting blocks such as Tuesday 10:30-19:00 and Wednesday 11:00-19:30, but does not state whether these are strict productive intervals or flexible blocks with breaks included.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Evening cognitive capacity', 'assumption': 'The user can produce effective copywriting after long daytime work periods and morning exercise on Monday, Tuesday and Wednesday.', 'evidence_gap': 'The rationale says copywriting is remote and flexible, but gives no user-specific evidence about concentration, fatigue tolerance or preferred working rhythm after exercise and extended work.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Transition after surf and gym', 'assumption': 'The gaps after morning exercise are sufficient for recovery, food, hygiene and any needed setup before work starts.', 'evidence_gap': 'The calendar shows 30 minutes from Monday surf ending 10:00 to work at 11:00 only if counting the full hour, Tuesday gym ending 09:30 to work at 10:30, Wednesday surf ending 10:00 to work at 11:00, and Friday surf ending 10:00 to work at 11:00; locations and routines are not provided.', 'potential_impact': 'material', 'verification_source': 'unknown'}, {'subject': 'Thursday recovery value', 'assumption': 'Removing the Thursday 13:30-18:30 work block provides enough compensating recovery or practical margin to offset heavier Monday-Wednesday evenings.', 'evidence_gap': 'Thursday has a medical consultation 11:00-12:30 and birthday dinner 20:00-23:30, but the rationale does not discuss whether the freed daytime period is intended for recovery, preparation, travel, errands or other obligations.', 'potential_impact': 'minor', 'verification_source': 'user_context'}, {'subject': 'Metadata of added work events', 'assumption': 'The added Copywriting Work Blocks are intended to have the same practical meaning as the original work blocks despite null category, importance and participants in the final calendar.', 'evidence_gap': 'The proposal specifies category, importance and participants for additions, while the final calendar displays null values and notes that this reflects the Proposal contract rather than a preference or hard constraint.', 'potential_impact': 'minor', 'verification_source': 'unknown'}] Weaknesses: ['The redistribution preserves the 32-hour weekly work total, sleep, health routines, medical appointment and birthday dinner, but it does so by extending already long copywriting days into continuous-looking work stretches: Monday 11:00-19:00 after surf, Tuesday 10:30-19:00 after gym, and Wednesday 11:00-19:30 after surf.', 'The rationale treats free evening time after existing work blocks as the least disruptive option, but gives limited practical analysis of meals, decompression, concentration decline, or whether the added copywriting time is realistically effective after 6-7 hours of prior work and morning exercise.', \"The plan removes Thursday's 13:30-18:30 work block, which does create a lighter Thursday around the medical consultation and birthday dinner, but the benefit is not fully weighed against the heavier Monday-Wednesday workload pattern.\", 'Alternatives are considered, especially avoiding one 5-hour evening block and preserving surf/gym routines, but the proposal does not appear to consider whether the redistributed blocks could be shaped to preserve more daily recovery margin while still meeting the visible weekly requirement and stated redistribution pattern.', 'The added events in the final calendar have null category, importance and participants despite the proposal describing them as work for the user; the metadata note says this is a contract issue rather than a preference, so this is not a human scheduling violation, but it makes the simulated calendar less self-explanatory.']. Actionable feedback: The proposal is broadly coherent and much better than concentrating the full 5 hours into one late evening. It protects the fixed medical and social commitments, keeps sleep blocks unchanged, and preserves the visible surf/gym routine. The main human-quality concern is the cumulative Monday-Wednesday pattern: each day combines morning physical activity with a long copywriting block that is extended directly into the evening, especially Tuesday 10:30-19:00 and Wednesday 11:00-19:30. That may be manageable for some people if the work blocks include flexible breaks and meals, but the rationale does not substantiate that assumption. The proposer should reconsider or better justify whether these extended continuous-looking work periods are sustainable and effective, rather than relying mainly on the fact that the calendar slots are free. A useful revision would not need to abandon the same operations if there is fuller context showing that breaks, meals and recovery are built into the work blocks; otherwise, the distribution should be reviewed for a less draining shape within the visible priorities.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "delete",
+            "event_id": "work_mon",
+            "title": "Copywriting Work Block",
+            "from_start": "2027-04-12T11:00:00+01:00",
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "work_tue",
+            "title": "Copywriting Work Block",
+            "from_start": "2027-04-13T10:30:00+01:00",
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "work_wed",
+            "title": "Copywriting Work Block",
+            "from_start": "2027-04-14T11:00:00+01:00",
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "work_thu",
+            "title": "Copywriting Work Block",
+            "from_start": "2027-04-15T13:30:00+01:00",
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "work_fri",
+            "title": "Copywriting Work Block",
+            "from_start": "2027-04-16T11:00:00+01:00",
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Copywriting Work Block",
+            "from_start": null,
+            "to_start": "2027-04-12T11:00:00+01:00",
+            "to_end": "2027-04-12T15:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Copywriting Work Block",
+            "from_start": null,
+            "to_start": "2027-04-12T16:00:00+01:00",
+            "to_end": "2027-04-12T20:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Copywriting Work Block",
+            "from_start": null,
+            "to_start": "2027-04-13T10:30:00+01:00",
+            "to_end": "2027-04-13T14:30:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Copywriting Work Block",
+            "from_start": null,
+            "to_start": "2027-04-13T15:30:00+01:00",
+            "to_end": "2027-04-13T19:30:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Copywriting Work Block",
+            "from_start": null,
+            "to_start": "2027-04-14T11:00:00+01:00",
+            "to_end": "2027-04-14T15:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Copywriting Work Block",
+            "from_start": null,
+            "to_start": "2027-04-14T16:00:00+01:00",
+            "to_end": "2027-04-14T20:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Copywriting Work Block",
+            "from_start": null,
+            "to_start": "2027-04-16T11:00:00+01:00",
+            "to_end": "2027-04-16T15:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Copywriting Work Block",
+            "from_start": null,
+            "to_start": "2027-04-16T16:00:00+01:00",
+            "to_end": "2027-04-16T20:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "The final calendar must include at least 1920 minutes of scheduled work between 2027-04-12T00:00:00+01:00 and 2027-04-17T00:00:00+01:00; the proposed work blocks total exactly 32 hours.",
+            "The mandatory medical specialist consultation on Thursday from 11:00 to 12:30 is fixed/protected and is not moved or deleted.",
+            "The best friend's birthday dinner on Thursday from 20:00 to 23:30 is fixed and is not moved or deleted.",
+            "Protected sleep blocks remain unchanged, including 23:30 to 07:30 each night in the supplied calendar.",
+            "Surf and gym routines remain unchanged: Monday surf 08:00-10:00, Tuesday gym 08:00-09:30, Wednesday surf 08:00-10:00, and Friday surf 08:00-10:00.",
+            "The deleted copywriting blocks are flexible work events under the supplied calendar and profile; deleting them here means replacing their scheduled work time, not dropping the weekly work requirement.",
+            "All proposed times use the Europe/Lisbon offset shown in the supplied calendar."
+          ],
+          "priorities": [
+            "Keep health, sleep, and fixed social commitments intact before optimizing work placement.",
+            "Remove Thursday copywriting so the day has more practical margin around the medical consultation and birthday dinner.",
+            "Redistribute the full 32 hours across Monday, Tuesday, Wednesday, and Friday as requested.",
+            "Avoid a single very long uninterrupted copywriting stretch by replacing each workday with two 4-hour work blocks separated by a visible 1-hour unscheduled interval.",
+            "Preserve the existing morning transition gaps after surf or gym before copywriting begins, rather than using those narrow intervals for extra work."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Keep the previous approach: delete Thursday work and append short work extensions directly after the existing Monday, Tuesday, Wednesday, and Friday blocks.",
+              "rejected_because": "It meets the numeric 32-hour requirement, but it creates continuous-looking work stretches such as 10:30-19:00 or 11:00-19:30 after morning exercise. Because the calendar does not prove that meals, decompression, or cognitive reset are built into those blocks, this revision reserves explicit mid-day gaps instead."
+            },
+            {
+              "option": "Keep the original Thursday 13:30-18:30 work block unchanged.",
+              "rejected_because": "The original calendar already totals 32 hours, but it does not satisfy the user's request to reduce Thursday's work load and redistribute the required work across Monday, Tuesday, Wednesday, and Friday around the medical appointment and birthday dinner."
+            },
+            {
+              "option": "Move the full Thursday workload to one single evening, such as Friday 17:00-22:00.",
+              "rejected_because": "This is operationally possible in free calendar time, but it would create a much heavier late work session and would leave less evening recovery before protected sleep."
+            },
+            {
+              "option": "Use the morning gaps immediately after sleep and before surf or gym for work.",
+              "rejected_because": "Those gaps are short and adjacent to protected sleep and health routines. Using them would be a poor fit for keeping the surf/gym routine and everyday transition needs intact, especially because travel, hygiene, food, and setup details are unknown."
+            },
+            {
+              "option": "Move or shorten the surf/gym sessions to create more daytime work availability.",
+              "rejected_because": "The user explicitly asked to keep surf/gym routines intact, and the required 32 hours can be scheduled without changing those health events."
+            },
+            {
+              "option": "Leave some work on Thursday afternoon after the medical consultation.",
+              "rejected_because": "That would reduce the scale of redistribution, but the user specifically asked to redistribute the required work hours across Monday, Tuesday, Wednesday, and Friday, and Thursday also contains a fixed evening social commitment."
+            }
+          ],
+          "summary": "This revised proposal removes all Thursday copywriting and restructures the flexible work schedule into four balanced 8-hour copywriting days on Monday, Tuesday, Wednesday, and Friday. Each day is split into two 4-hour blocks with a 1-hour unscheduled gap, so the plan no longer depends on assuming that long continuous-looking blocks secretly contain adequate breaks. The trade-off is that work now ends at 19:30 or 20:00 on the four workdays, which is later than some original work blocks, but it preserves sleep, surf/gym routines, the fixed medical consultation, and the birthday dinner. The main remaining uncertainty is human sustainability: the calendar cannot prove energy, focus, meal timing, travel after surf/gym, or actual completion of copywriting work. Based only on the supplied profile, the operational basis for the plan is that copywriting is remote and flexible and can be shifted freely, while the explicit gaps make the schedule more realistic than simply appending extra work onto uninterrupted long blocks."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true,
+        "aggregate_checks": [
+          {
+            "id": "weekly_hours",
+            "status": "pass",
+            "minutes": 1920.0,
+            "minimum_minutes": 1920,
+            "category": "work",
+            "evidence": "union of final calendar intervals"
+          }
+        ],
+        "aggregate_validation_version": "duration_total_v1"
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-04-11T23:30:00+01:00",
+            "end": "2027-04-12T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "surf_mon",
+            "title": "Morning Surf Session",
+            "start": "2027-04-12T08:00:00+01:00",
+            "end": "2027-04-12T10:00:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Surf.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_5",
+            "title": "Copywriting Work Block",
+            "start": "2027-04-12T11:00:00+01:00",
+            "end": "2027-04-12T15:00:00+01:00",
+            "category": null,
+            "importance": null,
+            "fixed": null,
+            "participants": null,
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "new_6",
+            "title": "Copywriting Work Block",
+            "start": "2027-04-12T16:00:00+01:00",
+            "end": "2027-04-12T20:00:00+01:00",
+            "category": null,
+            "importance": null,
+            "fixed": null,
+            "participants": null,
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-04-12T23:30:00+01:00",
+            "end": "2027-04-13T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_tue",
+            "title": "Gym Workout",
+            "start": "2027-04-13T08:00:00+01:00",
+            "end": "2027-04-13T09:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_7",
+            "title": "Copywriting Work Block",
+            "start": "2027-04-13T10:30:00+01:00",
+            "end": "2027-04-13T14:30:00+01:00",
+            "category": null,
+            "importance": null,
+            "fixed": null,
+            "participants": null,
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "new_8",
+            "title": "Copywriting Work Block",
+            "start": "2027-04-13T15:30:00+01:00",
+            "end": "2027-04-13T19:30:00+01:00",
+            "category": null,
+            "importance": null,
+            "fixed": null,
+            "participants": null,
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-04-13T23:30:00+01:00",
+            "end": "2027-04-14T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "surf_wed",
+            "title": "Morning Surf Session",
+            "start": "2027-04-14T08:00:00+01:00",
+            "end": "2027-04-14T10:00:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Surf.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_9",
+            "title": "Copywriting Work Block",
+            "start": "2027-04-14T11:00:00+01:00",
+            "end": "2027-04-14T15:00:00+01:00",
+            "category": null,
+            "importance": null,
+            "fixed": null,
+            "participants": null,
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "new_10",
+            "title": "Copywriting Work Block",
+            "start": "2027-04-14T16:00:00+01:00",
+            "end": "2027-04-14T20:00:00+01:00",
+            "category": null,
+            "importance": null,
+            "fixed": null,
+            "participants": null,
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-04-14T23:30:00+01:00",
+            "end": "2027-04-15T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "medical_thu",
+            "title": "Specialist Medical Consultation",
+            "start": "2027-04-15T11:00:00+01:00",
+            "end": "2027-04-15T12:30:00+01:00",
+            "category": "medical",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "doctor"
+            ],
+            "description": "Clinic visit (includes 30 min transit).",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "birthday_thu",
+            "title": "Best Friend's Birthday Dinner",
+            "start": "2027-04-15T20:00:00+01:00",
+            "end": "2027-04-15T23:30:00+01:00",
+            "category": "social",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "friends"
+            ],
+            "description": "Celebration dinner.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-04-15T23:30:00+01:00",
+            "end": "2027-04-16T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "surf_fri",
+            "title": "Morning Surf Session",
+            "start": "2027-04-16T08:00:00+01:00",
+            "end": "2027-04-16T10:00:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Surf.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_11",
+            "title": "Copywriting Work Block",
+            "start": "2027-04-16T11:00:00+01:00",
+            "end": "2027-04-16T15:00:00+01:00",
+            "category": null,
+            "importance": null,
+            "fixed": null,
+            "participants": null,
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "new_12",
+            "title": "Copywriting Work Block",
+            "start": "2027-04-16T16:00:00+01:00",
+            "end": "2027-04-16T20:00:00+01:00",
+            "category": null,
+            "importance": null,
+            "fixed": null,
+            "participants": null,
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          }
+        ],
+        "metadata_note": "Null metadata on added events means the Proposal contract did not supply it; it is not a new personal preference or hard constraint."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 4,
+          "alternatives": 4,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The revision substantially answers the prior concern by replacing continuous-looking work stretches with two 4-hour copywriting blocks and a visible 1-hour unscheduled interval on Monday, Tuesday, Wednesday and Friday.",
+          "The resulting routine is still demanding: Monday 08:00-10:00 surf followed by work 11:00-15:00 and 16:00-20:00; Tuesday 08:00-09:30 gym followed by work 10:30-14:30 and 15:30-19:30; Wednesday 08:00-10:00 surf followed by work 11:00-15:00 and 16:00-20:00; and Friday 08:00-10:00 surf followed by work 11:00-15:00 and 16:00-20:00.",
+          "The 1-hour mid-day gaps are a meaningful improvement, but the calendar still does not show whether they are enough for meals, decompression, context switching, or recovery after morning exercise. This remains an uncertainty rather than an objective flaw.",
+          "Friday becomes a full 8-hour workday ending at 20:00 after Thursday's fixed birthday dinner 20:00-23:30 and protected sleep 23:30-07:30, followed by Friday surf 08:00-10:00. The dinner-to-sleep adjacency and Friday surf were pre-existing, but the added Friday workload makes the next day more demanding.",
+          "The proposal deletes and recreates all weekday copywriting blocks rather than only adjusting Thursday's redistributed time. This is coherent with the new split-block structure, but it is a broader operational rewrite than a minimal redistribution and depends on the original work blocks being flexible in structure as well as timing.",
+          "The final calendar displays null metadata for the added work events even though the proposal describes them as work blocks for the user. The metadata note explains this as a contract limitation, so it is not a human scheduling violation, but it makes the resulting calendar less self-contained."
+        ],
+        "feedback": "The revised plan is materially stronger than the prior version. It directly addresses the main prior human-quality concern by avoiding uninterrupted 8-to-8.5-hour copywriting stretches and by making the mid-day break visible. It also preserves the fixed medical consultation, birthday dinner, protected sleep, and surf/gym sessions, while removing Thursday work to create practical margin around a medical appointment and evening social commitment. The main remaining issue is not a contradiction but cumulative load: four workdays each combine morning physical activity with 8 hours of copywriting, often ending at 19:30 or 20:00. That may be workable, especially for flexible remote copywriting, but it still relies on the user being able to use the 1-hour gaps effectively and sustain focus across repeated exercise-plus-work days. The Proposer's fuller context should confirm whether these split work blocks are intended to include realistic meal and recovery practices, especially for Friday after the late Thursday dinner. On the visible evidence, the revision does not require another round: the major prior concern received a grounded response, and the remaining risks are plausible uncertainties to monitor rather than clear scheduling defects.",
+        "plausibility_review": {
+          "revision_required": false,
+          "severity": "low",
+          "reason": "The revised schedule remains demanding, but it is now organized in a more human-manageable way than the prior proposal: each 8-hour workday is split into two 4-hour blocks with a visible 1-hour interval, Thursday is kept free of copywriting around the medical consultation and birthday dinner, and protected sleep and health routines are preserved. The remaining concern is cumulative fatigue from repeated morning exercise plus late-ending work days, especially Friday after Thursday's birthday dinner, but the calendar does not show enough evidence that this will fail or that another redistribution within the visible constraints would clearly improve the plan.",
+          "suggested_improvement": "Keep the split-block structure only if the fuller context supports that the 1-hour gaps and evening margins are adequate for meals, recovery and effective copywriting. If the user is known to struggle with late-day focus or post-exercise work, reconsider the distribution more broadly while preserving the visible fixed commitments and weekly work requirement."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Effectiveness of 1-hour mid-day gaps",
+            "assumption": "The 1-hour unscheduled intervals between copywriting blocks are sufficient for meals, recovery, decompression and resetting before the second 4-hour work block.",
+            "evidence_gap": "The calendar shows gaps on Monday 15:00-16:00, Tuesday 14:30-15:30, Wednesday 15:00-16:00 and Friday 15:00-16:00, but does not show personal meal needs, recovery needs, or whether setup and transition tasks fit there.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Sustained copywriting capacity across four 8-hour days",
+            "assumption": "The user can sustain effective copywriting for 8 scheduled hours on Monday, Tuesday, Wednesday and Friday while also maintaining morning surf or gym sessions.",
+            "evidence_gap": "The proposal states that copywriting is remote and flexible, and it splits the day into two blocks, but it does not provide user-specific evidence about focus tolerance, fatigue after exercise, or preference for late-day work.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Friday workload after Thursday evening commitment",
+            "assumption": "The user can manage Friday surf 08:00-10:00 and copywriting 11:00-20:00 after Thursday's birthday dinner 20:00-23:30 and protected sleep beginning at 23:30.",
+            "evidence_gap": "The dinner, sleep block and Friday surf are visible, but the calendar does not show whether the user needs additional wind-down, travel, recovery or reduced load after the Thursday evening event.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Transition after surf and gym",
+            "assumption": "The 1-hour gaps after Monday, Wednesday and Friday surf and the 1-hour gap after Tuesday gym are enough for hygiene, food, travel if any, and work setup.",
+            "evidence_gap": "The calendar shows surf ending at 10:00 with work at 11:00, and gym ending at 09:30 with work at 10:30, but locations and routines are not provided.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Flexibility of original copywriting blocks",
+            "assumption": "The original copywriting blocks may be deleted and recreated as split 4-hour blocks without harming work obligations, coordination, deadlines or expected availability.",
+            "evidence_gap": "The rationale describes the copywriting as flexible and remote, but the final calendar alone does not verify whether all original work blocks were equally flexible in structure and timing.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Metadata of added work events",
+            "assumption": "The added Copywriting Work Blocks have the same practical meaning as the original work blocks despite null category, importance, fixed status and participants in the final calendar.",
+            "evidence_gap": "The proposal specifies these as work events for the user, while the resulting calendar displays null metadata and explains this as a proposal contract limitation.",
+            "potential_impact": "minor",
+            "verification_source": "unknown"
+          }
+        ],
+        "overall": 4.0
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": true,
+        "plausibility_revision_required": false,
+        "accepted": true,
+        "revision_causes": []
+      },
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": [
+        {
+          "iteration": 0,
+          "proposal": {
+            "changes": [
+              {
+                "type": "delete",
+                "event_id": "work_thu",
+                "title": "Copywriting Work Block",
+                "from_start": "2027-04-15T13:30:00+01:00",
+                "to_start": null,
+                "to_end": null,
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Copywriting Work Block",
+                "from_start": null,
+                "to_start": "2027-04-12T18:00:00+01:00",
+                "to_end": "2027-04-12T19:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "participants": [
+                  "user"
+                ]
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Copywriting Work Block",
+                "from_start": null,
+                "to_start": "2027-04-13T17:30:00+01:00",
+                "to_end": "2027-04-13T19:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "participants": [
+                  "user"
+                ]
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Copywriting Work Block",
+                "from_start": null,
+                "to_start": "2027-04-14T18:00:00+01:00",
+                "to_end": "2027-04-14T19:30:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "participants": [
+                  "user"
+                ]
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Copywriting Work Block",
+                "from_start": null,
+                "to_start": "2027-04-16T17:00:00+01:00",
+                "to_end": "2027-04-16T18:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "participants": [
+                  "user"
+                ]
+              }
+            ],
+            "rationale": {
+              "constraints": [
+                "The weekly work requirement is a minimum of 1920 minutes between 2027-04-12T00:00:00+01:00 and 2027-04-17T00:00:00+01:00.",
+                "The medical consultation on Thursday at 11:00 is fixed/protected and is not moved or deleted.",
+                "The birthday dinner on Thursday from 20:00 to 23:30 is fixed and is not moved or deleted.",
+                "Protected sleep blocks remain unchanged, including the Thursday night sleep block starting at 23:30.",
+                "Surf and gym routines remain unchanged: Monday surf, Tuesday gym, Wednesday surf, and Friday surf are preserved.",
+                "The deleted Thursday work block is flexible work under the supplied calendar, not a fixed/protected event."
+              ],
+              "priorities": [
+                "Keep mandatory health and fixed social commitments intact.",
+                "Preserve sleep exactly as scheduled.",
+                "Preserve surf/gym routines rather than using those morning blocks for work.",
+                "Redistribute the 5 hours of Thursday work across Monday, Tuesday, Wednesday, and Friday so the final calendar still contains 32 hours of scheduled copywriting work for the week.",
+                "Use free calendar intervals after existing work blocks to avoid disrupting existing routines."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Keep the Thursday 13:30-18:30 work block unchanged.",
+                  "rejected_because": "Although the original calendar already totals 32 hours of work, it does not satisfy the request to redistribute Thursday's work load across Monday, Tuesday, Wednesday, and Friday around the medical appointment and birthday dinner."
+                },
+                {
+                  "option": "Move the full Thursday work block as one 5-hour block to a single evening, such as Monday 18:30-23:30.",
+                  "rejected_because": "This is operationally possible in a free interval, but it creates a much heavier single evening and ends immediately before protected sleep, which is a worse fit for keeping sleep and recovery intact."
+                },
+                {
+                  "option": "Move or shorten surf/gym sessions to create daytime work slots.",
+                  "rejected_because": "The user explicitly asked to keep surf/gym routines intact, and the existing free evening intervals can absorb the redistributed work without changing sports sessions."
+                },
+                {
+                  "option": "Add work on Thursday morning before the medical appointment or after the dinner.",
+                  "rejected_because": "That would not align with the user's request to redistribute the work across Monday, Tuesday, Wednesday, and Friday, and post-dinner work would conflict with protected sleep."
+                }
+              ],
+              "summary": "This proposal removes the flexible 5-hour Thursday copywriting block and redistributes exactly 5 hours across Monday, Tuesday, Wednesday, and Friday: 1 hour Monday evening, 1.5 hours Tuesday evening, 1.5 hours Wednesday evening, and 1 hour Friday evening. The final scheduled work total remains 32 hours for the week, while the fixed medical consultation, birthday dinner, protected sleep, and surf/gym routines are left unchanged. The main uncertainty is that free calendar time does not prove energy, concentration, or external availability, but copywriting is described as remote and flexible, so these additions are operationally feasible based on the supplied calendar."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "sleep_mon",
+                "title": "Sleep",
+                "start": "2027-04-11T23:30:00+01:00",
+                "end": "2027-04-12T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "surf_mon",
+                "title": "Morning Surf Session",
+                "start": "2027-04-12T08:00:00+01:00",
+                "end": "2027-04-12T10:00:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Surf.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_mon",
+                "title": "Copywriting Work Block",
+                "start": "2027-04-12T11:00:00+01:00",
+                "end": "2027-04-12T18:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "7 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_1",
+                "title": "Copywriting Work Block",
+                "start": "2027-04-12T18:00:00+01:00",
+                "end": "2027-04-12T19:00:00+01:00",
+                "category": null,
+                "importance": null,
+                "fixed": null,
+                "participants": null,
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "sleep_tue",
+                "title": "Sleep",
+                "start": "2027-04-12T23:30:00+01:00",
+                "end": "2027-04-13T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_tue",
+                "title": "Gym Workout",
+                "start": "2027-04-13T08:00:00+01:00",
+                "end": "2027-04-13T09:30:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Gym.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_tue",
+                "title": "Copywriting Work Block",
+                "start": "2027-04-13T10:30:00+01:00",
+                "end": "2027-04-13T17:30:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "7 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_2",
+                "title": "Copywriting Work Block",
+                "start": "2027-04-13T17:30:00+01:00",
+                "end": "2027-04-13T19:00:00+01:00",
+                "category": null,
+                "importance": null,
+                "fixed": null,
+                "participants": null,
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "sleep_wed",
+                "title": "Sleep",
+                "start": "2027-04-13T23:30:00+01:00",
+                "end": "2027-04-14T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "surf_wed",
+                "title": "Morning Surf Session",
+                "start": "2027-04-14T08:00:00+01:00",
+                "end": "2027-04-14T10:00:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Surf.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_wed",
+                "title": "Copywriting Work Block",
+                "start": "2027-04-14T11:00:00+01:00",
+                "end": "2027-04-14T18:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "7 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_3",
+                "title": "Copywriting Work Block",
+                "start": "2027-04-14T18:00:00+01:00",
+                "end": "2027-04-14T19:30:00+01:00",
+                "category": null,
+                "importance": null,
+                "fixed": null,
+                "participants": null,
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2027-04-14T23:30:00+01:00",
+                "end": "2027-04-15T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "medical_thu",
+                "title": "Specialist Medical Consultation",
+                "start": "2027-04-15T11:00:00+01:00",
+                "end": "2027-04-15T12:30:00+01:00",
+                "category": "medical",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "doctor"
+                ],
+                "description": "Clinic visit (includes 30 min transit).",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "birthday_thu",
+                "title": "Best Friend's Birthday Dinner",
+                "start": "2027-04-15T20:00:00+01:00",
+                "end": "2027-04-15T23:30:00+01:00",
+                "category": "social",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "friends"
+                ],
+                "description": "Celebration dinner.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_fri",
+                "title": "Sleep",
+                "start": "2027-04-15T23:30:00+01:00",
+                "end": "2027-04-16T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "surf_fri",
+                "title": "Morning Surf Session",
+                "start": "2027-04-16T08:00:00+01:00",
+                "end": "2027-04-16T10:00:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Surf.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_fri",
+                "title": "Copywriting Work Block",
+                "start": "2027-04-16T11:00:00+01:00",
+                "end": "2027-04-16T17:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "6 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_4",
+                "title": "Copywriting Work Block",
+                "start": "2027-04-16T17:00:00+01:00",
+                "end": "2027-04-16T18:00:00+01:00",
+                "category": null,
+                "importance": null,
+                "fixed": null,
+                "participants": null,
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              }
+            ],
+            "metadata_note": "Null metadata on added events means the Proposal contract did not supply it; it is not a new personal preference or hard constraint."
+          },
+          "plausibility_review": {
+            "revision_required": true,
+            "severity": "moderate",
+            "reason": "The proposed changes significantly increase the length of several already substantial workdays by appending work directly after existing copywriting blocks: Monday becomes 11:00-19:00 following 08:00-10:00 surf, Tuesday becomes 10:30-19:00 following 08:00-09:30 gym, and Wednesday becomes 11:00-19:30 following 08:00-10:00 surf. This is not objectively impossible, and Thursday becomes lighter, but the plan depends on the user being able to maintain useful concentration and ordinary daily needs across these long continuous-looking periods. The rationale acknowledges energy uncertainty but does not meaningfully account for it when choosing the final distribution.",
+            "suggested_improvement": "Reconsider the distribution with attention to daily recovery and whether the long copywriting blocks include practical breaks, meals and decompression. If the same schedule is kept, provide a grounded explanation from the fuller context that these extended work periods are intended to include adequate internal breaks and are sustainable for the user."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Internal breaks during copywriting blocks",
+              "assumption": "The long work intervals can include adequate breaks for meals, hydration, hygiene and mental reset without undermining the 32-hour weekly work requirement.",
+              "evidence_gap": "The calendar shows continuous copywriting blocks such as Tuesday 10:30-19:00 and Wednesday 11:00-19:30, but does not state whether these are strict productive intervals or flexible blocks with breaks included.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Evening cognitive capacity",
+              "assumption": "The user can produce effective copywriting after long daytime work periods and morning exercise on Monday, Tuesday and Wednesday.",
+              "evidence_gap": "The rationale says copywriting is remote and flexible, but gives no user-specific evidence about concentration, fatigue tolerance or preferred working rhythm after exercise and extended work.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Transition after surf and gym",
+              "assumption": "The gaps after morning exercise are sufficient for recovery, food, hygiene and any needed setup before work starts.",
+              "evidence_gap": "The calendar shows 30 minutes from Monday surf ending 10:00 to work at 11:00 only if counting the full hour, Tuesday gym ending 09:30 to work at 10:30, Wednesday surf ending 10:00 to work at 11:00, and Friday surf ending 10:00 to work at 11:00; locations and routines are not provided.",
+              "potential_impact": "material",
+              "verification_source": "unknown"
+            },
+            {
+              "subject": "Thursday recovery value",
+              "assumption": "Removing the Thursday 13:30-18:30 work block provides enough compensating recovery or practical margin to offset heavier Monday-Wednesday evenings.",
+              "evidence_gap": "Thursday has a medical consultation 11:00-12:30 and birthday dinner 20:00-23:30, but the rationale does not discuss whether the freed daytime period is intended for recovery, preparation, travel, errands or other obligations.",
+              "potential_impact": "minor",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Metadata of added work events",
+              "assumption": "The added Copywriting Work Blocks are intended to have the same practical meaning as the original work blocks despite null category, importance and participants in the final calendar.",
+              "evidence_gap": "The proposal specifies category, importance and participants for additions, while the final calendar displays null values and notes that this reflects the Proposal contract rather than a preference or hard constraint.",
+              "potential_impact": "minor",
+              "verification_source": "unknown"
+            }
+          ],
+          "weaknesses": [
+            "The redistribution preserves the 32-hour weekly work total, sleep, health routines, medical appointment and birthday dinner, but it does so by extending already long copywriting days into continuous-looking work stretches: Monday 11:00-19:00 after surf, Tuesday 10:30-19:00 after gym, and Wednesday 11:00-19:30 after surf.",
+            "The rationale treats free evening time after existing work blocks as the least disruptive option, but gives limited practical analysis of meals, decompression, concentration decline, or whether the added copywriting time is realistically effective after 6-7 hours of prior work and morning exercise.",
+            "The plan removes Thursday's 13:30-18:30 work block, which does create a lighter Thursday around the medical consultation and birthday dinner, but the benefit is not fully weighed against the heavier Monday-Wednesday workload pattern.",
+            "Alternatives are considered, especially avoiding one 5-hour evening block and preserving surf/gym routines, but the proposal does not appear to consider whether the redistributed blocks could be shaped to preserve more daily recovery margin while still meeting the visible weekly requirement and stated redistribution pattern.",
+            "The added events in the final calendar have null category, importance and participants despite the proposal describing them as work for the user; the metadata note says this is a contract issue rather than a preference, so this is not a human scheduling violation, but it makes the simulated calendar less self-explanatory."
+          ],
+          "feedback": "The proposal is broadly coherent and much better than concentrating the full 5 hours into one late evening. It protects the fixed medical and social commitments, keeps sleep blocks unchanged, and preserves the visible surf/gym routine. The main human-quality concern is the cumulative Monday-Wednesday pattern: each day combines morning physical activity with a long copywriting block that is extended directly into the evening, especially Tuesday 10:30-19:00 and Wednesday 11:00-19:30. That may be manageable for some people if the work blocks include flexible breaks and meals, but the rationale does not substantiate that assumption. The proposer should reconsider or better justify whether these extended continuous-looking work periods are sustainable and effective, rather than relying mainly on the fact that the calendar slots are free. A useful revision would not need to abandon the same operations if there is fuller context showing that breaks, meals and recovery are built into the work blocks; otherwise, the distribution should be reviewed for a less draining shape within the visible priorities."
+        }
+      ],
+      "unresolved_assumptions": [
+        {
+          "subject": "Effectiveness of 1-hour mid-day gaps",
+          "assumption": "The 1-hour unscheduled intervals between copywriting blocks are sufficient for meals, recovery, decompression and resetting before the second 4-hour work block.",
+          "evidence_gap": "The calendar shows gaps on Monday 15:00-16:00, Tuesday 14:30-15:30, Wednesday 15:00-16:00 and Friday 15:00-16:00, but does not show personal meal needs, recovery needs, or whether setup and transition tasks fit there.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Sustained copywriting capacity across four 8-hour days",
+          "assumption": "The user can sustain effective copywriting for 8 scheduled hours on Monday, Tuesday, Wednesday and Friday while also maintaining morning surf or gym sessions.",
+          "evidence_gap": "The proposal states that copywriting is remote and flexible, and it splits the day into two blocks, but it does not provide user-specific evidence about focus tolerance, fatigue after exercise, or preference for late-day work.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Friday workload after Thursday evening commitment",
+          "assumption": "The user can manage Friday surf 08:00-10:00 and copywriting 11:00-20:00 after Thursday's birthday dinner 20:00-23:30 and protected sleep beginning at 23:30.",
+          "evidence_gap": "The dinner, sleep block and Friday surf are visible, but the calendar does not show whether the user needs additional wind-down, travel, recovery or reduced load after the Thursday evening event.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Transition after surf and gym",
+          "assumption": "The 1-hour gaps after Monday, Wednesday and Friday surf and the 1-hour gap after Tuesday gym are enough for hygiene, food, travel if any, and work setup.",
+          "evidence_gap": "The calendar shows surf ending at 10:00 with work at 11:00, and gym ending at 09:30 with work at 10:30, but locations and routines are not provided.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Flexibility of original copywriting blocks",
+          "assumption": "The original copywriting blocks may be deleted and recreated as split 4-hour blocks without harming work obligations, coordination, deadlines or expected availability.",
+          "evidence_gap": "The rationale describes the copywriting as flexible and remote, but the final calendar alone does not verify whether all original work blocks were equally flexible in structure and timing.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Metadata of added work events",
+          "assumption": "The added Copywriting Work Blocks have the same practical meaning as the original work blocks despite null category, importance, fixed status and participants in the final calendar.",
+          "evidence_gap": "The proposal specifies these as work events for the user, while the resulting calendar displays null metadata and explains this as a proposal contract limitation.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        }
+      ]
+    }
+  ],
+  "refinements": 1,
+  "source_status": "proposal_ready",
+  "final_proposal": {
+    "changes": [
+      {
+        "type": "delete",
+        "event_id": "work_mon",
+        "title": "Copywriting Work Block",
+        "from_start": "2027-04-12T11:00:00+01:00",
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "work_tue",
+        "title": "Copywriting Work Block",
+        "from_start": "2027-04-13T10:30:00+01:00",
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "work_wed",
+        "title": "Copywriting Work Block",
+        "from_start": "2027-04-14T11:00:00+01:00",
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "work_thu",
+        "title": "Copywriting Work Block",
+        "from_start": "2027-04-15T13:30:00+01:00",
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "work_fri",
+        "title": "Copywriting Work Block",
+        "from_start": "2027-04-16T11:00:00+01:00",
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Copywriting Work Block",
+        "from_start": null,
+        "to_start": "2027-04-12T11:00:00+01:00",
+        "to_end": "2027-04-12T15:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Copywriting Work Block",
+        "from_start": null,
+        "to_start": "2027-04-12T16:00:00+01:00",
+        "to_end": "2027-04-12T20:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Copywriting Work Block",
+        "from_start": null,
+        "to_start": "2027-04-13T10:30:00+01:00",
+        "to_end": "2027-04-13T14:30:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Copywriting Work Block",
+        "from_start": null,
+        "to_start": "2027-04-13T15:30:00+01:00",
+        "to_end": "2027-04-13T19:30:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Copywriting Work Block",
+        "from_start": null,
+        "to_start": "2027-04-14T11:00:00+01:00",
+        "to_end": "2027-04-14T15:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Copywriting Work Block",
+        "from_start": null,
+        "to_start": "2027-04-14T16:00:00+01:00",
+        "to_end": "2027-04-14T20:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Copywriting Work Block",
+        "from_start": null,
+        "to_start": "2027-04-16T11:00:00+01:00",
+        "to_end": "2027-04-16T15:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Copywriting Work Block",
+        "from_start": null,
+        "to_start": "2027-04-16T16:00:00+01:00",
+        "to_end": "2027-04-16T20:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "The final calendar must include at least 1920 minutes of scheduled work between 2027-04-12T00:00:00+01:00 and 2027-04-17T00:00:00+01:00; the proposed work blocks total exactly 32 hours.",
+        "The mandatory medical specialist consultation on Thursday from 11:00 to 12:30 is fixed/protected and is not moved or deleted.",
+        "The best friend's birthday dinner on Thursday from 20:00 to 23:30 is fixed and is not moved or deleted.",
+        "Protected sleep blocks remain unchanged, including 23:30 to 07:30 each night in the supplied calendar.",
+        "Surf and gym routines remain unchanged: Monday surf 08:00-10:00, Tuesday gym 08:00-09:30, Wednesday surf 08:00-10:00, and Friday surf 08:00-10:00.",
+        "The deleted copywriting blocks are flexible work events under the supplied calendar and profile; deleting them here means replacing their scheduled work time, not dropping the weekly work requirement.",
+        "All proposed times use the Europe/Lisbon offset shown in the supplied calendar."
+      ],
+      "priorities": [
+        "Keep health, sleep, and fixed social commitments intact before optimizing work placement.",
+        "Remove Thursday copywriting so the day has more practical margin around the medical consultation and birthday dinner.",
+        "Redistribute the full 32 hours across Monday, Tuesday, Wednesday, and Friday as requested.",
+        "Avoid a single very long uninterrupted copywriting stretch by replacing each workday with two 4-hour work blocks separated by a visible 1-hour unscheduled interval.",
+        "Preserve the existing morning transition gaps after surf or gym before copywriting begins, rather than using those narrow intervals for extra work."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Keep the previous approach: delete Thursday work and append short work extensions directly after the existing Monday, Tuesday, Wednesday, and Friday blocks.",
+          "rejected_because": "It meets the numeric 32-hour requirement, but it creates continuous-looking work stretches such as 10:30-19:00 or 11:00-19:30 after morning exercise. Because the calendar does not prove that meals, decompression, or cognitive reset are built into those blocks, this revision reserves explicit mid-day gaps instead."
+        },
+        {
+          "option": "Keep the original Thursday 13:30-18:30 work block unchanged.",
+          "rejected_because": "The original calendar already totals 32 hours, but it does not satisfy the user's request to reduce Thursday's work load and redistribute the required work across Monday, Tuesday, Wednesday, and Friday around the medical appointment and birthday dinner."
+        },
+        {
+          "option": "Move the full Thursday workload to one single evening, such as Friday 17:00-22:00.",
+          "rejected_because": "This is operationally possible in free calendar time, but it would create a much heavier late work session and would leave less evening recovery before protected sleep."
+        },
+        {
+          "option": "Use the morning gaps immediately after sleep and before surf or gym for work.",
+          "rejected_because": "Those gaps are short and adjacent to protected sleep and health routines. Using them would be a poor fit for keeping the surf/gym routine and everyday transition needs intact, especially because travel, hygiene, food, and setup details are unknown."
+        },
+        {
+          "option": "Move or shorten the surf/gym sessions to create more daytime work availability.",
+          "rejected_because": "The user explicitly asked to keep surf/gym routines intact, and the required 32 hours can be scheduled without changing those health events."
+        },
+        {
+          "option": "Leave some work on Thursday afternoon after the medical consultation.",
+          "rejected_because": "That would reduce the scale of redistribution, but the user specifically asked to redistribute the required work hours across Monday, Tuesday, Wednesday, and Friday, and Thursday also contains a fixed evening social commitment."
+        }
+      ],
+      "summary": "This revised proposal removes all Thursday copywriting and restructures the flexible work schedule into four balanced 8-hour copywriting days on Monday, Tuesday, Wednesday, and Friday. Each day is split into two 4-hour blocks with a 1-hour unscheduled gap, so the plan no longer depends on assuming that long continuous-looking blocks secretly contain adequate breaks. The trade-off is that work now ends at 19:30 or 20:00 on the four workdays, which is later than some original work blocks, but it preserves sleep, surf/gym routines, the fixed medical consultation, and the birthday dinner. The main remaining uncertainty is human sustainability: the calendar cannot prove energy, focus, meal timing, travel after surf/gym, or actual completion of copywriting work. Based only on the supplied profile, the operational basis for the plan is that copywriting is remote and flexible and can be shifted freely, while the explicit gaps make the schedule more realistic than simply appending extra work onto uninterrupted long blocks."
+    }
+  },
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [],
+    "valid": true,
+    "aggregate_checks": [
+      {
+        "id": "weekly_hours",
+        "status": "pass",
+        "minutes": 1920.0,
+        "minimum_minutes": 1920,
+        "category": "work",
+        "evidence": "union of final calendar intervals"
+      }
+    ],
+    "aggregate_validation_version": "duration_total_v1"
+  },
+  "source_result_sha256": "bfe24726a75fe6fc61f3e639d0af3938ab75ae978fcc5016ac998a5fd9e95526",
+  "aggregate_requirements_sha256": "620d5d6c188f49770e9937098b03d0e6a6ac97e6956796868de506287c5b6b97",
+  "confirmed_changes_sha256": null,
+  "critic_input_version": "final_calendar_v1",
+  "critic_policy_version": "uncertainty_review_v2",
+  "final_result_calendar": {
+    "timezone": "Europe/Lisbon",
+    "coverage": "all_events_in_scenario_after_simulation",
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-04-11T23:30:00+01:00",
+        "end": "2027-04-12T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "surf_mon",
+        "title": "Morning Surf Session",
+        "start": "2027-04-12T08:00:00+01:00",
+        "end": "2027-04-12T10:00:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Surf.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_5",
+        "title": "Copywriting Work Block",
+        "start": "2027-04-12T11:00:00+01:00",
+        "end": "2027-04-12T15:00:00+01:00",
+        "category": null,
+        "importance": null,
+        "fixed": null,
+        "participants": null,
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "new_6",
+        "title": "Copywriting Work Block",
+        "start": "2027-04-12T16:00:00+01:00",
+        "end": "2027-04-12T20:00:00+01:00",
+        "category": null,
+        "importance": null,
+        "fixed": null,
+        "participants": null,
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-04-12T23:30:00+01:00",
+        "end": "2027-04-13T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_tue",
+        "title": "Gym Workout",
+        "start": "2027-04-13T08:00:00+01:00",
+        "end": "2027-04-13T09:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_7",
+        "title": "Copywriting Work Block",
+        "start": "2027-04-13T10:30:00+01:00",
+        "end": "2027-04-13T14:30:00+01:00",
+        "category": null,
+        "importance": null,
+        "fixed": null,
+        "participants": null,
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "new_8",
+        "title": "Copywriting Work Block",
+        "start": "2027-04-13T15:30:00+01:00",
+        "end": "2027-04-13T19:30:00+01:00",
+        "category": null,
+        "importance": null,
+        "fixed": null,
+        "participants": null,
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-04-13T23:30:00+01:00",
+        "end": "2027-04-14T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "surf_wed",
+        "title": "Morning Surf Session",
+        "start": "2027-04-14T08:00:00+01:00",
+        "end": "2027-04-14T10:00:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Surf.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_9",
+        "title": "Copywriting Work Block",
+        "start": "2027-04-14T11:00:00+01:00",
+        "end": "2027-04-14T15:00:00+01:00",
+        "category": null,
+        "importance": null,
+        "fixed": null,
+        "participants": null,
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "new_10",
+        "title": "Copywriting Work Block",
+        "start": "2027-04-14T16:00:00+01:00",
+        "end": "2027-04-14T20:00:00+01:00",
+        "category": null,
+        "importance": null,
+        "fixed": null,
+        "participants": null,
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-04-14T23:30:00+01:00",
+        "end": "2027-04-15T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "medical_thu",
+        "title": "Specialist Medical Consultation",
+        "start": "2027-04-15T11:00:00+01:00",
+        "end": "2027-04-15T12:30:00+01:00",
+        "category": "medical",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "doctor"
+        ],
+        "description": "Clinic visit (includes 30 min transit).",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "birthday_thu",
+        "title": "Best Friend's Birthday Dinner",
+        "start": "2027-04-15T20:00:00+01:00",
+        "end": "2027-04-15T23:30:00+01:00",
+        "category": "social",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "friends"
+        ],
+        "description": "Celebration dinner.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-04-15T23:30:00+01:00",
+        "end": "2027-04-16T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "surf_fri",
+        "title": "Morning Surf Session",
+        "start": "2027-04-16T08:00:00+01:00",
+        "end": "2027-04-16T10:00:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Surf.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_11",
+        "title": "Copywriting Work Block",
+        "start": "2027-04-16T11:00:00+01:00",
+        "end": "2027-04-16T15:00:00+01:00",
+        "category": null,
+        "importance": null,
+        "fixed": null,
+        "participants": null,
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "new_12",
+        "title": "Copywriting Work Block",
+        "start": "2027-04-16T16:00:00+01:00",
+        "end": "2027-04-16T20:00:00+01:00",
+        "category": null,
+        "importance": null,
+        "fixed": null,
+        "participants": null,
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      }
+    ],
+    "metadata_note": "Null metadata on added events means the Proposal contract did not supply it; it is not a new personal preference or hard constraint."
+  },
+  "final_unresolved_assumptions": [
+    {
+      "subject": "Effectiveness of 1-hour mid-day gaps",
+      "assumption": "The 1-hour unscheduled intervals between copywriting blocks are sufficient for meals, recovery, decompression and resetting before the second 4-hour work block.",
+      "evidence_gap": "The calendar shows gaps on Monday 15:00-16:00, Tuesday 14:30-15:30, Wednesday 15:00-16:00 and Friday 15:00-16:00, but does not show personal meal needs, recovery needs, or whether setup and transition tasks fit there.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Sustained copywriting capacity across four 8-hour days",
+      "assumption": "The user can sustain effective copywriting for 8 scheduled hours on Monday, Tuesday, Wednesday and Friday while also maintaining morning surf or gym sessions.",
+      "evidence_gap": "The proposal states that copywriting is remote and flexible, and it splits the day into two blocks, but it does not provide user-specific evidence about focus tolerance, fatigue after exercise, or preference for late-day work.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Friday workload after Thursday evening commitment",
+      "assumption": "The user can manage Friday surf 08:00-10:00 and copywriting 11:00-20:00 after Thursday's birthday dinner 20:00-23:30 and protected sleep beginning at 23:30.",
+      "evidence_gap": "The dinner, sleep block and Friday surf are visible, but the calendar does not show whether the user needs additional wind-down, travel, recovery or reduced load after the Thursday evening event.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Transition after surf and gym",
+      "assumption": "The 1-hour gaps after Monday, Wednesday and Friday surf and the 1-hour gap after Tuesday gym are enough for hygiene, food, travel if any, and work setup.",
+      "evidence_gap": "The calendar shows surf ending at 10:00 with work at 11:00, and gym ending at 09:30 with work at 10:30, but locations and routines are not provided.",
+      "potential_impact": "material",
+      "verification_source": "unknown"
+    },
+    {
+      "subject": "Flexibility of original copywriting blocks",
+      "assumption": "The original copywriting blocks may be deleted and recreated as split 4-hour blocks without harming work obligations, coordination, deadlines or expected availability.",
+      "evidence_gap": "The rationale describes the copywriting as flexible and remote, but the final calendar alone does not verify whether all original work blocks were equally flexible in structure and timing.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Metadata of added work events",
+      "assumption": "The added Copywriting Work Blocks have the same practical meaning as the original work blocks despite null category, importance, fixed status and participants in the final calendar.",
+      "evidence_gap": "The proposal specifies these as work events for the user, while the resulting calendar displays null metadata and explains this as a proposal contract limitation.",
+      "potential_impact": "minor",
+      "verification_source": "unknown"
+    }
+  ],
+  "uncertainty_history": [
+    {
+      "iteration": 0,
+      "unresolved_assumptions": [
+        {
+          "subject": "Internal breaks during copywriting blocks",
+          "assumption": "The long work intervals can include adequate breaks for meals, hydration, hygiene and mental reset without undermining the 32-hour weekly work requirement.",
+          "evidence_gap": "The calendar shows continuous copywriting blocks such as Tuesday 10:30-19:00 and Wednesday 11:00-19:30, but does not state whether these are strict productive intervals or flexible blocks with breaks included.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Evening cognitive capacity",
+          "assumption": "The user can produce effective copywriting after long daytime work periods and morning exercise on Monday, Tuesday and Wednesday.",
+          "evidence_gap": "The rationale says copywriting is remote and flexible, but gives no user-specific evidence about concentration, fatigue tolerance or preferred working rhythm after exercise and extended work.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Transition after surf and gym",
+          "assumption": "The gaps after morning exercise are sufficient for recovery, food, hygiene and any needed setup before work starts.",
+          "evidence_gap": "The calendar shows 30 minutes from Monday surf ending 10:00 to work at 11:00 only if counting the full hour, Tuesday gym ending 09:30 to work at 10:30, Wednesday surf ending 10:00 to work at 11:00, and Friday surf ending 10:00 to work at 11:00; locations and routines are not provided.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Thursday recovery value",
+          "assumption": "Removing the Thursday 13:30-18:30 work block provides enough compensating recovery or practical margin to offset heavier Monday-Wednesday evenings.",
+          "evidence_gap": "Thursday has a medical consultation 11:00-12:30 and birthday dinner 20:00-23:30, but the rationale does not discuss whether the freed daytime period is intended for recovery, preparation, travel, errands or other obligations.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Metadata of added work events",
+          "assumption": "The added Copywriting Work Blocks are intended to have the same practical meaning as the original work blocks despite null category, importance and participants in the final calendar.",
+          "evidence_gap": "The proposal specifies category, importance and participants for additions, while the final calendar displays null values and notes that this reflects the Proposal contract rather than a preference or hard constraint.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        }
+      ]
+    },
+    {
+      "iteration": 1,
+      "unresolved_assumptions": [
+        {
+          "subject": "Effectiveness of 1-hour mid-day gaps",
+          "assumption": "The 1-hour unscheduled intervals between copywriting blocks are sufficient for meals, recovery, decompression and resetting before the second 4-hour work block.",
+          "evidence_gap": "The calendar shows gaps on Monday 15:00-16:00, Tuesday 14:30-15:30, Wednesday 15:00-16:00 and Friday 15:00-16:00, but does not show personal meal needs, recovery needs, or whether setup and transition tasks fit there.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Sustained copywriting capacity across four 8-hour days",
+          "assumption": "The user can sustain effective copywriting for 8 scheduled hours on Monday, Tuesday, Wednesday and Friday while also maintaining morning surf or gym sessions.",
+          "evidence_gap": "The proposal states that copywriting is remote and flexible, and it splits the day into two blocks, but it does not provide user-specific evidence about focus tolerance, fatigue after exercise, or preference for late-day work.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Friday workload after Thursday evening commitment",
+          "assumption": "The user can manage Friday surf 08:00-10:00 and copywriting 11:00-20:00 after Thursday's birthday dinner 20:00-23:30 and protected sleep beginning at 23:30.",
+          "evidence_gap": "The dinner, sleep block and Friday surf are visible, but the calendar does not show whether the user needs additional wind-down, travel, recovery or reduced load after the Thursday evening event.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Transition after surf and gym",
+          "assumption": "The 1-hour gaps after Monday, Wednesday and Friday surf and the 1-hour gap after Tuesday gym are enough for hygiene, food, travel if any, and work setup.",
+          "evidence_gap": "The calendar shows surf ending at 10:00 with work at 11:00, and gym ending at 09:30 with work at 10:30, but locations and routines are not provided.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Flexibility of original copywriting blocks",
+          "assumption": "The original copywriting blocks may be deleted and recreated as split 4-hour blocks without harming work obligations, coordination, deadlines or expected availability.",
+          "evidence_gap": "The rationale describes the copywriting as flexible and remote, but the final calendar alone does not verify whether all original work blocks were equally flexible in structure and timing.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Metadata of added work events",
+          "assumption": "The added Copywriting Work Blocks have the same practical meaning as the original work blocks despite null category, importance, fixed status and participants in the final calendar.",
+          "evidence_gap": "The proposal specifies these as work events for the user, while the resulting calendar displays null metadata and explains this as a proposal contract limitation.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        }
+      ]
+    }
+  ]
+}

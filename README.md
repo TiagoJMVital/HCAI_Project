@@ -16,7 +16,7 @@ On a revised proposal, the Critic examines **both** whether the earlier concern 
 
 ## Official workflow
 
-1. Create a standalone `schema_version: "2.0"` scenario from [`scenario_v2_example.json`](../scenario_v2_example.json). Keep profile, calendar, reference time and request in the scenario; do not add labels or expected solutions. See [benchmark specification](docs/03_BENCHMARK.md).
+1. Create a standalone `schema_version: "2.0"` scenario using [`working_student_deadline_001.json`](data/scenarios/working_student_deadline_001.json) as the checked-in contract example. Keep profile, calendar, reference time and request in the scenario; do not add labels or expected solutions. See [benchmark specification](docs/03_BENCHMARK.md).
 2. Validate and import it. Assign the entire family to `train` or `test` **before** importing. The active corpus lives in `data/scenarios/`, and the split manifest is `data/benchmark_manifest.json`.
 3. Explicitly run configuration B to generate a proposal, then import its result into `data/proposals/`. Generation invokes the configured LLM and is never triggered by opening Streamlit. Configuration A is available as the paired baseline.
 4. Two authors independently review the same imported proposal in Streamlit. Reviews and consensus live in `data/annotations/author_a/`, `author_b/`, and `adjudicated/`.
@@ -24,7 +24,7 @@ On a revised proposal, the Critic examines **both** whether the earlier concern 
 
 ```bash
 source .venv/bin/activate
-python src/benchmark_v2.py validate ../scenario_v2_example.json
+python src/benchmark_v2.py validate data/scenarios/working_student_deadline_001.json
 python src/benchmark_v2.py import /path/to/new_scenario.json --split train
 python src/benchmark_v2.py validate
 # Explicit LLM calls; run only when authorised and configured:

@@ -4,7 +4,7 @@ The official corpus is `data/scenarios/`, indexed by `data/benchmark_manifest.js
 
 ## Scenario contract
 
-[`scenario_v2_example.json`](../../scenario_v2_example.json) is the reference example. `src/scenario_v2.py` enforces exactly `schema_version: "2.0"` and the fields `scenario_id`, `family_id`, `profile`, `now`, `calendar.events`, `user_request`. A profile has `profile_id`, `description`, `timezone`, `priorities`, `hard_constraints`, `soft_preferences`, and `autonomy_preferences`; events have `id`, `title`, `start`, `end`, `category`, `importance`, `fixed`, `participants`, and `description`. The validator checks unique IDs, IANA timezones, timestamp offsets, chronology, importance/priorities 1–5 and references from typed constraints. Intentional event overlap is allowed. The contract has no human label, expected proposal or outcome. It supports multiple profile types, not just students.
+[`working_student_deadline_001.json`](../data/scenarios/working_student_deadline_001.json) is the checked-in reference example. `src/scenario_v2.py` enforces exactly `schema_version: "2.0"` and the fields `scenario_id`, `family_id`, `profile`, `now`, `calendar.events`, `user_request`. A profile has `profile_id`, `description`, `timezone`, `priorities`, `hard_constraints`, `soft_preferences`, and `autonomy_preferences`; events have `id`, `title`, `start`, `end`, `category`, `importance`, `fixed`, `participants`, and `description`. The validator checks unique IDs, IANA timezones, timestamp offsets, chronology, importance/priorities 1–5 and references from typed constraints. Intentional event overlap is allowed. The contract has no human label, expected proposal or outcome. It supports multiple profile types, not just students.
 
 ## Import and split
 

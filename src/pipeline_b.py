@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from typing import Callable
 
 from critic import CRITIC_POLICY_VERSION, critique, final_calendar_view
-from llm import LLMError, Provider
+from llm import LLMError, Provider, RateLimitError
 from models import CurrentCriticEvaluation, Proposal
 from rules import rule_based_decision
 
@@ -93,9 +93,19 @@ def run_config_b(profile, scenario, *, proposer_provider: Provider,
             proposal = (initial_proposal if revision == 0 and initial_proposal is not None else
                         proposer_fn(profile, scenario, provider=proposer_provider,
                                     previous=previous, feedback=feedback))
+            if getattr(proposer_provider, "last_failed_outputs", None):
+                item["recovered_proposer_outputs"] = proposer_provider.last_failed_outputs
+            if getattr(proposer_provider, "last_rate_limit_attempts", None):
+                item["recovered_proposer_rate_limit_attempts"] = proposer_provider.last_rate_limit_attempts
         except LLMError as exc:
             record.update(status="proposer_error", error=str(exc),
                           error_stage="proposer", safe_action="no_autonomous_action")
+            if exc.failed_outputs:
+                record["failed_llm_outputs"] = exc.failed_outputs
+            if exc.diagnostics:
+                record["llm_diagnostics"] = exc.diagnostics
+                if isinstance(exc, RateLimitError):
+                    record["rate_limit_diagnostics"] = exc.diagnostics
             return record
 
         item["proposal"] = proposal.model_dump()
@@ -151,9 +161,19 @@ def run_config_b(profile, scenario, *, proposer_provider: Provider,
             evaluation = critique(proposal, final_calendar=result_calendar,
                                   technical_validation=validation,
                                   prior_reviews=prior_reviews, provider=critic_provider)
+            if getattr(critic_provider, "last_failed_outputs", None):
+                item["recovered_critic_outputs"] = critic_provider.last_failed_outputs
+            if getattr(critic_provider, "last_rate_limit_attempts", None):
+                item["recovered_critic_rate_limit_attempts"] = critic_provider.last_rate_limit_attempts
         except LLMError as exc:
             record.update(status="critic_error", error=str(exc),
                           error_stage="critic", safe_action="no_autonomous_action")
+            if exc.failed_outputs:
+                record["failed_llm_outputs"] = exc.failed_outputs
+            if exc.diagnostics:
+                record["llm_diagnostics"] = exc.diagnostics
+                if isinstance(exc, RateLimitError):
+                    record["rate_limit_diagnostics"] = exc.diagnostics
             return record
 
         item["critic_evaluation"] = evaluation.model_dump() | {"overall": evaluation.overall}

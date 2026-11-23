@@ -29,7 +29,8 @@ class ScriptedProvider:
 
     def generate_structured(self, prompt, schema, *, system=""):
         self.calls.append((prompt, schema, system))
-        return self.answers.pop(0)
+        value = self.answers.pop(0)
+        return schema.from_proposal(value) if isinstance(value, Proposal) and hasattr(schema, "from_proposal") else value
 
 
 def scenario():

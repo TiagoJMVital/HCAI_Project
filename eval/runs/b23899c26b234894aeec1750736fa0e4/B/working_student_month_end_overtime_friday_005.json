@@ -1,0 +1,946 @@
+{
+  "configuration": "B",
+  "scenario_id": "working_student_month_end_overtime_friday_005",
+  "family": "working_student_schedule_conflict",
+  "category": "v2",
+  "proposer_provider": "iaedu",
+  "proposer_model": "GPT-5.5",
+  "proposer_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request"
+  },
+  "critic_provider": "iaedu",
+  "critic_model": "GPT-5.5",
+  "critic_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request"
+  },
+  "critic_settings": {
+    "threshold": 4.0,
+    "max_refinements": 3,
+    "min_dimension_score": 1
+  },
+  "iterations": [
+    {
+      "index": 0,
+      "proposer_feedback": null,
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "delete",
+            "event_id": "gym_fri",
+            "title": "Friday Gym Workout",
+            "from_start": "2027-04-30T18:00:00+01:00",
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "Friday evening seminar class_fri is protected and mandatory from 2027-04-30T19:00:00+01:00 to 2027-04-30T21:30:00+01:00.",
+            "Friday month-end closing work_fri_overtime is fixed from 2027-04-30T09:00:00+01:00 to 2027-04-30T18:30:00+01:00.",
+            "The Friday workout gym_fri is flexible, but it overlaps the fixed overtime from 18:00 to 18:30 and the protected seminar from 19:00 to 19:15.",
+            "The user explicitly requested dropping Friday's workout and keeping earlier workouts this week intact.",
+            "No fixed or protected events are moved or deleted."
+          ],
+          "priorities": [
+            "Preserve mandatory education commitment on Friday evening.",
+            "Respect fixed work overtime ending at 18:30.",
+            "Remove the direct scheduling conflict immediately before the seminar.",
+            "Leave Monday, Wednesday, and Thursday workouts unchanged as requested."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Move the Friday workout to earlier in the week.",
+              "rejected_because": "The user asked to drop Friday's workout and specifically ensure the earlier workouts stay intact; moving it earlier would add or alter earlier-week exercise plans rather than simply preserving them."
+            },
+            {
+              "option": "Move the Friday workout to Saturday morning.",
+              "rejected_because": "Although the profile has a soft preference to compensate workouts on Saturday morning if overtime overlaps, the supplied calendar does not include Saturday availability, and a free calendar interval alone would not confirm gym, venue, or personal feasibility."
+            },
+            {
+              "option": "Shorten the Friday workout between overtime and the seminar.",
+              "rejected_because": "Only 30 minutes exist between fixed overtime ending at 18:30 and the protected seminar starting at 19:00, and no travel, preparation, or venue assumptions are supplied; this would not reliably satisfy the user's request to make it to the seminar on time."
+            }
+          ],
+          "summary": "Delete the flexible Friday workout that conflicts with confirmed month-end overtime and the protected 19:00 seminar. Earlier workouts on Monday, Wednesday, and Thursday remain unchanged."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-04-25T23:45:00+01:00",
+            "end": "2027-04-26T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_mon",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-04-26T09:00:00+01:00",
+            "end": "2027-04-26T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Daytime work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_mon",
+            "title": "Gym Workout",
+            "start": "2027-04-26T18:00:00+01:00",
+            "end": "2027-04-26T19:15:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_mon",
+            "title": "Evening Study: Seminar Readings",
+            "start": "2027-04-26T19:45:00+01:00",
+            "end": "2027-04-26T21:45:00+01:00",
+            "category": "education",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Reading preparation.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-04-26T23:45:00+01:00",
+            "end": "2027-04-27T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_tue",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-04-27T09:00:00+01:00",
+            "end": "2027-04-27T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Daytime work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "class_tue",
+            "title": "Evening Lecture: Applied Economics",
+            "start": "2027-04-27T18:30:00+01:00",
+            "end": "2027-04-27T21:30:00+01:00",
+            "category": "education",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "professor",
+              "classmates"
+            ],
+            "description": "Mandatory evening class.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-04-27T23:45:00+01:00",
+            "end": "2027-04-28T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_wed",
+            "title": "Daytime Job: Month-End Pre-Close",
+            "start": "2027-04-28T09:00:00+01:00",
+            "end": "2027-04-28T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "finance_team"
+            ],
+            "description": "Pre-closing tasks.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_wed",
+            "title": "Gym: Strength & Cardio",
+            "start": "2027-04-28T18:00:00+01:00",
+            "end": "2027-04-28T19:15:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_wed",
+            "title": "Evening Study: Applied Economics Exercises",
+            "start": "2027-04-28T19:45:00+01:00",
+            "end": "2027-04-28T21:45:00+01:00",
+            "category": "education",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Exercises.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-04-28T23:45:00+01:00",
+            "end": "2027-04-29T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_thu",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-04-29T09:00:00+01:00",
+            "end": "2027-04-29T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Daytime work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_thu",
+            "title": "Gym: Conditioning Session",
+            "start": "2027-04-29T18:00:00+01:00",
+            "end": "2027-04-29T19:00:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "personal_thu",
+            "title": "Dinner & Groceries",
+            "start": "2027-04-29T19:30:00+01:00",
+            "end": "2027-04-29T21:30:00+01:00",
+            "category": "personal",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Errands and dinner.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-04-29T23:45:00+01:00",
+            "end": "2027-04-30T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_fri_overtime",
+            "title": "Daytime Job: Month-End Closing Overtime",
+            "start": "2027-04-30T09:00:00+01:00",
+            "end": "2027-04-30T18:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "finance_team",
+              "manager"
+            ],
+            "description": "Extended shift for month-end closing.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "class_fri",
+            "title": "Evening Seminar: Business Ethics & Governance",
+            "start": "2027-04-30T19:00:00+01:00",
+            "end": "2027-04-30T21:30:00+01:00",
+            "category": "education",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "professor",
+              "classmates"
+            ],
+            "description": "Mandatory evening seminar.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Null metadata on added events means the Proposal contract did not supply it; it is not a new personal preference or hard constraint."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 5,
+          "coherence": 4,
+          "alternatives": 4,
+          "clarity": 5
+        },
+        "weaknesses": [
+          "The resulting Friday still has a demanding sequence: Month-End Closing Overtime from 09:00 to 18:30 followed by the mandatory seminar from 19:00 to 21:30, leaving only 30 minutes between them. The proposal correctly removes the workout conflict, but the remaining transition, food, and recovery margin is still uncertain.",
+          "The rationale states that the user explicitly requested dropping Friday's workout, but request satisfaction cannot be independently verified from the technical validation, which explicitly did not check request satisfaction.",
+          "Saturday compensation was rejected because Saturday availability is not supplied, which is reasonable, but the proposal does not establish whether missing the Friday workout has any material consequence for a broader fitness target. The visible calendar does retain Monday, Wednesday, and Thursday workouts."
+        ],
+        "feedback": "Deleting the Friday workout is a proportionate and human-sensible change because it removes a direct overlap with fixed overtime from 18:00 to 18:30 and with the protected seminar from 19:00 to 19:15, while preserving the earlier-week workouts listed in the rationale. The plan also avoids creating a new burden on Saturday without evidence of availability. The main human-quality issue is not the deletion itself but the still-tight Friday evening: after a 09:00-18:30 month-end workday, the user has only 30 minutes before a 19:00-21:30 seminar. If locations, food, hygiene, or decompression needs make that interval unrealistic, seminar readiness could suffer. Since the fixed work and seminar are visible constraints and deleting the gym improves rather than worsens the situation, this does not require revision on the current evidence. The Proposer should, with fuller context, confirm whether the 18:30-to-19:00 transition is practically workable or whether any non-disruptive support around preparation, meals, or logistics is needed.",
+        "plausibility_review": {
+          "revision_required": false,
+          "severity": "low",
+          "reason": "The proposed deletion directly addresses a concrete conflict and reduces pressure before a protected seminar. The remaining Friday workload is tight and potentially tiring, but it appears to be caused by preserved fixed commitments rather than by the proposed change. No clearly better operation is supported by the visible calendar.",
+          "suggested_improvement": "Keep the deletion unless fuller context shows that the user needs a different way to handle Friday logistics. The Proposer should verify the practical transition from overtime to seminar and, if relevant, account for food, preparation, or travel without assuming Saturday or other unseen availability."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Friday transition from overtime to seminar",
+            "assumption": "The user can realistically finish the 09:00-18:30 month-end closing work commitment and be ready for the 19:00-21:30 seminar within the 30-minute gap.",
+            "evidence_gap": "The calendar does not show locations, travel time, meal needs, hygiene/preparation needs, or whether the seminar can be joined remotely or from the work location.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Effect of dropping Friday workout",
+            "assumption": "Removing the Friday workout without compensation is acceptable for the user's health or fitness aims because Monday, Wednesday, and Thursday workouts remain.",
+            "evidence_gap": "The visible proposal states the user requested dropping Friday's workout, but the underlying request and any weekly fitness target are not independently available in the validation report.",
+            "potential_impact": "minor",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Saturday workout compensation",
+            "assumption": "Not moving the Friday workout to Saturday is acceptable because Saturday availability and feasibility are unknown.",
+            "evidence_gap": "The calendar coverage shown contains no Saturday events or availability, and there is no information about gym access, personal plans, or recovery needs on Saturday.",
+            "potential_impact": "minor",
+            "verification_source": "unknown"
+          }
+        ],
+        "overall": 4.5
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": true,
+        "plausibility_revision_required": false,
+        "accepted": true,
+        "revision_causes": []
+      },
+      "operations_changed_from_previous": null,
+      "rationale_changed_from_previous": null,
+      "prior_critic_reviews": [],
+      "unresolved_assumptions": [
+        {
+          "subject": "Friday transition from overtime to seminar",
+          "assumption": "The user can realistically finish the 09:00-18:30 month-end closing work commitment and be ready for the 19:00-21:30 seminar within the 30-minute gap.",
+          "evidence_gap": "The calendar does not show locations, travel time, meal needs, hygiene/preparation needs, or whether the seminar can be joined remotely or from the work location.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Effect of dropping Friday workout",
+          "assumption": "Removing the Friday workout without compensation is acceptable for the user's health or fitness aims because Monday, Wednesday, and Thursday workouts remain.",
+          "evidence_gap": "The visible proposal states the user requested dropping Friday's workout, but the underlying request and any weekly fitness target are not independently available in the validation report.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Saturday workout compensation",
+          "assumption": "Not moving the Friday workout to Saturday is acceptable because Saturday availability and feasibility are unknown.",
+          "evidence_gap": "The calendar coverage shown contains no Saturday events or availability, and there is no information about gym access, personal plans, or recovery needs on Saturday.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        }
+      ]
+    }
+  ],
+  "initial_proposal": {
+    "changes": [
+      {
+        "type": "delete",
+        "event_id": "gym_fri",
+        "title": "Friday Gym Workout",
+        "from_start": "2027-04-30T18:00:00+01:00",
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "Friday evening seminar class_fri is protected and mandatory from 2027-04-30T19:00:00+01:00 to 2027-04-30T21:30:00+01:00.",
+        "Friday month-end closing work_fri_overtime is fixed from 2027-04-30T09:00:00+01:00 to 2027-04-30T18:30:00+01:00.",
+        "The Friday workout gym_fri is flexible, but it overlaps the fixed overtime from 18:00 to 18:30 and the protected seminar from 19:00 to 19:15.",
+        "The user explicitly requested dropping Friday's workout and keeping earlier workouts this week intact.",
+        "No fixed or protected events are moved or deleted."
+      ],
+      "priorities": [
+        "Preserve mandatory education commitment on Friday evening.",
+        "Respect fixed work overtime ending at 18:30.",
+        "Remove the direct scheduling conflict immediately before the seminar.",
+        "Leave Monday, Wednesday, and Thursday workouts unchanged as requested."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Move the Friday workout to earlier in the week.",
+          "rejected_because": "The user asked to drop Friday's workout and specifically ensure the earlier workouts stay intact; moving it earlier would add or alter earlier-week exercise plans rather than simply preserving them."
+        },
+        {
+          "option": "Move the Friday workout to Saturday morning.",
+          "rejected_because": "Although the profile has a soft preference to compensate workouts on Saturday morning if overtime overlaps, the supplied calendar does not include Saturday availability, and a free calendar interval alone would not confirm gym, venue, or personal feasibility."
+        },
+        {
+          "option": "Shorten the Friday workout between overtime and the seminar.",
+          "rejected_because": "Only 30 minutes exist between fixed overtime ending at 18:30 and the protected seminar starting at 19:00, and no travel, preparation, or venue assumptions are supplied; this would not reliably satisfy the user's request to make it to the seminar on time."
+        }
+      ],
+      "summary": "Delete the flexible Friday workout that conflicts with confirmed month-end overtime and the protected 19:00 seminar. Earlier workouts on Monday, Wednesday, and Thursday remain unchanged."
+    }
+  },
+  "final_proposal": {
+    "changes": [
+      {
+        "type": "delete",
+        "event_id": "gym_fri",
+        "title": "Friday Gym Workout",
+        "from_start": "2027-04-30T18:00:00+01:00",
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "Friday evening seminar class_fri is protected and mandatory from 2027-04-30T19:00:00+01:00 to 2027-04-30T21:30:00+01:00.",
+        "Friday month-end closing work_fri_overtime is fixed from 2027-04-30T09:00:00+01:00 to 2027-04-30T18:30:00+01:00.",
+        "The Friday workout gym_fri is flexible, but it overlaps the fixed overtime from 18:00 to 18:30 and the protected seminar from 19:00 to 19:15.",
+        "The user explicitly requested dropping Friday's workout and keeping earlier workouts this week intact.",
+        "No fixed or protected events are moved or deleted."
+      ],
+      "priorities": [
+        "Preserve mandatory education commitment on Friday evening.",
+        "Respect fixed work overtime ending at 18:30.",
+        "Remove the direct scheduling conflict immediately before the seminar.",
+        "Leave Monday, Wednesday, and Thursday workouts unchanged as requested."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Move the Friday workout to earlier in the week.",
+          "rejected_because": "The user asked to drop Friday's workout and specifically ensure the earlier workouts stay intact; moving it earlier would add or alter earlier-week exercise plans rather than simply preserving them."
+        },
+        {
+          "option": "Move the Friday workout to Saturday morning.",
+          "rejected_because": "Although the profile has a soft preference to compensate workouts on Saturday morning if overtime overlaps, the supplied calendar does not include Saturday availability, and a free calendar interval alone would not confirm gym, venue, or personal feasibility."
+        },
+        {
+          "option": "Shorten the Friday workout between overtime and the seminar.",
+          "rejected_because": "Only 30 minutes exist between fixed overtime ending at 18:30 and the protected seminar starting at 19:00, and no travel, preparation, or venue assumptions are supplied; this would not reliably satisfy the user's request to make it to the seminar on time."
+        }
+      ],
+      "summary": "Delete the flexible Friday workout that conflicts with confirmed month-end overtime and the protected 19:00 seminar. Earlier workouts on Monday, Wednesday, and Thursday remain unchanged."
+    }
+  },
+  "final_score": 4.5,
+  "refinements": 0,
+  "critic_accepted": true,
+  "decision": "defer",
+  "reasons": [
+    "apaga evento (gym_fri)",
+    "toca em categoria sensível (health)"
+  ],
+  "status": "proposal_ready",
+  "critic_input_version": "final_calendar_v1",
+  "critic_policy_version": "uncertainty_review_v2",
+  "final_result_calendar": {
+    "timezone": "Europe/Lisbon",
+    "coverage": "all_events_in_scenario_after_simulation",
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-04-25T23:45:00+01:00",
+        "end": "2027-04-26T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_mon",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-04-26T09:00:00+01:00",
+        "end": "2027-04-26T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Daytime work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_mon",
+        "title": "Gym Workout",
+        "start": "2027-04-26T18:00:00+01:00",
+        "end": "2027-04-26T19:15:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "study_mon",
+        "title": "Evening Study: Seminar Readings",
+        "start": "2027-04-26T19:45:00+01:00",
+        "end": "2027-04-26T21:45:00+01:00",
+        "category": "education",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Reading preparation.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-04-26T23:45:00+01:00",
+        "end": "2027-04-27T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_tue",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-04-27T09:00:00+01:00",
+        "end": "2027-04-27T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Daytime work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "class_tue",
+        "title": "Evening Lecture: Applied Economics",
+        "start": "2027-04-27T18:30:00+01:00",
+        "end": "2027-04-27T21:30:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "professor",
+          "classmates"
+        ],
+        "description": "Mandatory evening class.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-04-27T23:45:00+01:00",
+        "end": "2027-04-28T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_wed",
+        "title": "Daytime Job: Month-End Pre-Close",
+        "start": "2027-04-28T09:00:00+01:00",
+        "end": "2027-04-28T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "finance_team"
+        ],
+        "description": "Pre-closing tasks.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_wed",
+        "title": "Gym: Strength & Cardio",
+        "start": "2027-04-28T18:00:00+01:00",
+        "end": "2027-04-28T19:15:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "study_wed",
+        "title": "Evening Study: Applied Economics Exercises",
+        "start": "2027-04-28T19:45:00+01:00",
+        "end": "2027-04-28T21:45:00+01:00",
+        "category": "education",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Exercises.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-04-28T23:45:00+01:00",
+        "end": "2027-04-29T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_thu",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-04-29T09:00:00+01:00",
+        "end": "2027-04-29T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Daytime work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_thu",
+        "title": "Gym: Conditioning Session",
+        "start": "2027-04-29T18:00:00+01:00",
+        "end": "2027-04-29T19:00:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "personal_thu",
+        "title": "Dinner & Groceries",
+        "start": "2027-04-29T19:30:00+01:00",
+        "end": "2027-04-29T21:30:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Errands and dinner.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-04-29T23:45:00+01:00",
+        "end": "2027-04-30T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_fri_overtime",
+        "title": "Daytime Job: Month-End Closing Overtime",
+        "start": "2027-04-30T09:00:00+01:00",
+        "end": "2027-04-30T18:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "finance_team",
+          "manager"
+        ],
+        "description": "Extended shift for month-end closing.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "class_fri",
+        "title": "Evening Seminar: Business Ethics & Governance",
+        "start": "2027-04-30T19:00:00+01:00",
+        "end": "2027-04-30T21:30:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "professor",
+          "classmates"
+        ],
+        "description": "Mandatory evening seminar.",
+        "origin": "existing",
+        "change_status": "preserved"
+      }
+    ],
+    "metadata_note": "Null metadata on added events means the Proposal contract did not supply it; it is not a new personal preference or hard constraint."
+  },
+  "final_unresolved_assumptions": [
+    {
+      "subject": "Friday transition from overtime to seminar",
+      "assumption": "The user can realistically finish the 09:00-18:30 month-end closing work commitment and be ready for the 19:00-21:30 seminar within the 30-minute gap.",
+      "evidence_gap": "The calendar does not show locations, travel time, meal needs, hygiene/preparation needs, or whether the seminar can be joined remotely or from the work location.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Effect of dropping Friday workout",
+      "assumption": "Removing the Friday workout without compensation is acceptable for the user's health or fitness aims because Monday, Wednesday, and Thursday workouts remain.",
+      "evidence_gap": "The visible proposal states the user requested dropping Friday's workout, but the underlying request and any weekly fitness target are not independently available in the validation report.",
+      "potential_impact": "minor",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Saturday workout compensation",
+      "assumption": "Not moving the Friday workout to Saturday is acceptable because Saturday availability and feasibility are unknown.",
+      "evidence_gap": "The calendar coverage shown contains no Saturday events or availability, and there is no information about gym access, personal plans, or recovery needs on Saturday.",
+      "potential_impact": "minor",
+      "verification_source": "unknown"
+    }
+  ],
+  "uncertainty_history": [
+    {
+      "iteration": 0,
+      "unresolved_assumptions": [
+        {
+          "subject": "Friday transition from overtime to seminar",
+          "assumption": "The user can realistically finish the 09:00-18:30 month-end closing work commitment and be ready for the 19:00-21:30 seminar within the 30-minute gap.",
+          "evidence_gap": "The calendar does not show locations, travel time, meal needs, hygiene/preparation needs, or whether the seminar can be joined remotely or from the work location.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Effect of dropping Friday workout",
+          "assumption": "Removing the Friday workout without compensation is acceptable for the user's health or fitness aims because Monday, Wednesday, and Thursday workouts remain.",
+          "evidence_gap": "The visible proposal states the user requested dropping Friday's workout, but the underlying request and any weekly fitness target are not independently available in the validation report.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Saturday workout compensation",
+          "assumption": "Not moving the Friday workout to Saturday is acceptable because Saturday availability and feasibility are unknown.",
+          "evidence_gap": "The calendar coverage shown contains no Saturday events or availability, and there is no information about gym access, personal plans, or recovery needs on Saturday.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        }
+      ]
+    }
+  ],
+  "schema_version": "2.0",
+  "profile_id": "working_student_01__working_student_month_end_overtime_friday_005",
+  "aggregate_requirements_sha256": null,
+  "confirmed_changes_sha256": null,
+  "split": "train",
+  "run_id": "b23899c26b234894aeec1750736fa0e4",
+  "experiment_id": null,
+  "repeat_index": 0,
+  "generated_at": "2026-11-22T19:44:34.400533+00:00",
+  "prompt_versions": {
+    "proposer_sha256": "45d8e4e44b2e45cd8c6e4e829ce43fb6825a88e6550716e1c655d1f49034cc79",
+    "proposer_revision_sha256": "3d8999560474363c55ab096e197152da0b244a3bfd2f597a7e0ad2136452ccf4",
+    "critic_sha256": "1686688cdd4bc63abb12e6633ef9dbb9b62d69b69aba1c4805a201657cc5bb34"
+  },
+  "seconds": 23.633,
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [],
+    "valid": true
+  }
+}

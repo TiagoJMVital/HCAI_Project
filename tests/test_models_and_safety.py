@@ -10,7 +10,8 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 
 from calendar_v2 import simulate
-from models import Alternative, Change, Proposal, Rationale
+from models import (PROPOSER_WIRE_SCHEMA_VERSION, Alternative, Change, Proposal,
+                    ProposerWireProposal, Rationale)
 from rules import rule_based_decision
 from scenario_v2 import load_scenario
 
@@ -37,6 +38,47 @@ def proposal(*changes):
 def test_required_fields_by_change_type(fields):
     with pytest.raises(ValidationError):
         Change.model_validate(fields)
+
+
+def test_compact_proposer_wire_round_trip_preserves_canonical_behavior(scenario):
+    canonical = proposal(
+        Change(type="move", event_id="gym_mon", title="redundant title",
+               from_start="2026-11-09T18:30:00+00:00",
+               to_start="2026-11-09T20:00:00+00:00"),
+        Change(type="add", title="Study", to_start="2026-11-10T20:00:00+00:00",
+               to_end="2026-11-10T21:00:00+00:00", category="study",
+               importance=4, participants=["user"]),
+    )
+    wire = ProposerWireProposal.from_proposal(canonical)
+    payload = wire.model_dump(mode="json", exclude_none=True)
+    normalized = wire.to_proposal()
+
+    assert PROPOSER_WIRE_SCHEMA_VERSION == "compact_proposal_v1"
+    assert payload["changes"][0] == {
+        "op": "move", "event_id": "gym_mon", "start": "2026-11-09T20:00:00+00:00"}
+    assert "from_start" not in json.dumps(payload)
+    assert "rejected_because" not in json.dumps(payload)
+    assert normalized.changes[0].title is None and normalized.changes[0].from_start is None
+    assert normalized.rationale == canonical.rationale
+    assert simulate(scenario, normalized)[1] == simulate(scenario, canonical)[1]
+    assert rule_based_decision(normalized, scenario.calendar.events, [])[0] == (
+        rule_based_decision(canonical, scenario.calendar.events, [])[0])
+
+
+def test_compact_proposer_wire_is_operation_specific_and_bounded():
+    with pytest.raises(ValidationError):
+        ProposerWireProposal.model_validate({
+            "changes": [{"op": "move", "event_id": "gym_mon",
+                         "start": "2026-11-09T20:00:00+00:00", "title": "not allowed"}],
+            "rationale": {"constraints": [], "priorities": [], "alternatives": [],
+                          "summary": "Move gym"},
+        })
+    with pytest.raises(ValidationError):
+        ProposerWireProposal.model_validate({
+            "changes": [],
+            "rationale": {"constraints": ["x" * 241], "priorities": [],
+                          "alternatives": [], "summary": "No change"},
+        })
 
 
 def test_valid_flexible_move_and_fixed_rules(scenario):

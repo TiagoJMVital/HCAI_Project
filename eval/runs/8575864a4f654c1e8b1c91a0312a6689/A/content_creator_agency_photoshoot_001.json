@@ -1,0 +1,151 @@
+{
+  "schema_version": "2.0",
+  "configuration": "A",
+  "run_id": "8575864a4f654c1e8b1c91a0312a6689",
+  "experiment_id": null,
+  "repeat_index": 0,
+  "scenario_id": "content_creator_agency_photoshoot_001",
+  "family": "content_creator_schedule_conflict",
+  "scenario_sha256": "0934c9d14b11e95ae7938230d51a657dff55fe573cabaf51179d066f262bec04",
+  "profile_id": "content_creator_streamer_01__content_creator_agency_photoshoot_001",
+  "split": "train",
+  "aggregate_requirements_sha256": null,
+  "confirmed_changes_sha256": null,
+  "provider": "iaedu",
+  "model": "GPT-5.5",
+  "generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "prompt_versions": {
+    "proposer_sha256": "45d8e4e44b2e45cd8c6e4e829ce43fb6825a88e6550716e1c655d1f49034cc79"
+  },
+  "generated_at": "2026-11-22T22:19:44.655062+00:00",
+  "proposal": {
+    "changes": [
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Additional Video Editing",
+        "from_start": null,
+        "to_start": "2027-03-22T11:30:00+00:00",
+        "to_end": "2027-03-22T12:30:00+00:00",
+        "category": "video_production",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Additional Video Editing",
+        "from_start": null,
+        "to_start": "2027-03-22T18:00:00+00:00",
+        "to_end": "2027-03-22T20:00:00+00:00",
+        "category": "video_production",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Additional Video Editing",
+        "from_start": null,
+        "to_start": "2027-03-23T11:30:00+00:00",
+        "to_end": "2027-03-23T12:30:00+00:00",
+        "category": "video_production",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Additional Video Editing",
+        "from_start": null,
+        "to_start": "2027-03-23T18:00:00+00:00",
+        "to_end": "2027-03-23T19:30:00+00:00",
+        "category": "video_production",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "The Wednesday talent agency photoshoot and contract renewal meeting from 2027-03-24T14:00:00+00:00 to 2027-03-24T18:00:00+00:00 is a protected sponsorship event and is not moved or deleted.",
+        "Daily gym workouts are protected health events and are not moved or deleted.",
+        "Sleep blocks are fixed events in the supplied calendar and are not moved or deleted.",
+        "All proposed times use the Europe/Lisbon timezone offset in effect for 2027-03-22 through 2027-03-26, which is +00:00.",
+        "The proposal uses only currently free calendar intervals; a free interval means there is no supplied calendar event there, not that every external resource would necessarily be available. These added editing blocks appear operationally feasible because video editing is a solo user activity in the supplied calendar."
+      ],
+      "priorities": [
+        "Recover the production time implied by the blocked Wednesday afternoon editing slot without disturbing fixed or protected events.",
+        "Follow the soft preference to shift editing hours to Monday and Tuesday.",
+        "Preserve existing live streams rather than moving them, because they involve the chat audience and would add an external dependency.",
+        "Use add-only changes in free time instead of moving existing editing blocks, reducing disruption while still adding 5.5 hours of video production time across Monday and Tuesday."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Move or shorten the Wednesday agency photoshoot and meeting.",
+          "rejected_because": "It is a fixed, protected sponsorship event and the request says it is mandatory; there is no externally confirmed exception allowing it to be moved or deleted."
+        },
+        {
+          "option": "Move daily gym workouts to create larger editing blocks.",
+          "rejected_because": "Gym workouts are protected by the hard health constraint and require confirmation for health-related changes; no confirmed exception was supplied."
+        },
+        {
+          "option": "Move live streams later or delete one to create evening editing time.",
+          "rejected_because": "Live streams involve an external audience participant, chat, and moving them would create a third-party scheduling impact. The same production goal can be met using free Monday and Tuesday slots without that disruption."
+        },
+        {
+          "option": "Place make-up editing on Wednesday before or after the agency event.",
+          "rejected_because": "This would be feasible from the supplied calendar, but it is less aligned with the stated soft preference to shift editing hours to Monday and Tuesday."
+        }
+      ],
+      "summary": "Added 5.5 hours of additional video editing on Monday and Tuesday to compensate for the Wednesday afternoon production time blocked by the mandatory agency photoshoot and contract renewal meeting. The plan preserves the fixed sponsorship event, all protected gym workouts, sleep blocks, and existing streams. The trade-off is that Monday and Tuesday become heavier editing days, including work adjacent to existing editing blocks, but this avoids moving protected or externally dependent events."
+    }
+  },
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [],
+    "valid": true
+  },
+  "decision": "defer",
+  "reasons": [
+    "mais de 2 mudanças"
+  ],
+  "status": "proposal_ready",
+  "seconds": 17.557
+}

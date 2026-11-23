@@ -1,0 +1,135 @@
+{
+  "schema_version": "2.0",
+  "configuration": "A",
+  "run_id": "978e8b3b49bd4705b747ad302b4d602c",
+  "experiment_id": null,
+  "repeat_index": 0,
+  "scenario_id": "freelancer_flexible_client_meeting_gaming_tournament_001",
+  "family": "freelancer_schedule_conflict",
+  "profile_id": "freelancer_flexible_01__freelancer_flexible_client_meeting_gaming_tournament_001",
+  "split": "train",
+  "aggregate_requirements_sha256": "02a293c5d9c84cbe96d1eafbadef5d33e60dfd269fc639f11e51c85aeb9f47f3",
+  "confirmed_changes_sha256": null,
+  "provider": "iaedu",
+  "model": "GPT-5.5",
+  "generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request"
+  },
+  "prompt_versions": {
+    "proposer_sha256": "45d8e4e44b2e45cd8c6e4e829ce43fb6825a88e6550716e1c655d1f49034cc79"
+  },
+  "generated_at": "2026-11-22T19:46:19.863301+00:00",
+  "proposal": {
+    "changes": [
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Additional Client Development Block",
+        "from_start": null,
+        "to_start": "2027-02-15T16:00:00+00:00",
+        "to_end": "2027-02-15T17:00:00+00:00",
+        "category": "work",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Additional Client Development Block",
+        "from_start": null,
+        "to_start": "2027-02-17T16:00:00+00:00",
+        "to_end": "2027-02-17T17:00:00+00:00",
+        "category": "work",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "The fixed online video game tournament on Friday from 20:00 to 23:30 is protected and is not moved.",
+        "The confirmed international client alignment meeting on Friday from 15:00 to 17:00 is fixed and remains in place.",
+        "Morning workouts are preserved: Monday and Wednesday runs remain 08:00 to 09:00, Tuesday and Thursday gym sessions remain 08:00 to 09:30, and Friday running remains 08:00 to 09:00.",
+        "Protected sleep blocks are not moved.",
+        "The weekly project-hours requirement needs at least 32 hours, or 1920 minutes, of events categorized as work between 2027-02-15T00:00:00+00:00 and 2027-02-20T00:00:00+00:00.",
+        "The Friday client meeting is categorized as meeting and is not counted as solo development work for the typed duration requirement."
+      ],
+      "priorities": [
+        "Reach the 32-hour freelance work target without moving fixed or protected commitments.",
+        "Keep Friday night fully available for the tournament.",
+        "Avoid reducing or moving morning exercise sessions.",
+        "Use free Monday-to-Thursday daytime-adjacent space instead of adding late-evening work.",
+        "Minimize disruption by adding two one-hour work blocks rather than moving existing events with participants or external dependencies."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Count the Friday 15:00 to 17:00 client meeting toward the 32 hours of work.",
+          "rejected_because": "The typed duration requirement counts only events categorized as work, and the meeting is explicitly categorized as meeting and described as not counted as solo development work."
+        },
+        {
+          "option": "Move or shorten the Friday night gaming tournament.",
+          "rejected_because": "The tournament is a fixed protected event with friends and the user explicitly asked not to miss it."
+        },
+        {
+          "option": "Move morning workouts to create earlier work starts.",
+          "rejected_because": "The user explicitly asked not to lose morning workouts, and the profile strongly prefers morning exercise between 08:00 and 10:00."
+        },
+        {
+          "option": "Add work on Friday after the client meeting.",
+          "rejected_because": "This would push work closer to the fixed Friday night tournament and reduce Friday evening recovery/social buffer, while Monday and Wednesday have clean free intervals immediately after existing work blocks."
+        },
+        {
+          "option": "Move existing Friday development work into Monday through Thursday.",
+          "rejected_because": "It is operationally possible because freelance work is flexible, but it is not necessary to satisfy the 32-hour target; adding two Monday-to-Thursday hours preserves the existing Friday morning plan and avoids a larger reshuffle."
+        }
+      ],
+      "summary": "Add one extra hour of work on Monday from 16:00 to 17:00 and one extra hour on Wednesday from 16:00 to 17:00. The final calendar keeps all morning workouts, preserves the fixed Friday tournament, keeps the confirmed Friday client meeting, and raises categorized work time from 30 hours to 32 hours for the week."
+    }
+  },
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [],
+    "valid": true,
+    "aggregate_checks": [
+      {
+        "id": "weekly_project_hours",
+        "status": "pass",
+        "minutes": 1920.0,
+        "minimum_minutes": 1920,
+        "category": "work",
+        "evidence": "union of final calendar intervals"
+      }
+    ],
+    "aggregate_validation_version": "duration_total_v1"
+  },
+  "decision": "act",
+  "reasons": [],
+  "status": "proposal_ready",
+  "seconds": 18.614
+}

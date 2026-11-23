@@ -39,7 +39,8 @@ class ScriptedProvider:
 
     def generate_structured(self, prompt, schema, *, system=""):
         self.calls.append((prompt, schema, system))
-        return self.answers.pop(0)
+        value = self.answers.pop(0)
+        return schema.from_proposal(value) if isinstance(value, Proposal) and hasattr(schema, "from_proposal") else value
 
 
 def candidate(start="2026-11-09T20:15:00+00:00"):
@@ -73,7 +74,7 @@ def unknown_facility(impact="material"):
 
 @pytest.fixture
 def context(tmp_path):
-    path = import_scenario(tmp_path, ROOT.parent / "scenario_v2_example.json", "train")
+    path = import_scenario(tmp_path, ROOT / "data/scenarios/working_student_deadline_001.json", "train")
     return tmp_path, load_scenario(path)
 
 
@@ -444,6 +445,9 @@ def test_a_baseline_unchanged_and_b_records_version(context):
     assert a["configuration"] == "A" and "critic_policy_version" not in a
     assert b["critic_policy_version"] == CRITIC_POLICY_VERSION
     assert b["prompt_versions"]["proposer_sha256"] == a["prompt_versions"]["proposer_sha256"]
+    assert b["prompt_versions"]["proposer_wire_schema_version"] == "compact_proposal_v1"
+    assert (b["prompt_versions"]["proposer_wire_schema_sha256"] ==
+            a["prompt_versions"]["proposer_wire_schema_sha256"])
     assert "proposer_revision_sha256" in b["prompt_versions"]
     assert "proposer_revision_sha256" not in a["prompt_versions"]
     assert a["decision"] == b["decision"] == "act"

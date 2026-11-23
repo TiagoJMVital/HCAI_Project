@@ -1,0 +1,1801 @@
+{
+  "proposal_id": "v2p_6085267d02a5903103b30d20",
+  "scenario_id": "working_student_makeup_class_friday_family_dinner_008",
+  "family_id": "working_student_schedule_conflict",
+  "profile_id": "working_student_01__working_student_makeup_class_friday_family_dinner_008",
+  "split": "train",
+  "run_id": "8879df08952944169c692b26fc7ce0b2",
+  "configuration": "B",
+  "generated_at": "2026-11-22T19:40:44.146764+00:00",
+  "proposer_provider": "iaedu",
+  "proposer_model": "GPT-5.5",
+  "proposer_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request"
+  },
+  "critic_provider": "iaedu",
+  "critic_model": "GPT-5.5",
+  "critic_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request"
+  },
+  "prompt_versions": {
+    "proposer_sha256": "45d8e4e44b2e45cd8c6e4e829ce43fb6825a88e6550716e1c655d1f49034cc79",
+    "proposer_revision_sha256": "3d8999560474363c55ab096e197152da0b244a3bfd2f597a7e0ad2136452ccf4",
+    "critic_sha256": "1686688cdd4bc63abb12e6633ef9dbb9b62d69b69aba1c4805a201657cc5bb34"
+  },
+  "critic_settings": {
+    "threshold": 4.0,
+    "max_refinements": 3,
+    "min_dimension_score": 1
+  },
+  "experiment_id": null,
+  "repeat_index": 0,
+  "seconds": 56.761,
+  "critic_score": 4.25,
+  "critic_accepted": true,
+  "iterations": [
+    {
+      "index": 0,
+      "proposer_feedback": null,
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "move",
+            "event_id": "family_dinner_fri",
+            "title": "Usual Friday Family Dinner",
+            "from_start": "2027-05-21T19:30:00+01:00",
+            "to_start": "2027-05-20T18:45:00+01:00",
+            "to_end": "2027-05-20T20:45:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "The Friday make-up lecture from 2027-05-21T18:30:00+01:00 to 2027-05-21T21:00:00+01:00 is mandatory and protected by the profile hard constraint.",
+            "The existing Friday family dinner from 2027-05-21T19:30:00+01:00 to 2027-05-21T21:30:00+01:00 overlaps the protected make-up lecture.",
+            "The family dinner is non-fixed and personal, so it is modifiable under the known calendar rules, but it includes family participants, so actual external availability is not guaranteed by a free calendar interval.",
+            "Thursday has a free interval after the workout from 2027-05-20T18:45:00+01:00 until sleep at 2027-05-20T23:45:00+01:00."
+          ],
+          "priorities": [
+            "Keep the protected mandatory Friday lecture intact.",
+            "Remove the Friday evening conflict so the user can attend the class without the dinner overlap.",
+            "Respect the user's request to move the usual Friday family dinner to Thursday evening after the workout.",
+            "Avoid moving fixed work, sleep, or protected education events."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Move the dinner to Thursday later in the evening, such as 19:30 to 21:30.",
+              "rejected_because": "It would also fit the free Thursday interval, but starting at 18:45 more directly satisfies the request to place it after the workout and avoids pushing the evening later without a stated need."
+            },
+            {
+              "option": "Keep the dinner on Friday after the make-up lecture, from 21:00 to 23:00.",
+              "rejected_because": "The user specifically asked to move the dinner to Thursday evening and keep Friday evening clear for the class."
+            },
+            {
+              "option": "Move or shorten the Thursday workout to create a different dinner slot.",
+              "rejected_because": "The existing Thursday workout is already followed by enough free time for the two-hour dinner, so disrupting a health event is unnecessary."
+            }
+          ],
+          "summary": "Move the flexible Friday family dinner to Thursday from 18:45 to 20:45, immediately after the Thursday workout. This resolves the overlap with the mandatory Friday make-up lecture while leaving fixed and protected events unchanged. The main uncertainty is external feasibility: the calendar is free, but family availability for Thursday evening is not confirmed by the supplied data."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-05-16T23:45:00+01:00",
+            "end": "2027-05-17T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_mon",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-05-17T09:00:00+01:00",
+            "end": "2027-05-17T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Daytime work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_mon",
+            "title": "Gym Workout",
+            "start": "2027-05-17T18:00:00+01:00",
+            "end": "2027-05-17T19:15:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_mon",
+            "title": "Evening Study: Course Material",
+            "start": "2027-05-17T19:45:00+01:00",
+            "end": "2027-05-17T21:45:00+01:00",
+            "category": "education",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Study.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-05-17T23:45:00+01:00",
+            "end": "2027-05-18T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_tue",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-05-18T09:00:00+01:00",
+            "end": "2027-05-18T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Daytime work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "class_tue",
+            "title": "Evening Lecture: Organizational Behavior",
+            "start": "2027-05-18T18:30:00+01:00",
+            "end": "2027-05-18T21:30:00+01:00",
+            "category": "education",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "professor",
+              "classmates"
+            ],
+            "description": "Mandatory evening class.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-05-18T23:45:00+01:00",
+            "end": "2027-05-19T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_wed",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-05-19T09:00:00+01:00",
+            "end": "2027-05-19T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Daytime work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_wed",
+            "title": "Gym: Strength & Conditioning",
+            "start": "2027-05-19T18:00:00+01:00",
+            "end": "2027-05-19T19:15:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_wed",
+            "title": "Evening Study: Organizational Behavior Case",
+            "start": "2027-05-19T19:45:00+01:00",
+            "end": "2027-05-19T21:45:00+01:00",
+            "category": "education",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Case study.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-05-19T23:45:00+01:00",
+            "end": "2027-05-20T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_thu",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-05-20T09:00:00+01:00",
+            "end": "2027-05-20T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Daytime work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_thu",
+            "title": "Gym Workout",
+            "start": "2027-05-20T17:45:00+01:00",
+            "end": "2027-05-20T18:45:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "family_dinner_fri",
+            "title": "Usual Friday Family Dinner",
+            "start": "2027-05-20T18:45:00+01:00",
+            "end": "2027-05-20T20:45:00+01:00",
+            "category": "personal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "family"
+            ],
+            "description": "Original Friday family dinner; overlaps newly confirmed make-up lecture, motivating a proposed move to Thursday.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-05-20T23:45:00+01:00",
+            "end": "2027-05-21T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_fri",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-05-21T09:00:00+01:00",
+            "end": "2027-05-21T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Friday work shift.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "makeup_class_fri",
+            "title": "Evening Make-up Lecture: Econometrics",
+            "start": "2027-05-21T18:30:00+01:00",
+            "end": "2027-05-21T21:00:00+01:00",
+            "category": "education",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "professor",
+              "classmates"
+            ],
+            "description": "Mandatory Friday evening make-up class.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Null metadata on added events means the Proposal contract did not supply it; it is not a new personal preference or hard constraint."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 3,
+          "coherence": 3,
+          "alternatives": 3,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "A proposta resolve o conflito objetivo entre o jantar de sexta-feira, originalmente 2027-05-21 19:30-21:30, e a aula obrigatória de sexta-feira 2027-05-21 18:30-21:00, mas trata o intervalo imediatamente após o treino de quinta-feira como capacidade prática quase automática.",
+          "Na quinta-feira, o calendário resultante cria uma sequência apertada: trabalho 09:00-17:30, treino 17:45-18:45 e jantar familiar 18:45-20:45. Não há margem visível entre o treino e o jantar para deslocação, banho, troca de roupa, preparação, recuperação ou chegada de familiares.",
+          "A alternativa de começar mais tarde na quinta-feira foi rejeitada sobretudo por evitar empurrar a noite, mas a justificação não pesa suficientemente o benefício humano de alguma transição depois do treino.",
+          "A disponibilidade da família é reconhecida como incerta, mas continua a ser uma condição material para que o plano funcione, uma vez que o evento inclui participantes familiares.",
+          "O calendário semanal visível já é exigente, com trabalho diurno todos os dias úteis, aulas/estudo à noite em vários dias e treinos em segunda, quarta e quinta. A proposta não cria a maior parte dessa carga, mas acrescenta o jantar a uma quinta-feira já fisicamente densa."
+        ],
+        "feedback": "A mudança é coerente no plano técnico e respeita a prioridade visível de manter intacta a aula obrigatória de sexta-feira. Também é proporcional no sentido de mover apenas o jantar flexível, em vez de alterar trabalho, sono ou eventos educativos protegidos. O ponto fraco principal é humano-prático: colocar o jantar exatamente às 18:45, no mesmo minuto em que termina o treino de quinta-feira, pode tornar a noite pouco realista se houver qualquer necessidade de transição. Isto não é uma contradição objetiva, porque os locais e rotinas não são conhecidos, e um jantar familiar pode até funcionar como tempo pessoal. Ainda assim, a proposta deveria reconsiderar ou justificar melhor por que motivo uma passagem imediata de treino para jantar é adequada, especialmente depois de um dia de trabalho completo e antes de uma sexta-feira com trabalho seguido de aula obrigatória até às 21:00. Uma revisão poderia manter a mesma operação se houver contexto forte, mas deveria demonstrar que a logística pós-treino e a disponibilidade familiar foram consideradas, ou então procurar uma distribuição de quinta-feira que preserve o objetivo sem depender tanto de uma transição instantânea.",
+        "plausibility_review": {
+          "revision_required": true,
+          "severity": "moderate",
+          "reason": "A organização proposta pode ser humanamente apertada porque o jantar familiar começa imediatamente após o treino de quinta-feira, após um dia de trabalho completo. A consequência provável, se houver deslocação, higiene, preparação ou necessidade de recuperação, é que o jantar comece atrasado, seja stressante ou torne a noite menos sustentável. A preocupação não prova inviabilidade, mas é concreta e ligada diretamente à alteração proposta.",
+          "suggested_improvement": "Reconsiderar a distribuição da noite de quinta-feira com o contexto completo: confirmar se a transição imediata pós-treino é realmente praticável e se a família está disponível, ou ajustar a proposta de forma geral para incluir margem prática sem comprometer a aula obrigatória de sexta-feira."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Disponibilidade da família",
+            "assumption": "Os participantes familiares conseguem comparecer ao jantar na quinta-feira 2027-05-20 à noite.",
+            "evidence_gap": "O calendário mostra o utilizador livre nesse período, mas não fornece calendários, confirmação ou disponibilidade dos familiares.",
+            "potential_impact": "material",
+            "verification_source": "third_party"
+          },
+          {
+            "subject": "Transição entre treino e jantar",
+            "assumption": "É praticável terminar o treino às 18:45 e iniciar imediatamente o jantar familiar às 18:45.",
+            "evidence_gap": "Não há informação sobre localização do treino e do jantar, necessidade de banho, troca de roupa, deslocação, preparação de comida ou tolerância a atraso.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Interpretação do pedido de mover para depois do treino",
+            "assumption": "Colocar o jantar imediatamente após o treino satisfaz a intenção visível de o mover para quinta-feira depois do treino.",
+            "evidence_gap": "A proposta relata esse objetivo, mas o pedido original não está disponível e a validação técnica declara que não verifica satisfação do pedido.",
+            "potential_impact": "minor",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Sustentabilidade da quinta e sexta-feira em sequência",
+            "assumption": "A sequência trabalho-treino-jantar na quinta-feira, seguida de trabalho e aula obrigatória até às 21:00 na sexta-feira, é manejável para esta pessoa.",
+            "evidence_gap": "O calendário mostra sono preservado, mas não informa níveis de fadiga, deslocações, responsabilidades domésticas, necessidades alimentares ou recuperação pessoal.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          }
+        ],
+        "overall": 3.25
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": false,
+        "plausibility_revision_required": true,
+        "accepted": false,
+        "revision_causes": [
+          "numeric_criteria_failed",
+          "plausibility_revision_required"
+        ]
+      },
+      "operations_changed_from_previous": null,
+      "rationale_changed_from_previous": null,
+      "prior_critic_reviews": [],
+      "unresolved_assumptions": [
+        {
+          "subject": "Disponibilidade da família",
+          "assumption": "Os participantes familiares conseguem comparecer ao jantar na quinta-feira 2027-05-20 à noite.",
+          "evidence_gap": "O calendário mostra o utilizador livre nesse período, mas não fornece calendários, confirmação ou disponibilidade dos familiares.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Transição entre treino e jantar",
+          "assumption": "É praticável terminar o treino às 18:45 e iniciar imediatamente o jantar familiar às 18:45.",
+          "evidence_gap": "Não há informação sobre localização do treino e do jantar, necessidade de banho, troca de roupa, deslocação, preparação de comida ou tolerância a atraso.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Interpretação do pedido de mover para depois do treino",
+          "assumption": "Colocar o jantar imediatamente após o treino satisfaz a intenção visível de o mover para quinta-feira depois do treino.",
+          "evidence_gap": "A proposta relata esse objetivo, mas o pedido original não está disponível e a validação técnica declara que não verifica satisfação do pedido.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Sustentabilidade da quinta e sexta-feira em sequência",
+          "assumption": "A sequência trabalho-treino-jantar na quinta-feira, seguida de trabalho e aula obrigatória até às 21:00 na sexta-feira, é manejável para esta pessoa.",
+          "evidence_gap": "O calendário mostra sono preservado, mas não informa níveis de fadiga, deslocações, responsabilidades domésticas, necessidades alimentares ou recuperação pessoal.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "proposer_feedback": "Numeric Critic criteria failed. Scores: {\"reasoning\":3,\"coherence\":3,\"alternatives\":3,\"clarity\":4}. Plausibility revision required (moderate): A organização proposta pode ser humanamente apertada porque o jantar familiar começa imediatamente após o treino de quinta-feira, após um dia de trabalho completo. A consequência provável, se houver deslocação, higiene, preparação ou necessidade de recuperação, é que o jantar comece atrasado, seja stressante ou torne a noite menos sustentável. A preocupação não prova inviabilidade, mas é concreta e ligada diretamente à alteração proposta. Suggested direction: Reconsiderar a distribuição da noite de quinta-feira com o contexto completo: confirmar se a transição imediata pós-treino é realmente praticável e se a família está disponível, ou ajustar a proposta de forma geral para incluir margem prática sem comprometer a aula obrigatória de sexta-feira. The Critic lacks the full user constraints; explain if no better feasible option exists. Unverified conditions to reassess: [{'subject': 'Disponibilidade da família', 'assumption': 'Os participantes familiares conseguem comparecer ao jantar na quinta-feira 2027-05-20 à noite.', 'evidence_gap': 'O calendário mostra o utilizador livre nesse período, mas não fornece calendários, confirmação ou disponibilidade dos familiares.', 'potential_impact': 'material', 'verification_source': 'third_party'}, {'subject': 'Transição entre treino e jantar', 'assumption': 'É praticável terminar o treino às 18:45 e iniciar imediatamente o jantar familiar às 18:45.', 'evidence_gap': 'Não há informação sobre localização do treino e do jantar, necessidade de banho, troca de roupa, deslocação, preparação de comida ou tolerância a atraso.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Interpretação do pedido de mover para depois do treino', 'assumption': 'Colocar o jantar imediatamente após o treino satisfaz a intenção visível de o mover para quinta-feira depois do treino.', 'evidence_gap': 'A proposta relata esse objetivo, mas o pedido original não está disponível e a validação técnica declara que não verifica satisfação do pedido.', 'potential_impact': 'minor', 'verification_source': 'unknown'}, {'subject': 'Sustentabilidade da quinta e sexta-feira em sequência', 'assumption': 'A sequência trabalho-treino-jantar na quinta-feira, seguida de trabalho e aula obrigatória até às 21:00 na sexta-feira, é manejável para esta pessoa.', 'evidence_gap': 'O calendário mostra sono preservado, mas não informa níveis de fadiga, deslocações, responsabilidades domésticas, necessidades alimentares ou recuperação pessoal.', 'potential_impact': 'material', 'verification_source': 'user_context'}] Weaknesses: ['A proposta resolve o conflito objetivo entre o jantar de sexta-feira, originalmente 2027-05-21 19:30-21:30, e a aula obrigatória de sexta-feira 2027-05-21 18:30-21:00, mas trata o intervalo imediatamente após o treino de quinta-feira como capacidade prática quase automática.', 'Na quinta-feira, o calendário resultante cria uma sequência apertada: trabalho 09:00-17:30, treino 17:45-18:45 e jantar familiar 18:45-20:45. Não há margem visível entre o treino e o jantar para deslocação, banho, troca de roupa, preparação, recuperação ou chegada de familiares.', 'A alternativa de começar mais tarde na quinta-feira foi rejeitada sobretudo por evitar empurrar a noite, mas a justificação não pesa suficientemente o benefício humano de alguma transição depois do treino.', 'A disponibilidade da família é reconhecida como incerta, mas continua a ser uma condição material para que o plano funcione, uma vez que o evento inclui participantes familiares.', 'O calendário semanal visível já é exigente, com trabalho diurno todos os dias úteis, aulas/estudo à noite em vários dias e treinos em segunda, quarta e quinta. A proposta não cria a maior parte dessa carga, mas acrescenta o jantar a uma quinta-feira já fisicamente densa.']. Actionable feedback: A mudança é coerente no plano técnico e respeita a prioridade visível de manter intacta a aula obrigatória de sexta-feira. Também é proporcional no sentido de mover apenas o jantar flexível, em vez de alterar trabalho, sono ou eventos educativos protegidos. O ponto fraco principal é humano-prático: colocar o jantar exatamente às 18:45, no mesmo minuto em que termina o treino de quinta-feira, pode tornar a noite pouco realista se houver qualquer necessidade de transição. Isto não é uma contradição objetiva, porque os locais e rotinas não são conhecidos, e um jantar familiar pode até funcionar como tempo pessoal. Ainda assim, a proposta deveria reconsiderar ou justificar melhor por que motivo uma passagem imediata de treino para jantar é adequada, especialmente depois de um dia de trabalho completo e antes de uma sexta-feira com trabalho seguido de aula obrigatória até às 21:00. Uma revisão poderia manter a mesma operação se houver contexto forte, mas deveria demonstrar que a logística pós-treino e a disponibilidade familiar foram consideradas, ou então procurar uma distribuição de quinta-feira que preserve o objetivo sem depender tanto de uma transição instantânea.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "move",
+            "event_id": "family_dinner_fri",
+            "title": "Usual Friday Family Dinner",
+            "from_start": "2027-05-21T19:30:00+01:00",
+            "to_start": "2027-05-20T19:30:00+01:00",
+            "to_end": "2027-05-20T21:30:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "The Friday make-up lecture from 2027-05-21T18:30:00+01:00 to 2027-05-21T21:00:00+01:00 is mandatory and protected by the profile hard constraint, so it must remain unchanged.",
+            "The original Friday family dinner from 2027-05-21T19:30:00+01:00 to 2027-05-21T21:30:00+01:00 overlaps the protected Friday make-up lecture and cannot remain in that slot if Friday evening is to be kept clear for class.",
+            "The family dinner is non-fixed and personal, so it is modifiable under the known calendar rules, but it includes family participants; a free interval on the user's calendar does not confirm family availability.",
+            "Thursday has a free calendar interval after the workout from 2027-05-20T18:45:00+01:00 until sleep at 2027-05-20T23:45:00+01:00.",
+            "No supplied information confirms travel time, showering, meal preparation, recovery needs, dinner location, or family logistics after the Thursday workout."
+          ],
+          "priorities": [
+            "Keep the mandatory Friday make-up lecture intact and remove the dinner conflict from Friday evening.",
+            "Respect the user's request to move the usual Friday family dinner to Thursday evening after the workout.",
+            "Avoid moving fixed work, sleep, or protected education events.",
+            "Use the Thursday free interval in a way that is more practical than starting dinner at the exact minute the workout ends.",
+            "Preserve the original two-hour dinner duration and usual 19:30 start time where feasible, reducing disruption to the dinner pattern while adding transition time after the workout."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Move the dinner to Thursday from 18:45 to 20:45 immediately after the workout.",
+              "rejected_because": "Although technically free and directly after the workout, it creates a no-buffer transition from exercise to a family dinner after a full workday. With no information about showering, travel, preparation, or recovery needs, that slot is more fragile and potentially stressful than a later Thursday start."
+            },
+            {
+              "option": "Move the dinner to Thursday from 19:30 to 21:30.",
+              "rejected_because": "This is the selected option, not rejected. It fits the free Thursday interval, keeps the original two-hour dinner duration, preserves the usual dinner start time, and leaves 45 minutes after the workout for unspecified transition needs without moving the workout."
+            },
+            {
+              "option": "Move or shorten the Thursday workout to create an earlier or larger dinner window.",
+              "rejected_because": "The Thursday calendar already has enough free time after the workout for the dinner, and moving a health event would introduce extra disruption without being necessary to satisfy the request."
+            },
+            {
+              "option": "Keep the dinner on Friday after the make-up lecture, for example from 21:00 to 23:00.",
+              "rejected_because": "The user specifically asked to move the dinner to Thursday evening and keep Friday evening clear for the class. A late Friday dinner would also follow a full workday and mandatory class ending at 21:00."
+            }
+          ],
+          "summary": "Move the flexible Friday family dinner to Thursday from 19:30 to 21:30. This keeps Friday evening clear for the mandatory 18:30 to 21:00 make-up lecture, avoids changing fixed or protected events, and improves practical quality compared with an immediate 18:45 dinner by leaving a 45-minute buffer after the Thursday workout. The plan still depends on unconfirmed external availability from family and unknown logistics such as travel, showering, meal preparation, and recovery needs. Thursday remains a demanding day with work, workout, and dinner, but the visible calendar preserves sleep and leaves time between dinner ending at 21:30 and sleep at 23:45."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-05-16T23:45:00+01:00",
+            "end": "2027-05-17T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_mon",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-05-17T09:00:00+01:00",
+            "end": "2027-05-17T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Daytime work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_mon",
+            "title": "Gym Workout",
+            "start": "2027-05-17T18:00:00+01:00",
+            "end": "2027-05-17T19:15:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_mon",
+            "title": "Evening Study: Course Material",
+            "start": "2027-05-17T19:45:00+01:00",
+            "end": "2027-05-17T21:45:00+01:00",
+            "category": "education",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Study.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-05-17T23:45:00+01:00",
+            "end": "2027-05-18T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_tue",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-05-18T09:00:00+01:00",
+            "end": "2027-05-18T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Daytime work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "class_tue",
+            "title": "Evening Lecture: Organizational Behavior",
+            "start": "2027-05-18T18:30:00+01:00",
+            "end": "2027-05-18T21:30:00+01:00",
+            "category": "education",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "professor",
+              "classmates"
+            ],
+            "description": "Mandatory evening class.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-05-18T23:45:00+01:00",
+            "end": "2027-05-19T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_wed",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-05-19T09:00:00+01:00",
+            "end": "2027-05-19T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Daytime work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_wed",
+            "title": "Gym: Strength & Conditioning",
+            "start": "2027-05-19T18:00:00+01:00",
+            "end": "2027-05-19T19:15:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_wed",
+            "title": "Evening Study: Organizational Behavior Case",
+            "start": "2027-05-19T19:45:00+01:00",
+            "end": "2027-05-19T21:45:00+01:00",
+            "category": "education",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Case study.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-05-19T23:45:00+01:00",
+            "end": "2027-05-20T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_thu",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-05-20T09:00:00+01:00",
+            "end": "2027-05-20T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Daytime work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_thu",
+            "title": "Gym Workout",
+            "start": "2027-05-20T17:45:00+01:00",
+            "end": "2027-05-20T18:45:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "family_dinner_fri",
+            "title": "Usual Friday Family Dinner",
+            "start": "2027-05-20T19:30:00+01:00",
+            "end": "2027-05-20T21:30:00+01:00",
+            "category": "personal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "family"
+            ],
+            "description": "Original Friday family dinner; overlaps newly confirmed make-up lecture, motivating a proposed move to Thursday.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-05-20T23:45:00+01:00",
+            "end": "2027-05-21T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_fri",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-05-21T09:00:00+01:00",
+            "end": "2027-05-21T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Friday work shift.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "makeup_class_fri",
+            "title": "Evening Make-up Lecture: Econometrics",
+            "start": "2027-05-21T18:30:00+01:00",
+            "end": "2027-05-21T21:00:00+01:00",
+            "category": "education",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "professor",
+              "classmates"
+            ],
+            "description": "Mandatory Friday evening make-up class.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Null metadata on added events means the Proposal contract did not supply it; it is not a new personal preference or hard constraint."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 4,
+          "alternatives": 4,
+          "clarity": 5
+        },
+        "weaknesses": [
+          "A proposta revista responde de forma concreta à preocupação anterior ao deixar 45 minutos entre o treino de quinta-feira 2027-05-20 17:45-18:45 e o jantar familiar 19:30-21:30, mas essa margem continua a depender de logística desconhecida como banho, deslocação, preparação ou local do jantar.",
+          "A quinta-feira resultante continua densa: trabalho 09:00-17:30, treino 17:45-18:45 e jantar familiar 19:30-21:30. Isto pode ser manejável, mas deixa a recuperação e tarefas pessoais para depois das 21:30 antes do sono às 23:45.",
+          "A semana visível já tem carga elevada, com trabalho diurno todos os dias úteis, estudo ou aulas à noite em segunda, terça, quarta e sexta, e treinos em segunda, quarta e quinta. A proposta não cria a maior parte dessa carga, mas concentra o jantar movido numa noite já activa.",
+          "A disponibilidade dos familiares para quinta-feira à noite continua materialmente não verificada; o calendário do utilizador estar livre não confirma que os restantes participantes possam comparecer.",
+          "A satisfação exacta do pedido original não pode ser verificada a partir dos dados disponíveis, porque a validação técnica declara que não verificou request satisfaction e o pedido original não foi fornecido."
+        ],
+        "feedback": "A revisão melhora substancialmente a qualidade humana face à versão anterior. O jantar já não começa no mesmo minuto em que termina o treino; passar para 19:30 preserva a duração habitual de duas horas, mantém o padrão de início original e cria alguma margem prática sem mexer no trabalho, sono, treino ou aula obrigatória. A escolha também resolve o conflito visível de sexta-feira entre o jantar original 19:30-21:30 e a aula obrigatória 18:30-21:00. Ainda assim, o plano continua a depender de condições não demonstradas: que 45 minutos cheguem para a transição pós-treino e que a família esteja disponível na quinta-feira. A carga global da semana é exigente, mas a alteração proposta é proporcional e não parece introduzir um problema novo suficientemente concreto para exigir nova revisão. Se o Proposer tiver contexto adicional, deve explicitar se a logística pós-treino e a disponibilidade familiar foram confirmadas; caso contrário, deve manter essas incertezas visíveis.",
+        "plausibility_review": {
+          "revision_required": false,
+          "severity": "low",
+          "reason": "A preocupação anterior recebeu uma resposta plausível: o jantar deixou de começar imediatamente após o treino e agora há uma margem visível de 45 minutos entre 18:45 e 19:30. A quinta-feira continua ocupada e a disponibilidade familiar permanece não verificada, mas não há uma contradição objectiva nem um sinal suficiente de que a organização seja impraticável. A alteração é limitada, proporcional ao conflito de sexta-feira e preserva o sono 23:45-07:15.",
+          "suggested_improvement": "Manter a proposta apenas se, no contexto completo, a transição pós-treino e a disponibilidade dos familiares forem aceitáveis. Caso esses elementos não estejam confirmados, o Proposer deve assinalar explicitamente a dependência ou reconsiderar de forma geral uma distribuição que reduza a pressão logística da noite de quinta-feira sem escolher automaticamente um novo horário."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Disponibilidade da família",
+            "assumption": "Os familiares conseguem participar no jantar na quinta-feira 2027-05-20 das 19:30 às 21:30.",
+            "evidence_gap": "O calendário mostra apenas a disponibilidade do utilizador; não há confirmação, calendário ou disponibilidade dos familiares.",
+            "potential_impact": "material",
+            "verification_source": "third_party"
+          },
+          {
+            "subject": "Transição entre treino e jantar",
+            "assumption": "O intervalo de 45 minutos entre o fim do treino às 18:45 e o jantar às 19:30 é suficiente para higiene, deslocação, troca de roupa, preparação e recuperação necessárias.",
+            "evidence_gap": "Não há informação sobre locais, duração de deslocações, rotina pós-treino, necessidade de banho, preparação de comida ou tolerância a atrasos.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Sustentabilidade da sequência quinta-sexta",
+            "assumption": "A sequência trabalho-treino-jantar na quinta-feira, seguida de trabalho e aula obrigatória até às 21:00 na sexta-feira, é manejável para esta pessoa.",
+            "evidence_gap": "O calendário preserva sono, mas não mostra fadiga, responsabilidades domésticas, necessidades alimentares, deslocações ou recuperação pessoal.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Satisfação do pedido original",
+            "assumption": "Mover o jantar para quinta-feira 19:30-21:30 cumpre a intenção original de o colocar na quinta-feira depois do treino.",
+            "evidence_gap": "A proposta afirma esse objectivo, mas o pedido original não foi fornecido e a validação técnica declara que não verificou satisfação do pedido.",
+            "potential_impact": "minor",
+            "verification_source": "unknown"
+          }
+        ],
+        "overall": 4.25
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": true,
+        "plausibility_revision_required": false,
+        "accepted": true,
+        "revision_causes": []
+      },
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": [
+        {
+          "iteration": 0,
+          "proposal": {
+            "changes": [
+              {
+                "type": "move",
+                "event_id": "family_dinner_fri",
+                "title": "Usual Friday Family Dinner",
+                "from_start": "2027-05-21T19:30:00+01:00",
+                "to_start": "2027-05-20T18:45:00+01:00",
+                "to_end": "2027-05-20T20:45:00+01:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              }
+            ],
+            "rationale": {
+              "constraints": [
+                "The Friday make-up lecture from 2027-05-21T18:30:00+01:00 to 2027-05-21T21:00:00+01:00 is mandatory and protected by the profile hard constraint.",
+                "The existing Friday family dinner from 2027-05-21T19:30:00+01:00 to 2027-05-21T21:30:00+01:00 overlaps the protected make-up lecture.",
+                "The family dinner is non-fixed and personal, so it is modifiable under the known calendar rules, but it includes family participants, so actual external availability is not guaranteed by a free calendar interval.",
+                "Thursday has a free interval after the workout from 2027-05-20T18:45:00+01:00 until sleep at 2027-05-20T23:45:00+01:00."
+              ],
+              "priorities": [
+                "Keep the protected mandatory Friday lecture intact.",
+                "Remove the Friday evening conflict so the user can attend the class without the dinner overlap.",
+                "Respect the user's request to move the usual Friday family dinner to Thursday evening after the workout.",
+                "Avoid moving fixed work, sleep, or protected education events."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Move the dinner to Thursday later in the evening, such as 19:30 to 21:30.",
+                  "rejected_because": "It would also fit the free Thursday interval, but starting at 18:45 more directly satisfies the request to place it after the workout and avoids pushing the evening later without a stated need."
+                },
+                {
+                  "option": "Keep the dinner on Friday after the make-up lecture, from 21:00 to 23:00.",
+                  "rejected_because": "The user specifically asked to move the dinner to Thursday evening and keep Friday evening clear for the class."
+                },
+                {
+                  "option": "Move or shorten the Thursday workout to create a different dinner slot.",
+                  "rejected_because": "The existing Thursday workout is already followed by enough free time for the two-hour dinner, so disrupting a health event is unnecessary."
+                }
+              ],
+              "summary": "Move the flexible Friday family dinner to Thursday from 18:45 to 20:45, immediately after the Thursday workout. This resolves the overlap with the mandatory Friday make-up lecture while leaving fixed and protected events unchanged. The main uncertainty is external feasibility: the calendar is free, but family availability for Thursday evening is not confirmed by the supplied data."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "sleep_mon",
+                "title": "Sleep",
+                "start": "2027-05-16T23:45:00+01:00",
+                "end": "2027-05-17T07:15:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Night sleep.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_mon",
+                "title": "Daytime Job: Core Shift",
+                "start": "2027-05-17T09:00:00+01:00",
+                "end": "2027-05-17T17:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "colleagues"
+                ],
+                "description": "Daytime work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_mon",
+                "title": "Gym Workout",
+                "start": "2027-05-17T18:00:00+01:00",
+                "end": "2027-05-17T19:15:00+01:00",
+                "category": "health",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Workout.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "study_mon",
+                "title": "Evening Study: Course Material",
+                "start": "2027-05-17T19:45:00+01:00",
+                "end": "2027-05-17T21:45:00+01:00",
+                "category": "education",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Study.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_tue",
+                "title": "Sleep",
+                "start": "2027-05-17T23:45:00+01:00",
+                "end": "2027-05-18T07:15:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Night sleep.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_tue",
+                "title": "Daytime Job: Core Shift",
+                "start": "2027-05-18T09:00:00+01:00",
+                "end": "2027-05-18T17:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "colleagues"
+                ],
+                "description": "Daytime work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "class_tue",
+                "title": "Evening Lecture: Organizational Behavior",
+                "start": "2027-05-18T18:30:00+01:00",
+                "end": "2027-05-18T21:30:00+01:00",
+                "category": "education",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "professor",
+                  "classmates"
+                ],
+                "description": "Mandatory evening class.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_wed",
+                "title": "Sleep",
+                "start": "2027-05-18T23:45:00+01:00",
+                "end": "2027-05-19T07:15:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Night sleep.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_wed",
+                "title": "Daytime Job: Core Shift",
+                "start": "2027-05-19T09:00:00+01:00",
+                "end": "2027-05-19T17:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "colleagues"
+                ],
+                "description": "Daytime work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_wed",
+                "title": "Gym: Strength & Conditioning",
+                "start": "2027-05-19T18:00:00+01:00",
+                "end": "2027-05-19T19:15:00+01:00",
+                "category": "health",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Workout.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "study_wed",
+                "title": "Evening Study: Organizational Behavior Case",
+                "start": "2027-05-19T19:45:00+01:00",
+                "end": "2027-05-19T21:45:00+01:00",
+                "category": "education",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Case study.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2027-05-19T23:45:00+01:00",
+                "end": "2027-05-20T07:15:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Night sleep.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_thu",
+                "title": "Daytime Job: Core Shift",
+                "start": "2027-05-20T09:00:00+01:00",
+                "end": "2027-05-20T17:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "colleagues"
+                ],
+                "description": "Daytime work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_thu",
+                "title": "Gym Workout",
+                "start": "2027-05-20T17:45:00+01:00",
+                "end": "2027-05-20T18:45:00+01:00",
+                "category": "health",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Workout.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "family_dinner_fri",
+                "title": "Usual Friday Family Dinner",
+                "start": "2027-05-20T18:45:00+01:00",
+                "end": "2027-05-20T20:45:00+01:00",
+                "category": "personal",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "family"
+                ],
+                "description": "Original Friday family dinner; overlaps newly confirmed make-up lecture, motivating a proposed move to Thursday.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "sleep_fri",
+                "title": "Sleep",
+                "start": "2027-05-20T23:45:00+01:00",
+                "end": "2027-05-21T07:15:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Night sleep.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_fri",
+                "title": "Daytime Job: Core Shift",
+                "start": "2027-05-21T09:00:00+01:00",
+                "end": "2027-05-21T17:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "colleagues"
+                ],
+                "description": "Friday work shift.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "makeup_class_fri",
+                "title": "Evening Make-up Lecture: Econometrics",
+                "start": "2027-05-21T18:30:00+01:00",
+                "end": "2027-05-21T21:00:00+01:00",
+                "category": "education",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "professor",
+                  "classmates"
+                ],
+                "description": "Mandatory Friday evening make-up class.",
+                "origin": "existing",
+                "change_status": "preserved"
+              }
+            ],
+            "metadata_note": "Null metadata on added events means the Proposal contract did not supply it; it is not a new personal preference or hard constraint."
+          },
+          "plausibility_review": {
+            "revision_required": true,
+            "severity": "moderate",
+            "reason": "A organização proposta pode ser humanamente apertada porque o jantar familiar começa imediatamente após o treino de quinta-feira, após um dia de trabalho completo. A consequência provável, se houver deslocação, higiene, preparação ou necessidade de recuperação, é que o jantar comece atrasado, seja stressante ou torne a noite menos sustentável. A preocupação não prova inviabilidade, mas é concreta e ligada diretamente à alteração proposta.",
+            "suggested_improvement": "Reconsiderar a distribuição da noite de quinta-feira com o contexto completo: confirmar se a transição imediata pós-treino é realmente praticável e se a família está disponível, ou ajustar a proposta de forma geral para incluir margem prática sem comprometer a aula obrigatória de sexta-feira."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Disponibilidade da família",
+              "assumption": "Os participantes familiares conseguem comparecer ao jantar na quinta-feira 2027-05-20 à noite.",
+              "evidence_gap": "O calendário mostra o utilizador livre nesse período, mas não fornece calendários, confirmação ou disponibilidade dos familiares.",
+              "potential_impact": "material",
+              "verification_source": "third_party"
+            },
+            {
+              "subject": "Transição entre treino e jantar",
+              "assumption": "É praticável terminar o treino às 18:45 e iniciar imediatamente o jantar familiar às 18:45.",
+              "evidence_gap": "Não há informação sobre localização do treino e do jantar, necessidade de banho, troca de roupa, deslocação, preparação de comida ou tolerância a atraso.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Interpretação do pedido de mover para depois do treino",
+              "assumption": "Colocar o jantar imediatamente após o treino satisfaz a intenção visível de o mover para quinta-feira depois do treino.",
+              "evidence_gap": "A proposta relata esse objetivo, mas o pedido original não está disponível e a validação técnica declara que não verifica satisfação do pedido.",
+              "potential_impact": "minor",
+              "verification_source": "unknown"
+            },
+            {
+              "subject": "Sustentabilidade da quinta e sexta-feira em sequência",
+              "assumption": "A sequência trabalho-treino-jantar na quinta-feira, seguida de trabalho e aula obrigatória até às 21:00 na sexta-feira, é manejável para esta pessoa.",
+              "evidence_gap": "O calendário mostra sono preservado, mas não informa níveis de fadiga, deslocações, responsabilidades domésticas, necessidades alimentares ou recuperação pessoal.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            }
+          ],
+          "weaknesses": [
+            "A proposta resolve o conflito objetivo entre o jantar de sexta-feira, originalmente 2027-05-21 19:30-21:30, e a aula obrigatória de sexta-feira 2027-05-21 18:30-21:00, mas trata o intervalo imediatamente após o treino de quinta-feira como capacidade prática quase automática.",
+            "Na quinta-feira, o calendário resultante cria uma sequência apertada: trabalho 09:00-17:30, treino 17:45-18:45 e jantar familiar 18:45-20:45. Não há margem visível entre o treino e o jantar para deslocação, banho, troca de roupa, preparação, recuperação ou chegada de familiares.",
+            "A alternativa de começar mais tarde na quinta-feira foi rejeitada sobretudo por evitar empurrar a noite, mas a justificação não pesa suficientemente o benefício humano de alguma transição depois do treino.",
+            "A disponibilidade da família é reconhecida como incerta, mas continua a ser uma condição material para que o plano funcione, uma vez que o evento inclui participantes familiares.",
+            "O calendário semanal visível já é exigente, com trabalho diurno todos os dias úteis, aulas/estudo à noite em vários dias e treinos em segunda, quarta e quinta. A proposta não cria a maior parte dessa carga, mas acrescenta o jantar a uma quinta-feira já fisicamente densa."
+          ],
+          "feedback": "A mudança é coerente no plano técnico e respeita a prioridade visível de manter intacta a aula obrigatória de sexta-feira. Também é proporcional no sentido de mover apenas o jantar flexível, em vez de alterar trabalho, sono ou eventos educativos protegidos. O ponto fraco principal é humano-prático: colocar o jantar exatamente às 18:45, no mesmo minuto em que termina o treino de quinta-feira, pode tornar a noite pouco realista se houver qualquer necessidade de transição. Isto não é uma contradição objetiva, porque os locais e rotinas não são conhecidos, e um jantar familiar pode até funcionar como tempo pessoal. Ainda assim, a proposta deveria reconsiderar ou justificar melhor por que motivo uma passagem imediata de treino para jantar é adequada, especialmente depois de um dia de trabalho completo e antes de uma sexta-feira com trabalho seguido de aula obrigatória até às 21:00. Uma revisão poderia manter a mesma operação se houver contexto forte, mas deveria demonstrar que a logística pós-treino e a disponibilidade familiar foram consideradas, ou então procurar uma distribuição de quinta-feira que preserve o objetivo sem depender tanto de uma transição instantânea."
+        }
+      ],
+      "unresolved_assumptions": [
+        {
+          "subject": "Disponibilidade da família",
+          "assumption": "Os familiares conseguem participar no jantar na quinta-feira 2027-05-20 das 19:30 às 21:30.",
+          "evidence_gap": "O calendário mostra apenas a disponibilidade do utilizador; não há confirmação, calendário ou disponibilidade dos familiares.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Transição entre treino e jantar",
+          "assumption": "O intervalo de 45 minutos entre o fim do treino às 18:45 e o jantar às 19:30 é suficiente para higiene, deslocação, troca de roupa, preparação e recuperação necessárias.",
+          "evidence_gap": "Não há informação sobre locais, duração de deslocações, rotina pós-treino, necessidade de banho, preparação de comida ou tolerância a atrasos.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Sustentabilidade da sequência quinta-sexta",
+          "assumption": "A sequência trabalho-treino-jantar na quinta-feira, seguida de trabalho e aula obrigatória até às 21:00 na sexta-feira, é manejável para esta pessoa.",
+          "evidence_gap": "O calendário preserva sono, mas não mostra fadiga, responsabilidades domésticas, necessidades alimentares, deslocações ou recuperação pessoal.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Satisfação do pedido original",
+          "assumption": "Mover o jantar para quinta-feira 19:30-21:30 cumpre a intenção original de o colocar na quinta-feira depois do treino.",
+          "evidence_gap": "A proposta afirma esse objectivo, mas o pedido original não foi fornecido e a validação técnica declara que não verificou satisfação do pedido.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        }
+      ]
+    }
+  ],
+  "refinements": 1,
+  "source_status": "proposal_ready",
+  "final_proposal": {
+    "changes": [
+      {
+        "type": "move",
+        "event_id": "family_dinner_fri",
+        "title": "Usual Friday Family Dinner",
+        "from_start": "2027-05-21T19:30:00+01:00",
+        "to_start": "2027-05-20T19:30:00+01:00",
+        "to_end": "2027-05-20T21:30:00+01:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "The Friday make-up lecture from 2027-05-21T18:30:00+01:00 to 2027-05-21T21:00:00+01:00 is mandatory and protected by the profile hard constraint, so it must remain unchanged.",
+        "The original Friday family dinner from 2027-05-21T19:30:00+01:00 to 2027-05-21T21:30:00+01:00 overlaps the protected Friday make-up lecture and cannot remain in that slot if Friday evening is to be kept clear for class.",
+        "The family dinner is non-fixed and personal, so it is modifiable under the known calendar rules, but it includes family participants; a free interval on the user's calendar does not confirm family availability.",
+        "Thursday has a free calendar interval after the workout from 2027-05-20T18:45:00+01:00 until sleep at 2027-05-20T23:45:00+01:00.",
+        "No supplied information confirms travel time, showering, meal preparation, recovery needs, dinner location, or family logistics after the Thursday workout."
+      ],
+      "priorities": [
+        "Keep the mandatory Friday make-up lecture intact and remove the dinner conflict from Friday evening.",
+        "Respect the user's request to move the usual Friday family dinner to Thursday evening after the workout.",
+        "Avoid moving fixed work, sleep, or protected education events.",
+        "Use the Thursday free interval in a way that is more practical than starting dinner at the exact minute the workout ends.",
+        "Preserve the original two-hour dinner duration and usual 19:30 start time where feasible, reducing disruption to the dinner pattern while adding transition time after the workout."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Move the dinner to Thursday from 18:45 to 20:45 immediately after the workout.",
+          "rejected_because": "Although technically free and directly after the workout, it creates a no-buffer transition from exercise to a family dinner after a full workday. With no information about showering, travel, preparation, or recovery needs, that slot is more fragile and potentially stressful than a later Thursday start."
+        },
+        {
+          "option": "Move the dinner to Thursday from 19:30 to 21:30.",
+          "rejected_because": "This is the selected option, not rejected. It fits the free Thursday interval, keeps the original two-hour dinner duration, preserves the usual dinner start time, and leaves 45 minutes after the workout for unspecified transition needs without moving the workout."
+        },
+        {
+          "option": "Move or shorten the Thursday workout to create an earlier or larger dinner window.",
+          "rejected_because": "The Thursday calendar already has enough free time after the workout for the dinner, and moving a health event would introduce extra disruption without being necessary to satisfy the request."
+        },
+        {
+          "option": "Keep the dinner on Friday after the make-up lecture, for example from 21:00 to 23:00.",
+          "rejected_because": "The user specifically asked to move the dinner to Thursday evening and keep Friday evening clear for the class. A late Friday dinner would also follow a full workday and mandatory class ending at 21:00."
+        }
+      ],
+      "summary": "Move the flexible Friday family dinner to Thursday from 19:30 to 21:30. This keeps Friday evening clear for the mandatory 18:30 to 21:00 make-up lecture, avoids changing fixed or protected events, and improves practical quality compared with an immediate 18:45 dinner by leaving a 45-minute buffer after the Thursday workout. The plan still depends on unconfirmed external availability from family and unknown logistics such as travel, showering, meal preparation, and recovery needs. Thursday remains a demanding day with work, workout, and dinner, but the visible calendar preserves sleep and leaves time between dinner ending at 21:30 and sleep at 23:45."
+    }
+  },
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [],
+    "valid": true
+  },
+  "source_result_sha256": "87b79e448f36adba42c07b2f16994cee1e2643b27f3622035a3fa7563c9032ac",
+  "aggregate_requirements_sha256": null,
+  "confirmed_changes_sha256": null,
+  "critic_input_version": "final_calendar_v1",
+  "critic_policy_version": "uncertainty_review_v2",
+  "final_result_calendar": {
+    "timezone": "Europe/Lisbon",
+    "coverage": "all_events_in_scenario_after_simulation",
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-05-16T23:45:00+01:00",
+        "end": "2027-05-17T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_mon",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-05-17T09:00:00+01:00",
+        "end": "2027-05-17T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Daytime work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_mon",
+        "title": "Gym Workout",
+        "start": "2027-05-17T18:00:00+01:00",
+        "end": "2027-05-17T19:15:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "study_mon",
+        "title": "Evening Study: Course Material",
+        "start": "2027-05-17T19:45:00+01:00",
+        "end": "2027-05-17T21:45:00+01:00",
+        "category": "education",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Study.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-05-17T23:45:00+01:00",
+        "end": "2027-05-18T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_tue",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-05-18T09:00:00+01:00",
+        "end": "2027-05-18T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Daytime work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "class_tue",
+        "title": "Evening Lecture: Organizational Behavior",
+        "start": "2027-05-18T18:30:00+01:00",
+        "end": "2027-05-18T21:30:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "professor",
+          "classmates"
+        ],
+        "description": "Mandatory evening class.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-05-18T23:45:00+01:00",
+        "end": "2027-05-19T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_wed",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-05-19T09:00:00+01:00",
+        "end": "2027-05-19T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Daytime work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_wed",
+        "title": "Gym: Strength & Conditioning",
+        "start": "2027-05-19T18:00:00+01:00",
+        "end": "2027-05-19T19:15:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "study_wed",
+        "title": "Evening Study: Organizational Behavior Case",
+        "start": "2027-05-19T19:45:00+01:00",
+        "end": "2027-05-19T21:45:00+01:00",
+        "category": "education",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Case study.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-05-19T23:45:00+01:00",
+        "end": "2027-05-20T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_thu",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-05-20T09:00:00+01:00",
+        "end": "2027-05-20T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Daytime work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_thu",
+        "title": "Gym Workout",
+        "start": "2027-05-20T17:45:00+01:00",
+        "end": "2027-05-20T18:45:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "family_dinner_fri",
+        "title": "Usual Friday Family Dinner",
+        "start": "2027-05-20T19:30:00+01:00",
+        "end": "2027-05-20T21:30:00+01:00",
+        "category": "personal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "family"
+        ],
+        "description": "Original Friday family dinner; overlaps newly confirmed make-up lecture, motivating a proposed move to Thursday.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-05-20T23:45:00+01:00",
+        "end": "2027-05-21T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_fri",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-05-21T09:00:00+01:00",
+        "end": "2027-05-21T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Friday work shift.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "makeup_class_fri",
+        "title": "Evening Make-up Lecture: Econometrics",
+        "start": "2027-05-21T18:30:00+01:00",
+        "end": "2027-05-21T21:00:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "professor",
+          "classmates"
+        ],
+        "description": "Mandatory Friday evening make-up class.",
+        "origin": "existing",
+        "change_status": "preserved"
+      }
+    ],
+    "metadata_note": "Null metadata on added events means the Proposal contract did not supply it; it is not a new personal preference or hard constraint."
+  },
+  "final_unresolved_assumptions": [
+    {
+      "subject": "Disponibilidade da família",
+      "assumption": "Os familiares conseguem participar no jantar na quinta-feira 2027-05-20 das 19:30 às 21:30.",
+      "evidence_gap": "O calendário mostra apenas a disponibilidade do utilizador; não há confirmação, calendário ou disponibilidade dos familiares.",
+      "potential_impact": "material",
+      "verification_source": "third_party"
+    },
+    {
+      "subject": "Transição entre treino e jantar",
+      "assumption": "O intervalo de 45 minutos entre o fim do treino às 18:45 e o jantar às 19:30 é suficiente para higiene, deslocação, troca de roupa, preparação e recuperação necessárias.",
+      "evidence_gap": "Não há informação sobre locais, duração de deslocações, rotina pós-treino, necessidade de banho, preparação de comida ou tolerância a atrasos.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Sustentabilidade da sequência quinta-sexta",
+      "assumption": "A sequência trabalho-treino-jantar na quinta-feira, seguida de trabalho e aula obrigatória até às 21:00 na sexta-feira, é manejável para esta pessoa.",
+      "evidence_gap": "O calendário preserva sono, mas não mostra fadiga, responsabilidades domésticas, necessidades alimentares, deslocações ou recuperação pessoal.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Satisfação do pedido original",
+      "assumption": "Mover o jantar para quinta-feira 19:30-21:30 cumpre a intenção original de o colocar na quinta-feira depois do treino.",
+      "evidence_gap": "A proposta afirma esse objectivo, mas o pedido original não foi fornecido e a validação técnica declara que não verificou satisfação do pedido.",
+      "potential_impact": "minor",
+      "verification_source": "unknown"
+    }
+  ],
+  "uncertainty_history": [
+    {
+      "iteration": 0,
+      "unresolved_assumptions": [
+        {
+          "subject": "Disponibilidade da família",
+          "assumption": "Os participantes familiares conseguem comparecer ao jantar na quinta-feira 2027-05-20 à noite.",
+          "evidence_gap": "O calendário mostra o utilizador livre nesse período, mas não fornece calendários, confirmação ou disponibilidade dos familiares.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Transição entre treino e jantar",
+          "assumption": "É praticável terminar o treino às 18:45 e iniciar imediatamente o jantar familiar às 18:45.",
+          "evidence_gap": "Não há informação sobre localização do treino e do jantar, necessidade de banho, troca de roupa, deslocação, preparação de comida ou tolerância a atraso.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Interpretação do pedido de mover para depois do treino",
+          "assumption": "Colocar o jantar imediatamente após o treino satisfaz a intenção visível de o mover para quinta-feira depois do treino.",
+          "evidence_gap": "A proposta relata esse objetivo, mas o pedido original não está disponível e a validação técnica declara que não verifica satisfação do pedido.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Sustentabilidade da quinta e sexta-feira em sequência",
+          "assumption": "A sequência trabalho-treino-jantar na quinta-feira, seguida de trabalho e aula obrigatória até às 21:00 na sexta-feira, é manejável para esta pessoa.",
+          "evidence_gap": "O calendário mostra sono preservado, mas não informa níveis de fadiga, deslocações, responsabilidades domésticas, necessidades alimentares ou recuperação pessoal.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    },
+    {
+      "iteration": 1,
+      "unresolved_assumptions": [
+        {
+          "subject": "Disponibilidade da família",
+          "assumption": "Os familiares conseguem participar no jantar na quinta-feira 2027-05-20 das 19:30 às 21:30.",
+          "evidence_gap": "O calendário mostra apenas a disponibilidade do utilizador; não há confirmação, calendário ou disponibilidade dos familiares.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Transição entre treino e jantar",
+          "assumption": "O intervalo de 45 minutos entre o fim do treino às 18:45 e o jantar às 19:30 é suficiente para higiene, deslocação, troca de roupa, preparação e recuperação necessárias.",
+          "evidence_gap": "Não há informação sobre locais, duração de deslocações, rotina pós-treino, necessidade de banho, preparação de comida ou tolerância a atrasos.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Sustentabilidade da sequência quinta-sexta",
+          "assumption": "A sequência trabalho-treino-jantar na quinta-feira, seguida de trabalho e aula obrigatória até às 21:00 na sexta-feira, é manejável para esta pessoa.",
+          "evidence_gap": "O calendário preserva sono, mas não mostra fadiga, responsabilidades domésticas, necessidades alimentares, deslocações ou recuperação pessoal.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Satisfação do pedido original",
+          "assumption": "Mover o jantar para quinta-feira 19:30-21:30 cumpre a intenção original de o colocar na quinta-feira depois do treino.",
+          "evidence_gap": "A proposta afirma esse objectivo, mas o pedido original não foi fornecido e a validação técnica declara que não verificou satisfação do pedido.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        }
+      ]
+    }
+  ]
+}

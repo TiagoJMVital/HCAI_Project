@@ -15,7 +15,8 @@ from benchmark_v2 import import_scenario
 from calendar_v2 import simulate
 from critic import critique
 from llm import IAeduProvider, LLMError
-from models import Change, CurrentCriticEvaluation, CriticScores, PlausibilityReview, Proposal, Rationale
+from models import (Change, CurrentCriticEvaluation, CriticScores, PlausibilityReview,
+                    Proposal, ProposerWireProposal, Rationale)
 from pipeline_b import CriticSettings, run_config_b
 from proposer_v2 import V2RuntimeScenario, propose_v2
 from rules import rule_based_decision
@@ -41,13 +42,15 @@ class ScriptedProvider:
         result = self.outputs.pop(0)
         if isinstance(result, Exception):
             raise result
+        if isinstance(result, Proposal) and hasattr(schema, "from_proposal"):
+            result = schema.from_proposal(result)
         assert isinstance(result, schema)
         return result
 
 
 @pytest.fixture
 def context(tmp_path):
-    path = import_scenario(tmp_path, ROOT.parent / "scenario_v2_example.json", "train")
+    path = import_scenario(tmp_path, ROOT / "data/scenarios/working_student_deadline_001.json", "train")
     return tmp_path, load_scenario(path)
 
 
@@ -94,8 +97,24 @@ def test_critic_feedback_revises_proposal(context):
     assert [step["critic_evaluation"]["overall"] for step in result["iterations"]] == [2, 5]
     assert "REVIEWER FEEDBACK" not in proposer.calls[1][0]  # v2 adapter uses its own prompt wording
     assert "Reviewer feedback" in proposer.calls[1][0]
-    assert first.model_dump_json() in proposer.calls[1][0]
+    compact_previous = ProposerWireProposal.from_proposal(first).model_dump_json(exclude_none=True)
+    assert compact_previous in proposer.calls[1][0]
+    assert first.model_dump_json() not in proposer.calls[1][0]
     assert "alternative not explained" in proposer.calls[1][0]
+
+
+def test_historical_verbose_previous_proposal_is_not_silently_truncated(context):
+    previous = proposal()
+    previous.rationale.summary = "historical evidence " * 50
+    provider = ScriptedProvider([proposal("2026-11-09T21:00:00+00:00")])
+    revised = propose_v2(context[1].profile, V2RuntimeScenario(context[1]),
+                         provider=provider, previous=previous,
+                         feedback="Reassess the timing")
+    prompt = provider.calls[0][0]
+    assert revised.changes[0].to_start == "2026-11-09T21:00:00+00:00"
+    assert "Previous proposal (canonical_historical)" in prompt
+    assert previous.rationale.summary in prompt
+    assert previous.model_dump_json(exclude_none=True) in prompt
 
 
 def test_max_three_refinements_and_threshold(context):
@@ -126,8 +145,13 @@ def test_technical_failures_never_act(context):
     result, _, _ = run(context, [proposal()], [LLMError("HTTP 503")])
     assert result["status"] == "critic_error" and result["decision"] is None
     assert result["safe_action"] == "no_autonomous_action"
-    result, _, critic = run(context, [LLMError("invalid JSON")], [])
+    structured = LLMError("invalid JSON", failed_outputs=['{"changes": ['],
+                          diagnostics={"classification": "structured_output_exhausted"})
+    result, _, critic = run(context, [structured], [])
     assert result["status"] == "proposer_error" and not critic.calls
+    assert result["llm_diagnostics"]["classification"] == "structured_output_exhausted"
+    assert "rate_limit_diagnostics" not in result
+    assert result["failed_llm_outputs"] == ['{"changes": [']
     def broken(*args):
         raise ValueError("internal validator error")
     result, _, critic = run(context, [proposal()], [], simulator=broken)
@@ -213,7 +237,7 @@ def test_iaedu_mock_rejects_new_response_without_plausibility_review(monkeypatch
     from critic import final_calendar_view
     calendar = final_calendar_view(events, proposal(), original_ids={e.id for e in scenario.calendar.events},
                                    timezone=scenario.profile.timezone)
-    with pytest.raises(LLMError, match="respostas sem JSON válido"):
+    with pytest.raises(LLMError, match="respostas estruturadas inválidas"):
         critique(proposal(), final_calendar=calendar, technical_validation=validation, provider=client)
     assert len(calls) == 2
 

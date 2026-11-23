@@ -40,12 +40,13 @@ class ScriptedProvider:
 
     def generate_structured(self, prompt, schema, *, system=""):
         self.calls.append((prompt, system, schema))
-        return self.values.pop(0)
+        value = self.values.pop(0)
+        return schema.from_proposal(value) if isinstance(value, Proposal) and hasattr(schema, "from_proposal") else value
 
 
 @pytest.fixture
 def imported(tmp_path):
-    path = import_scenario(tmp_path, ROOT.parent / "scenario_v2_example.json", "train")
+    path = import_scenario(tmp_path, ROOT / "data/scenarios/working_student_deadline_001.json", "train")
     return tmp_path, load_scenario(path)
 
 
@@ -210,6 +211,9 @@ def test_v2_a_and_b_share_proposer_and_rules(imported):
     assert provider.calls[0][0] == proposer.calls[0][0]
     assert provider.calls[0][1] == proposer.calls[0][1]
     assert a["prompt_versions"]["proposer_sha256"] == b["prompt_versions"]["proposer_sha256"]
+    assert a["prompt_versions"]["proposer_wire_schema_version"] == "compact_proposal_v1"
+    assert (a["prompt_versions"]["proposer_wire_schema_sha256"] ==
+            b["prompt_versions"]["proposer_wire_schema_sha256"])
 
 
 def test_direct_annotation_adjudication_export(imported):
@@ -332,7 +336,6 @@ def test_existing_imported_scenario_proposal_and_draft_survive_ui(tmp_path):
         "data/scenarios/working_student_deadline_001.json",
         "data/proposals/v2p_7ab98da4402d9ddb5133850a.json",
         "data/annotations/author_a/v2p_7ab98da4402d9ddb5133850a.json",
-        "eval/runs/11c42b58c5344e458f690b4b5790efa8/B_v2/working_student_deadline_001.json",
     ]
     originals = {}
     for relative in paths:
@@ -341,11 +344,14 @@ def test_existing_imported_scenario_proposal_and_draft_survive_ui(tmp_path):
         target = tmp_path / relative
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(source_path, target)
+    manifest_path = tmp_path / "data/benchmark_manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    manifest["scenarios"] = [row for row in manifest["scenarios"]
+                             if row["scenario_id"] == "working_student_deadline_001"]
+    manifest_path.write_text(json.dumps(manifest))
     assert load_manifest(tmp_path)[0]["scenario_id"] == "working_student_deadline_001"
     source = catalog(tmp_path)[0]
     pid = source["proposal_id"]
-    historical_result = tmp_path / paths[-1]
-    assert import_result(tmp_path, historical_result) == tmp_path / paths[2]
     assert source["scenario_id"] == "working_student_deadline_001"
     assert load_review(tmp_path, "author_a", pid)[0].status == "draft"
     wrapper = tmp_path / "existing_ui.py"

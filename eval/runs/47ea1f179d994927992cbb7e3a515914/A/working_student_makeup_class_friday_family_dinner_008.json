@@ -1,0 +1,40 @@
+{
+  "schema_version": "2.0",
+  "configuration": "A",
+  "run_id": "47ea1f179d994927992cbb7e3a515914",
+  "experiment_id": null,
+  "repeat_index": 0,
+  "scenario_id": "working_student_makeup_class_friday_family_dinner_008",
+  "family": "working_student_schedule_conflict",
+  "profile_id": "working_student_01__working_student_makeup_class_friday_family_dinner_008",
+  "split": "train",
+  "aggregate_requirements_sha256": null,
+  "confirmed_changes_sha256": null,
+  "provider": "iaedu",
+  "model": "GPT-5.5",
+  "generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request"
+  },
+  "prompt_versions": {
+    "proposer_sha256": "45d8e4e44b2e45cd8c6e4e829ce43fb6825a88e6550716e1c655d1f49034cc79"
+  },
+  "generated_at": "2026-11-22T19:38:23.844468+00:00",
+  "proposal": null,
+  "technical_validation": null,
+  "decision": null,
+  "reasons": [],
+  "status": "llm_error",
+  "error": "IAedu: 2 respostas sem JSON válido conforme o esquema",
+  "safe_action": "no_autonomous_action",
+  "failed_llm_outputs": [
+    "{\"changes\":[{\"type\":\"move\",\"event_id\":\"family_dinner_fri\",\"title\":\"Usual Friday Family Dinner\",\"from_start\":\"2027-05-21T19:30:00+01:00\",\"to_start\":\"2027-05-20T19:15:00+01:00\",\"to_end\":\"2027-05-20T21:15:00+01:00\",\"category\":\"personal\",\"importance\":4,\"participants\":[\"user\",\"family\"]}],\"rationale\":{\"constraints\":[\"The mandatory make-up lecture is fixed/protected on Friday 2027-05-21 from 18:30 to 21:00 and must not be moved or deleted.\",\"The original Friday family dinner from 19:30 to 21:30 overlaps the protected make-up lecture.\",\"Thursday has an existing workout from 17:45 to 18:45, and the requested move is to Thursday evening after that workout.\",\"Sleep on Thursday night begins at 23:45, so a 19:15 to 21:15 dinner fits within a free calendar interval after the workout and before sleep.\",\"The family dinner is marked flexible and personal, so moving it is permissible under the known calendar rules, but family availability is an external dependency and is not guaranteed by calendar free time alone.\"],\"priorities\":[\"Preserve the mandatory education commitment on Friday evening.\",\"Keep Friday evening available for the make-up lecture by removing the overlapping family dinner.\",\"Respect the user's requested placement of the dinner on Thursday evening after the workout.\",\"Keep the original two-hour duration of the family dinner.\",\"Avoid moving fixed work, sleep, or protected class events.\"],\"alternatives_considered\":[{\"option\":\"Move the dinner to Thursday 18:45 to 20:45 immediately after the workout.\",\"rejected_because\":\"This is technically free, but it leaves no buffer after the workout. A 19:15 start better matches the request while reducing practical friction without inventing travel or preparation assumptions.\"},{\"option\":\"Keep the dinner on Friday after the lecture, from 21:00 to 23:00.\",\"rejected_because\":\"The user explicitly asked to move the usual Friday family dinner to Thursday evening and keep Friday evening clear for the class; it would also create a late Friday commitment after a mandatory lecture.\"},{\"option\":\"Delete the Friday family dinner without rescheduling.\",\"rejected_because\":\"The request is to move the dinner, not cancel it, and the current Thursday calendar has a feasible free interval after the workout.\"}],\"summary\":\"Move the flexible Friday family dinner to Thursday 2027-05-20 from 19:15 to 21:15, after the existing workout and before sleep. This clears the Friday overlap with the protected mandatory make-up lecture. The main uncertainty is whether the family can attend on Thursday at that time; the calendar slot is free for the user, but external participant availability is not confirmed.\"}}",
+    "{\"changes\":[{\"type\":\"move\",\"event_id\":\"family_dinner_fri\",\"title\":\"Usual Friday Family Dinner\",\"from_start\":\"2027-05-21T19:30:00+01:00\",\"to_start\":\"2027-05-20T19:00:00+01:00\",\"to_end\":\"2027-05-20T21:00:00+01:00\",\"category\":\"personal\",\"importance\":4,\"participants\":[\"user\",\"family\"]}],\"rationale\":{\"constraints\":[\"The make-up lecture on Friday 2027-05-21 from 18:30 to 21:00 is mandatory and protected by the hard constraint for event_id makeup_class_fri.\",\"The existing Friday family dinner from 19:30 to 21:30 overlaps the protected make-up lecture from 19:30 to 21:00.\",\"Fixed/protected events are not moved or deleted: Friday work, Friday make-up lecture, Thursday work, Thursday sleep, and other fixed events remain unchanged.\",\"Thursday workout runs from 17:45 to 18:45, and the requested move is specifically to Thursday evening after the workout.\",\"The proposed Thursday slot from 19:00 to 21:00 is free in the supplied calendar and does not overlap sleep, work, workout, or protected class events.\",\"Family dinner is a flexible personal event, so it is modifiable under the supplied calendar rules; however, family availability on Thursday is an external dependency not confirmed by the calendar.\"],\"priorities\":[\"Preserve the mandatory Friday education commitment because education has priority 5 and the lecture is protected.\",\"Keep Friday evening clear for the class by removing the overlapping family dinner from Friday.\",\"Respect the user's explicit preference to move the usual Friday family dinner to Thursday evening after the workout.\",\"Avoid disrupting Thursday workout, work, sleep, and other fixed commitments.\",\"Keep the dinner duration unchanged at 2 hours to preserve the original commitment as closely as possible.\"],\"alternatives_considered\":[{\"option\":\"Move the family dinner to Thursday immediately at 18:45 after the workout, from 18:45 to 20:45.\",\"rejected_because\":\"Although calendar-free, it starts exactly when the workout ends. A 19:00 start better reflects 'after my workout' while leaving a small transition interval without inventing any specific travel or routine requirement.\"},{\"option\":\"Keep the Friday family dinner after the make-up lecture, from 21:00 to 23:00.\",\"rejected_because\":\"The user asked to move the dinner to Thursday evening and keep Friday evening clear for the class. This would also push the dinner close to the fixed Friday sleep event at 23:45.\"},{\"option\":\"Delete the Friday family dinner without rescheduling it.\",\"rejected_because\":\"The request is to move the usual Friday family dinner to Thursday, not cancel it.\"},{\"option\":\"Move the Thursday workout to create an earlier dinner slot.\",\"rejected_because\":\"The supplied Thursday calendar already has a free interval after the workout, so moving a health event would add unnecessary disruption without improving satisfaction of the request.\"}],\"summary\":\"Move the flexible Friday family dinner to Thursday 2027-05-20 from 19:00 to 21:00, after the 17:45 to 18:45 workout. This clears the Friday overlap with the protected mandatory make-up lecture while preserving the dinner duration and avoiding changes to fixed or protected events. The main uncertainty is whether the family is available on Thursday at that time; the calendar shows the user's availability, but not external participant availability.\"}}"
+  ],
+  "seconds": 16.956
+}

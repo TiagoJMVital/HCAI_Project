@@ -22,6 +22,23 @@ flowchart LR
 
 `src/scenario_v2.py` validates the schema `2.0` profile/calendar/request; `src/proposer_v2.py` adapts it for the existing structured `Proposal` contract in `src/models.py`. The Proposer receives the complete scenario. `src/llm.py` selects IAedu or Ollama from configuration; API credentials stay in ignored `.env` or environment. B now invokes `src/calendar_v2.py` once per proposal to obtain the exact resulting events and technical report. `src/critic.py` receives **the proposal and structured rationale, the complete resulting calendar, the limited technical validation report and the calendar timezone**. On revisions it also receives its own previous concerns, feedback, proposal and simulated resulting calendar, allowing it to judge the Proposer's response and any new regression. It does not receive the source profile, original calendar as a separate input, original request, annotation or autonomy labels. The Critic scores reasoning, coherence, alternatives and clarity from 1 to 5; its assessment now includes practical temporal plausibility and agreement between rationale and resulting calendar. It does not certify constraints beyond the validator's stated scope.
 
+The IAedu-facing Proposer contract is versioned separately as
+`compact_proposal_v1`. It is a discriminated union: `add` exposes only addition
+fields; `move` exposes an event reference and destination; `delete` exposes only
+the event reference. Redundant source timestamps and titles on existing events
+are read from the scenario rather than repeated by the model, absent optional
+fields are omitted instead of serialized as `null`, and rationale strings/lists
+have generous concision bounds. `src/proposer_v2.py` immediately converts this
+wire object into the canonical `Proposal`; simulation, fixed autonomy rules,
+Critic packets, UI, catalogue, annotations and historical run JSON therefore
+retain their existing schema. B revisions send the previous proposal in compact
+form when compatible. A manually replayed older proposal that exceeds the new
+prose bounds is passed intact in its historical canonical form rather than
+silently truncated. Every new A/B run records both
+`proposer_wire_schema_version` and `proposer_wire_schema_sha256` alongside prompt
+hashes. Runs with different wire-schema hashes are distinct experimental
+versions and must not be pooled as if the generation protocol were unchanged.
+
 The Critic calendar includes **all** resulting events in the scenario horizon, including unchanged neighbors; there is no silent token truncation. Each event carries ID, title, local start/end with offset, existing/addition origin and preserved/moved/added status. Existing events retain category, importance, fixed flag, participants and description. The `Proposal` contract does not provide those metadata for additions: the simulator uses neutral defaults internally to validate/apply them, but the Critic view presents those fields as `null`. It does not invent location, commuting time, meal time or personal preferences. Technical validation precedes Critic assessment; invalid changes have no final calendar and are not submitted to the Critic.
 
 `src/pipeline_b.py` runs the B loop with a threshold of 4.0 and at most three **revisions after the initial proposal**. It passes the previous proposal and Critic feedback to the Proposer, then validates and rebuilds the final calendar for each revision. Its iteration record stores proposal, validation, result calendar, feedback and scores; below-threshold runs retain final unresolved Critic weaknesses. Alternatives mentioned in a rationale are not revisions. `src/calendar_v2.py` validates change fields, references, timing, protected events and computable constraints, and simulates applicable changes in memory. Natural-language constraints not encoded as executable rules remain unverified. `src/rules.py` applies the same fixed autonomy logic in A and B; invalid proposals cannot act. B below threshold defers with a distinct `deferred_critic_threshold` status; this is not a trained gate prediction. Technical failures have separate error statuses.

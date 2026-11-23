@@ -1,0 +1,293 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "freelancer_flexible_client_meeting_gaming_tournament_001",
+  "family_id": "freelancer_schedule_conflict",
+  "profile": {
+    "profile_id": "freelancer_flexible_01__freelancer_flexible_client_meeting_gaming_tournament_001",
+    "description": "Freelance software developer working remotely with flexible hours, prioritizing physical activity, social life, and hobbies, needing to balance weekly client project hours around fixed external commitments.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "health": 5,
+      "social": 4,
+      "work": 4,
+      "sleep": 4,
+      "household": 3
+    },
+    "hard_constraints": [
+      {
+        "id": "fixed_external_events",
+        "description": "Meetings with fixed third-party schedules or social tournaments cannot be moved.",
+        "rule_type": "protect_events_by_id",
+        "event_categories": null,
+        "event_ids": [
+          "gaming_tournament_fri"
+        ],
+        "start": null,
+        "end": null
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "morning_exercise",
+        "description": "Prefer daily morning running or gym sessions between 08:00 and 10:00.",
+        "weight": 4
+      },
+      {
+        "id": "social_evenings",
+        "description": "Prefer free evenings for gaming or socializing with friends.",
+        "weight": 4
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Freelance work blocks are fully flexible and can be shifted across days. Client syncs and gaming tournaments are fixed."
+    }
+  },
+  "now": "2027-02-15T09:00:00Z",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-02-14T23:30:00Z",
+        "end": "2027-02-15T07:30:00Z",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "run_mon",
+        "title": "Morning Running",
+        "start": "2027-02-15T08:00:00Z",
+        "end": "2027-02-15T09:00:00Z",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Outdoor run."
+      },
+      {
+        "id": "work_mon",
+        "title": "Client Development Block",
+        "start": "2027-02-15T10:00:00Z",
+        "end": "2027-02-15T16:00:00Z",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "6 hours of coding."
+      },
+      {
+        "id": "social_mon",
+        "title": "Friends Hangout at Café",
+        "start": "2027-02-15T17:30:00Z",
+        "end": "2027-02-15T19:30:00Z",
+        "category": "social",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "friends"
+        ],
+        "description": "Social break."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-02-15T23:30:00Z",
+        "end": "2027-02-16T07:30:00Z",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_tue",
+        "title": "Gym Workout",
+        "start": "2027-02-16T08:00:00Z",
+        "end": "2027-02-16T09:30:00Z",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Strength training."
+      },
+      {
+        "id": "work_tue",
+        "title": "Client Development Block",
+        "start": "2027-02-16T10:30:00Z",
+        "end": "2027-02-16T17:30:00Z",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "7 hours of coding."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-02-16T23:30:00Z",
+        "end": "2027-02-17T07:30:00Z",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "run_wed",
+        "title": "Morning Running",
+        "start": "2027-02-17T08:00:00Z",
+        "end": "2027-02-17T09:00:00Z",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Outdoor run."
+      },
+      {
+        "id": "work_wed",
+        "title": "Client Development Block",
+        "start": "2027-02-17T10:00:00Z",
+        "end": "2027-02-17T16:00:00Z",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "6 hours of coding."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-02-17T23:30:00Z",
+        "end": "2027-02-18T07:30:00Z",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_thu",
+        "title": "Gym Workout",
+        "start": "2027-02-18T08:00:00Z",
+        "end": "2027-02-18T09:30:00Z",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Strength training."
+      },
+      {
+        "id": "work_thu",
+        "title": "Client Development Block",
+        "start": "2027-02-18T10:30:00Z",
+        "end": "2027-02-18T17:30:00Z",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "7 hours of coding."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-02-18T23:30:00Z",
+        "end": "2027-02-19T07:30:00Z",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "run_fri",
+        "title": "Morning Running",
+        "start": "2027-02-19T08:00:00Z",
+        "end": "2027-02-19T09:00:00Z",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Outdoor run."
+      },
+      {
+        "id": "work_fri",
+        "title": "Client Development Block",
+        "start": "2027-02-19T10:00:00Z",
+        "end": "2027-02-19T14:00:00Z",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "4 hours of coding."
+      },
+      {
+        "id": "gaming_tournament_fri",
+        "title": "Online Video Game Tournament with Friends",
+        "start": "2027-02-19T20:00:00Z",
+        "end": "2027-02-19T23:30:00Z",
+        "category": "social",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "friends"
+        ],
+        "description": "Fixed online esports tournament."
+      },
+      {
+        "id": "client_meeting_fri",
+        "title": "Confirmed international client alignment meeting",
+        "start": "2027-02-19T15:00:00Z",
+        "end": "2027-02-19T17:00:00Z",
+        "category": "meeting",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "client"
+        ],
+        "description": "Confirmed international client meeting announced in the request; this block is not counted as solo development work."
+      }
+    ]
+  },
+  "user_request": "An international client just scheduled an urgent alignment meeting for Friday at 15:00 to 17:00. This cuts right into my planned Friday afternoon, and I also have my annual online video game tournament with friends fixed for Friday night from 20:00 to 23:30. Since I need a total of 32 hours of freelance work across the 5 days, please reorganize my work hours from Monday to Thursday so I can absorb this client meeting without losing my morning workouts or missing the Friday night tournament."
+}

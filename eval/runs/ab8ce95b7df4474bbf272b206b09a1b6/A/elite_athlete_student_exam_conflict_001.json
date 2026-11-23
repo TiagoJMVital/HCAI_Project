@@ -1,0 +1,196 @@
+{
+  "schema_version": "2.0",
+  "configuration": "A",
+  "run_id": "ab8ce95b7df4474bbf272b206b09a1b6",
+  "experiment_id": null,
+  "repeat_index": 0,
+  "scenario_id": "elite_athlete_student_exam_conflict_001",
+  "family": "elite_athlete_student_schedule_conflict",
+  "scenario_sha256": "62804e964124f8aeef8a970fe758b7423b50789e40a141c4eebd9435b02bde63",
+  "profile_id": "elite_athlete_student_01__elite_athlete_student_exam_conflict_001",
+  "split": "train",
+  "aggregate_requirements_sha256": null,
+  "confirmed_changes_sha256": "af85af63b0e784a21a701d1ee91010292a1472cd17186aa3acd689c0f1cf29fb",
+  "provider": "iaedu",
+  "model": "GPT-5.5",
+  "generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "prompt_versions": {
+    "proposer_sha256": "45d8e4e44b2e45cd8c6e4e829ce43fb6825a88e6550716e1c655d1f49034cc79"
+  },
+  "generated_at": "2026-11-22T21:01:13.973654+00:00",
+  "proposal": {
+    "changes": [
+      {
+        "type": "delete",
+        "event_id": "commute_hpc_pm_wed",
+        "title": "Commute to High-Performance Center",
+        "from_start": "2027-01-13T16:00:00+00:00",
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "training_pm_wed",
+        "title": "Afternoon Technical Training",
+        "from_start": "2027-01-13T16:30:00+00:00",
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Transit after Advanced Physics Final Exam",
+        "from_start": null,
+        "to_start": "2027-01-13T18:00:00+00:00",
+        "to_end": "2027-01-13T18:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Individual Make-up Technical Training",
+        "from_start": null,
+        "to_start": "2027-01-13T19:00:00+00:00",
+        "to_end": "2027-01-13T20:30:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Commute Home after Make-up Training",
+        "from_start": null,
+        "to_start": "2027-01-13T20:30:00+00:00",
+        "to_end": "2027-01-13T21:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "delete",
+        "event_id": "coffee_social_wed",
+        "title": "Coffee with University Study Group",
+        "from_start": "2027-01-13T19:30:00+00:00",
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "All proposed times use the Europe/Lisbon offset applicable to the supplied dates, which is +00:00.",
+        "The confirmed Advanced Physics Final Exam on Wednesday 13 January from 16:00 to 18:00 is fixed, protected, and cannot be moved.",
+        "The original Wednesday 16:00 commute to the High-Performance Center and 16:30 technical training conflict with the exam. They are protected or fixed events, but the supplied externally confirmed exceptions specifically allow deleting exactly those two events.",
+        "The request requires a 30-minute transit period after the exam, so a new 18:00 to 18:30 transit block is added immediately after the exam.",
+        "The sleep blocks remain unchanged and preserve 8 hours each night.",
+        "The existing Physics study blocks before the exam already provide 6.5 hours: Monday 14:00 to 16:00, Tuesday 10:00 to 12:30, and Wednesday 10:30 to 12:30. No extra study block is needed to satisfy the stated minimum.",
+        "The Wednesday evening make-up session conflicts with the existing 19:30 to 21:00 coffee with the university study group, so the social event is proposed for deletion rather than overlapping it.",
+        "Deleting the Wednesday coffee is a third-party social change and should be confirmed with the friends or peers involved before applying it.",
+        "The individual make-up training should be confirmed with the coach, including venue and whether the 18:00 to 18:30 post-exam transit plus the 19:00 start is operationally acceptable."
+      ],
+      "priorities": [
+        "Prioritize the mandatory exam over regular training, as stated in the request and profile constraints.",
+        "Preserve protected sleep without shortening or moving any sleep block.",
+        "Maintain training continuity by using the coach-offered Wednesday 19:00 to 20:30 individual make-up instead of simply cancelling the missed session.",
+        "Avoid moving health appointments, morning training, classes, or other fixed events when the current calendar already satisfies the pre-exam Physics study requirement.",
+        "Use the lower-priority social event as the flexible item affected by the Wednesday evening make-up session, while noting that friend confirmation is needed."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Use the Friday 14:00 to 15:30 extra conditioning block instead of the Wednesday make-up session.",
+          "rejected_because": "This was not chosen because the calendar already has a fixed Friday 16:00 campus-to-HPC commute and 16:30 team training, while the location and travel implications of the Friday conditioning block are not specified. Adding it could create an operational location issue unless the coach confirms venue and travel expectations."
+        },
+        {
+          "option": "Keep the Wednesday 19:30 to 21:00 coffee and skip the Wednesday make-up training.",
+          "rejected_because": "This would leave the missed technical training uncompensated even though the coach supplied a feasible make-up window, and training has higher priority than social time in the profile."
+        },
+        {
+          "option": "Move the Wednesday coffee with the study group to immediately before the exam.",
+          "rejected_because": "Wednesday 13:30 to 16:00 is free, but placing a social event immediately before a mandatory final exam could undermine exam readiness, and friends' availability for that time is unknown."
+        },
+        {
+          "option": "Move the sports physiotherapy or Wednesday morning training to create more Wednesday study time.",
+          "rejected_because": "This is unnecessary because the current Monday, Tuesday, and Wednesday morning Physics study total already meets the 6-hour minimum, and physiotherapy or training changes would require stronger justification and additional confirmation."
+        }
+      ],
+      "summary": "The proposal protects sleep, preserves the fixed exam, removes only the two Wednesday protected/fixed events that have exact supplied deletion exceptions, adds the required post-exam transit, and uses the coach-offered Wednesday 19:00 to 20:30 individual make-up training. The existing pre-exam Physics study total is already sufficient at 6.5 hours. Confirmation is needed from the coach for the Wednesday make-up session details, especially venue and travel assumptions, and from the friends or peers affected by cancelling the Wednesday coffee."
+    }
+  },
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [],
+    "valid": true,
+    "confirmed_change_authorizations": [
+      {
+        "event_id": "training_pm_wed",
+        "type": "delete",
+        "to_start": null,
+        "to_end": null
+      },
+      {
+        "event_id": "commute_hpc_pm_wed",
+        "type": "delete",
+        "to_start": null,
+        "to_end": null
+      }
+    ]
+  },
+  "decision": "defer",
+  "reasons": [
+    "mais de 2 mudanças",
+    "apaga evento (commute_hpc_pm_wed)",
+    "toca em evento importante (commute_hpc_pm_wed, importância 4)",
+    "apaga evento (training_pm_wed)",
+    "toca em evento importante (training_pm_wed, importância 5)",
+    "apaga evento (coffee_social_wed)",
+    "toca em categoria sensível (social)"
+  ],
+  "status": "proposal_ready",
+  "seconds": 41.641
+}

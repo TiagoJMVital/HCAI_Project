@@ -137,6 +137,8 @@ def import_result(root: Path, result_path: Path) -> Path:
                 "source_status": record.get("status"),
                 "final_proposal": record["final_proposal"], "technical_validation": validation,
                 "source_result_sha256": hashlib.sha256(result_path.read_bytes()).hexdigest()}
+    if "scenario_sha256" in record:
+        artifact["scenario_sha256"] = record["scenario_sha256"]
     if "aggregate_requirements_sha256" in record:
         artifact["aggregate_requirements_sha256"] = record["aggregate_requirements_sha256"]
     if "confirmed_changes_sha256" in record:

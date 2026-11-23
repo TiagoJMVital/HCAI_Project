@@ -31,7 +31,8 @@ class ScriptedProvider:
 
     def generate_structured(self, prompt, schema, *, system=""):
         self.calls.append((prompt, system))
-        return self.answers.pop(0)
+        value = self.answers.pop(0)
+        return schema.from_proposal(value) if isinstance(value, Proposal) and hasattr(schema, "from_proposal") else value
 
 
 def proposal(hour="20:00"):
@@ -57,7 +58,7 @@ def evaluation(revise=False):
 
 @pytest.fixture
 def prepared(tmp_path):
-    path = import_scenario(tmp_path, ROOT.parent / "scenario_v2_example.json", "train")
+    path = import_scenario(tmp_path, ROOT / "data/scenarios/working_student_deadline_001.json", "train")
     source = run_one(tmp_path, "working_student_deadline_001",
                      ScriptedProvider([proposal()]), ScriptedProvider([evaluation()]))
     return tmp_path, load_scenario(path), source
@@ -154,7 +155,7 @@ def test_historical_initial_proposal_runs_under_current_critic_contract(tmp_path
     source = ROOT / "eval/runs/e9052e6757c14820a06b89ddaf9aafe6/B/working_student_deadline_001.json"
     if not source.exists():
         pytest.skip("local historical run is not checked into the repository")
-    import_scenario(tmp_path, ROOT.parent / "scenario_v2_example.json", "train")
+    import_scenario(tmp_path, ROOT / "data/scenarios/working_student_deadline_001.json", "train")
     before = source.read_bytes()
     proposer = ScriptedProvider([])
     result_path = run_one(tmp_path, "working_student_deadline_001", proposer,

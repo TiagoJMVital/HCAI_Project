@@ -19,7 +19,9 @@ from critic import SYSTEM as CRITIC_SYSTEM, final_calendar_view  # noqa: E402
 from llm import get_provider  # noqa: E402
 from models import Proposal  # noqa: E402
 from pipeline_b import CriticSettings, run_config_b  # noqa: E402
-from proposer_v2 import REVISION_GUIDANCE, SYSTEM_V2, V2RuntimeScenario, propose_v2  # noqa: E402
+from proposer_v2 import (PROPOSER_WIRE_SCHEMA_SHA256, PROPOSER_WIRE_SCHEMA_VERSION,
+                         REVISION_GUIDANCE, SYSTEM_V2, V2RuntimeScenario,
+                         propose_v2)  # noqa: E402
 from scenario_v2 import V2Scenario, confirmed_changes_fingerprint, load_manifest, load_scenario  # noqa: E402
 
 
@@ -102,6 +104,7 @@ def run_one(root: Path, scenario_id: str, proposer_provider, critic_provider,
     if row is None:
         raise ValueError("v2 scenario not imported")
     source = load_scenario(root / "data" / "scenarios" / f"{scenario_id}.json")
+    scenario_path = root / "data" / "scenarios" / f"{scenario_id}.json"
     replay_proposal, replay_source = (load_initial_proposal(root, initial_proposal_from, source, row)
                                      if initial_proposal_from is not None else (None, None))
     runtime = V2RuntimeScenario(source)
@@ -122,12 +125,15 @@ def run_one(root: Path, scenario_id: str, proposer_provider, critic_provider,
         if record["refinements"] == 0:
             record["final_proposal"] = original_payload
     record.update(schema_version="2.0", profile_id=source.profile.profile_id,
+                  scenario_sha256=hashlib.sha256(scenario_path.read_bytes()).hexdigest(),
                   aggregate_requirements_sha256=aggregate_fingerprint,
                   confirmed_changes_sha256=confirmed_changes_fingerprint(source),
                   split=row["split"], run_id=uuid.uuid4().hex,
                   experiment_id=experiment_id, repeat_index=repeat_index,
                   generated_at=datetime.now(timezone.utc).isoformat(),
                   prompt_versions={"proposer_sha256": hashlib.sha256(SYSTEM_V2.encode()).hexdigest(),
+                                   "proposer_wire_schema_version": PROPOSER_WIRE_SCHEMA_VERSION,
+                                   "proposer_wire_schema_sha256": PROPOSER_WIRE_SCHEMA_SHA256,
                                    "proposer_revision_sha256": hashlib.sha256(REVISION_GUIDANCE.encode()).hexdigest(),
                                    "critic_sha256": hashlib.sha256(CRITIC_SYSTEM.encode()).hexdigest()},
                   seconds=round(time.monotonic() - started, 3))

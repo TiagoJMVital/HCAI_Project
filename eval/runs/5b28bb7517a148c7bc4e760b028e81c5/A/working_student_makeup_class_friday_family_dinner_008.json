@@ -1,0 +1,101 @@
+{
+  "schema_version": "2.0",
+  "configuration": "A",
+  "run_id": "5b28bb7517a148c7bc4e760b028e81c5",
+  "experiment_id": null,
+  "repeat_index": 0,
+  "scenario_id": "working_student_makeup_class_friday_family_dinner_008",
+  "family": "working_student_schedule_conflict",
+  "profile_id": "working_student_01__working_student_makeup_class_friday_family_dinner_008",
+  "split": "train",
+  "aggregate_requirements_sha256": null,
+  "confirmed_changes_sha256": null,
+  "provider": "iaedu",
+  "model": "GPT-5.5",
+  "generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request"
+  },
+  "prompt_versions": {
+    "proposer_sha256": "45d8e4e44b2e45cd8c6e4e829ce43fb6825a88e6550716e1c655d1f49034cc79"
+  },
+  "generated_at": "2026-11-22T19:39:29.248697+00:00",
+  "proposal": {
+    "changes": [
+      {
+        "type": "move",
+        "event_id": "family_dinner_fri",
+        "title": "Usual Friday Family Dinner",
+        "from_start": "2027-05-21T19:30:00+01:00",
+        "to_start": "2027-05-20T19:00:00+01:00",
+        "to_end": "2027-05-20T21:00:00+01:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "The mandatory make-up lecture on Friday 2027-05-21 from 18:30 to 21:00 is fixed/protected and must remain unchanged.",
+        "The original Friday family dinner from 19:30 to 21:30 overlaps the mandatory lecture, so it cannot remain there if Friday evening is to be kept clear for the class.",
+        "Thursday has a free calendar interval after the workout: the workout ends at 18:45 and the next fixed event, sleep, starts at 23:45.",
+        "The proposed Thursday dinner preserves the original 2-hour duration and starts after the Thursday workout.",
+        "The family dinner is flexible and personal, but it involves family members; their availability on Thursday is not confirmed by the calendar."
+      ],
+      "priorities": [
+        "Protect the mandatory education commitment on Friday evening.",
+        "Satisfy the user’s explicit request to move the usual Friday family dinner to Thursday evening after the workout.",
+        "Avoid moving fixed work, sleep, or protected class events.",
+        "Preserve the family dinner rather than deleting it, since the request asks to move it."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Keep the family dinner on Friday after the make-up lecture, for example 21:00 to 23:00.",
+          "rejected_because": "The user asked to keep Friday evening clear for the class and specifically requested moving the dinner to Thursday after the workout."
+        },
+        {
+          "option": "Move the Thursday workout to create an earlier Thursday dinner slot.",
+          "rejected_because": "There is already a free Thursday evening interval after the workout, so moving the workout would add disruption without a clear benefit."
+        },
+        {
+          "option": "Move the dinner to Thursday immediately at 18:45 after the workout.",
+          "rejected_because": "Although the calendar is free then, starting at 19:00 provides a small transition gap without relying on invented travel time or changing the dinner duration."
+        }
+      ],
+      "summary": "Move the flexible Friday family dinner to Thursday 2027-05-20 from 19:00 to 21:00, after the 17:45 to 18:45 workout. This clears the Friday 19:30 to 21:30 conflict with the mandatory 18:30 to 21:00 make-up lecture while leaving protected work, sleep, and class events unchanged. The main uncertainty is external feasibility: the calendar is free, but family availability for Thursday evening is not confirmed."
+    }
+  },
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [],
+    "valid": true
+  },
+  "decision": "defer",
+  "reasons": [
+    "toca em evento importante (family_dinner_fri, importância 4)"
+  ],
+  "status": "proposal_ready",
+  "seconds": 11.393
+}

@@ -1,15 +1,17 @@
 """Input adapter for the same structured Proposer output on v2 scenarios."""
 from __future__ import annotations
 
+import hashlib
 import json
 from dataclasses import dataclass
 
-from llm import Provider
-from models import Proposal
+from llm import Provider, prompt_json_schema
+from models import (PROPOSER_WIRE_SCHEMA_VERSION, Proposal,
+                    ProposerWireProposal)
 from scenario_v2 import V2Scenario
 
-SYSTEM_V2 = """You are a personal calendar assistant. Produce the same structured Proposal
-JSON contract as the existing Proposer. Use only the supplied request, profile,
+SYSTEM_V2 = """You are a personal calendar assistant. Produce the compact structured
+proposal JSON contract supplied below. Use only the supplied request, profile,
 calendar and reference time. Do not move or delete fixed/protected events unless
 an exact externally confirmed exception is supplied for that event and operation. Times
 in proposed changes must include ISO 8601 timezone offsets consistent with the
@@ -18,6 +20,7 @@ uncertainty and alternatives in the rationale. Autonomy preferences are user
 preferences, not ACT/DEFER labels. Do not choose an autonomy label. Answer only
 with JSON matching the supplied schema. Distinguish an event's modifiability
 under known rules, a free calendar interval, and operational feasibility.
+Omit optional fields that do not apply or are unknown; do not emit them as null.
 Flexible does not mean an external venue, person or resource is available at
 every free time. Do not invent opening hours, travel times, or user routines.
 When moving an existing event, weigh its disruption and any new external
@@ -28,21 +31,27 @@ participants only when supported by the request or profile. A declared
 category may be used by typed duration checks; never label an unknown activity
 as work or thesis merely to satisfy a numeric target. An empty changes list
 requires a concrete explanation of why the current calendar already answers
-the request; do not use it to skip a difficult request."""
+the request; do not use it to skip a difficult request. Keep the rationale
+concise: use one short sentence per material constraint or priority, include
+only materially distinct alternatives, and give each rejection in one short
+sentence. State every material uncertainty, but state it once. Do not repeat
+event descriptions, timestamps or change details already present in `changes`.
+Keep `summary` focused on the selected plan and its main trade-off."""
+
+PROPOSER_WIRE_SCHEMA_SHA256 = hashlib.sha256(json.dumps(
+    prompt_json_schema(ProposerWireProposal), ensure_ascii=False,
+    sort_keys=True, separators=(",", ":"),
+).encode()).hexdigest()
 
 REVISION_GUIDANCE = (
     "Re-evaluate the scheduling concern using the original request, profile and calendar above. "
-    "You may change the operations if a better feasible plan exists, or keep exactly the same "
-    "operations with a rationale that directly addresses the concern. Do not change times merely "
-    "to satisfy the reviewer. Explain uncertainty when personal details such as travel, meals or "
-    "recovery are unknown; do not invent them. Repeating technical validity alone does not answer "
-    "a practical-quality concern. Reassess the whole visible routine: cumulative effort, "
-    "everyday needs, rest and whether reserved time can serve the user's objective. "
-    "A small timing shift is not enough if the underlying concern remains. "
-    "If changing operations, assess new risks, disruption, "
-    "external dependencies and trade-offs introduced by the revision; do not assume the Critic's "
-    "suggestion is an order. If keeping operations, provide grounds from the available context, "
-    "not an unsupported assertion. Return the full structured proposal and rationale."
+    "Change operations only if a better feasible plan exists; you may keep exactly the same operations "
+    "if the rationale directly addresses the concern. A small timing shift is not enough if the "
+    "underlying concern remains. Do not shift times merely to satisfy the reviewer, and do not invent travel, "
+    "meal, recovery or availability facts. Reassess cumulative effort, everyday needs, rest, "
+    "external dependencies and disruption. Repeating technical validity alone does not resolve a practical "
+    "concern. Return the full proposal, but keep each rationale item brief, state each material "
+    "uncertainty once, and do not repeat details already encoded in `changes`."
 )
 
 
@@ -86,7 +95,18 @@ def propose_v2(profile, scenario: V2RuntimeScenario, *, provider: Provider,
                    "otherwise protected events; they do not authorize unrelated changes: "
                    + json.dumps([item.model_dump(mode="json") for item in source.confirmed_changes]))
     if previous is not None and feedback is not None:
-        prompt += (f"\nPrevious proposal: {previous.model_dump_json()}\n"
+        previous_format = PROPOSER_WIRE_SCHEMA_VERSION
+        try:
+            compact_previous = ProposerWireProposal.from_proposal(previous).model_dump_json(
+                exclude_none=True)
+        except ValueError:
+            # A manually replayed historical proposal may predate compact_v1
+            # and exceed its prose bounds. Preserve all prior evidence rather
+            # than truncating it; only newly generated output uses the wire schema.
+            compact_previous = previous.model_dump_json(exclude_none=True)
+            previous_format = "canonical_historical"
+        prompt += (f"\nPrevious proposal ({previous_format}): {compact_previous}\n"
                    f"Reviewer feedback: {feedback}\n"
                    f"{REVISION_GUIDANCE}")
-    return provider.generate_structured(prompt, Proposal, system=SYSTEM_V2)
+    wire = provider.generate_structured(prompt, ProposerWireProposal, system=SYSTEM_V2)
+    return wire.to_proposal()

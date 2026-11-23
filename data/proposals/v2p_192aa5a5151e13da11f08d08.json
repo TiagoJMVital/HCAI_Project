@@ -1,0 +1,4150 @@
+{
+  "proposal_id": "v2p_192aa5a5151e13da11f08d08",
+  "scenario_id": "elite_athlete_student_exam_conflict_001",
+  "family_id": "elite_athlete_student_schedule_conflict",
+  "profile_id": "elite_athlete_student_01__elite_athlete_student_exam_conflict_001",
+  "split": "train",
+  "run_id": "8b028d2d100947a7adb61b886f304fcd",
+  "configuration": "B",
+  "generated_at": "2026-11-22T22:10:08.729227+00:00",
+  "proposer_provider": "iaedu",
+  "proposer_model": "GPT-5.5",
+  "proposer_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_provider": "iaedu",
+  "critic_model": "GPT-5.5",
+  "critic_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "prompt_versions": {
+    "proposer_sha256": "45d8e4e44b2e45cd8c6e4e829ce43fb6825a88e6550716e1c655d1f49034cc79",
+    "proposer_revision_sha256": "3d8999560474363c55ab096e197152da0b244a3bfd2f597a7e0ad2136452ccf4",
+    "critic_sha256": "1686688cdd4bc63abb12e6633ef9dbb9b62d69b69aba1c4805a201657cc5bb34"
+  },
+  "critic_settings": {
+    "threshold": 4.0,
+    "max_refinements": 3,
+    "min_dimension_score": 1
+  },
+  "experiment_id": null,
+  "repeat_index": 0,
+  "seconds": 65.86,
+  "critic_score": 4.0,
+  "critic_accepted": true,
+  "iterations": [
+    {
+      "index": 0,
+      "proposer_feedback": null,
+      "proposer_source": "replayed",
+      "proposal": {
+        "changes": [
+          {
+            "type": "delete",
+            "event_id": "commute_hpc_pm_wed",
+            "title": "Commute to High-Performance Center",
+            "from_start": "2027-01-13T16:00:00+00:00",
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "training_pm_wed",
+            "title": "Afternoon Technical Training",
+            "from_start": "2027-01-13T16:30:00+00:00",
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Post-exam transit buffer",
+            "from_start": null,
+            "to_start": "2027-01-13T18:00:00+00:00",
+            "to_end": "2027-01-13T18:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Make-up Individual Technical Training",
+            "from_start": null,
+            "to_start": "2027-01-13T19:00:00+00:00",
+            "to_end": "2027-01-13T20:30:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "delete",
+            "event_id": "coffee_social_wed",
+            "title": "Coffee with University Study Group",
+            "from_start": "2027-01-13T19:30:00+00:00",
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "All proposed times use the Europe/Lisbon timezone offset in effect for 11–15 January 2027, which is +00:00.",
+            "The Advanced Physics Final Exam on Wednesday 13 January from 16:00 to 18:00 is fixed and already present in the calendar, so it is not moved or recreated.",
+            "The protected 8-hour sleep blocks are left unchanged every night.",
+            "The Wednesday 16:00 commute to the High-Performance Center and the Wednesday 16:30 technical training are fixed/protected items, but exact externally confirmed delete exceptions were supplied for both, so deleting them is operationally permitted.",
+            "The requested 30-minute transit after the exam is added from 18:00 to 18:30.",
+            "The calendar already contains 6.5 hours of Physics study before the exam: Monday 14:00–16:00, Tuesday 10:00–12:30, and Wednesday 10:30–12:30. This satisfies the requested minimum of 6 hours without moving study blocks.",
+            "The Wednesday evening make-up session uses the coach-offered 19:00–20:30 option, but the exact venue, coach supervision, and equipment availability still need confirmation with the coach.",
+            "Deleting the Wednesday coffee social affects peers, so it should be confirmed with friends or the study group."
+          ],
+          "priorities": [
+            "Protect the official exam and keep the calendar clear during the exam window.",
+            "Preserve sleep exactly as scheduled because sleep has the highest protection level.",
+            "Maintain the training load by replacing the missed Wednesday afternoon technical session with the coach-offered Wednesday evening individual make-up session.",
+            "Avoid moving or deleting unrelated fixed/protected events without an exact supplied exception.",
+            "Prefer the Wednesday make-up over Friday conditioning because it directly replaces the missed technical session and does not require disturbing Friday’s fixed commute/training structure."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Use the Friday 14:00–15:30 extra conditioning block instead of Wednesday evening make-up training.",
+              "rejected_because": "Friday 14:00–15:30 is free on the calendar, but the location and travel logistics are not confirmed. If it is at the High-Performance Center, it creates uncertainty with the existing fixed Friday 16:00 commute to the High-Performance Center, which cannot be moved or deleted without an exception. It is also a conditioning block rather than a direct technical make-up."
+            },
+            {
+              "option": "Keep the Wednesday coffee social unchanged.",
+              "rejected_because": "It overlaps the proposed Wednesday 19:00–20:30 make-up training from 19:30 to 20:30. The make-up training is higher priority because it replaces a training session missed due to the mandatory exam."
+            },
+            {
+              "option": "Move the Wednesday coffee social later on Wednesday evening.",
+              "rejected_because": "A later 90-minute social would run too close to or into the protected 22:30 sleep start once travel uncertainty is considered. The friends’ availability is also unknown."
+            },
+            {
+              "option": "Move the original Wednesday afternoon training instead of deleting it.",
+              "rejected_because": "The only externally confirmed exception for the protected Wednesday training is deletion, not a move. The make-up training is therefore added as a new coach-offered session rather than moving the protected original event."
+            }
+          ],
+          "summary": "The plan keeps the mandatory Physics exam and all protected sleep intact, removes the conflicting Wednesday commute and technical training using the supplied exact exceptions, adds the required 30-minute post-exam transit buffer, and schedules the coach-offered Wednesday 19:00–20:30 individual make-up training. The existing Monday, Tuesday, and Wednesday morning Physics study blocks already provide 6.5 hours before the exam, so no extra study changes are needed. Confirm the Wednesday evening make-up details with the coach, and confirm cancellation of the Wednesday coffee social with friends."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true,
+        "confirmed_change_authorizations": [
+          {
+            "event_id": "training_pm_wed",
+            "type": "delete",
+            "to_start": null,
+            "to_end": null
+          },
+          {
+            "event_id": "commute_hpc_pm_wed",
+            "type": "delete",
+            "to_start": null,
+            "to_end": null
+          }
+        ]
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-01-10T22:30:00+00:00",
+            "end": "2027-01-11T06:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_hpc_am_mon",
+            "title": "Commute to High-Performance Center",
+            "start": "2027-01-11T06:30:00+00:00",
+            "end": "2027-01-11T07:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute drive from home to sports center.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_mon",
+            "title": "Morning Strength & Conditioning",
+            "start": "2027-01-11T07:00:00+00:00",
+            "end": "2027-01-11T09:00:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Gym session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_uni_mon",
+            "title": "Commute to University Campus",
+            "start": "2027-01-11T09:00:00+00:00",
+            "end": "2027-01-11T09:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute transit from HPC to campus.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "class_calculus_mon",
+            "title": "Calculus II Lecture",
+            "start": "2027-01-11T10:00:00+00:00",
+            "end": "2027-01-11T12:00:00+00:00",
+            "category": "classes",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Regular morning lecture.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_mon",
+            "title": "Lunch",
+            "start": "2027-01-11T12:30:00+00:00",
+            "end": "2027-01-11T13:30:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Nutritional recovery lunch.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_mon",
+            "title": "Independent Study: Physics",
+            "start": "2027-01-11T14:00:00+00:00",
+            "end": "2027-01-11T16:00:00+00:00",
+            "category": "study",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Flexible study block at university library.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_hpc_pm_mon",
+            "title": "Commute to High-Performance Center",
+            "start": "2027-01-11T16:00:00+00:00",
+            "end": "2027-01-11T16:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute transit from campus to HPC.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_mon",
+            "title": "Afternoon Technical Training",
+            "start": "2027-01-11T16:30:00+00:00",
+            "end": "2027-01-11T18:30:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "team",
+              "coach"
+            ],
+            "description": "Mandatory team technical session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "dinner_mon",
+            "title": "Dinner",
+            "start": "2027-01-11T19:30:00+00:00",
+            "end": "2027-01-11T20:30:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Dinner at home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-01-11T22:30:00+00:00",
+            "end": "2027-01-12T06:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_hpc_am_tue",
+            "title": "Commute to High-Performance Center",
+            "start": "2027-01-12T06:30:00+00:00",
+            "end": "2027-01-12T07:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute drive.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_tue",
+            "title": "Morning Endurance Session",
+            "start": "2027-01-12T07:00:00+00:00",
+            "end": "2027-01-12T09:00:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Track/Cardio session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_uni_tue",
+            "title": "Commute to University Campus",
+            "start": "2027-01-12T09:00:00+00:00",
+            "end": "2027-01-12T09:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute transit.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_tue",
+            "title": "Independent Study: Physics",
+            "start": "2027-01-12T10:00:00+00:00",
+            "end": "2027-01-12T12:30:00+00:00",
+            "category": "study",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Exam prep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_tue",
+            "title": "Lunch",
+            "start": "2027-01-12T12:30:00+00:00",
+            "end": "2027-01-12T13:30:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "class_lab_tue",
+            "title": "Physics Laboratory",
+            "start": "2027-01-12T14:00:00+00:00",
+            "end": "2027-01-12T16:00:00+00:00",
+            "category": "classes",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Practical lab class.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_hpc_pm_tue",
+            "title": "Commute to High-Performance Center",
+            "start": "2027-01-12T16:00:00+00:00",
+            "end": "2027-01-12T16:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute transit.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_tue",
+            "title": "Afternoon Tactical Training",
+            "start": "2027-01-12T16:30:00+00:00",
+            "end": "2027-01-12T18:30:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "team",
+              "coach"
+            ],
+            "description": "Team session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "dinner_tue",
+            "title": "Dinner",
+            "start": "2027-01-12T19:30:00+00:00",
+            "end": "2027-01-12T20:30:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Dinner at home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-01-12T22:30:00+00:00",
+            "end": "2027-01-13T06:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_hpc_am_wed",
+            "title": "Commute to High-Performance Center",
+            "start": "2027-01-13T06:30:00+00:00",
+            "end": "2027-01-13T07:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute drive.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_wed",
+            "title": "Morning Mobility & Recovery",
+            "start": "2027-01-13T07:00:00+00:00",
+            "end": "2027-01-13T08:30:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Light morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "physio_wed",
+            "title": "Sports Physiotherapy",
+            "start": "2027-01-13T09:00:00+00:00",
+            "end": "2027-01-13T10:00:00+00:00",
+            "category": "physio",
+            "importance": 3,
+            "fixed": true,
+            "participants": [
+              "user",
+              "physiotherapist"
+            ],
+            "description": "Preventive massage at HPC.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_uni_wed",
+            "title": "Commute to University Campus",
+            "start": "2027-01-13T10:00:00+00:00",
+            "end": "2027-01-13T10:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute transit.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_wed",
+            "title": "Exam Prep: Physics",
+            "start": "2027-01-13T10:30:00+00:00",
+            "end": "2027-01-13T12:30:00+00:00",
+            "category": "study",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Focused study.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_wed",
+            "title": "Lunch",
+            "start": "2027-01-13T12:30:00+00:00",
+            "end": "2027-01-13T13:30:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch at campus canteen.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "physics_exam_wed",
+            "title": "Confirmed Advanced Physics Final Exam",
+            "start": "2027-01-13T16:00:00+00:00",
+            "end": "2027-01-13T18:00:00+00:00",
+            "category": "exam",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "examiner"
+            ],
+            "description": "Mandatory exam announced for Wednesday 13 January, 16:00–18:00; conflicts with the existing training commitment.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_2",
+            "title": "Post-exam transit buffer",
+            "start": "2027-01-13T18:00:00+00:00",
+            "end": "2027-01-13T18:30:00+00:00",
+            "category": null,
+            "importance": null,
+            "fixed": null,
+            "participants": null,
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "new_3",
+            "title": "Make-up Individual Technical Training",
+            "start": "2027-01-13T19:00:00+00:00",
+            "end": "2027-01-13T20:30:00+00:00",
+            "category": null,
+            "importance": null,
+            "fixed": null,
+            "participants": null,
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-01-13T22:30:00+00:00",
+            "end": "2027-01-14T06:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_hpc_am_thu",
+            "title": "Commute to High-Performance Center",
+            "start": "2027-01-14T06:30:00+00:00",
+            "end": "2027-01-14T07:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute drive.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_thu",
+            "title": "Morning Strength Training",
+            "start": "2027-01-14T07:00:00+00:00",
+            "end": "2027-01-14T09:00:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Gym session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_uni_thu",
+            "title": "Commute to University Campus",
+            "start": "2027-01-14T09:00:00+00:00",
+            "end": "2027-01-14T09:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute transit.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "class_calculus_thu",
+            "title": "Calculus II Lecture",
+            "start": "2027-01-14T10:00:00+00:00",
+            "end": "2027-01-14T12:00:00+00:00",
+            "category": "classes",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Morning lecture.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_thu",
+            "title": "Lunch",
+            "start": "2027-01-14T12:30:00+00:00",
+            "end": "2027-01-14T13:30:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_thu",
+            "title": "Exam Prep: Calculus",
+            "start": "2027-01-14T14:00:00+00:00",
+            "end": "2027-01-14T16:00:00+00:00",
+            "category": "study",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Independent study.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_hpc_pm_thu",
+            "title": "Commute to High-Performance Center",
+            "start": "2027-01-14T16:00:00+00:00",
+            "end": "2027-01-14T16:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute transit.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_thu",
+            "title": "Afternoon Tactical Training",
+            "start": "2027-01-14T16:30:00+00:00",
+            "end": "2027-01-14T18:30:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "team",
+              "coach"
+            ],
+            "description": "Team session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "dinner_thu",
+            "title": "Dinner",
+            "start": "2027-01-14T19:30:00+00:00",
+            "end": "2027-01-14T20:30:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Dinner at home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-01-14T22:30:00+00:00",
+            "end": "2027-01-15T06:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_hpc_am_fri",
+            "title": "Commute to High-Performance Center",
+            "start": "2027-01-15T06:30:00+00:00",
+            "end": "2027-01-15T07:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute drive.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_fri",
+            "title": "Morning Speed & Agility",
+            "start": "2027-01-15T07:00:00+00:00",
+            "end": "2027-01-15T09:00:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_uni_fri",
+            "title": "Commute to University Campus",
+            "start": "2027-01-15T09:00:00+00:00",
+            "end": "2027-01-15T09:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute transit.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_fri",
+            "title": "Weekly Review & Summary Notes",
+            "start": "2027-01-15T10:00:00+00:00",
+            "end": "2027-01-15T12:00:00+00:00",
+            "category": "study",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Reviewing week's material.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_fri",
+            "title": "Lunch",
+            "start": "2027-01-15T12:30:00+00:00",
+            "end": "2027-01-15T13:30:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_hpc_pm_fri",
+            "title": "Commute to High-Performance Center",
+            "start": "2027-01-15T16:00:00+00:00",
+            "end": "2027-01-15T16:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute transit.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_fri",
+            "title": "Pre-Weekend Scrimmage",
+            "start": "2027-01-15T16:30:00+00:00",
+            "end": "2027-01-15T18:30:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "team",
+              "coach"
+            ],
+            "description": "Afternoon practice.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "student_union_fri",
+            "title": "Student Association Friday Gathering",
+            "start": "2027-01-15T19:30:00+00:00",
+            "end": "2027-01-15T21:30:00+00:00",
+            "category": "social",
+            "importance": 2,
+            "fixed": false,
+            "participants": [
+              "user",
+              "students"
+            ],
+            "description": "Social event at the student union bar.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Null metadata on added events means the Proposal contract did not supply it; it is not a new personal preference or hard constraint."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 3,
+          "coherence": 3,
+          "alternatives": 3,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The plan places Make-up Individual Technical Training on Wednesday 19:00–20:30 immediately after a 16:00–18:00 Advanced Physics Final Exam and a 18:00–18:30 post-exam transit buffer, but the rationale does not meaningfully assess the combined cognitive and physical load of exam day.",
+          "Wednesday has no explicit dinner or substantial recovery block between the 18:00 exam finish and 19:00 training start. There is only 18:30–19:00 unallocated time before training, and the next protected sleep block starts at 22:30. This may still be workable, but the proposal treats the slot mainly as available rather than explaining how basic post-exam food, decompression, preparation, and training readiness are handled.",
+          "The Wednesday evening make-up depends on coach-offered details that the rationale itself says still need confirmation: venue, coach supervision, and equipment availability. That is not a technical violation, but it is central to whether the added 19:00–20:30 session is actually usable.",
+          "The alternative analysis compares Wednesday make-up against Friday conditioning mostly on technical/training-type grounds, but it does not clearly weigh whether avoiding an exam-evening training session could be more sustainable despite being a less direct replacement.",
+          "The final calendar’s added events have null category, importance, fixed status, participants, and descriptions despite the proposal describing them as commute/training with importance and user participation. The metadata note says this is contractual rather than a new preference, so it is not necessarily invalid, but it weakens the human-readable evidence for how the added commitments should be treated."
+        ],
+        "feedback": "The resulting calendar is technically coherent and protects the fixed exam and sleep blocks, but the proposed organization creates a materially demanding Wednesday: recovery/mobility 07:00–08:30, physiotherapy 09:00–10:00, Physics study 10:30–12:30, exam 16:00–18:00, post-exam transit 18:00–18:30, and make-up technical training 19:00–20:30. The rationale is clear about operational permissions and priorities, yet it under-explains whether training one hour after a final exam is realistically sustainable, especially with only a short visible gap before training and no explicit dinner on Wednesday. A revision should not automatically abandon the same operations, but should either substantiate why this exam-evening make-up is manageable in the fuller context or reconsider whether a less compressed distribution could preserve the visible priorities with less dependence on post-exam stamina and unconfirmed logistics. Request satisfaction cannot be independently verified because the original request is not provided and technical validation explicitly did not check request satisfaction or soft preferences.",
+        "plausibility_review": {
+          "revision_required": true,
+          "severity": "moderate",
+          "reason": "The main human-quality risk is the placement of a high-priority individual technical training session on Wednesday 19:00–20:30 after a 16:00–18:00 final exam, with only a 18:00–18:30 transit buffer and 30 additional minutes before training. Given the visible week already includes repeated early commutes, morning training, academic blocks, and afternoon/evening training, the proposal should more directly address fatigue, food, preparation, and recovery on exam day. This is not an objective incompatibility, and the preserved 22:30–06:30 sleep block helps, but the practical manageability of the added session is under-substantiated.",
+          "suggested_improvement": "Reconsider the distribution using the fuller context: either justify why the Wednesday evening make-up is realistic after the exam, including how post-exam food, preparation, recovery, venue, and coach logistics are handled, or compare it more directly with less compressed options that may reduce exam-day load while still respecting the visible priorities and protected events."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Wednesday evening make-up training logistics",
+            "assumption": "The 19:00–20:30 Make-up Individual Technical Training is available with the required venue, coach supervision, and equipment.",
+            "evidence_gap": "The rationale explicitly states that exact venue, coach supervision, and equipment availability still need confirmation with the coach.",
+            "potential_impact": "potentially_blocking",
+            "verification_source": "third_party"
+          },
+          {
+            "subject": "Post-exam transition feasibility",
+            "assumption": "The 18:00–18:30 post-exam transit buffer plus the 18:30–19:00 gap is enough to get from the exam context to the make-up training context and be ready to train.",
+            "evidence_gap": "The calendar does not specify the exam location, make-up training venue, preparation requirements, or whether the transit buffer ends at the training location.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Food and recovery on Wednesday evening",
+            "assumption": "The user can reasonably eat, decompress, and prepare around the exam-to-training sequence without undermining training quality or recovery before 22:30 sleep.",
+            "evidence_gap": "There is no explicit Wednesday dinner, and the only visible time between post-exam transit and training is 18:30–19:00, with training ending at 20:30 and sleep at 22:30.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Cumulative workload tolerance",
+            "assumption": "The user can sustain the week’s combined athletic and academic load, including morning training on Monday through Friday, multiple afternoon training sessions, Physics exam preparation, the Wednesday final exam, and the added Wednesday evening make-up session.",
+            "evidence_gap": "The rationale preserves sleep and existing commitments but does not assess cumulative fatigue or whether adding training after the exam is appropriate for the user’s recovery needs.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Coffee social cancellation",
+            "assumption": "Deleting the Wednesday 19:30–20:30 Coffee with University Study Group is socially acceptable or can be communicated without significant issue.",
+            "evidence_gap": "The rationale notes that cancellation affects peers and should be confirmed, but no confirmation is present in the structured proposal.",
+            "potential_impact": "minor",
+            "verification_source": "third_party"
+          }
+        ],
+        "overall": 3.25
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": false,
+        "plausibility_revision_required": true,
+        "accepted": false,
+        "revision_causes": [
+          "numeric_criteria_failed",
+          "plausibility_revision_required"
+        ]
+      },
+      "operations_changed_from_previous": null,
+      "rationale_changed_from_previous": null,
+      "prior_critic_reviews": [],
+      "unresolved_assumptions": [
+        {
+          "subject": "Wednesday evening make-up training logistics",
+          "assumption": "The 19:00–20:30 Make-up Individual Technical Training is available with the required venue, coach supervision, and equipment.",
+          "evidence_gap": "The rationale explicitly states that exact venue, coach supervision, and equipment availability still need confirmation with the coach.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Post-exam transition feasibility",
+          "assumption": "The 18:00–18:30 post-exam transit buffer plus the 18:30–19:00 gap is enough to get from the exam context to the make-up training context and be ready to train.",
+          "evidence_gap": "The calendar does not specify the exam location, make-up training venue, preparation requirements, or whether the transit buffer ends at the training location.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Food and recovery on Wednesday evening",
+          "assumption": "The user can reasonably eat, decompress, and prepare around the exam-to-training sequence without undermining training quality or recovery before 22:30 sleep.",
+          "evidence_gap": "There is no explicit Wednesday dinner, and the only visible time between post-exam transit and training is 18:30–19:00, with training ending at 20:30 and sleep at 22:30.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Cumulative workload tolerance",
+          "assumption": "The user can sustain the week’s combined athletic and academic load, including morning training on Monday through Friday, multiple afternoon training sessions, Physics exam preparation, the Wednesday final exam, and the added Wednesday evening make-up session.",
+          "evidence_gap": "The rationale preserves sleep and existing commitments but does not assess cumulative fatigue or whether adding training after the exam is appropriate for the user’s recovery needs.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Coffee social cancellation",
+          "assumption": "Deleting the Wednesday 19:30–20:30 Coffee with University Study Group is socially acceptable or can be communicated without significant issue.",
+          "evidence_gap": "The rationale notes that cancellation affects peers and should be confirmed, but no confirmation is present in the structured proposal.",
+          "potential_impact": "minor",
+          "verification_source": "third_party"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "proposer_feedback": "Numeric Critic criteria failed. Scores: {\"reasoning\":3,\"coherence\":3,\"alternatives\":3,\"clarity\":4}. Plausibility revision required (moderate): The main human-quality risk is the placement of a high-priority individual technical training session on Wednesday 19:00–20:30 after a 16:00–18:00 final exam, with only a 18:00–18:30 transit buffer and 30 additional minutes before training. Given the visible week already includes repeated early commutes, morning training, academic blocks, and afternoon/evening training, the proposal should more directly address fatigue, food, preparation, and recovery on exam day. This is not an objective incompatibility, and the preserved 22:30–06:30 sleep block helps, but the practical manageability of the added session is under-substantiated. Suggested direction: Reconsider the distribution using the fuller context: either justify why the Wednesday evening make-up is realistic after the exam, including how post-exam food, preparation, recovery, venue, and coach logistics are handled, or compare it more directly with less compressed options that may reduce exam-day load while still respecting the visible priorities and protected events. The Critic lacks the full user constraints; explain if no better feasible option exists. Unverified conditions to reassess: [{'subject': 'Wednesday evening make-up training logistics', 'assumption': 'The 19:00–20:30 Make-up Individual Technical Training is available with the required venue, coach supervision, and equipment.', 'evidence_gap': 'The rationale explicitly states that exact venue, coach supervision, and equipment availability still need confirmation with the coach.', 'potential_impact': 'potentially_blocking', 'verification_source': 'third_party'}, {'subject': 'Post-exam transition feasibility', 'assumption': 'The 18:00–18:30 post-exam transit buffer plus the 18:30–19:00 gap is enough to get from the exam context to the make-up training context and be ready to train.', 'evidence_gap': 'The calendar does not specify the exam location, make-up training venue, preparation requirements, or whether the transit buffer ends at the training location.', 'potential_impact': 'material', 'verification_source': 'unknown'}, {'subject': 'Food and recovery on Wednesday evening', 'assumption': 'The user can reasonably eat, decompress, and prepare around the exam-to-training sequence without undermining training quality or recovery before 22:30 sleep.', 'evidence_gap': 'There is no explicit Wednesday dinner, and the only visible time between post-exam transit and training is 18:30–19:00, with training ending at 20:30 and sleep at 22:30.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Cumulative workload tolerance', 'assumption': 'The user can sustain the week’s combined athletic and academic load, including morning training on Monday through Friday, multiple afternoon training sessions, Physics exam preparation, the Wednesday final exam, and the added Wednesday evening make-up session.', 'evidence_gap': 'The rationale preserves sleep and existing commitments but does not assess cumulative fatigue or whether adding training after the exam is appropriate for the user’s recovery needs.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Coffee social cancellation', 'assumption': 'Deleting the Wednesday 19:30–20:30 Coffee with University Study Group is socially acceptable or can be communicated without significant issue.', 'evidence_gap': 'The rationale notes that cancellation affects peers and should be confirmed, but no confirmation is present in the structured proposal.', 'potential_impact': 'minor', 'verification_source': 'third_party'}] Weaknesses: ['The plan places Make-up Individual Technical Training on Wednesday 19:00–20:30 immediately after a 16:00–18:00 Advanced Physics Final Exam and a 18:00–18:30 post-exam transit buffer, but the rationale does not meaningfully assess the combined cognitive and physical load of exam day.', 'Wednesday has no explicit dinner or substantial recovery block between the 18:00 exam finish and 19:00 training start. There is only 18:30–19:00 unallocated time before training, and the next protected sleep block starts at 22:30. This may still be workable, but the proposal treats the slot mainly as available rather than explaining how basic post-exam food, decompression, preparation, and training readiness are handled.', 'The Wednesday evening make-up depends on coach-offered details that the rationale itself says still need confirmation: venue, coach supervision, and equipment availability. That is not a technical violation, but it is central to whether the added 19:00–20:30 session is actually usable.', 'The alternative analysis compares Wednesday make-up against Friday conditioning mostly on technical/training-type grounds, but it does not clearly weigh whether avoiding an exam-evening training session could be more sustainable despite being a less direct replacement.', 'The final calendar’s added events have null category, importance, fixed status, participants, and descriptions despite the proposal describing them as commute/training with importance and user participation. The metadata note says this is contractual rather than a new preference, so it is not necessarily invalid, but it weakens the human-readable evidence for how the added commitments should be treated.']. Actionable feedback: The resulting calendar is technically coherent and protects the fixed exam and sleep blocks, but the proposed organization creates a materially demanding Wednesday: recovery/mobility 07:00–08:30, physiotherapy 09:00–10:00, Physics study 10:30–12:30, exam 16:00–18:00, post-exam transit 18:00–18:30, and make-up technical training 19:00–20:30. The rationale is clear about operational permissions and priorities, yet it under-explains whether training one hour after a final exam is realistically sustainable, especially with only a short visible gap before training and no explicit dinner on Wednesday. A revision should not automatically abandon the same operations, but should either substantiate why this exam-evening make-up is manageable in the fuller context or reconsider whether a less compressed distribution could preserve the visible priorities with less dependence on post-exam stamina and unconfirmed logistics. Request satisfaction cannot be independently verified because the original request is not provided and technical validation explicitly did not check request satisfaction or soft preferences.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "delete",
+            "event_id": "commute_hpc_pm_wed",
+            "title": "Commute to High-Performance Center",
+            "from_start": "2027-01-13T16:00:00+00:00",
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "training_pm_wed",
+            "title": "Afternoon Technical Training",
+            "from_start": "2027-01-13T16:30:00+00:00",
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Post-exam transit buffer",
+            "from_start": null,
+            "to_start": "2027-01-13T18:00:00+00:00",
+            "to_end": "2027-01-13T18:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Post-exam food and training preparation buffer",
+            "from_start": null,
+            "to_start": "2027-01-13T18:30:00+00:00",
+            "to_end": "2027-01-13T19:00:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Make-up Individual Technical Training",
+            "from_start": null,
+            "to_start": "2027-01-13T19:00:00+00:00",
+            "to_end": "2027-01-13T20:30:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Post-training dinner and recovery",
+            "from_start": null,
+            "to_start": "2027-01-13T20:30:00+00:00",
+            "to_end": "2027-01-13T21:30:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "delete",
+            "event_id": "coffee_social_wed",
+            "title": "Coffee with University Study Group",
+            "from_start": "2027-01-13T19:30:00+00:00",
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "All proposed times use the Europe/Lisbon timezone offset in effect for 11–15 January 2027, which is +00:00.",
+            "The Advanced Physics Final Exam on Wednesday 13 January from 16:00 to 18:00 is fixed and already present in the calendar, so it is not moved or recreated.",
+            "The protected 8-hour sleep blocks are left unchanged every night, including Wednesday night 22:30–06:30 after the exam-day changes.",
+            "The Wednesday 16:00 commute to the High-Performance Center and the Wednesday 16:30 technical training are fixed/protected items, but exact externally confirmed delete exceptions were supplied for both, so deleting them is operationally permitted.",
+            "The requested 30-minute transit after the exam is reserved from 18:00 to 18:30.",
+            "The calendar already contains 6.5 hours of Physics study before the exam: Monday 14:00–16:00, Tuesday 10:00–12:30, and Wednesday 10:30–12:30. This satisfies the requested minimum of at least 6 hours across Monday, Tuesday, and Wednesday morning without moving existing study blocks.",
+            "The Wednesday evening make-up training uses one of the two coach-offered options, 19:00–20:30, but its venue, equipment, exact supervision arrangement, and whether the post-exam transit ends at the correct location still need confirmation with the coach.",
+            "A 30-minute post-exam food and preparation buffer is reserved between transit and training, and a 60-minute post-training dinner and recovery block is reserved before the protected sleep block. These are calendar reservations for basic needs; the exact food, recovery routine, and training readiness are personal-context unknowns and are not assumed.",
+            "Deleting the Wednesday coffee social affects peers, so that cancellation should be confirmed with the study group or friends."
+          ],
+          "priorities": [
+            "Protect the official exam and keep the calendar clear during the exam window.",
+            "Protect all sleep blocks because sleep is a hard constraint and has the highest performance priority.",
+            "Preserve the required Physics study target using existing study time rather than adding unnecessary academic load.",
+            "Replace the missed Wednesday technical session with the closest direct coach-offered make-up option, while explicitly reserving time for transit, food, preparation, dinner, and recovery.",
+            "Avoid moving or deleting unrelated fixed events without an exact supplied exception.",
+            "Prefer the Wednesday individual technical make-up over the Friday conditioning option because it is a direct substitute for the missed technical session and avoids creating an additional Friday double-training afternoon with uncertain venue and commute implications."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Use the Friday 14:00–15:30 extra conditioning block instead of Wednesday evening make-up training.",
+              "rejected_because": "This would reduce the immediate exam-evening load, but it is a conditioning block rather than a direct technical replacement. It also creates a demanding Friday sequence before the fixed 16:00 commute and 16:30–18:30 pre-weekend scrimmage. The venue is unknown: if the conditioning block is at the High-Performance Center, it may require a pre-14:00 commute or adjustment to the existing fixed 16:00 commute, neither of which is externally confirmed. If it is elsewhere, the transition into the fixed Friday training structure still needs coach confirmation."
+            },
+            {
+              "option": "Keep the Wednesday coffee social unchanged.",
+              "rejected_because": "It overlaps the proposed Wednesday 19:00–20:30 make-up training from 19:30 to 20:30. The make-up training has higher priority because it replaces a protected training session missed due to the mandatory exam."
+            },
+            {
+              "option": "Move the Wednesday coffee social later on Wednesday evening.",
+              "rejected_because": "After training ends at 20:30, the schedule needs dinner and recovery before the protected 22:30 sleep block. A later 90-minute social would compress recovery and sleep preparation, and friends’ availability is unknown."
+            },
+            {
+              "option": "Move the original Wednesday afternoon training instead of deleting it.",
+              "rejected_because": "The only externally confirmed exception for the protected Wednesday training is deletion, not a move. The make-up training is therefore added as a new coach-offered session rather than moving the protected original event."
+            },
+            {
+              "option": "Add more Physics study before the exam.",
+              "rejected_because": "The existing Monday, Tuesday, and Wednesday morning Physics study blocks already provide 6.5 hours before the exam, satisfying the user’s minimum. Adding more study would increase exam-week fatigue without being required by the stated target."
+            }
+          ],
+          "summary": "The revised plan keeps the same core exam and training solution but makes the exam-day feasibility more explicit. It deletes only the two protected Wednesday items covered by exact external exceptions, keeps all sleep unchanged, preserves the already sufficient 6.5 hours of Physics study, adds the required 18:00–18:30 post-exam transit buffer, reserves 18:30–19:00 for food and training preparation, schedules the coach-offered 19:00–20:30 individual technical make-up, and reserves 20:30–21:30 for dinner and recovery before the 22:30 sleep block. This is still a demanding Wednesday after a final exam, so the make-up should be confirmed with the coach for venue, equipment, supervision, and realistic readiness; the Wednesday coffee cancellation should be confirmed with friends. The Friday conditioning alternative is less compressed after the exam, but it introduces a different fatigue risk and more uncertainty around venue and commute before the already fixed Friday afternoon training."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true,
+        "confirmed_change_authorizations": [
+          {
+            "event_id": "training_pm_wed",
+            "type": "delete",
+            "to_start": null,
+            "to_end": null
+          },
+          {
+            "event_id": "commute_hpc_pm_wed",
+            "type": "delete",
+            "to_start": null,
+            "to_end": null
+          }
+        ]
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-01-10T22:30:00+00:00",
+            "end": "2027-01-11T06:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_hpc_am_mon",
+            "title": "Commute to High-Performance Center",
+            "start": "2027-01-11T06:30:00+00:00",
+            "end": "2027-01-11T07:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute drive from home to sports center.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_mon",
+            "title": "Morning Strength & Conditioning",
+            "start": "2027-01-11T07:00:00+00:00",
+            "end": "2027-01-11T09:00:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Gym session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_uni_mon",
+            "title": "Commute to University Campus",
+            "start": "2027-01-11T09:00:00+00:00",
+            "end": "2027-01-11T09:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute transit from HPC to campus.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "class_calculus_mon",
+            "title": "Calculus II Lecture",
+            "start": "2027-01-11T10:00:00+00:00",
+            "end": "2027-01-11T12:00:00+00:00",
+            "category": "classes",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Regular morning lecture.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_mon",
+            "title": "Lunch",
+            "start": "2027-01-11T12:30:00+00:00",
+            "end": "2027-01-11T13:30:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Nutritional recovery lunch.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_mon",
+            "title": "Independent Study: Physics",
+            "start": "2027-01-11T14:00:00+00:00",
+            "end": "2027-01-11T16:00:00+00:00",
+            "category": "study",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Flexible study block at university library.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_hpc_pm_mon",
+            "title": "Commute to High-Performance Center",
+            "start": "2027-01-11T16:00:00+00:00",
+            "end": "2027-01-11T16:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute transit from campus to HPC.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_mon",
+            "title": "Afternoon Technical Training",
+            "start": "2027-01-11T16:30:00+00:00",
+            "end": "2027-01-11T18:30:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "team",
+              "coach"
+            ],
+            "description": "Mandatory team technical session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "dinner_mon",
+            "title": "Dinner",
+            "start": "2027-01-11T19:30:00+00:00",
+            "end": "2027-01-11T20:30:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Dinner at home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-01-11T22:30:00+00:00",
+            "end": "2027-01-12T06:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_hpc_am_tue",
+            "title": "Commute to High-Performance Center",
+            "start": "2027-01-12T06:30:00+00:00",
+            "end": "2027-01-12T07:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute drive.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_tue",
+            "title": "Morning Endurance Session",
+            "start": "2027-01-12T07:00:00+00:00",
+            "end": "2027-01-12T09:00:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Track/Cardio session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_uni_tue",
+            "title": "Commute to University Campus",
+            "start": "2027-01-12T09:00:00+00:00",
+            "end": "2027-01-12T09:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute transit.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_tue",
+            "title": "Independent Study: Physics",
+            "start": "2027-01-12T10:00:00+00:00",
+            "end": "2027-01-12T12:30:00+00:00",
+            "category": "study",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Exam prep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_tue",
+            "title": "Lunch",
+            "start": "2027-01-12T12:30:00+00:00",
+            "end": "2027-01-12T13:30:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "class_lab_tue",
+            "title": "Physics Laboratory",
+            "start": "2027-01-12T14:00:00+00:00",
+            "end": "2027-01-12T16:00:00+00:00",
+            "category": "classes",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Practical lab class.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_hpc_pm_tue",
+            "title": "Commute to High-Performance Center",
+            "start": "2027-01-12T16:00:00+00:00",
+            "end": "2027-01-12T16:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute transit.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_tue",
+            "title": "Afternoon Tactical Training",
+            "start": "2027-01-12T16:30:00+00:00",
+            "end": "2027-01-12T18:30:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "team",
+              "coach"
+            ],
+            "description": "Team session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "dinner_tue",
+            "title": "Dinner",
+            "start": "2027-01-12T19:30:00+00:00",
+            "end": "2027-01-12T20:30:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Dinner at home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-01-12T22:30:00+00:00",
+            "end": "2027-01-13T06:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_hpc_am_wed",
+            "title": "Commute to High-Performance Center",
+            "start": "2027-01-13T06:30:00+00:00",
+            "end": "2027-01-13T07:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute drive.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_wed",
+            "title": "Morning Mobility & Recovery",
+            "start": "2027-01-13T07:00:00+00:00",
+            "end": "2027-01-13T08:30:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Light morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "physio_wed",
+            "title": "Sports Physiotherapy",
+            "start": "2027-01-13T09:00:00+00:00",
+            "end": "2027-01-13T10:00:00+00:00",
+            "category": "physio",
+            "importance": 3,
+            "fixed": true,
+            "participants": [
+              "user",
+              "physiotherapist"
+            ],
+            "description": "Preventive massage at HPC.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_uni_wed",
+            "title": "Commute to University Campus",
+            "start": "2027-01-13T10:00:00+00:00",
+            "end": "2027-01-13T10:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute transit.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_wed",
+            "title": "Exam Prep: Physics",
+            "start": "2027-01-13T10:30:00+00:00",
+            "end": "2027-01-13T12:30:00+00:00",
+            "category": "study",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Focused study.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_wed",
+            "title": "Lunch",
+            "start": "2027-01-13T12:30:00+00:00",
+            "end": "2027-01-13T13:30:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch at campus canteen.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "physics_exam_wed",
+            "title": "Confirmed Advanced Physics Final Exam",
+            "start": "2027-01-13T16:00:00+00:00",
+            "end": "2027-01-13T18:00:00+00:00",
+            "category": "exam",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "examiner"
+            ],
+            "description": "Mandatory exam announced for Wednesday 13 January, 16:00–18:00; conflicts with the existing training commitment.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_2",
+            "title": "Post-exam transit buffer",
+            "start": "2027-01-13T18:00:00+00:00",
+            "end": "2027-01-13T18:30:00+00:00",
+            "category": null,
+            "importance": null,
+            "fixed": null,
+            "participants": null,
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "new_3",
+            "title": "Post-exam food and training preparation buffer",
+            "start": "2027-01-13T18:30:00+00:00",
+            "end": "2027-01-13T19:00:00+00:00",
+            "category": null,
+            "importance": null,
+            "fixed": null,
+            "participants": null,
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "new_4",
+            "title": "Make-up Individual Technical Training",
+            "start": "2027-01-13T19:00:00+00:00",
+            "end": "2027-01-13T20:30:00+00:00",
+            "category": null,
+            "importance": null,
+            "fixed": null,
+            "participants": null,
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "new_5",
+            "title": "Post-training dinner and recovery",
+            "start": "2027-01-13T20:30:00+00:00",
+            "end": "2027-01-13T21:30:00+00:00",
+            "category": null,
+            "importance": null,
+            "fixed": null,
+            "participants": null,
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-01-13T22:30:00+00:00",
+            "end": "2027-01-14T06:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_hpc_am_thu",
+            "title": "Commute to High-Performance Center",
+            "start": "2027-01-14T06:30:00+00:00",
+            "end": "2027-01-14T07:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute drive.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_thu",
+            "title": "Morning Strength Training",
+            "start": "2027-01-14T07:00:00+00:00",
+            "end": "2027-01-14T09:00:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Gym session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_uni_thu",
+            "title": "Commute to University Campus",
+            "start": "2027-01-14T09:00:00+00:00",
+            "end": "2027-01-14T09:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute transit.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "class_calculus_thu",
+            "title": "Calculus II Lecture",
+            "start": "2027-01-14T10:00:00+00:00",
+            "end": "2027-01-14T12:00:00+00:00",
+            "category": "classes",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Morning lecture.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_thu",
+            "title": "Lunch",
+            "start": "2027-01-14T12:30:00+00:00",
+            "end": "2027-01-14T13:30:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_thu",
+            "title": "Exam Prep: Calculus",
+            "start": "2027-01-14T14:00:00+00:00",
+            "end": "2027-01-14T16:00:00+00:00",
+            "category": "study",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Independent study.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_hpc_pm_thu",
+            "title": "Commute to High-Performance Center",
+            "start": "2027-01-14T16:00:00+00:00",
+            "end": "2027-01-14T16:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute transit.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_thu",
+            "title": "Afternoon Tactical Training",
+            "start": "2027-01-14T16:30:00+00:00",
+            "end": "2027-01-14T18:30:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "team",
+              "coach"
+            ],
+            "description": "Team session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "dinner_thu",
+            "title": "Dinner",
+            "start": "2027-01-14T19:30:00+00:00",
+            "end": "2027-01-14T20:30:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Dinner at home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-01-14T22:30:00+00:00",
+            "end": "2027-01-15T06:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_hpc_am_fri",
+            "title": "Commute to High-Performance Center",
+            "start": "2027-01-15T06:30:00+00:00",
+            "end": "2027-01-15T07:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute drive.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_fri",
+            "title": "Morning Speed & Agility",
+            "start": "2027-01-15T07:00:00+00:00",
+            "end": "2027-01-15T09:00:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_uni_fri",
+            "title": "Commute to University Campus",
+            "start": "2027-01-15T09:00:00+00:00",
+            "end": "2027-01-15T09:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute transit.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_fri",
+            "title": "Weekly Review & Summary Notes",
+            "start": "2027-01-15T10:00:00+00:00",
+            "end": "2027-01-15T12:00:00+00:00",
+            "category": "study",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Reviewing week's material.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_fri",
+            "title": "Lunch",
+            "start": "2027-01-15T12:30:00+00:00",
+            "end": "2027-01-15T13:30:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_hpc_pm_fri",
+            "title": "Commute to High-Performance Center",
+            "start": "2027-01-15T16:00:00+00:00",
+            "end": "2027-01-15T16:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute transit.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_fri",
+            "title": "Pre-Weekend Scrimmage",
+            "start": "2027-01-15T16:30:00+00:00",
+            "end": "2027-01-15T18:30:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "team",
+              "coach"
+            ],
+            "description": "Afternoon practice.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "student_union_fri",
+            "title": "Student Association Friday Gathering",
+            "start": "2027-01-15T19:30:00+00:00",
+            "end": "2027-01-15T21:30:00+00:00",
+            "category": "social",
+            "importance": 2,
+            "fixed": false,
+            "participants": [
+              "user",
+              "students"
+            ],
+            "description": "Social event at the student union bar.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Null metadata on added events means the Proposal contract did not supply it; it is not a new personal preference or hard constraint."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 4,
+          "alternatives": 4,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "Wednesday remains a demanding sequence even after the revision: Morning Mobility & Recovery 07:00–08:30, Sports Physiotherapy 09:00–10:00, Exam Prep 10:30–12:30, Advanced Physics Final Exam 16:00–18:00, post-exam transit 18:00–18:30, food/preparation 18:30–19:00, and Make-up Individual Technical Training 19:00–20:30. The added food and recovery blocks improve feasibility, but the plan still depends on the user being able to shift from exam performance to athletic training quickly.",
+          "The 18:30–19:00 Post-exam food and training preparation buffer is helpful but compact. If the transit does not end at the correct training location, or if the user needs more decompression, changing, eating, or equipment setup after the exam, this segment could become practically thin.",
+          "The rationale explicitly acknowledges that the Wednesday 19:00–20:30 make-up training still requires confirmation of venue, equipment, supervision, and whether the post-exam transit ends at the correct location. This is not a technical violation, but it remains central to whether the added session is usable.",
+          "The final calendar’s added events still show null category, importance, fixed status, participants, and description, even though the proposal changes describe those additions with categories, importance, and participants. The metadata note explains this as a contract limitation, so it is not necessarily a planning failure, but it reduces the human-readable evidence in the resulting calendar.",
+          "Request satisfaction cannot be independently verified because the original request is not provided and the technical validation explicitly did not check request satisfaction or soft preferences."
+        ],
+        "feedback": "The revision substantially addresses the prior human-quality concern by adding explicit 18:30–19:00 food/preparation and 20:30–21:30 dinner/recovery reservations, and by more directly comparing the Wednesday make-up with the Friday conditioning alternative. The resulting Wednesday is still heavy, but the proposal no longer treats empty space as automatically available capacity; it now acknowledges fatigue, food, preparation, recovery, and logistics. Given the visible priorities, the plan is plausible if the coach logistics and post-exam transition are confirmed and if the user can tolerate training after the exam. Another revision is not clearly required from the visible information alone, because the main remaining risks are explicitly identified as conditions to verify rather than contradictions in the proposed organization. The Proposer should keep the plan contingent on confirming the Wednesday make-up details and should be prepared to reconsider distribution if the transit, setup, food, or readiness assumptions prove false.",
+        "plausibility_review": {
+          "revision_required": false,
+          "severity": "low",
+          "reason": "The prior concern received a grounded answer: the revised calendar now reserves post-exam food/preparation from 18:30–19:00 and dinner/recovery from 20:30–21:30, while preserving the 22:30–06:30 sleep block. The Wednesday evening training after a 16:00–18:00 final exam remains demanding, but the proposal acknowledges this and explains why the direct Wednesday technical make-up is preferred over the Friday conditioning alternative. The remaining uncertainties could materially affect feasibility if false, especially venue and readiness, but they are identified rather than ignored and do not by themselves show that another scheduling revision would likely improve the plan without additional context.",
+          "suggested_improvement": "Do not treat the Wednesday evening make-up as fully settled until coach logistics, venue, equipment, and the exam-to-training transition are verified. If any of those conditions fail, reconsider the distribution using the fuller context, especially options that reduce reliance on post-exam stamina while preserving sleep and the visible training priority."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Wednesday evening make-up training logistics",
+            "assumption": "The 19:00–20:30 Make-up Individual Technical Training is actually available with the required venue, coach supervision, and equipment.",
+            "evidence_gap": "The rationale states that venue, equipment, exact supervision arrangement, and coach confirmation are still needed.",
+            "potential_impact": "potentially_blocking",
+            "verification_source": "third_party"
+          },
+          {
+            "subject": "Post-exam transit feasibility",
+            "assumption": "The 18:00–18:30 Post-exam transit buffer gets the user from the exam context to the correct location for the 19:00 training or to a place where preparation can realistically happen.",
+            "evidence_gap": "The calendar does not specify the exam location, the make-up training venue, or whether the transit buffer ends at the training location.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Post-exam food and preparation",
+            "assumption": "The user can eat enough, decompress enough, and prepare for technical training during the 18:30–19:00 buffer after the exam and transit.",
+            "evidence_gap": "The proposal reserves the time but does not verify the user's food access, preparation needs, equipment needs, or post-exam recovery needs.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Cumulative workload tolerance",
+            "assumption": "The user can sustain the visible week’s combined load, including morning training Monday through Friday, multiple afternoon or evening training sessions, exam preparation, the Wednesday final exam, and the added Wednesday evening make-up session.",
+            "evidence_gap": "The rationale protects sleep and adds recovery blocks, but individual fatigue tolerance and recovery needs are not verified in the provided material.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Coffee social cancellation",
+            "assumption": "Deleting the Wednesday 19:30–20:30 Coffee with University Study Group is socially acceptable or can be communicated without significant issue.",
+            "evidence_gap": "The rationale says cancellation should be confirmed with the study group or friends, but no confirmation is included.",
+            "potential_impact": "minor",
+            "verification_source": "third_party"
+          },
+          {
+            "subject": "Added-event metadata interpretation",
+            "assumption": "The added Wednesday events should be understood according to the proposal’s described categories and priorities despite null metadata in the final calendar.",
+            "evidence_gap": "The proposal specifies commute, meal, training, and meal categories with importance levels and user participation, but the resulting calendar stores those added events with null category, importance, fixed status, participants, and description.",
+            "potential_impact": "minor",
+            "verification_source": "unknown"
+          }
+        ],
+        "overall": 4.0
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": true,
+        "plausibility_revision_required": false,
+        "accepted": true,
+        "revision_causes": []
+      },
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": [
+        {
+          "iteration": 0,
+          "proposal": {
+            "changes": [
+              {
+                "type": "delete",
+                "event_id": "commute_hpc_pm_wed",
+                "title": "Commute to High-Performance Center",
+                "from_start": "2027-01-13T16:00:00+00:00",
+                "to_start": null,
+                "to_end": null,
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "delete",
+                "event_id": "training_pm_wed",
+                "title": "Afternoon Technical Training",
+                "from_start": "2027-01-13T16:30:00+00:00",
+                "to_start": null,
+                "to_end": null,
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Post-exam transit buffer",
+                "from_start": null,
+                "to_start": "2027-01-13T18:00:00+00:00",
+                "to_end": "2027-01-13T18:30:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "participants": [
+                  "user"
+                ]
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Make-up Individual Technical Training",
+                "from_start": null,
+                "to_start": "2027-01-13T19:00:00+00:00",
+                "to_end": "2027-01-13T20:30:00+00:00",
+                "category": "training",
+                "importance": 5,
+                "participants": [
+                  "user"
+                ]
+              },
+              {
+                "type": "delete",
+                "event_id": "coffee_social_wed",
+                "title": "Coffee with University Study Group",
+                "from_start": "2027-01-13T19:30:00+00:00",
+                "to_start": null,
+                "to_end": null,
+                "category": null,
+                "importance": null,
+                "participants": null
+              }
+            ],
+            "rationale": {
+              "constraints": [
+                "All proposed times use the Europe/Lisbon timezone offset in effect for 11–15 January 2027, which is +00:00.",
+                "The Advanced Physics Final Exam on Wednesday 13 January from 16:00 to 18:00 is fixed and already present in the calendar, so it is not moved or recreated.",
+                "The protected 8-hour sleep blocks are left unchanged every night.",
+                "The Wednesday 16:00 commute to the High-Performance Center and the Wednesday 16:30 technical training are fixed/protected items, but exact externally confirmed delete exceptions were supplied for both, so deleting them is operationally permitted.",
+                "The requested 30-minute transit after the exam is added from 18:00 to 18:30.",
+                "The calendar already contains 6.5 hours of Physics study before the exam: Monday 14:00–16:00, Tuesday 10:00–12:30, and Wednesday 10:30–12:30. This satisfies the requested minimum of 6 hours without moving study blocks.",
+                "The Wednesday evening make-up session uses the coach-offered 19:00–20:30 option, but the exact venue, coach supervision, and equipment availability still need confirmation with the coach.",
+                "Deleting the Wednesday coffee social affects peers, so it should be confirmed with friends or the study group."
+              ],
+              "priorities": [
+                "Protect the official exam and keep the calendar clear during the exam window.",
+                "Preserve sleep exactly as scheduled because sleep has the highest protection level.",
+                "Maintain the training load by replacing the missed Wednesday afternoon technical session with the coach-offered Wednesday evening individual make-up session.",
+                "Avoid moving or deleting unrelated fixed/protected events without an exact supplied exception.",
+                "Prefer the Wednesday make-up over Friday conditioning because it directly replaces the missed technical session and does not require disturbing Friday’s fixed commute/training structure."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Use the Friday 14:00–15:30 extra conditioning block instead of Wednesday evening make-up training.",
+                  "rejected_because": "Friday 14:00–15:30 is free on the calendar, but the location and travel logistics are not confirmed. If it is at the High-Performance Center, it creates uncertainty with the existing fixed Friday 16:00 commute to the High-Performance Center, which cannot be moved or deleted without an exception. It is also a conditioning block rather than a direct technical make-up."
+                },
+                {
+                  "option": "Keep the Wednesday coffee social unchanged.",
+                  "rejected_because": "It overlaps the proposed Wednesday 19:00–20:30 make-up training from 19:30 to 20:30. The make-up training is higher priority because it replaces a training session missed due to the mandatory exam."
+                },
+                {
+                  "option": "Move the Wednesday coffee social later on Wednesday evening.",
+                  "rejected_because": "A later 90-minute social would run too close to or into the protected 22:30 sleep start once travel uncertainty is considered. The friends’ availability is also unknown."
+                },
+                {
+                  "option": "Move the original Wednesday afternoon training instead of deleting it.",
+                  "rejected_because": "The only externally confirmed exception for the protected Wednesday training is deletion, not a move. The make-up training is therefore added as a new coach-offered session rather than moving the protected original event."
+                }
+              ],
+              "summary": "The plan keeps the mandatory Physics exam and all protected sleep intact, removes the conflicting Wednesday commute and technical training using the supplied exact exceptions, adds the required 30-minute post-exam transit buffer, and schedules the coach-offered Wednesday 19:00–20:30 individual make-up training. The existing Monday, Tuesday, and Wednesday morning Physics study blocks already provide 6.5 hours before the exam, so no extra study changes are needed. Confirm the Wednesday evening make-up details with the coach, and confirm cancellation of the Wednesday coffee social with friends."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "sleep_mon",
+                "title": "Sleep",
+                "start": "2027-01-10T22:30:00+00:00",
+                "end": "2027-01-11T06:30:00+00:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected 8-hour sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "commute_hpc_am_mon",
+                "title": "Commute to High-Performance Center",
+                "start": "2027-01-11T06:30:00+00:00",
+                "end": "2027-01-11T07:00:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute drive from home to sports center.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_am_mon",
+                "title": "Morning Strength & Conditioning",
+                "start": "2027-01-11T07:00:00+00:00",
+                "end": "2027-01-11T09:00:00+00:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Gym session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "commute_uni_mon",
+                "title": "Commute to University Campus",
+                "start": "2027-01-11T09:00:00+00:00",
+                "end": "2027-01-11T09:30:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute transit from HPC to campus.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "class_calculus_mon",
+                "title": "Calculus II Lecture",
+                "start": "2027-01-11T10:00:00+00:00",
+                "end": "2027-01-11T12:00:00+00:00",
+                "category": "classes",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Regular morning lecture.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "lunch_mon",
+                "title": "Lunch",
+                "start": "2027-01-11T12:30:00+00:00",
+                "end": "2027-01-11T13:30:00+00:00",
+                "category": "meal",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Nutritional recovery lunch.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "study_mon",
+                "title": "Independent Study: Physics",
+                "start": "2027-01-11T14:00:00+00:00",
+                "end": "2027-01-11T16:00:00+00:00",
+                "category": "study",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Flexible study block at university library.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "commute_hpc_pm_mon",
+                "title": "Commute to High-Performance Center",
+                "start": "2027-01-11T16:00:00+00:00",
+                "end": "2027-01-11T16:30:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute transit from campus to HPC.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_pm_mon",
+                "title": "Afternoon Technical Training",
+                "start": "2027-01-11T16:30:00+00:00",
+                "end": "2027-01-11T18:30:00+00:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "team",
+                  "coach"
+                ],
+                "description": "Mandatory team technical session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "dinner_mon",
+                "title": "Dinner",
+                "start": "2027-01-11T19:30:00+00:00",
+                "end": "2027-01-11T20:30:00+00:00",
+                "category": "meal",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Dinner at home.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_tue",
+                "title": "Sleep",
+                "start": "2027-01-11T22:30:00+00:00",
+                "end": "2027-01-12T06:30:00+00:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected 8-hour sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "commute_hpc_am_tue",
+                "title": "Commute to High-Performance Center",
+                "start": "2027-01-12T06:30:00+00:00",
+                "end": "2027-01-12T07:00:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute drive.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_am_tue",
+                "title": "Morning Endurance Session",
+                "start": "2027-01-12T07:00:00+00:00",
+                "end": "2027-01-12T09:00:00+00:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Track/Cardio session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "commute_uni_tue",
+                "title": "Commute to University Campus",
+                "start": "2027-01-12T09:00:00+00:00",
+                "end": "2027-01-12T09:30:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute transit.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "study_tue",
+                "title": "Independent Study: Physics",
+                "start": "2027-01-12T10:00:00+00:00",
+                "end": "2027-01-12T12:30:00+00:00",
+                "category": "study",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Exam prep.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "lunch_tue",
+                "title": "Lunch",
+                "start": "2027-01-12T12:30:00+00:00",
+                "end": "2027-01-12T13:30:00+00:00",
+                "category": "meal",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Lunch break.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "class_lab_tue",
+                "title": "Physics Laboratory",
+                "start": "2027-01-12T14:00:00+00:00",
+                "end": "2027-01-12T16:00:00+00:00",
+                "category": "classes",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Practical lab class.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "commute_hpc_pm_tue",
+                "title": "Commute to High-Performance Center",
+                "start": "2027-01-12T16:00:00+00:00",
+                "end": "2027-01-12T16:30:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute transit.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_pm_tue",
+                "title": "Afternoon Tactical Training",
+                "start": "2027-01-12T16:30:00+00:00",
+                "end": "2027-01-12T18:30:00+00:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "team",
+                  "coach"
+                ],
+                "description": "Team session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "dinner_tue",
+                "title": "Dinner",
+                "start": "2027-01-12T19:30:00+00:00",
+                "end": "2027-01-12T20:30:00+00:00",
+                "category": "meal",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Dinner at home.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_wed",
+                "title": "Sleep",
+                "start": "2027-01-12T22:30:00+00:00",
+                "end": "2027-01-13T06:30:00+00:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected 8-hour sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "commute_hpc_am_wed",
+                "title": "Commute to High-Performance Center",
+                "start": "2027-01-13T06:30:00+00:00",
+                "end": "2027-01-13T07:00:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute drive.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_am_wed",
+                "title": "Morning Mobility & Recovery",
+                "start": "2027-01-13T07:00:00+00:00",
+                "end": "2027-01-13T08:30:00+00:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Light morning session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "physio_wed",
+                "title": "Sports Physiotherapy",
+                "start": "2027-01-13T09:00:00+00:00",
+                "end": "2027-01-13T10:00:00+00:00",
+                "category": "physio",
+                "importance": 3,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "physiotherapist"
+                ],
+                "description": "Preventive massage at HPC.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "commute_uni_wed",
+                "title": "Commute to University Campus",
+                "start": "2027-01-13T10:00:00+00:00",
+                "end": "2027-01-13T10:30:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute transit.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "study_wed",
+                "title": "Exam Prep: Physics",
+                "start": "2027-01-13T10:30:00+00:00",
+                "end": "2027-01-13T12:30:00+00:00",
+                "category": "study",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Focused study.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "lunch_wed",
+                "title": "Lunch",
+                "start": "2027-01-13T12:30:00+00:00",
+                "end": "2027-01-13T13:30:00+00:00",
+                "category": "meal",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Lunch at campus canteen.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "physics_exam_wed",
+                "title": "Confirmed Advanced Physics Final Exam",
+                "start": "2027-01-13T16:00:00+00:00",
+                "end": "2027-01-13T18:00:00+00:00",
+                "category": "exam",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "examiner"
+                ],
+                "description": "Mandatory exam announced for Wednesday 13 January, 16:00–18:00; conflicts with the existing training commitment.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_2",
+                "title": "Post-exam transit buffer",
+                "start": "2027-01-13T18:00:00+00:00",
+                "end": "2027-01-13T18:30:00+00:00",
+                "category": null,
+                "importance": null,
+                "fixed": null,
+                "participants": null,
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "new_3",
+                "title": "Make-up Individual Technical Training",
+                "start": "2027-01-13T19:00:00+00:00",
+                "end": "2027-01-13T20:30:00+00:00",
+                "category": null,
+                "importance": null,
+                "fixed": null,
+                "participants": null,
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2027-01-13T22:30:00+00:00",
+                "end": "2027-01-14T06:30:00+00:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected 8-hour sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "commute_hpc_am_thu",
+                "title": "Commute to High-Performance Center",
+                "start": "2027-01-14T06:30:00+00:00",
+                "end": "2027-01-14T07:00:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute drive.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_am_thu",
+                "title": "Morning Strength Training",
+                "start": "2027-01-14T07:00:00+00:00",
+                "end": "2027-01-14T09:00:00+00:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Gym session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "commute_uni_thu",
+                "title": "Commute to University Campus",
+                "start": "2027-01-14T09:00:00+00:00",
+                "end": "2027-01-14T09:30:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute transit.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "class_calculus_thu",
+                "title": "Calculus II Lecture",
+                "start": "2027-01-14T10:00:00+00:00",
+                "end": "2027-01-14T12:00:00+00:00",
+                "category": "classes",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Morning lecture.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "lunch_thu",
+                "title": "Lunch",
+                "start": "2027-01-14T12:30:00+00:00",
+                "end": "2027-01-14T13:30:00+00:00",
+                "category": "meal",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Lunch break.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "study_thu",
+                "title": "Exam Prep: Calculus",
+                "start": "2027-01-14T14:00:00+00:00",
+                "end": "2027-01-14T16:00:00+00:00",
+                "category": "study",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Independent study.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "commute_hpc_pm_thu",
+                "title": "Commute to High-Performance Center",
+                "start": "2027-01-14T16:00:00+00:00",
+                "end": "2027-01-14T16:30:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute transit.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_pm_thu",
+                "title": "Afternoon Tactical Training",
+                "start": "2027-01-14T16:30:00+00:00",
+                "end": "2027-01-14T18:30:00+00:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "team",
+                  "coach"
+                ],
+                "description": "Team session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "dinner_thu",
+                "title": "Dinner",
+                "start": "2027-01-14T19:30:00+00:00",
+                "end": "2027-01-14T20:30:00+00:00",
+                "category": "meal",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Dinner at home.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_fri",
+                "title": "Sleep",
+                "start": "2027-01-14T22:30:00+00:00",
+                "end": "2027-01-15T06:30:00+00:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected 8-hour sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "commute_hpc_am_fri",
+                "title": "Commute to High-Performance Center",
+                "start": "2027-01-15T06:30:00+00:00",
+                "end": "2027-01-15T07:00:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute drive.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_am_fri",
+                "title": "Morning Speed & Agility",
+                "start": "2027-01-15T07:00:00+00:00",
+                "end": "2027-01-15T09:00:00+00:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Morning workout.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "commute_uni_fri",
+                "title": "Commute to University Campus",
+                "start": "2027-01-15T09:00:00+00:00",
+                "end": "2027-01-15T09:30:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute transit.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "study_fri",
+                "title": "Weekly Review & Summary Notes",
+                "start": "2027-01-15T10:00:00+00:00",
+                "end": "2027-01-15T12:00:00+00:00",
+                "category": "study",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Reviewing week's material.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "lunch_fri",
+                "title": "Lunch",
+                "start": "2027-01-15T12:30:00+00:00",
+                "end": "2027-01-15T13:30:00+00:00",
+                "category": "meal",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Lunch break.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "commute_hpc_pm_fri",
+                "title": "Commute to High-Performance Center",
+                "start": "2027-01-15T16:00:00+00:00",
+                "end": "2027-01-15T16:30:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute transit.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_pm_fri",
+                "title": "Pre-Weekend Scrimmage",
+                "start": "2027-01-15T16:30:00+00:00",
+                "end": "2027-01-15T18:30:00+00:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "team",
+                  "coach"
+                ],
+                "description": "Afternoon practice.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "student_union_fri",
+                "title": "Student Association Friday Gathering",
+                "start": "2027-01-15T19:30:00+00:00",
+                "end": "2027-01-15T21:30:00+00:00",
+                "category": "social",
+                "importance": 2,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "students"
+                ],
+                "description": "Social event at the student union bar.",
+                "origin": "existing",
+                "change_status": "preserved"
+              }
+            ],
+            "metadata_note": "Null metadata on added events means the Proposal contract did not supply it; it is not a new personal preference or hard constraint."
+          },
+          "plausibility_review": {
+            "revision_required": true,
+            "severity": "moderate",
+            "reason": "The main human-quality risk is the placement of a high-priority individual technical training session on Wednesday 19:00–20:30 after a 16:00–18:00 final exam, with only a 18:00–18:30 transit buffer and 30 additional minutes before training. Given the visible week already includes repeated early commutes, morning training, academic blocks, and afternoon/evening training, the proposal should more directly address fatigue, food, preparation, and recovery on exam day. This is not an objective incompatibility, and the preserved 22:30–06:30 sleep block helps, but the practical manageability of the added session is under-substantiated.",
+            "suggested_improvement": "Reconsider the distribution using the fuller context: either justify why the Wednesday evening make-up is realistic after the exam, including how post-exam food, preparation, recovery, venue, and coach logistics are handled, or compare it more directly with less compressed options that may reduce exam-day load while still respecting the visible priorities and protected events."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Wednesday evening make-up training logistics",
+              "assumption": "The 19:00–20:30 Make-up Individual Technical Training is available with the required venue, coach supervision, and equipment.",
+              "evidence_gap": "The rationale explicitly states that exact venue, coach supervision, and equipment availability still need confirmation with the coach.",
+              "potential_impact": "potentially_blocking",
+              "verification_source": "third_party"
+            },
+            {
+              "subject": "Post-exam transition feasibility",
+              "assumption": "The 18:00–18:30 post-exam transit buffer plus the 18:30–19:00 gap is enough to get from the exam context to the make-up training context and be ready to train.",
+              "evidence_gap": "The calendar does not specify the exam location, make-up training venue, preparation requirements, or whether the transit buffer ends at the training location.",
+              "potential_impact": "material",
+              "verification_source": "unknown"
+            },
+            {
+              "subject": "Food and recovery on Wednesday evening",
+              "assumption": "The user can reasonably eat, decompress, and prepare around the exam-to-training sequence without undermining training quality or recovery before 22:30 sleep.",
+              "evidence_gap": "There is no explicit Wednesday dinner, and the only visible time between post-exam transit and training is 18:30–19:00, with training ending at 20:30 and sleep at 22:30.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Cumulative workload tolerance",
+              "assumption": "The user can sustain the week’s combined athletic and academic load, including morning training on Monday through Friday, multiple afternoon training sessions, Physics exam preparation, the Wednesday final exam, and the added Wednesday evening make-up session.",
+              "evidence_gap": "The rationale preserves sleep and existing commitments but does not assess cumulative fatigue or whether adding training after the exam is appropriate for the user’s recovery needs.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Coffee social cancellation",
+              "assumption": "Deleting the Wednesday 19:30–20:30 Coffee with University Study Group is socially acceptable or can be communicated without significant issue.",
+              "evidence_gap": "The rationale notes that cancellation affects peers and should be confirmed, but no confirmation is present in the structured proposal.",
+              "potential_impact": "minor",
+              "verification_source": "third_party"
+            }
+          ],
+          "weaknesses": [
+            "The plan places Make-up Individual Technical Training on Wednesday 19:00–20:30 immediately after a 16:00–18:00 Advanced Physics Final Exam and a 18:00–18:30 post-exam transit buffer, but the rationale does not meaningfully assess the combined cognitive and physical load of exam day.",
+            "Wednesday has no explicit dinner or substantial recovery block between the 18:00 exam finish and 19:00 training start. There is only 18:30–19:00 unallocated time before training, and the next protected sleep block starts at 22:30. This may still be workable, but the proposal treats the slot mainly as available rather than explaining how basic post-exam food, decompression, preparation, and training readiness are handled.",
+            "The Wednesday evening make-up depends on coach-offered details that the rationale itself says still need confirmation: venue, coach supervision, and equipment availability. That is not a technical violation, but it is central to whether the added 19:00–20:30 session is actually usable.",
+            "The alternative analysis compares Wednesday make-up against Friday conditioning mostly on technical/training-type grounds, but it does not clearly weigh whether avoiding an exam-evening training session could be more sustainable despite being a less direct replacement.",
+            "The final calendar’s added events have null category, importance, fixed status, participants, and descriptions despite the proposal describing them as commute/training with importance and user participation. The metadata note says this is contractual rather than a new preference, so it is not necessarily invalid, but it weakens the human-readable evidence for how the added commitments should be treated."
+          ],
+          "feedback": "The resulting calendar is technically coherent and protects the fixed exam and sleep blocks, but the proposed organization creates a materially demanding Wednesday: recovery/mobility 07:00–08:30, physiotherapy 09:00–10:00, Physics study 10:30–12:30, exam 16:00–18:00, post-exam transit 18:00–18:30, and make-up technical training 19:00–20:30. The rationale is clear about operational permissions and priorities, yet it under-explains whether training one hour after a final exam is realistically sustainable, especially with only a short visible gap before training and no explicit dinner on Wednesday. A revision should not automatically abandon the same operations, but should either substantiate why this exam-evening make-up is manageable in the fuller context or reconsider whether a less compressed distribution could preserve the visible priorities with less dependence on post-exam stamina and unconfirmed logistics. Request satisfaction cannot be independently verified because the original request is not provided and technical validation explicitly did not check request satisfaction or soft preferences."
+        }
+      ],
+      "unresolved_assumptions": [
+        {
+          "subject": "Wednesday evening make-up training logistics",
+          "assumption": "The 19:00–20:30 Make-up Individual Technical Training is actually available with the required venue, coach supervision, and equipment.",
+          "evidence_gap": "The rationale states that venue, equipment, exact supervision arrangement, and coach confirmation are still needed.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Post-exam transit feasibility",
+          "assumption": "The 18:00–18:30 Post-exam transit buffer gets the user from the exam context to the correct location for the 19:00 training or to a place where preparation can realistically happen.",
+          "evidence_gap": "The calendar does not specify the exam location, the make-up training venue, or whether the transit buffer ends at the training location.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Post-exam food and preparation",
+          "assumption": "The user can eat enough, decompress enough, and prepare for technical training during the 18:30–19:00 buffer after the exam and transit.",
+          "evidence_gap": "The proposal reserves the time but does not verify the user's food access, preparation needs, equipment needs, or post-exam recovery needs.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Cumulative workload tolerance",
+          "assumption": "The user can sustain the visible week’s combined load, including morning training Monday through Friday, multiple afternoon or evening training sessions, exam preparation, the Wednesday final exam, and the added Wednesday evening make-up session.",
+          "evidence_gap": "The rationale protects sleep and adds recovery blocks, but individual fatigue tolerance and recovery needs are not verified in the provided material.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Coffee social cancellation",
+          "assumption": "Deleting the Wednesday 19:30–20:30 Coffee with University Study Group is socially acceptable or can be communicated without significant issue.",
+          "evidence_gap": "The rationale says cancellation should be confirmed with the study group or friends, but no confirmation is included.",
+          "potential_impact": "minor",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Added-event metadata interpretation",
+          "assumption": "The added Wednesday events should be understood according to the proposal’s described categories and priorities despite null metadata in the final calendar.",
+          "evidence_gap": "The proposal specifies commute, meal, training, and meal categories with importance levels and user participation, but the resulting calendar stores those added events with null category, importance, fixed status, participants, and description.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        }
+      ]
+    }
+  ],
+  "refinements": 1,
+  "source_status": "proposal_ready",
+  "final_proposal": {
+    "changes": [
+      {
+        "type": "delete",
+        "event_id": "commute_hpc_pm_wed",
+        "title": "Commute to High-Performance Center",
+        "from_start": "2027-01-13T16:00:00+00:00",
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "training_pm_wed",
+        "title": "Afternoon Technical Training",
+        "from_start": "2027-01-13T16:30:00+00:00",
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Post-exam transit buffer",
+        "from_start": null,
+        "to_start": "2027-01-13T18:00:00+00:00",
+        "to_end": "2027-01-13T18:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Post-exam food and training preparation buffer",
+        "from_start": null,
+        "to_start": "2027-01-13T18:30:00+00:00",
+        "to_end": "2027-01-13T19:00:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Make-up Individual Technical Training",
+        "from_start": null,
+        "to_start": "2027-01-13T19:00:00+00:00",
+        "to_end": "2027-01-13T20:30:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Post-training dinner and recovery",
+        "from_start": null,
+        "to_start": "2027-01-13T20:30:00+00:00",
+        "to_end": "2027-01-13T21:30:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "delete",
+        "event_id": "coffee_social_wed",
+        "title": "Coffee with University Study Group",
+        "from_start": "2027-01-13T19:30:00+00:00",
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "All proposed times use the Europe/Lisbon timezone offset in effect for 11–15 January 2027, which is +00:00.",
+        "The Advanced Physics Final Exam on Wednesday 13 January from 16:00 to 18:00 is fixed and already present in the calendar, so it is not moved or recreated.",
+        "The protected 8-hour sleep blocks are left unchanged every night, including Wednesday night 22:30–06:30 after the exam-day changes.",
+        "The Wednesday 16:00 commute to the High-Performance Center and the Wednesday 16:30 technical training are fixed/protected items, but exact externally confirmed delete exceptions were supplied for both, so deleting them is operationally permitted.",
+        "The requested 30-minute transit after the exam is reserved from 18:00 to 18:30.",
+        "The calendar already contains 6.5 hours of Physics study before the exam: Monday 14:00–16:00, Tuesday 10:00–12:30, and Wednesday 10:30–12:30. This satisfies the requested minimum of at least 6 hours across Monday, Tuesday, and Wednesday morning without moving existing study blocks.",
+        "The Wednesday evening make-up training uses one of the two coach-offered options, 19:00–20:30, but its venue, equipment, exact supervision arrangement, and whether the post-exam transit ends at the correct location still need confirmation with the coach.",
+        "A 30-minute post-exam food and preparation buffer is reserved between transit and training, and a 60-minute post-training dinner and recovery block is reserved before the protected sleep block. These are calendar reservations for basic needs; the exact food, recovery routine, and training readiness are personal-context unknowns and are not assumed.",
+        "Deleting the Wednesday coffee social affects peers, so that cancellation should be confirmed with the study group or friends."
+      ],
+      "priorities": [
+        "Protect the official exam and keep the calendar clear during the exam window.",
+        "Protect all sleep blocks because sleep is a hard constraint and has the highest performance priority.",
+        "Preserve the required Physics study target using existing study time rather than adding unnecessary academic load.",
+        "Replace the missed Wednesday technical session with the closest direct coach-offered make-up option, while explicitly reserving time for transit, food, preparation, dinner, and recovery.",
+        "Avoid moving or deleting unrelated fixed events without an exact supplied exception.",
+        "Prefer the Wednesday individual technical make-up over the Friday conditioning option because it is a direct substitute for the missed technical session and avoids creating an additional Friday double-training afternoon with uncertain venue and commute implications."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Use the Friday 14:00–15:30 extra conditioning block instead of Wednesday evening make-up training.",
+          "rejected_because": "This would reduce the immediate exam-evening load, but it is a conditioning block rather than a direct technical replacement. It also creates a demanding Friday sequence before the fixed 16:00 commute and 16:30–18:30 pre-weekend scrimmage. The venue is unknown: if the conditioning block is at the High-Performance Center, it may require a pre-14:00 commute or adjustment to the existing fixed 16:00 commute, neither of which is externally confirmed. If it is elsewhere, the transition into the fixed Friday training structure still needs coach confirmation."
+        },
+        {
+          "option": "Keep the Wednesday coffee social unchanged.",
+          "rejected_because": "It overlaps the proposed Wednesday 19:00–20:30 make-up training from 19:30 to 20:30. The make-up training has higher priority because it replaces a protected training session missed due to the mandatory exam."
+        },
+        {
+          "option": "Move the Wednesday coffee social later on Wednesday evening.",
+          "rejected_because": "After training ends at 20:30, the schedule needs dinner and recovery before the protected 22:30 sleep block. A later 90-minute social would compress recovery and sleep preparation, and friends’ availability is unknown."
+        },
+        {
+          "option": "Move the original Wednesday afternoon training instead of deleting it.",
+          "rejected_because": "The only externally confirmed exception for the protected Wednesday training is deletion, not a move. The make-up training is therefore added as a new coach-offered session rather than moving the protected original event."
+        },
+        {
+          "option": "Add more Physics study before the exam.",
+          "rejected_because": "The existing Monday, Tuesday, and Wednesday morning Physics study blocks already provide 6.5 hours before the exam, satisfying the user’s minimum. Adding more study would increase exam-week fatigue without being required by the stated target."
+        }
+      ],
+      "summary": "The revised plan keeps the same core exam and training solution but makes the exam-day feasibility more explicit. It deletes only the two protected Wednesday items covered by exact external exceptions, keeps all sleep unchanged, preserves the already sufficient 6.5 hours of Physics study, adds the required 18:00–18:30 post-exam transit buffer, reserves 18:30–19:00 for food and training preparation, schedules the coach-offered 19:00–20:30 individual technical make-up, and reserves 20:30–21:30 for dinner and recovery before the 22:30 sleep block. This is still a demanding Wednesday after a final exam, so the make-up should be confirmed with the coach for venue, equipment, supervision, and realistic readiness; the Wednesday coffee cancellation should be confirmed with friends. The Friday conditioning alternative is less compressed after the exam, but it introduces a different fatigue risk and more uncertainty around venue and commute before the already fixed Friday afternoon training."
+    }
+  },
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [],
+    "valid": true,
+    "confirmed_change_authorizations": [
+      {
+        "event_id": "training_pm_wed",
+        "type": "delete",
+        "to_start": null,
+        "to_end": null
+      },
+      {
+        "event_id": "commute_hpc_pm_wed",
+        "type": "delete",
+        "to_start": null,
+        "to_end": null
+      }
+    ]
+  },
+  "source_result_sha256": "313d3e8ad173a4c63496e2b60edbd7f7de3776faa030ec04bdf3c335e3abbb54",
+  "scenario_sha256": "62804e964124f8aeef8a970fe758b7423b50789e40a141c4eebd9435b02bde63",
+  "aggregate_requirements_sha256": null,
+  "confirmed_changes_sha256": "af85af63b0e784a21a701d1ee91010292a1472cd17186aa3acd689c0f1cf29fb",
+  "critic_input_version": "final_calendar_v1",
+  "critic_policy_version": "uncertainty_review_v2",
+  "final_result_calendar": {
+    "timezone": "Europe/Lisbon",
+    "coverage": "all_events_in_scenario_after_simulation",
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-01-10T22:30:00+00:00",
+        "end": "2027-01-11T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "commute_hpc_am_mon",
+        "title": "Commute to High-Performance Center",
+        "start": "2027-01-11T06:30:00+00:00",
+        "end": "2027-01-11T07:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute drive from home to sports center.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_am_mon",
+        "title": "Morning Strength & Conditioning",
+        "start": "2027-01-11T07:00:00+00:00",
+        "end": "2027-01-11T09:00:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Gym session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "commute_uni_mon",
+        "title": "Commute to University Campus",
+        "start": "2027-01-11T09:00:00+00:00",
+        "end": "2027-01-11T09:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute transit from HPC to campus.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "class_calculus_mon",
+        "title": "Calculus II Lecture",
+        "start": "2027-01-11T10:00:00+00:00",
+        "end": "2027-01-11T12:00:00+00:00",
+        "category": "classes",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Regular morning lecture.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "lunch_mon",
+        "title": "Lunch",
+        "start": "2027-01-11T12:30:00+00:00",
+        "end": "2027-01-11T13:30:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Nutritional recovery lunch.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "study_mon",
+        "title": "Independent Study: Physics",
+        "start": "2027-01-11T14:00:00+00:00",
+        "end": "2027-01-11T16:00:00+00:00",
+        "category": "study",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Flexible study block at university library.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "commute_hpc_pm_mon",
+        "title": "Commute to High-Performance Center",
+        "start": "2027-01-11T16:00:00+00:00",
+        "end": "2027-01-11T16:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute transit from campus to HPC.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_pm_mon",
+        "title": "Afternoon Technical Training",
+        "start": "2027-01-11T16:30:00+00:00",
+        "end": "2027-01-11T18:30:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "team",
+          "coach"
+        ],
+        "description": "Mandatory team technical session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "dinner_mon",
+        "title": "Dinner",
+        "start": "2027-01-11T19:30:00+00:00",
+        "end": "2027-01-11T20:30:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Dinner at home.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-01-11T22:30:00+00:00",
+        "end": "2027-01-12T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "commute_hpc_am_tue",
+        "title": "Commute to High-Performance Center",
+        "start": "2027-01-12T06:30:00+00:00",
+        "end": "2027-01-12T07:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute drive.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_am_tue",
+        "title": "Morning Endurance Session",
+        "start": "2027-01-12T07:00:00+00:00",
+        "end": "2027-01-12T09:00:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Track/Cardio session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "commute_uni_tue",
+        "title": "Commute to University Campus",
+        "start": "2027-01-12T09:00:00+00:00",
+        "end": "2027-01-12T09:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute transit.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "study_tue",
+        "title": "Independent Study: Physics",
+        "start": "2027-01-12T10:00:00+00:00",
+        "end": "2027-01-12T12:30:00+00:00",
+        "category": "study",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Exam prep.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "lunch_tue",
+        "title": "Lunch",
+        "start": "2027-01-12T12:30:00+00:00",
+        "end": "2027-01-12T13:30:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "class_lab_tue",
+        "title": "Physics Laboratory",
+        "start": "2027-01-12T14:00:00+00:00",
+        "end": "2027-01-12T16:00:00+00:00",
+        "category": "classes",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Practical lab class.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "commute_hpc_pm_tue",
+        "title": "Commute to High-Performance Center",
+        "start": "2027-01-12T16:00:00+00:00",
+        "end": "2027-01-12T16:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute transit.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_pm_tue",
+        "title": "Afternoon Tactical Training",
+        "start": "2027-01-12T16:30:00+00:00",
+        "end": "2027-01-12T18:30:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "team",
+          "coach"
+        ],
+        "description": "Team session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "dinner_tue",
+        "title": "Dinner",
+        "start": "2027-01-12T19:30:00+00:00",
+        "end": "2027-01-12T20:30:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Dinner at home.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-01-12T22:30:00+00:00",
+        "end": "2027-01-13T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "commute_hpc_am_wed",
+        "title": "Commute to High-Performance Center",
+        "start": "2027-01-13T06:30:00+00:00",
+        "end": "2027-01-13T07:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute drive.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_am_wed",
+        "title": "Morning Mobility & Recovery",
+        "start": "2027-01-13T07:00:00+00:00",
+        "end": "2027-01-13T08:30:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Light morning session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "physio_wed",
+        "title": "Sports Physiotherapy",
+        "start": "2027-01-13T09:00:00+00:00",
+        "end": "2027-01-13T10:00:00+00:00",
+        "category": "physio",
+        "importance": 3,
+        "fixed": true,
+        "participants": [
+          "user",
+          "physiotherapist"
+        ],
+        "description": "Preventive massage at HPC.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "commute_uni_wed",
+        "title": "Commute to University Campus",
+        "start": "2027-01-13T10:00:00+00:00",
+        "end": "2027-01-13T10:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute transit.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "study_wed",
+        "title": "Exam Prep: Physics",
+        "start": "2027-01-13T10:30:00+00:00",
+        "end": "2027-01-13T12:30:00+00:00",
+        "category": "study",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Focused study.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "lunch_wed",
+        "title": "Lunch",
+        "start": "2027-01-13T12:30:00+00:00",
+        "end": "2027-01-13T13:30:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch at campus canteen.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "physics_exam_wed",
+        "title": "Confirmed Advanced Physics Final Exam",
+        "start": "2027-01-13T16:00:00+00:00",
+        "end": "2027-01-13T18:00:00+00:00",
+        "category": "exam",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "examiner"
+        ],
+        "description": "Mandatory exam announced for Wednesday 13 January, 16:00–18:00; conflicts with the existing training commitment.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_2",
+        "title": "Post-exam transit buffer",
+        "start": "2027-01-13T18:00:00+00:00",
+        "end": "2027-01-13T18:30:00+00:00",
+        "category": null,
+        "importance": null,
+        "fixed": null,
+        "participants": null,
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "new_3",
+        "title": "Post-exam food and training preparation buffer",
+        "start": "2027-01-13T18:30:00+00:00",
+        "end": "2027-01-13T19:00:00+00:00",
+        "category": null,
+        "importance": null,
+        "fixed": null,
+        "participants": null,
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "new_4",
+        "title": "Make-up Individual Technical Training",
+        "start": "2027-01-13T19:00:00+00:00",
+        "end": "2027-01-13T20:30:00+00:00",
+        "category": null,
+        "importance": null,
+        "fixed": null,
+        "participants": null,
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "new_5",
+        "title": "Post-training dinner and recovery",
+        "start": "2027-01-13T20:30:00+00:00",
+        "end": "2027-01-13T21:30:00+00:00",
+        "category": null,
+        "importance": null,
+        "fixed": null,
+        "participants": null,
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-01-13T22:30:00+00:00",
+        "end": "2027-01-14T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "commute_hpc_am_thu",
+        "title": "Commute to High-Performance Center",
+        "start": "2027-01-14T06:30:00+00:00",
+        "end": "2027-01-14T07:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute drive.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_am_thu",
+        "title": "Morning Strength Training",
+        "start": "2027-01-14T07:00:00+00:00",
+        "end": "2027-01-14T09:00:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Gym session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "commute_uni_thu",
+        "title": "Commute to University Campus",
+        "start": "2027-01-14T09:00:00+00:00",
+        "end": "2027-01-14T09:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute transit.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "class_calculus_thu",
+        "title": "Calculus II Lecture",
+        "start": "2027-01-14T10:00:00+00:00",
+        "end": "2027-01-14T12:00:00+00:00",
+        "category": "classes",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Morning lecture.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "lunch_thu",
+        "title": "Lunch",
+        "start": "2027-01-14T12:30:00+00:00",
+        "end": "2027-01-14T13:30:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "study_thu",
+        "title": "Exam Prep: Calculus",
+        "start": "2027-01-14T14:00:00+00:00",
+        "end": "2027-01-14T16:00:00+00:00",
+        "category": "study",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Independent study.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "commute_hpc_pm_thu",
+        "title": "Commute to High-Performance Center",
+        "start": "2027-01-14T16:00:00+00:00",
+        "end": "2027-01-14T16:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute transit.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_pm_thu",
+        "title": "Afternoon Tactical Training",
+        "start": "2027-01-14T16:30:00+00:00",
+        "end": "2027-01-14T18:30:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "team",
+          "coach"
+        ],
+        "description": "Team session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "dinner_thu",
+        "title": "Dinner",
+        "start": "2027-01-14T19:30:00+00:00",
+        "end": "2027-01-14T20:30:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Dinner at home.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-01-14T22:30:00+00:00",
+        "end": "2027-01-15T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "commute_hpc_am_fri",
+        "title": "Commute to High-Performance Center",
+        "start": "2027-01-15T06:30:00+00:00",
+        "end": "2027-01-15T07:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute drive.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_am_fri",
+        "title": "Morning Speed & Agility",
+        "start": "2027-01-15T07:00:00+00:00",
+        "end": "2027-01-15T09:00:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Morning workout.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "commute_uni_fri",
+        "title": "Commute to University Campus",
+        "start": "2027-01-15T09:00:00+00:00",
+        "end": "2027-01-15T09:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute transit.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "study_fri",
+        "title": "Weekly Review & Summary Notes",
+        "start": "2027-01-15T10:00:00+00:00",
+        "end": "2027-01-15T12:00:00+00:00",
+        "category": "study",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Reviewing week's material.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "lunch_fri",
+        "title": "Lunch",
+        "start": "2027-01-15T12:30:00+00:00",
+        "end": "2027-01-15T13:30:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "commute_hpc_pm_fri",
+        "title": "Commute to High-Performance Center",
+        "start": "2027-01-15T16:00:00+00:00",
+        "end": "2027-01-15T16:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute transit.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_pm_fri",
+        "title": "Pre-Weekend Scrimmage",
+        "start": "2027-01-15T16:30:00+00:00",
+        "end": "2027-01-15T18:30:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "team",
+          "coach"
+        ],
+        "description": "Afternoon practice.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "student_union_fri",
+        "title": "Student Association Friday Gathering",
+        "start": "2027-01-15T19:30:00+00:00",
+        "end": "2027-01-15T21:30:00+00:00",
+        "category": "social",
+        "importance": 2,
+        "fixed": false,
+        "participants": [
+          "user",
+          "students"
+        ],
+        "description": "Social event at the student union bar.",
+        "origin": "existing",
+        "change_status": "preserved"
+      }
+    ],
+    "metadata_note": "Null metadata on added events means the Proposal contract did not supply it; it is not a new personal preference or hard constraint."
+  },
+  "replay_source": {
+    "source_path": "eval/runs/c40ab1f4cde74332832b987fe5014dfb/B/elite_athlete_student_exam_conflict_001.json",
+    "source_run_id": "c40ab1f4cde74332832b987fe5014dfb",
+    "source_run_sha256": "6857f42424a4d0d166f3a6a74b42bb4f9759fd8119e6adfe4cb8ae4584883390",
+    "source_prompt_versions": {
+      "proposer_sha256": "45d8e4e44b2e45cd8c6e4e829ce43fb6825a88e6550716e1c655d1f49034cc79",
+      "proposer_revision_sha256": "3d8999560474363c55ab096e197152da0b244a3bfd2f597a7e0ad2136452ccf4",
+      "critic_sha256": "1686688cdd4bc63abb12e6633ef9dbb9b62d69b69aba1c4805a201657cc5bb34"
+    },
+    "source_critic_policy_version": "uncertainty_review_v2",
+    "initial_proposal_sha256_canonical": "7627593e75d67c75e78a208adac520096704115f1069ba190dc7f8f05679fcf6",
+    "current_scenario_sha256": "62804e964124f8aeef8a970fe758b7423b50789e40a141c4eebd9435b02bde63",
+    "source_calendar_verified_against_current_simulator": true
+  },
+  "final_unresolved_assumptions": [
+    {
+      "subject": "Wednesday evening make-up training logistics",
+      "assumption": "The 19:00–20:30 Make-up Individual Technical Training is actually available with the required venue, coach supervision, and equipment.",
+      "evidence_gap": "The rationale states that venue, equipment, exact supervision arrangement, and coach confirmation are still needed.",
+      "potential_impact": "potentially_blocking",
+      "verification_source": "third_party"
+    },
+    {
+      "subject": "Post-exam transit feasibility",
+      "assumption": "The 18:00–18:30 Post-exam transit buffer gets the user from the exam context to the correct location for the 19:00 training or to a place where preparation can realistically happen.",
+      "evidence_gap": "The calendar does not specify the exam location, the make-up training venue, or whether the transit buffer ends at the training location.",
+      "potential_impact": "material",
+      "verification_source": "unknown"
+    },
+    {
+      "subject": "Post-exam food and preparation",
+      "assumption": "The user can eat enough, decompress enough, and prepare for technical training during the 18:30–19:00 buffer after the exam and transit.",
+      "evidence_gap": "The proposal reserves the time but does not verify the user's food access, preparation needs, equipment needs, or post-exam recovery needs.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Cumulative workload tolerance",
+      "assumption": "The user can sustain the visible week’s combined load, including morning training Monday through Friday, multiple afternoon or evening training sessions, exam preparation, the Wednesday final exam, and the added Wednesday evening make-up session.",
+      "evidence_gap": "The rationale protects sleep and adds recovery blocks, but individual fatigue tolerance and recovery needs are not verified in the provided material.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Coffee social cancellation",
+      "assumption": "Deleting the Wednesday 19:30–20:30 Coffee with University Study Group is socially acceptable or can be communicated without significant issue.",
+      "evidence_gap": "The rationale says cancellation should be confirmed with the study group or friends, but no confirmation is included.",
+      "potential_impact": "minor",
+      "verification_source": "third_party"
+    },
+    {
+      "subject": "Added-event metadata interpretation",
+      "assumption": "The added Wednesday events should be understood according to the proposal’s described categories and priorities despite null metadata in the final calendar.",
+      "evidence_gap": "The proposal specifies commute, meal, training, and meal categories with importance levels and user participation, but the resulting calendar stores those added events with null category, importance, fixed status, participants, and description.",
+      "potential_impact": "minor",
+      "verification_source": "unknown"
+    }
+  ],
+  "uncertainty_history": [
+    {
+      "iteration": 0,
+      "unresolved_assumptions": [
+        {
+          "subject": "Wednesday evening make-up training logistics",
+          "assumption": "The 19:00–20:30 Make-up Individual Technical Training is available with the required venue, coach supervision, and equipment.",
+          "evidence_gap": "The rationale explicitly states that exact venue, coach supervision, and equipment availability still need confirmation with the coach.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Post-exam transition feasibility",
+          "assumption": "The 18:00–18:30 post-exam transit buffer plus the 18:30–19:00 gap is enough to get from the exam context to the make-up training context and be ready to train.",
+          "evidence_gap": "The calendar does not specify the exam location, make-up training venue, preparation requirements, or whether the transit buffer ends at the training location.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Food and recovery on Wednesday evening",
+          "assumption": "The user can reasonably eat, decompress, and prepare around the exam-to-training sequence without undermining training quality or recovery before 22:30 sleep.",
+          "evidence_gap": "There is no explicit Wednesday dinner, and the only visible time between post-exam transit and training is 18:30–19:00, with training ending at 20:30 and sleep at 22:30.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Cumulative workload tolerance",
+          "assumption": "The user can sustain the week’s combined athletic and academic load, including morning training on Monday through Friday, multiple afternoon training sessions, Physics exam preparation, the Wednesday final exam, and the added Wednesday evening make-up session.",
+          "evidence_gap": "The rationale preserves sleep and existing commitments but does not assess cumulative fatigue or whether adding training after the exam is appropriate for the user’s recovery needs.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Coffee social cancellation",
+          "assumption": "Deleting the Wednesday 19:30–20:30 Coffee with University Study Group is socially acceptable or can be communicated without significant issue.",
+          "evidence_gap": "The rationale notes that cancellation affects peers and should be confirmed, but no confirmation is present in the structured proposal.",
+          "potential_impact": "minor",
+          "verification_source": "third_party"
+        }
+      ]
+    },
+    {
+      "iteration": 1,
+      "unresolved_assumptions": [
+        {
+          "subject": "Wednesday evening make-up training logistics",
+          "assumption": "The 19:00–20:30 Make-up Individual Technical Training is actually available with the required venue, coach supervision, and equipment.",
+          "evidence_gap": "The rationale states that venue, equipment, exact supervision arrangement, and coach confirmation are still needed.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Post-exam transit feasibility",
+          "assumption": "The 18:00–18:30 Post-exam transit buffer gets the user from the exam context to the correct location for the 19:00 training or to a place where preparation can realistically happen.",
+          "evidence_gap": "The calendar does not specify the exam location, the make-up training venue, or whether the transit buffer ends at the training location.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Post-exam food and preparation",
+          "assumption": "The user can eat enough, decompress enough, and prepare for technical training during the 18:30–19:00 buffer after the exam and transit.",
+          "evidence_gap": "The proposal reserves the time but does not verify the user's food access, preparation needs, equipment needs, or post-exam recovery needs.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Cumulative workload tolerance",
+          "assumption": "The user can sustain the visible week’s combined load, including morning training Monday through Friday, multiple afternoon or evening training sessions, exam preparation, the Wednesday final exam, and the added Wednesday evening make-up session.",
+          "evidence_gap": "The rationale protects sleep and adds recovery blocks, but individual fatigue tolerance and recovery needs are not verified in the provided material.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Coffee social cancellation",
+          "assumption": "Deleting the Wednesday 19:30–20:30 Coffee with University Study Group is socially acceptable or can be communicated without significant issue.",
+          "evidence_gap": "The rationale says cancellation should be confirmed with the study group or friends, but no confirmation is included.",
+          "potential_impact": "minor",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Added-event metadata interpretation",
+          "assumption": "The added Wednesday events should be understood according to the proposal’s described categories and priorities despite null metadata in the final calendar.",
+          "evidence_gap": "The proposal specifies commute, meal, training, and meal categories with importance levels and user participation, but the resulting calendar stores those added events with null category, importance, fixed status, participants, and description.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        }
+      ]
+    }
+  ]
+}

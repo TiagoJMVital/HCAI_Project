@@ -1,0 +1,1947 @@
+{
+  "proposal_id": "v2p_43d65507690b7b5eb7975f7b",
+  "scenario_id": "freelancer_flexible_client_meeting_gaming_tournament_001",
+  "family_id": "freelancer_schedule_conflict",
+  "profile_id": "freelancer_flexible_01__freelancer_flexible_client_meeting_gaming_tournament_001",
+  "split": "train",
+  "run_id": "d3b55da11200489eb441554ba6259663",
+  "configuration": "B",
+  "generated_at": "2026-11-22T19:47:59.709511+00:00",
+  "proposer_provider": "iaedu",
+  "proposer_model": "GPT-5.5",
+  "proposer_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request"
+  },
+  "critic_provider": "iaedu",
+  "critic_model": "GPT-5.5",
+  "critic_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request"
+  },
+  "prompt_versions": {
+    "proposer_sha256": "45d8e4e44b2e45cd8c6e4e829ce43fb6825a88e6550716e1c655d1f49034cc79",
+    "proposer_revision_sha256": "3d8999560474363c55ab096e197152da0b244a3bfd2f597a7e0ad2136452ccf4",
+    "critic_sha256": "1686688cdd4bc63abb12e6633ef9dbb9b62d69b69aba1c4805a201657cc5bb34"
+  },
+  "critic_settings": {
+    "threshold": 4.0,
+    "max_refinements": 3,
+    "min_dimension_score": 1
+  },
+  "experiment_id": null,
+  "repeat_index": 0,
+  "seconds": 80.971,
+  "critic_score": 4.0,
+  "critic_accepted": true,
+  "iterations": [
+    {
+      "index": 0,
+      "proposer_feedback": null,
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Client Development Block",
+            "from_start": null,
+            "to_start": "2027-02-15T16:00:00+00:00",
+            "to_end": "2027-02-15T17:00:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Client Development Block",
+            "from_start": null,
+            "to_start": "2027-02-17T16:00:00+00:00",
+            "to_end": "2027-02-17T17:00:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "The fixed Friday online video game tournament from 2027-02-19T20:00:00+00:00 to 2027-02-19T23:30:00+00:00 is protected and is not moved or shortened.",
+            "The confirmed international client alignment meeting on Friday from 2027-02-19T15:00:00+00:00 to 2027-02-19T17:00:00+00:00 is fixed and is kept unchanged.",
+            "Morning workouts are preserved: Monday and Wednesday runs remain 08:00-09:00, Tuesday and Thursday gym sessions remain 08:00-09:30, and Friday running remains 08:00-09:00.",
+            "The typed weekly project-hours requirement needs at least 1920 minutes of events with category work between 2027-02-15T00:00:00+00:00 and 2027-02-20T00:00:00+00:00.",
+            "The existing work blocks total 1800 minutes, so 120 additional work minutes are needed. The Friday client meeting is category meeting, not category work, so it is not counted toward the work-duration requirement.",
+            "All proposed times use the Europe/Lisbon timezone offset applicable on these dates, +00:00."
+          ],
+          "priorities": [
+            "Meet the 32-hour freelance work target without relying on the Friday client meeting as work time.",
+            "Absorb the Friday client meeting while keeping Friday evening clear for the fixed tournament.",
+            "Avoid moving fixed or protected events.",
+            "Preserve morning exercise blocks and avoid disrupting existing sleep.",
+            "Use available Monday-to-Thursday free intervals, as requested, with minimal disruption to existing social time."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Extend Tuesday or Thursday work later into the evening.",
+              "rejected_because": "Those days already have 7-hour work blocks ending at 17:30. Extending them would be operationally possible but would concentrate the extra load on longer days and reduce evening flexibility more than adding one hour each on Monday and Wednesday."
+            },
+            {
+              "option": "Add the extra two hours on Friday before or after the client meeting.",
+              "rejected_because": "The user specifically asked to reorganize work hours from Monday to Thursday to absorb the Friday meeting, and adding work on Friday afternoon would reduce the buffer before the fixed Friday night tournament."
+            },
+            {
+              "option": "Move or shorten the Friday tournament.",
+              "rejected_because": "The tournament is a fixed protected external event and the user explicitly said they do not want to miss it."
+            },
+            {
+              "option": "Move morning workouts to create larger work blocks.",
+              "rejected_because": "The user explicitly asked not to lose morning workouts, and the existing workout times already satisfy the morning-exercise preference."
+            }
+          ],
+          "summary": "Add one extra hour of freelance work on Monday from 16:00 to 17:00 and one extra hour on Wednesday from 16:00 to 17:00. This raises scheduled category-work time from 30 hours to 32 hours for the Monday-Friday window, keeps all morning workouts, leaves the Friday client meeting and protected Friday night tournament unchanged, and avoids moving any fixed event."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true,
+        "aggregate_checks": [
+          {
+            "id": "weekly_project_hours",
+            "status": "pass",
+            "minutes": 1920.0,
+            "minimum_minutes": 1920,
+            "category": "work",
+            "evidence": "union of final calendar intervals"
+          }
+        ],
+        "aggregate_validation_version": "duration_total_v1"
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-02-14T23:30:00+00:00",
+            "end": "2027-02-15T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "run_mon",
+            "title": "Morning Running",
+            "start": "2027-02-15T08:00:00+00:00",
+            "end": "2027-02-15T09:00:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Outdoor run.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_mon",
+            "title": "Client Development Block",
+            "start": "2027-02-15T10:00:00+00:00",
+            "end": "2027-02-15T16:00:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "6 hours of coding.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_0",
+            "title": "Client Development Block",
+            "start": "2027-02-15T16:00:00+00:00",
+            "end": "2027-02-15T17:00:00+00:00",
+            "category": null,
+            "importance": null,
+            "fixed": null,
+            "participants": null,
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "social_mon",
+            "title": "Friends Hangout at Café",
+            "start": "2027-02-15T17:30:00+00:00",
+            "end": "2027-02-15T19:30:00+00:00",
+            "category": "social",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "friends"
+            ],
+            "description": "Social break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-02-15T23:30:00+00:00",
+            "end": "2027-02-16T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_tue",
+            "title": "Gym Workout",
+            "start": "2027-02-16T08:00:00+00:00",
+            "end": "2027-02-16T09:30:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Strength training.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_tue",
+            "title": "Client Development Block",
+            "start": "2027-02-16T10:30:00+00:00",
+            "end": "2027-02-16T17:30:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "7 hours of coding.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-02-16T23:30:00+00:00",
+            "end": "2027-02-17T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "run_wed",
+            "title": "Morning Running",
+            "start": "2027-02-17T08:00:00+00:00",
+            "end": "2027-02-17T09:00:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Outdoor run.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_wed",
+            "title": "Client Development Block",
+            "start": "2027-02-17T10:00:00+00:00",
+            "end": "2027-02-17T16:00:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "6 hours of coding.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_1",
+            "title": "Client Development Block",
+            "start": "2027-02-17T16:00:00+00:00",
+            "end": "2027-02-17T17:00:00+00:00",
+            "category": null,
+            "importance": null,
+            "fixed": null,
+            "participants": null,
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-02-17T23:30:00+00:00",
+            "end": "2027-02-18T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_thu",
+            "title": "Gym Workout",
+            "start": "2027-02-18T08:00:00+00:00",
+            "end": "2027-02-18T09:30:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Strength training.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_thu",
+            "title": "Client Development Block",
+            "start": "2027-02-18T10:30:00+00:00",
+            "end": "2027-02-18T17:30:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "7 hours of coding.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-02-18T23:30:00+00:00",
+            "end": "2027-02-19T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "run_fri",
+            "title": "Morning Running",
+            "start": "2027-02-19T08:00:00+00:00",
+            "end": "2027-02-19T09:00:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Outdoor run.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_fri",
+            "title": "Client Development Block",
+            "start": "2027-02-19T10:00:00+00:00",
+            "end": "2027-02-19T14:00:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "4 hours of coding.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "client_meeting_fri",
+            "title": "Confirmed international client alignment meeting",
+            "start": "2027-02-19T15:00:00+00:00",
+            "end": "2027-02-19T17:00:00+00:00",
+            "category": "meeting",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "client"
+            ],
+            "description": "Confirmed international client meeting announced in the request; this block is not counted as solo development work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gaming_tournament_fri",
+            "title": "Online Video Game Tournament with Friends",
+            "start": "2027-02-19T20:00:00+00:00",
+            "end": "2027-02-19T23:30:00+00:00",
+            "category": "social",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "friends"
+            ],
+            "description": "Fixed online esports tournament.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Null metadata on added events means the Proposal contract did not supply it; it is not a new personal preference or hard constraint."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 3,
+          "alternatives": 4,
+          "clarity": 3
+        },
+        "weaknesses": [
+          "There is a material inconsistency between the proposal/rationale and the resulting calendar metadata: the proposed additions are described as category work with importance 4 and user participation, but the final calendar shows new_0 and new_1 with category, importance, fixed status, participants and description all null. Because the visible goal is specifically a category-work minimum of 1920 minutes, this undermines the human-review evidence that the added Monday 16:00-17:00 and Wednesday 16:00-17:00 blocks actually support that goal.",
+          "The added Monday 16:00-17:00 work hour creates a compact sequence from Morning Running 08:00-09:00, work 10:00-17:00, then Friends Hangout at Café 17:30-19:30. This may still be manageable, but the rationale treats the 30-minute gap before the café as sufficient without discussing transition, decompression, food, or travel uncertainty.",
+          "Across the visible week, the user has morning exercise every weekday, 32 claimed hours of development work, a Friday 15:00-17:00 client meeting, and a Friday 20:00-23:30 tournament. The plan is not obviously overloaded, and sleep is protected through Friday morning, but the rationale gives limited attention to cumulative fatigue from five consecutive exercise mornings plus concentrated work/meeting obligations.",
+          "The alternatives are sensible but framed mostly around preserving fixed events and avoiding longer Tuesday/Thursday evenings. They do not directly address whether splitting the added work into Monday and Wednesday is preferable from a recovery and transition standpoint, especially given the Monday social event shortly after the added block."
+        ],
+        "feedback": "The overall weekly shape is plausibly manageable: sleep blocks are preserved at 23:30-07:30, workouts are kept in the morning, and the added work is distributed over Monday and Wednesday rather than further lengthening the already 10:30-17:30 Tuesday and Thursday workdays. The Friday schedule also retains a reasonable gap between the 15:00-17:00 client meeting and the 20:00-23:30 tournament. However, the plan needs reconsideration or clearer substantiation because the resulting calendar does not visibly encode the added blocks as category work even though the rationale and the weekly-hours goal depend on that classification. Separately, the Proposer should address whether the Monday 16:00-17:00 extension leaves enough practical margin before the 17:30 café event and whether the cumulative Monday-Friday exercise plus work pattern is acceptable in the fuller context. The same operations may be reasonable if the missing metadata and transition assumptions are grounded.",
+        "plausibility_review": {
+          "revision_required": true,
+          "severity": "moderate",
+          "reason": "The main concern is not that the week is inherently unmanageable, but that the proposal's claimed benefit depends on two added work blocks that appear in the exact resulting calendar with null category and null participant metadata. Since the visible objective is specifically to reach 1920 minutes of category-work time, this inconsistency could significantly affect whether the plan accomplishes its stated purpose. There is also a grounded but less severe manageability concern around Monday's compressed sequence: run 08:00-09:00, work 10:00-17:00 after the added hour, then café social time at 17:30.",
+          "suggested_improvement": "Reconsider or substantiate the plan with the fuller context by resolving the added-event metadata/category issue and explaining why the Monday and Wednesday additions are the most sustainable distribution, including whether the Monday 30-minute transition before the café event is practically adequate. The Proposer could keep the same timing if these conditions are verified and the practical margins are intentionally acceptable."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Added work-block classification",
+            "assumption": "The Monday 16:00-17:00 and Wednesday 16:00-17:00 added events are genuinely category work and count toward the 1920-minute weekly work target.",
+            "evidence_gap": "The proposal changes label both additions as category work, and the validator reports the aggregate work-duration check as passed, but the exact final calendar lists both added events with category null and participants null.",
+            "potential_impact": "potentially_blocking",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Monday transition before social event",
+            "assumption": "The 30-minute gap between the added Monday work block ending at 17:00 and the café hangout starting at 17:30 is enough for any needed transition, travel, food, hygiene, or mental decompression.",
+            "evidence_gap": "The calendar shows Friends Hangout at Café from 17:30-19:30 immediately after a now 10:00-17:00 work span, but no location, travel, or preparation details are visible.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Cumulative weekday workload and recovery",
+            "assumption": "The user can sustainably handle five consecutive morning exercise sessions, 32 claimed hours of development work, a Friday client meeting, and a Friday night tournament within the visible week.",
+            "evidence_gap": "The calendar preserves sleep and contains some evening gaps, but it does not show meals, recovery needs, commute/preparation time, or individual tolerance for daily exercise plus focused coding work.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Friday evening recovery after client obligations",
+            "assumption": "The 17:00-20:00 gap after the Friday client meeting is sufficient before the fixed 20:00-23:30 online tournament.",
+            "evidence_gap": "The calendar shows a three-hour gap, but the practical demands of the client meeting, dinner, decompression, and tournament preparation are not specified.",
+            "potential_impact": "minor",
+            "verification_source": "user_context"
+          }
+        ],
+        "overall": 3.5
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": false,
+        "plausibility_revision_required": true,
+        "accepted": false,
+        "revision_causes": [
+          "numeric_criteria_failed",
+          "plausibility_revision_required"
+        ]
+      },
+      "operations_changed_from_previous": null,
+      "rationale_changed_from_previous": null,
+      "prior_critic_reviews": [],
+      "unresolved_assumptions": [
+        {
+          "subject": "Added work-block classification",
+          "assumption": "The Monday 16:00-17:00 and Wednesday 16:00-17:00 added events are genuinely category work and count toward the 1920-minute weekly work target.",
+          "evidence_gap": "The proposal changes label both additions as category work, and the validator reports the aggregate work-duration check as passed, but the exact final calendar lists both added events with category null and participants null.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Monday transition before social event",
+          "assumption": "The 30-minute gap between the added Monday work block ending at 17:00 and the café hangout starting at 17:30 is enough for any needed transition, travel, food, hygiene, or mental decompression.",
+          "evidence_gap": "The calendar shows Friends Hangout at Café from 17:30-19:30 immediately after a now 10:00-17:00 work span, but no location, travel, or preparation details are visible.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Cumulative weekday workload and recovery",
+          "assumption": "The user can sustainably handle five consecutive morning exercise sessions, 32 claimed hours of development work, a Friday client meeting, and a Friday night tournament within the visible week.",
+          "evidence_gap": "The calendar preserves sleep and contains some evening gaps, but it does not show meals, recovery needs, commute/preparation time, or individual tolerance for daily exercise plus focused coding work.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Friday evening recovery after client obligations",
+          "assumption": "The 17:00-20:00 gap after the Friday client meeting is sufficient before the fixed 20:00-23:30 online tournament.",
+          "evidence_gap": "The calendar shows a three-hour gap, but the practical demands of the client meeting, dinner, decompression, and tournament preparation are not specified.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "proposer_feedback": "Numeric Critic criteria failed. Scores: {\"reasoning\":4,\"coherence\":3,\"alternatives\":4,\"clarity\":3}. Plausibility revision required (moderate): The main concern is not that the week is inherently unmanageable, but that the proposal's claimed benefit depends on two added work blocks that appear in the exact resulting calendar with null category and null participant metadata. Since the visible objective is specifically to reach 1920 minutes of category-work time, this inconsistency could significantly affect whether the plan accomplishes its stated purpose. There is also a grounded but less severe manageability concern around Monday's compressed sequence: run 08:00-09:00, work 10:00-17:00 after the added hour, then café social time at 17:30. Suggested direction: Reconsider or substantiate the plan with the fuller context by resolving the added-event metadata/category issue and explaining why the Monday and Wednesday additions are the most sustainable distribution, including whether the Monday 30-minute transition before the café event is practically adequate. The Proposer could keep the same timing if these conditions are verified and the practical margins are intentionally acceptable. The Critic lacks the full user constraints; explain if no better feasible option exists. Unverified conditions to reassess: [{'subject': 'Added work-block classification', 'assumption': 'The Monday 16:00-17:00 and Wednesday 16:00-17:00 added events are genuinely category work and count toward the 1920-minute weekly work target.', 'evidence_gap': 'The proposal changes label both additions as category work, and the validator reports the aggregate work-duration check as passed, but the exact final calendar lists both added events with category null and participants null.', 'potential_impact': 'potentially_blocking', 'verification_source': 'unknown'}, {'subject': 'Monday transition before social event', 'assumption': 'The 30-minute gap between the added Monday work block ending at 17:00 and the café hangout starting at 17:30 is enough for any needed transition, travel, food, hygiene, or mental decompression.', 'evidence_gap': 'The calendar shows Friends Hangout at Café from 17:30-19:30 immediately after a now 10:00-17:00 work span, but no location, travel, or preparation details are visible.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Cumulative weekday workload and recovery', 'assumption': 'The user can sustainably handle five consecutive morning exercise sessions, 32 claimed hours of development work, a Friday client meeting, and a Friday night tournament within the visible week.', 'evidence_gap': 'The calendar preserves sleep and contains some evening gaps, but it does not show meals, recovery needs, commute/preparation time, or individual tolerance for daily exercise plus focused coding work.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Friday evening recovery after client obligations', 'assumption': 'The 17:00-20:00 gap after the Friday client meeting is sufficient before the fixed 20:00-23:30 online tournament.', 'evidence_gap': 'The calendar shows a three-hour gap, but the practical demands of the client meeting, dinner, decompression, and tournament preparation are not specified.', 'potential_impact': 'minor', 'verification_source': 'user_context'}] Weaknesses: ['There is a material inconsistency between the proposal/rationale and the resulting calendar metadata: the proposed additions are described as category work with importance 4 and user participation, but the final calendar shows new_0 and new_1 with category, importance, fixed status, participants and description all null. Because the visible goal is specifically a category-work minimum of 1920 minutes, this undermines the human-review evidence that the added Monday 16:00-17:00 and Wednesday 16:00-17:00 blocks actually support that goal.', 'The added Monday 16:00-17:00 work hour creates a compact sequence from Morning Running 08:00-09:00, work 10:00-17:00, then Friends Hangout at Café 17:30-19:30. This may still be manageable, but the rationale treats the 30-minute gap before the café as sufficient without discussing transition, decompression, food, or travel uncertainty.', 'Across the visible week, the user has morning exercise every weekday, 32 claimed hours of development work, a Friday 15:00-17:00 client meeting, and a Friday 20:00-23:30 tournament. The plan is not obviously overloaded, and sleep is protected through Friday morning, but the rationale gives limited attention to cumulative fatigue from five consecutive exercise mornings plus concentrated work/meeting obligations.', 'The alternatives are sensible but framed mostly around preserving fixed events and avoiding longer Tuesday/Thursday evenings. They do not directly address whether splitting the added work into Monday and Wednesday is preferable from a recovery and transition standpoint, especially given the Monday social event shortly after the added block.']. Actionable feedback: The overall weekly shape is plausibly manageable: sleep blocks are preserved at 23:30-07:30, workouts are kept in the morning, and the added work is distributed over Monday and Wednesday rather than further lengthening the already 10:30-17:30 Tuesday and Thursday workdays. The Friday schedule also retains a reasonable gap between the 15:00-17:00 client meeting and the 20:00-23:30 tournament. However, the plan needs reconsideration or clearer substantiation because the resulting calendar does not visibly encode the added blocks as category work even though the rationale and the weekly-hours goal depend on that classification. Separately, the Proposer should address whether the Monday 16:00-17:00 extension leaves enough practical margin before the 17:30 café event and whether the cumulative Monday-Friday exercise plus work pattern is acceptable in the fuller context. The same operations may be reasonable if the missing metadata and transition assumptions are grounded.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Client Development Block",
+            "from_start": null,
+            "to_start": "2027-02-17T16:00:00+00:00",
+            "to_end": "2027-02-17T18:00:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "The fixed protected Friday online video game tournament from 2027-02-19T20:00:00+00:00 to 2027-02-19T23:30:00+00:00 is not moved, shortened or deleted.",
+            "The confirmed international client alignment meeting on Friday from 2027-02-19T15:00:00+00:00 to 2027-02-19T17:00:00+00:00 is already present as a fixed event and is kept unchanged.",
+            "Morning workouts are preserved unchanged: Monday and Wednesday running remain 08:00-09:00, Tuesday and Thursday gym sessions remain 08:00-09:30, and Friday running remains 08:00-09:00.",
+            "The typed weekly requirement needs at least 1920 minutes of category work between 2027-02-15T00:00:00+00:00 and 2027-02-20T00:00:00+00:00. Existing category-work events total 1800 minutes, so 120 additional category-work minutes are required.",
+            "The added block is explicitly category work, importance 4 and participant user, matching the existing freelance work pattern and allowing it to count toward the typed weekly project-hours requirement.",
+            "All proposed times use the Europe/Lisbon offset applicable for these dates, +00:00."
+          ],
+          "priorities": [
+            "Reach 32 scheduled hours of freelance work without counting the Friday client meeting, which is category meeting rather than solo development work.",
+            "Absorb the Friday 15:00-17:00 client meeting without adding more work on Friday and without affecting the fixed Friday night tournament.",
+            "Keep all sleep blocks and morning exercise intact to protect health and recovery.",
+            "Avoid creating a tight Monday transition before the 17:30 café hangout, since travel, food, hygiene and decompression needs are unknown.",
+            "Use a free Monday-to-Thursday interval for solo flexible freelance work, while avoiding changes that depend on third-party availability."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Keep the previous split of one added work hour on Monday 16:00-17:00 and one added work hour on Wednesday 16:00-17:00.",
+              "rejected_because": "It is calendar-feasible, but Monday would become running 08:00-09:00, work 10:00-17:00 and a café hangout at 17:30. Because travel, food, preparation and decompression needs are not specified, concentrating the added work on Wednesday avoids relying on a 30-minute Monday transition."
+            },
+            {
+              "option": "Add one hour on Tuesday and one hour on Thursday after the existing 10:30-17:30 work blocks.",
+              "rejected_because": "This would be operationally possible in free calendar time, but Tuesday and Thursday already combine 90-minute morning gym sessions with 7-hour development blocks. Extending both days would spread the load but would further lengthen already-heavy days."
+            },
+            {
+              "option": "Add the two hours on Friday before or after the client meeting.",
+              "rejected_because": "The user asked to reorganize work hours from Monday to Thursday to absorb the Friday meeting. Adding Friday work would also reduce the recovery and preparation buffer before the fixed 20:00-23:30 tournament."
+            },
+            {
+              "option": "Move the Monday café hangout to make room for work earlier or with a wider transition.",
+              "rejected_because": "The café event is not marked fixed, but it involves friends and moving it would introduce an external dependency. The request can be satisfied without disrupting it."
+            },
+            {
+              "option": "Move or shorten the Friday tournament.",
+              "rejected_because": "The tournament is fixed, protected by the profile, and the user explicitly does not want to miss it."
+            },
+            {
+              "option": "Move or shorten morning workouts.",
+              "rejected_because": "The user explicitly asked not to lose morning workouts, and the existing workout schedule already matches the stated morning-exercise preference."
+            }
+          ],
+          "summary": "Add a single 2-hour freelance development block on Wednesday from 16:00 to 18:00. This raises scheduled category-work time from 30 hours to 32 hours while preserving every morning workout, keeping the Friday client meeting and protected tournament unchanged, avoiding any added Friday work, and avoiding the previous concern about a compressed Monday transition before the café hangout. The main practical trade-off is that Wednesday becomes a longer 8-hour development day after a morning run, but it has no visible evening commitment and leaves a substantial open interval from 18:00 until the 23:30 sleep block. Meals, recovery needs and exact transition requirements are not specified, so the proposal avoids assuming them where possible."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true,
+        "aggregate_checks": [
+          {
+            "id": "weekly_project_hours",
+            "status": "pass",
+            "minutes": 1920.0,
+            "minimum_minutes": 1920,
+            "category": "work",
+            "evidence": "union of final calendar intervals"
+          }
+        ],
+        "aggregate_validation_version": "duration_total_v1"
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-02-14T23:30:00+00:00",
+            "end": "2027-02-15T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "run_mon",
+            "title": "Morning Running",
+            "start": "2027-02-15T08:00:00+00:00",
+            "end": "2027-02-15T09:00:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Outdoor run.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_mon",
+            "title": "Client Development Block",
+            "start": "2027-02-15T10:00:00+00:00",
+            "end": "2027-02-15T16:00:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "6 hours of coding.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "social_mon",
+            "title": "Friends Hangout at Café",
+            "start": "2027-02-15T17:30:00+00:00",
+            "end": "2027-02-15T19:30:00+00:00",
+            "category": "social",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "friends"
+            ],
+            "description": "Social break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-02-15T23:30:00+00:00",
+            "end": "2027-02-16T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_tue",
+            "title": "Gym Workout",
+            "start": "2027-02-16T08:00:00+00:00",
+            "end": "2027-02-16T09:30:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Strength training.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_tue",
+            "title": "Client Development Block",
+            "start": "2027-02-16T10:30:00+00:00",
+            "end": "2027-02-16T17:30:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "7 hours of coding.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-02-16T23:30:00+00:00",
+            "end": "2027-02-17T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "run_wed",
+            "title": "Morning Running",
+            "start": "2027-02-17T08:00:00+00:00",
+            "end": "2027-02-17T09:00:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Outdoor run.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_wed",
+            "title": "Client Development Block",
+            "start": "2027-02-17T10:00:00+00:00",
+            "end": "2027-02-17T16:00:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "6 hours of coding.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_0",
+            "title": "Client Development Block",
+            "start": "2027-02-17T16:00:00+00:00",
+            "end": "2027-02-17T18:00:00+00:00",
+            "category": null,
+            "importance": null,
+            "fixed": null,
+            "participants": null,
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-02-17T23:30:00+00:00",
+            "end": "2027-02-18T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_thu",
+            "title": "Gym Workout",
+            "start": "2027-02-18T08:00:00+00:00",
+            "end": "2027-02-18T09:30:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Strength training.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_thu",
+            "title": "Client Development Block",
+            "start": "2027-02-18T10:30:00+00:00",
+            "end": "2027-02-18T17:30:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "7 hours of coding.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-02-18T23:30:00+00:00",
+            "end": "2027-02-19T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "run_fri",
+            "title": "Morning Running",
+            "start": "2027-02-19T08:00:00+00:00",
+            "end": "2027-02-19T09:00:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Outdoor run.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_fri",
+            "title": "Client Development Block",
+            "start": "2027-02-19T10:00:00+00:00",
+            "end": "2027-02-19T14:00:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "4 hours of coding.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "client_meeting_fri",
+            "title": "Confirmed international client alignment meeting",
+            "start": "2027-02-19T15:00:00+00:00",
+            "end": "2027-02-19T17:00:00+00:00",
+            "category": "meeting",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "client"
+            ],
+            "description": "Confirmed international client meeting announced in the request; this block is not counted as solo development work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gaming_tournament_fri",
+            "title": "Online Video Game Tournament with Friends",
+            "start": "2027-02-19T20:00:00+00:00",
+            "end": "2027-02-19T23:30:00+00:00",
+            "category": "social",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "friends"
+            ],
+            "description": "Fixed online esports tournament.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Null metadata on added events means the Proposal contract did not supply it; it is not a new personal preference or hard constraint."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 4,
+          "alternatives": 4,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The prior Monday transition concern is substantially addressed: the added work is no longer placed before the Monday 17:30-19:30 café hangout. However, the replacement concentrates the full 120 added minutes on Wednesday, creating a continuous visible work span from 10:00-18:00 after Morning Running from 08:00-09:00. This is plausible, especially with no visible evening commitment, but the rationale could more explicitly acknowledge how breaks, food, and recovery are expected to fit inside or around that long development block.",
+          "The exact final calendar still lists the added Wednesday event new_0 with category, importance, fixed status, participants, and description as null, while the proposal and rationale describe it as category work, importance 4, participant user, and the validator reports the weekly work-duration check as passed. This is less a human-capacity issue than an evidence/clarity issue, but because the visible goal depends on reaching 1920 minutes of category work, the mismatch remains relevant.",
+          "The visible week is demanding but not obviously unsustainable: it includes five consecutive morning exercise sessions, 32 claimed hours of development work, a Friday 15:00-17:00 client meeting, and a Friday 20:00-23:30 tournament. Sleep blocks are preserved through Friday morning and several evening gaps remain, but the rationale still depends on the user's tolerance for this cumulative weekday load.",
+          "The alternatives are relevant and improved compared with the prior version, particularly in rejecting the Monday extension and Friday additions. They do not fully explore whether one long Wednesday block is preferable to other Monday-to-Thursday distributions from a recovery standpoint, but the visible trade-off is reasonably explained without inventing external dependencies."
+        ],
+        "feedback": "The revised plan is more human-manageable than the prior version because it removes the tight Monday sequence that would have placed added work ending at 17:00 before the 17:30 café hangout. The resulting calendar keeps sleep, morning exercise, the Friday client meeting, and the Friday tournament intact, and the added work lands on a day with a substantial open evening from 18:00 to 23:30. The main practical trade-off is that Wednesday becomes a long focused-work day after a morning run, followed by a Thursday gym session and 7-hour work block. That is a grounded manageability risk, but not enough by itself to require another revision given the preserved sleep and recovery windows. The Proposer should still explicitly reconcile the null metadata on the added event with the category-work goal and, in its fuller context, confirm that the Wednesday 10:00-18:00 development span can realistically include ordinary breaks, meals, and recovery rather than being treated as uninterrupted productive capacity.",
+        "plausibility_review": {
+          "revision_required": false,
+          "severity": "low",
+          "reason": "The prior practical concern about Monday's compressed transition has been meaningfully addressed by moving the added time to Wednesday. The revised schedule is demanding but plausibly workable: Wednesday has an 08:00-09:00 run followed by development work from 10:00-18:00, but no visible evening obligation before the 23:30 sleep block; Friday also preserves a 17:00-20:00 gap before the tournament. The remaining metadata inconsistency could matter if the added event were not actually treated as category work, but the proposal states it is work and the technical aggregate check reports 1920 minutes passed, so there is not enough evidence of actual failure to require another human-quality revision.",
+          "suggested_improvement": "Keep the current distribution unless the fuller context shows that an 8-hour Wednesday development span after running is not sustainable. The Proposer should strengthen the explanation by explicitly confirming how the added event counts toward the work target despite null final-calendar metadata, and by noting that breaks, food, and recovery are expected to fit within the long Wednesday work period or the open evening."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Added work-block classification",
+            "assumption": "The Wednesday 16:00-18:00 added event is genuinely category work and counts toward the 1920-minute weekly work target.",
+            "evidence_gap": "The proposal change labels the addition as category work with importance 4 and participant user, and the validator reports the aggregate work-duration check as passed, but the exact final calendar lists new_0 with category, importance, fixed status, participants, and description all null.",
+            "potential_impact": "potentially_blocking",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Wednesday long development span",
+            "assumption": "The user can sustainably handle Morning Running from 08:00-09:00 followed by development work from 10:00-18:00 on Wednesday, with adequate room for food, breaks, hygiene, and mental recovery.",
+            "evidence_gap": "The calendar shows a continuous visible work sequence from 10:00-18:00 after the run, but does not show meals, breaks, commute or preparation needs, or the user's tolerance for long coding blocks.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Cumulative weekday workload and recovery",
+            "assumption": "The user can sustainably manage five consecutive morning exercise sessions, 32 claimed hours of development work, the Friday client meeting, and the Friday night tournament within the visible week.",
+            "evidence_gap": "The calendar preserves 23:30-07:30 sleep blocks through Friday morning and leaves several evening gaps, but it does not show personal recovery needs, meal routines, commute/preparation time, or the user's fatigue tolerance.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Friday evening recovery before tournament",
+            "assumption": "The 17:00-20:00 gap after the Friday client meeting is sufficient for dinner, decompression, and any tournament preparation before the 20:00-23:30 online event.",
+            "evidence_gap": "The calendar shows a three-hour gap, but the practical demands of the client meeting, tournament setup, and personal recovery needs are not specified.",
+            "potential_impact": "minor",
+            "verification_source": "user_context"
+          }
+        ],
+        "overall": 4.0
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": true,
+        "plausibility_revision_required": false,
+        "accepted": true,
+        "revision_causes": []
+      },
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": [
+        {
+          "iteration": 0,
+          "proposal": {
+            "changes": [
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Client Development Block",
+                "from_start": null,
+                "to_start": "2027-02-15T16:00:00+00:00",
+                "to_end": "2027-02-15T17:00:00+00:00",
+                "category": "work",
+                "importance": 4,
+                "participants": [
+                  "user"
+                ]
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Client Development Block",
+                "from_start": null,
+                "to_start": "2027-02-17T16:00:00+00:00",
+                "to_end": "2027-02-17T17:00:00+00:00",
+                "category": "work",
+                "importance": 4,
+                "participants": [
+                  "user"
+                ]
+              }
+            ],
+            "rationale": {
+              "constraints": [
+                "The fixed Friday online video game tournament from 2027-02-19T20:00:00+00:00 to 2027-02-19T23:30:00+00:00 is protected and is not moved or shortened.",
+                "The confirmed international client alignment meeting on Friday from 2027-02-19T15:00:00+00:00 to 2027-02-19T17:00:00+00:00 is fixed and is kept unchanged.",
+                "Morning workouts are preserved: Monday and Wednesday runs remain 08:00-09:00, Tuesday and Thursday gym sessions remain 08:00-09:30, and Friday running remains 08:00-09:00.",
+                "The typed weekly project-hours requirement needs at least 1920 minutes of events with category work between 2027-02-15T00:00:00+00:00 and 2027-02-20T00:00:00+00:00.",
+                "The existing work blocks total 1800 minutes, so 120 additional work minutes are needed. The Friday client meeting is category meeting, not category work, so it is not counted toward the work-duration requirement.",
+                "All proposed times use the Europe/Lisbon timezone offset applicable on these dates, +00:00."
+              ],
+              "priorities": [
+                "Meet the 32-hour freelance work target without relying on the Friday client meeting as work time.",
+                "Absorb the Friday client meeting while keeping Friday evening clear for the fixed tournament.",
+                "Avoid moving fixed or protected events.",
+                "Preserve morning exercise blocks and avoid disrupting existing sleep.",
+                "Use available Monday-to-Thursday free intervals, as requested, with minimal disruption to existing social time."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Extend Tuesday or Thursday work later into the evening.",
+                  "rejected_because": "Those days already have 7-hour work blocks ending at 17:30. Extending them would be operationally possible but would concentrate the extra load on longer days and reduce evening flexibility more than adding one hour each on Monday and Wednesday."
+                },
+                {
+                  "option": "Add the extra two hours on Friday before or after the client meeting.",
+                  "rejected_because": "The user specifically asked to reorganize work hours from Monday to Thursday to absorb the Friday meeting, and adding work on Friday afternoon would reduce the buffer before the fixed Friday night tournament."
+                },
+                {
+                  "option": "Move or shorten the Friday tournament.",
+                  "rejected_because": "The tournament is a fixed protected external event and the user explicitly said they do not want to miss it."
+                },
+                {
+                  "option": "Move morning workouts to create larger work blocks.",
+                  "rejected_because": "The user explicitly asked not to lose morning workouts, and the existing workout times already satisfy the morning-exercise preference."
+                }
+              ],
+              "summary": "Add one extra hour of freelance work on Monday from 16:00 to 17:00 and one extra hour on Wednesday from 16:00 to 17:00. This raises scheduled category-work time from 30 hours to 32 hours for the Monday-Friday window, keeps all morning workouts, leaves the Friday client meeting and protected Friday night tournament unchanged, and avoids moving any fixed event."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "sleep_mon",
+                "title": "Sleep",
+                "start": "2027-02-14T23:30:00+00:00",
+                "end": "2027-02-15T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "run_mon",
+                "title": "Morning Running",
+                "start": "2027-02-15T08:00:00+00:00",
+                "end": "2027-02-15T09:00:00+00:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Outdoor run.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_mon",
+                "title": "Client Development Block",
+                "start": "2027-02-15T10:00:00+00:00",
+                "end": "2027-02-15T16:00:00+00:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "6 hours of coding.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_0",
+                "title": "Client Development Block",
+                "start": "2027-02-15T16:00:00+00:00",
+                "end": "2027-02-15T17:00:00+00:00",
+                "category": null,
+                "importance": null,
+                "fixed": null,
+                "participants": null,
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "social_mon",
+                "title": "Friends Hangout at Café",
+                "start": "2027-02-15T17:30:00+00:00",
+                "end": "2027-02-15T19:30:00+00:00",
+                "category": "social",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "friends"
+                ],
+                "description": "Social break.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_tue",
+                "title": "Sleep",
+                "start": "2027-02-15T23:30:00+00:00",
+                "end": "2027-02-16T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_tue",
+                "title": "Gym Workout",
+                "start": "2027-02-16T08:00:00+00:00",
+                "end": "2027-02-16T09:30:00+00:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Strength training.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_tue",
+                "title": "Client Development Block",
+                "start": "2027-02-16T10:30:00+00:00",
+                "end": "2027-02-16T17:30:00+00:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "7 hours of coding.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_wed",
+                "title": "Sleep",
+                "start": "2027-02-16T23:30:00+00:00",
+                "end": "2027-02-17T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "run_wed",
+                "title": "Morning Running",
+                "start": "2027-02-17T08:00:00+00:00",
+                "end": "2027-02-17T09:00:00+00:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Outdoor run.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_wed",
+                "title": "Client Development Block",
+                "start": "2027-02-17T10:00:00+00:00",
+                "end": "2027-02-17T16:00:00+00:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "6 hours of coding.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_1",
+                "title": "Client Development Block",
+                "start": "2027-02-17T16:00:00+00:00",
+                "end": "2027-02-17T17:00:00+00:00",
+                "category": null,
+                "importance": null,
+                "fixed": null,
+                "participants": null,
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2027-02-17T23:30:00+00:00",
+                "end": "2027-02-18T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_thu",
+                "title": "Gym Workout",
+                "start": "2027-02-18T08:00:00+00:00",
+                "end": "2027-02-18T09:30:00+00:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Strength training.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_thu",
+                "title": "Client Development Block",
+                "start": "2027-02-18T10:30:00+00:00",
+                "end": "2027-02-18T17:30:00+00:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "7 hours of coding.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_fri",
+                "title": "Sleep",
+                "start": "2027-02-18T23:30:00+00:00",
+                "end": "2027-02-19T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "run_fri",
+                "title": "Morning Running",
+                "start": "2027-02-19T08:00:00+00:00",
+                "end": "2027-02-19T09:00:00+00:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Outdoor run.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_fri",
+                "title": "Client Development Block",
+                "start": "2027-02-19T10:00:00+00:00",
+                "end": "2027-02-19T14:00:00+00:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "4 hours of coding.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "client_meeting_fri",
+                "title": "Confirmed international client alignment meeting",
+                "start": "2027-02-19T15:00:00+00:00",
+                "end": "2027-02-19T17:00:00+00:00",
+                "category": "meeting",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "client"
+                ],
+                "description": "Confirmed international client meeting announced in the request; this block is not counted as solo development work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gaming_tournament_fri",
+                "title": "Online Video Game Tournament with Friends",
+                "start": "2027-02-19T20:00:00+00:00",
+                "end": "2027-02-19T23:30:00+00:00",
+                "category": "social",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "friends"
+                ],
+                "description": "Fixed online esports tournament.",
+                "origin": "existing",
+                "change_status": "preserved"
+              }
+            ],
+            "metadata_note": "Null metadata on added events means the Proposal contract did not supply it; it is not a new personal preference or hard constraint."
+          },
+          "plausibility_review": {
+            "revision_required": true,
+            "severity": "moderate",
+            "reason": "The main concern is not that the week is inherently unmanageable, but that the proposal's claimed benefit depends on two added work blocks that appear in the exact resulting calendar with null category and null participant metadata. Since the visible objective is specifically to reach 1920 minutes of category-work time, this inconsistency could significantly affect whether the plan accomplishes its stated purpose. There is also a grounded but less severe manageability concern around Monday's compressed sequence: run 08:00-09:00, work 10:00-17:00 after the added hour, then café social time at 17:30.",
+            "suggested_improvement": "Reconsider or substantiate the plan with the fuller context by resolving the added-event metadata/category issue and explaining why the Monday and Wednesday additions are the most sustainable distribution, including whether the Monday 30-minute transition before the café event is practically adequate. The Proposer could keep the same timing if these conditions are verified and the practical margins are intentionally acceptable."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Added work-block classification",
+              "assumption": "The Monday 16:00-17:00 and Wednesday 16:00-17:00 added events are genuinely category work and count toward the 1920-minute weekly work target.",
+              "evidence_gap": "The proposal changes label both additions as category work, and the validator reports the aggregate work-duration check as passed, but the exact final calendar lists both added events with category null and participants null.",
+              "potential_impact": "potentially_blocking",
+              "verification_source": "unknown"
+            },
+            {
+              "subject": "Monday transition before social event",
+              "assumption": "The 30-minute gap between the added Monday work block ending at 17:00 and the café hangout starting at 17:30 is enough for any needed transition, travel, food, hygiene, or mental decompression.",
+              "evidence_gap": "The calendar shows Friends Hangout at Café from 17:30-19:30 immediately after a now 10:00-17:00 work span, but no location, travel, or preparation details are visible.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Cumulative weekday workload and recovery",
+              "assumption": "The user can sustainably handle five consecutive morning exercise sessions, 32 claimed hours of development work, a Friday client meeting, and a Friday night tournament within the visible week.",
+              "evidence_gap": "The calendar preserves sleep and contains some evening gaps, but it does not show meals, recovery needs, commute/preparation time, or individual tolerance for daily exercise plus focused coding work.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Friday evening recovery after client obligations",
+              "assumption": "The 17:00-20:00 gap after the Friday client meeting is sufficient before the fixed 20:00-23:30 online tournament.",
+              "evidence_gap": "The calendar shows a three-hour gap, but the practical demands of the client meeting, dinner, decompression, and tournament preparation are not specified.",
+              "potential_impact": "minor",
+              "verification_source": "user_context"
+            }
+          ],
+          "weaknesses": [
+            "There is a material inconsistency between the proposal/rationale and the resulting calendar metadata: the proposed additions are described as category work with importance 4 and user participation, but the final calendar shows new_0 and new_1 with category, importance, fixed status, participants and description all null. Because the visible goal is specifically a category-work minimum of 1920 minutes, this undermines the human-review evidence that the added Monday 16:00-17:00 and Wednesday 16:00-17:00 blocks actually support that goal.",
+            "The added Monday 16:00-17:00 work hour creates a compact sequence from Morning Running 08:00-09:00, work 10:00-17:00, then Friends Hangout at Café 17:30-19:30. This may still be manageable, but the rationale treats the 30-minute gap before the café as sufficient without discussing transition, decompression, food, or travel uncertainty.",
+            "Across the visible week, the user has morning exercise every weekday, 32 claimed hours of development work, a Friday 15:00-17:00 client meeting, and a Friday 20:00-23:30 tournament. The plan is not obviously overloaded, and sleep is protected through Friday morning, but the rationale gives limited attention to cumulative fatigue from five consecutive exercise mornings plus concentrated work/meeting obligations.",
+            "The alternatives are sensible but framed mostly around preserving fixed events and avoiding longer Tuesday/Thursday evenings. They do not directly address whether splitting the added work into Monday and Wednesday is preferable from a recovery and transition standpoint, especially given the Monday social event shortly after the added block."
+          ],
+          "feedback": "The overall weekly shape is plausibly manageable: sleep blocks are preserved at 23:30-07:30, workouts are kept in the morning, and the added work is distributed over Monday and Wednesday rather than further lengthening the already 10:30-17:30 Tuesday and Thursday workdays. The Friday schedule also retains a reasonable gap between the 15:00-17:00 client meeting and the 20:00-23:30 tournament. However, the plan needs reconsideration or clearer substantiation because the resulting calendar does not visibly encode the added blocks as category work even though the rationale and the weekly-hours goal depend on that classification. Separately, the Proposer should address whether the Monday 16:00-17:00 extension leaves enough practical margin before the 17:30 café event and whether the cumulative Monday-Friday exercise plus work pattern is acceptable in the fuller context. The same operations may be reasonable if the missing metadata and transition assumptions are grounded."
+        }
+      ],
+      "unresolved_assumptions": [
+        {
+          "subject": "Added work-block classification",
+          "assumption": "The Wednesday 16:00-18:00 added event is genuinely category work and counts toward the 1920-minute weekly work target.",
+          "evidence_gap": "The proposal change labels the addition as category work with importance 4 and participant user, and the validator reports the aggregate work-duration check as passed, but the exact final calendar lists new_0 with category, importance, fixed status, participants, and description all null.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Wednesday long development span",
+          "assumption": "The user can sustainably handle Morning Running from 08:00-09:00 followed by development work from 10:00-18:00 on Wednesday, with adequate room for food, breaks, hygiene, and mental recovery.",
+          "evidence_gap": "The calendar shows a continuous visible work sequence from 10:00-18:00 after the run, but does not show meals, breaks, commute or preparation needs, or the user's tolerance for long coding blocks.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Cumulative weekday workload and recovery",
+          "assumption": "The user can sustainably manage five consecutive morning exercise sessions, 32 claimed hours of development work, the Friday client meeting, and the Friday night tournament within the visible week.",
+          "evidence_gap": "The calendar preserves 23:30-07:30 sleep blocks through Friday morning and leaves several evening gaps, but it does not show personal recovery needs, meal routines, commute/preparation time, or the user's fatigue tolerance.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Friday evening recovery before tournament",
+          "assumption": "The 17:00-20:00 gap after the Friday client meeting is sufficient for dinner, decompression, and any tournament preparation before the 20:00-23:30 online event.",
+          "evidence_gap": "The calendar shows a three-hour gap, but the practical demands of the client meeting, tournament setup, and personal recovery needs are not specified.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        }
+      ]
+    }
+  ],
+  "refinements": 1,
+  "source_status": "proposal_ready",
+  "final_proposal": {
+    "changes": [
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Client Development Block",
+        "from_start": null,
+        "to_start": "2027-02-17T16:00:00+00:00",
+        "to_end": "2027-02-17T18:00:00+00:00",
+        "category": "work",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "The fixed protected Friday online video game tournament from 2027-02-19T20:00:00+00:00 to 2027-02-19T23:30:00+00:00 is not moved, shortened or deleted.",
+        "The confirmed international client alignment meeting on Friday from 2027-02-19T15:00:00+00:00 to 2027-02-19T17:00:00+00:00 is already present as a fixed event and is kept unchanged.",
+        "Morning workouts are preserved unchanged: Monday and Wednesday running remain 08:00-09:00, Tuesday and Thursday gym sessions remain 08:00-09:30, and Friday running remains 08:00-09:00.",
+        "The typed weekly requirement needs at least 1920 minutes of category work between 2027-02-15T00:00:00+00:00 and 2027-02-20T00:00:00+00:00. Existing category-work events total 1800 minutes, so 120 additional category-work minutes are required.",
+        "The added block is explicitly category work, importance 4 and participant user, matching the existing freelance work pattern and allowing it to count toward the typed weekly project-hours requirement.",
+        "All proposed times use the Europe/Lisbon offset applicable for these dates, +00:00."
+      ],
+      "priorities": [
+        "Reach 32 scheduled hours of freelance work without counting the Friday client meeting, which is category meeting rather than solo development work.",
+        "Absorb the Friday 15:00-17:00 client meeting without adding more work on Friday and without affecting the fixed Friday night tournament.",
+        "Keep all sleep blocks and morning exercise intact to protect health and recovery.",
+        "Avoid creating a tight Monday transition before the 17:30 café hangout, since travel, food, hygiene and decompression needs are unknown.",
+        "Use a free Monday-to-Thursday interval for solo flexible freelance work, while avoiding changes that depend on third-party availability."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Keep the previous split of one added work hour on Monday 16:00-17:00 and one added work hour on Wednesday 16:00-17:00.",
+          "rejected_because": "It is calendar-feasible, but Monday would become running 08:00-09:00, work 10:00-17:00 and a café hangout at 17:30. Because travel, food, preparation and decompression needs are not specified, concentrating the added work on Wednesday avoids relying on a 30-minute Monday transition."
+        },
+        {
+          "option": "Add one hour on Tuesday and one hour on Thursday after the existing 10:30-17:30 work blocks.",
+          "rejected_because": "This would be operationally possible in free calendar time, but Tuesday and Thursday already combine 90-minute morning gym sessions with 7-hour development blocks. Extending both days would spread the load but would further lengthen already-heavy days."
+        },
+        {
+          "option": "Add the two hours on Friday before or after the client meeting.",
+          "rejected_because": "The user asked to reorganize work hours from Monday to Thursday to absorb the Friday meeting. Adding Friday work would also reduce the recovery and preparation buffer before the fixed 20:00-23:30 tournament."
+        },
+        {
+          "option": "Move the Monday café hangout to make room for work earlier or with a wider transition.",
+          "rejected_because": "The café event is not marked fixed, but it involves friends and moving it would introduce an external dependency. The request can be satisfied without disrupting it."
+        },
+        {
+          "option": "Move or shorten the Friday tournament.",
+          "rejected_because": "The tournament is fixed, protected by the profile, and the user explicitly does not want to miss it."
+        },
+        {
+          "option": "Move or shorten morning workouts.",
+          "rejected_because": "The user explicitly asked not to lose morning workouts, and the existing workout schedule already matches the stated morning-exercise preference."
+        }
+      ],
+      "summary": "Add a single 2-hour freelance development block on Wednesday from 16:00 to 18:00. This raises scheduled category-work time from 30 hours to 32 hours while preserving every morning workout, keeping the Friday client meeting and protected tournament unchanged, avoiding any added Friday work, and avoiding the previous concern about a compressed Monday transition before the café hangout. The main practical trade-off is that Wednesday becomes a longer 8-hour development day after a morning run, but it has no visible evening commitment and leaves a substantial open interval from 18:00 until the 23:30 sleep block. Meals, recovery needs and exact transition requirements are not specified, so the proposal avoids assuming them where possible."
+    }
+  },
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [],
+    "valid": true,
+    "aggregate_checks": [
+      {
+        "id": "weekly_project_hours",
+        "status": "pass",
+        "minutes": 1920.0,
+        "minimum_minutes": 1920,
+        "category": "work",
+        "evidence": "union of final calendar intervals"
+      }
+    ],
+    "aggregate_validation_version": "duration_total_v1"
+  },
+  "source_result_sha256": "1f7589403a68f585054b5581a1d3b1fe193492ac45e4920384daea7a46cdcde5",
+  "aggregate_requirements_sha256": "02a293c5d9c84cbe96d1eafbadef5d33e60dfd269fc639f11e51c85aeb9f47f3",
+  "confirmed_changes_sha256": null,
+  "critic_input_version": "final_calendar_v1",
+  "critic_policy_version": "uncertainty_review_v2",
+  "final_result_calendar": {
+    "timezone": "Europe/Lisbon",
+    "coverage": "all_events_in_scenario_after_simulation",
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-02-14T23:30:00+00:00",
+        "end": "2027-02-15T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "run_mon",
+        "title": "Morning Running",
+        "start": "2027-02-15T08:00:00+00:00",
+        "end": "2027-02-15T09:00:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Outdoor run.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_mon",
+        "title": "Client Development Block",
+        "start": "2027-02-15T10:00:00+00:00",
+        "end": "2027-02-15T16:00:00+00:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "6 hours of coding.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "social_mon",
+        "title": "Friends Hangout at Café",
+        "start": "2027-02-15T17:30:00+00:00",
+        "end": "2027-02-15T19:30:00+00:00",
+        "category": "social",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "friends"
+        ],
+        "description": "Social break.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-02-15T23:30:00+00:00",
+        "end": "2027-02-16T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_tue",
+        "title": "Gym Workout",
+        "start": "2027-02-16T08:00:00+00:00",
+        "end": "2027-02-16T09:30:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Strength training.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_tue",
+        "title": "Client Development Block",
+        "start": "2027-02-16T10:30:00+00:00",
+        "end": "2027-02-16T17:30:00+00:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "7 hours of coding.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-02-16T23:30:00+00:00",
+        "end": "2027-02-17T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "run_wed",
+        "title": "Morning Running",
+        "start": "2027-02-17T08:00:00+00:00",
+        "end": "2027-02-17T09:00:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Outdoor run.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_wed",
+        "title": "Client Development Block",
+        "start": "2027-02-17T10:00:00+00:00",
+        "end": "2027-02-17T16:00:00+00:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "6 hours of coding.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_0",
+        "title": "Client Development Block",
+        "start": "2027-02-17T16:00:00+00:00",
+        "end": "2027-02-17T18:00:00+00:00",
+        "category": null,
+        "importance": null,
+        "fixed": null,
+        "participants": null,
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-02-17T23:30:00+00:00",
+        "end": "2027-02-18T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_thu",
+        "title": "Gym Workout",
+        "start": "2027-02-18T08:00:00+00:00",
+        "end": "2027-02-18T09:30:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Strength training.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_thu",
+        "title": "Client Development Block",
+        "start": "2027-02-18T10:30:00+00:00",
+        "end": "2027-02-18T17:30:00+00:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "7 hours of coding.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-02-18T23:30:00+00:00",
+        "end": "2027-02-19T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "run_fri",
+        "title": "Morning Running",
+        "start": "2027-02-19T08:00:00+00:00",
+        "end": "2027-02-19T09:00:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Outdoor run.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_fri",
+        "title": "Client Development Block",
+        "start": "2027-02-19T10:00:00+00:00",
+        "end": "2027-02-19T14:00:00+00:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "4 hours of coding.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "client_meeting_fri",
+        "title": "Confirmed international client alignment meeting",
+        "start": "2027-02-19T15:00:00+00:00",
+        "end": "2027-02-19T17:00:00+00:00",
+        "category": "meeting",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "client"
+        ],
+        "description": "Confirmed international client meeting announced in the request; this block is not counted as solo development work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gaming_tournament_fri",
+        "title": "Online Video Game Tournament with Friends",
+        "start": "2027-02-19T20:00:00+00:00",
+        "end": "2027-02-19T23:30:00+00:00",
+        "category": "social",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "friends"
+        ],
+        "description": "Fixed online esports tournament.",
+        "origin": "existing",
+        "change_status": "preserved"
+      }
+    ],
+    "metadata_note": "Null metadata on added events means the Proposal contract did not supply it; it is not a new personal preference or hard constraint."
+  },
+  "final_unresolved_assumptions": [
+    {
+      "subject": "Added work-block classification",
+      "assumption": "The Wednesday 16:00-18:00 added event is genuinely category work and counts toward the 1920-minute weekly work target.",
+      "evidence_gap": "The proposal change labels the addition as category work with importance 4 and participant user, and the validator reports the aggregate work-duration check as passed, but the exact final calendar lists new_0 with category, importance, fixed status, participants, and description all null.",
+      "potential_impact": "potentially_blocking",
+      "verification_source": "unknown"
+    },
+    {
+      "subject": "Wednesday long development span",
+      "assumption": "The user can sustainably handle Morning Running from 08:00-09:00 followed by development work from 10:00-18:00 on Wednesday, with adequate room for food, breaks, hygiene, and mental recovery.",
+      "evidence_gap": "The calendar shows a continuous visible work sequence from 10:00-18:00 after the run, but does not show meals, breaks, commute or preparation needs, or the user's tolerance for long coding blocks.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Cumulative weekday workload and recovery",
+      "assumption": "The user can sustainably manage five consecutive morning exercise sessions, 32 claimed hours of development work, the Friday client meeting, and the Friday night tournament within the visible week.",
+      "evidence_gap": "The calendar preserves 23:30-07:30 sleep blocks through Friday morning and leaves several evening gaps, but it does not show personal recovery needs, meal routines, commute/preparation time, or the user's fatigue tolerance.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Friday evening recovery before tournament",
+      "assumption": "The 17:00-20:00 gap after the Friday client meeting is sufficient for dinner, decompression, and any tournament preparation before the 20:00-23:30 online event.",
+      "evidence_gap": "The calendar shows a three-hour gap, but the practical demands of the client meeting, tournament setup, and personal recovery needs are not specified.",
+      "potential_impact": "minor",
+      "verification_source": "user_context"
+    }
+  ],
+  "uncertainty_history": [
+    {
+      "iteration": 0,
+      "unresolved_assumptions": [
+        {
+          "subject": "Added work-block classification",
+          "assumption": "The Monday 16:00-17:00 and Wednesday 16:00-17:00 added events are genuinely category work and count toward the 1920-minute weekly work target.",
+          "evidence_gap": "The proposal changes label both additions as category work, and the validator reports the aggregate work-duration check as passed, but the exact final calendar lists both added events with category null and participants null.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Monday transition before social event",
+          "assumption": "The 30-minute gap between the added Monday work block ending at 17:00 and the café hangout starting at 17:30 is enough for any needed transition, travel, food, hygiene, or mental decompression.",
+          "evidence_gap": "The calendar shows Friends Hangout at Café from 17:30-19:30 immediately after a now 10:00-17:00 work span, but no location, travel, or preparation details are visible.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Cumulative weekday workload and recovery",
+          "assumption": "The user can sustainably handle five consecutive morning exercise sessions, 32 claimed hours of development work, a Friday client meeting, and a Friday night tournament within the visible week.",
+          "evidence_gap": "The calendar preserves sleep and contains some evening gaps, but it does not show meals, recovery needs, commute/preparation time, or individual tolerance for daily exercise plus focused coding work.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Friday evening recovery after client obligations",
+          "assumption": "The 17:00-20:00 gap after the Friday client meeting is sufficient before the fixed 20:00-23:30 online tournament.",
+          "evidence_gap": "The calendar shows a three-hour gap, but the practical demands of the client meeting, dinner, decompression, and tournament preparation are not specified.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        }
+      ]
+    },
+    {
+      "iteration": 1,
+      "unresolved_assumptions": [
+        {
+          "subject": "Added work-block classification",
+          "assumption": "The Wednesday 16:00-18:00 added event is genuinely category work and counts toward the 1920-minute weekly work target.",
+          "evidence_gap": "The proposal change labels the addition as category work with importance 4 and participant user, and the validator reports the aggregate work-duration check as passed, but the exact final calendar lists new_0 with category, importance, fixed status, participants, and description all null.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Wednesday long development span",
+          "assumption": "The user can sustainably handle Morning Running from 08:00-09:00 followed by development work from 10:00-18:00 on Wednesday, with adequate room for food, breaks, hygiene, and mental recovery.",
+          "evidence_gap": "The calendar shows a continuous visible work sequence from 10:00-18:00 after the run, but does not show meals, breaks, commute or preparation needs, or the user's tolerance for long coding blocks.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Cumulative weekday workload and recovery",
+          "assumption": "The user can sustainably manage five consecutive morning exercise sessions, 32 claimed hours of development work, the Friday client meeting, and the Friday night tournament within the visible week.",
+          "evidence_gap": "The calendar preserves 23:30-07:30 sleep blocks through Friday morning and leaves several evening gaps, but it does not show personal recovery needs, meal routines, commute/preparation time, or the user's fatigue tolerance.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Friday evening recovery before tournament",
+          "assumption": "The 17:00-20:00 gap after the Friday client meeting is sufficient for dinner, decompression, and any tournament preparation before the 20:00-23:30 online event.",
+          "evidence_gap": "The calendar shows a three-hour gap, but the practical demands of the client meeting, tournament setup, and personal recovery needs are not specified.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        }
+      ]
+    }
+  ]
+}

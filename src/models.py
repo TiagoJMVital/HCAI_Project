@@ -5,7 +5,7 @@ are preserved in archive/legacy_v1/src/models.py.
 """
 from __future__ import annotations
 
-from typing import Literal, Optional
+from typing import Annotated, Literal, Optional
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, model_validator
 
@@ -13,15 +13,34 @@ ChangeType = Literal["add", "move", "delete"]
 
 
 class Change(BaseModel):
+    model_config = ConfigDict(json_schema_extra={
+        "allOf": [{
+            "if": {"properties": {"type": {"enum": ["move", "delete"]}},
+                   "required": ["type"]},
+            "then": {"properties": {
+                "category": {"type": "null"},
+                "importance": {"type": "null"},
+                "participants": {"type": "null"},
+            }},
+        }]
+    })
+
     type: ChangeType
     event_id: Optional[str] = None
     title: Optional[str] = None
     from_start: Optional[str] = None
     to_start: Optional[str] = None
     to_end: Optional[str] = None
-    category: Optional[str] = None
-    importance: Optional[int] = Field(default=None, ge=1, le=5)
-    participants: Optional[list[str]] = None
+    category: Optional[str] = Field(
+        default=None, description="Only valid for add; use null for move or delete."
+    )
+    importance: Optional[int] = Field(
+        default=None, ge=1, le=5,
+        description="Only valid for add; use null for move or delete.",
+    )
+    participants: Optional[list[str]] = Field(
+        default=None, description="Only valid for add; use null for move or delete."
+    )
 
     @model_validator(mode="after")
     def _required_fields(self):
@@ -58,6 +77,130 @@ class Rationale(BaseModel):
 class Proposal(BaseModel):
     changes: list[Change]
     rationale: Rationale
+
+
+# Compact, versioned IAedu wire contract. The rest of the application continues
+# to consume the canonical Proposal above, including historical run artifacts.
+PROPOSER_WIRE_SCHEMA_VERSION = "compact_proposal_v1"
+BriefConstraint = Annotated[str, Field(min_length=1, max_length=240)]
+BriefPriority = Annotated[str, Field(min_length=1, max_length=200)]
+
+
+class ProposerWireAdd(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    op: Literal["add"]
+    title: str = Field(min_length=1)
+    start: str = Field(min_length=1)
+    end: str | None = None
+    event_id: str | None = None
+    category: str | None = None
+    importance: int | None = Field(default=None, ge=1, le=5)
+    participants: list[str] | None = None
+
+
+class ProposerWireMove(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    op: Literal["move"]
+    event_id: str = Field(min_length=1)
+    start: str = Field(min_length=1)
+    end: str | None = None
+
+
+class ProposerWireDelete(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    op: Literal["delete"]
+    event_id: str = Field(min_length=1)
+
+
+ProposerWireChange = Annotated[
+    ProposerWireAdd | ProposerWireMove | ProposerWireDelete,
+    Field(discriminator="op"),
+]
+
+
+class ProposerWireAlternative(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    option: str = Field(min_length=1, max_length=160)
+    reason: str = Field(min_length=1, max_length=240)
+
+
+class ProposerWireRationale(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    constraints: list[BriefConstraint] = Field(max_length=12)
+    priorities: list[BriefPriority] = Field(max_length=8)
+    alternatives: list[ProposerWireAlternative] = Field(max_length=6)
+    summary: str = Field(min_length=1, max_length=600)
+
+
+class ProposerWireProposal(BaseModel):
+    """Compact model-facing representation normalized to canonical Proposal."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    changes: list[ProposerWireChange]
+    rationale: ProposerWireRationale
+
+    def to_proposal(self) -> Proposal:
+        changes: list[Change] = []
+        for item in self.changes:
+            if isinstance(item, ProposerWireAdd):
+                changes.append(Change(
+                    type="add", event_id=item.event_id, title=item.title,
+                    to_start=item.start, to_end=item.end, category=item.category,
+                    importance=item.importance, participants=item.participants,
+                ))
+            elif isinstance(item, ProposerWireMove):
+                changes.append(Change(
+                    type="move", event_id=item.event_id,
+                    to_start=item.start, to_end=item.end,
+                ))
+            else:
+                changes.append(Change(type="delete", event_id=item.event_id))
+        return Proposal(
+            changes=changes,
+            rationale=Rationale(
+                constraints=self.rationale.constraints,
+                priorities=self.rationale.priorities,
+                alternatives_considered=[Alternative(
+                    option=item.option, rejected_because=item.reason,
+                ) for item in self.rationale.alternatives],
+                summary=self.rationale.summary,
+            ),
+        )
+
+    @classmethod
+    def from_proposal(cls, proposal: Proposal) -> "ProposerWireProposal":
+        wire_changes = []
+        for item in proposal.changes:
+            if item.type == "add":
+                wire_changes.append(ProposerWireAdd(
+                    op="add", event_id=item.event_id, title=item.title,
+                    start=item.to_start, end=item.to_end, category=item.category,
+                    importance=item.importance, participants=item.participants,
+                ))
+            elif item.type == "move":
+                wire_changes.append(ProposerWireMove(
+                    op="move", event_id=item.event_id,
+                    start=item.to_start, end=item.to_end,
+                ))
+            else:
+                wire_changes.append(ProposerWireDelete(op="delete", event_id=item.event_id))
+        return cls(
+            changes=wire_changes,
+            rationale=ProposerWireRationale(
+                constraints=proposal.rationale.constraints,
+                priorities=proposal.rationale.priorities,
+                alternatives=[ProposerWireAlternative(
+                    option=item.option, reason=item.rejected_because,
+                ) for item in proposal.rationale.alternatives_considered],
+                summary=proposal.rationale.summary,
+            ),
+        )
 
 
 class CriticScores(BaseModel):

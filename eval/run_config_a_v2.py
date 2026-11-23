@@ -15,8 +15,9 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from benchmark_v2 import atomic_json  # noqa: E402
 from calendar_v2 import simulate  # noqa: E402
-from llm import LLMError, get_provider  # noqa: E402
-from proposer_v2 import SYSTEM_V2, V2RuntimeScenario, propose_v2  # noqa: E402
+from llm import LLMError, RateLimitError, get_provider  # noqa: E402
+from proposer_v2 import (PROPOSER_WIRE_SCHEMA_SHA256, PROPOSER_WIRE_SCHEMA_VERSION,
+                         SYSTEM_V2, V2RuntimeScenario, propose_v2)  # noqa: E402
 from rules import rule_based_decision  # noqa: E402
 from scenario_v2 import confirmed_changes_fingerprint, load_manifest, load_scenario  # noqa: E402
 
@@ -27,6 +28,7 @@ def run_one(root: Path, scenario_id: str, provider, *, experiment_id: str | None
     if row is None:
         raise ValueError("v2 scenario not imported")
     scenario = load_scenario(root / "data" / "scenarios" / f"{scenario_id}.json")
+    scenario_path = root / "data" / "scenarios" / f"{scenario_id}.json"
     aggregate_fingerprint = (hashlib.sha256(json.dumps(
         [rule.model_dump(mode="json") for rule in scenario.aggregate_requirements],
         sort_keys=True).encode()).hexdigest() if scenario.aggregate_requirements else None)
@@ -35,17 +37,26 @@ def run_one(root: Path, scenario_id: str, provider, *, experiment_id: str | None
     record = {"schema_version": "2.0", "configuration": "A", "run_id": run_id,
               "experiment_id": experiment_id, "repeat_index": repeat_index,
               "scenario_id": scenario_id, "family": scenario.family_id,
+              "scenario_sha256": hashlib.sha256(scenario_path.read_bytes()).hexdigest(),
               "profile_id": scenario.profile.profile_id, "split": row["split"],
               "aggregate_requirements_sha256": aggregate_fingerprint,
               "confirmed_changes_sha256": confirmed_changes_fingerprint(scenario),
               "provider": provider.name, "model": provider.model,
               "generation_config": provider.generation_config(),
-              "prompt_versions": {"proposer_sha256": hashlib.sha256(SYSTEM_V2.encode()).hexdigest()},
+              "prompt_versions": {
+                  "proposer_sha256": hashlib.sha256(SYSTEM_V2.encode()).hexdigest(),
+                  "proposer_wire_schema_version": PROPOSER_WIRE_SCHEMA_VERSION,
+                  "proposer_wire_schema_sha256": PROPOSER_WIRE_SCHEMA_SHA256,
+              },
               "generated_at": datetime.now(timezone.utc).isoformat(),
               "proposal": None, "technical_validation": None, "decision": None,
               "reasons": [], "status": "running"}
     try:
         proposal = propose_v2(scenario.profile, V2RuntimeScenario(scenario), provider=provider)
+        if getattr(provider, "last_failed_outputs", None):
+            record["recovered_llm_outputs"] = provider.last_failed_outputs
+        if getattr(provider, "last_rate_limit_attempts", None):
+            record["recovered_rate_limit_attempts"] = provider.last_rate_limit_attempts
         _, validation = simulate(scenario, proposal)
         decision, reasons = rule_based_decision(proposal, scenario.calendar.events,
                                                 validation["violations"])
@@ -54,6 +65,12 @@ def run_one(root: Path, scenario_id: str, provider, *, experiment_id: str | None
                       status="proposal_ready" if validation["valid"] else "invalid_proposal")
     except LLMError as exc:
         record.update(status="llm_error", error=str(exc), safe_action="no_autonomous_action")
+        if exc.failed_outputs:
+            record["failed_llm_outputs"] = exc.failed_outputs
+        if exc.diagnostics:
+            record["llm_diagnostics"] = exc.diagnostics
+            if isinstance(exc, RateLimitError):
+                record["rate_limit_diagnostics"] = exc.diagnostics
     except Exception:
         record.update(status="validation_error", error="technical validation failed",
                       safe_action="no_autonomous_action")

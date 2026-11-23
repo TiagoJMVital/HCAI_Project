@@ -1,0 +1,167 @@
+{
+  "schema_version": "2.0",
+  "configuration": "A",
+  "run_id": "d414139e5d6144918ea1530fb771fb16",
+  "experiment_id": null,
+  "repeat_index": 0,
+  "scenario_id": "freelancer_flexible_medical_appointment_birthday_dinner_001",
+  "family": "freelancer_schedule_conflict",
+  "profile_id": "freelancer_flexible_01__freelancer_flexible_medical_appointment_birthday_dinner_001",
+  "split": "train",
+  "aggregate_requirements_sha256": "620d5d6c188f49770e9937098b03d0e6a6ac97e6956796868de506287c5b6b97",
+  "confirmed_changes_sha256": null,
+  "provider": "iaedu",
+  "model": "GPT-5.5",
+  "generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request"
+  },
+  "prompt_versions": {
+    "proposer_sha256": "45d8e4e44b2e45cd8c6e4e829ce43fb6825a88e6550716e1c655d1f49034cc79"
+  },
+  "generated_at": "2026-11-22T19:44:34.655323+00:00",
+  "proposal": {
+    "changes": [
+      {
+        "type": "delete",
+        "event_id": "work_thu",
+        "title": "Copywriting Work Block",
+        "from_start": "2027-04-15T13:30:00+01:00",
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Copywriting Work Block",
+        "from_start": null,
+        "to_start": "2027-04-12T18:00:00+01:00",
+        "to_end": "2027-04-12T19:15:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Copywriting Work Block",
+        "from_start": null,
+        "to_start": "2027-04-13T17:30:00+01:00",
+        "to_end": "2027-04-13T18:45:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Copywriting Work Block",
+        "from_start": null,
+        "to_start": "2027-04-14T18:00:00+01:00",
+        "to_end": "2027-04-14T19:15:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Copywriting Work Block",
+        "from_start": null,
+        "to_start": "2027-04-16T17:00:00+01:00",
+        "to_end": "2027-04-16T18:15:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "The medical consultation on Thursday at 11:00 is fixed/protected by the profile hard constraint and is not moved or deleted.",
+        "The birthday dinner on Thursday from 20:00 to 23:30 is fixed and is not moved or deleted.",
+        "Protected sleep blocks remain unchanged, including Thursday night sleep from 23:30 to 07:30.",
+        "Surf and gym routines remain unchanged: Monday surf, Tuesday gym, Wednesday surf, and Friday surf are preserved.",
+        "The final calendar keeps at least 32 hours of work between 2027-04-12T00:00:00+01:00 and 2027-04-17T00:00:00+01:00.",
+        "Only free calendar intervals are used for added work blocks; this does not imply any external availability beyond the user's own flexible copywriting work."
+      ],
+      "priorities": [
+        "Shift Thursday work away from a day already constrained by the mandatory medical appointment and evening birthday dinner.",
+        "Preserve health routines and sleep intact, matching the user's stated preference.",
+        "Keep the weekly copywriting target by redistributing the deleted 5-hour Thursday block across Monday, Tuesday, Wednesday, and Friday.",
+        "Use moderate extensions after existing work blocks rather than moving fixed or protected events."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Keep the Thursday 13:30-18:30 work block unchanged.",
+          "rejected_because": "Although the original calendar already totals 32 hours of work, it does not satisfy the user's request to redistribute Thursday's work across Monday, Tuesday, Wednesday, and Friday after accounting for the medical appointment and birthday dinner."
+        },
+        {
+          "option": "Move all 5 Thursday work hours to a single day, such as Friday 17:00-22:00.",
+          "rejected_because": "This would satisfy the weekly total but creates a much heavier single day and a larger disruption than spreading the load across the four requested workdays."
+        },
+        {
+          "option": "Add work on Thursday morning before the medical appointment.",
+          "rejected_because": "The user specifically asked to redistribute the required work hours across Monday, Tuesday, Wednesday, and Friday, and Thursday has a fixed medical appointment plus a fixed evening social commitment."
+        }
+      ],
+      "summary": "The proposal removes the flexible 5-hour Thursday copywriting block and redistributes it evenly as four 1 hour 15 minute work additions after existing work blocks on Monday, Tuesday, Wednesday, and Friday. This keeps the final weekly work total at 32 hours while preserving fixed medical and social events, sleep, and surf/gym routines."
+    }
+  },
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [],
+    "valid": true,
+    "aggregate_checks": [
+      {
+        "id": "weekly_hours",
+        "status": "pass",
+        "minutes": 1920.0,
+        "minimum_minutes": 1920,
+        "category": "work",
+        "evidence": "union of final calendar intervals"
+      }
+    ],
+    "aggregate_validation_version": "duration_total_v1"
+  },
+  "decision": "defer",
+  "reasons": [
+    "mais de 2 mudanças",
+    "apaga evento (work_thu)",
+    "toca em evento importante (work_thu, importância 4)"
+  ],
+  "status": "proposal_ready",
+  "seconds": 12.487
+}

@@ -11,10 +11,34 @@ cp .env.example .env
 
 Put the institutional IAedu key, HTTPS endpoint and channel ID **only** in ignored `.env` via VS Code, or export them in the shell. Never commit or print credentials. `.env.example` lists provider and Ollama alternatives. `LLM_PROVIDER=iaedu` selects IAedu; `LLM_PROVIDER=ollama` selects the local alternative when installed separately. Proposer and Critic can be configured independently through role-specific variables or runner options. Streamlit, validation, import and mocked tests need no IAedu connection. The app serves locally; start it with `streamlit run annotation_app.py --server.address 127.0.0.1`, then open the printed URL in the Windows browser.
 
+IAedu rate limits are handled in the shared provider for both agents. `Retry-After`
+is respected when present; otherwise bounded exponential backoff with jitter uses
+`IAEDU_RATE_LIMIT_MAX_RETRIES`, `IAEDU_RATE_LIMIT_BASE_DELAY`,
+`IAEDU_RATE_LIMIT_MAX_DELAY`, and `IAEDU_RATE_LIMIT_JITTER`. The resumable pilot
+adds `PILOT_REQUEST_DELAY_SECONDS` between new A/B configurations and stops after
+a rate-limit failure instead of advancing through the remaining scenarios.
+
+Structured-output retries are separate from HTTP rate-limit retries.
+`IAEDU_STRUCTURED_MAX_RETRIES` sets the total number of attempts (default `2`,
+minimum `1`) used when a response is truncated, has invalid JSON, or fails the
+local Pydantic schema. Run diagnostics record only the failure category, output
+length and affected schema fields; raw failed outputs remain in the existing
+`failed_llm_outputs` field for traceability. The official IAedu Python API example
+documents only the multipart fields `channel_id`, `thread_id`, `user_info`, and
+`message`. It does not document an output-token parameter, so this client does
+not send an unsupported `max_tokens` field. Any provider-side generation limit
+is therefore outside the controls documented for this client.
+
+The Proposer uses the versioned `compact_proposal_v1` wire schema to reduce
+model output size. The stored run still contains the canonical `Proposal` used
+by deterministic validation. Use `prompt_versions.proposer_wire_schema_version`
+and `prompt_versions.proposer_wire_schema_sha256` when comparing runs; older
+runs without these fields predate the compact generation contract.
+
 ## Local checks (no LLM requests)
 
 ```bash
-python src/benchmark_v2.py validate ../scenario_v2_example.json
+python src/benchmark_v2.py validate data/scenarios/working_student_deadline_001.json
 python src/benchmark_v2.py validate
 python -m pytest -q
 ```
