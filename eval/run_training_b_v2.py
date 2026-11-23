@@ -23,7 +23,8 @@ from pipeline_b import CriticSettings  # noqa: E402
 from proposer_v2 import (PROPOSER_WIRE_SCHEMA_SHA256, PROPOSER_WIRE_SCHEMA_VERSION,
                          REVISION_GUIDANCE, SYSTEM_V2)  # noqa: E402
 from run_catalog_v2 import runs  # noqa: E402
-from run_completion_v2 import B_COMPLETED_STATUSES, TechnicalRunError  # noqa: E402
+from run_completion_v2 import (B_COMPLETED_STATUSES, TechnicalRunError,
+                               historical_pilot_completed_b)  # noqa: E402
 from run_config_b_v2 import run_one  # noqa: E402
 
 
@@ -102,11 +103,25 @@ def execute_batch(args, *, execute=run_one) -> tuple[int, dict]:
     if unknown:
         raise ValueError("unrecognized readiness states: " + ", ".join(row["scenario_id"] for row in unknown))
     completed: dict[str, dict] = {}
+    completed_current: set[str] = set()
+    completed_pilot: set[str] = set()
     if not args.force:
+        pilot = historical_pilot_completed_b(ROOT)
         for row in eligible:
+            if row["scenario_id"] in pilot:
+                pilot_record = pilot[row["scenario_id"]]
+                if (pilot_record.get("family") != row["family_id"]
+                        or pilot_record.get("profile_id") != row["profile_id"]
+                        or pilot_record.get("split") != row["split"]):
+                    raise ValueError(
+                        f"historical pilot/current manifest mismatch: {row['scenario_id']}")
+                completed[row["scenario_id"]] = pilot_record
+                completed_pilot.add(row["scenario_id"])
+                continue
             match = compatible_completed(ROOT, row, proposer, critic)
             if match is not None:
                 completed[row["scenario_id"]] = match
+                completed_current.add(row["scenario_id"])
     pending = [row for row in eligible if row["scenario_id"] not in completed]
     if args.limit is not None:
         pending = pending[:args.limit]
@@ -114,14 +129,20 @@ def execute_batch(args, *, execute=run_one) -> tuple[int, dict]:
     for row in blocked:
         print(f"BLOCKED — {row['scenario_id']} — {row['state_reason']}", flush=True)
     for sid, record in sorted(completed.items()):
-        print(f"SKIPPED — already completed — {sid} — {record['run_id']}", flush=True)
+        if sid in completed_pilot:
+            print(f"ALREADY_COMPLETED_PILOT — {sid} — {record['run_id']}", flush=True)
+        else:
+            print(f"SKIPPED — already completed — {sid} — {record['run_id']}", flush=True)
     for row in pending:
         print(f"{'WOULD RUN' if args.dry_run else 'PENDING'} — {row['scenario_id']}", flush=True)
 
     summary = {"generated_at": datetime.now(timezone.utc).isoformat(),
                "dry_run": args.dry_run, "selected": len(selected),
                "eligible": len(eligible), "blocked": len(blocked),
-               "already_completed_compatible": len(completed),
+               "already_completed_total": len(completed),
+               "already_completed_compatible": len(completed_current),
+               "already_completed_current": len(completed_current),
+               "already_completed_pilot": len(completed_pilot),
                "pending_selected": len(pending), "succeeded": [], "failed": [],
                "stopped_early": False}
     if args.dry_run:

@@ -1,0 +1,2461 @@
+{
+  "configuration": "B",
+  "scenario_id": "content_creator_sponsor_inperson_meeting_001",
+  "family": "content_creator_schedule_conflict",
+  "category": "v2",
+  "proposer_provider": "iaedu",
+  "proposer_model": "GPT-5.5",
+  "proposer_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_provider": "iaedu",
+  "critic_model": "GPT-5.5",
+  "critic_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_settings": {
+    "threshold": 4.0,
+    "max_refinements": 3,
+    "min_dimension_score": 1
+  },
+  "iterations": [
+    {
+      "index": 0,
+      "proposer_feedback": null,
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Video Editing",
+            "from_start": null,
+            "to_start": "2027-04-22T12:30:00+01:00",
+            "to_end": "2027-04-22T15:00:00+01:00",
+            "category": "video_production",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Video Editing",
+            "from_start": null,
+            "to_start": "2027-04-21T18:00:00+01:00",
+            "to_end": "2027-04-21T20:00:00+01:00",
+            "category": "video_production",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Video Editing",
+            "from_start": null,
+            "to_start": "2027-04-23T11:30:00+01:00",
+            "to_end": "2027-04-23T12:30:00+01:00",
+            "category": "video_production",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "The sponsorship meeting is fixed by hard constraint, so no move or deletion is proposed.",
+            "Daily gym workouts are health-protected and left unchanged.",
+            "No Thursday editing event exists in the supplied calendar, so the plan creates replacement production time instead of moving an event.",
+            "Wednesday afternoon is already occupied by editing, so only the adjacent pre-stream gap is usable.",
+            "The calendar does not confirm travel time from the in-person meeting or sponsor-site editing feasibility."
+          ],
+          "priorities": [
+            "Preserve mandatory sponsorship and health commitments.",
+            "Keep the normal live stream schedule unchanged.",
+            "Recover a full assumed Thursday editing block using available solo-production slots.",
+            "Use Wednesday as much as the supplied calendar allows."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Use the hour immediately after the sponsor meeting instead of the Friday bridge hour",
+              "rejected_because": "This is closer to the displaced block but may be infeasible without confirmed travel time after an in-person meeting."
+            },
+            {
+              "option": "Move or shorten a live stream",
+              "rejected_because": "This would open a larger production block but disrupts an external audience-facing commitment."
+            },
+            {
+              "option": "Use only the Thursday pre-meeting block plus the Wednesday extension",
+              "rejected_because": "This fits the preference better but leaves one hour of the assumed Thursday editing target uncovered."
+            }
+          ],
+          "summary": "Adds a split replacement editing plan around the protected sponsor meeting, using the only usable Wednesday extension and a small Friday bridge hour; the main trade-off is that one recovery hour lands after Thursday because Wednesday afternoon is already occupied."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-04-19T01:30:00+01:00",
+            "end": "2027-04-19T09:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_mon",
+            "title": "Gym Workout",
+            "start": "2027-04-19T10:00:00+01:00",
+            "end": "2027-04-19T11:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Mandatory workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "edit_mon",
+            "title": "Video Editing",
+            "start": "2027-04-19T12:30:00+01:00",
+            "end": "2027-04-19T18:00:00+01:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Editing.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "stream_mon",
+            "title": "Live Stream",
+            "start": "2027-04-19T20:00:00+01:00",
+            "end": "2027-04-19T23:30:00+01:00",
+            "category": "streaming",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "chat"
+            ],
+            "description": "Stream.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-04-20T01:30:00+01:00",
+            "end": "2027-04-20T09:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_tue",
+            "title": "Gym Workout",
+            "start": "2027-04-20T10:00:00+01:00",
+            "end": "2027-04-20T11:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Mandatory workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "edit_tue",
+            "title": "Video Editing",
+            "start": "2027-04-20T12:30:00+01:00",
+            "end": "2027-04-20T18:00:00+01:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Editing.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "stream_tue",
+            "title": "Live Stream",
+            "start": "2027-04-20T20:00:00+01:00",
+            "end": "2027-04-20T23:30:00+01:00",
+            "category": "streaming",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "chat"
+            ],
+            "description": "Stream.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-04-21T01:30:00+01:00",
+            "end": "2027-04-21T09:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_wed",
+            "title": "Gym Workout",
+            "start": "2027-04-21T10:00:00+01:00",
+            "end": "2027-04-21T11:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Mandatory workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "edit_wed",
+            "title": "Video Editing",
+            "start": "2027-04-21T12:30:00+01:00",
+            "end": "2027-04-21T18:00:00+01:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Editing.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_1",
+            "title": "Video Editing",
+            "start": "2027-04-21T18:00:00+01:00",
+            "end": "2027-04-21T20:00:00+01:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "stream_wed",
+            "title": "Live Stream",
+            "start": "2027-04-21T20:00:00+01:00",
+            "end": "2027-04-21T23:30:00+01:00",
+            "category": "streaming",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "chat"
+            ],
+            "description": "Stream.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-04-22T01:30:00+01:00",
+            "end": "2027-04-22T09:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_thu",
+            "title": "Gym Workout",
+            "start": "2027-04-22T10:00:00+01:00",
+            "end": "2027-04-22T11:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Mandatory workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_0",
+            "title": "Video Editing",
+            "start": "2027-04-22T12:30:00+01:00",
+            "end": "2027-04-22T15:00:00+01:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "sponsor_meeting_thu",
+            "title": "In-Person Sponsor Strategy Meeting",
+            "start": "2027-04-22T15:00:00+01:00",
+            "end": "2027-04-22T18:00:00+01:00",
+            "category": "sponsorships",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "sponsor_rep"
+            ],
+            "description": "Brand meeting.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "stream_thu",
+            "title": "Live Stream",
+            "start": "2027-04-22T20:00:00+01:00",
+            "end": "2027-04-22T23:30:00+01:00",
+            "category": "streaming",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "chat"
+            ],
+            "description": "Stream.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-04-23T01:30:00+01:00",
+            "end": "2027-04-23T09:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_fri",
+            "title": "Gym Workout",
+            "start": "2027-04-23T10:00:00+01:00",
+            "end": "2027-04-23T11:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Mandatory workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_2",
+            "title": "Video Editing",
+            "start": "2027-04-23T11:30:00+01:00",
+            "end": "2027-04-23T12:30:00+01:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "edit_fri",
+            "title": "Video Editing",
+            "start": "2027-04-23T12:30:00+01:00",
+            "end": "2027-04-23T18:00:00+01:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Editing.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "stream_fri",
+            "title": "Live Stream",
+            "start": "2027-04-23T20:00:00+01:00",
+            "end": "2027-04-23T23:30:00+01:00",
+            "category": "streaming",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "chat"
+            ],
+            "description": "Stream.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 3,
+          "coherence": 2,
+          "alternatives": 3,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The proposal restores production time mostly by filling narrow gaps, but it under-weighs the cumulative workload across an already dense Monday–Friday pattern: daily gym from 10:00–11:30, editing from 12:30–18:00 on most days, and live streams from 20:00–23:30.",
+          "The Wednesday addition creates a continuous production-and-streaming stretch from 12:30 to 23:30: existing Video Editing 12:30–18:00, added Video Editing 18:00–20:00, then Live Stream 20:00–23:30. This leaves no visible transition, meal, decompression, or stream preparation time between intensive editing and an audience-facing commitment.",
+          "The Thursday addition ends exactly when the in-person sponsor meeting begins: Video Editing 12:30–15:00 followed immediately by In-Person Sponsor Strategy Meeting 15:00–18:00. The rationale acknowledges uncertainty about travel after the meeting, but not the equally relevant uncertainty about travel, setup, preparation, or context-switching before the meeting.",
+          "The Friday bridge hour runs immediately after Gym Workout 10:00–11:30 and directly into the existing Video Editing 12:30–18:00, producing a 6.5-hour editing block after a workout with no visible recovery, hygiene, or lunch margin between 11:30 and 18:00.",
+          "The alternatives considered are relevant, but they focus mainly on preserving commitments and recovering the assumed editing duration. They do not sufficiently examine whether recovering the full block is worth the added fatigue and transition pressure, especially across Wednesday through Friday.",
+          "Request satisfaction cannot be verified from the provided materials because the original request is not available. The plan may match the intended editing-duration goal, but that goal is described only as an assumed Thursday editing target in the rationale."
+        ],
+        "feedback": "The proposal is technically coherent in that it preserves fixed events and avoids checked overlaps, but the resulting routine is fragile from a human-manageability perspective. The most concerning change is the Wednesday 18:00–20:00 addition, which turns Wednesday into an uninterrupted 11-hour chain of editing and streaming from 12:30 to 23:30. Thursday also places editing directly before an in-person sponsor meeting, and Friday places editing directly after the gym and before a long existing editing block. A reconsideration should weigh whether fully recovering the assumed editing time is more important than preserving practical transition, food, preparation, and recovery margins. The Proposer should either redistribute the added work with stronger evidence that these tight transitions are acceptable, or justify why the user can sustainably handle the added density given the visible workload.",
+        "plausibility_review": {
+          "revision_required": true,
+          "severity": "moderate",
+          "reason": "The added events significantly increase pressure on an already repetitive high-output week. The schedule remains technically valid, but Wednesday becomes a continuous 12:30–23:30 work/stream sequence, Thursday has no visible transition before an in-person sponsor meeting, and Friday extends work immediately after the gym into a long editing block. These are concrete human-quality risks that could affect performance, fatigue, preparation, and sustainability.",
+          "suggested_improvement": "Reconsider the distribution of the replacement editing time with explicit attention to recovery, meals, setup, travel/preparation around the in-person meeting, and the cumulative Wednesday–Friday workload. The same operations could be retained only if the Proposer can ground why the tight transitions and extended blocks are manageable in the fuller context."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Wednesday extended editing before live stream",
+            "assumption": "The user can work from 12:30 to 23:30 across editing and live streaming without a visible break between the added editing block and the stream.",
+            "evidence_gap": "The calendar shows continuous Video Editing 12:30–20:00 followed immediately by Live Stream 20:00–23:30, but provides no evidence about meal timing, stream setup needs, fatigue tolerance, or whether editing right up to the stream is acceptable.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Thursday transition into in-person sponsor meeting",
+            "assumption": "Ending Video Editing at 15:00 and starting the In-Person Sponsor Strategy Meeting at 15:00 is practically workable.",
+            "evidence_gap": "The proposal notes that travel time and sponsor-site editing feasibility are not confirmed, but the calendar still places editing immediately before the in-person meeting with no visible travel, setup, preparation, or context-switching time.",
+            "potential_impact": "potentially_blocking",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Friday post-gym editing bridge",
+            "assumption": "The user can move directly from Gym Workout ending at 11:30 into Video Editing 11:30–18:00 without needing visible recovery, hygiene, food, or setup time.",
+            "evidence_gap": "The added Friday editing event begins at exactly 11:30 after the gym and continues directly into the existing 12:30–18:00 editing block; no supporting context confirms this is sustainable.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Recovered editing-duration target",
+            "assumption": "Recovering the full assumed Thursday editing block is necessary or preferable to leaving one hour uncovered.",
+            "evidence_gap": "The rationale refers to a full assumed Thursday editing target, but the original request is unavailable and the technical validation explicitly does not check request satisfaction or soft preferences.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Cumulative weekday workload",
+            "assumption": "The user can sustain the visible Monday–Friday pattern of daily gym, long editing blocks, and nightly live streams, plus the added replacement editing, without meaningful degradation.",
+            "evidence_gap": "The calendar shows repeated late streams ending at 23:30, sleep beginning at 01:30, daily workouts, and substantial editing time, but gives no evidence about recovery needs, existing fatigue, or whether the added density is acceptable.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          }
+        ],
+        "overall": 3.0
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": false,
+        "plausibility_revision_required": true,
+        "accepted": false,
+        "revision_causes": [
+          "numeric_criteria_failed",
+          "plausibility_revision_required"
+        ]
+      },
+      "operations_changed_from_previous": null,
+      "rationale_changed_from_previous": null,
+      "prior_critic_reviews": [],
+      "unresolved_assumptions": [
+        {
+          "subject": "Wednesday extended editing before live stream",
+          "assumption": "The user can work from 12:30 to 23:30 across editing and live streaming without a visible break between the added editing block and the stream.",
+          "evidence_gap": "The calendar shows continuous Video Editing 12:30–20:00 followed immediately by Live Stream 20:00–23:30, but provides no evidence about meal timing, stream setup needs, fatigue tolerance, or whether editing right up to the stream is acceptable.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Thursday transition into in-person sponsor meeting",
+          "assumption": "Ending Video Editing at 15:00 and starting the In-Person Sponsor Strategy Meeting at 15:00 is practically workable.",
+          "evidence_gap": "The proposal notes that travel time and sponsor-site editing feasibility are not confirmed, but the calendar still places editing immediately before the in-person meeting with no visible travel, setup, preparation, or context-switching time.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Friday post-gym editing bridge",
+          "assumption": "The user can move directly from Gym Workout ending at 11:30 into Video Editing 11:30–18:00 without needing visible recovery, hygiene, food, or setup time.",
+          "evidence_gap": "The added Friday editing event begins at exactly 11:30 after the gym and continues directly into the existing 12:30–18:00 editing block; no supporting context confirms this is sustainable.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Recovered editing-duration target",
+          "assumption": "Recovering the full assumed Thursday editing block is necessary or preferable to leaving one hour uncovered.",
+          "evidence_gap": "The rationale refers to a full assumed Thursday editing target, but the original request is unavailable and the technical validation explicitly does not check request satisfaction or soft preferences.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Cumulative weekday workload",
+          "assumption": "The user can sustain the visible Monday–Friday pattern of daily gym, long editing blocks, and nightly live streams, plus the added replacement editing, without meaningful degradation.",
+          "evidence_gap": "The calendar shows repeated late streams ending at 23:30, sleep beginning at 01:30, daily workouts, and substantial editing time, but gives no evidence about recovery needs, existing fatigue, or whether the added density is acceptable.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "proposer_feedback": "Numeric Critic criteria failed. Scores: {\"reasoning\":3,\"coherence\":2,\"alternatives\":3,\"clarity\":4}. Plausibility revision required (moderate): The added events significantly increase pressure on an already repetitive high-output week. The schedule remains technically valid, but Wednesday becomes a continuous 12:30–23:30 work/stream sequence, Thursday has no visible transition before an in-person sponsor meeting, and Friday extends work immediately after the gym into a long editing block. These are concrete human-quality risks that could affect performance, fatigue, preparation, and sustainability. Suggested direction: Reconsider the distribution of the replacement editing time with explicit attention to recovery, meals, setup, travel/preparation around the in-person meeting, and the cumulative Wednesday–Friday workload. The same operations could be retained only if the Proposer can ground why the tight transitions and extended blocks are manageable in the fuller context. The Critic lacks the full user constraints; explain if no better feasible option exists. Unverified conditions to reassess: [{'subject': 'Wednesday extended editing before live stream', 'assumption': 'The user can work from 12:30 to 23:30 across editing and live streaming without a visible break between the added editing block and the stream.', 'evidence_gap': 'The calendar shows continuous Video Editing 12:30–20:00 followed immediately by Live Stream 20:00–23:30, but provides no evidence about meal timing, stream setup needs, fatigue tolerance, or whether editing right up to the stream is acceptable.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Thursday transition into in-person sponsor meeting', 'assumption': 'Ending Video Editing at 15:00 and starting the In-Person Sponsor Strategy Meeting at 15:00 is practically workable.', 'evidence_gap': 'The proposal notes that travel time and sponsor-site editing feasibility are not confirmed, but the calendar still places editing immediately before the in-person meeting with no visible travel, setup, preparation, or context-switching time.', 'potential_impact': 'potentially_blocking', 'verification_source': 'unknown'}, {'subject': 'Friday post-gym editing bridge', 'assumption': 'The user can move directly from Gym Workout ending at 11:30 into Video Editing 11:30–18:00 without needing visible recovery, hygiene, food, or setup time.', 'evidence_gap': 'The added Friday editing event begins at exactly 11:30 after the gym and continues directly into the existing 12:30–18:00 editing block; no supporting context confirms this is sustainable.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Recovered editing-duration target', 'assumption': 'Recovering the full assumed Thursday editing block is necessary or preferable to leaving one hour uncovered.', 'evidence_gap': 'The rationale refers to a full assumed Thursday editing target, but the original request is unavailable and the technical validation explicitly does not check request satisfaction or soft preferences.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Cumulative weekday workload', 'assumption': 'The user can sustain the visible Monday–Friday pattern of daily gym, long editing blocks, and nightly live streams, plus the added replacement editing, without meaningful degradation.', 'evidence_gap': 'The calendar shows repeated late streams ending at 23:30, sleep beginning at 01:30, daily workouts, and substantial editing time, but gives no evidence about recovery needs, existing fatigue, or whether the added density is acceptable.', 'potential_impact': 'material', 'verification_source': 'user_context'}] Weaknesses: ['The proposal restores production time mostly by filling narrow gaps, but it under-weighs the cumulative workload across an already dense Monday–Friday pattern: daily gym from 10:00–11:30, editing from 12:30–18:00 on most days, and live streams from 20:00–23:30.', 'The Wednesday addition creates a continuous production-and-streaming stretch from 12:30 to 23:30: existing Video Editing 12:30–18:00, added Video Editing 18:00–20:00, then Live Stream 20:00–23:30. This leaves no visible transition, meal, decompression, or stream preparation time between intensive editing and an audience-facing commitment.', 'The Thursday addition ends exactly when the in-person sponsor meeting begins: Video Editing 12:30–15:00 followed immediately by In-Person Sponsor Strategy Meeting 15:00–18:00. The rationale acknowledges uncertainty about travel after the meeting, but not the equally relevant uncertainty about travel, setup, preparation, or context-switching before the meeting.', 'The Friday bridge hour runs immediately after Gym Workout 10:00–11:30 and directly into the existing Video Editing 12:30–18:00, producing a 6.5-hour editing block after a workout with no visible recovery, hygiene, or lunch margin between 11:30 and 18:00.', 'The alternatives considered are relevant, but they focus mainly on preserving commitments and recovering the assumed editing duration. They do not sufficiently examine whether recovering the full block is worth the added fatigue and transition pressure, especially across Wednesday through Friday.', 'Request satisfaction cannot be verified from the provided materials because the original request is not available. The plan may match the intended editing-duration goal, but that goal is described only as an assumed Thursday editing target in the rationale.']. Actionable feedback: The proposal is technically coherent in that it preserves fixed events and avoids checked overlaps, but the resulting routine is fragile from a human-manageability perspective. The most concerning change is the Wednesday 18:00–20:00 addition, which turns Wednesday into an uninterrupted 11-hour chain of editing and streaming from 12:30 to 23:30. Thursday also places editing directly before an in-person sponsor meeting, and Friday places editing directly after the gym and before a long existing editing block. A reconsideration should weigh whether fully recovering the assumed editing time is more important than preserving practical transition, food, preparation, and recovery margins. The Proposer should either redistribute the added work with stronger evidence that these tight transitions are acceptable, or justify why the user can sustainably handle the added density given the visible workload.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Video Editing",
+            "from_start": null,
+            "to_start": "2027-04-19T18:00:00+01:00",
+            "to_end": "2027-04-19T19:00:00+01:00",
+            "category": "video_production",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Video Editing",
+            "from_start": null,
+            "to_start": "2027-04-20T18:00:00+01:00",
+            "to_end": "2027-04-20T19:00:00+01:00",
+            "category": "video_production",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Video Editing",
+            "from_start": null,
+            "to_start": "2027-04-21T18:00:00+01:00",
+            "to_end": "2027-04-21T19:00:00+01:00",
+            "category": "video_production",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Video Editing",
+            "from_start": null,
+            "to_start": "2027-04-22T12:30:00+01:00",
+            "to_end": "2027-04-22T14:00:00+01:00",
+            "category": "video_production",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Video Editing",
+            "from_start": null,
+            "to_start": "2027-04-23T18:00:00+01:00",
+            "to_end": "2027-04-23T19:00:00+01:00",
+            "category": "video_production",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "The sponsorship meeting is fixed by hard constraint and is left unchanged.",
+            "Daily gym workouts are health-protected and are left unchanged.",
+            "The supplied calendar has no movable Thursday editing event, so replacement editing is added only in free intervals.",
+            "The plan preserves visible transition time before the in-person meeting and before each live stream.",
+            "The exact production target is not stated, so the amount is inferred from the recurring editing pattern.",
+            "Free calendar time does not confirm editing setup, travel, meal, or recovery needs."
+          ],
+          "priorities": [
+            "Recover the inferred displaced video-production volume without touching protected events.",
+            "Distribute the extra work across the week instead of creating one unusually compressed day.",
+            "Respect the Wednesday preference only to the extent it does not remove stream transition time.",
+            "Avoid using the immediate post-gym bridge that would create a longer continuous editing block."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Keep the prior Wednesday-heavy recovery plan",
+              "rejected_because": "It restores the same volume but creates a fragile continuous work-to-stream chain."
+            },
+            {
+              "option": "Use the hour immediately after the sponsor meeting",
+              "rejected_because": "It is closer to the displaced block but depends on unconfirmed travel and decompression after an in-person meeting."
+            },
+            {
+              "option": "Move or shorten a live stream",
+              "rejected_because": "It would open larger blocks but disrupts an audience-facing commitment with external participants."
+            },
+            {
+              "option": "Recover less than the inferred full target",
+              "rejected_because": "It would reduce fatigue risk but may leave the user behind on stated production targets."
+            }
+          ],
+          "summary": "Adds distributed replacement editing across available solo-production gaps while preserving the fixed sponsor meeting, protected workouts, and live streams; the main trade-off is a modest workload increase on several days instead of one tightly compressed recovery block."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-04-19T01:30:00+01:00",
+            "end": "2027-04-19T09:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_mon",
+            "title": "Gym Workout",
+            "start": "2027-04-19T10:00:00+01:00",
+            "end": "2027-04-19T11:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Mandatory workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "edit_mon",
+            "title": "Video Editing",
+            "start": "2027-04-19T12:30:00+01:00",
+            "end": "2027-04-19T18:00:00+01:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Editing.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_0",
+            "title": "Video Editing",
+            "start": "2027-04-19T18:00:00+01:00",
+            "end": "2027-04-19T19:00:00+01:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "stream_mon",
+            "title": "Live Stream",
+            "start": "2027-04-19T20:00:00+01:00",
+            "end": "2027-04-19T23:30:00+01:00",
+            "category": "streaming",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "chat"
+            ],
+            "description": "Stream.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-04-20T01:30:00+01:00",
+            "end": "2027-04-20T09:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_tue",
+            "title": "Gym Workout",
+            "start": "2027-04-20T10:00:00+01:00",
+            "end": "2027-04-20T11:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Mandatory workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "edit_tue",
+            "title": "Video Editing",
+            "start": "2027-04-20T12:30:00+01:00",
+            "end": "2027-04-20T18:00:00+01:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Editing.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_1",
+            "title": "Video Editing",
+            "start": "2027-04-20T18:00:00+01:00",
+            "end": "2027-04-20T19:00:00+01:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "stream_tue",
+            "title": "Live Stream",
+            "start": "2027-04-20T20:00:00+01:00",
+            "end": "2027-04-20T23:30:00+01:00",
+            "category": "streaming",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "chat"
+            ],
+            "description": "Stream.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-04-21T01:30:00+01:00",
+            "end": "2027-04-21T09:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_wed",
+            "title": "Gym Workout",
+            "start": "2027-04-21T10:00:00+01:00",
+            "end": "2027-04-21T11:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Mandatory workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "edit_wed",
+            "title": "Video Editing",
+            "start": "2027-04-21T12:30:00+01:00",
+            "end": "2027-04-21T18:00:00+01:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Editing.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_2",
+            "title": "Video Editing",
+            "start": "2027-04-21T18:00:00+01:00",
+            "end": "2027-04-21T19:00:00+01:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "stream_wed",
+            "title": "Live Stream",
+            "start": "2027-04-21T20:00:00+01:00",
+            "end": "2027-04-21T23:30:00+01:00",
+            "category": "streaming",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "chat"
+            ],
+            "description": "Stream.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-04-22T01:30:00+01:00",
+            "end": "2027-04-22T09:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_thu",
+            "title": "Gym Workout",
+            "start": "2027-04-22T10:00:00+01:00",
+            "end": "2027-04-22T11:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Mandatory workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_3",
+            "title": "Video Editing",
+            "start": "2027-04-22T12:30:00+01:00",
+            "end": "2027-04-22T14:00:00+01:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "sponsor_meeting_thu",
+            "title": "In-Person Sponsor Strategy Meeting",
+            "start": "2027-04-22T15:00:00+01:00",
+            "end": "2027-04-22T18:00:00+01:00",
+            "category": "sponsorships",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "sponsor_rep"
+            ],
+            "description": "Brand meeting.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "stream_thu",
+            "title": "Live Stream",
+            "start": "2027-04-22T20:00:00+01:00",
+            "end": "2027-04-22T23:30:00+01:00",
+            "category": "streaming",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "chat"
+            ],
+            "description": "Stream.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-04-23T01:30:00+01:00",
+            "end": "2027-04-23T09:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_fri",
+            "title": "Gym Workout",
+            "start": "2027-04-23T10:00:00+01:00",
+            "end": "2027-04-23T11:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Mandatory workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "edit_fri",
+            "title": "Video Editing",
+            "start": "2027-04-23T12:30:00+01:00",
+            "end": "2027-04-23T18:00:00+01:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Editing.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_4",
+            "title": "Video Editing",
+            "start": "2027-04-23T18:00:00+01:00",
+            "end": "2027-04-23T19:00:00+01:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "stream_fri",
+            "title": "Live Stream",
+            "start": "2027-04-23T20:00:00+01:00",
+            "end": "2027-04-23T23:30:00+01:00",
+            "category": "streaming",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "chat"
+            ],
+            "description": "Stream.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 4,
+          "alternatives": 4,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The revision directly addresses several prior practical risks: Wednesday now has a visible 19:00–20:00 transition before the live stream instead of editing directly into it, Thursday editing ends at 14:00 before the 15:00 in-person sponsor meeting, and Friday no longer starts editing immediately after the gym.",
+          "The added work is now spread across Monday through Friday, but this also means four days become gym 10:00–11:30, editing 12:30–19:00, and live stream 20:00–23:30. That is a substantial repeated daily load with only one visible hour between editing and streaming on Monday, Tuesday, Wednesday, and Friday.",
+          "The rationale acknowledges setup, meal, travel, and recovery uncertainty, but it still depends on the assumption that a one-hour pre-stream interval is enough after a long editing block on multiple consecutive days.",
+          "Thursday is more workable than in the prior version, but it still combines gym 10:00–11:30, editing 12:30–14:00, an in-person sponsor meeting 15:00–18:00, and a live stream 20:00–23:30. This is not technically contradictory, but it is a demanding context-switching day.",
+          "The plan continues to recover the full inferred editing volume even though the exact production target is not provided. Without the original request, it cannot be verified whether full recovery is necessary, preferable, or merely assumed.",
+          "Weekly context outside Monday–Friday is unavailable, so the review cannot determine whether there is later recovery time or whether this visible horizon sits inside a longer overloaded stretch."
+        ],
+        "feedback": "This revision is materially more plausible than the prior plan. It removes the strongest practical problems: no event now runs directly into the sponsor meeting, the Wednesday stream is no longer preceded by continuous editing until 20:00, and Friday no longer uses the immediate post-gym bridge. The resulting routine is still heavy, especially because Monday, Tuesday, Wednesday, and Friday each extend editing to 19:00 before a 20:00 live stream, after a morning gym session. That one-hour gap may be enough for some users, but the calendar itself does not show whether it covers food, setup, decompression, or preparation. On balance, the proposal is coherent and reasonably justified as a distributed recovery plan, but its success depends on unverified tolerance for repeated long production-and-streaming days and on whether the full inferred editing target is actually required.",
+        "plausibility_review": {
+          "revision_required": false,
+          "severity": "low",
+          "reason": "The prior moderate concerns received a grounded and visible response: the most fragile immediate transitions were replaced with at least one visible hour of margin, and the workload was distributed rather than concentrated. The remaining concerns are real human-quality risks, especially cumulative fatigue and the repeated 19:00–20:00 pre-stream gap, but the revised organization is not plainly unsustainable from the visible evidence alone. Another review could improve substantiation, but there is not a concrete remaining scheduling flaw strong enough to require revision.",
+          "suggested_improvement": "If the Proposer has fuller context, they should explicitly substantiate that the repeated one-hour pre-stream gaps and the full recovered editing volume are acceptable, or reconsider whether some recovery target can be reduced or distributed differently if the user’s preparation, meals, or fatigue tolerance make the current pattern brittle."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Full recovered editing volume",
+            "assumption": "Recovering the full inferred displaced video-editing volume is necessary or preferable.",
+            "evidence_gap": "The rationale says the exact production target is not stated and the amount is inferred from a recurring editing pattern; the original request is unavailable and technical validation does not check request satisfaction.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Repeated pre-stream transition time",
+            "assumption": "The 19:00–20:00 gap after editing is enough for food, decompression, stream setup, and any preparation on Monday, Tuesday, Wednesday, and Friday.",
+            "evidence_gap": "The calendar shows Video Editing ending at 19:00 and Live Stream starting at 20:00 on four days, but provides no evidence about setup requirements, meal routines, or how much recovery the user needs before an audience-facing commitment.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Cumulative weekday workload",
+            "assumption": "The user can sustain daily gym, long editing blocks, and nightly live streams across the visible Monday–Friday horizon with the added replacement editing.",
+            "evidence_gap": "The calendar shows repeated late streams ending at 23:30, sleep from 01:30–09:30, daily workouts from 10:00–11:30, and substantial editing, but gives no evidence about fatigue, recovery capacity, or workload outside the visible horizon.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Thursday in-person meeting logistics",
+            "assumption": "The user can complete editing 12:30–14:00 and be ready for the in-person sponsor meeting at 15:00.",
+            "evidence_gap": "The revised calendar provides a one-hour gap before the meeting, but does not verify location, travel, preparation, or whether editing can occur from a place compatible with attending the meeting.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Weekly recovery outside visible scope",
+            "assumption": "The user has adequate recovery or lower-load time outside the visible Monday–Friday calendar.",
+            "evidence_gap": "Only the scenario horizon is shown; unseen days cannot be assumed free or restorative.",
+            "potential_impact": "minor",
+            "verification_source": "unknown"
+          }
+        ],
+        "overall": 4.0
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": true,
+        "plausibility_revision_required": false,
+        "accepted": true,
+        "revision_causes": []
+      },
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": [
+        {
+          "iteration": 0,
+          "proposal": {
+            "changes": [
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Video Editing",
+                "from_start": null,
+                "to_start": "2027-04-22T12:30:00+01:00",
+                "to_end": "2027-04-22T15:00:00+01:00",
+                "category": "video_production",
+                "importance": 4,
+                "participants": [
+                  "user"
+                ]
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Video Editing",
+                "from_start": null,
+                "to_start": "2027-04-21T18:00:00+01:00",
+                "to_end": "2027-04-21T20:00:00+01:00",
+                "category": "video_production",
+                "importance": 4,
+                "participants": [
+                  "user"
+                ]
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Video Editing",
+                "from_start": null,
+                "to_start": "2027-04-23T11:30:00+01:00",
+                "to_end": "2027-04-23T12:30:00+01:00",
+                "category": "video_production",
+                "importance": 4,
+                "participants": [
+                  "user"
+                ]
+              }
+            ],
+            "rationale": {
+              "constraints": [
+                "The sponsorship meeting is fixed by hard constraint, so no move or deletion is proposed.",
+                "Daily gym workouts are health-protected and left unchanged.",
+                "No Thursday editing event exists in the supplied calendar, so the plan creates replacement production time instead of moving an event.",
+                "Wednesday afternoon is already occupied by editing, so only the adjacent pre-stream gap is usable.",
+                "The calendar does not confirm travel time from the in-person meeting or sponsor-site editing feasibility."
+              ],
+              "priorities": [
+                "Preserve mandatory sponsorship and health commitments.",
+                "Keep the normal live stream schedule unchanged.",
+                "Recover a full assumed Thursday editing block using available solo-production slots.",
+                "Use Wednesday as much as the supplied calendar allows."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Use the hour immediately after the sponsor meeting instead of the Friday bridge hour",
+                  "rejected_because": "This is closer to the displaced block but may be infeasible without confirmed travel time after an in-person meeting."
+                },
+                {
+                  "option": "Move or shorten a live stream",
+                  "rejected_because": "This would open a larger production block but disrupts an external audience-facing commitment."
+                },
+                {
+                  "option": "Use only the Thursday pre-meeting block plus the Wednesday extension",
+                  "rejected_because": "This fits the preference better but leaves one hour of the assumed Thursday editing target uncovered."
+                }
+              ],
+              "summary": "Adds a split replacement editing plan around the protected sponsor meeting, using the only usable Wednesday extension and a small Friday bridge hour; the main trade-off is that one recovery hour lands after Thursday because Wednesday afternoon is already occupied."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "sleep_mon",
+                "title": "Sleep",
+                "start": "2027-04-19T01:30:00+01:00",
+                "end": "2027-04-19T09:30:00+01:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_mon",
+                "title": "Gym Workout",
+                "start": "2027-04-19T10:00:00+01:00",
+                "end": "2027-04-19T11:30:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Mandatory workout.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "edit_mon",
+                "title": "Video Editing",
+                "start": "2027-04-19T12:30:00+01:00",
+                "end": "2027-04-19T18:00:00+01:00",
+                "category": "video_production",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Editing.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "stream_mon",
+                "title": "Live Stream",
+                "start": "2027-04-19T20:00:00+01:00",
+                "end": "2027-04-19T23:30:00+01:00",
+                "category": "streaming",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "chat"
+                ],
+                "description": "Stream.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_tue",
+                "title": "Sleep",
+                "start": "2027-04-20T01:30:00+01:00",
+                "end": "2027-04-20T09:30:00+01:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_tue",
+                "title": "Gym Workout",
+                "start": "2027-04-20T10:00:00+01:00",
+                "end": "2027-04-20T11:30:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Mandatory workout.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "edit_tue",
+                "title": "Video Editing",
+                "start": "2027-04-20T12:30:00+01:00",
+                "end": "2027-04-20T18:00:00+01:00",
+                "category": "video_production",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Editing.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "stream_tue",
+                "title": "Live Stream",
+                "start": "2027-04-20T20:00:00+01:00",
+                "end": "2027-04-20T23:30:00+01:00",
+                "category": "streaming",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "chat"
+                ],
+                "description": "Stream.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_wed",
+                "title": "Sleep",
+                "start": "2027-04-21T01:30:00+01:00",
+                "end": "2027-04-21T09:30:00+01:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_wed",
+                "title": "Gym Workout",
+                "start": "2027-04-21T10:00:00+01:00",
+                "end": "2027-04-21T11:30:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Mandatory workout.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "edit_wed",
+                "title": "Video Editing",
+                "start": "2027-04-21T12:30:00+01:00",
+                "end": "2027-04-21T18:00:00+01:00",
+                "category": "video_production",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Editing.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_1",
+                "title": "Video Editing",
+                "start": "2027-04-21T18:00:00+01:00",
+                "end": "2027-04-21T20:00:00+01:00",
+                "category": "video_production",
+                "importance": 4,
+                "fixed": null,
+                "participants": [
+                  "user"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "stream_wed",
+                "title": "Live Stream",
+                "start": "2027-04-21T20:00:00+01:00",
+                "end": "2027-04-21T23:30:00+01:00",
+                "category": "streaming",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "chat"
+                ],
+                "description": "Stream.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2027-04-22T01:30:00+01:00",
+                "end": "2027-04-22T09:30:00+01:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_thu",
+                "title": "Gym Workout",
+                "start": "2027-04-22T10:00:00+01:00",
+                "end": "2027-04-22T11:30:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Mandatory workout.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_0",
+                "title": "Video Editing",
+                "start": "2027-04-22T12:30:00+01:00",
+                "end": "2027-04-22T15:00:00+01:00",
+                "category": "video_production",
+                "importance": 4,
+                "fixed": null,
+                "participants": [
+                  "user"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "sponsor_meeting_thu",
+                "title": "In-Person Sponsor Strategy Meeting",
+                "start": "2027-04-22T15:00:00+01:00",
+                "end": "2027-04-22T18:00:00+01:00",
+                "category": "sponsorships",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "sponsor_rep"
+                ],
+                "description": "Brand meeting.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "stream_thu",
+                "title": "Live Stream",
+                "start": "2027-04-22T20:00:00+01:00",
+                "end": "2027-04-22T23:30:00+01:00",
+                "category": "streaming",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "chat"
+                ],
+                "description": "Stream.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_fri",
+                "title": "Sleep",
+                "start": "2027-04-23T01:30:00+01:00",
+                "end": "2027-04-23T09:30:00+01:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_fri",
+                "title": "Gym Workout",
+                "start": "2027-04-23T10:00:00+01:00",
+                "end": "2027-04-23T11:30:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Mandatory workout.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_2",
+                "title": "Video Editing",
+                "start": "2027-04-23T11:30:00+01:00",
+                "end": "2027-04-23T12:30:00+01:00",
+                "category": "video_production",
+                "importance": 4,
+                "fixed": null,
+                "participants": [
+                  "user"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "edit_fri",
+                "title": "Video Editing",
+                "start": "2027-04-23T12:30:00+01:00",
+                "end": "2027-04-23T18:00:00+01:00",
+                "category": "video_production",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Editing.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "stream_fri",
+                "title": "Live Stream",
+                "start": "2027-04-23T20:00:00+01:00",
+                "end": "2027-04-23T23:30:00+01:00",
+                "category": "streaming",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "chat"
+                ],
+                "description": "Stream.",
+                "origin": "existing",
+                "change_status": "preserved"
+              }
+            ],
+            "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+          },
+          "plausibility_review": {
+            "revision_required": true,
+            "severity": "moderate",
+            "reason": "The added events significantly increase pressure on an already repetitive high-output week. The schedule remains technically valid, but Wednesday becomes a continuous 12:30–23:30 work/stream sequence, Thursday has no visible transition before an in-person sponsor meeting, and Friday extends work immediately after the gym into a long editing block. These are concrete human-quality risks that could affect performance, fatigue, preparation, and sustainability.",
+            "suggested_improvement": "Reconsider the distribution of the replacement editing time with explicit attention to recovery, meals, setup, travel/preparation around the in-person meeting, and the cumulative Wednesday–Friday workload. The same operations could be retained only if the Proposer can ground why the tight transitions and extended blocks are manageable in the fuller context."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Wednesday extended editing before live stream",
+              "assumption": "The user can work from 12:30 to 23:30 across editing and live streaming without a visible break between the added editing block and the stream.",
+              "evidence_gap": "The calendar shows continuous Video Editing 12:30–20:00 followed immediately by Live Stream 20:00–23:30, but provides no evidence about meal timing, stream setup needs, fatigue tolerance, or whether editing right up to the stream is acceptable.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Thursday transition into in-person sponsor meeting",
+              "assumption": "Ending Video Editing at 15:00 and starting the In-Person Sponsor Strategy Meeting at 15:00 is practically workable.",
+              "evidence_gap": "The proposal notes that travel time and sponsor-site editing feasibility are not confirmed, but the calendar still places editing immediately before the in-person meeting with no visible travel, setup, preparation, or context-switching time.",
+              "potential_impact": "potentially_blocking",
+              "verification_source": "unknown"
+            },
+            {
+              "subject": "Friday post-gym editing bridge",
+              "assumption": "The user can move directly from Gym Workout ending at 11:30 into Video Editing 11:30–18:00 without needing visible recovery, hygiene, food, or setup time.",
+              "evidence_gap": "The added Friday editing event begins at exactly 11:30 after the gym and continues directly into the existing 12:30–18:00 editing block; no supporting context confirms this is sustainable.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Recovered editing-duration target",
+              "assumption": "Recovering the full assumed Thursday editing block is necessary or preferable to leaving one hour uncovered.",
+              "evidence_gap": "The rationale refers to a full assumed Thursday editing target, but the original request is unavailable and the technical validation explicitly does not check request satisfaction or soft preferences.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Cumulative weekday workload",
+              "assumption": "The user can sustain the visible Monday–Friday pattern of daily gym, long editing blocks, and nightly live streams, plus the added replacement editing, without meaningful degradation.",
+              "evidence_gap": "The calendar shows repeated late streams ending at 23:30, sleep beginning at 01:30, daily workouts, and substantial editing time, but gives no evidence about recovery needs, existing fatigue, or whether the added density is acceptable.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            }
+          ],
+          "weaknesses": [
+            "The proposal restores production time mostly by filling narrow gaps, but it under-weighs the cumulative workload across an already dense Monday–Friday pattern: daily gym from 10:00–11:30, editing from 12:30–18:00 on most days, and live streams from 20:00–23:30.",
+            "The Wednesday addition creates a continuous production-and-streaming stretch from 12:30 to 23:30: existing Video Editing 12:30–18:00, added Video Editing 18:00–20:00, then Live Stream 20:00–23:30. This leaves no visible transition, meal, decompression, or stream preparation time between intensive editing and an audience-facing commitment.",
+            "The Thursday addition ends exactly when the in-person sponsor meeting begins: Video Editing 12:30–15:00 followed immediately by In-Person Sponsor Strategy Meeting 15:00–18:00. The rationale acknowledges uncertainty about travel after the meeting, but not the equally relevant uncertainty about travel, setup, preparation, or context-switching before the meeting.",
+            "The Friday bridge hour runs immediately after Gym Workout 10:00–11:30 and directly into the existing Video Editing 12:30–18:00, producing a 6.5-hour editing block after a workout with no visible recovery, hygiene, or lunch margin between 11:30 and 18:00.",
+            "The alternatives considered are relevant, but they focus mainly on preserving commitments and recovering the assumed editing duration. They do not sufficiently examine whether recovering the full block is worth the added fatigue and transition pressure, especially across Wednesday through Friday.",
+            "Request satisfaction cannot be verified from the provided materials because the original request is not available. The plan may match the intended editing-duration goal, but that goal is described only as an assumed Thursday editing target in the rationale."
+          ],
+          "feedback": "The proposal is technically coherent in that it preserves fixed events and avoids checked overlaps, but the resulting routine is fragile from a human-manageability perspective. The most concerning change is the Wednesday 18:00–20:00 addition, which turns Wednesday into an uninterrupted 11-hour chain of editing and streaming from 12:30 to 23:30. Thursday also places editing directly before an in-person sponsor meeting, and Friday places editing directly after the gym and before a long existing editing block. A reconsideration should weigh whether fully recovering the assumed editing time is more important than preserving practical transition, food, preparation, and recovery margins. The Proposer should either redistribute the added work with stronger evidence that these tight transitions are acceptable, or justify why the user can sustainably handle the added density given the visible workload."
+        }
+      ],
+      "unresolved_assumptions": [
+        {
+          "subject": "Full recovered editing volume",
+          "assumption": "Recovering the full inferred displaced video-editing volume is necessary or preferable.",
+          "evidence_gap": "The rationale says the exact production target is not stated and the amount is inferred from a recurring editing pattern; the original request is unavailable and technical validation does not check request satisfaction.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Repeated pre-stream transition time",
+          "assumption": "The 19:00–20:00 gap after editing is enough for food, decompression, stream setup, and any preparation on Monday, Tuesday, Wednesday, and Friday.",
+          "evidence_gap": "The calendar shows Video Editing ending at 19:00 and Live Stream starting at 20:00 on four days, but provides no evidence about setup requirements, meal routines, or how much recovery the user needs before an audience-facing commitment.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Cumulative weekday workload",
+          "assumption": "The user can sustain daily gym, long editing blocks, and nightly live streams across the visible Monday–Friday horizon with the added replacement editing.",
+          "evidence_gap": "The calendar shows repeated late streams ending at 23:30, sleep from 01:30–09:30, daily workouts from 10:00–11:30, and substantial editing, but gives no evidence about fatigue, recovery capacity, or workload outside the visible horizon.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Thursday in-person meeting logistics",
+          "assumption": "The user can complete editing 12:30–14:00 and be ready for the in-person sponsor meeting at 15:00.",
+          "evidence_gap": "The revised calendar provides a one-hour gap before the meeting, but does not verify location, travel, preparation, or whether editing can occur from a place compatible with attending the meeting.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Weekly recovery outside visible scope",
+          "assumption": "The user has adequate recovery or lower-load time outside the visible Monday–Friday calendar.",
+          "evidence_gap": "Only the scenario horizon is shown; unseen days cannot be assumed free or restorative.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        }
+      ]
+    }
+  ],
+  "initial_proposal": {
+    "changes": [
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Video Editing",
+        "from_start": null,
+        "to_start": "2027-04-22T12:30:00+01:00",
+        "to_end": "2027-04-22T15:00:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Video Editing",
+        "from_start": null,
+        "to_start": "2027-04-21T18:00:00+01:00",
+        "to_end": "2027-04-21T20:00:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Video Editing",
+        "from_start": null,
+        "to_start": "2027-04-23T11:30:00+01:00",
+        "to_end": "2027-04-23T12:30:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "The sponsorship meeting is fixed by hard constraint, so no move or deletion is proposed.",
+        "Daily gym workouts are health-protected and left unchanged.",
+        "No Thursday editing event exists in the supplied calendar, so the plan creates replacement production time instead of moving an event.",
+        "Wednesday afternoon is already occupied by editing, so only the adjacent pre-stream gap is usable.",
+        "The calendar does not confirm travel time from the in-person meeting or sponsor-site editing feasibility."
+      ],
+      "priorities": [
+        "Preserve mandatory sponsorship and health commitments.",
+        "Keep the normal live stream schedule unchanged.",
+        "Recover a full assumed Thursday editing block using available solo-production slots.",
+        "Use Wednesday as much as the supplied calendar allows."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Use the hour immediately after the sponsor meeting instead of the Friday bridge hour",
+          "rejected_because": "This is closer to the displaced block but may be infeasible without confirmed travel time after an in-person meeting."
+        },
+        {
+          "option": "Move or shorten a live stream",
+          "rejected_because": "This would open a larger production block but disrupts an external audience-facing commitment."
+        },
+        {
+          "option": "Use only the Thursday pre-meeting block plus the Wednesday extension",
+          "rejected_because": "This fits the preference better but leaves one hour of the assumed Thursday editing target uncovered."
+        }
+      ],
+      "summary": "Adds a split replacement editing plan around the protected sponsor meeting, using the only usable Wednesday extension and a small Friday bridge hour; the main trade-off is that one recovery hour lands after Thursday because Wednesday afternoon is already occupied."
+    }
+  },
+  "final_proposal": {
+    "changes": [
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Video Editing",
+        "from_start": null,
+        "to_start": "2027-04-19T18:00:00+01:00",
+        "to_end": "2027-04-19T19:00:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Video Editing",
+        "from_start": null,
+        "to_start": "2027-04-20T18:00:00+01:00",
+        "to_end": "2027-04-20T19:00:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Video Editing",
+        "from_start": null,
+        "to_start": "2027-04-21T18:00:00+01:00",
+        "to_end": "2027-04-21T19:00:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Video Editing",
+        "from_start": null,
+        "to_start": "2027-04-22T12:30:00+01:00",
+        "to_end": "2027-04-22T14:00:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Video Editing",
+        "from_start": null,
+        "to_start": "2027-04-23T18:00:00+01:00",
+        "to_end": "2027-04-23T19:00:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "The sponsorship meeting is fixed by hard constraint and is left unchanged.",
+        "Daily gym workouts are health-protected and are left unchanged.",
+        "The supplied calendar has no movable Thursday editing event, so replacement editing is added only in free intervals.",
+        "The plan preserves visible transition time before the in-person meeting and before each live stream.",
+        "The exact production target is not stated, so the amount is inferred from the recurring editing pattern.",
+        "Free calendar time does not confirm editing setup, travel, meal, or recovery needs."
+      ],
+      "priorities": [
+        "Recover the inferred displaced video-production volume without touching protected events.",
+        "Distribute the extra work across the week instead of creating one unusually compressed day.",
+        "Respect the Wednesday preference only to the extent it does not remove stream transition time.",
+        "Avoid using the immediate post-gym bridge that would create a longer continuous editing block."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Keep the prior Wednesday-heavy recovery plan",
+          "rejected_because": "It restores the same volume but creates a fragile continuous work-to-stream chain."
+        },
+        {
+          "option": "Use the hour immediately after the sponsor meeting",
+          "rejected_because": "It is closer to the displaced block but depends on unconfirmed travel and decompression after an in-person meeting."
+        },
+        {
+          "option": "Move or shorten a live stream",
+          "rejected_because": "It would open larger blocks but disrupts an audience-facing commitment with external participants."
+        },
+        {
+          "option": "Recover less than the inferred full target",
+          "rejected_because": "It would reduce fatigue risk but may leave the user behind on stated production targets."
+        }
+      ],
+      "summary": "Adds distributed replacement editing across available solo-production gaps while preserving the fixed sponsor meeting, protected workouts, and live streams; the main trade-off is a modest workload increase on several days instead of one tightly compressed recovery block."
+    }
+  },
+  "final_score": 4.0,
+  "refinements": 1,
+  "critic_accepted": true,
+  "decision": "defer",
+  "reasons": [
+    "mais de 2 mudanças"
+  ],
+  "status": "proposal_ready",
+  "critic_input_version": "final_calendar_v1",
+  "critic_policy_version": "uncertainty_review_v2",
+  "result_calendar_version": "validated_added_metadata_v2",
+  "final_result_calendar": {
+    "timezone": "Europe/Lisbon",
+    "coverage": "all_events_in_scenario_after_simulation",
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-04-19T01:30:00+01:00",
+        "end": "2027-04-19T09:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_mon",
+        "title": "Gym Workout",
+        "start": "2027-04-19T10:00:00+01:00",
+        "end": "2027-04-19T11:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "edit_mon",
+        "title": "Video Editing",
+        "start": "2027-04-19T12:30:00+01:00",
+        "end": "2027-04-19T18:00:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Editing.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_0",
+        "title": "Video Editing",
+        "start": "2027-04-19T18:00:00+01:00",
+        "end": "2027-04-19T19:00:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "stream_mon",
+        "title": "Live Stream",
+        "start": "2027-04-19T20:00:00+01:00",
+        "end": "2027-04-19T23:30:00+01:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-04-20T01:30:00+01:00",
+        "end": "2027-04-20T09:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_tue",
+        "title": "Gym Workout",
+        "start": "2027-04-20T10:00:00+01:00",
+        "end": "2027-04-20T11:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "edit_tue",
+        "title": "Video Editing",
+        "start": "2027-04-20T12:30:00+01:00",
+        "end": "2027-04-20T18:00:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Editing.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_1",
+        "title": "Video Editing",
+        "start": "2027-04-20T18:00:00+01:00",
+        "end": "2027-04-20T19:00:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "stream_tue",
+        "title": "Live Stream",
+        "start": "2027-04-20T20:00:00+01:00",
+        "end": "2027-04-20T23:30:00+01:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-04-21T01:30:00+01:00",
+        "end": "2027-04-21T09:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_wed",
+        "title": "Gym Workout",
+        "start": "2027-04-21T10:00:00+01:00",
+        "end": "2027-04-21T11:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "edit_wed",
+        "title": "Video Editing",
+        "start": "2027-04-21T12:30:00+01:00",
+        "end": "2027-04-21T18:00:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Editing.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_2",
+        "title": "Video Editing",
+        "start": "2027-04-21T18:00:00+01:00",
+        "end": "2027-04-21T19:00:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "stream_wed",
+        "title": "Live Stream",
+        "start": "2027-04-21T20:00:00+01:00",
+        "end": "2027-04-21T23:30:00+01:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-04-22T01:30:00+01:00",
+        "end": "2027-04-22T09:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_thu",
+        "title": "Gym Workout",
+        "start": "2027-04-22T10:00:00+01:00",
+        "end": "2027-04-22T11:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_3",
+        "title": "Video Editing",
+        "start": "2027-04-22T12:30:00+01:00",
+        "end": "2027-04-22T14:00:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "sponsor_meeting_thu",
+        "title": "In-Person Sponsor Strategy Meeting",
+        "start": "2027-04-22T15:00:00+01:00",
+        "end": "2027-04-22T18:00:00+01:00",
+        "category": "sponsorships",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "sponsor_rep"
+        ],
+        "description": "Brand meeting.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "stream_thu",
+        "title": "Live Stream",
+        "start": "2027-04-22T20:00:00+01:00",
+        "end": "2027-04-22T23:30:00+01:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-04-23T01:30:00+01:00",
+        "end": "2027-04-23T09:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_fri",
+        "title": "Gym Workout",
+        "start": "2027-04-23T10:00:00+01:00",
+        "end": "2027-04-23T11:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "edit_fri",
+        "title": "Video Editing",
+        "start": "2027-04-23T12:30:00+01:00",
+        "end": "2027-04-23T18:00:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Editing.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_4",
+        "title": "Video Editing",
+        "start": "2027-04-23T18:00:00+01:00",
+        "end": "2027-04-23T19:00:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "stream_fri",
+        "title": "Live Stream",
+        "start": "2027-04-23T20:00:00+01:00",
+        "end": "2027-04-23T23:30:00+01:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream.",
+        "origin": "existing",
+        "change_status": "preserved"
+      }
+    ],
+    "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+  },
+  "final_unresolved_assumptions": [
+    {
+      "subject": "Full recovered editing volume",
+      "assumption": "Recovering the full inferred displaced video-editing volume is necessary or preferable.",
+      "evidence_gap": "The rationale says the exact production target is not stated and the amount is inferred from a recurring editing pattern; the original request is unavailable and technical validation does not check request satisfaction.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Repeated pre-stream transition time",
+      "assumption": "The 19:00–20:00 gap after editing is enough for food, decompression, stream setup, and any preparation on Monday, Tuesday, Wednesday, and Friday.",
+      "evidence_gap": "The calendar shows Video Editing ending at 19:00 and Live Stream starting at 20:00 on four days, but provides no evidence about setup requirements, meal routines, or how much recovery the user needs before an audience-facing commitment.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Cumulative weekday workload",
+      "assumption": "The user can sustain daily gym, long editing blocks, and nightly live streams across the visible Monday–Friday horizon with the added replacement editing.",
+      "evidence_gap": "The calendar shows repeated late streams ending at 23:30, sleep from 01:30–09:30, daily workouts from 10:00–11:30, and substantial editing, but gives no evidence about fatigue, recovery capacity, or workload outside the visible horizon.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Thursday in-person meeting logistics",
+      "assumption": "The user can complete editing 12:30–14:00 and be ready for the in-person sponsor meeting at 15:00.",
+      "evidence_gap": "The revised calendar provides a one-hour gap before the meeting, but does not verify location, travel, preparation, or whether editing can occur from a place compatible with attending the meeting.",
+      "potential_impact": "material",
+      "verification_source": "unknown"
+    },
+    {
+      "subject": "Weekly recovery outside visible scope",
+      "assumption": "The user has adequate recovery or lower-load time outside the visible Monday–Friday calendar.",
+      "evidence_gap": "Only the scenario horizon is shown; unseen days cannot be assumed free or restorative.",
+      "potential_impact": "minor",
+      "verification_source": "unknown"
+    }
+  ],
+  "uncertainty_history": [
+    {
+      "iteration": 0,
+      "unresolved_assumptions": [
+        {
+          "subject": "Wednesday extended editing before live stream",
+          "assumption": "The user can work from 12:30 to 23:30 across editing and live streaming without a visible break between the added editing block and the stream.",
+          "evidence_gap": "The calendar shows continuous Video Editing 12:30–20:00 followed immediately by Live Stream 20:00–23:30, but provides no evidence about meal timing, stream setup needs, fatigue tolerance, or whether editing right up to the stream is acceptable.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Thursday transition into in-person sponsor meeting",
+          "assumption": "Ending Video Editing at 15:00 and starting the In-Person Sponsor Strategy Meeting at 15:00 is practically workable.",
+          "evidence_gap": "The proposal notes that travel time and sponsor-site editing feasibility are not confirmed, but the calendar still places editing immediately before the in-person meeting with no visible travel, setup, preparation, or context-switching time.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Friday post-gym editing bridge",
+          "assumption": "The user can move directly from Gym Workout ending at 11:30 into Video Editing 11:30–18:00 without needing visible recovery, hygiene, food, or setup time.",
+          "evidence_gap": "The added Friday editing event begins at exactly 11:30 after the gym and continues directly into the existing 12:30–18:00 editing block; no supporting context confirms this is sustainable.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Recovered editing-duration target",
+          "assumption": "Recovering the full assumed Thursday editing block is necessary or preferable to leaving one hour uncovered.",
+          "evidence_gap": "The rationale refers to a full assumed Thursday editing target, but the original request is unavailable and the technical validation explicitly does not check request satisfaction or soft preferences.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Cumulative weekday workload",
+          "assumption": "The user can sustain the visible Monday–Friday pattern of daily gym, long editing blocks, and nightly live streams, plus the added replacement editing, without meaningful degradation.",
+          "evidence_gap": "The calendar shows repeated late streams ending at 23:30, sleep beginning at 01:30, daily workouts, and substantial editing time, but gives no evidence about recovery needs, existing fatigue, or whether the added density is acceptable.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    },
+    {
+      "iteration": 1,
+      "unresolved_assumptions": [
+        {
+          "subject": "Full recovered editing volume",
+          "assumption": "Recovering the full inferred displaced video-editing volume is necessary or preferable.",
+          "evidence_gap": "The rationale says the exact production target is not stated and the amount is inferred from a recurring editing pattern; the original request is unavailable and technical validation does not check request satisfaction.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Repeated pre-stream transition time",
+          "assumption": "The 19:00–20:00 gap after editing is enough for food, decompression, stream setup, and any preparation on Monday, Tuesday, Wednesday, and Friday.",
+          "evidence_gap": "The calendar shows Video Editing ending at 19:00 and Live Stream starting at 20:00 on four days, but provides no evidence about setup requirements, meal routines, or how much recovery the user needs before an audience-facing commitment.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Cumulative weekday workload",
+          "assumption": "The user can sustain daily gym, long editing blocks, and nightly live streams across the visible Monday–Friday horizon with the added replacement editing.",
+          "evidence_gap": "The calendar shows repeated late streams ending at 23:30, sleep from 01:30–09:30, daily workouts from 10:00–11:30, and substantial editing, but gives no evidence about fatigue, recovery capacity, or workload outside the visible horizon.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Thursday in-person meeting logistics",
+          "assumption": "The user can complete editing 12:30–14:00 and be ready for the in-person sponsor meeting at 15:00.",
+          "evidence_gap": "The revised calendar provides a one-hour gap before the meeting, but does not verify location, travel, preparation, or whether editing can occur from a place compatible with attending the meeting.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Weekly recovery outside visible scope",
+          "assumption": "The user has adequate recovery or lower-load time outside the visible Monday–Friday calendar.",
+          "evidence_gap": "Only the scenario horizon is shown; unseen days cannot be assumed free or restorative.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        }
+      ]
+    }
+  ],
+  "schema_version": "2.0",
+  "profile_id": "content_creator_streamer_01__content_creator_sponsor_inperson_meeting_001",
+  "scenario_sha256": "8586540f3bc3f6645bb950521cb8b75441706737d65319b37f6d7423ca3a148d",
+  "aggregate_requirements_sha256": null,
+  "confirmed_changes_sha256": null,
+  "simulator_version": "calendar_v2_validated_added_metadata_v2",
+  "dataset_manifest_sha256": "28af38846fb8995651d5f63ab63402e36147dc0915a2bfcd5379747ea531ffad",
+  "split": "train",
+  "run_id": "b997f17d3c1649a990d93a30f3fb07fa",
+  "experiment_id": null,
+  "repeat_index": 0,
+  "generated_at": "2026-11-23T16:37:56.482219+00:00",
+  "prompt_versions": {
+    "proposer_sha256": "ae6fa59cccb86c31f34f66d07d241660b1feadf852ebf1b594bc85addab86985",
+    "proposer_wire_schema_version": "compact_proposal_v1",
+    "proposer_wire_schema_sha256": "f504fbcd7e939c43e055e2f188feb22097a284bcd9b043227d868e559547b865",
+    "proposer_revision_sha256": "3f0fe7f221013700694a22984560612013e9804072ffde4538e1329b9708ac95",
+    "critic_sha256": "1686688cdd4bc63abb12e6633ef9dbb9b62d69b69aba1c4805a201657cc5bb34"
+  },
+  "seconds": 93.847,
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [],
+    "valid": true
+  }
+}

@@ -1,0 +1,2742 @@
+{
+  "configuration": "B",
+  "scenario_id": "elite_athlete_student_academic_week_festivals_001",
+  "family": "elite_athlete_student_schedule_conflict",
+  "category": "v2",
+  "proposer_provider": "iaedu",
+  "proposer_model": "GPT-5.5",
+  "proposer_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_provider": "iaedu",
+  "critic_model": "GPT-5.5",
+  "critic_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_settings": {
+    "threshold": 4.0,
+    "max_refinements": 3,
+    "min_dimension_score": 1
+  },
+  "iterations": [
+    {
+      "index": 0,
+      "proposer_feedback": null,
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "delete",
+            "event_id": "class_mon",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Exam study block",
+            "from_start": null,
+            "to_start": "2027-05-10T10:00:00+01:00",
+            "to_end": "2027-05-10T12:00:00+01:00",
+            "category": "exams",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "delete",
+            "event_id": "class_tue",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Exam study block",
+            "from_start": null,
+            "to_start": "2027-05-11T10:00:00+01:00",
+            "to_end": "2027-05-11T12:00:00+01:00",
+            "category": "exams",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Student Association Outdoor Picnic & Lunch on campus",
+            "from_start": null,
+            "to_start": "2027-05-12T12:30:00+01:00",
+            "to_end": "2027-05-12T15:00:00+01:00",
+            "category": "social",
+            "importance": 2,
+            "participants": [
+              "classmates",
+              "Student Association"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Friday Sunset Acoustic Session & Dinner",
+            "from_start": null,
+            "to_start": "2027-05-14T19:30:00+01:00",
+            "to_end": "2027-05-14T21:30:00+01:00",
+            "category": "social",
+            "importance": 2,
+            "participants": [
+              "classmates",
+              "Student Association"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Sleep",
+            "from_start": null,
+            "to_start": "2027-05-14T22:30:00+01:00",
+            "to_end": "2027-05-15T06:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "participants": [
+              "user"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "Training and existing sleep blocks are protected, so none are moved or deleted.",
+            "The Tuesday late-night Serenata conflicts with the protected sleep window before 07:00 training, so it must be declined.",
+            "Regular lectures can be removed because the request states they are suspended for Academic Week.",
+            "The Wednesday picnic fits between physio and afternoon training but still needs RSVP confirmation.",
+            "The Friday dinner ends before the 22:30 sleep block, but attendance still needs RSVP confirmation.",
+            "Venue availability, exact travel time and any food logistics are not confirmed."
+          ],
+          "priorities": [
+            "The freed lecture hours are used for the requested 4 hours of exam study.",
+            "Daytime and early-evening social events are preferred over late-night events.",
+            "The plan preserves all high-priority training, sleep and health commitments."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Use Wednesday 11:00–12:00 plus Thursday morning for study",
+              "rejected_because": "Rejected because the removed lecture slots already provide the full 4 hours with less fragmentation."
+            },
+            {
+              "option": "Attend part of the Tuesday Serenata only",
+              "rejected_because": "Rejected because even partial attendance during 23:30–03:00 violates the protected sleep block."
+            },
+            {
+              "option": "Skip Friday dinner to reduce social load",
+              "rejected_because": "Rejected because it does not conflict with protected commitments and ends before sleep."
+            }
+          ],
+          "summary": "Attend the Wednesday picnic and Friday dinner, decline the Tuesday late-night Serenata, remove the suspended lectures, and use the freed Monday and Tuesday morning lecture slots for 4 hours of exam study while adding Friday night sleep protection."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-05-09T22:30:00+01:00",
+            "end": "2027-05-10T06:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_mon",
+            "title": "Morning Strength Training",
+            "start": "2027-05-10T07:00:00+01:00",
+            "end": "2027-05-10T09:00:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_1",
+            "title": "Exam study block",
+            "start": "2027-05-10T10:00:00+01:00",
+            "end": "2027-05-10T12:00:00+01:00",
+            "category": "exams",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "lunch_mon",
+            "title": "Lunch",
+            "start": "2027-05-10T12:30:00+01:00",
+            "end": "2027-05-10T13:30:00+01:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_mon",
+            "title": "Afternoon Technical Training",
+            "start": "2027-05-10T16:30:00+01:00",
+            "end": "2027-05-10T18:30:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-05-10T22:30:00+01:00",
+            "end": "2027-05-11T06:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_tue",
+            "title": "Morning Conditioning",
+            "start": "2027-05-11T07:00:00+01:00",
+            "end": "2027-05-11T09:00:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_3",
+            "title": "Exam study block",
+            "start": "2027-05-11T10:00:00+01:00",
+            "end": "2027-05-11T12:00:00+01:00",
+            "category": "exams",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "lunch_tue",
+            "title": "Lunch",
+            "start": "2027-05-11T12:30:00+01:00",
+            "end": "2027-05-11T13:30:00+01:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_tue",
+            "title": "Afternoon Tactical Training",
+            "start": "2027-05-11T16:30:00+01:00",
+            "end": "2027-05-11T18:30:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-05-11T22:30:00+01:00",
+            "end": "2027-05-12T06:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_wed",
+            "title": "Morning Pool Recovery",
+            "start": "2027-05-12T07:00:00+01:00",
+            "end": "2027-05-12T09:00:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "physio_wed",
+            "title": "Sports Physiotherapy",
+            "start": "2027-05-12T10:00:00+01:00",
+            "end": "2027-05-12T11:00:00+01:00",
+            "category": "physio",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user",
+              "physiotherapist"
+            ],
+            "description": "Routine recovery.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_4",
+            "title": "Student Association Outdoor Picnic & Lunch on campus",
+            "start": "2027-05-12T12:30:00+01:00",
+            "end": "2027-05-12T15:00:00+01:00",
+            "category": "social",
+            "importance": 2,
+            "fixed": null,
+            "participants": [
+              "classmates",
+              "Student Association"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "training_pm_wed",
+            "title": "Afternoon Technical Session",
+            "start": "2027-05-12T16:30:00+01:00",
+            "end": "2027-05-12T18:30:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-05-12T22:30:00+01:00",
+            "end": "2027-05-13T06:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_thu",
+            "title": "Morning Gym",
+            "start": "2027-05-13T07:00:00+01:00",
+            "end": "2027-05-13T09:00:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_thu",
+            "title": "Afternoon Scrimmage",
+            "start": "2027-05-13T16:30:00+01:00",
+            "end": "2027-05-13T18:30:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-05-13T22:30:00+01:00",
+            "end": "2027-05-14T06:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_fri",
+            "title": "Morning Speed Session",
+            "start": "2027-05-14T07:00:00+01:00",
+            "end": "2027-05-14T09:00:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_fri",
+            "title": "Afternoon Tactical Session",
+            "start": "2027-05-14T16:30:00+01:00",
+            "end": "2027-05-14T18:30:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_5",
+            "title": "Friday Sunset Acoustic Session & Dinner",
+            "start": "2027-05-14T19:30:00+01:00",
+            "end": "2027-05-14T21:30:00+01:00",
+            "category": "social",
+            "importance": 2,
+            "fixed": null,
+            "participants": [
+              "classmates",
+              "Student Association"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "new_6",
+            "title": "Sleep",
+            "start": "2027-05-14T22:30:00+01:00",
+            "end": "2027-05-15T06:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 3,
+          "coherence": 3,
+          "alternatives": 3,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The rationale protects fixed sleep and training well, but it leans too heavily on technical non-conflict. It rejects skipping the Friday dinner mainly because it does not conflict with protected commitments, without weighing the cumulative load of five consecutive days with morning training from 07:00–09:00 and afternoon training from 16:30–18:30.",
+          "The Monday and Tuesday exam study blocks from 10:00–12:00 come one hour after 07:00–09:00 training and before lunch at 12:30. That may be workable, but the rationale does not discuss whether these are likely to be effective study periods after physical training rather than merely available former lecture slots.",
+          "The Wednesday picnic from 12:30–15:00 sits between sports physiotherapy at 10:00–11:00 and afternoon training at 16:30–18:30. This is not an objective conflict, but it leaves limited visible recovery or preparation margin on a day already containing recovery, social time and training.",
+          "The Friday dinner from 19:30–21:30 follows afternoon tactical training ending at 18:30 and precedes sleep at 22:30. The one-hour gaps on both sides may be enough, especially if nearby, but travel, showering, decompression and bedtime preparation are not substantiated.",
+          "The proposal deletes Monday and Tuesday lectures based on the stated rationale that lectures are suspended for Academic Week. That may be correct, but from the visible evidence here it remains an unverified condition rather than something independently demonstrated by the calendar.",
+          "The alternatives considered are relevant, especially declining the late-night Serenata, but the social-load alternative is dismissed too narrowly on the basis of no protected-event conflict rather than overall sustainability."
+        ],
+        "feedback": "The plan is mostly coherent and has several human-centered strengths: it preserves fixed sleep, training and physio; avoids the late-night event before early training; and uses the removed lecture slots for exam study rather than pushing study into evenings. The main concern is not a technical clash but cumulative manageability. Across the visible week, the user has early sleep-to-training transitions every weekday, two daily training sessions on most days, exam study added immediately after morning training on Monday and Tuesday, a long social lunch on Wednesday between physio and afternoon training, and an evening social event on Friday after the final afternoon training session. That may still be manageable for this person, but the rationale does not show enough consideration of recovery, transitions, or the effectiveness of study after training. A stronger plan would either substantiate why these additions are realistic in the user’s fuller context or reconsider whether both social events should remain given the visible training density. I cannot verify whether the original request is fully satisfied, because the original request and any hidden preferences are not available.",
+        "plausibility_review": {
+          "revision_required": true,
+          "severity": "moderate",
+          "reason": "A concrete human-quality risk remains: the proposal adds low-importance social events and immediate post-training study blocks into a week already showing daily early training and repeated afternoon training, while the rationale mostly treats free slots and absence of protected-event conflicts as sufficient. This could affect recovery, study quality and bedtime practicality, especially on Friday where training ends at 18:30, dinner runs 19:30–21:30, and sleep starts at 22:30. The issue is not objectively impossible, and the same operations may be defensible, but the current rationale does not sufficiently justify the sustainability of the full routine.",
+          "suggested_improvement": "Reconsider the cumulative load using the fuller context: explain whether the post-training study periods and the Wednesday and Friday social events are realistically compatible with recovery, travel, food, hygiene and bedtime preparation, or reduce the added social load if that context is not supportive."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Suspended lectures",
+            "assumption": "The Monday and Tuesday regular lectures deleted by the proposal are genuinely suspended for Academic Week.",
+            "evidence_gap": "The rationale states this, but the visible calendar and validation do not independently confirm the academic schedule or the original request.",
+            "potential_impact": "potentially_blocking",
+            "verification_source": "external_source"
+          },
+          {
+            "subject": "RSVP and event availability",
+            "assumption": "The Wednesday picnic and Friday dinner are available to the user and the user can attend after RSVP confirmation.",
+            "evidence_gap": "The rationale explicitly says RSVP confirmation is still needed, and the calendar only shows proposed additions.",
+            "potential_impact": "material",
+            "verification_source": "third_party"
+          },
+          {
+            "subject": "Travel and location practicality",
+            "assumption": "Travel between training, physio, campus picnic, Friday dinner and sleep location is short enough for the visible gaps to work.",
+            "evidence_gap": "The rationale notes exact travel time is not confirmed, and event locations are not specified beyond the picnic being on campus.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Post-training study effectiveness",
+            "assumption": "The user can study effectively from 10:00–12:00 after 07:00–09:00 morning training on both Monday and Tuesday.",
+            "evidence_gap": "The proposal identifies these as freed lecture slots but does not provide evidence about the user’s recovery needs, energy patterns or study effectiveness after training.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Friday evening recovery and bedtime routine",
+            "assumption": "The user can transition from 16:30–18:30 tactical training to a 19:30–21:30 dinner and still complete recovery and bedtime preparation before 22:30 sleep.",
+            "evidence_gap": "The calendar shows only one hour before dinner and one hour after dinner; no travel, hygiene, recovery or preparation needs are visible.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Food logistics",
+            "assumption": "The Wednesday picnic and Friday dinner adequately cover meal needs without creating nutrition or timing issues around training.",
+            "evidence_gap": "The rationale explicitly says food logistics are not confirmed, and the calendar does not show separate meals around those events.",
+            "potential_impact": "material",
+            "verification_source": "third_party"
+          }
+        ],
+        "overall": 3.25
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": false,
+        "plausibility_revision_required": true,
+        "accepted": false,
+        "revision_causes": [
+          "numeric_criteria_failed",
+          "plausibility_revision_required"
+        ]
+      },
+      "operations_changed_from_previous": null,
+      "rationale_changed_from_previous": null,
+      "prior_critic_reviews": [],
+      "unresolved_assumptions": [
+        {
+          "subject": "Suspended lectures",
+          "assumption": "The Monday and Tuesday regular lectures deleted by the proposal are genuinely suspended for Academic Week.",
+          "evidence_gap": "The rationale states this, but the visible calendar and validation do not independently confirm the academic schedule or the original request.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "external_source"
+        },
+        {
+          "subject": "RSVP and event availability",
+          "assumption": "The Wednesday picnic and Friday dinner are available to the user and the user can attend after RSVP confirmation.",
+          "evidence_gap": "The rationale explicitly says RSVP confirmation is still needed, and the calendar only shows proposed additions.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Travel and location practicality",
+          "assumption": "Travel between training, physio, campus picnic, Friday dinner and sleep location is short enough for the visible gaps to work.",
+          "evidence_gap": "The rationale notes exact travel time is not confirmed, and event locations are not specified beyond the picnic being on campus.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Post-training study effectiveness",
+          "assumption": "The user can study effectively from 10:00–12:00 after 07:00–09:00 morning training on both Monday and Tuesday.",
+          "evidence_gap": "The proposal identifies these as freed lecture slots but does not provide evidence about the user’s recovery needs, energy patterns or study effectiveness after training.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Friday evening recovery and bedtime routine",
+          "assumption": "The user can transition from 16:30–18:30 tactical training to a 19:30–21:30 dinner and still complete recovery and bedtime preparation before 22:30 sleep.",
+          "evidence_gap": "The calendar shows only one hour before dinner and one hour after dinner; no travel, hygiene, recovery or preparation needs are visible.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Food logistics",
+          "assumption": "The Wednesday picnic and Friday dinner adequately cover meal needs without creating nutrition or timing issues around training.",
+          "evidence_gap": "The rationale explicitly says food logistics are not confirmed, and the calendar does not show separate meals around those events.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "proposer_feedback": "Numeric Critic criteria failed. Scores: {\"reasoning\":3,\"coherence\":3,\"alternatives\":3,\"clarity\":4}. Plausibility revision required (moderate): A concrete human-quality risk remains: the proposal adds low-importance social events and immediate post-training study blocks into a week already showing daily early training and repeated afternoon training, while the rationale mostly treats free slots and absence of protected-event conflicts as sufficient. This could affect recovery, study quality and bedtime practicality, especially on Friday where training ends at 18:30, dinner runs 19:30–21:30, and sleep starts at 22:30. The issue is not objectively impossible, and the same operations may be defensible, but the current rationale does not sufficiently justify the sustainability of the full routine. Suggested direction: Reconsider the cumulative load using the fuller context: explain whether the post-training study periods and the Wednesday and Friday social events are realistically compatible with recovery, travel, food, hygiene and bedtime preparation, or reduce the added social load if that context is not supportive. The Critic lacks the full user constraints; explain if no better feasible option exists. Unverified conditions to reassess: [{'subject': 'Suspended lectures', 'assumption': 'The Monday and Tuesday regular lectures deleted by the proposal are genuinely suspended for Academic Week.', 'evidence_gap': 'The rationale states this, but the visible calendar and validation do not independently confirm the academic schedule or the original request.', 'potential_impact': 'potentially_blocking', 'verification_source': 'external_source'}, {'subject': 'RSVP and event availability', 'assumption': 'The Wednesday picnic and Friday dinner are available to the user and the user can attend after RSVP confirmation.', 'evidence_gap': 'The rationale explicitly says RSVP confirmation is still needed, and the calendar only shows proposed additions.', 'potential_impact': 'material', 'verification_source': 'third_party'}, {'subject': 'Travel and location practicality', 'assumption': 'Travel between training, physio, campus picnic, Friday dinner and sleep location is short enough for the visible gaps to work.', 'evidence_gap': 'The rationale notes exact travel time is not confirmed, and event locations are not specified beyond the picnic being on campus.', 'potential_impact': 'material', 'verification_source': 'unknown'}, {'subject': 'Post-training study effectiveness', 'assumption': 'The user can study effectively from 10:00–12:00 after 07:00–09:00 morning training on both Monday and Tuesday.', 'evidence_gap': 'The proposal identifies these as freed lecture slots but does not provide evidence about the user’s recovery needs, energy patterns or study effectiveness after training.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Friday evening recovery and bedtime routine', 'assumption': 'The user can transition from 16:30–18:30 tactical training to a 19:30–21:30 dinner and still complete recovery and bedtime preparation before 22:30 sleep.', 'evidence_gap': 'The calendar shows only one hour before dinner and one hour after dinner; no travel, hygiene, recovery or preparation needs are visible.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Food logistics', 'assumption': 'The Wednesday picnic and Friday dinner adequately cover meal needs without creating nutrition or timing issues around training.', 'evidence_gap': 'The rationale explicitly says food logistics are not confirmed, and the calendar does not show separate meals around those events.', 'potential_impact': 'material', 'verification_source': 'third_party'}] Weaknesses: ['The rationale protects fixed sleep and training well, but it leans too heavily on technical non-conflict. It rejects skipping the Friday dinner mainly because it does not conflict with protected commitments, without weighing the cumulative load of five consecutive days with morning training from 07:00–09:00 and afternoon training from 16:30–18:30.', 'The Monday and Tuesday exam study blocks from 10:00–12:00 come one hour after 07:00–09:00 training and before lunch at 12:30. That may be workable, but the rationale does not discuss whether these are likely to be effective study periods after physical training rather than merely available former lecture slots.', 'The Wednesday picnic from 12:30–15:00 sits between sports physiotherapy at 10:00–11:00 and afternoon training at 16:30–18:30. This is not an objective conflict, but it leaves limited visible recovery or preparation margin on a day already containing recovery, social time and training.', 'The Friday dinner from 19:30–21:30 follows afternoon tactical training ending at 18:30 and precedes sleep at 22:30. The one-hour gaps on both sides may be enough, especially if nearby, but travel, showering, decompression and bedtime preparation are not substantiated.', 'The proposal deletes Monday and Tuesday lectures based on the stated rationale that lectures are suspended for Academic Week. That may be correct, but from the visible evidence here it remains an unverified condition rather than something independently demonstrated by the calendar.', 'The alternatives considered are relevant, especially declining the late-night Serenata, but the social-load alternative is dismissed too narrowly on the basis of no protected-event conflict rather than overall sustainability.']. Actionable feedback: The plan is mostly coherent and has several human-centered strengths: it preserves fixed sleep, training and physio; avoids the late-night event before early training; and uses the removed lecture slots for exam study rather than pushing study into evenings. The main concern is not a technical clash but cumulative manageability. Across the visible week, the user has early sleep-to-training transitions every weekday, two daily training sessions on most days, exam study added immediately after morning training on Monday and Tuesday, a long social lunch on Wednesday between physio and afternoon training, and an evening social event on Friday after the final afternoon training session. That may still be manageable for this person, but the rationale does not show enough consideration of recovery, transitions, or the effectiveness of study after training. A stronger plan would either substantiate why these additions are realistic in the user’s fuller context or reconsider whether both social events should remain given the visible training density. I cannot verify whether the original request is fully satisfied, because the original request and any hidden preferences are not available.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "delete",
+            "event_id": "class_mon",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Exam study block",
+            "from_start": null,
+            "to_start": "2027-05-10T10:00:00+01:00",
+            "to_end": "2027-05-10T11:30:00+01:00",
+            "category": "exams",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "delete",
+            "event_id": "class_tue",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Exam study block",
+            "from_start": null,
+            "to_start": "2027-05-11T10:00:00+01:00",
+            "to_end": "2027-05-11T11:30:00+01:00",
+            "category": "exams",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Exam study block",
+            "from_start": null,
+            "to_start": "2027-05-13T10:00:00+01:00",
+            "to_end": "2027-05-13T11:00:00+01:00",
+            "category": "exams",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Student Association Outdoor Picnic & Lunch on campus",
+            "from_start": null,
+            "to_start": "2027-05-12T12:30:00+01:00",
+            "to_end": "2027-05-12T15:00:00+01:00",
+            "category": "social",
+            "importance": 2,
+            "participants": [
+              "classmates",
+              "Student Association"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Friday Sunset Acoustic Session & Dinner",
+            "from_start": null,
+            "to_start": "2027-05-14T19:30:00+01:00",
+            "to_end": "2027-05-14T21:30:00+01:00",
+            "category": "social",
+            "importance": 2,
+            "participants": [
+              "classmates",
+              "Student Association"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Sleep",
+            "from_start": null,
+            "to_start": "2027-05-14T22:30:00+01:00",
+            "to_end": "2027-05-15T06:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "participants": [
+              "user"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "Training and existing sleep blocks are protected, so none are moved or deleted.",
+            "The Tuesday late-night Serenata must be declined because it overlaps the protected sleep period before 07:00 training.",
+            "The lecture removals rely on the user-stated Academic Week suspension and are not independently verified here.",
+            "The 4 hours of exam study are split across mornings to reduce post-training fatigue versus two full 2-hour blocks.",
+            "The Wednesday picnic is schedulable but needs RSVP, food, travel and pre-training margin confirmation.",
+            "The Friday dinner is schedulable only if RSVP, travel, recovery, hygiene and bedtime preparation fit the narrow evening margins.",
+            "Friday night sleep is added to preserve the non-negotiable 8-hour sleep rule after the dinner."
+          ],
+          "priorities": [
+            "Preserve high-priority training, sleep and physio before adding social activities.",
+            "Use morning capacity for exam preparation without loading evenings.",
+            "Prefer the daytime picnic and early-evening dinner over the late-night concert.",
+            "Keep social attendance conditional on external confirmation rather than assuming venue or logistics availability."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Keep two 2-hour study blocks on Monday and Tuesday",
+              "rejected_because": "Rejected because shorter distributed blocks are more sustainable after morning training."
+            },
+            {
+              "option": "Attend part of the Tuesday Serenata",
+              "rejected_because": "Rejected because any meaningful attendance overlaps protected sleep."
+            },
+            {
+              "option": "Decline the Friday dinner by default",
+              "rejected_because": "Rejected because it can fit if nearby logistics and bedtime preparation are confirmed."
+            },
+            {
+              "option": "Move study into Wednesday before the picnic",
+              "rejected_because": "Rejected because that would stack physio, study, social time and afternoon training on one day."
+            }
+          ],
+          "summary": "Decline the Tuesday Serenata, attend the Wednesday picnic and Friday dinner only after RSVP and practical logistics are confirmed, and complete 4 hours of exam study through shorter morning blocks while preserving all protected training and sleep."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-05-09T22:30:00+01:00",
+            "end": "2027-05-10T06:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_mon",
+            "title": "Morning Strength Training",
+            "start": "2027-05-10T07:00:00+01:00",
+            "end": "2027-05-10T09:00:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_1",
+            "title": "Exam study block",
+            "start": "2027-05-10T10:00:00+01:00",
+            "end": "2027-05-10T11:30:00+01:00",
+            "category": "exams",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "lunch_mon",
+            "title": "Lunch",
+            "start": "2027-05-10T12:30:00+01:00",
+            "end": "2027-05-10T13:30:00+01:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_mon",
+            "title": "Afternoon Technical Training",
+            "start": "2027-05-10T16:30:00+01:00",
+            "end": "2027-05-10T18:30:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-05-10T22:30:00+01:00",
+            "end": "2027-05-11T06:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_tue",
+            "title": "Morning Conditioning",
+            "start": "2027-05-11T07:00:00+01:00",
+            "end": "2027-05-11T09:00:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_3",
+            "title": "Exam study block",
+            "start": "2027-05-11T10:00:00+01:00",
+            "end": "2027-05-11T11:30:00+01:00",
+            "category": "exams",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "lunch_tue",
+            "title": "Lunch",
+            "start": "2027-05-11T12:30:00+01:00",
+            "end": "2027-05-11T13:30:00+01:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_tue",
+            "title": "Afternoon Tactical Training",
+            "start": "2027-05-11T16:30:00+01:00",
+            "end": "2027-05-11T18:30:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-05-11T22:30:00+01:00",
+            "end": "2027-05-12T06:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_wed",
+            "title": "Morning Pool Recovery",
+            "start": "2027-05-12T07:00:00+01:00",
+            "end": "2027-05-12T09:00:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "physio_wed",
+            "title": "Sports Physiotherapy",
+            "start": "2027-05-12T10:00:00+01:00",
+            "end": "2027-05-12T11:00:00+01:00",
+            "category": "physio",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user",
+              "physiotherapist"
+            ],
+            "description": "Routine recovery.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_5",
+            "title": "Student Association Outdoor Picnic & Lunch on campus",
+            "start": "2027-05-12T12:30:00+01:00",
+            "end": "2027-05-12T15:00:00+01:00",
+            "category": "social",
+            "importance": 2,
+            "fixed": null,
+            "participants": [
+              "classmates",
+              "Student Association"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "training_pm_wed",
+            "title": "Afternoon Technical Session",
+            "start": "2027-05-12T16:30:00+01:00",
+            "end": "2027-05-12T18:30:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-05-12T22:30:00+01:00",
+            "end": "2027-05-13T06:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_thu",
+            "title": "Morning Gym",
+            "start": "2027-05-13T07:00:00+01:00",
+            "end": "2027-05-13T09:00:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_4",
+            "title": "Exam study block",
+            "start": "2027-05-13T10:00:00+01:00",
+            "end": "2027-05-13T11:00:00+01:00",
+            "category": "exams",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "training_pm_thu",
+            "title": "Afternoon Scrimmage",
+            "start": "2027-05-13T16:30:00+01:00",
+            "end": "2027-05-13T18:30:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-05-13T22:30:00+01:00",
+            "end": "2027-05-14T06:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_fri",
+            "title": "Morning Speed Session",
+            "start": "2027-05-14T07:00:00+01:00",
+            "end": "2027-05-14T09:00:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_fri",
+            "title": "Afternoon Tactical Session",
+            "start": "2027-05-14T16:30:00+01:00",
+            "end": "2027-05-14T18:30:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_6",
+            "title": "Friday Sunset Acoustic Session & Dinner",
+            "start": "2027-05-14T19:30:00+01:00",
+            "end": "2027-05-14T21:30:00+01:00",
+            "category": "social",
+            "importance": 2,
+            "fixed": null,
+            "participants": [
+              "classmates",
+              "Student Association"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "new_7",
+            "title": "Sleep",
+            "start": "2027-05-14T22:30:00+01:00",
+            "end": "2027-05-15T06:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 4,
+          "alternatives": 4,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The revised proposal materially improves the prior study-load concern by reducing Monday and Tuesday study from 10:00–12:00 to 10:00–11:30 and adding a shorter Thursday 10:00–11:00 block, but all three exam blocks still occur one hour after 07:00–09:00 training. That is plausible, but the calendar does not show whether post-training recovery, showering, food, or energy levels make these effective study periods rather than merely available time.",
+          "The Friday evening remains the tightest part of the plan: afternoon tactical training ends at 18:30, the dinner runs 19:30–21:30, and sleep starts at 22:30. The rationale now correctly treats RSVP, travel, recovery, hygiene and bedtime preparation as conditions, but the resulting calendar still depends heavily on those narrow margins working in practice.",
+          "The Wednesday picnic from 12:30–15:00 is more plausible than the Friday dinner because it has visible gaps after 10:00–11:00 physiotherapy and before 16:30–18:30 training, but it still adds a 2.5-hour social event into a day already containing recovery care and afternoon training. This is not a conflict, only a moderate sustainability consideration.",
+          "The proposal deletes Monday and Tuesday class events based on an Academic Week suspension. The rationale is transparent that this is user-stated and not independently verified, so the deletion is proportionate only if that condition is true.",
+          "The social events are importance 2 while training, sleep, meals and exams are higher importance. The rationale explains why the late-night event is declined and why these events are conditional, but it could still more directly justify why keeping both social events is worthwhile in a visibly dense training week."
+        ],
+        "feedback": "The revised plan is substantially more human-centered than the prior version. It responds to the earlier concern by distributing the 4 hours of exam study across three shorter morning blocks instead of two longer post-training blocks, and it explicitly recognizes practical margins around RSVP, food, travel, hygiene, recovery and bedtime. The visible week remains demanding, but much of that load comes from preserved high-priority training and sleep rather than from the proposal itself. The added study and social events appear plausible if the stated conditions are true, especially because the proposal avoids evening study and rejects the late-night Serenata before early training. I would not require another revision on the current evidence, but the Proposer should keep the social events conditional in its fuller context and be prepared to drop or shorten them if the unverified logistics do not support recovery and bedtime. I cannot verify original request satisfaction because the original request and hidden preferences are not available.",
+        "plausibility_review": {
+          "revision_required": false,
+          "severity": "low",
+          "reason": "The main prior concern received a grounded answer: the study load was reduced per day and distributed, the late-night social option was rejected to protect sleep, and the rationale now explicitly flags the practical conditions needed for the Wednesday and Friday social events. The remaining risks are real but conditional rather than showing a concrete unsupported organization that clearly needs another revision. The Friday dinner is still tight after 16:30–18:30 training and before 22:30 sleep, but the proposal acknowledges this dependency rather than treating a free slot as automatically sufficient.",
+          "suggested_improvement": "Use the fuller context to verify the stated conditions before relying on the social additions, especially Friday travel, recovery, hygiene and bedtime preparation. If those conditions are weak, reconsider the social load rather than adding more commitments around the fixed training and sleep routine."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Suspended lectures",
+            "assumption": "The Monday and Tuesday class events deleted by the proposal are genuinely suspended for Academic Week.",
+            "evidence_gap": "The rationale says the lecture removals rely on the user-stated suspension, but the visible calendar and validation do not independently confirm the academic schedule or the original request.",
+            "potential_impact": "potentially_blocking",
+            "verification_source": "external_source"
+          },
+          {
+            "subject": "RSVP and event availability",
+            "assumption": "The Wednesday picnic and Friday dinner are actually available to the user and attendance can be confirmed.",
+            "evidence_gap": "The rationale explicitly says RSVP or practical confirmation is needed, while the calendar only shows the events as proposed additions.",
+            "potential_impact": "material",
+            "verification_source": "third_party"
+          },
+          {
+            "subject": "Friday evening logistics",
+            "assumption": "The user can move from 16:30–18:30 tactical training to the 19:30–21:30 dinner and still complete recovery, hygiene, travel and bedtime preparation before 22:30 sleep.",
+            "evidence_gap": "The calendar shows one hour before the dinner and one hour after it, but does not specify locations, travel time, showering, decompression or bedtime needs.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Wednesday picnic practicality",
+            "assumption": "The 12:30–15:00 campus picnic leaves enough practical margin after 10:00–11:00 physiotherapy and before 16:30–18:30 afternoon training.",
+            "evidence_gap": "The picnic is described as on campus, but no food logistics, recovery needs, preparation needs or exact locations are shown.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Post-training study effectiveness",
+            "assumption": "The user can study effectively during the 10:00–11:30 blocks on Monday and Tuesday and the 10:00–11:00 block on Thursday after 07:00–09:00 training.",
+            "evidence_gap": "The revised rationale gives a plausible distribution reason, but the calendar does not show the user’s recovery needs, energy pattern or whether these post-training study periods are cognitively effective.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Food and nutrition around training",
+            "assumption": "The Wednesday picnic and Friday dinner adequately cover meal needs without creating nutrition or timing issues around training.",
+            "evidence_gap": "The rationale says food confirmation is needed, and the final calendar does not show separate meal arrangements on Wednesday or Friday around the added social events.",
+            "potential_impact": "material",
+            "verification_source": "third_party"
+          }
+        ],
+        "overall": 4.0
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": true,
+        "plausibility_revision_required": false,
+        "accepted": true,
+        "revision_causes": []
+      },
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": [
+        {
+          "iteration": 0,
+          "proposal": {
+            "changes": [
+              {
+                "type": "delete",
+                "event_id": "class_mon",
+                "title": null,
+                "from_start": null,
+                "to_start": null,
+                "to_end": null,
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Exam study block",
+                "from_start": null,
+                "to_start": "2027-05-10T10:00:00+01:00",
+                "to_end": "2027-05-10T12:00:00+01:00",
+                "category": "exams",
+                "importance": 4,
+                "participants": [
+                  "user"
+                ]
+              },
+              {
+                "type": "delete",
+                "event_id": "class_tue",
+                "title": null,
+                "from_start": null,
+                "to_start": null,
+                "to_end": null,
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Exam study block",
+                "from_start": null,
+                "to_start": "2027-05-11T10:00:00+01:00",
+                "to_end": "2027-05-11T12:00:00+01:00",
+                "category": "exams",
+                "importance": 4,
+                "participants": [
+                  "user"
+                ]
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Student Association Outdoor Picnic & Lunch on campus",
+                "from_start": null,
+                "to_start": "2027-05-12T12:30:00+01:00",
+                "to_end": "2027-05-12T15:00:00+01:00",
+                "category": "social",
+                "importance": 2,
+                "participants": [
+                  "classmates",
+                  "Student Association"
+                ]
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Friday Sunset Acoustic Session & Dinner",
+                "from_start": null,
+                "to_start": "2027-05-14T19:30:00+01:00",
+                "to_end": "2027-05-14T21:30:00+01:00",
+                "category": "social",
+                "importance": 2,
+                "participants": [
+                  "classmates",
+                  "Student Association"
+                ]
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Sleep",
+                "from_start": null,
+                "to_start": "2027-05-14T22:30:00+01:00",
+                "to_end": "2027-05-15T06:30:00+01:00",
+                "category": "sleep",
+                "importance": 5,
+                "participants": [
+                  "user"
+                ]
+              }
+            ],
+            "rationale": {
+              "constraints": [
+                "Training and existing sleep blocks are protected, so none are moved or deleted.",
+                "The Tuesday late-night Serenata conflicts with the protected sleep window before 07:00 training, so it must be declined.",
+                "Regular lectures can be removed because the request states they are suspended for Academic Week.",
+                "The Wednesday picnic fits between physio and afternoon training but still needs RSVP confirmation.",
+                "The Friday dinner ends before the 22:30 sleep block, but attendance still needs RSVP confirmation.",
+                "Venue availability, exact travel time and any food logistics are not confirmed."
+              ],
+              "priorities": [
+                "The freed lecture hours are used for the requested 4 hours of exam study.",
+                "Daytime and early-evening social events are preferred over late-night events.",
+                "The plan preserves all high-priority training, sleep and health commitments."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Use Wednesday 11:00–12:00 plus Thursday morning for study",
+                  "rejected_because": "Rejected because the removed lecture slots already provide the full 4 hours with less fragmentation."
+                },
+                {
+                  "option": "Attend part of the Tuesday Serenata only",
+                  "rejected_because": "Rejected because even partial attendance during 23:30–03:00 violates the protected sleep block."
+                },
+                {
+                  "option": "Skip Friday dinner to reduce social load",
+                  "rejected_because": "Rejected because it does not conflict with protected commitments and ends before sleep."
+                }
+              ],
+              "summary": "Attend the Wednesday picnic and Friday dinner, decline the Tuesday late-night Serenata, remove the suspended lectures, and use the freed Monday and Tuesday morning lecture slots for 4 hours of exam study while adding Friday night sleep protection."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "sleep_mon",
+                "title": "Sleep",
+                "start": "2027-05-09T22:30:00+01:00",
+                "end": "2027-05-10T06:30:00+01:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected 8-hour sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_am_mon",
+                "title": "Morning Strength Training",
+                "start": "2027-05-10T07:00:00+01:00",
+                "end": "2027-05-10T09:00:00+01:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Morning session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_1",
+                "title": "Exam study block",
+                "start": "2027-05-10T10:00:00+01:00",
+                "end": "2027-05-10T12:00:00+01:00",
+                "category": "exams",
+                "importance": 4,
+                "fixed": null,
+                "participants": [
+                  "user"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "lunch_mon",
+                "title": "Lunch",
+                "start": "2027-05-10T12:30:00+01:00",
+                "end": "2027-05-10T13:30:00+01:00",
+                "category": "meal",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Lunch break.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_pm_mon",
+                "title": "Afternoon Technical Training",
+                "start": "2027-05-10T16:30:00+01:00",
+                "end": "2027-05-10T18:30:00+01:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Afternoon session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_tue",
+                "title": "Sleep",
+                "start": "2027-05-10T22:30:00+01:00",
+                "end": "2027-05-11T06:30:00+01:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected 8-hour sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_am_tue",
+                "title": "Morning Conditioning",
+                "start": "2027-05-11T07:00:00+01:00",
+                "end": "2027-05-11T09:00:00+01:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Morning session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_3",
+                "title": "Exam study block",
+                "start": "2027-05-11T10:00:00+01:00",
+                "end": "2027-05-11T12:00:00+01:00",
+                "category": "exams",
+                "importance": 4,
+                "fixed": null,
+                "participants": [
+                  "user"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "lunch_tue",
+                "title": "Lunch",
+                "start": "2027-05-11T12:30:00+01:00",
+                "end": "2027-05-11T13:30:00+01:00",
+                "category": "meal",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Lunch break.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_pm_tue",
+                "title": "Afternoon Tactical Training",
+                "start": "2027-05-11T16:30:00+01:00",
+                "end": "2027-05-11T18:30:00+01:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Afternoon session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_wed",
+                "title": "Sleep",
+                "start": "2027-05-11T22:30:00+01:00",
+                "end": "2027-05-12T06:30:00+01:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected 8-hour sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_am_wed",
+                "title": "Morning Pool Recovery",
+                "start": "2027-05-12T07:00:00+01:00",
+                "end": "2027-05-12T09:00:00+01:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Morning session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "physio_wed",
+                "title": "Sports Physiotherapy",
+                "start": "2027-05-12T10:00:00+01:00",
+                "end": "2027-05-12T11:00:00+01:00",
+                "category": "physio",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "physiotherapist"
+                ],
+                "description": "Routine recovery.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_4",
+                "title": "Student Association Outdoor Picnic & Lunch on campus",
+                "start": "2027-05-12T12:30:00+01:00",
+                "end": "2027-05-12T15:00:00+01:00",
+                "category": "social",
+                "importance": 2,
+                "fixed": null,
+                "participants": [
+                  "classmates",
+                  "Student Association"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "training_pm_wed",
+                "title": "Afternoon Technical Session",
+                "start": "2027-05-12T16:30:00+01:00",
+                "end": "2027-05-12T18:30:00+01:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Afternoon session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2027-05-12T22:30:00+01:00",
+                "end": "2027-05-13T06:30:00+01:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected 8-hour sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_am_thu",
+                "title": "Morning Gym",
+                "start": "2027-05-13T07:00:00+01:00",
+                "end": "2027-05-13T09:00:00+01:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Morning session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_pm_thu",
+                "title": "Afternoon Scrimmage",
+                "start": "2027-05-13T16:30:00+01:00",
+                "end": "2027-05-13T18:30:00+01:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Afternoon session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_fri",
+                "title": "Sleep",
+                "start": "2027-05-13T22:30:00+01:00",
+                "end": "2027-05-14T06:30:00+01:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected 8-hour sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_am_fri",
+                "title": "Morning Speed Session",
+                "start": "2027-05-14T07:00:00+01:00",
+                "end": "2027-05-14T09:00:00+01:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Morning session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_pm_fri",
+                "title": "Afternoon Tactical Session",
+                "start": "2027-05-14T16:30:00+01:00",
+                "end": "2027-05-14T18:30:00+01:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Afternoon session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_5",
+                "title": "Friday Sunset Acoustic Session & Dinner",
+                "start": "2027-05-14T19:30:00+01:00",
+                "end": "2027-05-14T21:30:00+01:00",
+                "category": "social",
+                "importance": 2,
+                "fixed": null,
+                "participants": [
+                  "classmates",
+                  "Student Association"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "new_6",
+                "title": "Sleep",
+                "start": "2027-05-14T22:30:00+01:00",
+                "end": "2027-05-15T06:30:00+01:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": null,
+                "participants": [
+                  "user"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              }
+            ],
+            "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+          },
+          "plausibility_review": {
+            "revision_required": true,
+            "severity": "moderate",
+            "reason": "A concrete human-quality risk remains: the proposal adds low-importance social events and immediate post-training study blocks into a week already showing daily early training and repeated afternoon training, while the rationale mostly treats free slots and absence of protected-event conflicts as sufficient. This could affect recovery, study quality and bedtime practicality, especially on Friday where training ends at 18:30, dinner runs 19:30–21:30, and sleep starts at 22:30. The issue is not objectively impossible, and the same operations may be defensible, but the current rationale does not sufficiently justify the sustainability of the full routine.",
+            "suggested_improvement": "Reconsider the cumulative load using the fuller context: explain whether the post-training study periods and the Wednesday and Friday social events are realistically compatible with recovery, travel, food, hygiene and bedtime preparation, or reduce the added social load if that context is not supportive."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Suspended lectures",
+              "assumption": "The Monday and Tuesday regular lectures deleted by the proposal are genuinely suspended for Academic Week.",
+              "evidence_gap": "The rationale states this, but the visible calendar and validation do not independently confirm the academic schedule or the original request.",
+              "potential_impact": "potentially_blocking",
+              "verification_source": "external_source"
+            },
+            {
+              "subject": "RSVP and event availability",
+              "assumption": "The Wednesday picnic and Friday dinner are available to the user and the user can attend after RSVP confirmation.",
+              "evidence_gap": "The rationale explicitly says RSVP confirmation is still needed, and the calendar only shows proposed additions.",
+              "potential_impact": "material",
+              "verification_source": "third_party"
+            },
+            {
+              "subject": "Travel and location practicality",
+              "assumption": "Travel between training, physio, campus picnic, Friday dinner and sleep location is short enough for the visible gaps to work.",
+              "evidence_gap": "The rationale notes exact travel time is not confirmed, and event locations are not specified beyond the picnic being on campus.",
+              "potential_impact": "material",
+              "verification_source": "unknown"
+            },
+            {
+              "subject": "Post-training study effectiveness",
+              "assumption": "The user can study effectively from 10:00–12:00 after 07:00–09:00 morning training on both Monday and Tuesday.",
+              "evidence_gap": "The proposal identifies these as freed lecture slots but does not provide evidence about the user’s recovery needs, energy patterns or study effectiveness after training.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Friday evening recovery and bedtime routine",
+              "assumption": "The user can transition from 16:30–18:30 tactical training to a 19:30–21:30 dinner and still complete recovery and bedtime preparation before 22:30 sleep.",
+              "evidence_gap": "The calendar shows only one hour before dinner and one hour after dinner; no travel, hygiene, recovery or preparation needs are visible.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Food logistics",
+              "assumption": "The Wednesday picnic and Friday dinner adequately cover meal needs without creating nutrition or timing issues around training.",
+              "evidence_gap": "The rationale explicitly says food logistics are not confirmed, and the calendar does not show separate meals around those events.",
+              "potential_impact": "material",
+              "verification_source": "third_party"
+            }
+          ],
+          "weaknesses": [
+            "The rationale protects fixed sleep and training well, but it leans too heavily on technical non-conflict. It rejects skipping the Friday dinner mainly because it does not conflict with protected commitments, without weighing the cumulative load of five consecutive days with morning training from 07:00–09:00 and afternoon training from 16:30–18:30.",
+            "The Monday and Tuesday exam study blocks from 10:00–12:00 come one hour after 07:00–09:00 training and before lunch at 12:30. That may be workable, but the rationale does not discuss whether these are likely to be effective study periods after physical training rather than merely available former lecture slots.",
+            "The Wednesday picnic from 12:30–15:00 sits between sports physiotherapy at 10:00–11:00 and afternoon training at 16:30–18:30. This is not an objective conflict, but it leaves limited visible recovery or preparation margin on a day already containing recovery, social time and training.",
+            "The Friday dinner from 19:30–21:30 follows afternoon tactical training ending at 18:30 and precedes sleep at 22:30. The one-hour gaps on both sides may be enough, especially if nearby, but travel, showering, decompression and bedtime preparation are not substantiated.",
+            "The proposal deletes Monday and Tuesday lectures based on the stated rationale that lectures are suspended for Academic Week. That may be correct, but from the visible evidence here it remains an unverified condition rather than something independently demonstrated by the calendar.",
+            "The alternatives considered are relevant, especially declining the late-night Serenata, but the social-load alternative is dismissed too narrowly on the basis of no protected-event conflict rather than overall sustainability."
+          ],
+          "feedback": "The plan is mostly coherent and has several human-centered strengths: it preserves fixed sleep, training and physio; avoids the late-night event before early training; and uses the removed lecture slots for exam study rather than pushing study into evenings. The main concern is not a technical clash but cumulative manageability. Across the visible week, the user has early sleep-to-training transitions every weekday, two daily training sessions on most days, exam study added immediately after morning training on Monday and Tuesday, a long social lunch on Wednesday between physio and afternoon training, and an evening social event on Friday after the final afternoon training session. That may still be manageable for this person, but the rationale does not show enough consideration of recovery, transitions, or the effectiveness of study after training. A stronger plan would either substantiate why these additions are realistic in the user’s fuller context or reconsider whether both social events should remain given the visible training density. I cannot verify whether the original request is fully satisfied, because the original request and any hidden preferences are not available."
+        }
+      ],
+      "unresolved_assumptions": [
+        {
+          "subject": "Suspended lectures",
+          "assumption": "The Monday and Tuesday class events deleted by the proposal are genuinely suspended for Academic Week.",
+          "evidence_gap": "The rationale says the lecture removals rely on the user-stated suspension, but the visible calendar and validation do not independently confirm the academic schedule or the original request.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "external_source"
+        },
+        {
+          "subject": "RSVP and event availability",
+          "assumption": "The Wednesday picnic and Friday dinner are actually available to the user and attendance can be confirmed.",
+          "evidence_gap": "The rationale explicitly says RSVP or practical confirmation is needed, while the calendar only shows the events as proposed additions.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Friday evening logistics",
+          "assumption": "The user can move from 16:30–18:30 tactical training to the 19:30–21:30 dinner and still complete recovery, hygiene, travel and bedtime preparation before 22:30 sleep.",
+          "evidence_gap": "The calendar shows one hour before the dinner and one hour after it, but does not specify locations, travel time, showering, decompression or bedtime needs.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Wednesday picnic practicality",
+          "assumption": "The 12:30–15:00 campus picnic leaves enough practical margin after 10:00–11:00 physiotherapy and before 16:30–18:30 afternoon training.",
+          "evidence_gap": "The picnic is described as on campus, but no food logistics, recovery needs, preparation needs or exact locations are shown.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Post-training study effectiveness",
+          "assumption": "The user can study effectively during the 10:00–11:30 blocks on Monday and Tuesday and the 10:00–11:00 block on Thursday after 07:00–09:00 training.",
+          "evidence_gap": "The revised rationale gives a plausible distribution reason, but the calendar does not show the user’s recovery needs, energy pattern or whether these post-training study periods are cognitively effective.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Food and nutrition around training",
+          "assumption": "The Wednesday picnic and Friday dinner adequately cover meal needs without creating nutrition or timing issues around training.",
+          "evidence_gap": "The rationale says food confirmation is needed, and the final calendar does not show separate meal arrangements on Wednesday or Friday around the added social events.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        }
+      ]
+    }
+  ],
+  "initial_proposal": {
+    "changes": [
+      {
+        "type": "delete",
+        "event_id": "class_mon",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Exam study block",
+        "from_start": null,
+        "to_start": "2027-05-10T10:00:00+01:00",
+        "to_end": "2027-05-10T12:00:00+01:00",
+        "category": "exams",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "delete",
+        "event_id": "class_tue",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Exam study block",
+        "from_start": null,
+        "to_start": "2027-05-11T10:00:00+01:00",
+        "to_end": "2027-05-11T12:00:00+01:00",
+        "category": "exams",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Student Association Outdoor Picnic & Lunch on campus",
+        "from_start": null,
+        "to_start": "2027-05-12T12:30:00+01:00",
+        "to_end": "2027-05-12T15:00:00+01:00",
+        "category": "social",
+        "importance": 2,
+        "participants": [
+          "classmates",
+          "Student Association"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Friday Sunset Acoustic Session & Dinner",
+        "from_start": null,
+        "to_start": "2027-05-14T19:30:00+01:00",
+        "to_end": "2027-05-14T21:30:00+01:00",
+        "category": "social",
+        "importance": 2,
+        "participants": [
+          "classmates",
+          "Student Association"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Sleep",
+        "from_start": null,
+        "to_start": "2027-05-14T22:30:00+01:00",
+        "to_end": "2027-05-15T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "participants": [
+          "user"
+        ]
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "Training and existing sleep blocks are protected, so none are moved or deleted.",
+        "The Tuesday late-night Serenata conflicts with the protected sleep window before 07:00 training, so it must be declined.",
+        "Regular lectures can be removed because the request states they are suspended for Academic Week.",
+        "The Wednesday picnic fits between physio and afternoon training but still needs RSVP confirmation.",
+        "The Friday dinner ends before the 22:30 sleep block, but attendance still needs RSVP confirmation.",
+        "Venue availability, exact travel time and any food logistics are not confirmed."
+      ],
+      "priorities": [
+        "The freed lecture hours are used for the requested 4 hours of exam study.",
+        "Daytime and early-evening social events are preferred over late-night events.",
+        "The plan preserves all high-priority training, sleep and health commitments."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Use Wednesday 11:00–12:00 plus Thursday morning for study",
+          "rejected_because": "Rejected because the removed lecture slots already provide the full 4 hours with less fragmentation."
+        },
+        {
+          "option": "Attend part of the Tuesday Serenata only",
+          "rejected_because": "Rejected because even partial attendance during 23:30–03:00 violates the protected sleep block."
+        },
+        {
+          "option": "Skip Friday dinner to reduce social load",
+          "rejected_because": "Rejected because it does not conflict with protected commitments and ends before sleep."
+        }
+      ],
+      "summary": "Attend the Wednesday picnic and Friday dinner, decline the Tuesday late-night Serenata, remove the suspended lectures, and use the freed Monday and Tuesday morning lecture slots for 4 hours of exam study while adding Friday night sleep protection."
+    }
+  },
+  "final_proposal": {
+    "changes": [
+      {
+        "type": "delete",
+        "event_id": "class_mon",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Exam study block",
+        "from_start": null,
+        "to_start": "2027-05-10T10:00:00+01:00",
+        "to_end": "2027-05-10T11:30:00+01:00",
+        "category": "exams",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "delete",
+        "event_id": "class_tue",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Exam study block",
+        "from_start": null,
+        "to_start": "2027-05-11T10:00:00+01:00",
+        "to_end": "2027-05-11T11:30:00+01:00",
+        "category": "exams",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Exam study block",
+        "from_start": null,
+        "to_start": "2027-05-13T10:00:00+01:00",
+        "to_end": "2027-05-13T11:00:00+01:00",
+        "category": "exams",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Student Association Outdoor Picnic & Lunch on campus",
+        "from_start": null,
+        "to_start": "2027-05-12T12:30:00+01:00",
+        "to_end": "2027-05-12T15:00:00+01:00",
+        "category": "social",
+        "importance": 2,
+        "participants": [
+          "classmates",
+          "Student Association"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Friday Sunset Acoustic Session & Dinner",
+        "from_start": null,
+        "to_start": "2027-05-14T19:30:00+01:00",
+        "to_end": "2027-05-14T21:30:00+01:00",
+        "category": "social",
+        "importance": 2,
+        "participants": [
+          "classmates",
+          "Student Association"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Sleep",
+        "from_start": null,
+        "to_start": "2027-05-14T22:30:00+01:00",
+        "to_end": "2027-05-15T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "participants": [
+          "user"
+        ]
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "Training and existing sleep blocks are protected, so none are moved or deleted.",
+        "The Tuesday late-night Serenata must be declined because it overlaps the protected sleep period before 07:00 training.",
+        "The lecture removals rely on the user-stated Academic Week suspension and are not independently verified here.",
+        "The 4 hours of exam study are split across mornings to reduce post-training fatigue versus two full 2-hour blocks.",
+        "The Wednesday picnic is schedulable but needs RSVP, food, travel and pre-training margin confirmation.",
+        "The Friday dinner is schedulable only if RSVP, travel, recovery, hygiene and bedtime preparation fit the narrow evening margins.",
+        "Friday night sleep is added to preserve the non-negotiable 8-hour sleep rule after the dinner."
+      ],
+      "priorities": [
+        "Preserve high-priority training, sleep and physio before adding social activities.",
+        "Use morning capacity for exam preparation without loading evenings.",
+        "Prefer the daytime picnic and early-evening dinner over the late-night concert.",
+        "Keep social attendance conditional on external confirmation rather than assuming venue or logistics availability."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Keep two 2-hour study blocks on Monday and Tuesday",
+          "rejected_because": "Rejected because shorter distributed blocks are more sustainable after morning training."
+        },
+        {
+          "option": "Attend part of the Tuesday Serenata",
+          "rejected_because": "Rejected because any meaningful attendance overlaps protected sleep."
+        },
+        {
+          "option": "Decline the Friday dinner by default",
+          "rejected_because": "Rejected because it can fit if nearby logistics and bedtime preparation are confirmed."
+        },
+        {
+          "option": "Move study into Wednesday before the picnic",
+          "rejected_because": "Rejected because that would stack physio, study, social time and afternoon training on one day."
+        }
+      ],
+      "summary": "Decline the Tuesday Serenata, attend the Wednesday picnic and Friday dinner only after RSVP and practical logistics are confirmed, and complete 4 hours of exam study through shorter morning blocks while preserving all protected training and sleep."
+    }
+  },
+  "final_score": 4.0,
+  "refinements": 1,
+  "critic_accepted": true,
+  "decision": "defer",
+  "reasons": [
+    "mais de 2 mudanças",
+    "apaga evento (class_mon)",
+    "apaga evento (class_tue)"
+  ],
+  "status": "proposal_ready",
+  "critic_input_version": "final_calendar_v1",
+  "critic_policy_version": "uncertainty_review_v2",
+  "result_calendar_version": "validated_added_metadata_v2",
+  "final_result_calendar": {
+    "timezone": "Europe/Lisbon",
+    "coverage": "all_events_in_scenario_after_simulation",
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-05-09T22:30:00+01:00",
+        "end": "2027-05-10T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_am_mon",
+        "title": "Morning Strength Training",
+        "start": "2027-05-10T07:00:00+01:00",
+        "end": "2027-05-10T09:00:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Morning session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_1",
+        "title": "Exam study block",
+        "start": "2027-05-10T10:00:00+01:00",
+        "end": "2027-05-10T11:30:00+01:00",
+        "category": "exams",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "lunch_mon",
+        "title": "Lunch",
+        "start": "2027-05-10T12:30:00+01:00",
+        "end": "2027-05-10T13:30:00+01:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_pm_mon",
+        "title": "Afternoon Technical Training",
+        "start": "2027-05-10T16:30:00+01:00",
+        "end": "2027-05-10T18:30:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-05-10T22:30:00+01:00",
+        "end": "2027-05-11T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_am_tue",
+        "title": "Morning Conditioning",
+        "start": "2027-05-11T07:00:00+01:00",
+        "end": "2027-05-11T09:00:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Morning session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_3",
+        "title": "Exam study block",
+        "start": "2027-05-11T10:00:00+01:00",
+        "end": "2027-05-11T11:30:00+01:00",
+        "category": "exams",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "lunch_tue",
+        "title": "Lunch",
+        "start": "2027-05-11T12:30:00+01:00",
+        "end": "2027-05-11T13:30:00+01:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_pm_tue",
+        "title": "Afternoon Tactical Training",
+        "start": "2027-05-11T16:30:00+01:00",
+        "end": "2027-05-11T18:30:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-05-11T22:30:00+01:00",
+        "end": "2027-05-12T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_am_wed",
+        "title": "Morning Pool Recovery",
+        "start": "2027-05-12T07:00:00+01:00",
+        "end": "2027-05-12T09:00:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Morning session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "physio_wed",
+        "title": "Sports Physiotherapy",
+        "start": "2027-05-12T10:00:00+01:00",
+        "end": "2027-05-12T11:00:00+01:00",
+        "category": "physio",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user",
+          "physiotherapist"
+        ],
+        "description": "Routine recovery.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_5",
+        "title": "Student Association Outdoor Picnic & Lunch on campus",
+        "start": "2027-05-12T12:30:00+01:00",
+        "end": "2027-05-12T15:00:00+01:00",
+        "category": "social",
+        "importance": 2,
+        "fixed": null,
+        "participants": [
+          "classmates",
+          "Student Association"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "training_pm_wed",
+        "title": "Afternoon Technical Session",
+        "start": "2027-05-12T16:30:00+01:00",
+        "end": "2027-05-12T18:30:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-05-12T22:30:00+01:00",
+        "end": "2027-05-13T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_am_thu",
+        "title": "Morning Gym",
+        "start": "2027-05-13T07:00:00+01:00",
+        "end": "2027-05-13T09:00:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Morning session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_4",
+        "title": "Exam study block",
+        "start": "2027-05-13T10:00:00+01:00",
+        "end": "2027-05-13T11:00:00+01:00",
+        "category": "exams",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "training_pm_thu",
+        "title": "Afternoon Scrimmage",
+        "start": "2027-05-13T16:30:00+01:00",
+        "end": "2027-05-13T18:30:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-05-13T22:30:00+01:00",
+        "end": "2027-05-14T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_am_fri",
+        "title": "Morning Speed Session",
+        "start": "2027-05-14T07:00:00+01:00",
+        "end": "2027-05-14T09:00:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Morning session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_pm_fri",
+        "title": "Afternoon Tactical Session",
+        "start": "2027-05-14T16:30:00+01:00",
+        "end": "2027-05-14T18:30:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_6",
+        "title": "Friday Sunset Acoustic Session & Dinner",
+        "start": "2027-05-14T19:30:00+01:00",
+        "end": "2027-05-14T21:30:00+01:00",
+        "category": "social",
+        "importance": 2,
+        "fixed": null,
+        "participants": [
+          "classmates",
+          "Student Association"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "new_7",
+        "title": "Sleep",
+        "start": "2027-05-14T22:30:00+01:00",
+        "end": "2027-05-15T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      }
+    ],
+    "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+  },
+  "final_unresolved_assumptions": [
+    {
+      "subject": "Suspended lectures",
+      "assumption": "The Monday and Tuesday class events deleted by the proposal are genuinely suspended for Academic Week.",
+      "evidence_gap": "The rationale says the lecture removals rely on the user-stated suspension, but the visible calendar and validation do not independently confirm the academic schedule or the original request.",
+      "potential_impact": "potentially_blocking",
+      "verification_source": "external_source"
+    },
+    {
+      "subject": "RSVP and event availability",
+      "assumption": "The Wednesday picnic and Friday dinner are actually available to the user and attendance can be confirmed.",
+      "evidence_gap": "The rationale explicitly says RSVP or practical confirmation is needed, while the calendar only shows the events as proposed additions.",
+      "potential_impact": "material",
+      "verification_source": "third_party"
+    },
+    {
+      "subject": "Friday evening logistics",
+      "assumption": "The user can move from 16:30–18:30 tactical training to the 19:30–21:30 dinner and still complete recovery, hygiene, travel and bedtime preparation before 22:30 sleep.",
+      "evidence_gap": "The calendar shows one hour before the dinner and one hour after it, but does not specify locations, travel time, showering, decompression or bedtime needs.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Wednesday picnic practicality",
+      "assumption": "The 12:30–15:00 campus picnic leaves enough practical margin after 10:00–11:00 physiotherapy and before 16:30–18:30 afternoon training.",
+      "evidence_gap": "The picnic is described as on campus, but no food logistics, recovery needs, preparation needs or exact locations are shown.",
+      "potential_impact": "material",
+      "verification_source": "unknown"
+    },
+    {
+      "subject": "Post-training study effectiveness",
+      "assumption": "The user can study effectively during the 10:00–11:30 blocks on Monday and Tuesday and the 10:00–11:00 block on Thursday after 07:00–09:00 training.",
+      "evidence_gap": "The revised rationale gives a plausible distribution reason, but the calendar does not show the user’s recovery needs, energy pattern or whether these post-training study periods are cognitively effective.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Food and nutrition around training",
+      "assumption": "The Wednesday picnic and Friday dinner adequately cover meal needs without creating nutrition or timing issues around training.",
+      "evidence_gap": "The rationale says food confirmation is needed, and the final calendar does not show separate meal arrangements on Wednesday or Friday around the added social events.",
+      "potential_impact": "material",
+      "verification_source": "third_party"
+    }
+  ],
+  "uncertainty_history": [
+    {
+      "iteration": 0,
+      "unresolved_assumptions": [
+        {
+          "subject": "Suspended lectures",
+          "assumption": "The Monday and Tuesday regular lectures deleted by the proposal are genuinely suspended for Academic Week.",
+          "evidence_gap": "The rationale states this, but the visible calendar and validation do not independently confirm the academic schedule or the original request.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "external_source"
+        },
+        {
+          "subject": "RSVP and event availability",
+          "assumption": "The Wednesday picnic and Friday dinner are available to the user and the user can attend after RSVP confirmation.",
+          "evidence_gap": "The rationale explicitly says RSVP confirmation is still needed, and the calendar only shows proposed additions.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Travel and location practicality",
+          "assumption": "Travel between training, physio, campus picnic, Friday dinner and sleep location is short enough for the visible gaps to work.",
+          "evidence_gap": "The rationale notes exact travel time is not confirmed, and event locations are not specified beyond the picnic being on campus.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Post-training study effectiveness",
+          "assumption": "The user can study effectively from 10:00–12:00 after 07:00–09:00 morning training on both Monday and Tuesday.",
+          "evidence_gap": "The proposal identifies these as freed lecture slots but does not provide evidence about the user’s recovery needs, energy patterns or study effectiveness after training.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Friday evening recovery and bedtime routine",
+          "assumption": "The user can transition from 16:30–18:30 tactical training to a 19:30–21:30 dinner and still complete recovery and bedtime preparation before 22:30 sleep.",
+          "evidence_gap": "The calendar shows only one hour before dinner and one hour after dinner; no travel, hygiene, recovery or preparation needs are visible.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Food logistics",
+          "assumption": "The Wednesday picnic and Friday dinner adequately cover meal needs without creating nutrition or timing issues around training.",
+          "evidence_gap": "The rationale explicitly says food logistics are not confirmed, and the calendar does not show separate meals around those events.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        }
+      ]
+    },
+    {
+      "iteration": 1,
+      "unresolved_assumptions": [
+        {
+          "subject": "Suspended lectures",
+          "assumption": "The Monday and Tuesday class events deleted by the proposal are genuinely suspended for Academic Week.",
+          "evidence_gap": "The rationale says the lecture removals rely on the user-stated suspension, but the visible calendar and validation do not independently confirm the academic schedule or the original request.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "external_source"
+        },
+        {
+          "subject": "RSVP and event availability",
+          "assumption": "The Wednesday picnic and Friday dinner are actually available to the user and attendance can be confirmed.",
+          "evidence_gap": "The rationale explicitly says RSVP or practical confirmation is needed, while the calendar only shows the events as proposed additions.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Friday evening logistics",
+          "assumption": "The user can move from 16:30–18:30 tactical training to the 19:30–21:30 dinner and still complete recovery, hygiene, travel and bedtime preparation before 22:30 sleep.",
+          "evidence_gap": "The calendar shows one hour before the dinner and one hour after it, but does not specify locations, travel time, showering, decompression or bedtime needs.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Wednesday picnic practicality",
+          "assumption": "The 12:30–15:00 campus picnic leaves enough practical margin after 10:00–11:00 physiotherapy and before 16:30–18:30 afternoon training.",
+          "evidence_gap": "The picnic is described as on campus, but no food logistics, recovery needs, preparation needs or exact locations are shown.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Post-training study effectiveness",
+          "assumption": "The user can study effectively during the 10:00–11:30 blocks on Monday and Tuesday and the 10:00–11:00 block on Thursday after 07:00–09:00 training.",
+          "evidence_gap": "The revised rationale gives a plausible distribution reason, but the calendar does not show the user’s recovery needs, energy pattern or whether these post-training study periods are cognitively effective.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Food and nutrition around training",
+          "assumption": "The Wednesday picnic and Friday dinner adequately cover meal needs without creating nutrition or timing issues around training.",
+          "evidence_gap": "The rationale says food confirmation is needed, and the final calendar does not show separate meal arrangements on Wednesday or Friday around the added social events.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        }
+      ]
+    }
+  ],
+  "schema_version": "2.0",
+  "profile_id": "elite_athlete_student_01__elite_athlete_student_academic_week_festivals_001",
+  "scenario_sha256": "69fa0ad25e7ef3bac594ed4c0eb9442eafff7d6d2251694ce19d152f4c9228d7",
+  "aggregate_requirements_sha256": null,
+  "confirmed_changes_sha256": null,
+  "simulator_version": "calendar_v2_validated_added_metadata_v2",
+  "dataset_manifest_sha256": "28af38846fb8995651d5f63ab63402e36147dc0915a2bfcd5379747ea531ffad",
+  "split": "train",
+  "run_id": "4a4a90d1583a4fb5b48de34238a5954b",
+  "experiment_id": null,
+  "repeat_index": 0,
+  "generated_at": "2026-11-23T16:49:28.181788+00:00",
+  "prompt_versions": {
+    "proposer_sha256": "ae6fa59cccb86c31f34f66d07d241660b1feadf852ebf1b594bc85addab86985",
+    "proposer_wire_schema_version": "compact_proposal_v1",
+    "proposer_wire_schema_sha256": "f504fbcd7e939c43e055e2f188feb22097a284bcd9b043227d868e559547b865",
+    "proposer_revision_sha256": "3f0fe7f221013700694a22984560612013e9804072ffde4538e1329b9708ac95",
+    "critic_sha256": "1686688cdd4bc63abb12e6633ef9dbb9b62d69b69aba1c4805a201657cc5bb34"
+  },
+  "seconds": 85.501,
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [],
+    "valid": true
+  }
+}

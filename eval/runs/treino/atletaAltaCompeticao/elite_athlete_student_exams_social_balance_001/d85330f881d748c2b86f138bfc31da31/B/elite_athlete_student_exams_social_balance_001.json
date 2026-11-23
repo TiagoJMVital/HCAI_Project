@@ -1,0 +1,2524 @@
+{
+  "configuration": "B",
+  "scenario_id": "elite_athlete_student_exams_social_balance_001",
+  "family": "elite_athlete_student_schedule_conflict",
+  "category": "v2",
+  "proposer_provider": "iaedu",
+  "proposer_model": "GPT-5.5",
+  "proposer_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_provider": "iaedu",
+  "critic_model": "GPT-5.5",
+  "critic_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_settings": {
+    "threshold": 4.0,
+    "max_refinements": 3,
+    "min_dimension_score": 1
+  },
+  "iterations": [
+    {
+      "index": 0,
+      "proposer_feedback": null,
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Board Game & Coffee Night (brief attendance)",
+            "from_start": null,
+            "to_start": "2027-06-16T19:30:00+01:00",
+            "to_end": "2027-06-16T20:30:00+01:00",
+            "category": "social",
+            "importance": 2,
+            "participants": [
+              "user",
+              "Student Association"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "End-of-Exams Sunset Dinner",
+            "from_start": null,
+            "to_start": "2027-06-18T19:30:00+01:00",
+            "to_end": "2027-06-18T22:00:00+01:00",
+            "category": "social",
+            "importance": 2,
+            "participants": [
+              "user",
+              "Student Association"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "All protected training, sleep and exam events remain unchanged.",
+            "The existing Business Law study blocks on Wednesday and Thursday provide 5 hours total before the Friday exam.",
+            "Wednesday brief attendance ends well before the protected 23:00 sleep block.",
+            "Friday dinner follows the exam and does not conflict with listed protected events.",
+            "Friday venue-to-home travel time is unknown, so the 23:00 sleep target after dinner cannot be fully verified."
+          ],
+          "priorities": [
+            "Prioritise the Friday dinner because exams are finished and it gives the fuller social benefit.",
+            "Use only brief Wednesday attendance to decompress without adding a late evening before the exam.",
+            "Avoid moving study blocks because the current plan already meets the stated study target."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Attend only the Friday dinner.",
+              "rejected_because": "This is simpler and avoids adding any social commitment on the night before the Business Law exam."
+            },
+            {
+              "option": "Attend the full Wednesday event and skip Friday dinner.",
+              "rejected_because": "This fits the listed calendar but gives a later pre-exam evening and misses the post-exam social opportunity."
+            },
+            {
+              "option": "Attend both events fully.",
+              "rejected_because": "This appears calendar-feasible, but it conflicts with the user's stated concern about only attending one properly."
+            }
+          ],
+          "summary": "Adds a short Wednesday social decompression plus the full Friday post-exam dinner, preserving all fixed training, exam and sleep blocks while relying on the current 5 hours of Business Law study already scheduled."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-06-13T23:00:00+01:00",
+            "end": "2027-06-14T07:00:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_mon",
+            "title": "Morning Strength Training",
+            "start": "2027-06-14T07:30:00+01:00",
+            "end": "2027-06-14T09:30:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_macro_mon",
+            "title": "Exam Study: Macroeconomics",
+            "start": "2027-06-14T10:30:00+01:00",
+            "end": "2027-06-14T13:00:00+01:00",
+            "category": "study",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Exam prep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_mon",
+            "title": "Lunch",
+            "start": "2027-06-14T13:00:00+01:00",
+            "end": "2027-06-14T14:00:00+01:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_mon",
+            "title": "Afternoon Field Practice",
+            "start": "2027-06-14T16:30:00+01:00",
+            "end": "2027-06-14T18:30:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-06-14T23:00:00+01:00",
+            "end": "2027-06-15T07:00:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_tue",
+            "title": "Morning Conditioning",
+            "start": "2027-06-15T07:30:00+01:00",
+            "end": "2027-06-15T09:30:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "exam_macro_tue",
+            "title": "Macroeconomics Final Exam",
+            "start": "2027-06-15T10:30:00+01:00",
+            "end": "2027-06-15T12:30:00+01:00",
+            "category": "exam",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "examiner"
+            ],
+            "description": "Official exam.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_tue",
+            "title": "Lunch",
+            "start": "2027-06-15T13:00:00+01:00",
+            "end": "2027-06-15T14:00:00+01:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_tue",
+            "title": "Afternoon Technical Training",
+            "start": "2027-06-15T16:30:00+01:00",
+            "end": "2027-06-15T18:30:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-06-15T23:00:00+01:00",
+            "end": "2027-06-16T07:00:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_wed",
+            "title": "Morning Recovery & Mobility",
+            "start": "2027-06-16T07:30:00+01:00",
+            "end": "2027-06-16T09:30:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_law_wed",
+            "title": "Exam Study: Business Law",
+            "start": "2027-06-16T10:30:00+01:00",
+            "end": "2027-06-16T13:00:00+01:00",
+            "category": "study",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Exam prep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_wed",
+            "title": "Lunch",
+            "start": "2027-06-16T13:00:00+01:00",
+            "end": "2027-06-16T14:00:00+01:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_wed",
+            "title": "Afternoon Tactical Session",
+            "start": "2027-06-16T16:30:00+01:00",
+            "end": "2027-06-16T18:30:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_0",
+            "title": "Board Game & Coffee Night (brief attendance)",
+            "start": "2027-06-16T19:30:00+01:00",
+            "end": "2027-06-16T20:30:00+01:00",
+            "category": "social",
+            "importance": 2,
+            "fixed": null,
+            "participants": [
+              "user",
+              "Student Association"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-06-16T23:00:00+01:00",
+            "end": "2027-06-17T07:00:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_thu",
+            "title": "Morning Speed Session",
+            "start": "2027-06-17T07:30:00+01:00",
+            "end": "2027-06-17T09:30:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_law_thu",
+            "title": "Exam Study: Business Law",
+            "start": "2027-06-17T10:30:00+01:00",
+            "end": "2027-06-17T13:00:00+01:00",
+            "category": "study",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Exam prep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_thu",
+            "title": "Lunch",
+            "start": "2027-06-17T13:00:00+01:00",
+            "end": "2027-06-17T14:00:00+01:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_thu",
+            "title": "Afternoon Team Scrimmage",
+            "start": "2027-06-17T16:30:00+01:00",
+            "end": "2027-06-17T18:30:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-06-17T23:00:00+01:00",
+            "end": "2027-06-18T07:00:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_fri",
+            "title": "Morning Light Activation",
+            "start": "2027-06-18T07:30:00+01:00",
+            "end": "2027-06-18T09:00:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "exam_law_fri",
+            "title": "Business Law Final Exam",
+            "start": "2027-06-18T10:00:00+01:00",
+            "end": "2027-06-18T12:00:00+01:00",
+            "category": "exam",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "examiner"
+            ],
+            "description": "Official exam.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_fri",
+            "title": "Lunch",
+            "start": "2027-06-18T12:30:00+01:00",
+            "end": "2027-06-18T13:30:00+01:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_fri",
+            "title": "Afternoon Technical Training",
+            "start": "2027-06-18T16:30:00+01:00",
+            "end": "2027-06-18T18:30:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_1",
+            "title": "End-of-Exams Sunset Dinner",
+            "start": "2027-06-18T19:30:00+01:00",
+            "end": "2027-06-18T22:00:00+01:00",
+            "category": "social",
+            "importance": 2,
+            "fixed": null,
+            "participants": [
+              "user",
+              "Student Association"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 3,
+          "alternatives": 4,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The rationale is stronger than a purely free-slot argument, but it underweights the cumulative load of the visible week: daily morning training, several afternoon training sessions, two final exams, and study blocks. The added Wednesday social event at 2027-06-16 19:30-20:30 follows Morning Recovery & Mobility, Business Law study, and Afternoon Tactical Session on the same day.",
+          "The Friday dinner at 2027-06-18 19:30-22:00 follows Morning Light Activation at 07:30-09:00, the Business Law Final Exam at 10:00-12:00, lunch at 12:30-13:30, and Afternoon Technical Training at 16:30-18:30. The one-hour gap before dinner may be enough in some contexts, but the plan does not substantiate travel, showering, changing, decompression, or arrival logistics after training.",
+          "The proposal acknowledges that Friday venue-to-home travel is unknown and that the 23:00 sleep target cannot be fully verified, but it still treats the full dinner as the preferred option without explaining why the risk to recovery after a dense exam/training day is acceptable.",
+          "The alternative 'attend only the Friday dinner' is identified as simpler but is not clearly weighed against the actual human-quality concern introduced by the selected plan: adding a Wednesday commitment during exam week plus a full Friday evening commitment after a high-load day.",
+          "Request satisfaction cannot be verified from the provided material because the original request is not available. The rationale references a stated concern about only attending one event properly, but the evidence for that concern is not independently visible outside the proposal text."
+        ],
+        "feedback": "The proposal is generally coherent and preserves protected events, and the Wednesday addition is reasonably limited. The main practical risk is not a calendar conflict but cumulative manageability: the user has a demanding visible week with repeated training, study, and two exams, then the plan adds two social commitments. Friday is the most concerning because the dinner starts only one hour after a 16:30-18:30 training session and ends at 22:00, while the rationale itself says the post-dinner travel and 23:00 sleep target are not fully verified. The Proposer should reconsider or substantiate whether the Friday evening plan realistically allows post-training cleanup, travel, dinner attendance, return home, and recovery without undermining the protected rest pattern. With fuller context, the same operations might still be acceptable, but the current rationale does not fully support the human feasibility of the Friday evening sequence.",
+        "plausibility_review": {
+          "revision_required": true,
+          "severity": "moderate",
+          "reason": "A concrete manageability concern remains around the Friday sequence: morning training, final exam, afternoon training, then a 19:30-22:00 social dinner with only a one-hour gap after training and unverified travel before the implied 23:00 sleep target. This could significantly affect recovery and sustainability in an already dense exam-and-training week, even though there is no technical overlap.",
+          "suggested_improvement": "Reconsider the Friday dinner in light of post-training logistics and recovery, or provide grounded context showing that travel, hygiene, decompression, and return before the intended sleep routine are realistically accommodated. Also briefly justify why adding the Wednesday social hour remains worthwhile given the cumulative exam-week load."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Friday post-training logistics",
+            "assumption": "The user can finish Afternoon Technical Training at 18:30 and still prepare, travel, and arrive for the End-of-Exams Sunset Dinner at 19:30 without undue stress.",
+            "evidence_gap": "The calendar shows only a one-hour gap between training and dinner, with no information about venue locations, shower/change needs, travel time, or arrival flexibility.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Friday return and sleep routine",
+            "assumption": "The user can leave the 19:30-22:00 dinner, travel home, and maintain the intended 23:00 sleep target or otherwise recover adequately.",
+            "evidence_gap": "The rationale explicitly states that Friday venue-to-home travel time is unknown, and the final calendar does not show a Friday-night sleep block after the dinner.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Cumulative exam-week capacity",
+            "assumption": "Adding both a Wednesday social hour and a Friday dinner is sustainable alongside daily training, two exams, and Business Law study.",
+            "evidence_gap": "The rationale notes preserved events and study totals but does not directly evaluate fatigue or recovery across the full visible sequence from Monday through Friday.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "User preference about attending one event properly",
+            "assumption": "The selected combination of brief Wednesday attendance plus full Friday dinner satisfies the user's visible social priority better than attending only one event.",
+            "evidence_gap": "The rationale references the user's concern about only attending one properly, but the original request is not provided, so request satisfaction cannot be independently verified.",
+            "potential_impact": "minor",
+            "verification_source": "user_context"
+          }
+        ],
+        "overall": 3.75
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": false,
+        "plausibility_revision_required": true,
+        "accepted": false,
+        "revision_causes": [
+          "numeric_criteria_failed",
+          "plausibility_revision_required"
+        ]
+      },
+      "operations_changed_from_previous": null,
+      "rationale_changed_from_previous": null,
+      "prior_critic_reviews": [],
+      "unresolved_assumptions": [
+        {
+          "subject": "Friday post-training logistics",
+          "assumption": "The user can finish Afternoon Technical Training at 18:30 and still prepare, travel, and arrive for the End-of-Exams Sunset Dinner at 19:30 without undue stress.",
+          "evidence_gap": "The calendar shows only a one-hour gap between training and dinner, with no information about venue locations, shower/change needs, travel time, or arrival flexibility.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Friday return and sleep routine",
+          "assumption": "The user can leave the 19:30-22:00 dinner, travel home, and maintain the intended 23:00 sleep target or otherwise recover adequately.",
+          "evidence_gap": "The rationale explicitly states that Friday venue-to-home travel time is unknown, and the final calendar does not show a Friday-night sleep block after the dinner.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Cumulative exam-week capacity",
+          "assumption": "Adding both a Wednesday social hour and a Friday dinner is sustainable alongside daily training, two exams, and Business Law study.",
+          "evidence_gap": "The rationale notes preserved events and study totals but does not directly evaluate fatigue or recovery across the full visible sequence from Monday through Friday.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "User preference about attending one event properly",
+          "assumption": "The selected combination of brief Wednesday attendance plus full Friday dinner satisfies the user's visible social priority better than attending only one event.",
+          "evidence_gap": "The rationale references the user's concern about only attending one properly, but the original request is not provided, so request satisfaction cannot be independently verified.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "proposer_feedback": "Numeric Critic criteria failed. Scores: {\"reasoning\":4,\"coherence\":3,\"alternatives\":4,\"clarity\":4}. Plausibility revision required (moderate): A concrete manageability concern remains around the Friday sequence: morning training, final exam, afternoon training, then a 19:30-22:00 social dinner with only a one-hour gap after training and unverified travel before the implied 23:00 sleep target. This could significantly affect recovery and sustainability in an already dense exam-and-training week, even though there is no technical overlap. Suggested direction: Reconsider the Friday dinner in light of post-training logistics and recovery, or provide grounded context showing that travel, hygiene, decompression, and return before the intended sleep routine are realistically accommodated. Also briefly justify why adding the Wednesday social hour remains worthwhile given the cumulative exam-week load. The Critic lacks the full user constraints; explain if no better feasible option exists. Unverified conditions to reassess: [{'subject': 'Friday post-training logistics', 'assumption': 'The user can finish Afternoon Technical Training at 18:30 and still prepare, travel, and arrive for the End-of-Exams Sunset Dinner at 19:30 without undue stress.', 'evidence_gap': 'The calendar shows only a one-hour gap between training and dinner, with no information about venue locations, shower/change needs, travel time, or arrival flexibility.', 'potential_impact': 'material', 'verification_source': 'unknown'}, {'subject': 'Friday return and sleep routine', 'assumption': 'The user can leave the 19:30-22:00 dinner, travel home, and maintain the intended 23:00 sleep target or otherwise recover adequately.', 'evidence_gap': 'The rationale explicitly states that Friday venue-to-home travel time is unknown, and the final calendar does not show a Friday-night sleep block after the dinner.', 'potential_impact': 'material', 'verification_source': 'unknown'}, {'subject': 'Cumulative exam-week capacity', 'assumption': 'Adding both a Wednesday social hour and a Friday dinner is sustainable alongside daily training, two exams, and Business Law study.', 'evidence_gap': 'The rationale notes preserved events and study totals but does not directly evaluate fatigue or recovery across the full visible sequence from Monday through Friday.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'User preference about attending one event properly', 'assumption': \"The selected combination of brief Wednesday attendance plus full Friday dinner satisfies the user's visible social priority better than attending only one event.\", 'evidence_gap': \"The rationale references the user's concern about only attending one properly, but the original request is not provided, so request satisfaction cannot be independently verified.\", 'potential_impact': 'minor', 'verification_source': 'user_context'}] Weaknesses: ['The rationale is stronger than a purely free-slot argument, but it underweights the cumulative load of the visible week: daily morning training, several afternoon training sessions, two final exams, and study blocks. The added Wednesday social event at 2027-06-16 19:30-20:30 follows Morning Recovery & Mobility, Business Law study, and Afternoon Tactical Session on the same day.', 'The Friday dinner at 2027-06-18 19:30-22:00 follows Morning Light Activation at 07:30-09:00, the Business Law Final Exam at 10:00-12:00, lunch at 12:30-13:30, and Afternoon Technical Training at 16:30-18:30. The one-hour gap before dinner may be enough in some contexts, but the plan does not substantiate travel, showering, changing, decompression, or arrival logistics after training.', 'The proposal acknowledges that Friday venue-to-home travel is unknown and that the 23:00 sleep target cannot be fully verified, but it still treats the full dinner as the preferred option without explaining why the risk to recovery after a dense exam/training day is acceptable.', \"The alternative 'attend only the Friday dinner' is identified as simpler but is not clearly weighed against the actual human-quality concern introduced by the selected plan: adding a Wednesday commitment during exam week plus a full Friday evening commitment after a high-load day.\", 'Request satisfaction cannot be verified from the provided material because the original request is not available. The rationale references a stated concern about only attending one event properly, but the evidence for that concern is not independently visible outside the proposal text.']. Actionable feedback: The proposal is generally coherent and preserves protected events, and the Wednesday addition is reasonably limited. The main practical risk is not a calendar conflict but cumulative manageability: the user has a demanding visible week with repeated training, study, and two exams, then the plan adds two social commitments. Friday is the most concerning because the dinner starts only one hour after a 16:30-18:30 training session and ends at 22:00, while the rationale itself says the post-dinner travel and 23:00 sleep target are not fully verified. The Proposer should reconsider or substantiate whether the Friday evening plan realistically allows post-training cleanup, travel, dinner attendance, return home, and recovery without undermining the protected rest pattern. With fuller context, the same operations might still be acceptable, but the current rationale does not fully support the human feasibility of the Friday evening sequence.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "End-of-Exams Sunset Dinner (partial attendance)",
+            "from_start": null,
+            "to_start": "2027-06-18T19:30:00+01:00",
+            "to_end": "2027-06-18T21:30:00+01:00",
+            "category": "social",
+            "importance": 2,
+            "participants": [
+              "user",
+              "Student Association"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Sleep",
+            "from_start": null,
+            "to_start": "2027-06-18T23:00:00+01:00",
+            "to_end": "2027-06-19T07:00:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "participants": [
+              "user"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "Training and exam events are protected and remain unchanged.",
+            "The existing Wednesday and Thursday Business Law study blocks already meet the requested 5-hour total.",
+            "A Friday-night sleep block is added to maintain the profile's 8-hour sleep rule after the social plan.",
+            "The Friday venue is stated to be 20 minutes from the training center, but cleanup, changing, arrival flexibility and homeward travel remain unknown.",
+            "No external RSVP or venue availability is confirmed by the supplied data."
+          ],
+          "priorities": [
+            "Prioritise the post-exam social event because it avoids adding a commitment before the Business Law exam.",
+            "Limit attendance rather than add Wednesday as well, reducing cumulative exam-week load.",
+            "Keep protected training, exam and sleep requirements ahead of social duration."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Attend the full Friday dinner.",
+              "rejected_because": "Higher social value, but the later finish leaves less verified margin for return and sleep after a dense Friday."
+            },
+            {
+              "option": "Attend Wednesday briefly plus Friday dinner.",
+              "rejected_because": "Close to the user's idea, but it adds cumulative load across both the pre-exam and post-training parts of the week."
+            },
+            {
+              "option": "Attend only Wednesday briefly.",
+              "rejected_because": "Safer for Friday recovery, but it gives less post-exam decompression and occurs before the Business Law exam."
+            },
+            {
+              "option": "Attend the full Wednesday event only.",
+              "rejected_because": "Provides one complete social event, but uses a longer pre-exam evening and does not use the post-exam window."
+            }
+          ],
+          "summary": "Schedules a single, shortened Friday dinner plus an explicit Friday-night sleep block, preserving fixed training, exams and existing study time while trading full social attendance for better recovery margins under unverified logistics."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-06-13T23:00:00+01:00",
+            "end": "2027-06-14T07:00:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_mon",
+            "title": "Morning Strength Training",
+            "start": "2027-06-14T07:30:00+01:00",
+            "end": "2027-06-14T09:30:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_macro_mon",
+            "title": "Exam Study: Macroeconomics",
+            "start": "2027-06-14T10:30:00+01:00",
+            "end": "2027-06-14T13:00:00+01:00",
+            "category": "study",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Exam prep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_mon",
+            "title": "Lunch",
+            "start": "2027-06-14T13:00:00+01:00",
+            "end": "2027-06-14T14:00:00+01:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_mon",
+            "title": "Afternoon Field Practice",
+            "start": "2027-06-14T16:30:00+01:00",
+            "end": "2027-06-14T18:30:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-06-14T23:00:00+01:00",
+            "end": "2027-06-15T07:00:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_tue",
+            "title": "Morning Conditioning",
+            "start": "2027-06-15T07:30:00+01:00",
+            "end": "2027-06-15T09:30:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "exam_macro_tue",
+            "title": "Macroeconomics Final Exam",
+            "start": "2027-06-15T10:30:00+01:00",
+            "end": "2027-06-15T12:30:00+01:00",
+            "category": "exam",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "examiner"
+            ],
+            "description": "Official exam.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_tue",
+            "title": "Lunch",
+            "start": "2027-06-15T13:00:00+01:00",
+            "end": "2027-06-15T14:00:00+01:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_tue",
+            "title": "Afternoon Technical Training",
+            "start": "2027-06-15T16:30:00+01:00",
+            "end": "2027-06-15T18:30:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-06-15T23:00:00+01:00",
+            "end": "2027-06-16T07:00:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_wed",
+            "title": "Morning Recovery & Mobility",
+            "start": "2027-06-16T07:30:00+01:00",
+            "end": "2027-06-16T09:30:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_law_wed",
+            "title": "Exam Study: Business Law",
+            "start": "2027-06-16T10:30:00+01:00",
+            "end": "2027-06-16T13:00:00+01:00",
+            "category": "study",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Exam prep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_wed",
+            "title": "Lunch",
+            "start": "2027-06-16T13:00:00+01:00",
+            "end": "2027-06-16T14:00:00+01:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_wed",
+            "title": "Afternoon Tactical Session",
+            "start": "2027-06-16T16:30:00+01:00",
+            "end": "2027-06-16T18:30:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-06-16T23:00:00+01:00",
+            "end": "2027-06-17T07:00:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_thu",
+            "title": "Morning Speed Session",
+            "start": "2027-06-17T07:30:00+01:00",
+            "end": "2027-06-17T09:30:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_law_thu",
+            "title": "Exam Study: Business Law",
+            "start": "2027-06-17T10:30:00+01:00",
+            "end": "2027-06-17T13:00:00+01:00",
+            "category": "study",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Exam prep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_thu",
+            "title": "Lunch",
+            "start": "2027-06-17T13:00:00+01:00",
+            "end": "2027-06-17T14:00:00+01:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_thu",
+            "title": "Afternoon Team Scrimmage",
+            "start": "2027-06-17T16:30:00+01:00",
+            "end": "2027-06-17T18:30:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-06-17T23:00:00+01:00",
+            "end": "2027-06-18T07:00:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_fri",
+            "title": "Morning Light Activation",
+            "start": "2027-06-18T07:30:00+01:00",
+            "end": "2027-06-18T09:00:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "exam_law_fri",
+            "title": "Business Law Final Exam",
+            "start": "2027-06-18T10:00:00+01:00",
+            "end": "2027-06-18T12:00:00+01:00",
+            "category": "exam",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "examiner"
+            ],
+            "description": "Official exam.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_fri",
+            "title": "Lunch",
+            "start": "2027-06-18T12:30:00+01:00",
+            "end": "2027-06-18T13:30:00+01:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_fri",
+            "title": "Afternoon Technical Training",
+            "start": "2027-06-18T16:30:00+01:00",
+            "end": "2027-06-18T18:30:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_0",
+            "title": "End-of-Exams Sunset Dinner (partial attendance)",
+            "start": "2027-06-18T19:30:00+01:00",
+            "end": "2027-06-18T21:30:00+01:00",
+            "category": "social",
+            "importance": 2,
+            "fixed": null,
+            "participants": [
+              "user",
+              "Student Association"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "new_1",
+            "title": "Sleep",
+            "start": "2027-06-18T23:00:00+01:00",
+            "end": "2027-06-19T07:00:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 4,
+          "alternatives": 4,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The revised plan substantially addresses the prior cumulative-load concern by removing the Wednesday social event and shortening the Friday dinner, but Friday remains a demanding sequence: Morning Light Activation at 07:30-09:00, Business Law Final Exam at 10:00-12:00, Afternoon Technical Training at 16:30-18:30, then dinner at 19:30-21:30.",
+          "The one-hour gap between Afternoon Technical Training ending at 18:30 and the dinner starting at 19:30 is still tight if the user needs cleanup, changing, packing, or any delay after training. The rationale states the venue is 20 minutes from the training center, which helps, but it also acknowledges cleanup, changing, and arrival flexibility remain unknown.",
+          "The added 23:00-07:00 sleep block is a good recovery-oriented correction, but it is partly dependent on unverified return logistics from the dinner ending at 21:30. The 90-minute interval before sleep may be realistic in many contexts, but the homeward travel and wind-down needs are not evidenced.",
+          "External availability and acceptability of partial attendance are not confirmed. This is not a technical violation, but it matters because the plan’s manageability depends on attending only 19:30-21:30 rather than the full dinner.",
+          "Request satisfaction cannot be independently verified because the original request is not provided. The visible rationale supports the no-Wednesday, shortened-Friday choice, but the review can only assess the resulting calendar and stated rationale."
+        ],
+        "feedback": "The revision gives a grounded answer to the prior concern. It removes the Wednesday social commitment, shortens the Friday dinner from a fuller evening to 19:30-21:30, and adds an explicit 23:00-07:00 sleep block. That makes the visible week more sustainable than the prior proposal and shows appropriate prioritisation of exams, training, and sleep. The remaining concern is not an objective conflict but a practical Friday-evening margin issue: after a final exam day plus afternoon training, the plan relies on the user being able to transition from training to dinner in one hour and then return and wind down before 23:00. Because the proposal acknowledges those logistics are not fully verified, the assumptions should remain visible. However, the revised distribution is proportionate and plausibly manageable if the stated 20-minute venue distance and partial-attendance flexibility hold.",
+        "plausibility_review": {
+          "revision_required": false,
+          "severity": "low",
+          "reason": "The prior moderate concern has been materially mitigated: the Wednesday event was removed, the Friday dinner was shortened, and a Friday-night sleep block was added. The remaining risks concern unverified logistics around a still-tight Friday evening, but the calendar now leaves 90 minutes between dinner end and sleep and avoids adding pre-exam social load. There is no concrete visible problem that clearly requires another revision rather than retaining unresolved assumptions for verification.",
+          "suggested_improvement": "If the Proposer has fuller context, it should briefly substantiate the Friday transition: whether partial attendance is acceptable, whether post-training cleanup and travel fit the 18:30-19:30 gap, and whether return home and wind-down fit before 23:00. If that context is weak, reconsider the amount of Friday attendance rather than adding back commitments elsewhere."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Friday post-training transition",
+            "assumption": "The user can finish Afternoon Technical Training at 18:30, handle any cleanup or changing, travel to the dinner venue, and arrive for 19:30 without undue stress.",
+            "evidence_gap": "The rationale states the venue is 20 minutes from the training center, but cleanup, changing, packing, delays, and arrival flexibility are not verified.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Friday return and sleep routine",
+            "assumption": "The user can leave the dinner at 21:30, travel home, complete any evening routine, and realistically begin the 23:00-07:00 sleep block.",
+            "evidence_gap": "Homeward travel time and wind-down needs are not shown in the calendar or verified in the rationale.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Partial attendance acceptability",
+            "assumption": "The Student Association dinner permits or socially accommodates attendance only from 19:30 to 21:30.",
+            "evidence_gap": "No RSVP, event format, venue timing, or organiser confirmation is provided.",
+            "potential_impact": "material",
+            "verification_source": "third_party"
+          },
+          {
+            "subject": "Post-exam and post-training capacity",
+            "assumption": "A two-hour social dinner after a morning exam and afternoon training is restorative or acceptable rather than overly draining for the user.",
+            "evidence_gap": "The calendar shows a dense Friday, but the user’s personal fatigue tolerance and recovery needs are not available.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Request satisfaction",
+            "assumption": "The revised plan satisfies the user’s underlying social and scheduling intent.",
+            "evidence_gap": "The original request is not provided, and the technical validation explicitly did not check request satisfaction.",
+            "potential_impact": "minor",
+            "verification_source": "user_context"
+          }
+        ],
+        "overall": 4.0
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": true,
+        "plausibility_revision_required": false,
+        "accepted": true,
+        "revision_causes": []
+      },
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": [
+        {
+          "iteration": 0,
+          "proposal": {
+            "changes": [
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Board Game & Coffee Night (brief attendance)",
+                "from_start": null,
+                "to_start": "2027-06-16T19:30:00+01:00",
+                "to_end": "2027-06-16T20:30:00+01:00",
+                "category": "social",
+                "importance": 2,
+                "participants": [
+                  "user",
+                  "Student Association"
+                ]
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "End-of-Exams Sunset Dinner",
+                "from_start": null,
+                "to_start": "2027-06-18T19:30:00+01:00",
+                "to_end": "2027-06-18T22:00:00+01:00",
+                "category": "social",
+                "importance": 2,
+                "participants": [
+                  "user",
+                  "Student Association"
+                ]
+              }
+            ],
+            "rationale": {
+              "constraints": [
+                "All protected training, sleep and exam events remain unchanged.",
+                "The existing Business Law study blocks on Wednesday and Thursday provide 5 hours total before the Friday exam.",
+                "Wednesday brief attendance ends well before the protected 23:00 sleep block.",
+                "Friday dinner follows the exam and does not conflict with listed protected events.",
+                "Friday venue-to-home travel time is unknown, so the 23:00 sleep target after dinner cannot be fully verified."
+              ],
+              "priorities": [
+                "Prioritise the Friday dinner because exams are finished and it gives the fuller social benefit.",
+                "Use only brief Wednesday attendance to decompress without adding a late evening before the exam.",
+                "Avoid moving study blocks because the current plan already meets the stated study target."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Attend only the Friday dinner.",
+                  "rejected_because": "This is simpler and avoids adding any social commitment on the night before the Business Law exam."
+                },
+                {
+                  "option": "Attend the full Wednesday event and skip Friday dinner.",
+                  "rejected_because": "This fits the listed calendar but gives a later pre-exam evening and misses the post-exam social opportunity."
+                },
+                {
+                  "option": "Attend both events fully.",
+                  "rejected_because": "This appears calendar-feasible, but it conflicts with the user's stated concern about only attending one properly."
+                }
+              ],
+              "summary": "Adds a short Wednesday social decompression plus the full Friday post-exam dinner, preserving all fixed training, exam and sleep blocks while relying on the current 5 hours of Business Law study already scheduled."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "sleep_mon",
+                "title": "Sleep",
+                "start": "2027-06-13T23:00:00+01:00",
+                "end": "2027-06-14T07:00:00+01:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected 8-hour sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_am_mon",
+                "title": "Morning Strength Training",
+                "start": "2027-06-14T07:30:00+01:00",
+                "end": "2027-06-14T09:30:00+01:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Morning session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "study_macro_mon",
+                "title": "Exam Study: Macroeconomics",
+                "start": "2027-06-14T10:30:00+01:00",
+                "end": "2027-06-14T13:00:00+01:00",
+                "category": "study",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Exam prep.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "lunch_mon",
+                "title": "Lunch",
+                "start": "2027-06-14T13:00:00+01:00",
+                "end": "2027-06-14T14:00:00+01:00",
+                "category": "meal",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Lunch break.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_pm_mon",
+                "title": "Afternoon Field Practice",
+                "start": "2027-06-14T16:30:00+01:00",
+                "end": "2027-06-14T18:30:00+01:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Afternoon session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_tue",
+                "title": "Sleep",
+                "start": "2027-06-14T23:00:00+01:00",
+                "end": "2027-06-15T07:00:00+01:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected 8-hour sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_am_tue",
+                "title": "Morning Conditioning",
+                "start": "2027-06-15T07:30:00+01:00",
+                "end": "2027-06-15T09:30:00+01:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Morning session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "exam_macro_tue",
+                "title": "Macroeconomics Final Exam",
+                "start": "2027-06-15T10:30:00+01:00",
+                "end": "2027-06-15T12:30:00+01:00",
+                "category": "exam",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "examiner"
+                ],
+                "description": "Official exam.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "lunch_tue",
+                "title": "Lunch",
+                "start": "2027-06-15T13:00:00+01:00",
+                "end": "2027-06-15T14:00:00+01:00",
+                "category": "meal",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Lunch break.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_pm_tue",
+                "title": "Afternoon Technical Training",
+                "start": "2027-06-15T16:30:00+01:00",
+                "end": "2027-06-15T18:30:00+01:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Afternoon session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_wed",
+                "title": "Sleep",
+                "start": "2027-06-15T23:00:00+01:00",
+                "end": "2027-06-16T07:00:00+01:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected 8-hour sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_am_wed",
+                "title": "Morning Recovery & Mobility",
+                "start": "2027-06-16T07:30:00+01:00",
+                "end": "2027-06-16T09:30:00+01:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Morning session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "study_law_wed",
+                "title": "Exam Study: Business Law",
+                "start": "2027-06-16T10:30:00+01:00",
+                "end": "2027-06-16T13:00:00+01:00",
+                "category": "study",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Exam prep.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "lunch_wed",
+                "title": "Lunch",
+                "start": "2027-06-16T13:00:00+01:00",
+                "end": "2027-06-16T14:00:00+01:00",
+                "category": "meal",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Lunch break.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_pm_wed",
+                "title": "Afternoon Tactical Session",
+                "start": "2027-06-16T16:30:00+01:00",
+                "end": "2027-06-16T18:30:00+01:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Afternoon session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_0",
+                "title": "Board Game & Coffee Night (brief attendance)",
+                "start": "2027-06-16T19:30:00+01:00",
+                "end": "2027-06-16T20:30:00+01:00",
+                "category": "social",
+                "importance": 2,
+                "fixed": null,
+                "participants": [
+                  "user",
+                  "Student Association"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2027-06-16T23:00:00+01:00",
+                "end": "2027-06-17T07:00:00+01:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected 8-hour sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_am_thu",
+                "title": "Morning Speed Session",
+                "start": "2027-06-17T07:30:00+01:00",
+                "end": "2027-06-17T09:30:00+01:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Morning session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "study_law_thu",
+                "title": "Exam Study: Business Law",
+                "start": "2027-06-17T10:30:00+01:00",
+                "end": "2027-06-17T13:00:00+01:00",
+                "category": "study",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Exam prep.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "lunch_thu",
+                "title": "Lunch",
+                "start": "2027-06-17T13:00:00+01:00",
+                "end": "2027-06-17T14:00:00+01:00",
+                "category": "meal",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Lunch break.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_pm_thu",
+                "title": "Afternoon Team Scrimmage",
+                "start": "2027-06-17T16:30:00+01:00",
+                "end": "2027-06-17T18:30:00+01:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Afternoon session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_fri",
+                "title": "Sleep",
+                "start": "2027-06-17T23:00:00+01:00",
+                "end": "2027-06-18T07:00:00+01:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected 8-hour sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_am_fri",
+                "title": "Morning Light Activation",
+                "start": "2027-06-18T07:30:00+01:00",
+                "end": "2027-06-18T09:00:00+01:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Morning session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "exam_law_fri",
+                "title": "Business Law Final Exam",
+                "start": "2027-06-18T10:00:00+01:00",
+                "end": "2027-06-18T12:00:00+01:00",
+                "category": "exam",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "examiner"
+                ],
+                "description": "Official exam.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "lunch_fri",
+                "title": "Lunch",
+                "start": "2027-06-18T12:30:00+01:00",
+                "end": "2027-06-18T13:30:00+01:00",
+                "category": "meal",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Lunch break.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_pm_fri",
+                "title": "Afternoon Technical Training",
+                "start": "2027-06-18T16:30:00+01:00",
+                "end": "2027-06-18T18:30:00+01:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Afternoon session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_1",
+                "title": "End-of-Exams Sunset Dinner",
+                "start": "2027-06-18T19:30:00+01:00",
+                "end": "2027-06-18T22:00:00+01:00",
+                "category": "social",
+                "importance": 2,
+                "fixed": null,
+                "participants": [
+                  "user",
+                  "Student Association"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              }
+            ],
+            "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+          },
+          "plausibility_review": {
+            "revision_required": true,
+            "severity": "moderate",
+            "reason": "A concrete manageability concern remains around the Friday sequence: morning training, final exam, afternoon training, then a 19:30-22:00 social dinner with only a one-hour gap after training and unverified travel before the implied 23:00 sleep target. This could significantly affect recovery and sustainability in an already dense exam-and-training week, even though there is no technical overlap.",
+            "suggested_improvement": "Reconsider the Friday dinner in light of post-training logistics and recovery, or provide grounded context showing that travel, hygiene, decompression, and return before the intended sleep routine are realistically accommodated. Also briefly justify why adding the Wednesday social hour remains worthwhile given the cumulative exam-week load."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Friday post-training logistics",
+              "assumption": "The user can finish Afternoon Technical Training at 18:30 and still prepare, travel, and arrive for the End-of-Exams Sunset Dinner at 19:30 without undue stress.",
+              "evidence_gap": "The calendar shows only a one-hour gap between training and dinner, with no information about venue locations, shower/change needs, travel time, or arrival flexibility.",
+              "potential_impact": "material",
+              "verification_source": "unknown"
+            },
+            {
+              "subject": "Friday return and sleep routine",
+              "assumption": "The user can leave the 19:30-22:00 dinner, travel home, and maintain the intended 23:00 sleep target or otherwise recover adequately.",
+              "evidence_gap": "The rationale explicitly states that Friday venue-to-home travel time is unknown, and the final calendar does not show a Friday-night sleep block after the dinner.",
+              "potential_impact": "material",
+              "verification_source": "unknown"
+            },
+            {
+              "subject": "Cumulative exam-week capacity",
+              "assumption": "Adding both a Wednesday social hour and a Friday dinner is sustainable alongside daily training, two exams, and Business Law study.",
+              "evidence_gap": "The rationale notes preserved events and study totals but does not directly evaluate fatigue or recovery across the full visible sequence from Monday through Friday.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "User preference about attending one event properly",
+              "assumption": "The selected combination of brief Wednesday attendance plus full Friday dinner satisfies the user's visible social priority better than attending only one event.",
+              "evidence_gap": "The rationale references the user's concern about only attending one properly, but the original request is not provided, so request satisfaction cannot be independently verified.",
+              "potential_impact": "minor",
+              "verification_source": "user_context"
+            }
+          ],
+          "weaknesses": [
+            "The rationale is stronger than a purely free-slot argument, but it underweights the cumulative load of the visible week: daily morning training, several afternoon training sessions, two final exams, and study blocks. The added Wednesday social event at 2027-06-16 19:30-20:30 follows Morning Recovery & Mobility, Business Law study, and Afternoon Tactical Session on the same day.",
+            "The Friday dinner at 2027-06-18 19:30-22:00 follows Morning Light Activation at 07:30-09:00, the Business Law Final Exam at 10:00-12:00, lunch at 12:30-13:30, and Afternoon Technical Training at 16:30-18:30. The one-hour gap before dinner may be enough in some contexts, but the plan does not substantiate travel, showering, changing, decompression, or arrival logistics after training.",
+            "The proposal acknowledges that Friday venue-to-home travel is unknown and that the 23:00 sleep target cannot be fully verified, but it still treats the full dinner as the preferred option without explaining why the risk to recovery after a dense exam/training day is acceptable.",
+            "The alternative 'attend only the Friday dinner' is identified as simpler but is not clearly weighed against the actual human-quality concern introduced by the selected plan: adding a Wednesday commitment during exam week plus a full Friday evening commitment after a high-load day.",
+            "Request satisfaction cannot be verified from the provided material because the original request is not available. The rationale references a stated concern about only attending one event properly, but the evidence for that concern is not independently visible outside the proposal text."
+          ],
+          "feedback": "The proposal is generally coherent and preserves protected events, and the Wednesday addition is reasonably limited. The main practical risk is not a calendar conflict but cumulative manageability: the user has a demanding visible week with repeated training, study, and two exams, then the plan adds two social commitments. Friday is the most concerning because the dinner starts only one hour after a 16:30-18:30 training session and ends at 22:00, while the rationale itself says the post-dinner travel and 23:00 sleep target are not fully verified. The Proposer should reconsider or substantiate whether the Friday evening plan realistically allows post-training cleanup, travel, dinner attendance, return home, and recovery without undermining the protected rest pattern. With fuller context, the same operations might still be acceptable, but the current rationale does not fully support the human feasibility of the Friday evening sequence."
+        }
+      ],
+      "unresolved_assumptions": [
+        {
+          "subject": "Friday post-training transition",
+          "assumption": "The user can finish Afternoon Technical Training at 18:30, handle any cleanup or changing, travel to the dinner venue, and arrive for 19:30 without undue stress.",
+          "evidence_gap": "The rationale states the venue is 20 minutes from the training center, but cleanup, changing, packing, delays, and arrival flexibility are not verified.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Friday return and sleep routine",
+          "assumption": "The user can leave the dinner at 21:30, travel home, complete any evening routine, and realistically begin the 23:00-07:00 sleep block.",
+          "evidence_gap": "Homeward travel time and wind-down needs are not shown in the calendar or verified in the rationale.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Partial attendance acceptability",
+          "assumption": "The Student Association dinner permits or socially accommodates attendance only from 19:30 to 21:30.",
+          "evidence_gap": "No RSVP, event format, venue timing, or organiser confirmation is provided.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Post-exam and post-training capacity",
+          "assumption": "A two-hour social dinner after a morning exam and afternoon training is restorative or acceptable rather than overly draining for the user.",
+          "evidence_gap": "The calendar shows a dense Friday, but the user’s personal fatigue tolerance and recovery needs are not available.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Request satisfaction",
+          "assumption": "The revised plan satisfies the user’s underlying social and scheduling intent.",
+          "evidence_gap": "The original request is not provided, and the technical validation explicitly did not check request satisfaction.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        }
+      ]
+    }
+  ],
+  "initial_proposal": {
+    "changes": [
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Board Game & Coffee Night (brief attendance)",
+        "from_start": null,
+        "to_start": "2027-06-16T19:30:00+01:00",
+        "to_end": "2027-06-16T20:30:00+01:00",
+        "category": "social",
+        "importance": 2,
+        "participants": [
+          "user",
+          "Student Association"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "End-of-Exams Sunset Dinner",
+        "from_start": null,
+        "to_start": "2027-06-18T19:30:00+01:00",
+        "to_end": "2027-06-18T22:00:00+01:00",
+        "category": "social",
+        "importance": 2,
+        "participants": [
+          "user",
+          "Student Association"
+        ]
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "All protected training, sleep and exam events remain unchanged.",
+        "The existing Business Law study blocks on Wednesday and Thursday provide 5 hours total before the Friday exam.",
+        "Wednesday brief attendance ends well before the protected 23:00 sleep block.",
+        "Friday dinner follows the exam and does not conflict with listed protected events.",
+        "Friday venue-to-home travel time is unknown, so the 23:00 sleep target after dinner cannot be fully verified."
+      ],
+      "priorities": [
+        "Prioritise the Friday dinner because exams are finished and it gives the fuller social benefit.",
+        "Use only brief Wednesday attendance to decompress without adding a late evening before the exam.",
+        "Avoid moving study blocks because the current plan already meets the stated study target."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Attend only the Friday dinner.",
+          "rejected_because": "This is simpler and avoids adding any social commitment on the night before the Business Law exam."
+        },
+        {
+          "option": "Attend the full Wednesday event and skip Friday dinner.",
+          "rejected_because": "This fits the listed calendar but gives a later pre-exam evening and misses the post-exam social opportunity."
+        },
+        {
+          "option": "Attend both events fully.",
+          "rejected_because": "This appears calendar-feasible, but it conflicts with the user's stated concern about only attending one properly."
+        }
+      ],
+      "summary": "Adds a short Wednesday social decompression plus the full Friday post-exam dinner, preserving all fixed training, exam and sleep blocks while relying on the current 5 hours of Business Law study already scheduled."
+    }
+  },
+  "final_proposal": {
+    "changes": [
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "End-of-Exams Sunset Dinner (partial attendance)",
+        "from_start": null,
+        "to_start": "2027-06-18T19:30:00+01:00",
+        "to_end": "2027-06-18T21:30:00+01:00",
+        "category": "social",
+        "importance": 2,
+        "participants": [
+          "user",
+          "Student Association"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Sleep",
+        "from_start": null,
+        "to_start": "2027-06-18T23:00:00+01:00",
+        "to_end": "2027-06-19T07:00:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "participants": [
+          "user"
+        ]
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "Training and exam events are protected and remain unchanged.",
+        "The existing Wednesday and Thursday Business Law study blocks already meet the requested 5-hour total.",
+        "A Friday-night sleep block is added to maintain the profile's 8-hour sleep rule after the social plan.",
+        "The Friday venue is stated to be 20 minutes from the training center, but cleanup, changing, arrival flexibility and homeward travel remain unknown.",
+        "No external RSVP or venue availability is confirmed by the supplied data."
+      ],
+      "priorities": [
+        "Prioritise the post-exam social event because it avoids adding a commitment before the Business Law exam.",
+        "Limit attendance rather than add Wednesday as well, reducing cumulative exam-week load.",
+        "Keep protected training, exam and sleep requirements ahead of social duration."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Attend the full Friday dinner.",
+          "rejected_because": "Higher social value, but the later finish leaves less verified margin for return and sleep after a dense Friday."
+        },
+        {
+          "option": "Attend Wednesday briefly plus Friday dinner.",
+          "rejected_because": "Close to the user's idea, but it adds cumulative load across both the pre-exam and post-training parts of the week."
+        },
+        {
+          "option": "Attend only Wednesday briefly.",
+          "rejected_because": "Safer for Friday recovery, but it gives less post-exam decompression and occurs before the Business Law exam."
+        },
+        {
+          "option": "Attend the full Wednesday event only.",
+          "rejected_because": "Provides one complete social event, but uses a longer pre-exam evening and does not use the post-exam window."
+        }
+      ],
+      "summary": "Schedules a single, shortened Friday dinner plus an explicit Friday-night sleep block, preserving fixed training, exams and existing study time while trading full social attendance for better recovery margins under unverified logistics."
+    }
+  },
+  "final_score": 4.0,
+  "refinements": 1,
+  "critic_accepted": true,
+  "decision": "act",
+  "reasons": [
+    "regras fixas permitem act"
+  ],
+  "status": "proposal_ready",
+  "critic_input_version": "final_calendar_v1",
+  "critic_policy_version": "uncertainty_review_v2",
+  "result_calendar_version": "validated_added_metadata_v2",
+  "final_result_calendar": {
+    "timezone": "Europe/Lisbon",
+    "coverage": "all_events_in_scenario_after_simulation",
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-06-13T23:00:00+01:00",
+        "end": "2027-06-14T07:00:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_am_mon",
+        "title": "Morning Strength Training",
+        "start": "2027-06-14T07:30:00+01:00",
+        "end": "2027-06-14T09:30:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Morning session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "study_macro_mon",
+        "title": "Exam Study: Macroeconomics",
+        "start": "2027-06-14T10:30:00+01:00",
+        "end": "2027-06-14T13:00:00+01:00",
+        "category": "study",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Exam prep.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "lunch_mon",
+        "title": "Lunch",
+        "start": "2027-06-14T13:00:00+01:00",
+        "end": "2027-06-14T14:00:00+01:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_pm_mon",
+        "title": "Afternoon Field Practice",
+        "start": "2027-06-14T16:30:00+01:00",
+        "end": "2027-06-14T18:30:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-06-14T23:00:00+01:00",
+        "end": "2027-06-15T07:00:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_am_tue",
+        "title": "Morning Conditioning",
+        "start": "2027-06-15T07:30:00+01:00",
+        "end": "2027-06-15T09:30:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Morning session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "exam_macro_tue",
+        "title": "Macroeconomics Final Exam",
+        "start": "2027-06-15T10:30:00+01:00",
+        "end": "2027-06-15T12:30:00+01:00",
+        "category": "exam",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "examiner"
+        ],
+        "description": "Official exam.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "lunch_tue",
+        "title": "Lunch",
+        "start": "2027-06-15T13:00:00+01:00",
+        "end": "2027-06-15T14:00:00+01:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_pm_tue",
+        "title": "Afternoon Technical Training",
+        "start": "2027-06-15T16:30:00+01:00",
+        "end": "2027-06-15T18:30:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-06-15T23:00:00+01:00",
+        "end": "2027-06-16T07:00:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_am_wed",
+        "title": "Morning Recovery & Mobility",
+        "start": "2027-06-16T07:30:00+01:00",
+        "end": "2027-06-16T09:30:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Morning session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "study_law_wed",
+        "title": "Exam Study: Business Law",
+        "start": "2027-06-16T10:30:00+01:00",
+        "end": "2027-06-16T13:00:00+01:00",
+        "category": "study",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Exam prep.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "lunch_wed",
+        "title": "Lunch",
+        "start": "2027-06-16T13:00:00+01:00",
+        "end": "2027-06-16T14:00:00+01:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_pm_wed",
+        "title": "Afternoon Tactical Session",
+        "start": "2027-06-16T16:30:00+01:00",
+        "end": "2027-06-16T18:30:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-06-16T23:00:00+01:00",
+        "end": "2027-06-17T07:00:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_am_thu",
+        "title": "Morning Speed Session",
+        "start": "2027-06-17T07:30:00+01:00",
+        "end": "2027-06-17T09:30:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Morning session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "study_law_thu",
+        "title": "Exam Study: Business Law",
+        "start": "2027-06-17T10:30:00+01:00",
+        "end": "2027-06-17T13:00:00+01:00",
+        "category": "study",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Exam prep.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "lunch_thu",
+        "title": "Lunch",
+        "start": "2027-06-17T13:00:00+01:00",
+        "end": "2027-06-17T14:00:00+01:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_pm_thu",
+        "title": "Afternoon Team Scrimmage",
+        "start": "2027-06-17T16:30:00+01:00",
+        "end": "2027-06-17T18:30:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-06-17T23:00:00+01:00",
+        "end": "2027-06-18T07:00:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_am_fri",
+        "title": "Morning Light Activation",
+        "start": "2027-06-18T07:30:00+01:00",
+        "end": "2027-06-18T09:00:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Morning session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "exam_law_fri",
+        "title": "Business Law Final Exam",
+        "start": "2027-06-18T10:00:00+01:00",
+        "end": "2027-06-18T12:00:00+01:00",
+        "category": "exam",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "examiner"
+        ],
+        "description": "Official exam.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "lunch_fri",
+        "title": "Lunch",
+        "start": "2027-06-18T12:30:00+01:00",
+        "end": "2027-06-18T13:30:00+01:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_pm_fri",
+        "title": "Afternoon Technical Training",
+        "start": "2027-06-18T16:30:00+01:00",
+        "end": "2027-06-18T18:30:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_0",
+        "title": "End-of-Exams Sunset Dinner (partial attendance)",
+        "start": "2027-06-18T19:30:00+01:00",
+        "end": "2027-06-18T21:30:00+01:00",
+        "category": "social",
+        "importance": 2,
+        "fixed": null,
+        "participants": [
+          "user",
+          "Student Association"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "new_1",
+        "title": "Sleep",
+        "start": "2027-06-18T23:00:00+01:00",
+        "end": "2027-06-19T07:00:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      }
+    ],
+    "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+  },
+  "final_unresolved_assumptions": [
+    {
+      "subject": "Friday post-training transition",
+      "assumption": "The user can finish Afternoon Technical Training at 18:30, handle any cleanup or changing, travel to the dinner venue, and arrive for 19:30 without undue stress.",
+      "evidence_gap": "The rationale states the venue is 20 minutes from the training center, but cleanup, changing, packing, delays, and arrival flexibility are not verified.",
+      "potential_impact": "material",
+      "verification_source": "unknown"
+    },
+    {
+      "subject": "Friday return and sleep routine",
+      "assumption": "The user can leave the dinner at 21:30, travel home, complete any evening routine, and realistically begin the 23:00-07:00 sleep block.",
+      "evidence_gap": "Homeward travel time and wind-down needs are not shown in the calendar or verified in the rationale.",
+      "potential_impact": "material",
+      "verification_source": "unknown"
+    },
+    {
+      "subject": "Partial attendance acceptability",
+      "assumption": "The Student Association dinner permits or socially accommodates attendance only from 19:30 to 21:30.",
+      "evidence_gap": "No RSVP, event format, venue timing, or organiser confirmation is provided.",
+      "potential_impact": "material",
+      "verification_source": "third_party"
+    },
+    {
+      "subject": "Post-exam and post-training capacity",
+      "assumption": "A two-hour social dinner after a morning exam and afternoon training is restorative or acceptable rather than overly draining for the user.",
+      "evidence_gap": "The calendar shows a dense Friday, but the user’s personal fatigue tolerance and recovery needs are not available.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Request satisfaction",
+      "assumption": "The revised plan satisfies the user’s underlying social and scheduling intent.",
+      "evidence_gap": "The original request is not provided, and the technical validation explicitly did not check request satisfaction.",
+      "potential_impact": "minor",
+      "verification_source": "user_context"
+    }
+  ],
+  "uncertainty_history": [
+    {
+      "iteration": 0,
+      "unresolved_assumptions": [
+        {
+          "subject": "Friday post-training logistics",
+          "assumption": "The user can finish Afternoon Technical Training at 18:30 and still prepare, travel, and arrive for the End-of-Exams Sunset Dinner at 19:30 without undue stress.",
+          "evidence_gap": "The calendar shows only a one-hour gap between training and dinner, with no information about venue locations, shower/change needs, travel time, or arrival flexibility.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Friday return and sleep routine",
+          "assumption": "The user can leave the 19:30-22:00 dinner, travel home, and maintain the intended 23:00 sleep target or otherwise recover adequately.",
+          "evidence_gap": "The rationale explicitly states that Friday venue-to-home travel time is unknown, and the final calendar does not show a Friday-night sleep block after the dinner.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Cumulative exam-week capacity",
+          "assumption": "Adding both a Wednesday social hour and a Friday dinner is sustainable alongside daily training, two exams, and Business Law study.",
+          "evidence_gap": "The rationale notes preserved events and study totals but does not directly evaluate fatigue or recovery across the full visible sequence from Monday through Friday.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "User preference about attending one event properly",
+          "assumption": "The selected combination of brief Wednesday attendance plus full Friday dinner satisfies the user's visible social priority better than attending only one event.",
+          "evidence_gap": "The rationale references the user's concern about only attending one properly, but the original request is not provided, so request satisfaction cannot be independently verified.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        }
+      ]
+    },
+    {
+      "iteration": 1,
+      "unresolved_assumptions": [
+        {
+          "subject": "Friday post-training transition",
+          "assumption": "The user can finish Afternoon Technical Training at 18:30, handle any cleanup or changing, travel to the dinner venue, and arrive for 19:30 without undue stress.",
+          "evidence_gap": "The rationale states the venue is 20 minutes from the training center, but cleanup, changing, packing, delays, and arrival flexibility are not verified.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Friday return and sleep routine",
+          "assumption": "The user can leave the dinner at 21:30, travel home, complete any evening routine, and realistically begin the 23:00-07:00 sleep block.",
+          "evidence_gap": "Homeward travel time and wind-down needs are not shown in the calendar or verified in the rationale.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Partial attendance acceptability",
+          "assumption": "The Student Association dinner permits or socially accommodates attendance only from 19:30 to 21:30.",
+          "evidence_gap": "No RSVP, event format, venue timing, or organiser confirmation is provided.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Post-exam and post-training capacity",
+          "assumption": "A two-hour social dinner after a morning exam and afternoon training is restorative or acceptable rather than overly draining for the user.",
+          "evidence_gap": "The calendar shows a dense Friday, but the user’s personal fatigue tolerance and recovery needs are not available.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Request satisfaction",
+          "assumption": "The revised plan satisfies the user’s underlying social and scheduling intent.",
+          "evidence_gap": "The original request is not provided, and the technical validation explicitly did not check request satisfaction.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        }
+      ]
+    }
+  ],
+  "schema_version": "2.0",
+  "profile_id": "elite_athlete_student_01__elite_athlete_student_exams_social_balance_001",
+  "scenario_sha256": "53c1248bf0bf6396fa4dfb54e2cec826232b8aa2d4d442b4982286d9ffe0607e",
+  "aggregate_requirements_sha256": null,
+  "confirmed_changes_sha256": null,
+  "simulator_version": "calendar_v2_validated_added_metadata_v2",
+  "dataset_manifest_sha256": "28af38846fb8995651d5f63ab63402e36147dc0915a2bfcd5379747ea531ffad",
+  "split": "train",
+  "run_id": "d85330f881d748c2b86f138bfc31da31",
+  "experiment_id": null,
+  "repeat_index": 0,
+  "generated_at": "2026-11-23T16:54:37.338580+00:00",
+  "prompt_versions": {
+    "proposer_sha256": "ae6fa59cccb86c31f34f66d07d241660b1feadf852ebf1b594bc85addab86985",
+    "proposer_wire_schema_version": "compact_proposal_v1",
+    "proposer_wire_schema_sha256": "f504fbcd7e939c43e055e2f188feb22097a284bcd9b043227d868e559547b865",
+    "proposer_revision_sha256": "3f0fe7f221013700694a22984560612013e9804072ffde4538e1329b9708ac95",
+    "critic_sha256": "1686688cdd4bc63abb12e6633ef9dbb9b62d69b69aba1c4805a201657cc5bb34"
+  },
+  "seconds": 103.936,
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [],
+    "valid": true
+  }
+}

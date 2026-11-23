@@ -1,0 +1,2071 @@
+{
+  "configuration": "B",
+  "scenario_id": "content_creator_physio_posture_correction_001",
+  "family": "content_creator_schedule_conflict",
+  "category": "v2",
+  "proposer_provider": "iaedu",
+  "proposer_model": "GPT-5.5",
+  "proposer_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_provider": "iaedu",
+  "critic_model": "GPT-5.5",
+  "critic_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_settings": {
+    "threshold": 4.0,
+    "max_refinements": 3,
+    "min_dimension_score": 1
+  },
+  "iterations": [
+    {
+      "index": 0,
+      "proposer_feedback": null,
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "move",
+            "event_id": "edit_mon",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-05-24T13:00:00+01:00",
+            "to_end": "2027-05-24T18:30:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "The physiotherapy session is fixed and protected, so it is left unchanged.",
+            "Sleep is fixed and protected, so no sleep block is moved.",
+            "The edited event is flexible, user-only, and does not require third-party confirmation.",
+            "The new editing window uses free calendar time and does not overlap the live stream."
+          ],
+          "priorities": [
+            "Health remains the top priority by preserving the mandatory therapy session.",
+            "Video production productivity is preserved by extending Monday editing to a longer focused block.",
+            "A short post-therapy buffer is kept before editing instead of starting immediately at 12:30."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Keep editing at 13:30-18:00",
+              "rejected_because": "This already avoids the therapy session, but it does not add productivity protection for Monday."
+            },
+            {
+              "option": "Start editing at 12:30",
+              "rejected_because": "This maximizes available work time but leaves no buffer after physiotherapy."
+            },
+            {
+              "option": "Add editing after the stream",
+              "rejected_because": "This avoids daytime compression but would push work late near protected sleep."
+            }
+          ],
+          "summary": "Move the flexible Monday editing block earlier and extend it slightly, preserving the fixed physiotherapy session while protecting overall video production time."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-05-24T01:30:00+01:00",
+            "end": "2027-05-24T09:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "physio_mon",
+            "title": "Posture Physiotherapy",
+            "start": "2027-05-24T11:00:00+01:00",
+            "end": "2027-05-24T12:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "physio"
+            ],
+            "description": "Medical therapy.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "edit_mon",
+            "title": "Video Editing",
+            "start": "2027-05-24T13:00:00+01:00",
+            "end": "2027-05-24T18:30:00+01:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Editing.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "stream_mon",
+            "title": "Live Stream",
+            "start": "2027-05-24T20:00:00+01:00",
+            "end": "2027-05-24T23:30:00+01:00",
+            "category": "streaming",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "chat"
+            ],
+            "description": "Stream.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-05-25T01:30:00+01:00",
+            "end": "2027-05-25T09:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_tue",
+            "title": "Gym Workout",
+            "start": "2027-05-25T10:00:00+01:00",
+            "end": "2027-05-25T11:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Mandatory workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "edit_tue",
+            "title": "Video Editing",
+            "start": "2027-05-25T12:30:00+01:00",
+            "end": "2027-05-25T18:00:00+01:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Editing.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "stream_tue",
+            "title": "Live Stream",
+            "start": "2027-05-25T20:00:00+01:00",
+            "end": "2027-05-25T23:30:00+01:00",
+            "category": "streaming",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "chat"
+            ],
+            "description": "Stream.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-05-26T01:30:00+01:00",
+            "end": "2027-05-26T09:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_wed",
+            "title": "Gym Workout",
+            "start": "2027-05-26T10:00:00+01:00",
+            "end": "2027-05-26T11:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Mandatory workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "edit_wed",
+            "title": "Video Editing",
+            "start": "2027-05-26T12:30:00+01:00",
+            "end": "2027-05-26T18:00:00+01:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Editing.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "stream_wed",
+            "title": "Live Stream",
+            "start": "2027-05-26T20:00:00+01:00",
+            "end": "2027-05-26T23:30:00+01:00",
+            "category": "streaming",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "chat"
+            ],
+            "description": "Stream.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-05-27T01:30:00+01:00",
+            "end": "2027-05-27T09:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_thu",
+            "title": "Gym Workout",
+            "start": "2027-05-27T10:00:00+01:00",
+            "end": "2027-05-27T11:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Mandatory workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "edit_thu",
+            "title": "Video Editing",
+            "start": "2027-05-27T12:30:00+01:00",
+            "end": "2027-05-27T18:00:00+01:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Editing.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "stream_thu",
+            "title": "Live Stream",
+            "start": "2027-05-27T20:00:00+01:00",
+            "end": "2027-05-27T23:30:00+01:00",
+            "category": "streaming",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "chat"
+            ],
+            "description": "Stream.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-05-28T01:30:00+01:00",
+            "end": "2027-05-28T09:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_fri",
+            "title": "Gym Workout",
+            "start": "2027-05-28T10:00:00+01:00",
+            "end": "2027-05-28T11:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Mandatory workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "edit_fri",
+            "title": "Video Editing",
+            "start": "2027-05-28T12:30:00+01:00",
+            "end": "2027-05-28T18:00:00+01:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Editing.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "stream_fri",
+            "title": "Live Stream",
+            "start": "2027-05-28T20:00:00+01:00",
+            "end": "2027-05-28T23:30:00+01:00",
+            "category": "streaming",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "chat"
+            ],
+            "description": "Stream.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 3,
+          "coherence": 3,
+          "alternatives": 3,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The proposal treats the free slot after physiotherapy as mostly usable work capacity, but Monday has Posture Physiotherapy from 11:00 to 12:30 followed by only a 30-minute gap before Video Editing from 13:00 to 18:30. That may be workable for some people, but the rationale does not substantiate that this is enough time for lunch, transition, recovery, or resetting after a medical therapy session.",
+          "The moved Monday editing block is longer than the explicitly mentioned prior option of 13:30-18:00, increasing Monday's focused work demand before a Live Stream from 20:00 to 23:30. The proposal explains the productivity benefit, but gives limited attention to the cost of concentrating a longer cognitive block after therapy and before evening performance work.",
+          "Across the visible week, the routine is already demanding: Tuesday through Friday each include Sleep until 09:30, Gym Workout from 10:00 to 11:30, Video Editing from 12:30 to 18:00, and Live Stream from 20:00 to 23:30. This appears largely pre-existing and should not automatically be blamed on the proposed change, but the Monday extension adds load into an already dense visible pattern without discussing cumulative sustainability.",
+          "The alternatives considered are relevant but narrow. They compare keeping the old editing time, starting immediately after physiotherapy, or adding work after the stream, but they do not show whether a less compressed or less extended Monday option was considered within the visible flexibility."
+        ],
+        "feedback": "The proposal is technically coherent and preserves the fixed health and sleep blocks, and the stated 30-minute post-therapy buffer is better than starting editing immediately at 12:30. However, the human-quality case is only partially supported. The resulting Monday has physiotherapy from 11:00 to 12:30, then a 5.5-hour editing block from 13:00 to 18:30, then a live stream from 20:00 to 23:30. In isolation this may be possible, but it leaves little visibly protected margin after therapy and creates a long cognitive-production day. Over the visible horizon, the following days repeat gym, editing, streaming, and late sleep timing, so the added Monday load deserves more justification than simply saying the slot is free. Because the original request is not provided, request satisfaction cannot be verified; the review can only assess whether the visible plan looks realistically manageable.",
+        "plausibility_review": {
+          "revision_required": true,
+          "severity": "moderate",
+          "reason": "The proposed move could materially affect manageability by extending Monday editing to 13:00-18:30 after a fixed physiotherapy session ending at 12:30 and before a 20:00-23:30 live stream. The concern is not an objective conflict: the events fit, and the user may tolerate this pattern. The issue is that the rationale does not adequately address recovery, food, transition, and cumulative fatigue in a week that already contains repeated long editing and streaming days.",
+          "suggested_improvement": "Reconsider or better substantiate the Monday distribution using the proposer’s fuller context: explain why the 30-minute post-therapy margin and longer editing block are realistically sustainable, or consider a less compressed way to protect video-production time without assuming all free calendar time after therapy is effective work capacity."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Post-physiotherapy transition and recovery",
+            "assumption": "A 30-minute gap from 12:30 to 13:00 is enough for the user to recover from physiotherapy and be ready for focused editing.",
+            "evidence_gap": "The calendar shows the gap, but does not show travel, hygiene, food, therapy after-effects, or the user's recovery needs.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Meal and personal-care margin on Monday",
+            "assumption": "The user can handle meals and basic personal needs around physiotherapy, the 13:00-18:30 editing block, and the 20:00-23:30 stream.",
+            "evidence_gap": "No meal or personal-care blocks are visible, and the rationale does not explain how these needs are accommodated.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Productive capacity after therapy",
+            "assumption": "The extended Monday editing block will preserve or improve video-production productivity rather than becoming low-quality work due to post-therapy fatigue.",
+            "evidence_gap": "The proposal states productivity is preserved, but gives no user-specific evidence about focus after physiotherapy.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Cumulative weekly workload tolerance",
+            "assumption": "The user can sustainably manage the visible sequence of daily health activity, long editing blocks, and evening streams from Monday through Friday.",
+            "evidence_gap": "The calendar shows repeated demanding days, but no information about the user's normal workload tolerance, recovery practices, or whether this week is exceptional.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Request satisfaction",
+            "assumption": "Moving and extending Monday editing fulfills the user's actual scheduling goal.",
+            "evidence_gap": "The original request is not included, and the technical validation explicitly did not check request satisfaction.",
+            "potential_impact": "potentially_blocking",
+            "verification_source": "unknown"
+          }
+        ],
+        "overall": 3.25
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": false,
+        "plausibility_revision_required": true,
+        "accepted": false,
+        "revision_causes": [
+          "numeric_criteria_failed",
+          "plausibility_revision_required"
+        ]
+      },
+      "operations_changed_from_previous": null,
+      "rationale_changed_from_previous": null,
+      "prior_critic_reviews": [],
+      "unresolved_assumptions": [
+        {
+          "subject": "Post-physiotherapy transition and recovery",
+          "assumption": "A 30-minute gap from 12:30 to 13:00 is enough for the user to recover from physiotherapy and be ready for focused editing.",
+          "evidence_gap": "The calendar shows the gap, but does not show travel, hygiene, food, therapy after-effects, or the user's recovery needs.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Meal and personal-care margin on Monday",
+          "assumption": "The user can handle meals and basic personal needs around physiotherapy, the 13:00-18:30 editing block, and the 20:00-23:30 stream.",
+          "evidence_gap": "No meal or personal-care blocks are visible, and the rationale does not explain how these needs are accommodated.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Productive capacity after therapy",
+          "assumption": "The extended Monday editing block will preserve or improve video-production productivity rather than becoming low-quality work due to post-therapy fatigue.",
+          "evidence_gap": "The proposal states productivity is preserved, but gives no user-specific evidence about focus after physiotherapy.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Cumulative weekly workload tolerance",
+          "assumption": "The user can sustainably manage the visible sequence of daily health activity, long editing blocks, and evening streams from Monday through Friday.",
+          "evidence_gap": "The calendar shows repeated demanding days, but no information about the user's normal workload tolerance, recovery practices, or whether this week is exceptional.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Request satisfaction",
+          "assumption": "Moving and extending Monday editing fulfills the user's actual scheduling goal.",
+          "evidence_gap": "The original request is not included, and the technical validation explicitly did not check request satisfaction.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "unknown"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "proposer_feedback": "Numeric Critic criteria failed. Scores: {\"reasoning\":3,\"coherence\":3,\"alternatives\":3,\"clarity\":4}. Plausibility revision required (moderate): The proposed move could materially affect manageability by extending Monday editing to 13:00-18:30 after a fixed physiotherapy session ending at 12:30 and before a 20:00-23:30 live stream. The concern is not an objective conflict: the events fit, and the user may tolerate this pattern. The issue is that the rationale does not adequately address recovery, food, transition, and cumulative fatigue in a week that already contains repeated long editing and streaming days. Suggested direction: Reconsider or better substantiate the Monday distribution using the proposer’s fuller context: explain why the 30-minute post-therapy margin and longer editing block are realistically sustainable, or consider a less compressed way to protect video-production time without assuming all free calendar time after therapy is effective work capacity. The Critic lacks the full user constraints; explain if no better feasible option exists. Unverified conditions to reassess: [{'subject': 'Post-physiotherapy transition and recovery', 'assumption': 'A 30-minute gap from 12:30 to 13:00 is enough for the user to recover from physiotherapy and be ready for focused editing.', 'evidence_gap': \"The calendar shows the gap, but does not show travel, hygiene, food, therapy after-effects, or the user's recovery needs.\", 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Meal and personal-care margin on Monday', 'assumption': 'The user can handle meals and basic personal needs around physiotherapy, the 13:00-18:30 editing block, and the 20:00-23:30 stream.', 'evidence_gap': 'No meal or personal-care blocks are visible, and the rationale does not explain how these needs are accommodated.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Productive capacity after therapy', 'assumption': 'The extended Monday editing block will preserve or improve video-production productivity rather than becoming low-quality work due to post-therapy fatigue.', 'evidence_gap': 'The proposal states productivity is preserved, but gives no user-specific evidence about focus after physiotherapy.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Cumulative weekly workload tolerance', 'assumption': 'The user can sustainably manage the visible sequence of daily health activity, long editing blocks, and evening streams from Monday through Friday.', 'evidence_gap': \"The calendar shows repeated demanding days, but no information about the user's normal workload tolerance, recovery practices, or whether this week is exceptional.\", 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Request satisfaction', 'assumption': \"Moving and extending Monday editing fulfills the user's actual scheduling goal.\", 'evidence_gap': 'The original request is not included, and the technical validation explicitly did not check request satisfaction.', 'potential_impact': 'potentially_blocking', 'verification_source': 'unknown'}] Weaknesses: ['The proposal treats the free slot after physiotherapy as mostly usable work capacity, but Monday has Posture Physiotherapy from 11:00 to 12:30 followed by only a 30-minute gap before Video Editing from 13:00 to 18:30. That may be workable for some people, but the rationale does not substantiate that this is enough time for lunch, transition, recovery, or resetting after a medical therapy session.', \"The moved Monday editing block is longer than the explicitly mentioned prior option of 13:30-18:00, increasing Monday's focused work demand before a Live Stream from 20:00 to 23:30. The proposal explains the productivity benefit, but gives limited attention to the cost of concentrating a longer cognitive block after therapy and before evening performance work.\", 'Across the visible week, the routine is already demanding: Tuesday through Friday each include Sleep until 09:30, Gym Workout from 10:00 to 11:30, Video Editing from 12:30 to 18:00, and Live Stream from 20:00 to 23:30. This appears largely pre-existing and should not automatically be blamed on the proposed change, but the Monday extension adds load into an already dense visible pattern without discussing cumulative sustainability.', 'The alternatives considered are relevant but narrow. They compare keeping the old editing time, starting immediately after physiotherapy, or adding work after the stream, but they do not show whether a less compressed or less extended Monday option was considered within the visible flexibility.']. Actionable feedback: The proposal is technically coherent and preserves the fixed health and sleep blocks, and the stated 30-minute post-therapy buffer is better than starting editing immediately at 12:30. However, the human-quality case is only partially supported. The resulting Monday has physiotherapy from 11:00 to 12:30, then a 5.5-hour editing block from 13:00 to 18:30, then a live stream from 20:00 to 23:30. In isolation this may be possible, but it leaves little visibly protected margin after therapy and creates a long cognitive-production day. Over the visible horizon, the following days repeat gym, editing, streaming, and late sleep timing, so the added Monday load deserves more justification than simply saying the slot is free. Because the original request is not provided, request satisfaction cannot be verified; the review can only assess whether the visible plan looks realistically manageable.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Video Editing Prep",
+            "from_start": null,
+            "to_start": "2027-05-24T10:00:00+01:00",
+            "to_end": "2027-05-24T10:30:00+01:00",
+            "category": "video_production",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "move",
+            "event_id": "edit_mon",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-05-24T13:30:00+01:00",
+            "to_end": "2027-05-24T18:30:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "The physiotherapy session is fixed and protected, so it is left unchanged.",
+            "Sleep is fixed and protected, so no sleep block is moved.",
+            "The edited event is flexible, user-only, and has no third-party dependency.",
+            "The added prep uses free calendar time, but starting at the reference time depends on immediate execution.",
+            "Travel, meals, hygiene, and post-therapy recovery needs are not shown in the calendar."
+          ],
+          "priorities": [
+            "Health remains the top priority by preserving the mandatory therapy session.",
+            "Video production time is protected by splitting the extra workload instead of placing it all after therapy.",
+            "The main editing block keeps the existing post-therapy start to avoid reducing visible recovery margin.",
+            "The plan avoids adding work after the evening stream or near protected sleep."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Keep editing unchanged",
+              "rejected_because": "This already avoids physiotherapy, but it leaves Monday editing shorter than the visible weekday pattern."
+            },
+            {
+              "option": "Move editing to 13:00-18:30",
+              "rejected_because": "This preserves more production time in one block but relies on a shorter post-therapy transition."
+            },
+            {
+              "option": "Add editing after the stream",
+              "rejected_because": "This protects daytime recovery but would push production work late near protected sleep."
+            },
+            {
+              "option": "Shift production to another weekday",
+              "rejected_because": "The request targets Monday, and the other visible weekdays already contain long editing and streaming days."
+            }
+          ],
+          "summary": "Use a small pre-therapy editing prep block and a modest extension of the flexible Monday editing block, preserving therapy and sleep while reducing the risk of overloading the post-physiotherapy period."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-05-24T01:30:00+01:00",
+            "end": "2027-05-24T09:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_0",
+            "title": "Video Editing Prep",
+            "start": "2027-05-24T10:00:00+01:00",
+            "end": "2027-05-24T10:30:00+01:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "physio_mon",
+            "title": "Posture Physiotherapy",
+            "start": "2027-05-24T11:00:00+01:00",
+            "end": "2027-05-24T12:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "physio"
+            ],
+            "description": "Medical therapy.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "edit_mon",
+            "title": "Video Editing",
+            "start": "2027-05-24T13:30:00+01:00",
+            "end": "2027-05-24T18:30:00+01:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Editing.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "stream_mon",
+            "title": "Live Stream",
+            "start": "2027-05-24T20:00:00+01:00",
+            "end": "2027-05-24T23:30:00+01:00",
+            "category": "streaming",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "chat"
+            ],
+            "description": "Stream.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-05-25T01:30:00+01:00",
+            "end": "2027-05-25T09:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_tue",
+            "title": "Gym Workout",
+            "start": "2027-05-25T10:00:00+01:00",
+            "end": "2027-05-25T11:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Mandatory workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "edit_tue",
+            "title": "Video Editing",
+            "start": "2027-05-25T12:30:00+01:00",
+            "end": "2027-05-25T18:00:00+01:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Editing.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "stream_tue",
+            "title": "Live Stream",
+            "start": "2027-05-25T20:00:00+01:00",
+            "end": "2027-05-25T23:30:00+01:00",
+            "category": "streaming",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "chat"
+            ],
+            "description": "Stream.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-05-26T01:30:00+01:00",
+            "end": "2027-05-26T09:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_wed",
+            "title": "Gym Workout",
+            "start": "2027-05-26T10:00:00+01:00",
+            "end": "2027-05-26T11:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Mandatory workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "edit_wed",
+            "title": "Video Editing",
+            "start": "2027-05-26T12:30:00+01:00",
+            "end": "2027-05-26T18:00:00+01:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Editing.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "stream_wed",
+            "title": "Live Stream",
+            "start": "2027-05-26T20:00:00+01:00",
+            "end": "2027-05-26T23:30:00+01:00",
+            "category": "streaming",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "chat"
+            ],
+            "description": "Stream.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-05-27T01:30:00+01:00",
+            "end": "2027-05-27T09:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_thu",
+            "title": "Gym Workout",
+            "start": "2027-05-27T10:00:00+01:00",
+            "end": "2027-05-27T11:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Mandatory workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "edit_thu",
+            "title": "Video Editing",
+            "start": "2027-05-27T12:30:00+01:00",
+            "end": "2027-05-27T18:00:00+01:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Editing.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "stream_thu",
+            "title": "Live Stream",
+            "start": "2027-05-27T20:00:00+01:00",
+            "end": "2027-05-27T23:30:00+01:00",
+            "category": "streaming",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "chat"
+            ],
+            "description": "Stream.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-05-28T01:30:00+01:00",
+            "end": "2027-05-28T09:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_fri",
+            "title": "Gym Workout",
+            "start": "2027-05-28T10:00:00+01:00",
+            "end": "2027-05-28T11:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Mandatory workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "edit_fri",
+            "title": "Video Editing",
+            "start": "2027-05-28T12:30:00+01:00",
+            "end": "2027-05-28T18:00:00+01:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Editing.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "stream_fri",
+            "title": "Live Stream",
+            "start": "2027-05-28T20:00:00+01:00",
+            "end": "2027-05-28T23:30:00+01:00",
+            "category": "streaming",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "chat"
+            ],
+            "description": "Stream.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 4,
+          "alternatives": 4,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The revision meaningfully improves the prior post-physiotherapy concern by moving the main Monday editing block to 13:30-18:30, leaving a 1-hour gap after Posture Physiotherapy ends at 12:30. However, it partly shifts the pressure to the morning: Sleep ends at 09:30, Video Editing Prep is scheduled 10:00-10:30, and physiotherapy starts at 11:00. That leaves only visible 30-minute margins on either side of the prep block for waking routines, food, travel or setup, none of which are shown.",
+          "Monday remains a dense production-and-performance day: Video Editing Prep from 10:00-10:30, Posture Physiotherapy from 11:00-12:30, Video Editing from 13:30-18:30, and Live Stream from 20:00-23:30. The plan is plausible, but still depends on the user being able to recover from therapy and sustain focused editing plus evening streaming on the same day.",
+          "The visible week remains cumulatively demanding, with Tuesday through Friday each showing Gym Workout from 10:00-11:30, Video Editing from 12:30-18:00, and Live Stream from 20:00-23:30 after Sleep ending at 09:30. This is mostly pre-existing and should not be blamed on the revision, but the rationale could more explicitly explain why Monday should match the weekday video-production pattern rather than leaving extra recovery margin around the medical session.",
+          "The rationale considers relevant alternatives and directly responds to the previous concern about a too-short post-therapy transition, but it still does not substantiate the practical morning feasibility of the added 10:00-10:30 prep block beyond noting that travel, meals, hygiene and recovery are not shown."
+        ],
+        "feedback": "This revised proposal is more humanly plausible than the prior version. The main improvement is that the editing block no longer starts at 13:00 after physiotherapy; it starts at 13:30, preserving a more credible post-therapy transition. Splitting the video-production workload into a short 10:00-10:30 prep block and a 13:30-18:30 main block also avoids placing more work after the 20:00-23:30 stream or near protected sleep. The remaining concern is not a clear failure, but a practical dependency: the new prep block compresses the morning between Sleep ending at 09:30 and Posture Physiotherapy at 11:00, and the calendar does not show whether the user needs travel, breakfast, hygiene, setup, or other preparation before therapy. Because the revised plan addresses the prior post-therapy compression and no stronger supported alternative is visible from the provided scope, another revision is not required on human-quality grounds. The proposer should, however, verify or explain the morning practicality and the user’s tolerance for a therapy-plus-production-plus-stream Monday.",
+        "plausibility_review": {
+          "revision_required": false,
+          "severity": "low",
+          "reason": "The prior material concern about a 30-minute post-physiotherapy gap has been substantially addressed: the main editing block now starts at 13:30 after physiotherapy ends at 12:30. The added 10:00-10:30 prep block introduces a new morning-compression uncertainty between Sleep ending at 09:30 and physiotherapy starting at 11:00, but the impact is limited to a short block and the rationale acknowledges that practical needs are not shown. There is no demonstrated contradiction or sufficiently concrete evidence that the resulting Monday is unmanageable.",
+          "suggested_improvement": "Keep the current distribution only if the proposer’s fuller context supports that the 10:00-10:30 prep block is realistic before physiotherapy. If not, reconsider the distribution generally to preserve morning preparation, food, travel or therapy-readiness margin without relying on all visible free time being usable work capacity."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Morning preparation before physiotherapy",
+            "assumption": "The user can wake from Sleep ending at 09:30, complete any needed morning routine, do Video Editing Prep from 10:00 to 10:30, and still be ready for Posture Physiotherapy at 11:00.",
+            "evidence_gap": "The calendar shows only 30 minutes before the prep block and 30 minutes between prep and physiotherapy; it does not show breakfast, hygiene, setup, travel, or the location of physiotherapy.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Post-physiotherapy recovery and transition",
+            "assumption": "The 1-hour gap from 12:30 to 13:30 is enough for recovery, food, transition and readiness for focused editing.",
+            "evidence_gap": "The revised calendar provides a larger gap than the prior version, but still does not include user-specific recovery needs, travel, meal timing, or therapy after-effects.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Sustained Monday workload",
+            "assumption": "The user can sustainably handle physiotherapy, 5.5 total hours of video-production work, and a 3.5-hour live stream on the same Monday.",
+            "evidence_gap": "The rationale explains the distribution, but does not provide user-specific evidence about focus, fatigue, or tolerance for therapy followed by production and evening performance work.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Cumulative weekly workload tolerance",
+            "assumption": "The user can manage the visible Monday-through-Friday sequence of health activity, long editing blocks, evening streams, and late sleep timing without excessive cumulative fatigue.",
+            "evidence_gap": "The calendar shows repeated demanding days, but does not show whether this is normal for the user, whether recovery practices exist, or whether unseen days provide recovery.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Request satisfaction",
+            "assumption": "Adding a prep block and moving Monday editing to 13:30-18:30 fulfills the user’s actual scheduling goal.",
+            "evidence_gap": "The original request is not included, and the technical validation explicitly did not check request satisfaction.",
+            "potential_impact": "potentially_blocking",
+            "verification_source": "unknown"
+          }
+        ],
+        "overall": 4.0
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": true,
+        "plausibility_revision_required": false,
+        "accepted": true,
+        "revision_causes": []
+      },
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": [
+        {
+          "iteration": 0,
+          "proposal": {
+            "changes": [
+              {
+                "type": "move",
+                "event_id": "edit_mon",
+                "title": null,
+                "from_start": null,
+                "to_start": "2027-05-24T13:00:00+01:00",
+                "to_end": "2027-05-24T18:30:00+01:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              }
+            ],
+            "rationale": {
+              "constraints": [
+                "The physiotherapy session is fixed and protected, so it is left unchanged.",
+                "Sleep is fixed and protected, so no sleep block is moved.",
+                "The edited event is flexible, user-only, and does not require third-party confirmation.",
+                "The new editing window uses free calendar time and does not overlap the live stream."
+              ],
+              "priorities": [
+                "Health remains the top priority by preserving the mandatory therapy session.",
+                "Video production productivity is preserved by extending Monday editing to a longer focused block.",
+                "A short post-therapy buffer is kept before editing instead of starting immediately at 12:30."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Keep editing at 13:30-18:00",
+                  "rejected_because": "This already avoids the therapy session, but it does not add productivity protection for Monday."
+                },
+                {
+                  "option": "Start editing at 12:30",
+                  "rejected_because": "This maximizes available work time but leaves no buffer after physiotherapy."
+                },
+                {
+                  "option": "Add editing after the stream",
+                  "rejected_because": "This avoids daytime compression but would push work late near protected sleep."
+                }
+              ],
+              "summary": "Move the flexible Monday editing block earlier and extend it slightly, preserving the fixed physiotherapy session while protecting overall video production time."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "sleep_mon",
+                "title": "Sleep",
+                "start": "2027-05-24T01:30:00+01:00",
+                "end": "2027-05-24T09:30:00+01:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "physio_mon",
+                "title": "Posture Physiotherapy",
+                "start": "2027-05-24T11:00:00+01:00",
+                "end": "2027-05-24T12:30:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "physio"
+                ],
+                "description": "Medical therapy.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "edit_mon",
+                "title": "Video Editing",
+                "start": "2027-05-24T13:00:00+01:00",
+                "end": "2027-05-24T18:30:00+01:00",
+                "category": "video_production",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Editing.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "stream_mon",
+                "title": "Live Stream",
+                "start": "2027-05-24T20:00:00+01:00",
+                "end": "2027-05-24T23:30:00+01:00",
+                "category": "streaming",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "chat"
+                ],
+                "description": "Stream.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_tue",
+                "title": "Sleep",
+                "start": "2027-05-25T01:30:00+01:00",
+                "end": "2027-05-25T09:30:00+01:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_tue",
+                "title": "Gym Workout",
+                "start": "2027-05-25T10:00:00+01:00",
+                "end": "2027-05-25T11:30:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Mandatory workout.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "edit_tue",
+                "title": "Video Editing",
+                "start": "2027-05-25T12:30:00+01:00",
+                "end": "2027-05-25T18:00:00+01:00",
+                "category": "video_production",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Editing.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "stream_tue",
+                "title": "Live Stream",
+                "start": "2027-05-25T20:00:00+01:00",
+                "end": "2027-05-25T23:30:00+01:00",
+                "category": "streaming",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "chat"
+                ],
+                "description": "Stream.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_wed",
+                "title": "Sleep",
+                "start": "2027-05-26T01:30:00+01:00",
+                "end": "2027-05-26T09:30:00+01:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_wed",
+                "title": "Gym Workout",
+                "start": "2027-05-26T10:00:00+01:00",
+                "end": "2027-05-26T11:30:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Mandatory workout.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "edit_wed",
+                "title": "Video Editing",
+                "start": "2027-05-26T12:30:00+01:00",
+                "end": "2027-05-26T18:00:00+01:00",
+                "category": "video_production",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Editing.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "stream_wed",
+                "title": "Live Stream",
+                "start": "2027-05-26T20:00:00+01:00",
+                "end": "2027-05-26T23:30:00+01:00",
+                "category": "streaming",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "chat"
+                ],
+                "description": "Stream.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2027-05-27T01:30:00+01:00",
+                "end": "2027-05-27T09:30:00+01:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_thu",
+                "title": "Gym Workout",
+                "start": "2027-05-27T10:00:00+01:00",
+                "end": "2027-05-27T11:30:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Mandatory workout.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "edit_thu",
+                "title": "Video Editing",
+                "start": "2027-05-27T12:30:00+01:00",
+                "end": "2027-05-27T18:00:00+01:00",
+                "category": "video_production",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Editing.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "stream_thu",
+                "title": "Live Stream",
+                "start": "2027-05-27T20:00:00+01:00",
+                "end": "2027-05-27T23:30:00+01:00",
+                "category": "streaming",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "chat"
+                ],
+                "description": "Stream.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_fri",
+                "title": "Sleep",
+                "start": "2027-05-28T01:30:00+01:00",
+                "end": "2027-05-28T09:30:00+01:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_fri",
+                "title": "Gym Workout",
+                "start": "2027-05-28T10:00:00+01:00",
+                "end": "2027-05-28T11:30:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Mandatory workout.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "edit_fri",
+                "title": "Video Editing",
+                "start": "2027-05-28T12:30:00+01:00",
+                "end": "2027-05-28T18:00:00+01:00",
+                "category": "video_production",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Editing.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "stream_fri",
+                "title": "Live Stream",
+                "start": "2027-05-28T20:00:00+01:00",
+                "end": "2027-05-28T23:30:00+01:00",
+                "category": "streaming",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "chat"
+                ],
+                "description": "Stream.",
+                "origin": "existing",
+                "change_status": "preserved"
+              }
+            ],
+            "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+          },
+          "plausibility_review": {
+            "revision_required": true,
+            "severity": "moderate",
+            "reason": "The proposed move could materially affect manageability by extending Monday editing to 13:00-18:30 after a fixed physiotherapy session ending at 12:30 and before a 20:00-23:30 live stream. The concern is not an objective conflict: the events fit, and the user may tolerate this pattern. The issue is that the rationale does not adequately address recovery, food, transition, and cumulative fatigue in a week that already contains repeated long editing and streaming days.",
+            "suggested_improvement": "Reconsider or better substantiate the Monday distribution using the proposer’s fuller context: explain why the 30-minute post-therapy margin and longer editing block are realistically sustainable, or consider a less compressed way to protect video-production time without assuming all free calendar time after therapy is effective work capacity."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Post-physiotherapy transition and recovery",
+              "assumption": "A 30-minute gap from 12:30 to 13:00 is enough for the user to recover from physiotherapy and be ready for focused editing.",
+              "evidence_gap": "The calendar shows the gap, but does not show travel, hygiene, food, therapy after-effects, or the user's recovery needs.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Meal and personal-care margin on Monday",
+              "assumption": "The user can handle meals and basic personal needs around physiotherapy, the 13:00-18:30 editing block, and the 20:00-23:30 stream.",
+              "evidence_gap": "No meal or personal-care blocks are visible, and the rationale does not explain how these needs are accommodated.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Productive capacity after therapy",
+              "assumption": "The extended Monday editing block will preserve or improve video-production productivity rather than becoming low-quality work due to post-therapy fatigue.",
+              "evidence_gap": "The proposal states productivity is preserved, but gives no user-specific evidence about focus after physiotherapy.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Cumulative weekly workload tolerance",
+              "assumption": "The user can sustainably manage the visible sequence of daily health activity, long editing blocks, and evening streams from Monday through Friday.",
+              "evidence_gap": "The calendar shows repeated demanding days, but no information about the user's normal workload tolerance, recovery practices, or whether this week is exceptional.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Request satisfaction",
+              "assumption": "Moving and extending Monday editing fulfills the user's actual scheduling goal.",
+              "evidence_gap": "The original request is not included, and the technical validation explicitly did not check request satisfaction.",
+              "potential_impact": "potentially_blocking",
+              "verification_source": "unknown"
+            }
+          ],
+          "weaknesses": [
+            "The proposal treats the free slot after physiotherapy as mostly usable work capacity, but Monday has Posture Physiotherapy from 11:00 to 12:30 followed by only a 30-minute gap before Video Editing from 13:00 to 18:30. That may be workable for some people, but the rationale does not substantiate that this is enough time for lunch, transition, recovery, or resetting after a medical therapy session.",
+            "The moved Monday editing block is longer than the explicitly mentioned prior option of 13:30-18:00, increasing Monday's focused work demand before a Live Stream from 20:00 to 23:30. The proposal explains the productivity benefit, but gives limited attention to the cost of concentrating a longer cognitive block after therapy and before evening performance work.",
+            "Across the visible week, the routine is already demanding: Tuesday through Friday each include Sleep until 09:30, Gym Workout from 10:00 to 11:30, Video Editing from 12:30 to 18:00, and Live Stream from 20:00 to 23:30. This appears largely pre-existing and should not automatically be blamed on the proposed change, but the Monday extension adds load into an already dense visible pattern without discussing cumulative sustainability.",
+            "The alternatives considered are relevant but narrow. They compare keeping the old editing time, starting immediately after physiotherapy, or adding work after the stream, but they do not show whether a less compressed or less extended Monday option was considered within the visible flexibility."
+          ],
+          "feedback": "The proposal is technically coherent and preserves the fixed health and sleep blocks, and the stated 30-minute post-therapy buffer is better than starting editing immediately at 12:30. However, the human-quality case is only partially supported. The resulting Monday has physiotherapy from 11:00 to 12:30, then a 5.5-hour editing block from 13:00 to 18:30, then a live stream from 20:00 to 23:30. In isolation this may be possible, but it leaves little visibly protected margin after therapy and creates a long cognitive-production day. Over the visible horizon, the following days repeat gym, editing, streaming, and late sleep timing, so the added Monday load deserves more justification than simply saying the slot is free. Because the original request is not provided, request satisfaction cannot be verified; the review can only assess whether the visible plan looks realistically manageable."
+        }
+      ],
+      "unresolved_assumptions": [
+        {
+          "subject": "Morning preparation before physiotherapy",
+          "assumption": "The user can wake from Sleep ending at 09:30, complete any needed morning routine, do Video Editing Prep from 10:00 to 10:30, and still be ready for Posture Physiotherapy at 11:00.",
+          "evidence_gap": "The calendar shows only 30 minutes before the prep block and 30 minutes between prep and physiotherapy; it does not show breakfast, hygiene, setup, travel, or the location of physiotherapy.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Post-physiotherapy recovery and transition",
+          "assumption": "The 1-hour gap from 12:30 to 13:30 is enough for recovery, food, transition and readiness for focused editing.",
+          "evidence_gap": "The revised calendar provides a larger gap than the prior version, but still does not include user-specific recovery needs, travel, meal timing, or therapy after-effects.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Sustained Monday workload",
+          "assumption": "The user can sustainably handle physiotherapy, 5.5 total hours of video-production work, and a 3.5-hour live stream on the same Monday.",
+          "evidence_gap": "The rationale explains the distribution, but does not provide user-specific evidence about focus, fatigue, or tolerance for therapy followed by production and evening performance work.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Cumulative weekly workload tolerance",
+          "assumption": "The user can manage the visible Monday-through-Friday sequence of health activity, long editing blocks, evening streams, and late sleep timing without excessive cumulative fatigue.",
+          "evidence_gap": "The calendar shows repeated demanding days, but does not show whether this is normal for the user, whether recovery practices exist, or whether unseen days provide recovery.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Request satisfaction",
+          "assumption": "Adding a prep block and moving Monday editing to 13:30-18:30 fulfills the user’s actual scheduling goal.",
+          "evidence_gap": "The original request is not included, and the technical validation explicitly did not check request satisfaction.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "unknown"
+        }
+      ]
+    }
+  ],
+  "initial_proposal": {
+    "changes": [
+      {
+        "type": "move",
+        "event_id": "edit_mon",
+        "title": null,
+        "from_start": null,
+        "to_start": "2027-05-24T13:00:00+01:00",
+        "to_end": "2027-05-24T18:30:00+01:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "The physiotherapy session is fixed and protected, so it is left unchanged.",
+        "Sleep is fixed and protected, so no sleep block is moved.",
+        "The edited event is flexible, user-only, and does not require third-party confirmation.",
+        "The new editing window uses free calendar time and does not overlap the live stream."
+      ],
+      "priorities": [
+        "Health remains the top priority by preserving the mandatory therapy session.",
+        "Video production productivity is preserved by extending Monday editing to a longer focused block.",
+        "A short post-therapy buffer is kept before editing instead of starting immediately at 12:30."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Keep editing at 13:30-18:00",
+          "rejected_because": "This already avoids the therapy session, but it does not add productivity protection for Monday."
+        },
+        {
+          "option": "Start editing at 12:30",
+          "rejected_because": "This maximizes available work time but leaves no buffer after physiotherapy."
+        },
+        {
+          "option": "Add editing after the stream",
+          "rejected_because": "This avoids daytime compression but would push work late near protected sleep."
+        }
+      ],
+      "summary": "Move the flexible Monday editing block earlier and extend it slightly, preserving the fixed physiotherapy session while protecting overall video production time."
+    }
+  },
+  "final_proposal": {
+    "changes": [
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Video Editing Prep",
+        "from_start": null,
+        "to_start": "2027-05-24T10:00:00+01:00",
+        "to_end": "2027-05-24T10:30:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "move",
+        "event_id": "edit_mon",
+        "title": null,
+        "from_start": null,
+        "to_start": "2027-05-24T13:30:00+01:00",
+        "to_end": "2027-05-24T18:30:00+01:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "The physiotherapy session is fixed and protected, so it is left unchanged.",
+        "Sleep is fixed and protected, so no sleep block is moved.",
+        "The edited event is flexible, user-only, and has no third-party dependency.",
+        "The added prep uses free calendar time, but starting at the reference time depends on immediate execution.",
+        "Travel, meals, hygiene, and post-therapy recovery needs are not shown in the calendar."
+      ],
+      "priorities": [
+        "Health remains the top priority by preserving the mandatory therapy session.",
+        "Video production time is protected by splitting the extra workload instead of placing it all after therapy.",
+        "The main editing block keeps the existing post-therapy start to avoid reducing visible recovery margin.",
+        "The plan avoids adding work after the evening stream or near protected sleep."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Keep editing unchanged",
+          "rejected_because": "This already avoids physiotherapy, but it leaves Monday editing shorter than the visible weekday pattern."
+        },
+        {
+          "option": "Move editing to 13:00-18:30",
+          "rejected_because": "This preserves more production time in one block but relies on a shorter post-therapy transition."
+        },
+        {
+          "option": "Add editing after the stream",
+          "rejected_because": "This protects daytime recovery but would push production work late near protected sleep."
+        },
+        {
+          "option": "Shift production to another weekday",
+          "rejected_because": "The request targets Monday, and the other visible weekdays already contain long editing and streaming days."
+        }
+      ],
+      "summary": "Use a small pre-therapy editing prep block and a modest extension of the flexible Monday editing block, preserving therapy and sleep while reducing the risk of overloading the post-physiotherapy period."
+    }
+  },
+  "final_score": 4.0,
+  "refinements": 1,
+  "critic_accepted": true,
+  "decision": "defer",
+  "reasons": [
+    "toca em evento importante (edit_mon, importância 4)"
+  ],
+  "status": "proposal_ready",
+  "critic_input_version": "final_calendar_v1",
+  "critic_policy_version": "uncertainty_review_v2",
+  "result_calendar_version": "validated_added_metadata_v2",
+  "final_result_calendar": {
+    "timezone": "Europe/Lisbon",
+    "coverage": "all_events_in_scenario_after_simulation",
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-05-24T01:30:00+01:00",
+        "end": "2027-05-24T09:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_0",
+        "title": "Video Editing Prep",
+        "start": "2027-05-24T10:00:00+01:00",
+        "end": "2027-05-24T10:30:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "physio_mon",
+        "title": "Posture Physiotherapy",
+        "start": "2027-05-24T11:00:00+01:00",
+        "end": "2027-05-24T12:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "physio"
+        ],
+        "description": "Medical therapy.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "edit_mon",
+        "title": "Video Editing",
+        "start": "2027-05-24T13:30:00+01:00",
+        "end": "2027-05-24T18:30:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Editing.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "stream_mon",
+        "title": "Live Stream",
+        "start": "2027-05-24T20:00:00+01:00",
+        "end": "2027-05-24T23:30:00+01:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-05-25T01:30:00+01:00",
+        "end": "2027-05-25T09:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_tue",
+        "title": "Gym Workout",
+        "start": "2027-05-25T10:00:00+01:00",
+        "end": "2027-05-25T11:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "edit_tue",
+        "title": "Video Editing",
+        "start": "2027-05-25T12:30:00+01:00",
+        "end": "2027-05-25T18:00:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Editing.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "stream_tue",
+        "title": "Live Stream",
+        "start": "2027-05-25T20:00:00+01:00",
+        "end": "2027-05-25T23:30:00+01:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-05-26T01:30:00+01:00",
+        "end": "2027-05-26T09:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_wed",
+        "title": "Gym Workout",
+        "start": "2027-05-26T10:00:00+01:00",
+        "end": "2027-05-26T11:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "edit_wed",
+        "title": "Video Editing",
+        "start": "2027-05-26T12:30:00+01:00",
+        "end": "2027-05-26T18:00:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Editing.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "stream_wed",
+        "title": "Live Stream",
+        "start": "2027-05-26T20:00:00+01:00",
+        "end": "2027-05-26T23:30:00+01:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-05-27T01:30:00+01:00",
+        "end": "2027-05-27T09:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_thu",
+        "title": "Gym Workout",
+        "start": "2027-05-27T10:00:00+01:00",
+        "end": "2027-05-27T11:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "edit_thu",
+        "title": "Video Editing",
+        "start": "2027-05-27T12:30:00+01:00",
+        "end": "2027-05-27T18:00:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Editing.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "stream_thu",
+        "title": "Live Stream",
+        "start": "2027-05-27T20:00:00+01:00",
+        "end": "2027-05-27T23:30:00+01:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-05-28T01:30:00+01:00",
+        "end": "2027-05-28T09:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_fri",
+        "title": "Gym Workout",
+        "start": "2027-05-28T10:00:00+01:00",
+        "end": "2027-05-28T11:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "edit_fri",
+        "title": "Video Editing",
+        "start": "2027-05-28T12:30:00+01:00",
+        "end": "2027-05-28T18:00:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Editing.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "stream_fri",
+        "title": "Live Stream",
+        "start": "2027-05-28T20:00:00+01:00",
+        "end": "2027-05-28T23:30:00+01:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream.",
+        "origin": "existing",
+        "change_status": "preserved"
+      }
+    ],
+    "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+  },
+  "final_unresolved_assumptions": [
+    {
+      "subject": "Morning preparation before physiotherapy",
+      "assumption": "The user can wake from Sleep ending at 09:30, complete any needed morning routine, do Video Editing Prep from 10:00 to 10:30, and still be ready for Posture Physiotherapy at 11:00.",
+      "evidence_gap": "The calendar shows only 30 minutes before the prep block and 30 minutes between prep and physiotherapy; it does not show breakfast, hygiene, setup, travel, or the location of physiotherapy.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Post-physiotherapy recovery and transition",
+      "assumption": "The 1-hour gap from 12:30 to 13:30 is enough for recovery, food, transition and readiness for focused editing.",
+      "evidence_gap": "The revised calendar provides a larger gap than the prior version, but still does not include user-specific recovery needs, travel, meal timing, or therapy after-effects.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Sustained Monday workload",
+      "assumption": "The user can sustainably handle physiotherapy, 5.5 total hours of video-production work, and a 3.5-hour live stream on the same Monday.",
+      "evidence_gap": "The rationale explains the distribution, but does not provide user-specific evidence about focus, fatigue, or tolerance for therapy followed by production and evening performance work.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Cumulative weekly workload tolerance",
+      "assumption": "The user can manage the visible Monday-through-Friday sequence of health activity, long editing blocks, evening streams, and late sleep timing without excessive cumulative fatigue.",
+      "evidence_gap": "The calendar shows repeated demanding days, but does not show whether this is normal for the user, whether recovery practices exist, or whether unseen days provide recovery.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Request satisfaction",
+      "assumption": "Adding a prep block and moving Monday editing to 13:30-18:30 fulfills the user’s actual scheduling goal.",
+      "evidence_gap": "The original request is not included, and the technical validation explicitly did not check request satisfaction.",
+      "potential_impact": "potentially_blocking",
+      "verification_source": "unknown"
+    }
+  ],
+  "uncertainty_history": [
+    {
+      "iteration": 0,
+      "unresolved_assumptions": [
+        {
+          "subject": "Post-physiotherapy transition and recovery",
+          "assumption": "A 30-minute gap from 12:30 to 13:00 is enough for the user to recover from physiotherapy and be ready for focused editing.",
+          "evidence_gap": "The calendar shows the gap, but does not show travel, hygiene, food, therapy after-effects, or the user's recovery needs.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Meal and personal-care margin on Monday",
+          "assumption": "The user can handle meals and basic personal needs around physiotherapy, the 13:00-18:30 editing block, and the 20:00-23:30 stream.",
+          "evidence_gap": "No meal or personal-care blocks are visible, and the rationale does not explain how these needs are accommodated.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Productive capacity after therapy",
+          "assumption": "The extended Monday editing block will preserve or improve video-production productivity rather than becoming low-quality work due to post-therapy fatigue.",
+          "evidence_gap": "The proposal states productivity is preserved, but gives no user-specific evidence about focus after physiotherapy.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Cumulative weekly workload tolerance",
+          "assumption": "The user can sustainably manage the visible sequence of daily health activity, long editing blocks, and evening streams from Monday through Friday.",
+          "evidence_gap": "The calendar shows repeated demanding days, but no information about the user's normal workload tolerance, recovery practices, or whether this week is exceptional.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Request satisfaction",
+          "assumption": "Moving and extending Monday editing fulfills the user's actual scheduling goal.",
+          "evidence_gap": "The original request is not included, and the technical validation explicitly did not check request satisfaction.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "unknown"
+        }
+      ]
+    },
+    {
+      "iteration": 1,
+      "unresolved_assumptions": [
+        {
+          "subject": "Morning preparation before physiotherapy",
+          "assumption": "The user can wake from Sleep ending at 09:30, complete any needed morning routine, do Video Editing Prep from 10:00 to 10:30, and still be ready for Posture Physiotherapy at 11:00.",
+          "evidence_gap": "The calendar shows only 30 minutes before the prep block and 30 minutes between prep and physiotherapy; it does not show breakfast, hygiene, setup, travel, or the location of physiotherapy.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Post-physiotherapy recovery and transition",
+          "assumption": "The 1-hour gap from 12:30 to 13:30 is enough for recovery, food, transition and readiness for focused editing.",
+          "evidence_gap": "The revised calendar provides a larger gap than the prior version, but still does not include user-specific recovery needs, travel, meal timing, or therapy after-effects.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Sustained Monday workload",
+          "assumption": "The user can sustainably handle physiotherapy, 5.5 total hours of video-production work, and a 3.5-hour live stream on the same Monday.",
+          "evidence_gap": "The rationale explains the distribution, but does not provide user-specific evidence about focus, fatigue, or tolerance for therapy followed by production and evening performance work.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Cumulative weekly workload tolerance",
+          "assumption": "The user can manage the visible Monday-through-Friday sequence of health activity, long editing blocks, evening streams, and late sleep timing without excessive cumulative fatigue.",
+          "evidence_gap": "The calendar shows repeated demanding days, but does not show whether this is normal for the user, whether recovery practices exist, or whether unseen days provide recovery.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Request satisfaction",
+          "assumption": "Adding a prep block and moving Monday editing to 13:30-18:30 fulfills the user’s actual scheduling goal.",
+          "evidence_gap": "The original request is not included, and the technical validation explicitly did not check request satisfaction.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "unknown"
+        }
+      ]
+    }
+  ],
+  "schema_version": "2.0",
+  "profile_id": "content_creator_streamer_01__content_creator_physio_posture_correction_001",
+  "scenario_sha256": "7370c1e9c8cc9dbbe48a5814ffed03f6c4b68bff681c3050170f46d4eefc92ce",
+  "aggregate_requirements_sha256": null,
+  "confirmed_changes_sha256": null,
+  "simulator_version": "calendar_v2_validated_added_metadata_v2",
+  "dataset_manifest_sha256": "28af38846fb8995651d5f63ab63402e36147dc0915a2bfcd5379747ea531ffad",
+  "split": "train",
+  "run_id": "aca09079e14841849f856ac8fed1309a",
+  "experiment_id": null,
+  "repeat_index": 0,
+  "generated_at": "2026-11-23T16:30:41.323713+00:00",
+  "prompt_versions": {
+    "proposer_sha256": "ae6fa59cccb86c31f34f66d07d241660b1feadf852ebf1b594bc85addab86985",
+    "proposer_wire_schema_version": "compact_proposal_v1",
+    "proposer_wire_schema_sha256": "f504fbcd7e939c43e055e2f188feb22097a284bcd9b043227d868e559547b865",
+    "proposer_revision_sha256": "3f0fe7f221013700694a22984560612013e9804072ffde4538e1329b9708ac95",
+    "critic_sha256": "1686688cdd4bc63abb12e6633ef9dbb9b62d69b69aba1c4805a201657cc5bb34"
+  },
+  "seconds": 76.403,
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [],
+    "valid": true
+  }
+}

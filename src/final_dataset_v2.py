@@ -9,7 +9,7 @@ from pathlib import Path
 
 from scenario_v2 import load_scenario
 
-EXPECTED_ARCHIVE_SHA256 = "ec04108d3a39ba9dbf4b91ba4ba5f60ee7f332f207991a0ab231fa70c8cb16fd"
+EXPECTED_ARCHIVE_SHA256 = "8f0381ecda376923be74a16f654d7a4973d604cf9aba838269fb52bdd92cac47"
 EXPECTED_SPLITS = {"train": 60, "dev": 10, "test": 30}
 FAMILY_FOLDERS = {
     "elite_athlete_student_schedule_conflict": "atletaAltaCompeticao",
@@ -39,7 +39,12 @@ EXPECTED_FAMILIES = {
         "university_professor_schedule_conflict",
     },
 }
-ELIGIBLE_STATES = {"ready_for_pilot", "ready_with_uncertainty", "intentional_no_op"}
+ELIGIBLE_STATES = {
+    "ready_for_pilot",
+    "ready_with_uncertainty",
+    "ready_with_legitimate_uncertainty",
+    "intentional_no_op",
+}
 BLOCKED_STATE = "blocked_real_issue"
 
 

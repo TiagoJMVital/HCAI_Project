@@ -604,3 +604,21 @@ O [plano de piloto](pilot_plan.md) seleciona dez casos exclusivamente de treino 
 ### Limpeza verificada do workspace
 
 Depois de validar o ZIP final e repetir **106/106 testes** e a importação isolada 100/100, foram retiradas da raiz as quatro pastas de trabalho antigas: `scenarios_corrected/`, `scenarios_new_corrected/`, `scenarios_semantic_review/` e `scenarios_candidate/`. Cada JSON era **byte a byte idêntico** ao membro do respetivo ZIP histórico antes da remoção. Os seis ZIP anteriores (`Cenários.zip`, `lastTwo.zip`, `Cenarios_v2_corrigidos.zip`, `Cenarios_v2_100_normalizados.zip`, `Cenarios_v2_100_semantic_review.zip`, `Cenarios_v2_100_candidate.zip`) foram movidos, com SHA-256 novamente confirmado, para `../archive/dataset_sources/`, ignorado pelo Git. Assim, o workspace global mostra apenas `scenarios/` e `Cenarios_v2_100_final.zip` como versões de cenário ativas, enquanto os bytes de origem e das fases anteriores continuam recuperáveis para rastreabilidade. O manifesto ativo, os resultados, as anotações e `working_student_deadline_001` não foram alterados.
+
+## Sétima fase — Fecho dos bloqueios de treino
+
+**Data:** 2026-11-23. Esta fase parte do ZIP final da sexta fase, SHA-256 `ec04108d3a39ba9dbf4b91ba4ba5f60ee7f332f207991a0ab231fa70c8cb16fd`, que permanece identificado acima como proveniência. A versão ativa sincronizada de `Cenarios_v2_100_final.zip` passa a ter SHA-256 **`8f0381ecda376923be74a16f654d7a4973d604cf9aba838269fb52bdd92cac47`**. Os 129 membros do ZIP correspondem byte a byte a `scenarios/` e o CRC está íntegro.
+
+### Alterações cirúrgicas
+
+Foram modificados apenas quatro JSON de cenário. Em `content_creator_medical_emergency_sponsor_001`, a proteção ampla de `video_production` foi substituída pela proteção por ID de `sponsor_edit_fri`; `medical_fri` e o prazo textual de sexta às 18:00 foram preservados. Em `content_creator_studio_maintenance_anniversary_001`, foram repostos `gym_tue` (10:00–11:30), `edit_tue` (12:30–18:00) e `stream_fri` (20:00–23:30), preservando os compromissos confirmados `tech_tue` e `anniversary_stream_fri`; as sobreposições são o conflito inicial deliberado a resolver. Em `elite_athlete_student_international_competition_001`, somente o início e o fim de `sleep_thu` passaram para 22:00–05:30; não foram inventados voo nem regresso dominical. Em `working_student_transit_strike_commute_delay_006`, somente o pedido e a preferência suave foram alinhados com a deslocação matinal real, a aula das 18:30 e um treino curto em casa no intervalo de uma hora; não foi criado um ginásio inexistente.
+
+As sidecars de alterações confirmadas dos dois últimos cenários mantêm exatamente as mesmas operações e tiveram apenas o hash canónico de ligação atualizado. Nenhuma sidecar de requisitos agregados necessitou de alteração: não houve mudança de IDs ou categorias dos eventos aos quais essas regras se aplicam.
+
+Os quatro casos `nurse_shift_worker_masters_night_shift_cover_001`, `nurse_shift_worker_masters_night_shift_swap_001`, `elite_athlete_student_injury_rehab_001` e `elite_athlete_student_sponsor_media_day_project_001` não tiveram calendários, restrições ou pedidos alterados. Foram classificados como `ready_with_legitimate_uncertainty`, preservando confirmação de terceiros, disponibilidade externa e prova qualitativa como matéria para o Critic e para uma possível decisão DEFER, sem criar rótulos automáticos.
+
+### Estado atual
+
+O treino tem agora **60/60 cenários elegíveis e 0 bloqueados**: 38 `ready_for_pilot`, 15 `ready_with_uncertainty`, seis `ready_with_legitimate_uncertainty` e um `intentional_no_op`. No conjunto completo há 67 `ready_for_pilot`, 21 `ready_with_uncertainty`, seis `ready_with_legitimate_uncertainty`, dois `intentional_no_op` e quatro `blocked_real_issue`; os quatro bloqueios remanescentes pertencem a desenvolvimento/teste e estão documentados em [`scenario_final_decisions.md`](scenario_final_decisions.md).
+
+Não foram executados agentes, chamadas IAedu, cenários, treino do gate ou anotações. Os resultados experimentais, propostas, anotações e hashes de artefactos históricos não foram modificados. A suite local terminou com **145 testes passados e três ignorados**. A execução `eval/run_training_b_v2.py --dry-run --resume` enumerou **60 `WOULD RUN`**, sem `BLOCKED`, confirmando 60 pendentes elegíveis sem consumir API.
