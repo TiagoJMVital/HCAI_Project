@@ -105,11 +105,13 @@ def _raise(message: str):
     raise ValueError(message)
 
 
-def prepare(root: Path, author: str) -> int:
+def prepare(root: Path, author: str, proposal_ids: set[str] | None = None) -> int:
     if author not in AUTHORS:
         raise ValueError("unknown author")
     count = 0
     for source in catalog(root):
+        if proposal_ids is not None and source["proposal_id"] not in proposal_ids:
+            continue
         path = _path(root, author, source["proposal_id"])
         if path.exists():
             continue
@@ -124,7 +126,7 @@ def load_review(root: Path, author: str, proposal_id: str) -> tuple[ProposalRevi
     source = _source(root, proposal_id)
     path = _path(root, author, proposal_id)
     if not path.exists():
-        prepare(root, author)
+        prepare(root, author, {proposal_id})
     raw = path.read_bytes()
     review = ProposalReview.model_validate_json(raw)
     if (review.proposal_id, review.scenario_id, review.annotator_id) != (

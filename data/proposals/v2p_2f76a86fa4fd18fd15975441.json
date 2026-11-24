@@ -1,0 +1,2724 @@
+{
+  "proposal_id": "v2p_2f76a86fa4fd18fd15975441",
+  "scenario_id": "freelancer_flexible_girlfriend_day_deadline_001",
+  "family_id": "freelancer_schedule_conflict",
+  "profile_id": "freelancer_flexible_01__freelancer_flexible_girlfriend_day_deadline_001",
+  "split": "train",
+  "run_id": "896c017e2d0a425daef6a86928ca54f3",
+  "configuration": "B",
+  "generated_at": "2026-11-24T10:06:40.391870+00:00",
+  "proposer_provider": "iaedu",
+  "proposer_model": "GPT-5.5",
+  "proposer_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_provider": "iaedu",
+  "critic_model": "GPT-5.5",
+  "critic_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "prompt_versions": {
+    "proposer_sha256": "ae6fa59cccb86c31f34f66d07d241660b1feadf852ebf1b594bc85addab86985",
+    "proposer_wire_schema_version": "compact_proposal_v1",
+    "proposer_wire_schema_sha256": "f504fbcd7e939c43e055e2f188feb22097a284bcd9b043227d868e559547b865",
+    "proposer_revision_sha256": "3f0fe7f221013700694a22984560612013e9804072ffde4538e1329b9708ac95",
+    "critic_sha256": "1686688cdd4bc63abb12e6633ef9dbb9b62d69b69aba1c4805a201657cc5bb34"
+  },
+  "critic_settings": {
+    "threshold": 4.0,
+    "max_refinements": 3,
+    "min_dimension_score": 1
+  },
+  "experiment_id": null,
+  "repeat_index": 0,
+  "seconds": 112.492,
+  "critic_score": 4.0,
+  "critic_accepted": true,
+  "iterations": [
+    {
+      "index": 0,
+      "proposer_feedback": null,
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [],
+        "rationale": {
+          "constraints": [
+            "Wednesday is protected for the full-day social trip and has no work scheduled.",
+            "Fixed sleep blocks are not moved or shortened.",
+            "Morning workouts remain in place and are not used for work time.",
+            "The weekly work requirement is exactly 30 scheduled hours within Monday, Tuesday, Thursday, and Friday."
+          ],
+          "priorities": [
+            "Preserve the girlfriend trip as non-negotiable social time.",
+            "Protect sleep and morning fitness before adding or moving work.",
+            "Avoid unnecessary disruption because the current calendar already meets the work target."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Add extra work on Friday evening",
+              "rejected_because": "Rejected because the 30-hour target is already met and extra work would add unnecessary load."
+            },
+            {
+              "option": "Move morning workouts to create earlier work starts",
+              "rejected_because": "Rejected because workouts are protected by preference and no work shortfall requires the disruption."
+            }
+          ],
+          "summary": "No calendar changes are needed: the existing plan already keeps Wednesday completely work-free while scheduling 30 design-work hours across Monday, Tuesday, Thursday and Friday, with sleep and morning workouts protected."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [
+          "no changes proposed; request satisfaction requires Critic and human review"
+        ],
+        "valid": true,
+        "aggregate_checks": [
+          {
+            "id": "weekly_project_hours",
+            "status": "pass",
+            "minutes": 1800.0,
+            "minimum_minutes": 1800,
+            "category": "work",
+            "evidence": "union of final calendar intervals"
+          }
+        ],
+        "aggregate_validation_version": "duration_total_v1",
+        "no_op": true
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-03-07T23:30:00+00:00",
+            "end": "2027-03-08T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_mon",
+            "title": "Gym Workout",
+            "start": "2027-03-08T08:00:00+00:00",
+            "end": "2027-03-08T09:30:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_mon",
+            "title": "Design Project Block",
+            "start": "2027-03-08T10:30:00+00:00",
+            "end": "2027-03-08T18:30:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "8 hours design.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-03-08T23:30:00+00:00",
+            "end": "2027-03-09T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "run_tue",
+            "title": "Morning Run",
+            "start": "2027-03-09T08:00:00+00:00",
+            "end": "2027-03-09T09:00:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Run.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_tue",
+            "title": "Design Project Block",
+            "start": "2027-03-09T10:00:00+00:00",
+            "end": "2027-03-09T18:00:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "8 hours design.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-03-09T23:30:00+00:00",
+            "end": "2027-03-10T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "girlfriend_day_wed",
+            "title": "Full Day Trip with Girlfriend",
+            "start": "2027-03-10T08:30:00+00:00",
+            "end": "2027-03-10T21:00:00+00:00",
+            "category": "social",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "girlfriend"
+            ],
+            "description": "Protected full day out.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-03-10T23:30:00+00:00",
+            "end": "2027-03-11T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_thu",
+            "title": "Gym Workout",
+            "start": "2027-03-11T08:00:00+00:00",
+            "end": "2027-03-11T09:30:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_thu",
+            "title": "Design Project Block",
+            "start": "2027-03-11T10:30:00+00:00",
+            "end": "2027-03-11T18:30:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "8 hours design.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-03-11T23:30:00+00:00",
+            "end": "2027-03-12T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "run_fri",
+            "title": "Morning Run",
+            "start": "2027-03-12T08:00:00+00:00",
+            "end": "2027-03-12T09:00:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Run.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_fri",
+            "title": "Design Project Block",
+            "start": "2027-03-12T10:00:00+00:00",
+            "end": "2027-03-12T16:00:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "6 hours design.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 4,
+          "alternatives": 3,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The rationale is sound for a no-change proposal but somewhat equates 30 scheduled work hours with sustainable effective capacity; it does not discuss whether the 8-hour design blocks on Monday 10:30-18:30, Tuesday 10:00-18:00 and Thursday 10:30-18:30 include realistic breaks or cognitive recovery.",
+          "The plan preserves a demanding sequence around midweek: Full Day Trip with Girlfriend on Wednesday 08:30-21:00, then sleep 23:30-07:30, Gym Workout Thursday 08:00-09:30, and an 8-hour Design Project Block Thursday 10:30-18:30. This is plausible but the rationale does not explicitly weigh recovery after the long social day before another workout-plus-workday.",
+          "Alternatives considered are relevant but narrow. They reject extra Friday work and moving workouts, which makes sense given the 30-hour target, but they do not address whether distributing effort differently within the already visible workdays would reduce the Thursday-after-trip load.",
+          "Because the original request is not provided, request satisfaction cannot be independently verified beyond the visible rationale, final calendar and technical aggregate check."
+        ],
+        "feedback": "The resulting calendar appears broadly manageable and balanced over the visible Monday-Friday horizon: sleep is consistently protected at 8 hours, Wednesday is free of work for the full-day trip, workouts are preserved, and the 30-hour work target is met without adding unnecessary extra load. The main human-quality caveat is not a contradiction but a sustainability question: the Thursday sequence after a long Wednesday trip may be tiring, and three 8-hour design days plus morning exercise could depend on whether those work blocks allow breaks and whether the user normally tolerates that rhythm. Since no changes were made and the visible calendar already protects the stated priorities, this does not by itself require revision, but the proposer would strengthen the rationale by explicitly acknowledging the Thursday recovery issue and clarifying whether the long work blocks are intended to include normal breaks and meals.",
+        "plausibility_review": {
+          "revision_required": false,
+          "severity": "low",
+          "reason": "No concrete proposed change creates a new manageability problem, and the visible routine is plausibly sustainable: protected sleep, protected social time, protected fitness, and no excess work beyond the stated 30-hour target. The main concern is a grounded but uncertain fatigue risk around Wednesday 08:30-21:00 followed by Thursday gym and 8 hours of design work. If the user needs substantial recovery after the trip or if the design blocks require uninterrupted deep work, the plan could feel overloaded; however, the calendar still leaves evening time and does not show an objective incompatibility.",
+          "suggested_improvement": "Keep the no-change outcome if supported by the fuller context, but explicitly reconsider or justify the Thursday-after-trip workload and whether the long design blocks include realistic breaks, meals and recovery. If the fuller context shows fatigue risk, consider a less concentrated distribution rather than adding work or disturbing protected social/sleep/fitness time."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Effective work capacity within long design blocks",
+            "assumption": "The 8-hour design blocks on Monday, Tuesday and Thursday, and the 6-hour block on Friday, are usable for the intended work without requiring additional separately scheduled break time.",
+            "evidence_gap": "The calendar labels them as work durations, but does not show meals, short breaks, or whether the design work can be performed effectively across long continuous blocks.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Recovery after the Wednesday trip",
+            "assumption": "The user can realistically recover from the Full Day Trip with Girlfriend on Wednesday 08:30-21:00 before Thursday sleep, gym and 8-hour work sequence.",
+            "evidence_gap": "The proposal protects the trip but does not discuss travel intensity, physical effort, late return effects, or the user's recovery needs.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Trip logistics and preparation",
+            "assumption": "The Wednesday trip from 08:30-21:00 includes or leaves enough practical room for travel, meals and preparation without affecting nearby sleep or next-day commitments.",
+            "evidence_gap": "The calendar gives only the trip block and no logistics details; there is no evidence about travel time, location or required preparation.",
+            "potential_impact": "minor",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Original request satisfaction",
+            "assumption": "The no-change result satisfies the user's actual request, not only the visible rationale's stated goals of preserving Wednesday, sleep, workouts and 30 work hours.",
+            "evidence_gap": "The original request is not provided, and the validator explicitly notes that request satisfaction was not checked.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          }
+        ],
+        "overall": 3.75
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": false,
+        "plausibility_revision_required": false,
+        "accepted": false,
+        "revision_causes": [
+          "numeric_criteria_failed"
+        ]
+      },
+      "operations_changed_from_previous": null,
+      "rationale_changed_from_previous": null,
+      "prior_critic_reviews": [],
+      "unresolved_assumptions": [
+        {
+          "subject": "Effective work capacity within long design blocks",
+          "assumption": "The 8-hour design blocks on Monday, Tuesday and Thursday, and the 6-hour block on Friday, are usable for the intended work without requiring additional separately scheduled break time.",
+          "evidence_gap": "The calendar labels them as work durations, but does not show meals, short breaks, or whether the design work can be performed effectively across long continuous blocks.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Recovery after the Wednesday trip",
+          "assumption": "The user can realistically recover from the Full Day Trip with Girlfriend on Wednesday 08:30-21:00 before Thursday sleep, gym and 8-hour work sequence.",
+          "evidence_gap": "The proposal protects the trip but does not discuss travel intensity, physical effort, late return effects, or the user's recovery needs.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Trip logistics and preparation",
+          "assumption": "The Wednesday trip from 08:30-21:00 includes or leaves enough practical room for travel, meals and preparation without affecting nearby sleep or next-day commitments.",
+          "evidence_gap": "The calendar gives only the trip block and no logistics details; there is no evidence about travel time, location or required preparation.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Original request satisfaction",
+          "assumption": "The no-change result satisfies the user's actual request, not only the visible rationale's stated goals of preserving Wednesday, sleep, workouts and 30 work hours.",
+          "evidence_gap": "The original request is not provided, and the validator explicitly notes that request satisfaction was not checked.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "proposer_feedback": "Numeric Critic criteria failed. Scores: {\"reasoning\":4,\"coherence\":4,\"alternatives\":3,\"clarity\":4}. Unverified conditions to reassess: [{'subject': 'Effective work capacity within long design blocks', 'assumption': 'The 8-hour design blocks on Monday, Tuesday and Thursday, and the 6-hour block on Friday, are usable for the intended work without requiring additional separately scheduled break time.', 'evidence_gap': 'The calendar labels them as work durations, but does not show meals, short breaks, or whether the design work can be performed effectively across long continuous blocks.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Recovery after the Wednesday trip', 'assumption': 'The user can realistically recover from the Full Day Trip with Girlfriend on Wednesday 08:30-21:00 before Thursday sleep, gym and 8-hour work sequence.', 'evidence_gap': \"The proposal protects the trip but does not discuss travel intensity, physical effort, late return effects, or the user's recovery needs.\", 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Trip logistics and preparation', 'assumption': 'The Wednesday trip from 08:30-21:00 includes or leaves enough practical room for travel, meals and preparation without affecting nearby sleep or next-day commitments.', 'evidence_gap': 'The calendar gives only the trip block and no logistics details; there is no evidence about travel time, location or required preparation.', 'potential_impact': 'minor', 'verification_source': 'unknown'}, {'subject': 'Original request satisfaction', 'assumption': \"The no-change result satisfies the user's actual request, not only the visible rationale's stated goals of preserving Wednesday, sleep, workouts and 30 work hours.\", 'evidence_gap': 'The original request is not provided, and the validator explicitly notes that request satisfaction was not checked.', 'potential_impact': 'material', 'verification_source': 'unknown'}] Weaknesses: ['The rationale is sound for a no-change proposal but somewhat equates 30 scheduled work hours with sustainable effective capacity; it does not discuss whether the 8-hour design blocks on Monday 10:30-18:30, Tuesday 10:00-18:00 and Thursday 10:30-18:30 include realistic breaks or cognitive recovery.', 'The plan preserves a demanding sequence around midweek: Full Day Trip with Girlfriend on Wednesday 08:30-21:00, then sleep 23:30-07:30, Gym Workout Thursday 08:00-09:30, and an 8-hour Design Project Block Thursday 10:30-18:30. This is plausible but the rationale does not explicitly weigh recovery after the long social day before another workout-plus-workday.', 'Alternatives considered are relevant but narrow. They reject extra Friday work and moving workouts, which makes sense given the 30-hour target, but they do not address whether distributing effort differently within the already visible workdays would reduce the Thursday-after-trip load.', 'Because the original request is not provided, request satisfaction cannot be independently verified beyond the visible rationale, final calendar and technical aggregate check.']. Actionable feedback: The resulting calendar appears broadly manageable and balanced over the visible Monday-Friday horizon: sleep is consistently protected at 8 hours, Wednesday is free of work for the full-day trip, workouts are preserved, and the 30-hour work target is met without adding unnecessary extra load. The main human-quality caveat is not a contradiction but a sustainability question: the Thursday sequence after a long Wednesday trip may be tiring, and three 8-hour design days plus morning exercise could depend on whether those work blocks allow breaks and whether the user normally tolerates that rhythm. Since no changes were made and the visible calendar already protects the stated priorities, this does not by itself require revision, but the proposer would strengthen the rationale by explicitly acknowledging the Thursday recovery issue and clarifying whether the long work blocks are intended to include normal breaks and meals.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "move",
+            "event_id": "work_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-03-11T10:30:00+00:00",
+            "to_end": "2027-03-11T16:30:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "work_fri",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-03-12T10:00:00+00:00",
+            "to_end": "2027-03-12T18:00:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "Wednesday remains fully protected for the social trip and no work is placed there.",
+            "Fixed sleep blocks are not moved or shortened.",
+            "Morning workouts remain in their original morning slots.",
+            "The final work allocation totals 30 scheduled hours across Monday, Tuesday, Thursday and Friday.",
+            "Only flexible user-only work blocks are changed, so no third-party availability is introduced.",
+            "Long work blocks are scheduled time, not proof of completed effective work or included breaks."
+          ],
+          "priorities": [
+            "Reduce the Thursday workload after the long Wednesday trip.",
+            "Preserve sleep and morning fitness while meeting the weekly work target.",
+            "Use Friday capacity instead of adding work near the protected trip."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Keep the previous no-change plan",
+              "rejected_because": "Rejected because it meets the numeric target but leaves the heaviest post-trip Thursday workload unchanged."
+            },
+            {
+              "option": "Move or shorten Thursday morning gym",
+              "rejected_because": "Rejected because the request protects morning workouts and the work target can be met without moving it."
+            },
+            {
+              "option": "Add work on Wednesday before or after the trip",
+              "rejected_because": "Rejected because Wednesday is completely reserved and the user specified 0 work hours that day."
+            }
+          ],
+          "summary": "Shift two design-work hours from Thursday to Friday, keeping Wednesday work-free, protecting sleep and morning workouts, and reducing the main recovery risk after the full-day trip."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true,
+        "aggregate_checks": [
+          {
+            "id": "weekly_project_hours",
+            "status": "pass",
+            "minutes": 1800.0,
+            "minimum_minutes": 1800,
+            "category": "work",
+            "evidence": "union of final calendar intervals"
+          }
+        ],
+        "aggregate_validation_version": "duration_total_v1"
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-03-07T23:30:00+00:00",
+            "end": "2027-03-08T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_mon",
+            "title": "Gym Workout",
+            "start": "2027-03-08T08:00:00+00:00",
+            "end": "2027-03-08T09:30:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_mon",
+            "title": "Design Project Block",
+            "start": "2027-03-08T10:30:00+00:00",
+            "end": "2027-03-08T18:30:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "8 hours design.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-03-08T23:30:00+00:00",
+            "end": "2027-03-09T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "run_tue",
+            "title": "Morning Run",
+            "start": "2027-03-09T08:00:00+00:00",
+            "end": "2027-03-09T09:00:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Run.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_tue",
+            "title": "Design Project Block",
+            "start": "2027-03-09T10:00:00+00:00",
+            "end": "2027-03-09T18:00:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "8 hours design.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-03-09T23:30:00+00:00",
+            "end": "2027-03-10T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "girlfriend_day_wed",
+            "title": "Full Day Trip with Girlfriend",
+            "start": "2027-03-10T08:30:00+00:00",
+            "end": "2027-03-10T21:00:00+00:00",
+            "category": "social",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "girlfriend"
+            ],
+            "description": "Protected full day out.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-03-10T23:30:00+00:00",
+            "end": "2027-03-11T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_thu",
+            "title": "Gym Workout",
+            "start": "2027-03-11T08:00:00+00:00",
+            "end": "2027-03-11T09:30:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_thu",
+            "title": "Design Project Block",
+            "start": "2027-03-11T10:30:00+00:00",
+            "end": "2027-03-11T16:30:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "8 hours design.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-03-11T23:30:00+00:00",
+            "end": "2027-03-12T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "run_fri",
+            "title": "Morning Run",
+            "start": "2027-03-12T08:00:00+00:00",
+            "end": "2027-03-12T09:00:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Run.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_fri",
+            "title": "Design Project Block",
+            "start": "2027-03-12T10:00:00+00:00",
+            "end": "2027-03-12T18:00:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "6 hours design.",
+            "origin": "existing",
+            "change_status": "moved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 4,
+          "alternatives": 3,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "There is a visible metadata inconsistency: Thursday work is scheduled 10:30-16:30, which is 6 scheduled hours, but its description still says \"8 hours design\"; Friday work is scheduled 10:00-18:00, which is 8 scheduled hours, but its description still says \"6 hours design\". The aggregate total and rationale align with the start/end times, but the mismatch could confuse implementation or user expectations.",
+          "The revision directly reduces the prior midweek recovery risk by shortening Thursday after the Wednesday 08:30-21:00 trip, but the routine remains demanding across the visible week: Monday gym plus work 10:30-18:30, Tuesday run plus work 10:00-18:00, the full-day Wednesday trip, Thursday gym plus work 10:30-16:30, and Friday run plus work 10:00-18:00.",
+          "The rationale acknowledges that long work blocks are scheduled time rather than proof of effective work or included breaks, which is helpful, but it does not show how meals, breaks, decompression, or ordinary recovery are expected to fit around the repeated workout-plus-work pattern.",
+          "Alternatives considered are relevant to the main prior concern, especially rejecting work on Wednesday and preserving workouts, but they remain somewhat narrow. The proposal does not explain whether other distributions within Monday, Tuesday, Thursday, and Friday were considered to reduce cumulative end-of-week load without disturbing the protected Wednesday trip.",
+          "Because the original request is not provided and the validator explicitly does not check request satisfaction, the review can only assess the visible goals: preserving Wednesday, sleep, workouts, and the 30-hour work target."
+        ],
+        "feedback": "The revised calendar is more human-centered than the prior no-change version because it takes the earlier recovery concern seriously: after the Wednesday Full Day Trip with Girlfriend from 08:30 to 21:00, Thursday now has Gym Workout 08:00-09:30 followed by a shorter Design Project Block 10:30-16:30 rather than an 8-hour block ending 18:30. That is a proportionate improvement and preserves the stated priorities of sleep, fitness, no Wednesday work, and 30 scheduled work hours. The main remaining practical issue is cumulative intensity rather than a clear infeasibility: the user still has four substantial workdays, three morning fitness sessions, and a long fixed social day within five visible days. Friday now carries the transferred load with Morning Run 08:00-09:00 and Design Project Block 10:00-18:00, which is plausible but should be understood as a full day after an already active week. The proposer should correct or explain the work-duration description mismatch and, with fuller context, confirm that the long design blocks include ordinary breaks and that Friday capacity is genuinely preferable to the heavier Thursday-after-trip pattern. Overall, reconsideration appears to have addressed the prior concern enough that another revision is not required solely on manageability grounds.",
+        "plausibility_review": {
+          "revision_required": false,
+          "severity": "low",
+          "reason": "The proposed changes reasonably improve the main prior human-quality risk by shifting two hours away from the immediate post-trip Thursday while preserving fixed sleep, the protected Wednesday trip, morning workouts, and the 30-hour work target. The remaining risks are grounded but not concrete enough to require revision: the week is still demanding, and long design blocks may depend on breaks and personal stamina, but the schedule leaves evenings outside the fixed blocks and does not show an objective incompatibility. The main concrete flaw is a clarity/coherence issue in the event descriptions for Thursday and Friday work durations, not a demonstrated manageability failure.",
+          "suggested_improvement": "Keep the revised distribution if the fuller context supports Friday as the better place for the transferred work, but correct the Thursday and Friday work descriptions so they match the scheduled times, and explicitly confirm that the long design blocks are intended to allow normal breaks, meals, and sustainable pacing."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Work duration interpretation",
+            "assumption": "The intended work durations are determined by the scheduled start and end times, with Thursday as 6 hours and Friday as 8 hours, despite the reversed duration descriptions.",
+            "evidence_gap": "The rationale and aggregate check support a 6-hour Thursday and 8-hour Friday, but the event descriptions state \"8 hours design\" for Thursday and \"6 hours design\" for Friday.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Effective work capacity within long design blocks",
+            "assumption": "The 8-hour design blocks on Monday, Tuesday and Friday, plus the 6-hour block on Thursday, are usable for the intended work without requiring separately scheduled break or meal time.",
+            "evidence_gap": "The proposal acknowledges that scheduled work is not proof of effective work or included breaks, but the calendar does not show how breaks, meals, or cognitive recovery fit within or around the blocks.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Recovery after the Wednesday trip",
+            "assumption": "The user can realistically recover from the Wednesday Full Day Trip with Girlfriend from 08:30 to 21:00 before Thursday sleep, gym from 08:00 to 09:30, and work from 10:30 to 16:30.",
+            "evidence_gap": "The revision reduces Thursday work by two hours, but there is still no information about the trip's physical intensity, travel demands, late-return effects, or the user's recovery needs.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Friday capacity after cumulative weekly load",
+            "assumption": "Moving the extra two work hours to Friday is more sustainable for the user than keeping them on Thursday or distributing them elsewhere within the visible workdays.",
+            "evidence_gap": "The rationale says Friday capacity is used instead of adding work near the protected trip, but it does not provide user-specific evidence about Friday stamina after Monday and Tuesday 8-hour workdays, the Wednesday trip, Thursday gym and work, and Friday morning run.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Trip logistics and preparation",
+            "assumption": "The Wednesday trip block from 08:30 to 21:00 includes or leaves enough room for travel, meals, preparation, and return logistics without affecting nearby sleep or next-day commitments.",
+            "evidence_gap": "The calendar gives only the trip block and no logistics details; there is no evidence about location, travel time, or required preparation.",
+            "potential_impact": "minor",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Original request satisfaction",
+            "assumption": "The revised plan satisfies the user's actual request, not only the visible goals of preserving Wednesday, sleep, workouts, and 30 scheduled work hours.",
+            "evidence_gap": "The original request is not provided, and the technical validation explicitly says request satisfaction was not checked.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          }
+        ],
+        "overall": 3.75
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": false,
+        "plausibility_revision_required": false,
+        "accepted": false,
+        "revision_causes": [
+          "numeric_criteria_failed"
+        ]
+      },
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": [
+        {
+          "iteration": 0,
+          "proposal": {
+            "changes": [],
+            "rationale": {
+              "constraints": [
+                "Wednesday is protected for the full-day social trip and has no work scheduled.",
+                "Fixed sleep blocks are not moved or shortened.",
+                "Morning workouts remain in place and are not used for work time.",
+                "The weekly work requirement is exactly 30 scheduled hours within Monday, Tuesday, Thursday, and Friday."
+              ],
+              "priorities": [
+                "Preserve the girlfriend trip as non-negotiable social time.",
+                "Protect sleep and morning fitness before adding or moving work.",
+                "Avoid unnecessary disruption because the current calendar already meets the work target."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Add extra work on Friday evening",
+                  "rejected_because": "Rejected because the 30-hour target is already met and extra work would add unnecessary load."
+                },
+                {
+                  "option": "Move morning workouts to create earlier work starts",
+                  "rejected_because": "Rejected because workouts are protected by preference and no work shortfall requires the disruption."
+                }
+              ],
+              "summary": "No calendar changes are needed: the existing plan already keeps Wednesday completely work-free while scheduling 30 design-work hours across Monday, Tuesday, Thursday and Friday, with sleep and morning workouts protected."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "sleep_mon",
+                "title": "Sleep",
+                "start": "2027-03-07T23:30:00+00:00",
+                "end": "2027-03-08T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_mon",
+                "title": "Gym Workout",
+                "start": "2027-03-08T08:00:00+00:00",
+                "end": "2027-03-08T09:30:00+00:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Gym session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_mon",
+                "title": "Design Project Block",
+                "start": "2027-03-08T10:30:00+00:00",
+                "end": "2027-03-08T18:30:00+00:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "8 hours design.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_tue",
+                "title": "Sleep",
+                "start": "2027-03-08T23:30:00+00:00",
+                "end": "2027-03-09T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "run_tue",
+                "title": "Morning Run",
+                "start": "2027-03-09T08:00:00+00:00",
+                "end": "2027-03-09T09:00:00+00:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Run.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_tue",
+                "title": "Design Project Block",
+                "start": "2027-03-09T10:00:00+00:00",
+                "end": "2027-03-09T18:00:00+00:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "8 hours design.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_wed",
+                "title": "Sleep",
+                "start": "2027-03-09T23:30:00+00:00",
+                "end": "2027-03-10T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "girlfriend_day_wed",
+                "title": "Full Day Trip with Girlfriend",
+                "start": "2027-03-10T08:30:00+00:00",
+                "end": "2027-03-10T21:00:00+00:00",
+                "category": "social",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "girlfriend"
+                ],
+                "description": "Protected full day out.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2027-03-10T23:30:00+00:00",
+                "end": "2027-03-11T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_thu",
+                "title": "Gym Workout",
+                "start": "2027-03-11T08:00:00+00:00",
+                "end": "2027-03-11T09:30:00+00:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Gym session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_thu",
+                "title": "Design Project Block",
+                "start": "2027-03-11T10:30:00+00:00",
+                "end": "2027-03-11T18:30:00+00:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "8 hours design.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_fri",
+                "title": "Sleep",
+                "start": "2027-03-11T23:30:00+00:00",
+                "end": "2027-03-12T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "run_fri",
+                "title": "Morning Run",
+                "start": "2027-03-12T08:00:00+00:00",
+                "end": "2027-03-12T09:00:00+00:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Run.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_fri",
+                "title": "Design Project Block",
+                "start": "2027-03-12T10:00:00+00:00",
+                "end": "2027-03-12T16:00:00+00:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "6 hours design.",
+                "origin": "existing",
+                "change_status": "preserved"
+              }
+            ],
+            "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+          },
+          "plausibility_review": {
+            "revision_required": false,
+            "severity": "low",
+            "reason": "No concrete proposed change creates a new manageability problem, and the visible routine is plausibly sustainable: protected sleep, protected social time, protected fitness, and no excess work beyond the stated 30-hour target. The main concern is a grounded but uncertain fatigue risk around Wednesday 08:30-21:00 followed by Thursday gym and 8 hours of design work. If the user needs substantial recovery after the trip or if the design blocks require uninterrupted deep work, the plan could feel overloaded; however, the calendar still leaves evening time and does not show an objective incompatibility.",
+            "suggested_improvement": "Keep the no-change outcome if supported by the fuller context, but explicitly reconsider or justify the Thursday-after-trip workload and whether the long design blocks include realistic breaks, meals and recovery. If the fuller context shows fatigue risk, consider a less concentrated distribution rather than adding work or disturbing protected social/sleep/fitness time."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Effective work capacity within long design blocks",
+              "assumption": "The 8-hour design blocks on Monday, Tuesday and Thursday, and the 6-hour block on Friday, are usable for the intended work without requiring additional separately scheduled break time.",
+              "evidence_gap": "The calendar labels them as work durations, but does not show meals, short breaks, or whether the design work can be performed effectively across long continuous blocks.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Recovery after the Wednesday trip",
+              "assumption": "The user can realistically recover from the Full Day Trip with Girlfriend on Wednesday 08:30-21:00 before Thursday sleep, gym and 8-hour work sequence.",
+              "evidence_gap": "The proposal protects the trip but does not discuss travel intensity, physical effort, late return effects, or the user's recovery needs.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Trip logistics and preparation",
+              "assumption": "The Wednesday trip from 08:30-21:00 includes or leaves enough practical room for travel, meals and preparation without affecting nearby sleep or next-day commitments.",
+              "evidence_gap": "The calendar gives only the trip block and no logistics details; there is no evidence about travel time, location or required preparation.",
+              "potential_impact": "minor",
+              "verification_source": "unknown"
+            },
+            {
+              "subject": "Original request satisfaction",
+              "assumption": "The no-change result satisfies the user's actual request, not only the visible rationale's stated goals of preserving Wednesday, sleep, workouts and 30 work hours.",
+              "evidence_gap": "The original request is not provided, and the validator explicitly notes that request satisfaction was not checked.",
+              "potential_impact": "material",
+              "verification_source": "unknown"
+            }
+          ],
+          "weaknesses": [
+            "The rationale is sound for a no-change proposal but somewhat equates 30 scheduled work hours with sustainable effective capacity; it does not discuss whether the 8-hour design blocks on Monday 10:30-18:30, Tuesday 10:00-18:00 and Thursday 10:30-18:30 include realistic breaks or cognitive recovery.",
+            "The plan preserves a demanding sequence around midweek: Full Day Trip with Girlfriend on Wednesday 08:30-21:00, then sleep 23:30-07:30, Gym Workout Thursday 08:00-09:30, and an 8-hour Design Project Block Thursday 10:30-18:30. This is plausible but the rationale does not explicitly weigh recovery after the long social day before another workout-plus-workday.",
+            "Alternatives considered are relevant but narrow. They reject extra Friday work and moving workouts, which makes sense given the 30-hour target, but they do not address whether distributing effort differently within the already visible workdays would reduce the Thursday-after-trip load.",
+            "Because the original request is not provided, request satisfaction cannot be independently verified beyond the visible rationale, final calendar and technical aggregate check."
+          ],
+          "feedback": "The resulting calendar appears broadly manageable and balanced over the visible Monday-Friday horizon: sleep is consistently protected at 8 hours, Wednesday is free of work for the full-day trip, workouts are preserved, and the 30-hour work target is met without adding unnecessary extra load. The main human-quality caveat is not a contradiction but a sustainability question: the Thursday sequence after a long Wednesday trip may be tiring, and three 8-hour design days plus morning exercise could depend on whether those work blocks allow breaks and whether the user normally tolerates that rhythm. Since no changes were made and the visible calendar already protects the stated priorities, this does not by itself require revision, but the proposer would strengthen the rationale by explicitly acknowledging the Thursday recovery issue and clarifying whether the long work blocks are intended to include normal breaks and meals."
+        }
+      ],
+      "unresolved_assumptions": [
+        {
+          "subject": "Work duration interpretation",
+          "assumption": "The intended work durations are determined by the scheduled start and end times, with Thursday as 6 hours and Friday as 8 hours, despite the reversed duration descriptions.",
+          "evidence_gap": "The rationale and aggregate check support a 6-hour Thursday and 8-hour Friday, but the event descriptions state \"8 hours design\" for Thursday and \"6 hours design\" for Friday.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Effective work capacity within long design blocks",
+          "assumption": "The 8-hour design blocks on Monday, Tuesday and Friday, plus the 6-hour block on Thursday, are usable for the intended work without requiring separately scheduled break or meal time.",
+          "evidence_gap": "The proposal acknowledges that scheduled work is not proof of effective work or included breaks, but the calendar does not show how breaks, meals, or cognitive recovery fit within or around the blocks.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Recovery after the Wednesday trip",
+          "assumption": "The user can realistically recover from the Wednesday Full Day Trip with Girlfriend from 08:30 to 21:00 before Thursday sleep, gym from 08:00 to 09:30, and work from 10:30 to 16:30.",
+          "evidence_gap": "The revision reduces Thursday work by two hours, but there is still no information about the trip's physical intensity, travel demands, late-return effects, or the user's recovery needs.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Friday capacity after cumulative weekly load",
+          "assumption": "Moving the extra two work hours to Friday is more sustainable for the user than keeping them on Thursday or distributing them elsewhere within the visible workdays.",
+          "evidence_gap": "The rationale says Friday capacity is used instead of adding work near the protected trip, but it does not provide user-specific evidence about Friday stamina after Monday and Tuesday 8-hour workdays, the Wednesday trip, Thursday gym and work, and Friday morning run.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Trip logistics and preparation",
+          "assumption": "The Wednesday trip block from 08:30 to 21:00 includes or leaves enough room for travel, meals, preparation, and return logistics without affecting nearby sleep or next-day commitments.",
+          "evidence_gap": "The calendar gives only the trip block and no logistics details; there is no evidence about location, travel time, or required preparation.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Original request satisfaction",
+          "assumption": "The revised plan satisfies the user's actual request, not only the visible goals of preserving Wednesday, sleep, workouts, and 30 scheduled work hours.",
+          "evidence_gap": "The original request is not provided, and the technical validation explicitly says request satisfaction was not checked.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "proposer_feedback": "Numeric Critic criteria failed. Scores: {\"reasoning\":4,\"coherence\":4,\"alternatives\":3,\"clarity\":4}. Unverified conditions to reassess: [{'subject': 'Work duration interpretation', 'assumption': 'The intended work durations are determined by the scheduled start and end times, with Thursday as 6 hours and Friday as 8 hours, despite the reversed duration descriptions.', 'evidence_gap': 'The rationale and aggregate check support a 6-hour Thursday and 8-hour Friday, but the event descriptions state \"8 hours design\" for Thursday and \"6 hours design\" for Friday.', 'potential_impact': 'material', 'verification_source': 'unknown'}, {'subject': 'Effective work capacity within long design blocks', 'assumption': 'The 8-hour design blocks on Monday, Tuesday and Friday, plus the 6-hour block on Thursday, are usable for the intended work without requiring separately scheduled break or meal time.', 'evidence_gap': 'The proposal acknowledges that scheduled work is not proof of effective work or included breaks, but the calendar does not show how breaks, meals, or cognitive recovery fit within or around the blocks.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Recovery after the Wednesday trip', 'assumption': 'The user can realistically recover from the Wednesday Full Day Trip with Girlfriend from 08:30 to 21:00 before Thursday sleep, gym from 08:00 to 09:30, and work from 10:30 to 16:30.', 'evidence_gap': \"The revision reduces Thursday work by two hours, but there is still no information about the trip's physical intensity, travel demands, late-return effects, or the user's recovery needs.\", 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Friday capacity after cumulative weekly load', 'assumption': 'Moving the extra two work hours to Friday is more sustainable for the user than keeping them on Thursday or distributing them elsewhere within the visible workdays.', 'evidence_gap': 'The rationale says Friday capacity is used instead of adding work near the protected trip, but it does not provide user-specific evidence about Friday stamina after Monday and Tuesday 8-hour workdays, the Wednesday trip, Thursday gym and work, and Friday morning run.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Trip logistics and preparation', 'assumption': 'The Wednesday trip block from 08:30 to 21:00 includes or leaves enough room for travel, meals, preparation, and return logistics without affecting nearby sleep or next-day commitments.', 'evidence_gap': 'The calendar gives only the trip block and no logistics details; there is no evidence about location, travel time, or required preparation.', 'potential_impact': 'minor', 'verification_source': 'unknown'}, {'subject': 'Original request satisfaction', 'assumption': \"The revised plan satisfies the user's actual request, not only the visible goals of preserving Wednesday, sleep, workouts, and 30 scheduled work hours.\", 'evidence_gap': 'The original request is not provided, and the technical validation explicitly says request satisfaction was not checked.', 'potential_impact': 'material', 'verification_source': 'unknown'}] Weaknesses: ['There is a visible metadata inconsistency: Thursday work is scheduled 10:30-16:30, which is 6 scheduled hours, but its description still says \"8 hours design\"; Friday work is scheduled 10:00-18:00, which is 8 scheduled hours, but its description still says \"6 hours design\". The aggregate total and rationale align with the start/end times, but the mismatch could confuse implementation or user expectations.', 'The revision directly reduces the prior midweek recovery risk by shortening Thursday after the Wednesday 08:30-21:00 trip, but the routine remains demanding across the visible week: Monday gym plus work 10:30-18:30, Tuesday run plus work 10:00-18:00, the full-day Wednesday trip, Thursday gym plus work 10:30-16:30, and Friday run plus work 10:00-18:00.', 'The rationale acknowledges that long work blocks are scheduled time rather than proof of effective work or included breaks, which is helpful, but it does not show how meals, breaks, decompression, or ordinary recovery are expected to fit around the repeated workout-plus-work pattern.', 'Alternatives considered are relevant to the main prior concern, especially rejecting work on Wednesday and preserving workouts, but they remain somewhat narrow. The proposal does not explain whether other distributions within Monday, Tuesday, Thursday, and Friday were considered to reduce cumulative end-of-week load without disturbing the protected Wednesday trip.', 'Because the original request is not provided and the validator explicitly does not check request satisfaction, the review can only assess the visible goals: preserving Wednesday, sleep, workouts, and the 30-hour work target.']. Actionable feedback: The revised calendar is more human-centered than the prior no-change version because it takes the earlier recovery concern seriously: after the Wednesday Full Day Trip with Girlfriend from 08:30 to 21:00, Thursday now has Gym Workout 08:00-09:30 followed by a shorter Design Project Block 10:30-16:30 rather than an 8-hour block ending 18:30. That is a proportionate improvement and preserves the stated priorities of sleep, fitness, no Wednesday work, and 30 scheduled work hours. The main remaining practical issue is cumulative intensity rather than a clear infeasibility: the user still has four substantial workdays, three morning fitness sessions, and a long fixed social day within five visible days. Friday now carries the transferred load with Morning Run 08:00-09:00 and Design Project Block 10:00-18:00, which is plausible but should be understood as a full day after an already active week. The proposer should correct or explain the work-duration description mismatch and, with fuller context, confirm that the long design blocks include ordinary breaks and that Friday capacity is genuinely preferable to the heavier Thursday-after-trip pattern. Overall, reconsideration appears to have addressed the prior concern enough that another revision is not required solely on manageability grounds.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "move",
+            "event_id": "work_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-03-11T10:30:00+00:00",
+            "to_end": "2027-03-11T16:30:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "work_fri",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-03-12T10:00:00+00:00",
+            "to_end": "2027-03-12T18:00:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "Wednesday stays fully protected for the fixed social trip and no work is placed there.",
+            "Fixed sleep blocks are not moved, shortened or overlapped.",
+            "Morning workouts remain in their original morning slots.",
+            "The final scheduled work total is 30 hours across Monday, Tuesday, Thursday and Friday.",
+            "Only flexible user-only work blocks are changed, so no third-party availability is introduced.",
+            "Work duration is interpreted from start and end times; existing free-text descriptions may need separate cleanup.",
+            "Breaks, meals, trip logistics and personal recovery needs are unspecified, so scheduled time is not proof of effective work."
+          ],
+          "priorities": [
+            "Reduce the workload immediately after the long Wednesday trip.",
+            "Preserve sleep and morning fitness while meeting the weekly work requirement.",
+            "Accept a fuller Friday rather than keeping the heaviest post-trip Thursday pattern.",
+            "Avoid broader disruption because the target can be met by moving only flexible work time."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Keep all original work blocks unchanged",
+              "rejected_because": "Rejected because it preserves 30 hours but leaves the largest work block immediately after the full-day trip."
+            },
+            {
+              "option": "Spread the 30 hours evenly across all four workdays",
+              "rejected_because": "Rejected because it would increase Thursday compared with the selected recovery-focused plan."
+            },
+            {
+              "option": "Move workout time to create earlier or longer work blocks",
+              "rejected_because": "Rejected because the request explicitly protects morning workouts."
+            },
+            {
+              "option": "Add any work on Wednesday",
+              "rejected_because": "Rejected because Wednesday is reserved for the trip and the user specified 0 work hours that day."
+            }
+          ],
+          "summary": "Keep the same two work moves: shorten Thursday after the protected trip and shift those two hours to Friday, trading a fuller Friday for better immediate recovery while preserving sleep, workouts and the 30-hour target."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true,
+        "aggregate_checks": [
+          {
+            "id": "weekly_project_hours",
+            "status": "pass",
+            "minutes": 1800.0,
+            "minimum_minutes": 1800,
+            "category": "work",
+            "evidence": "union of final calendar intervals"
+          }
+        ],
+        "aggregate_validation_version": "duration_total_v1"
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-03-07T23:30:00+00:00",
+            "end": "2027-03-08T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_mon",
+            "title": "Gym Workout",
+            "start": "2027-03-08T08:00:00+00:00",
+            "end": "2027-03-08T09:30:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_mon",
+            "title": "Design Project Block",
+            "start": "2027-03-08T10:30:00+00:00",
+            "end": "2027-03-08T18:30:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "8 hours design.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-03-08T23:30:00+00:00",
+            "end": "2027-03-09T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "run_tue",
+            "title": "Morning Run",
+            "start": "2027-03-09T08:00:00+00:00",
+            "end": "2027-03-09T09:00:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Run.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_tue",
+            "title": "Design Project Block",
+            "start": "2027-03-09T10:00:00+00:00",
+            "end": "2027-03-09T18:00:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "8 hours design.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-03-09T23:30:00+00:00",
+            "end": "2027-03-10T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "girlfriend_day_wed",
+            "title": "Full Day Trip with Girlfriend",
+            "start": "2027-03-10T08:30:00+00:00",
+            "end": "2027-03-10T21:00:00+00:00",
+            "category": "social",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "girlfriend"
+            ],
+            "description": "Protected full day out.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-03-10T23:30:00+00:00",
+            "end": "2027-03-11T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_thu",
+            "title": "Gym Workout",
+            "start": "2027-03-11T08:00:00+00:00",
+            "end": "2027-03-11T09:30:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_thu",
+            "title": "Design Project Block",
+            "start": "2027-03-11T10:30:00+00:00",
+            "end": "2027-03-11T16:30:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "8 hours design.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-03-11T23:30:00+00:00",
+            "end": "2027-03-12T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "run_fri",
+            "title": "Morning Run",
+            "start": "2027-03-12T08:00:00+00:00",
+            "end": "2027-03-12T09:00:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Run.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_fri",
+            "title": "Design Project Block",
+            "start": "2027-03-12T10:00:00+00:00",
+            "end": "2027-03-12T18:00:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "6 hours design.",
+            "origin": "existing",
+            "change_status": "moved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 4,
+          "alternatives": 4,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The revised distribution is more recovery-aware than the original no-change plan, but the visible week remains demanding: Monday has Gym Workout 08:00-09:30 followed by Design Project Block 10:30-18:30, Tuesday has Morning Run 08:00-09:00 followed by Design Project Block 10:00-18:00, Wednesday has Full Day Trip with Girlfriend 08:30-21:00, Thursday has Gym Workout 08:00-09:30 followed by Design Project Block 10:30-16:30, and Friday has Morning Run 08:00-09:00 followed by Design Project Block 10:00-18:00.",
+          "The proposal improves the prior recovery concern by reducing Thursday work after the Wednesday 08:30-21:00 trip, but it shifts that load to Friday. Friday is plausible, yet it becomes a full workday after several active days, so the benefit depends on whether the user is meaningfully more able to absorb work on Friday than on Thursday.",
+          "There is still a visible metadata mismatch: Thursday work is scheduled 10:30-16:30, which is 6 scheduled hours, but its description says \"8 hours design\"; Friday work is scheduled 10:00-18:00, which is 8 scheduled hours, but its description says \"6 hours design\". The rationale acknowledges this as a free-text cleanup issue, so it is not necessarily a manageability failure, but it could confuse expectations.",
+          "The rationale acknowledges that scheduled time is not proof of effective work, meals, breaks or recovery, which is appropriate. However, the final calendar still does not show whether the long design blocks are intended to include ordinary breaks or whether meals and decompression fit comfortably around the repeated exercise-plus-work pattern.",
+          "Because the original request is not provided and technical validation explicitly does not check request satisfaction or soft preferences, this review can only assess the visible goals: protect Wednesday, sleep and workouts while maintaining 30 scheduled work hours."
+        ],
+        "feedback": "The proposal appears realistically manageable enough over the visible Monday-Friday horizon and is an improvement over the original unchanged pattern. The main prior concern, the heavy Thursday immediately after the Wednesday Full Day Trip with Girlfriend from 08:30 to 21:00, has been addressed in a proportionate way by shortening Thursday work to 10:30-16:30 and moving the two hours to Friday. This preserves sleep, morning fitness, the protected Wednesday trip and the 30-hour work total without adding work to the trip day or disturbing fixed events. The resulting routine is still intensive rather than relaxed: Friday now becomes Morning Run 08:00-09:00 plus Design Project Block 10:00-18:00 after an already active week. That is a grounded sustainability caveat, but not a clear reason to require another revision because the proposer explicitly weighed the trade-off and selected the fuller Friday to reduce the more immediate post-trip load. The proposer should still clean up the Thursday and Friday work descriptions and, using fuller context, verify that the long work blocks include normal breaks and that Friday is genuinely the better place for the transferred effort.",
+        "plausibility_review": {
+          "revision_required": false,
+          "severity": "low",
+          "reason": "The current proposal gives a grounded answer to the prior recovery concern by reducing the Thursday-after-trip workload from an 8-hour block ending 18:30 to a 6-hour block ending 16:30, while preserving the protected Wednesday trip, fixed sleep, morning workouts and the 30-hour work target. The remaining risks are real but uncertain human-capacity questions rather than concrete schedule failures: the week is still demanding, Friday becomes heavier, and long design blocks may require breaks and meals not explicitly shown. The visible duration-description mismatch remains a clarity issue, but the rationale acknowledges that descriptions may need cleanup and the technical aggregate aligns with the scheduled intervals.",
+          "suggested_improvement": "Keep the distribution if the fuller context supports Friday as the better place for the transferred work, but clean up the Thursday and Friday descriptions so they match the scheduled durations, and substantiate that the long design blocks allow sustainable breaks, meals and recovery."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Work duration interpretation",
+            "assumption": "The intended work durations are determined by scheduled start and end times, with Thursday as 6 hours and Friday as 8 hours, despite the reversed free-text descriptions.",
+            "evidence_gap": "The rationale and aggregate validation support 30 total scheduled work hours, but Thursday still says \"8 hours design\" while running 10:30-16:30, and Friday still says \"6 hours design\" while running 10:00-18:00.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Effective work capacity within long design blocks",
+            "assumption": "The 8-hour design blocks on Monday, Tuesday and Friday, plus the 6-hour Thursday block, are usable for the intended work while allowing ordinary breaks, meals and pacing.",
+            "evidence_gap": "The calendar shows scheduled work intervals but does not show break structure, meal timing or whether the design work can be done effectively in long continuous blocks.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Recovery after the Wednesday trip",
+            "assumption": "The user can recover adequately from the Wednesday Full Day Trip with Girlfriend from 08:30 to 21:00 before Thursday sleep, Gym Workout 08:00-09:30 and Design Project Block 10:30-16:30.",
+            "evidence_gap": "The proposal reduces Thursday work by two hours, but there is no information about travel intensity, physical effort, late-return effects or the user's recovery needs.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Friday capacity after cumulative weekly load",
+            "assumption": "Moving the extra two work hours to Friday is more sustainable than keeping them on Thursday or distributing them differently within the visible workdays.",
+            "evidence_gap": "The rationale explains the trade-off at a general level, but does not provide user-specific evidence about Friday stamina after Monday and Tuesday 8-hour workdays, the Wednesday trip, Thursday gym and work, and Friday morning run.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Trip logistics and preparation",
+            "assumption": "The Wednesday trip block from 08:30 to 21:00 includes or leaves enough practical room for travel, meals, preparation and return logistics without affecting nearby sleep or next-day commitments.",
+            "evidence_gap": "The calendar gives only the protected trip block and no logistics details such as location, travel time or preparation needs.",
+            "potential_impact": "minor",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Original request satisfaction",
+            "assumption": "The revised plan satisfies the user's actual request, not only the visible goals of preserving Wednesday, sleep, workouts and 30 scheduled work hours.",
+            "evidence_gap": "The original request is not provided, and the technical validation explicitly says request satisfaction and soft preference satisfaction were not checked.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          }
+        ],
+        "overall": 4.0
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": true,
+        "plausibility_revision_required": false,
+        "accepted": true,
+        "revision_causes": []
+      },
+      "operations_changed_from_previous": false,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": [
+        {
+          "iteration": 0,
+          "proposal": {
+            "changes": [],
+            "rationale": {
+              "constraints": [
+                "Wednesday is protected for the full-day social trip and has no work scheduled.",
+                "Fixed sleep blocks are not moved or shortened.",
+                "Morning workouts remain in place and are not used for work time.",
+                "The weekly work requirement is exactly 30 scheduled hours within Monday, Tuesday, Thursday, and Friday."
+              ],
+              "priorities": [
+                "Preserve the girlfriend trip as non-negotiable social time.",
+                "Protect sleep and morning fitness before adding or moving work.",
+                "Avoid unnecessary disruption because the current calendar already meets the work target."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Add extra work on Friday evening",
+                  "rejected_because": "Rejected because the 30-hour target is already met and extra work would add unnecessary load."
+                },
+                {
+                  "option": "Move morning workouts to create earlier work starts",
+                  "rejected_because": "Rejected because workouts are protected by preference and no work shortfall requires the disruption."
+                }
+              ],
+              "summary": "No calendar changes are needed: the existing plan already keeps Wednesday completely work-free while scheduling 30 design-work hours across Monday, Tuesday, Thursday and Friday, with sleep and morning workouts protected."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "sleep_mon",
+                "title": "Sleep",
+                "start": "2027-03-07T23:30:00+00:00",
+                "end": "2027-03-08T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_mon",
+                "title": "Gym Workout",
+                "start": "2027-03-08T08:00:00+00:00",
+                "end": "2027-03-08T09:30:00+00:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Gym session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_mon",
+                "title": "Design Project Block",
+                "start": "2027-03-08T10:30:00+00:00",
+                "end": "2027-03-08T18:30:00+00:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "8 hours design.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_tue",
+                "title": "Sleep",
+                "start": "2027-03-08T23:30:00+00:00",
+                "end": "2027-03-09T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "run_tue",
+                "title": "Morning Run",
+                "start": "2027-03-09T08:00:00+00:00",
+                "end": "2027-03-09T09:00:00+00:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Run.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_tue",
+                "title": "Design Project Block",
+                "start": "2027-03-09T10:00:00+00:00",
+                "end": "2027-03-09T18:00:00+00:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "8 hours design.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_wed",
+                "title": "Sleep",
+                "start": "2027-03-09T23:30:00+00:00",
+                "end": "2027-03-10T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "girlfriend_day_wed",
+                "title": "Full Day Trip with Girlfriend",
+                "start": "2027-03-10T08:30:00+00:00",
+                "end": "2027-03-10T21:00:00+00:00",
+                "category": "social",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "girlfriend"
+                ],
+                "description": "Protected full day out.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2027-03-10T23:30:00+00:00",
+                "end": "2027-03-11T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_thu",
+                "title": "Gym Workout",
+                "start": "2027-03-11T08:00:00+00:00",
+                "end": "2027-03-11T09:30:00+00:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Gym session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_thu",
+                "title": "Design Project Block",
+                "start": "2027-03-11T10:30:00+00:00",
+                "end": "2027-03-11T18:30:00+00:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "8 hours design.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_fri",
+                "title": "Sleep",
+                "start": "2027-03-11T23:30:00+00:00",
+                "end": "2027-03-12T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "run_fri",
+                "title": "Morning Run",
+                "start": "2027-03-12T08:00:00+00:00",
+                "end": "2027-03-12T09:00:00+00:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Run.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_fri",
+                "title": "Design Project Block",
+                "start": "2027-03-12T10:00:00+00:00",
+                "end": "2027-03-12T16:00:00+00:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "6 hours design.",
+                "origin": "existing",
+                "change_status": "preserved"
+              }
+            ],
+            "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+          },
+          "plausibility_review": {
+            "revision_required": false,
+            "severity": "low",
+            "reason": "No concrete proposed change creates a new manageability problem, and the visible routine is plausibly sustainable: protected sleep, protected social time, protected fitness, and no excess work beyond the stated 30-hour target. The main concern is a grounded but uncertain fatigue risk around Wednesday 08:30-21:00 followed by Thursday gym and 8 hours of design work. If the user needs substantial recovery after the trip or if the design blocks require uninterrupted deep work, the plan could feel overloaded; however, the calendar still leaves evening time and does not show an objective incompatibility.",
+            "suggested_improvement": "Keep the no-change outcome if supported by the fuller context, but explicitly reconsider or justify the Thursday-after-trip workload and whether the long design blocks include realistic breaks, meals and recovery. If the fuller context shows fatigue risk, consider a less concentrated distribution rather than adding work or disturbing protected social/sleep/fitness time."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Effective work capacity within long design blocks",
+              "assumption": "The 8-hour design blocks on Monday, Tuesday and Thursday, and the 6-hour block on Friday, are usable for the intended work without requiring additional separately scheduled break time.",
+              "evidence_gap": "The calendar labels them as work durations, but does not show meals, short breaks, or whether the design work can be performed effectively across long continuous blocks.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Recovery after the Wednesday trip",
+              "assumption": "The user can realistically recover from the Full Day Trip with Girlfriend on Wednesday 08:30-21:00 before Thursday sleep, gym and 8-hour work sequence.",
+              "evidence_gap": "The proposal protects the trip but does not discuss travel intensity, physical effort, late return effects, or the user's recovery needs.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Trip logistics and preparation",
+              "assumption": "The Wednesday trip from 08:30-21:00 includes or leaves enough practical room for travel, meals and preparation without affecting nearby sleep or next-day commitments.",
+              "evidence_gap": "The calendar gives only the trip block and no logistics details; there is no evidence about travel time, location or required preparation.",
+              "potential_impact": "minor",
+              "verification_source": "unknown"
+            },
+            {
+              "subject": "Original request satisfaction",
+              "assumption": "The no-change result satisfies the user's actual request, not only the visible rationale's stated goals of preserving Wednesday, sleep, workouts and 30 work hours.",
+              "evidence_gap": "The original request is not provided, and the validator explicitly notes that request satisfaction was not checked.",
+              "potential_impact": "material",
+              "verification_source": "unknown"
+            }
+          ],
+          "weaknesses": [
+            "The rationale is sound for a no-change proposal but somewhat equates 30 scheduled work hours with sustainable effective capacity; it does not discuss whether the 8-hour design blocks on Monday 10:30-18:30, Tuesday 10:00-18:00 and Thursday 10:30-18:30 include realistic breaks or cognitive recovery.",
+            "The plan preserves a demanding sequence around midweek: Full Day Trip with Girlfriend on Wednesday 08:30-21:00, then sleep 23:30-07:30, Gym Workout Thursday 08:00-09:30, and an 8-hour Design Project Block Thursday 10:30-18:30. This is plausible but the rationale does not explicitly weigh recovery after the long social day before another workout-plus-workday.",
+            "Alternatives considered are relevant but narrow. They reject extra Friday work and moving workouts, which makes sense given the 30-hour target, but they do not address whether distributing effort differently within the already visible workdays would reduce the Thursday-after-trip load.",
+            "Because the original request is not provided, request satisfaction cannot be independently verified beyond the visible rationale, final calendar and technical aggregate check."
+          ],
+          "feedback": "The resulting calendar appears broadly manageable and balanced over the visible Monday-Friday horizon: sleep is consistently protected at 8 hours, Wednesday is free of work for the full-day trip, workouts are preserved, and the 30-hour work target is met without adding unnecessary extra load. The main human-quality caveat is not a contradiction but a sustainability question: the Thursday sequence after a long Wednesday trip may be tiring, and three 8-hour design days plus morning exercise could depend on whether those work blocks allow breaks and whether the user normally tolerates that rhythm. Since no changes were made and the visible calendar already protects the stated priorities, this does not by itself require revision, but the proposer would strengthen the rationale by explicitly acknowledging the Thursday recovery issue and clarifying whether the long work blocks are intended to include normal breaks and meals."
+        },
+        {
+          "iteration": 1,
+          "proposal": {
+            "changes": [
+              {
+                "type": "move",
+                "event_id": "work_thu",
+                "title": null,
+                "from_start": null,
+                "to_start": "2027-03-11T10:30:00+00:00",
+                "to_end": "2027-03-11T16:30:00+00:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "move",
+                "event_id": "work_fri",
+                "title": null,
+                "from_start": null,
+                "to_start": "2027-03-12T10:00:00+00:00",
+                "to_end": "2027-03-12T18:00:00+00:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              }
+            ],
+            "rationale": {
+              "constraints": [
+                "Wednesday remains fully protected for the social trip and no work is placed there.",
+                "Fixed sleep blocks are not moved or shortened.",
+                "Morning workouts remain in their original morning slots.",
+                "The final work allocation totals 30 scheduled hours across Monday, Tuesday, Thursday and Friday.",
+                "Only flexible user-only work blocks are changed, so no third-party availability is introduced.",
+                "Long work blocks are scheduled time, not proof of completed effective work or included breaks."
+              ],
+              "priorities": [
+                "Reduce the Thursday workload after the long Wednesday trip.",
+                "Preserve sleep and morning fitness while meeting the weekly work target.",
+                "Use Friday capacity instead of adding work near the protected trip."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Keep the previous no-change plan",
+                  "rejected_because": "Rejected because it meets the numeric target but leaves the heaviest post-trip Thursday workload unchanged."
+                },
+                {
+                  "option": "Move or shorten Thursday morning gym",
+                  "rejected_because": "Rejected because the request protects morning workouts and the work target can be met without moving it."
+                },
+                {
+                  "option": "Add work on Wednesday before or after the trip",
+                  "rejected_because": "Rejected because Wednesday is completely reserved and the user specified 0 work hours that day."
+                }
+              ],
+              "summary": "Shift two design-work hours from Thursday to Friday, keeping Wednesday work-free, protecting sleep and morning workouts, and reducing the main recovery risk after the full-day trip."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "sleep_mon",
+                "title": "Sleep",
+                "start": "2027-03-07T23:30:00+00:00",
+                "end": "2027-03-08T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_mon",
+                "title": "Gym Workout",
+                "start": "2027-03-08T08:00:00+00:00",
+                "end": "2027-03-08T09:30:00+00:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Gym session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_mon",
+                "title": "Design Project Block",
+                "start": "2027-03-08T10:30:00+00:00",
+                "end": "2027-03-08T18:30:00+00:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "8 hours design.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_tue",
+                "title": "Sleep",
+                "start": "2027-03-08T23:30:00+00:00",
+                "end": "2027-03-09T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "run_tue",
+                "title": "Morning Run",
+                "start": "2027-03-09T08:00:00+00:00",
+                "end": "2027-03-09T09:00:00+00:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Run.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_tue",
+                "title": "Design Project Block",
+                "start": "2027-03-09T10:00:00+00:00",
+                "end": "2027-03-09T18:00:00+00:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "8 hours design.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_wed",
+                "title": "Sleep",
+                "start": "2027-03-09T23:30:00+00:00",
+                "end": "2027-03-10T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "girlfriend_day_wed",
+                "title": "Full Day Trip with Girlfriend",
+                "start": "2027-03-10T08:30:00+00:00",
+                "end": "2027-03-10T21:00:00+00:00",
+                "category": "social",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "girlfriend"
+                ],
+                "description": "Protected full day out.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2027-03-10T23:30:00+00:00",
+                "end": "2027-03-11T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_thu",
+                "title": "Gym Workout",
+                "start": "2027-03-11T08:00:00+00:00",
+                "end": "2027-03-11T09:30:00+00:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Gym session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_thu",
+                "title": "Design Project Block",
+                "start": "2027-03-11T10:30:00+00:00",
+                "end": "2027-03-11T16:30:00+00:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "8 hours design.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "sleep_fri",
+                "title": "Sleep",
+                "start": "2027-03-11T23:30:00+00:00",
+                "end": "2027-03-12T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "run_fri",
+                "title": "Morning Run",
+                "start": "2027-03-12T08:00:00+00:00",
+                "end": "2027-03-12T09:00:00+00:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Run.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_fri",
+                "title": "Design Project Block",
+                "start": "2027-03-12T10:00:00+00:00",
+                "end": "2027-03-12T18:00:00+00:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "6 hours design.",
+                "origin": "existing",
+                "change_status": "moved"
+              }
+            ],
+            "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+          },
+          "plausibility_review": {
+            "revision_required": false,
+            "severity": "low",
+            "reason": "The proposed changes reasonably improve the main prior human-quality risk by shifting two hours away from the immediate post-trip Thursday while preserving fixed sleep, the protected Wednesday trip, morning workouts, and the 30-hour work target. The remaining risks are grounded but not concrete enough to require revision: the week is still demanding, and long design blocks may depend on breaks and personal stamina, but the schedule leaves evenings outside the fixed blocks and does not show an objective incompatibility. The main concrete flaw is a clarity/coherence issue in the event descriptions for Thursday and Friday work durations, not a demonstrated manageability failure.",
+            "suggested_improvement": "Keep the revised distribution if the fuller context supports Friday as the better place for the transferred work, but correct the Thursday and Friday work descriptions so they match the scheduled times, and explicitly confirm that the long design blocks are intended to allow normal breaks, meals, and sustainable pacing."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Work duration interpretation",
+              "assumption": "The intended work durations are determined by the scheduled start and end times, with Thursday as 6 hours and Friday as 8 hours, despite the reversed duration descriptions.",
+              "evidence_gap": "The rationale and aggregate check support a 6-hour Thursday and 8-hour Friday, but the event descriptions state \"8 hours design\" for Thursday and \"6 hours design\" for Friday.",
+              "potential_impact": "material",
+              "verification_source": "unknown"
+            },
+            {
+              "subject": "Effective work capacity within long design blocks",
+              "assumption": "The 8-hour design blocks on Monday, Tuesday and Friday, plus the 6-hour block on Thursday, are usable for the intended work without requiring separately scheduled break or meal time.",
+              "evidence_gap": "The proposal acknowledges that scheduled work is not proof of effective work or included breaks, but the calendar does not show how breaks, meals, or cognitive recovery fit within or around the blocks.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Recovery after the Wednesday trip",
+              "assumption": "The user can realistically recover from the Wednesday Full Day Trip with Girlfriend from 08:30 to 21:00 before Thursday sleep, gym from 08:00 to 09:30, and work from 10:30 to 16:30.",
+              "evidence_gap": "The revision reduces Thursday work by two hours, but there is still no information about the trip's physical intensity, travel demands, late-return effects, or the user's recovery needs.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Friday capacity after cumulative weekly load",
+              "assumption": "Moving the extra two work hours to Friday is more sustainable for the user than keeping them on Thursday or distributing them elsewhere within the visible workdays.",
+              "evidence_gap": "The rationale says Friday capacity is used instead of adding work near the protected trip, but it does not provide user-specific evidence about Friday stamina after Monday and Tuesday 8-hour workdays, the Wednesday trip, Thursday gym and work, and Friday morning run.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Trip logistics and preparation",
+              "assumption": "The Wednesday trip block from 08:30 to 21:00 includes or leaves enough room for travel, meals, preparation, and return logistics without affecting nearby sleep or next-day commitments.",
+              "evidence_gap": "The calendar gives only the trip block and no logistics details; there is no evidence about location, travel time, or required preparation.",
+              "potential_impact": "minor",
+              "verification_source": "unknown"
+            },
+            {
+              "subject": "Original request satisfaction",
+              "assumption": "The revised plan satisfies the user's actual request, not only the visible goals of preserving Wednesday, sleep, workouts, and 30 scheduled work hours.",
+              "evidence_gap": "The original request is not provided, and the technical validation explicitly says request satisfaction was not checked.",
+              "potential_impact": "material",
+              "verification_source": "unknown"
+            }
+          ],
+          "weaknesses": [
+            "There is a visible metadata inconsistency: Thursday work is scheduled 10:30-16:30, which is 6 scheduled hours, but its description still says \"8 hours design\"; Friday work is scheduled 10:00-18:00, which is 8 scheduled hours, but its description still says \"6 hours design\". The aggregate total and rationale align with the start/end times, but the mismatch could confuse implementation or user expectations.",
+            "The revision directly reduces the prior midweek recovery risk by shortening Thursday after the Wednesday 08:30-21:00 trip, but the routine remains demanding across the visible week: Monday gym plus work 10:30-18:30, Tuesday run plus work 10:00-18:00, the full-day Wednesday trip, Thursday gym plus work 10:30-16:30, and Friday run plus work 10:00-18:00.",
+            "The rationale acknowledges that long work blocks are scheduled time rather than proof of effective work or included breaks, which is helpful, but it does not show how meals, breaks, decompression, or ordinary recovery are expected to fit around the repeated workout-plus-work pattern.",
+            "Alternatives considered are relevant to the main prior concern, especially rejecting work on Wednesday and preserving workouts, but they remain somewhat narrow. The proposal does not explain whether other distributions within Monday, Tuesday, Thursday, and Friday were considered to reduce cumulative end-of-week load without disturbing the protected Wednesday trip.",
+            "Because the original request is not provided and the validator explicitly does not check request satisfaction, the review can only assess the visible goals: preserving Wednesday, sleep, workouts, and the 30-hour work target."
+          ],
+          "feedback": "The revised calendar is more human-centered than the prior no-change version because it takes the earlier recovery concern seriously: after the Wednesday Full Day Trip with Girlfriend from 08:30 to 21:00, Thursday now has Gym Workout 08:00-09:30 followed by a shorter Design Project Block 10:30-16:30 rather than an 8-hour block ending 18:30. That is a proportionate improvement and preserves the stated priorities of sleep, fitness, no Wednesday work, and 30 scheduled work hours. The main remaining practical issue is cumulative intensity rather than a clear infeasibility: the user still has four substantial workdays, three morning fitness sessions, and a long fixed social day within five visible days. Friday now carries the transferred load with Morning Run 08:00-09:00 and Design Project Block 10:00-18:00, which is plausible but should be understood as a full day after an already active week. The proposer should correct or explain the work-duration description mismatch and, with fuller context, confirm that the long design blocks include ordinary breaks and that Friday capacity is genuinely preferable to the heavier Thursday-after-trip pattern. Overall, reconsideration appears to have addressed the prior concern enough that another revision is not required solely on manageability grounds."
+        }
+      ],
+      "unresolved_assumptions": [
+        {
+          "subject": "Work duration interpretation",
+          "assumption": "The intended work durations are determined by scheduled start and end times, with Thursday as 6 hours and Friday as 8 hours, despite the reversed free-text descriptions.",
+          "evidence_gap": "The rationale and aggregate validation support 30 total scheduled work hours, but Thursday still says \"8 hours design\" while running 10:30-16:30, and Friday still says \"6 hours design\" while running 10:00-18:00.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Effective work capacity within long design blocks",
+          "assumption": "The 8-hour design blocks on Monday, Tuesday and Friday, plus the 6-hour Thursday block, are usable for the intended work while allowing ordinary breaks, meals and pacing.",
+          "evidence_gap": "The calendar shows scheduled work intervals but does not show break structure, meal timing or whether the design work can be done effectively in long continuous blocks.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Recovery after the Wednesday trip",
+          "assumption": "The user can recover adequately from the Wednesday Full Day Trip with Girlfriend from 08:30 to 21:00 before Thursday sleep, Gym Workout 08:00-09:30 and Design Project Block 10:30-16:30.",
+          "evidence_gap": "The proposal reduces Thursday work by two hours, but there is no information about travel intensity, physical effort, late-return effects or the user's recovery needs.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Friday capacity after cumulative weekly load",
+          "assumption": "Moving the extra two work hours to Friday is more sustainable than keeping them on Thursday or distributing them differently within the visible workdays.",
+          "evidence_gap": "The rationale explains the trade-off at a general level, but does not provide user-specific evidence about Friday stamina after Monday and Tuesday 8-hour workdays, the Wednesday trip, Thursday gym and work, and Friday morning run.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Trip logistics and preparation",
+          "assumption": "The Wednesday trip block from 08:30 to 21:00 includes or leaves enough practical room for travel, meals, preparation and return logistics without affecting nearby sleep or next-day commitments.",
+          "evidence_gap": "The calendar gives only the protected trip block and no logistics details such as location, travel time or preparation needs.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Original request satisfaction",
+          "assumption": "The revised plan satisfies the user's actual request, not only the visible goals of preserving Wednesday, sleep, workouts and 30 scheduled work hours.",
+          "evidence_gap": "The original request is not provided, and the technical validation explicitly says request satisfaction and soft preference satisfaction were not checked.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        }
+      ]
+    }
+  ],
+  "refinements": 2,
+  "source_status": "proposal_ready",
+  "final_proposal": {
+    "changes": [
+      {
+        "type": "move",
+        "event_id": "work_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": "2027-03-11T10:30:00+00:00",
+        "to_end": "2027-03-11T16:30:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "work_fri",
+        "title": null,
+        "from_start": null,
+        "to_start": "2027-03-12T10:00:00+00:00",
+        "to_end": "2027-03-12T18:00:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "Wednesday stays fully protected for the fixed social trip and no work is placed there.",
+        "Fixed sleep blocks are not moved, shortened or overlapped.",
+        "Morning workouts remain in their original morning slots.",
+        "The final scheduled work total is 30 hours across Monday, Tuesday, Thursday and Friday.",
+        "Only flexible user-only work blocks are changed, so no third-party availability is introduced.",
+        "Work duration is interpreted from start and end times; existing free-text descriptions may need separate cleanup.",
+        "Breaks, meals, trip logistics and personal recovery needs are unspecified, so scheduled time is not proof of effective work."
+      ],
+      "priorities": [
+        "Reduce the workload immediately after the long Wednesday trip.",
+        "Preserve sleep and morning fitness while meeting the weekly work requirement.",
+        "Accept a fuller Friday rather than keeping the heaviest post-trip Thursday pattern.",
+        "Avoid broader disruption because the target can be met by moving only flexible work time."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Keep all original work blocks unchanged",
+          "rejected_because": "Rejected because it preserves 30 hours but leaves the largest work block immediately after the full-day trip."
+        },
+        {
+          "option": "Spread the 30 hours evenly across all four workdays",
+          "rejected_because": "Rejected because it would increase Thursday compared with the selected recovery-focused plan."
+        },
+        {
+          "option": "Move workout time to create earlier or longer work blocks",
+          "rejected_because": "Rejected because the request explicitly protects morning workouts."
+        },
+        {
+          "option": "Add any work on Wednesday",
+          "rejected_because": "Rejected because Wednesday is reserved for the trip and the user specified 0 work hours that day."
+        }
+      ],
+      "summary": "Keep the same two work moves: shorten Thursday after the protected trip and shift those two hours to Friday, trading a fuller Friday for better immediate recovery while preserving sleep, workouts and the 30-hour target."
+    }
+  },
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [],
+    "valid": true,
+    "aggregate_checks": [
+      {
+        "id": "weekly_project_hours",
+        "status": "pass",
+        "minutes": 1800.0,
+        "minimum_minutes": 1800,
+        "category": "work",
+        "evidence": "union of final calendar intervals"
+      }
+    ],
+    "aggregate_validation_version": "duration_total_v1"
+  },
+  "source_result_sha256": "daddc5502a6dadb7c67f08ee18295638725f63439a87a95408e2c63ba1f588eb",
+  "scenario_sha256": "9efe03672a3642bac09212df6f50f77a5c99eb4af43cd6ce51133a2f643ec0a8",
+  "aggregate_requirements_sha256": "62ac9d20cd18d333ca183647dbda219b0f48832cec3a3295c40abc13e8ae070c",
+  "confirmed_changes_sha256": null,
+  "critic_input_version": "final_calendar_v1",
+  "critic_policy_version": "uncertainty_review_v2",
+  "result_calendar_version": "validated_added_metadata_v2",
+  "final_result_calendar": {
+    "timezone": "Europe/Lisbon",
+    "coverage": "all_events_in_scenario_after_simulation",
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-03-07T23:30:00+00:00",
+        "end": "2027-03-08T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_mon",
+        "title": "Gym Workout",
+        "start": "2027-03-08T08:00:00+00:00",
+        "end": "2027-03-08T09:30:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_mon",
+        "title": "Design Project Block",
+        "start": "2027-03-08T10:30:00+00:00",
+        "end": "2027-03-08T18:30:00+00:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "8 hours design.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-03-08T23:30:00+00:00",
+        "end": "2027-03-09T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "run_tue",
+        "title": "Morning Run",
+        "start": "2027-03-09T08:00:00+00:00",
+        "end": "2027-03-09T09:00:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Run.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_tue",
+        "title": "Design Project Block",
+        "start": "2027-03-09T10:00:00+00:00",
+        "end": "2027-03-09T18:00:00+00:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "8 hours design.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-03-09T23:30:00+00:00",
+        "end": "2027-03-10T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "girlfriend_day_wed",
+        "title": "Full Day Trip with Girlfriend",
+        "start": "2027-03-10T08:30:00+00:00",
+        "end": "2027-03-10T21:00:00+00:00",
+        "category": "social",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "girlfriend"
+        ],
+        "description": "Protected full day out.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-03-10T23:30:00+00:00",
+        "end": "2027-03-11T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_thu",
+        "title": "Gym Workout",
+        "start": "2027-03-11T08:00:00+00:00",
+        "end": "2027-03-11T09:30:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_thu",
+        "title": "Design Project Block",
+        "start": "2027-03-11T10:30:00+00:00",
+        "end": "2027-03-11T16:30:00+00:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "8 hours design.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-03-11T23:30:00+00:00",
+        "end": "2027-03-12T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "run_fri",
+        "title": "Morning Run",
+        "start": "2027-03-12T08:00:00+00:00",
+        "end": "2027-03-12T09:00:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Run.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_fri",
+        "title": "Design Project Block",
+        "start": "2027-03-12T10:00:00+00:00",
+        "end": "2027-03-12T18:00:00+00:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "6 hours design.",
+        "origin": "existing",
+        "change_status": "moved"
+      }
+    ],
+    "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+  },
+  "final_unresolved_assumptions": [
+    {
+      "subject": "Work duration interpretation",
+      "assumption": "The intended work durations are determined by scheduled start and end times, with Thursday as 6 hours and Friday as 8 hours, despite the reversed free-text descriptions.",
+      "evidence_gap": "The rationale and aggregate validation support 30 total scheduled work hours, but Thursday still says \"8 hours design\" while running 10:30-16:30, and Friday still says \"6 hours design\" while running 10:00-18:00.",
+      "potential_impact": "material",
+      "verification_source": "unknown"
+    },
+    {
+      "subject": "Effective work capacity within long design blocks",
+      "assumption": "The 8-hour design blocks on Monday, Tuesday and Friday, plus the 6-hour Thursday block, are usable for the intended work while allowing ordinary breaks, meals and pacing.",
+      "evidence_gap": "The calendar shows scheduled work intervals but does not show break structure, meal timing or whether the design work can be done effectively in long continuous blocks.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Recovery after the Wednesday trip",
+      "assumption": "The user can recover adequately from the Wednesday Full Day Trip with Girlfriend from 08:30 to 21:00 before Thursday sleep, Gym Workout 08:00-09:30 and Design Project Block 10:30-16:30.",
+      "evidence_gap": "The proposal reduces Thursday work by two hours, but there is no information about travel intensity, physical effort, late-return effects or the user's recovery needs.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Friday capacity after cumulative weekly load",
+      "assumption": "Moving the extra two work hours to Friday is more sustainable than keeping them on Thursday or distributing them differently within the visible workdays.",
+      "evidence_gap": "The rationale explains the trade-off at a general level, but does not provide user-specific evidence about Friday stamina after Monday and Tuesday 8-hour workdays, the Wednesday trip, Thursday gym and work, and Friday morning run.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Trip logistics and preparation",
+      "assumption": "The Wednesday trip block from 08:30 to 21:00 includes or leaves enough practical room for travel, meals, preparation and return logistics without affecting nearby sleep or next-day commitments.",
+      "evidence_gap": "The calendar gives only the protected trip block and no logistics details such as location, travel time or preparation needs.",
+      "potential_impact": "minor",
+      "verification_source": "unknown"
+    },
+    {
+      "subject": "Original request satisfaction",
+      "assumption": "The revised plan satisfies the user's actual request, not only the visible goals of preserving Wednesday, sleep, workouts and 30 scheduled work hours.",
+      "evidence_gap": "The original request is not provided, and the technical validation explicitly says request satisfaction and soft preference satisfaction were not checked.",
+      "potential_impact": "material",
+      "verification_source": "unknown"
+    }
+  ],
+  "uncertainty_history": [
+    {
+      "iteration": 0,
+      "unresolved_assumptions": [
+        {
+          "subject": "Effective work capacity within long design blocks",
+          "assumption": "The 8-hour design blocks on Monday, Tuesday and Thursday, and the 6-hour block on Friday, are usable for the intended work without requiring additional separately scheduled break time.",
+          "evidence_gap": "The calendar labels them as work durations, but does not show meals, short breaks, or whether the design work can be performed effectively across long continuous blocks.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Recovery after the Wednesday trip",
+          "assumption": "The user can realistically recover from the Full Day Trip with Girlfriend on Wednesday 08:30-21:00 before Thursday sleep, gym and 8-hour work sequence.",
+          "evidence_gap": "The proposal protects the trip but does not discuss travel intensity, physical effort, late return effects, or the user's recovery needs.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Trip logistics and preparation",
+          "assumption": "The Wednesday trip from 08:30-21:00 includes or leaves enough practical room for travel, meals and preparation without affecting nearby sleep or next-day commitments.",
+          "evidence_gap": "The calendar gives only the trip block and no logistics details; there is no evidence about travel time, location or required preparation.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Original request satisfaction",
+          "assumption": "The no-change result satisfies the user's actual request, not only the visible rationale's stated goals of preserving Wednesday, sleep, workouts and 30 work hours.",
+          "evidence_gap": "The original request is not provided, and the validator explicitly notes that request satisfaction was not checked.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        }
+      ]
+    },
+    {
+      "iteration": 1,
+      "unresolved_assumptions": [
+        {
+          "subject": "Work duration interpretation",
+          "assumption": "The intended work durations are determined by the scheduled start and end times, with Thursday as 6 hours and Friday as 8 hours, despite the reversed duration descriptions.",
+          "evidence_gap": "The rationale and aggregate check support a 6-hour Thursday and 8-hour Friday, but the event descriptions state \"8 hours design\" for Thursday and \"6 hours design\" for Friday.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Effective work capacity within long design blocks",
+          "assumption": "The 8-hour design blocks on Monday, Tuesday and Friday, plus the 6-hour block on Thursday, are usable for the intended work without requiring separately scheduled break or meal time.",
+          "evidence_gap": "The proposal acknowledges that scheduled work is not proof of effective work or included breaks, but the calendar does not show how breaks, meals, or cognitive recovery fit within or around the blocks.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Recovery after the Wednesday trip",
+          "assumption": "The user can realistically recover from the Wednesday Full Day Trip with Girlfriend from 08:30 to 21:00 before Thursday sleep, gym from 08:00 to 09:30, and work from 10:30 to 16:30.",
+          "evidence_gap": "The revision reduces Thursday work by two hours, but there is still no information about the trip's physical intensity, travel demands, late-return effects, or the user's recovery needs.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Friday capacity after cumulative weekly load",
+          "assumption": "Moving the extra two work hours to Friday is more sustainable for the user than keeping them on Thursday or distributing them elsewhere within the visible workdays.",
+          "evidence_gap": "The rationale says Friday capacity is used instead of adding work near the protected trip, but it does not provide user-specific evidence about Friday stamina after Monday and Tuesday 8-hour workdays, the Wednesday trip, Thursday gym and work, and Friday morning run.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Trip logistics and preparation",
+          "assumption": "The Wednesday trip block from 08:30 to 21:00 includes or leaves enough room for travel, meals, preparation, and return logistics without affecting nearby sleep or next-day commitments.",
+          "evidence_gap": "The calendar gives only the trip block and no logistics details; there is no evidence about location, travel time, or required preparation.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Original request satisfaction",
+          "assumption": "The revised plan satisfies the user's actual request, not only the visible goals of preserving Wednesday, sleep, workouts, and 30 scheduled work hours.",
+          "evidence_gap": "The original request is not provided, and the technical validation explicitly says request satisfaction was not checked.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        }
+      ]
+    },
+    {
+      "iteration": 2,
+      "unresolved_assumptions": [
+        {
+          "subject": "Work duration interpretation",
+          "assumption": "The intended work durations are determined by scheduled start and end times, with Thursday as 6 hours and Friday as 8 hours, despite the reversed free-text descriptions.",
+          "evidence_gap": "The rationale and aggregate validation support 30 total scheduled work hours, but Thursday still says \"8 hours design\" while running 10:30-16:30, and Friday still says \"6 hours design\" while running 10:00-18:00.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Effective work capacity within long design blocks",
+          "assumption": "The 8-hour design blocks on Monday, Tuesday and Friday, plus the 6-hour Thursday block, are usable for the intended work while allowing ordinary breaks, meals and pacing.",
+          "evidence_gap": "The calendar shows scheduled work intervals but does not show break structure, meal timing or whether the design work can be done effectively in long continuous blocks.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Recovery after the Wednesday trip",
+          "assumption": "The user can recover adequately from the Wednesday Full Day Trip with Girlfriend from 08:30 to 21:00 before Thursday sleep, Gym Workout 08:00-09:30 and Design Project Block 10:30-16:30.",
+          "evidence_gap": "The proposal reduces Thursday work by two hours, but there is no information about travel intensity, physical effort, late-return effects or the user's recovery needs.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Friday capacity after cumulative weekly load",
+          "assumption": "Moving the extra two work hours to Friday is more sustainable than keeping them on Thursday or distributing them differently within the visible workdays.",
+          "evidence_gap": "The rationale explains the trade-off at a general level, but does not provide user-specific evidence about Friday stamina after Monday and Tuesday 8-hour workdays, the Wednesday trip, Thursday gym and work, and Friday morning run.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Trip logistics and preparation",
+          "assumption": "The Wednesday trip block from 08:30 to 21:00 includes or leaves enough practical room for travel, meals, preparation and return logistics without affecting nearby sleep or next-day commitments.",
+          "evidence_gap": "The calendar gives only the protected trip block and no logistics details such as location, travel time or preparation needs.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Original request satisfaction",
+          "assumption": "The revised plan satisfies the user's actual request, not only the visible goals of preserving Wednesday, sleep, workouts and 30 scheduled work hours.",
+          "evidence_gap": "The original request is not provided, and the technical validation explicitly says request satisfaction and soft preference satisfaction were not checked.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        }
+      ]
+    }
+  ]
+}

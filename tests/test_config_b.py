@@ -22,6 +22,7 @@ from proposer_v2 import V2RuntimeScenario, propose_v2
 from rules import rule_based_decision
 from run_config_a_v2 import run_one as run_a
 from run_config_b_v2 import run_one as run_b
+from run_completion_v2 import completed_b_integrity_issues
 from scenario_v2 import load_scenario
 from compare_runs import collect
 
@@ -157,6 +158,43 @@ def test_technical_failures_never_act(context):
     result, _, critic = run(context, [proposal()], [], simulator=broken)
     assert result["status"] == "validation_error" and result["decision"] is None
     assert not critic.calls
+
+
+@pytest.mark.parametrize("classification", ["incomplete_json", "output_truncated"])
+def test_unrecovered_proposer_structured_failure_cannot_become_scientific_defer(
+        context, classification):
+    failure = LLMError("structured output failed", failed_outputs=['{"changes":['],
+                       diagnostics={"classification": classification})
+    result, _, critic = run(context, [failure], [])
+    assert result["status"] == "proposer_error"
+    assert result["error_stage"] == "proposer"
+    assert result["llm_diagnostics"]["classification"] == classification
+    assert result["final_proposal"] is None and result["decision"] is None
+    assert not critic.calls
+    forged = result | {"status": "deferred_invalid_proposal"}
+    assert completed_b_integrity_issues(forged)
+
+
+def test_unrecovered_critic_incomplete_json_cannot_become_threshold_defer(context):
+    failure = LLMError("structured output failed", failed_outputs=['{"scores":{'],
+                       diagnostics={"classification": "incomplete_json"})
+    result, _, _ = run(context, [proposal()], [failure])
+    assert result["status"] == "critic_error"
+    assert result["error_stage"] == "critic"
+    assert result["final_score"] is None and result["critic_accepted"] is False
+    forged = result | {"status": "deferred_critic_threshold"}
+    assert completed_b_integrity_issues(forged)
+
+
+def test_scientific_invalid_and_below_threshold_results_pass_completion_integrity(context):
+    invalid = proposal(event_id="work_mon")
+    invalid_result, _, _ = run(context, [invalid], [], CriticSettings(max_refinements=0))
+    threshold_result, _, _ = run(context, [proposal()], [evaluation(3)],
+                                 CriticSettings(max_refinements=0))
+    assert invalid_result["status"] == "deferred_invalid_proposal"
+    assert threshold_result["status"] == "deferred_critic_threshold"
+    assert completed_b_integrity_issues(invalid_result) == []
+    assert completed_b_integrity_issues(threshold_result) == []
 
 
 def test_critic_acceptance_does_not_override_fixed_defer_rule(context):

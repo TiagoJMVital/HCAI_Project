@@ -1,0 +1,1192 @@
+{
+  "configuration": "B",
+  "scenario_id": "parent_young_children_school_strike_closure_001",
+  "family": "parent_young_children_schedule_conflict",
+  "category": "v2",
+  "proposer_provider": "iaedu",
+  "proposer_model": "GPT-5.5",
+  "proposer_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_provider": "iaedu",
+  "critic_model": "GPT-5.5",
+  "critic_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_settings": {
+    "threshold": 4.0,
+    "max_refinements": 3,
+    "min_dimension_score": 1
+  },
+  "iterations": [
+    {
+      "index": 0,
+      "proposer_feedback": null,
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "delete",
+            "event_id": "travel_to_school_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "dropoff_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "commute_to_work_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "commute_to_school_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "pickup_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "focus_pm_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Q2 operational budget work",
+            "from_start": null,
+            "to_start": "2027-05-11T21:15:00+01:00",
+            "to_end": "2027-05-11T22:45:00+01:00",
+            "category": "work_focus",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Q2 operational budget work",
+            "from_start": null,
+            "to_start": "2027-05-12T08:30:00+01:00",
+            "to_end": "2027-05-12T09:00:00+01:00",
+            "category": "work_focus",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Partner watches children during supplier call",
+            "from_start": null,
+            "to_start": "2027-05-12T10:30:00+01:00",
+            "to_end": "2027-05-12T11:30:00+01:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "partner",
+              "marta",
+              "duarte"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Solo childcare at home",
+            "from_start": null,
+            "to_start": "2027-05-12T13:15:00+01:00",
+            "to_end": "2027-05-12T16:00:00+01:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Solo childcare at home",
+            "from_start": null,
+            "to_start": "2027-05-12T16:45:00+01:00",
+            "to_end": "2027-05-12T17:45:00+01:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "The school/daycare closure and WFH request are the supplied exception for deleting protected school-run events and office commutes.",
+            "Fixed work meetings and protected sleep blocks are left unchanged.",
+            "The plan reaches three hours of budget work using two new blocks plus the existing 11:30 budget block.",
+            "Afternoon solo childcare makes the original 13:30 focus block operationally unreliable, so it is removed.",
+            "Marta’s swimming class, dinner, bedtime routine and sleep are preserved.",
+            "Partner coverage for the supplier call should be confirmed with the partner because it creates an explicit childcare dependency.",
+            "Work should be told the user is WFH due to the closure and that children may be present during the retrospective."
+          ],
+          "priorities": [
+            "Finish the Q2 budget before Thursday afternoon without reducing sleep.",
+            "Keep the supplier negotiation quiet and unchanged.",
+            "Avoid relying on unconfirmed afternoon childcare after the partner leaves.",
+            "Keep the children’s swimming and evening routine intact where feasible."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Do the remaining budget work during the 13:30–15:30 block.",
+              "rejected_because": "Rejected because the user is alone with a 7-year-old and 3-year-old from 12:45, making focused work unreliable."
+            },
+            {
+              "option": "Skip Marta’s swimming class to create more home time.",
+              "rejected_because": "Rejected because the selected plan completes the work and still keeps the activity."
+            },
+            {
+              "option": "Ask grandparents, neighbours or another sitter for afternoon coverage.",
+              "rejected_because": "Not assumed because it would require third-party confirmation not supplied in the request."
+            }
+          ],
+          "summary": "The plan removes school and office travel, shifts flexible budget work into tonight and Wednesday morning, keeps the supplier call protected with partner cover, and preserves swimming, dinner, bedtime and sleep; the main trade-off is using most of tonight’s post-bedtime buffer."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [
+          "change 1: protected event cannot be changed: travel_to_school_wed",
+          "change 2: protected event cannot be changed: dropoff_wed",
+          "change 3: protected event cannot be changed: commute_to_work_wed",
+          "change 4: protected event cannot be changed: commute_to_school_wed",
+          "change 5: protected event cannot be changed: pickup_wed"
+        ],
+        "warnings": [],
+        "valid": false
+      },
+      "result_calendar": null,
+      "critic_evaluation": null,
+      "acceptance_policy": null,
+      "operations_changed_from_previous": null,
+      "rationale_changed_from_previous": null,
+      "prior_critic_reviews": []
+    },
+    {
+      "index": 1,
+      "proposer_feedback": "Deterministic validation found these operational problems: change 1: protected event cannot be changed: travel_to_school_wed; change 2: protected event cannot be changed: dropoff_wed; change 3: protected event cannot be changed: commute_to_work_wed; change 4: protected event cannot be changed: commute_to_school_wed; change 5: protected event cannot be changed: pickup_wed. Revise the changes before any Critic assessment.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "delete",
+            "event_id": "run_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "focus_pm_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Q2 operational budget work",
+            "from_start": null,
+            "to_start": "2027-05-11T21:15:00+01:00",
+            "to_end": "2027-05-11T22:45:00+01:00",
+            "category": "work_focus",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Q2 operational budget work",
+            "from_start": null,
+            "to_start": "2027-05-12T06:30:00+01:00",
+            "to_end": "2027-05-12T07:00:00+01:00",
+            "category": "work_focus",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Partner watches children during supplier call",
+            "from_start": null,
+            "to_start": "2027-05-12T10:30:00+01:00",
+            "to_end": "2027-05-12T11:30:00+01:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "partner",
+              "marta",
+              "duarte"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Solo childcare at home",
+            "from_start": null,
+            "to_start": "2027-05-12T12:45:00+01:00",
+            "to_end": "2027-05-12T16:00:00+01:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Solo childcare at home",
+            "from_start": null,
+            "to_start": "2027-05-12T16:45:00+01:00",
+            "to_end": "2027-05-12T17:00:00+01:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "Fixed/protected school-run and commute entries are not changed by this proposal despite the closure notice.",
+            "The closure means those protected entries need manual calendar override or confirmation under the applicable rules.",
+            "Fixed work meetings and protected sleep blocks are left unchanged.",
+            "The plan reaches three hours of budget work using two new blocks plus the existing late-morning block.",
+            "The afternoon focus block is removed because solo childcare makes it operationally unreliable.",
+            "Partner coverage for the supplier call needs confirmation with the partner.",
+            "Work should be told the user is WFH and that children may be present during the retrospective.",
+            "Marta’s swimming class, dinner, bedtime and sleep are preserved."
+          ],
+          "priorities": [
+            "Finish the Q2 budget before Thursday afternoon without reducing sleep.",
+            "Keep the supplier negotiation quiet and unchanged.",
+            "Avoid relying on unconfirmed afternoon childcare after the partner leaves.",
+            "Trade the morning run for budget work on an unusually constrained strike day."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Delete the protected school-run and commute events directly.",
+              "rejected_because": "Rejected because their fixed/protected status prevents this proposal from changing them."
+            },
+            {
+              "option": "Use the 13:30–15:30 focus block for budget work.",
+              "rejected_because": "Rejected because the user is alone with both children then, including a 3-year-old."
+            },
+            {
+              "option": "Skip Marta’s swimming class.",
+              "rejected_because": "Rejected because the selected plan completes the budget work while keeping the activity."
+            },
+            {
+              "option": "Ask grandparents, neighbours or another sitter for afternoon cover.",
+              "rejected_because": "Not assumed because it introduces a third-party dependency not confirmed in the request."
+            }
+          ],
+          "summary": "The plan completes the budget work by using tonight and an early morning block, removes the unreliable afternoon focus block, keeps swimming and the evening routine, and leaves protected school-run and commute entries untouched pending manual override or confirmation."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [
+          "new_4: overlaps protected event external_client_wed"
+        ],
+        "warnings": [
+          "new_6: overlaps contextual event partner_shift_wed for another participant",
+          "new_5: overlaps contextual event partner_shift_wed for another participant",
+          "new temporal overlap (not automatically a hard-rule violation): lunch_wed x new_5"
+        ],
+        "valid": false
+      },
+      "result_calendar": null,
+      "critic_evaluation": null,
+      "acceptance_policy": null,
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": []
+    },
+    {
+      "index": 2,
+      "proposer_feedback": "Deterministic validation found these operational problems: new_4: overlaps protected event external_client_wed. Revise the changes before any Critic assessment.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "delete",
+            "event_id": "travel_to_school_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "dropoff_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "commute_to_work_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "commute_to_school_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "pickup_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "run_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "focus_pm_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Q2 operational budget work",
+            "from_start": null,
+            "to_start": "2027-05-11T21:15:00+01:00",
+            "to_end": "2027-05-11T22:45:00+01:00",
+            "category": "work_focus",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Q2 operational budget work",
+            "from_start": null,
+            "to_start": "2027-05-12T06:30:00+01:00",
+            "to_end": "2027-05-12T07:00:00+01:00",
+            "category": "work_focus",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Solo childcare at home",
+            "from_start": null,
+            "to_start": "2027-05-12T12:45:00+01:00",
+            "to_end": "2027-05-12T16:00:00+01:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Solo childcare at home",
+            "from_start": null,
+            "to_start": "2027-05-12T16:45:00+01:00",
+            "to_end": "2027-05-12T17:45:00+01:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "The closure notice and WFH instruction justify removing the school-run and office-commute entries.",
+            "Fixed work meetings and protected sleep blocks are left unchanged.",
+            "The plan reaches three hours of budget work using the existing late-morning block plus two new blocks.",
+            "The afternoon budget block is removed because solo childcare makes it operationally unreliable.",
+            "Partner coverage for the supplier call should be confirmed directly with the partner.",
+            "Work should be told the user is WFH and that children may be present during the retrospective.",
+            "No unconfirmed grandparents, neighbours or sitter coverage is assumed.",
+            "Marta’s swimming class, dinner, bedtime and sleep are preserved."
+          ],
+          "priorities": [
+            "Finish the Q2 budget before Thursday afternoon without reducing sleep.",
+            "Protect the supplier negotiation by relying on partner coverage rather than moving the call.",
+            "Keep the children’s evening routine stable on a disrupted school-closure day.",
+            "Trade the morning run for work because the strike compresses available quiet time."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Keep the 13:30–15:30 budget block.",
+              "rejected_because": "Rejected because the user will be alone with both children then, including a 3-year-old."
+            },
+            {
+              "option": "Add a partner childcare calendar block during the supplier call.",
+              "rejected_because": "Rejected because it would overlap the protected supplier meeting in the calendar."
+            },
+            {
+              "option": "Skip Marta’s swimming class.",
+              "rejected_because": "Rejected because the selected plan completes the budget work while keeping the activity."
+            },
+            {
+              "option": "Ask another adult for afternoon childcare.",
+              "rejected_because": "Not assumed because it introduces an unconfirmed third-party dependency."
+            }
+          ],
+          "summary": "The plan removes the closed-school runs and office commutes, completes the budget work tonight and early tomorrow, preserves fixed work and sleep, and keeps swimming and the evening routine; the main trade-off is cancelling the run and dropping the unreliable afternoon focus block."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [
+          "change 1: protected event cannot be changed: travel_to_school_wed",
+          "change 2: protected event cannot be changed: dropoff_wed",
+          "change 3: protected event cannot be changed: commute_to_work_wed",
+          "change 4: protected event cannot be changed: commute_to_school_wed",
+          "change 5: protected event cannot be changed: pickup_wed"
+        ],
+        "warnings": [],
+        "valid": false
+      },
+      "result_calendar": null,
+      "critic_evaluation": null,
+      "acceptance_policy": null,
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": []
+    },
+    {
+      "index": 3,
+      "proposer_feedback": "Deterministic validation found these operational problems: change 1: protected event cannot be changed: travel_to_school_wed; change 2: protected event cannot be changed: dropoff_wed; change 3: protected event cannot be changed: commute_to_work_wed; change 4: protected event cannot be changed: commute_to_school_wed; change 5: protected event cannot be changed: pickup_wed. Revise the changes before any Critic assessment.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "delete",
+            "event_id": "run_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "focus_pm_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Q2 operational budget work",
+            "from_start": null,
+            "to_start": "2027-05-11T21:15:00+01:00",
+            "to_end": "2027-05-11T22:45:00+01:00",
+            "category": "work_focus",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Q2 operational budget work",
+            "from_start": null,
+            "to_start": "2027-05-12T06:30:00+01:00",
+            "to_end": "2027-05-12T07:00:00+01:00",
+            "category": "work_focus",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Partner childcare cover for supplier call",
+            "from_start": null,
+            "to_start": "2027-05-12T10:30:00+01:00",
+            "to_end": "2027-05-12T11:30:00+01:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "partner",
+              "marta",
+              "duarte"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Solo childcare at home",
+            "from_start": null,
+            "to_start": "2027-05-12T12:45:00+01:00",
+            "to_end": "2027-05-12T16:00:00+01:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Solo childcare at home",
+            "from_start": null,
+            "to_start": "2027-05-12T16:45:00+01:00",
+            "to_end": "2027-05-12T17:45:00+01:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "Fixed or protected school-run and office-commute events are not changed despite the closure request because no valid operation-level exception is available.",
+            "Fixed work meetings and protected sleep blocks are left unchanged.",
+            "The plan reaches three hours of budget work using the existing late-morning block plus two added quiet blocks.",
+            "The afternoon budget block is removed because solo childcare makes it operationally unreliable.",
+            "Partner coverage for the supplier call needs direct confirmation with the partner.",
+            "Work needs confirmation that the user is WFH and that children may be present around internal meetings.",
+            "The partner departure time is uncertain because the request says 12:45 while the calendar shift starts later.",
+            "No unconfirmed grandparents, neighbours, sitter help, travel changes or venue availability are assumed.",
+            "Swimming, dinner, bedtime and sleep are preserved."
+          ],
+          "priorities": [
+            "Finish the Q2 budget before Thursday afternoon without reducing sleep.",
+            "Protect the supplier negotiation using partner childcare rather than moving the fixed call.",
+            "Keep the children’s evening routine stable on a disrupted closure day.",
+            "Trade the morning run for work because reliable quiet time is limited."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Delete the school-run and office-commute events.",
+              "rejected_because": "Rejected because those events are fixed or protected and the available exception is not operation-specific enough."
+            },
+            {
+              "option": "Keep the afternoon budget block.",
+              "rejected_because": "Rejected because the user will be alone with both children then, including a 3-year-old."
+            },
+            {
+              "option": "Skip Marta’s swimming class.",
+              "rejected_because": "Rejected because the selected plan completes the budget work while keeping the activity."
+            },
+            {
+              "option": "Ask another adult for afternoon childcare.",
+              "rejected_because": "Not assumed because it introduces an unconfirmed third-party dependency."
+            }
+          ],
+          "summary": "The selected plan completes the Q2 budget tonight and early tomorrow, preserves sleep, fixed meetings, swimming and the evening routine, and marks childcare cover where supported; the main trade-off is cancelling the run and leaving protected closure-related travel events unchanged for manual handling or authorised override."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [
+          "new_4: overlaps protected event external_client_wed",
+          "new_6: overlaps protected event commute_to_school_wed",
+          "new_6: overlaps protected event pickup_wed"
+        ],
+        "warnings": [
+          "new_6: overlaps contextual event partner_shift_wed for another participant",
+          "new_5: overlaps contextual event partner_shift_wed for another participant",
+          "new temporal overlap (not automatically a hard-rule violation): lunch_wed x new_5"
+        ],
+        "valid": false
+      },
+      "result_calendar": null,
+      "critic_evaluation": null,
+      "acceptance_policy": null,
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": []
+    }
+  ],
+  "initial_proposal": {
+    "changes": [
+      {
+        "type": "delete",
+        "event_id": "travel_to_school_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "dropoff_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "commute_to_work_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "commute_to_school_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "pickup_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "focus_pm_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Q2 operational budget work",
+        "from_start": null,
+        "to_start": "2027-05-11T21:15:00+01:00",
+        "to_end": "2027-05-11T22:45:00+01:00",
+        "category": "work_focus",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Q2 operational budget work",
+        "from_start": null,
+        "to_start": "2027-05-12T08:30:00+01:00",
+        "to_end": "2027-05-12T09:00:00+01:00",
+        "category": "work_focus",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Partner watches children during supplier call",
+        "from_start": null,
+        "to_start": "2027-05-12T10:30:00+01:00",
+        "to_end": "2027-05-12T11:30:00+01:00",
+        "category": "childcare",
+        "importance": 5,
+        "participants": [
+          "partner",
+          "marta",
+          "duarte"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Solo childcare at home",
+        "from_start": null,
+        "to_start": "2027-05-12T13:15:00+01:00",
+        "to_end": "2027-05-12T16:00:00+01:00",
+        "category": "childcare",
+        "importance": 5,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Solo childcare at home",
+        "from_start": null,
+        "to_start": "2027-05-12T16:45:00+01:00",
+        "to_end": "2027-05-12T17:45:00+01:00",
+        "category": "childcare",
+        "importance": 5,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ]
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "The school/daycare closure and WFH request are the supplied exception for deleting protected school-run events and office commutes.",
+        "Fixed work meetings and protected sleep blocks are left unchanged.",
+        "The plan reaches three hours of budget work using two new blocks plus the existing 11:30 budget block.",
+        "Afternoon solo childcare makes the original 13:30 focus block operationally unreliable, so it is removed.",
+        "Marta’s swimming class, dinner, bedtime routine and sleep are preserved.",
+        "Partner coverage for the supplier call should be confirmed with the partner because it creates an explicit childcare dependency.",
+        "Work should be told the user is WFH due to the closure and that children may be present during the retrospective."
+      ],
+      "priorities": [
+        "Finish the Q2 budget before Thursday afternoon without reducing sleep.",
+        "Keep the supplier negotiation quiet and unchanged.",
+        "Avoid relying on unconfirmed afternoon childcare after the partner leaves.",
+        "Keep the children’s swimming and evening routine intact where feasible."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Do the remaining budget work during the 13:30–15:30 block.",
+          "rejected_because": "Rejected because the user is alone with a 7-year-old and 3-year-old from 12:45, making focused work unreliable."
+        },
+        {
+          "option": "Skip Marta’s swimming class to create more home time.",
+          "rejected_because": "Rejected because the selected plan completes the work and still keeps the activity."
+        },
+        {
+          "option": "Ask grandparents, neighbours or another sitter for afternoon coverage.",
+          "rejected_because": "Not assumed because it would require third-party confirmation not supplied in the request."
+        }
+      ],
+      "summary": "The plan removes school and office travel, shifts flexible budget work into tonight and Wednesday morning, keeps the supplier call protected with partner cover, and preserves swimming, dinner, bedtime and sleep; the main trade-off is using most of tonight’s post-bedtime buffer."
+    }
+  },
+  "final_proposal": {
+    "changes": [
+      {
+        "type": "delete",
+        "event_id": "run_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "focus_pm_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Q2 operational budget work",
+        "from_start": null,
+        "to_start": "2027-05-11T21:15:00+01:00",
+        "to_end": "2027-05-11T22:45:00+01:00",
+        "category": "work_focus",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Q2 operational budget work",
+        "from_start": null,
+        "to_start": "2027-05-12T06:30:00+01:00",
+        "to_end": "2027-05-12T07:00:00+01:00",
+        "category": "work_focus",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Partner childcare cover for supplier call",
+        "from_start": null,
+        "to_start": "2027-05-12T10:30:00+01:00",
+        "to_end": "2027-05-12T11:30:00+01:00",
+        "category": "childcare",
+        "importance": 5,
+        "participants": [
+          "partner",
+          "marta",
+          "duarte"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Solo childcare at home",
+        "from_start": null,
+        "to_start": "2027-05-12T12:45:00+01:00",
+        "to_end": "2027-05-12T16:00:00+01:00",
+        "category": "childcare",
+        "importance": 5,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Solo childcare at home",
+        "from_start": null,
+        "to_start": "2027-05-12T16:45:00+01:00",
+        "to_end": "2027-05-12T17:45:00+01:00",
+        "category": "childcare",
+        "importance": 5,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ]
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "Fixed or protected school-run and office-commute events are not changed despite the closure request because no valid operation-level exception is available.",
+        "Fixed work meetings and protected sleep blocks are left unchanged.",
+        "The plan reaches three hours of budget work using the existing late-morning block plus two added quiet blocks.",
+        "The afternoon budget block is removed because solo childcare makes it operationally unreliable.",
+        "Partner coverage for the supplier call needs direct confirmation with the partner.",
+        "Work needs confirmation that the user is WFH and that children may be present around internal meetings.",
+        "The partner departure time is uncertain because the request says 12:45 while the calendar shift starts later.",
+        "No unconfirmed grandparents, neighbours, sitter help, travel changes or venue availability are assumed.",
+        "Swimming, dinner, bedtime and sleep are preserved."
+      ],
+      "priorities": [
+        "Finish the Q2 budget before Thursday afternoon without reducing sleep.",
+        "Protect the supplier negotiation using partner childcare rather than moving the fixed call.",
+        "Keep the children’s evening routine stable on a disrupted closure day.",
+        "Trade the morning run for work because reliable quiet time is limited."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Delete the school-run and office-commute events.",
+          "rejected_because": "Rejected because those events are fixed or protected and the available exception is not operation-specific enough."
+        },
+        {
+          "option": "Keep the afternoon budget block.",
+          "rejected_because": "Rejected because the user will be alone with both children then, including a 3-year-old."
+        },
+        {
+          "option": "Skip Marta’s swimming class.",
+          "rejected_because": "Rejected because the selected plan completes the budget work while keeping the activity."
+        },
+        {
+          "option": "Ask another adult for afternoon childcare.",
+          "rejected_because": "Not assumed because it introduces an unconfirmed third-party dependency."
+        }
+      ],
+      "summary": "The selected plan completes the Q2 budget tonight and early tomorrow, preserves sleep, fixed meetings, swimming and the evening routine, and marks childcare cover where supported; the main trade-off is cancelling the run and leaving protected closure-related travel events unchanged for manual handling or authorised override."
+    }
+  },
+  "final_score": null,
+  "refinements": 3,
+  "critic_accepted": false,
+  "decision": "defer",
+  "reasons": [
+    "validação determinística falhou",
+    "new_4: overlaps protected event external_client_wed",
+    "new_6: overlaps protected event commute_to_school_wed",
+    "new_6: overlaps protected event pickup_wed"
+  ],
+  "status": "deferred_invalid_proposal",
+  "critic_input_version": "final_calendar_v1",
+  "critic_policy_version": "uncertainty_review_v2",
+  "result_calendar_version": "validated_added_metadata_v2",
+  "final_result_calendar": null,
+  "final_unresolved_assumptions": null,
+  "uncertainty_history": [],
+  "schema_version": "2.0",
+  "profile_id": "parent_young_children_01__parent_young_children_school_strike_closure_001",
+  "scenario_sha256": "437780207e9146749b9f1cf5b3e6816b8f264f9a9dc3066afcc89578708aa311",
+  "aggregate_requirements_sha256": null,
+  "confirmed_changes_sha256": null,
+  "simulator_version": "calendar_v2_validated_added_metadata_v2",
+  "dataset_manifest_sha256": "28af38846fb8995651d5f63ab63402e36147dc0915a2bfcd5379747ea531ffad",
+  "split": "train",
+  "run_id": "a5ab3958276c45948996f02985fc0162",
+  "experiment_id": null,
+  "repeat_index": 0,
+  "generated_at": "2026-11-24T12:04:15.847107+00:00",
+  "prompt_versions": {
+    "proposer_sha256": "ae6fa59cccb86c31f34f66d07d241660b1feadf852ebf1b594bc85addab86985",
+    "proposer_wire_schema_version": "compact_proposal_v1",
+    "proposer_wire_schema_sha256": "f504fbcd7e939c43e055e2f188feb22097a284bcd9b043227d868e559547b865",
+    "proposer_revision_sha256": "3f0fe7f221013700694a22984560612013e9804072ffde4538e1329b9708ac95",
+    "critic_sha256": "1686688cdd4bc63abb12e6633ef9dbb9b62d69b69aba1c4805a201657cc5bb34"
+  },
+  "seconds": 171.726,
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [
+      "new_4: overlaps protected event external_client_wed",
+      "new_6: overlaps protected event commute_to_school_wed",
+      "new_6: overlaps protected event pickup_wed"
+    ],
+    "warnings": [
+      "new_6: overlaps contextual event partner_shift_wed for another participant",
+      "new_5: overlaps contextual event partner_shift_wed for another participant",
+      "new temporal overlap (not automatically a hard-rule violation): lunch_wed x new_5"
+    ],
+    "valid": false
+  }
+}

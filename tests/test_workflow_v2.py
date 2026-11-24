@@ -18,10 +18,11 @@ from annotation_v2 import (ProposalReview, ProposalConsensus, compare, load_revi
 from annotation_v2_ui import preview, records, temporal_overlaps
 from benchmark_v2 import import_scenario
 from calendar_v2 import simulate
-from critic import CRITIC_POLICY_VERSION
 from gate_dataset_v2 import build_rows, features, grouped_folds
 from models import Change, CurrentCriticEvaluation, CriticScores, PlausibilityReview, Proposal, Rationale
-from proposal_catalog_v2 import catalog, import_result
+from proposal_catalog_v2 import (canonical_training_results, catalog, import_result,
+                                 import_training_results, training_catalog,
+                                 training_catalog_audit)
 from run_config_a_v2 import run_one as run_a
 from run_config_b_v2 import run_one
 from scenario_v2 import V2Scenario, load_manifest, load_scenario
@@ -71,6 +72,74 @@ def source(root):
     return json.loads(artifact.read_text()), proposer, critic
 
 
+def test_training_import_is_idempotent_and_preserves_existing_canonical(imported):
+    root, scenario = imported
+    first, _, _ = source(root)
+    second_run = run_one(root, scenario.scenario_id, ScriptedProvider([proposal()]),
+                         ScriptedProvider([accepted()]))
+    assert json.loads(second_run.read_text())["run_id"] != first["run_id"]
+    selected = canonical_training_results(root)
+    assert selected[scenario.scenario_id]["run_id"] == first["run_id"]
+    summary = import_training_results(root)
+    assert summary["eligible_results"] == 1
+    assert summary["previously_imported"] == 1
+    assert summary["newly_imported"] == 0
+    assert [row["proposal_id"] for row in training_catalog(root)] == [first["proposal_id"]]
+
+
+def test_technical_result_cannot_enter_proposal_catalog(imported, tmp_path):
+    root, _ = imported
+    source(root)
+    result_path = next((root / "eval" / "runs").rglob("B/*.json"))
+    record = json.loads(result_path.read_text())
+    record["status"] = "proposer_error"
+    failed = tmp_path / "technical_failure.json"
+    failed.write_text(json.dumps(record))
+    with pytest.raises(ValueError, match="completed scientific B status"):
+        import_result(root, failed)
+
+
+def test_progress_scan_does_not_create_blank_human_annotations(imported):
+    root, _ = imported
+    artifact, _, _ = source(root)
+    author_dir = root / "data" / "annotations" / "author_a"
+    assert not author_dir.exists()
+    rows = records(root, "author_a", training_only=True)
+    assert rows == [{"id": artifact["proposal_id"],
+                     "scenario_id": artifact["scenario_id"],
+                     "profile_id": artifact["profile_id"],
+                     "family_id": artifact["family_id"],
+                     "state": "not_started"}]
+    assert not author_dir.exists()
+
+
+def test_corrupted_source_is_quarantined_without_touching_annotations_or_gate_export(imported):
+    root, _ = imported
+    artifact, _, _ = source(root)
+    pid = artifact["proposal_id"]
+    form, revision = load_review(root, "author_a", pid)
+    save_review(root, "author_a", pid, {**form.model_dump(), "status": "draft",
+                "justification": "Preserve this existing human draft"}, revision)
+    annotation_path = root / "data/annotations/author_a" / f"{pid}.json"
+    before = hashlib.sha256(annotation_path.read_bytes()).hexdigest()
+    run_path = next((root / "eval/runs").rglob("B/*.json"))
+    record = json.loads(run_path.read_text())
+    run_path.write_text(json.dumps(record | {
+        "error": "incomplete_json", "error_stage": "proposer",
+        "llm_diagnostics": {"classification": "incomplete_json"}}))
+
+    audit = training_catalog_audit(root)
+    assert audit["active"] == []
+    assert audit["quarantined"][0]["proposal_id"] == pid
+    assert any("technical error field" in reason
+               for reason in audit["quarantined"][0]["reasons"])
+    rows, exclusions = build_rows(root)
+    assert rows == []
+    assert {item["proposal_id"]: item["reason"] for item in exclusions}[pid] == \
+        "source_run_integrity_failed"
+    assert hashlib.sha256(annotation_path.read_bytes()).hexdigest() == before
+
+
 def test_noop_b_is_reviewed_and_excluded_from_gate(imported):
     root, scenario = imported
     unchanged = Proposal(changes=[], rationale=Rationale(
@@ -104,7 +173,7 @@ def test_import_rejects_new_result_without_plausibility_review(imported):
     record = json.loads(path.read_text())
     del record["iterations"][0]["critic_evaluation"]["plausibility_review"]
     path.write_text(json.dumps(record))
-    with pytest.raises(ValidationError):
+    with pytest.raises(ValueError, match="invalid Critic evaluation"):
         import_result(root, path)
 
 
@@ -305,32 +374,33 @@ def test_technical_failure_excluded_without_defer_label(imported):
 
 def test_v2_streamlit_navigation_and_author_isolation(imported, tmp_path):
     root, scenario = imported
-    source(root)
-    source(root)
+    artifact, _, _ = source(root)
     wrapper = tmp_path / "v2_ui.py"
     wrapper.write_text(f"import sys\nsys.path.insert(0, {str(ROOT)!r})\n"
                        f"from pathlib import Path\nimport annotation_app\n"
                        f"annotation_app.ROOT = Path({str(root)!r})\nannotation_app.main()\n")
     app = AppTest.from_file(wrapper, default_timeout=10).run()
     assert not app.exception
-    assert any(f"Política do Critic: {CRITIC_POLICY_VERSION}" in x.value for x in app.caption)
-    assert any(x.label == "Proposta" for x in app.selectbox)
-    first = next(x.value for x in app.selectbox if x.label == "Proposta")
+    assert next(x for x in app.selectbox if x.label == "Profile family")
+    assert next(x for x in app.selectbox if x.label == "Scenario").value == scenario.scenario_id
+    assert not any(x.label == "Proposta" for x in app.selectbox)
+    visible = "\n".join(str(x.value) for group in (app.caption, app.markdown, app.info)
+                        for x in group)
+    assert "Score final do Critic" not in visible
+    assert "Política do Critic" not in visible
+    assert "Histórico do Critic" not in visible
+    first = artifact["proposal_id"]
     next(x for x in app.text_area if x.label == "Justificação obrigatória para concluir").set_value("Draft 1").run()
     next(x for x in app.button if x.label == "Guardar rascunho").click().run()
     assert load_review(root, "author_a", first)[0].justification == "Draft 1"
-    next(x for x in app.button if x.label == "Seguinte →").click().run()
-    assert not app.exception
-    next(x for x in app.button if x.label == "← Anterior").click().run()
-    assert not app.exception
     assert next(x.value for x in app.text_area if x.label == "Justificação obrigatória para concluir") == "Draft 1"
     app.sidebar.selectbox[0].set_value("author_b").run()
     assert not app.exception
     assert load_review(root, "author_b", first)[0].justification == ""
 
 
-def test_existing_imported_scenario_proposal_and_draft_survive_ui(tmp_path):
-    """Exercise the migrated real artifact through the UI on a disposable copy."""
+def test_source_less_historical_proposal_and_draft_are_preserved_but_not_active(tmp_path):
+    """A missing source run quarantines an import without changing its old draft."""
     paths = [
         "data/benchmark_manifest.json",
         "data/scenarios/working_student_deadline_001.json",
@@ -354,22 +424,20 @@ def test_existing_imported_scenario_proposal_and_draft_survive_ui(tmp_path):
     pid = source["proposal_id"]
     assert source["scenario_id"] == "working_student_deadline_001"
     assert load_review(tmp_path, "author_a", pid)[0].status == "draft"
+    audit = training_catalog_audit(tmp_path)
+    assert audit["active"] == []
+    assert audit["quarantined"] == [{"proposal_id": pid,
+                                     "scenario_id": "working_student_deadline_001",
+                                     "run_id": source["run_id"],
+                                     "reasons": ["source run is not discoverable"]}]
     wrapper = tmp_path / "existing_ui.py"
     wrapper.write_text(f"import sys\nsys.path.insert(0, {str(ROOT)!r})\n"
                        f"from pathlib import Path\nimport annotation_app\n"
                        f"annotation_app.ROOT = Path({str(tmp_path)!r})\nannotation_app.main()\n")
     app = AppTest.from_file(wrapper, default_timeout=10).run()
     assert not app.exception
-    assert next(x for x in app.selectbox if x.label == "Proposta").value == pid
-    assert any("revisão de plausibilidade não disponível" in x.value for x in app.caption)
-    next(x for x in app.text_area if x.label == "Justificação obrigatória para concluir").set_value("Disposable draft").run()
-    next(x for x in app.button if x.label == "Guardar rascunho").click().run()
-    assert load_review(tmp_path, "author_a", pid)[0].justification == "Disposable draft"
-    app.sidebar.selectbox[0].set_value("author_b").run()
-    assert not app.exception
-    assert load_review(tmp_path, "author_b", pid)[0].justification == ""
-    app.sidebar.selectbox[0].set_value("author_a").run()
-    assert not app.exception
-    assert load_review(tmp_path, "author_a", pid)[0].justification == "Disposable draft"
+    assert any("Ainda não existem propostas B de treino elegíveis" in item.value
+               for item in app.info)
+    assert load_review(tmp_path, "author_a", pid)[0].status == "draft"
     assert all(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest() == digest
                for relative, digest in originals.items())

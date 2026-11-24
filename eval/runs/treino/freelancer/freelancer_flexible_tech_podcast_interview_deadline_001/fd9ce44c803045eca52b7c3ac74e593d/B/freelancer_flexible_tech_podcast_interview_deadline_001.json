@@ -1,0 +1,866 @@
+{
+  "configuration": "B",
+  "scenario_id": "freelancer_flexible_tech_podcast_interview_deadline_001",
+  "family": "freelancer_schedule_conflict",
+  "category": "v2",
+  "proposer_provider": "iaedu",
+  "proposer_model": "GPT-5.5",
+  "proposer_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_provider": "iaedu",
+  "critic_model": "GPT-5.5",
+  "critic_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_settings": {
+    "threshold": 4.0,
+    "max_refinements": 3,
+    "min_dimension_score": 1
+  },
+  "iterations": [
+    {
+      "index": 0,
+      "proposer_feedback": null,
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [],
+        "rationale": {
+          "constraints": [
+            "The podcast interview is fixed and protected as a social event, so it is not moved or altered.",
+            "The final calendar already schedules at least 30 hours of work within the checked week.",
+            "The Friday work block ends before the podcast, leaving a free interval between them.",
+            "Scheduled work time is not proof that the client work is completed."
+          ],
+          "priorities": [
+            "Keep the protected podcast intact.",
+            "Avoid unnecessary disruption to existing work blocks when the hours target is already satisfied.",
+            "Preserve morning gym workouts as preferred."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Move the Friday work block earlier or later",
+              "rejected_because": "Rejected because there is no actual overlap with the podcast and moving it adds disruption without improving the stated requirement."
+            },
+            {
+              "option": "Add more work after the podcast",
+              "rejected_because": "Rejected because the weekly work minimum is already exceeded and no extra work need was stated."
+            },
+            {
+              "option": "Delete the Friday work block",
+              "rejected_because": "Rejected because it would reduce useful scheduled work even though the minimum would still be met."
+            }
+          ],
+          "summary": "No calendar changes are needed: the podcast remains protected, Friday already has a gap before it, and the existing work schedule exceeds the 30-hour weekly client-work minimum."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [
+          "no changes proposed; request satisfaction requires Critic and human review"
+        ],
+        "valid": true,
+        "aggregate_checks": [
+          {
+            "id": "weekly_hours",
+            "status": "pass",
+            "minutes": 2190.0,
+            "minimum_minutes": 1800,
+            "category": "work",
+            "evidence": "union of final calendar intervals"
+          }
+        ],
+        "aggregate_validation_version": "duration_total_v1",
+        "no_op": true
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-04-18T23:30:00+01:00",
+            "end": "2027-04-19T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_mon",
+            "title": "Gym Workout",
+            "start": "2027-04-19T08:00:00+01:00",
+            "end": "2027-04-19T09:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_mon",
+            "title": "Freelance Work Block",
+            "start": "2027-04-19T10:30:00+01:00",
+            "end": "2027-04-19T18:30:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "8 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-04-19T23:30:00+01:00",
+            "end": "2027-04-20T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_tue",
+            "title": "Gym Workout",
+            "start": "2027-04-20T08:00:00+01:00",
+            "end": "2027-04-20T09:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_tue",
+            "title": "Freelance Work Block",
+            "start": "2027-04-20T10:30:00+01:00",
+            "end": "2027-04-20T18:30:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "8 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-04-20T23:30:00+01:00",
+            "end": "2027-04-21T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_wed",
+            "title": "Gym Workout",
+            "start": "2027-04-21T08:00:00+01:00",
+            "end": "2027-04-21T09:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_wed",
+            "title": "Freelance Work Block",
+            "start": "2027-04-21T10:30:00+01:00",
+            "end": "2027-04-21T18:30:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "8 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-04-21T23:30:00+01:00",
+            "end": "2027-04-22T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_thu",
+            "title": "Gym Workout",
+            "start": "2027-04-22T08:00:00+01:00",
+            "end": "2027-04-22T09:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_thu",
+            "title": "Freelance Work Block",
+            "start": "2027-04-22T10:30:00+01:00",
+            "end": "2027-04-22T18:30:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "8 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-04-22T23:30:00+01:00",
+            "end": "2027-04-23T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_fri",
+            "title": "Freelance Work Block",
+            "start": "2027-04-23T10:30:00+01:00",
+            "end": "2027-04-23T15:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "4.5 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "podcast_fri",
+            "title": "Tech Podcast Live Interview",
+            "start": "2027-04-23T16:00:00+01:00",
+            "end": "2027-04-23T17:00:00+01:00",
+            "category": "social",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "host"
+            ],
+            "description": "Fixed interview.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 4,
+          "alternatives": 4,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The rationale correctly avoids disruption when the visible 30-hour work minimum is already exceeded, but it only lightly addresses human capacity across the full week. Monday through Thursday each combine an 08:00-09:30 gym workout with a 10:30-18:30 work block, creating four consecutive high-output days before Friday's 10:30-15:00 work block and 16:00-17:00 podcast.",
+          "The Friday gap from 15:00 to 16:00 is visible and conflict-free, but the rationale does not substantiate whether that hour is enough for podcast preparation, setup, decompression from work, food, or any travel if relevant.",
+          "Because no original request is available, request satisfaction cannot be independently verified. The proposal's no-change outcome is plausible from the visible calendar and validation, but it cannot be confirmed against any hidden or natural-language requirement beyond the stated priorities and checked weekly-hours target.",
+          "The rationale notes that scheduled work is not proof that client work is completed, but it still relies on scheduled work duration as the main reason not to adjust the week. That is reasonable for calendar placement, but it leaves a practical uncertainty about whether the visible work blocks are actually usable for the intended client-work goal."
+        ],
+        "feedback": "The no-change proposal is broadly plausible and proportionate. The protected podcast remains intact, the Friday work block ends at 15:00, and the podcast starts at 16:00, so there is no visible overlap. The week also contains 36.5 scheduled work hours, which exceeds the validated 30-hour minimum. Since all events are existing and preserved, the proposal is not responsible for creating the Monday-to-Thursday workload pattern. Still, the Proposer should be cautious about treating the free Friday hour as automatically sufficient for a live interview transition, and should explicitly account for any known preparation, setup, travel, or recovery needs if that context exists. With the visible information, revision is not required, but the no-change conclusion depends on assumptions that remain unverified.",
+        "plausibility_review": {
+          "revision_required": false,
+          "severity": "low",
+          "reason": "The resulting calendar appears realistically manageable on the visible facts: protected sleep is preserved nightly, the podcast is not conflicted, Friday has a one-hour gap before the interview, and the work-hours target is exceeded without adding more load. The main concerns are practical uncertainties around the podcast transition and cumulative weekday effort, but these are not concrete enough from the visible evidence to require a revision, especially because the proposal makes no disruptive changes and does not worsen the existing pattern.",
+          "suggested_improvement": "If the Proposer has fuller context, it should briefly confirm whether the Friday 15:00-16:00 interval covers any required podcast preparation, setup, food, travel, or decompression, and whether the existing Monday-to-Thursday gym-plus-work pattern is an accepted routine rather than an accidental overload."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Friday podcast transition",
+            "assumption": "The 15:00-16:00 gap after the Friday work block is sufficient for any preparation, setup, food, decompression, or travel needed before the 16:00 live interview.",
+            "evidence_gap": "The calendar shows a one-hour free interval, but no information is provided about podcast preparation requirements, location, technical setup, or the user's preferred transition needs.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Client work completion",
+            "assumption": "The preserved freelance work blocks are usable for the intended client-work requirement and reasonably count toward the visible 30-hour weekly target.",
+            "evidence_gap": "The validator confirms 36.5 scheduled work hours, and the rationale acknowledges that scheduled work is not proof of completion, but no evidence confirms the nature or effectiveness of those work blocks.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Sustainability of weekday routine",
+            "assumption": "The existing sequence of four consecutive days with 08:00-09:30 gym workouts followed by 10:30-18:30 work blocks is sustainable for this person.",
+            "evidence_gap": "The proposal states that morning gym workouts are preferred and preserves them, but no information is provided about fatigue, commute, meals, recovery needs, or whether this routine has been working well.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Original request satisfaction",
+            "assumption": "A no-change outcome satisfies the user's original scheduling request beyond the visible priorities of protecting the podcast and meeting the 30-hour work minimum.",
+            "evidence_gap": "The original request is not provided, and the technical validation explicitly says request satisfaction and soft preference satisfaction were not checked.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          }
+        ],
+        "overall": 4.0
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": true,
+        "plausibility_revision_required": false,
+        "accepted": true,
+        "revision_causes": []
+      },
+      "operations_changed_from_previous": null,
+      "rationale_changed_from_previous": null,
+      "prior_critic_reviews": [],
+      "unresolved_assumptions": [
+        {
+          "subject": "Friday podcast transition",
+          "assumption": "The 15:00-16:00 gap after the Friday work block is sufficient for any preparation, setup, food, decompression, or travel needed before the 16:00 live interview.",
+          "evidence_gap": "The calendar shows a one-hour free interval, but no information is provided about podcast preparation requirements, location, technical setup, or the user's preferred transition needs.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Client work completion",
+          "assumption": "The preserved freelance work blocks are usable for the intended client-work requirement and reasonably count toward the visible 30-hour weekly target.",
+          "evidence_gap": "The validator confirms 36.5 scheduled work hours, and the rationale acknowledges that scheduled work is not proof of completion, but no evidence confirms the nature or effectiveness of those work blocks.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Sustainability of weekday routine",
+          "assumption": "The existing sequence of four consecutive days with 08:00-09:30 gym workouts followed by 10:30-18:30 work blocks is sustainable for this person.",
+          "evidence_gap": "The proposal states that morning gym workouts are preferred and preserves them, but no information is provided about fatigue, commute, meals, recovery needs, or whether this routine has been working well.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Original request satisfaction",
+          "assumption": "A no-change outcome satisfies the user's original scheduling request beyond the visible priorities of protecting the podcast and meeting the 30-hour work minimum.",
+          "evidence_gap": "The original request is not provided, and the technical validation explicitly says request satisfaction and soft preference satisfaction were not checked.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        }
+      ]
+    }
+  ],
+  "initial_proposal": {
+    "changes": [],
+    "rationale": {
+      "constraints": [
+        "The podcast interview is fixed and protected as a social event, so it is not moved or altered.",
+        "The final calendar already schedules at least 30 hours of work within the checked week.",
+        "The Friday work block ends before the podcast, leaving a free interval between them.",
+        "Scheduled work time is not proof that the client work is completed."
+      ],
+      "priorities": [
+        "Keep the protected podcast intact.",
+        "Avoid unnecessary disruption to existing work blocks when the hours target is already satisfied.",
+        "Preserve morning gym workouts as preferred."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Move the Friday work block earlier or later",
+          "rejected_because": "Rejected because there is no actual overlap with the podcast and moving it adds disruption without improving the stated requirement."
+        },
+        {
+          "option": "Add more work after the podcast",
+          "rejected_because": "Rejected because the weekly work minimum is already exceeded and no extra work need was stated."
+        },
+        {
+          "option": "Delete the Friday work block",
+          "rejected_because": "Rejected because it would reduce useful scheduled work even though the minimum would still be met."
+        }
+      ],
+      "summary": "No calendar changes are needed: the podcast remains protected, Friday already has a gap before it, and the existing work schedule exceeds the 30-hour weekly client-work minimum."
+    }
+  },
+  "final_proposal": {
+    "changes": [],
+    "rationale": {
+      "constraints": [
+        "The podcast interview is fixed and protected as a social event, so it is not moved or altered.",
+        "The final calendar already schedules at least 30 hours of work within the checked week.",
+        "The Friday work block ends before the podcast, leaving a free interval between them.",
+        "Scheduled work time is not proof that the client work is completed."
+      ],
+      "priorities": [
+        "Keep the protected podcast intact.",
+        "Avoid unnecessary disruption to existing work blocks when the hours target is already satisfied.",
+        "Preserve morning gym workouts as preferred."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Move the Friday work block earlier or later",
+          "rejected_because": "Rejected because there is no actual overlap with the podcast and moving it adds disruption without improving the stated requirement."
+        },
+        {
+          "option": "Add more work after the podcast",
+          "rejected_because": "Rejected because the weekly work minimum is already exceeded and no extra work need was stated."
+        },
+        {
+          "option": "Delete the Friday work block",
+          "rejected_because": "Rejected because it would reduce useful scheduled work even though the minimum would still be met."
+        }
+      ],
+      "summary": "No calendar changes are needed: the podcast remains protected, Friday already has a gap before it, and the existing work schedule exceeds the 30-hour weekly client-work minimum."
+    }
+  },
+  "final_score": 4.0,
+  "refinements": 0,
+  "critic_accepted": true,
+  "decision": "defer",
+  "reasons": [
+    "sem mudanças concretas (pedido pode precisar de clarificação)"
+  ],
+  "status": "proposal_ready",
+  "critic_input_version": "final_calendar_v1",
+  "critic_policy_version": "uncertainty_review_v2",
+  "result_calendar_version": "validated_added_metadata_v2",
+  "final_result_calendar": {
+    "timezone": "Europe/Lisbon",
+    "coverage": "all_events_in_scenario_after_simulation",
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-04-18T23:30:00+01:00",
+        "end": "2027-04-19T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_mon",
+        "title": "Gym Workout",
+        "start": "2027-04-19T08:00:00+01:00",
+        "end": "2027-04-19T09:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_mon",
+        "title": "Freelance Work Block",
+        "start": "2027-04-19T10:30:00+01:00",
+        "end": "2027-04-19T18:30:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "8 hours work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-04-19T23:30:00+01:00",
+        "end": "2027-04-20T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_tue",
+        "title": "Gym Workout",
+        "start": "2027-04-20T08:00:00+01:00",
+        "end": "2027-04-20T09:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_tue",
+        "title": "Freelance Work Block",
+        "start": "2027-04-20T10:30:00+01:00",
+        "end": "2027-04-20T18:30:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "8 hours work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-04-20T23:30:00+01:00",
+        "end": "2027-04-21T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_wed",
+        "title": "Gym Workout",
+        "start": "2027-04-21T08:00:00+01:00",
+        "end": "2027-04-21T09:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_wed",
+        "title": "Freelance Work Block",
+        "start": "2027-04-21T10:30:00+01:00",
+        "end": "2027-04-21T18:30:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "8 hours work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-04-21T23:30:00+01:00",
+        "end": "2027-04-22T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_thu",
+        "title": "Gym Workout",
+        "start": "2027-04-22T08:00:00+01:00",
+        "end": "2027-04-22T09:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_thu",
+        "title": "Freelance Work Block",
+        "start": "2027-04-22T10:30:00+01:00",
+        "end": "2027-04-22T18:30:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "8 hours work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-04-22T23:30:00+01:00",
+        "end": "2027-04-23T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_fri",
+        "title": "Freelance Work Block",
+        "start": "2027-04-23T10:30:00+01:00",
+        "end": "2027-04-23T15:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "4.5 hours work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "podcast_fri",
+        "title": "Tech Podcast Live Interview",
+        "start": "2027-04-23T16:00:00+01:00",
+        "end": "2027-04-23T17:00:00+01:00",
+        "category": "social",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "host"
+        ],
+        "description": "Fixed interview.",
+        "origin": "existing",
+        "change_status": "preserved"
+      }
+    ],
+    "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+  },
+  "final_unresolved_assumptions": [
+    {
+      "subject": "Friday podcast transition",
+      "assumption": "The 15:00-16:00 gap after the Friday work block is sufficient for any preparation, setup, food, decompression, or travel needed before the 16:00 live interview.",
+      "evidence_gap": "The calendar shows a one-hour free interval, but no information is provided about podcast preparation requirements, location, technical setup, or the user's preferred transition needs.",
+      "potential_impact": "material",
+      "verification_source": "unknown"
+    },
+    {
+      "subject": "Client work completion",
+      "assumption": "The preserved freelance work blocks are usable for the intended client-work requirement and reasonably count toward the visible 30-hour weekly target.",
+      "evidence_gap": "The validator confirms 36.5 scheduled work hours, and the rationale acknowledges that scheduled work is not proof of completion, but no evidence confirms the nature or effectiveness of those work blocks.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Sustainability of weekday routine",
+      "assumption": "The existing sequence of four consecutive days with 08:00-09:30 gym workouts followed by 10:30-18:30 work blocks is sustainable for this person.",
+      "evidence_gap": "The proposal states that morning gym workouts are preferred and preserves them, but no information is provided about fatigue, commute, meals, recovery needs, or whether this routine has been working well.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Original request satisfaction",
+      "assumption": "A no-change outcome satisfies the user's original scheduling request beyond the visible priorities of protecting the podcast and meeting the 30-hour work minimum.",
+      "evidence_gap": "The original request is not provided, and the technical validation explicitly says request satisfaction and soft preference satisfaction were not checked.",
+      "potential_impact": "material",
+      "verification_source": "unknown"
+    }
+  ],
+  "uncertainty_history": [
+    {
+      "iteration": 0,
+      "unresolved_assumptions": [
+        {
+          "subject": "Friday podcast transition",
+          "assumption": "The 15:00-16:00 gap after the Friday work block is sufficient for any preparation, setup, food, decompression, or travel needed before the 16:00 live interview.",
+          "evidence_gap": "The calendar shows a one-hour free interval, but no information is provided about podcast preparation requirements, location, technical setup, or the user's preferred transition needs.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Client work completion",
+          "assumption": "The preserved freelance work blocks are usable for the intended client-work requirement and reasonably count toward the visible 30-hour weekly target.",
+          "evidence_gap": "The validator confirms 36.5 scheduled work hours, and the rationale acknowledges that scheduled work is not proof of completion, but no evidence confirms the nature or effectiveness of those work blocks.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Sustainability of weekday routine",
+          "assumption": "The existing sequence of four consecutive days with 08:00-09:30 gym workouts followed by 10:30-18:30 work blocks is sustainable for this person.",
+          "evidence_gap": "The proposal states that morning gym workouts are preferred and preserves them, but no information is provided about fatigue, commute, meals, recovery needs, or whether this routine has been working well.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Original request satisfaction",
+          "assumption": "A no-change outcome satisfies the user's original scheduling request beyond the visible priorities of protecting the podcast and meeting the 30-hour work minimum.",
+          "evidence_gap": "The original request is not provided, and the technical validation explicitly says request satisfaction and soft preference satisfaction were not checked.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        }
+      ]
+    }
+  ],
+  "schema_version": "2.0",
+  "profile_id": "freelancer_flexible_01__freelancer_flexible_tech_podcast_interview_deadline_001",
+  "scenario_sha256": "4d1db91f5433d5a3e58ac6b61887130bbf78dc1c1fca51c5c0df23c6d381655d",
+  "aggregate_requirements_sha256": "c9c705edefb276401b26414ef765e0760d18cff359504c855de24640b23dd0f9",
+  "confirmed_changes_sha256": null,
+  "simulator_version": "calendar_v2_validated_added_metadata_v2",
+  "dataset_manifest_sha256": "28af38846fb8995651d5f63ab63402e36147dc0915a2bfcd5379747ea531ffad",
+  "split": "train",
+  "run_id": "fd9ce44c803045eca52b7c3ac74e593d",
+  "experiment_id": null,
+  "repeat_index": 0,
+  "generated_at": "2026-11-24T10:23:07.943851+00:00",
+  "prompt_versions": {
+    "proposer_sha256": "ae6fa59cccb86c31f34f66d07d241660b1feadf852ebf1b594bc85addab86985",
+    "proposer_wire_schema_version": "compact_proposal_v1",
+    "proposer_wire_schema_sha256": "f504fbcd7e939c43e055e2f188feb22097a284bcd9b043227d868e559547b865",
+    "proposer_revision_sha256": "3f0fe7f221013700694a22984560612013e9804072ffde4538e1329b9708ac95",
+    "critic_sha256": "1686688cdd4bc63abb12e6633ef9dbb9b62d69b69aba1c4805a201657cc5bb34"
+  },
+  "seconds": 31.684,
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [
+      "no changes proposed; request satisfaction requires Critic and human review"
+    ],
+    "valid": true,
+    "aggregate_checks": [
+      {
+        "id": "weekly_hours",
+        "status": "pass",
+        "minutes": 2190.0,
+        "minimum_minutes": 1800,
+        "category": "work",
+        "evidence": "union of final calendar intervals"
+      }
+    ],
+    "aggregate_validation_version": "duration_total_v1",
+    "no_op": true
+  }
+}

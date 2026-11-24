@@ -1,0 +1,2272 @@
+{
+  "configuration": "B",
+  "scenario_id": "parent_young_children_cancelled_offsite_free_afternoon_001",
+  "family": "parent_young_children_schedule_conflict",
+  "category": "v2",
+  "proposer_provider": "iaedu",
+  "proposer_model": "GPT-5.5",
+  "proposer_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_provider": "iaedu",
+  "critic_model": "GPT-5.5",
+  "critic_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_settings": {
+    "threshold": 4.0,
+    "max_refinements": 3,
+    "min_dimension_score": 1
+  },
+  "iterations": [
+    {
+      "index": 0,
+      "proposer_feedback": null,
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "delete",
+            "event_id": "travel_to_offsite_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "offsite_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "commute_to_school_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-02-10T13:30:00+00:00",
+            "to_end": "2027-02-10T14:00:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Renew Marta's ID card",
+            "from_start": null,
+            "to_start": "2027-02-10T14:00:00+00:00",
+            "to_end": "2027-02-10T15:20:00+00:00",
+            "category": "children",
+            "importance": 5,
+            "participants": [
+              "user",
+              "marta"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Travel from ID office to boots shop via daycare",
+            "from_start": null,
+            "to_start": "2027-02-10T15:20:00+00:00",
+            "to_end": "2027-02-10T15:50:00+00:00",
+            "category": "commute",
+            "importance": 3,
+            "participants": [
+              "user",
+              "marta"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Buy winter boots for Duarte",
+            "from_start": null,
+            "to_start": "2027-02-10T15:50:00+00:00",
+            "to_end": "2027-02-10T16:20:00+00:00",
+            "category": "household",
+            "importance": 3,
+            "participants": [
+              "user",
+              "marta"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Return to school and daycare area",
+            "from_start": null,
+            "to_start": "2027-02-10T16:20:00+00:00",
+            "to_end": "2027-02-10T16:30:00+00:00",
+            "category": "commute",
+            "importance": 3,
+            "participants": [
+              "user",
+              "marta"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Run",
+            "from_start": null,
+            "to_start": "2027-02-10T21:15:00+00:00",
+            "to_end": "2027-02-10T22:00:00+00:00",
+            "category": "exercise",
+            "importance": 2,
+            "participants": [
+              "user"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "The offsite and its hotel travel can be removed because the organiser has cancelled the event and the user requested removal.",
+            "Marta's ID errand is scheduled to obtain a ticket well before the 16:30 cutoff and uses the stated 20-minute travel, 45-minute wait and 15-minute appointment.",
+            "The original school commute is moved earlier to support the early school collection, while the protected child pickup block is not deleted.",
+            "Marta's swimming, dinner by 19:30, bedtime and protected sleep are preserved.",
+            "Groceries are not moved to today because swimming, dinner, supermarket closing time and unknown travel from the shop make the same-day option unreliable without help.",
+            "No partner task is scheduled because the partner has not been asked and third-party changes require confirmation."
+          ],
+          "priorities": [
+            "ID renewal is prioritised because Marta must be present and the card expires in ten days.",
+            "Boots are fitted into the afternoon before the normal daycare pickup and swimming chain.",
+            "The run is placed after bedtime, matching the preferred evening exercise window and preserving sleep.",
+            "Tomorrow evening groceries remain the fallback already on the calendar."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Ask partner to cover daycare pickup or groceries today.",
+              "rejected_because": "This could make same-day groceries easier, but it needs the partner's agreement and was not assumed."
+            },
+            {
+              "option": "Skip or move Marta's swimming to make room for groceries today.",
+              "rejected_because": "This was rejected because the user asked to keep swimming and the class involves an external activity."
+            },
+            {
+              "option": "Do groceries online for delivery while the partner is home.",
+              "rejected_because": "This may work if delivery slots exist and the partner agrees to receive it, but availability and consent are unknown."
+            }
+          ],
+          "summary": "The plan uses the cancelled offsite window for Marta's urgent ID renewal and Duarte's boots, keeps swimming and dinner intact, adds a post-bedtime run, and leaves weekly groceries tomorrow because doing them today is not reliable without partner help or dropping another commitment."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [
+          "change 1: protected event cannot be changed: travel_to_offsite_wed",
+          "change 2: protected event cannot be changed: offsite_wed",
+          "change 3: protected event cannot be changed: commute_to_school_wed"
+        ],
+        "warnings": [],
+        "valid": false
+      },
+      "result_calendar": null,
+      "critic_evaluation": null,
+      "acceptance_policy": null,
+      "operations_changed_from_previous": null,
+      "rationale_changed_from_previous": null,
+      "prior_critic_reviews": []
+    },
+    {
+      "index": 1,
+      "proposer_feedback": "Deterministic validation found these operational problems: change 1: protected event cannot be changed: travel_to_offsite_wed; change 2: protected event cannot be changed: offsite_wed; change 3: protected event cannot be changed: commute_to_school_wed. Revise the changes before any Critic assessment.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Travel to collect Marta early",
+            "from_start": null,
+            "to_start": "2027-02-10T13:30:00+00:00",
+            "to_end": "2027-02-10T14:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Collect Marta and travel to ID office",
+            "from_start": null,
+            "to_start": "2027-02-10T14:00:00+00:00",
+            "to_end": "2027-02-10T14:20:00+00:00",
+            "category": "commute",
+            "importance": 5,
+            "participants": [
+              "user",
+              "marta"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Renew Marta's ID card",
+            "from_start": null,
+            "to_start": "2027-02-10T14:20:00+00:00",
+            "to_end": "2027-02-10T15:20:00+00:00",
+            "category": "children",
+            "importance": 5,
+            "participants": [
+              "user",
+              "marta"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Travel to boots shop via daycare area",
+            "from_start": null,
+            "to_start": "2027-02-10T15:20:00+00:00",
+            "to_end": "2027-02-10T15:50:00+00:00",
+            "category": "commute",
+            "importance": 3,
+            "participants": [
+              "user",
+              "marta"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Buy winter boots for Duarte",
+            "from_start": null,
+            "to_start": "2027-02-10T15:50:00+00:00",
+            "to_end": "2027-02-10T16:20:00+00:00",
+            "category": "household",
+            "importance": 3,
+            "participants": [
+              "user",
+              "marta"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Return to school and daycare area",
+            "from_start": null,
+            "to_start": "2027-02-10T16:20:00+00:00",
+            "to_end": "2027-02-10T16:30:00+00:00",
+            "category": "commute",
+            "importance": 3,
+            "participants": [
+              "user",
+              "marta"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Run",
+            "from_start": null,
+            "to_start": "2027-02-10T21:15:00+00:00",
+            "to_end": "2027-02-10T22:00:00+00:00",
+            "category": "exercise",
+            "importance": 2,
+            "participants": [
+              "user"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "The offsite cancellation is treated as real-world availability, but the fixed offsite and travel entries are not deleted here because protected-event deletion was rejected.",
+            "The ID plan needs confirmation that school can release Marta early and whether she may return afterward or stay with the user.",
+            "The ID timing uses the stated cutoff, usual wait and appointment duration; the actual queue length is uncertain.",
+            "Buying boots before pickup assumes Duarte does not need to be present for sizing.",
+            "Marta's swimming, dinner by 19:30, bedtime and protected sleep are kept unchanged.",
+            "Same-day groceries are not added because the remaining usable time cannot fit them without partner help or dropping another commitment.",
+            "No partner task is scheduled because the partner has not been asked and third-party changes require confirmation.",
+            "The existing Thursday groceries block remains the fallback for the weekly shop."
+          ],
+          "priorities": [
+            "Marta's ID renewal is prioritised because it expires soon and requires her presence.",
+            "Duarte's boots are placed next because the shop can fit before the evening activity chain if sizing can be handled without him.",
+            "The run is placed after bedtime to preserve childcare, dinner and sleep constraints.",
+            "Calendar cleanup for the cancelled fixed events is separated from the rest of the plan because those entries are protected."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Ask the partner to cover daycare pickup or groceries today.",
+              "rejected_because": "This could make groceries today easier, but it requires the partner's agreement and was not assumed."
+            },
+            {
+              "option": "Buy boots with Duarte after pickup.",
+              "rejected_because": "This was rejected because it would collide with swimming or the 19:30 home-for-dinner goal."
+            },
+            {
+              "option": "Skip or move Marta's swimming to fit groceries today.",
+              "rejected_because": "This was rejected because the user asked to keep swimming and it is an external children's activity."
+            },
+            {
+              "option": "Move the ID errand to tomorrow afternoon.",
+              "rejected_because": "This would disrupt work and childcare arrangements and still needs school confirmation."
+            }
+          ],
+          "summary": "The plan uses the cancelled offsite window for Marta's urgent ID renewal and Duarte's boots, keeps swimming and dinner intact, adds a post-bedtime run, and leaves groceries on Thursday; the main trade-off is that the cancelled fixed offsite entries still need protected-calendar cleanup while school release and boots sizing must be confirmed."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [
+          "new_4: overlaps protected event offsite_wed",
+          "new_3: overlaps protected event offsite_wed",
+          "new_0: overlaps protected event travel_to_offsite_wed",
+          "new_5: overlaps protected event offsite_wed",
+          "new_1: overlaps protected event offsite_wed",
+          "new_2: overlaps protected event offsite_wed"
+        ],
+        "warnings": [],
+        "valid": false
+      },
+      "result_calendar": null,
+      "critic_evaluation": null,
+      "acceptance_policy": null,
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": []
+    },
+    {
+      "index": 2,
+      "proposer_feedback": "Deterministic validation found these operational problems: new_4: overlaps protected event offsite_wed; new_3: overlaps protected event offsite_wed; new_0: overlaps protected event travel_to_offsite_wed; new_5: overlaps protected event offsite_wed; new_1: overlaps protected event offsite_wed; new_2: overlaps protected event offsite_wed. Revise the changes before any Critic assessment.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "delete",
+            "event_id": "travel_to_offsite_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "offsite_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "commute_to_school_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Travel to collect Marta early",
+            "from_start": null,
+            "to_start": "2027-02-10T13:30:00+00:00",
+            "to_end": "2027-02-10T14:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Collect Marta and travel to ID office",
+            "from_start": null,
+            "to_start": "2027-02-10T14:00:00+00:00",
+            "to_end": "2027-02-10T14:20:00+00:00",
+            "category": "commute",
+            "importance": 5,
+            "participants": [
+              "user",
+              "marta"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Renew Marta's ID card",
+            "from_start": null,
+            "to_start": "2027-02-10T14:20:00+00:00",
+            "to_end": "2027-02-10T15:20:00+00:00",
+            "category": "children",
+            "importance": 5,
+            "participants": [
+              "user",
+              "marta"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Travel to boots shop via daycare area",
+            "from_start": null,
+            "to_start": "2027-02-10T15:20:00+00:00",
+            "to_end": "2027-02-10T15:50:00+00:00",
+            "category": "commute",
+            "importance": 3,
+            "participants": [
+              "user",
+              "marta"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Buy winter boots for Duarte",
+            "from_start": null,
+            "to_start": "2027-02-10T15:50:00+00:00",
+            "to_end": "2027-02-10T16:20:00+00:00",
+            "category": "household",
+            "importance": 3,
+            "participants": [
+              "user",
+              "marta"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Return to school and daycare area",
+            "from_start": null,
+            "to_start": "2027-02-10T16:20:00+00:00",
+            "to_end": "2027-02-10T16:30:00+00:00",
+            "category": "commute",
+            "importance": 3,
+            "participants": [
+              "user",
+              "marta"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Wait with Marta until Duarte pickup",
+            "from_start": null,
+            "to_start": "2027-02-10T16:30:00+00:00",
+            "to_end": "2027-02-10T17:30:00+00:00",
+            "category": "family",
+            "importance": 4,
+            "participants": [
+              "user",
+              "marta"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Run",
+            "from_start": null,
+            "to_start": "2027-02-10T21:15:00+00:00",
+            "to_end": "2027-02-10T22:00:00+00:00",
+            "category": "exercise",
+            "importance": 2,
+            "participants": [
+              "user"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "The offsite and its affected travel are removed because the organiser cancellation is the supplied exception for those fixed entries.",
+            "The old school commute is removed because the new route already places the user at the school and daycare area before pickup.",
+            "The ID errand uses the stated school-to-office travel, usual wait and appointment length, with arrival before the ticket cutoff.",
+            "The actual ID queue and ticket availability remain uncertain.",
+            "Buying boots before Duarte pickup assumes Duarte does not need to try them on in person.",
+            "Marta's swimming, dinner by 19:30, bedtime and protected sleep remain intact.",
+            "Groceries are left on Thursday because no known free slot today fits shopping, travel, swimming and dinner without third-party help.",
+            "No partner task is scheduled because the partner has not been asked."
+          ],
+          "priorities": [
+            "Marta's ID renewal is prioritised because it expires soon and requires her presence.",
+            "Duarte's boots are fitted into the freed afternoon without disrupting swimming.",
+            "The run is placed after bedtime to preserve childcare and dinner constraints.",
+            "Thursday's existing grocery block remains the fallback weekly shop."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Ask the partner to cover daycare pickup or groceries today.",
+              "rejected_because": "This may allow groceries today, but it requires the partner's agreement and was not assumed."
+            },
+            {
+              "option": "Buy boots with Duarte after pickup.",
+              "rejected_because": "This was rejected because it would collide with swimming or the 19:30 home goal."
+            },
+            {
+              "option": "Skip or move Marta's swimming.",
+              "rejected_because": "This was rejected because the user asked to keep it and it is an external activity."
+            },
+            {
+              "option": "Do groceries after bedtime today.",
+              "rejected_because": "This was rejected because the supermarket is only stated open until 21:00."
+            }
+          ],
+          "summary": "The selected plan clears the cancelled offsite, uses the afternoon for Marta's ID renewal and Duarte's boots, keeps swimming and dinner protected, and adds a late run; the main trade-off is leaving groceries for Thursday unless the partner agrees to help today."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [
+          "change 1: protected event cannot be changed: travel_to_offsite_wed",
+          "change 2: protected event cannot be changed: offsite_wed",
+          "change 3: protected event cannot be changed: commute_to_school_wed"
+        ],
+        "warnings": [],
+        "valid": false
+      },
+      "result_calendar": null,
+      "critic_evaluation": null,
+      "acceptance_policy": null,
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": []
+    },
+    {
+      "index": 3,
+      "proposer_feedback": "Deterministic validation found these operational problems: change 1: protected event cannot be changed: travel_to_offsite_wed; change 2: protected event cannot be changed: offsite_wed; change 3: protected event cannot be changed: commute_to_school_wed. Revise the changes before any Critic assessment.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Run",
+            "from_start": null,
+            "to_start": "2027-02-10T21:15:00+00:00",
+            "to_end": "2027-02-10T22:00:00+00:00",
+            "category": "exercise",
+            "importance": 2,
+            "participants": [
+              "user"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "The cancelled offsite and its travel are still fixed/protected in the supplied calendar, so this proposal cannot remove them without an externally confirmed exception accepted for those entries.",
+            "The requested afternoon errands are not operationally feasible while those protected blocks remain on the calendar.",
+            "Marta's ID renewal requires her presence, ticket availability before cutoff, the usual queue time, and a valid route from school to the office.",
+            "Duarte's boots depend on shop availability and whether Duarte must be present for sizing.",
+            "Marta's swimming, dinner by 19:30, bedtime, and protected sleep remain intact.",
+            "Groceries stay on Thursday because today has no confirmed feasible slot before the supermarket closes.",
+            "No partner task is assumed because the partner has not been asked."
+          ],
+          "priorities": [
+            "The only safe change is adding the run after bedtime without disturbing childcare or sleep.",
+            "Marta's ID card remains the highest unresolved errand because it expires soon.",
+            "Thursday's existing grocery block remains the fallback weekly shop.",
+            "Confirming the offsite cancellation in the calendar would unlock the intended afternoon replanning."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Remove the offsite and related travel after confirmed calendar cancellation.",
+              "rejected_because": "This would likely allow the ID errand and possibly boots today, but the protected entries cannot be changed under the current supplied rules."
+            },
+            {
+              "option": "Ask the partner to cover daycare pickup or groceries today.",
+              "rejected_because": "This may create room for boots or groceries, but it requires the partner's agreement."
+            },
+            {
+              "option": "Skip or move Marta's swimming.",
+              "rejected_because": "This was rejected because the user asked to keep it and it depends on an external activity."
+            },
+            {
+              "option": "Do groceries after bedtime today.",
+              "rejected_because": "This was rejected because the supermarket is only stated open until 21:00."
+            }
+          ],
+          "summary": "The selected plan keeps all protected commitments, adds the run tonight, and leaves groceries for Thursday; the main trade-off is that Marta's ID renewal and Duarte's boots cannot be safely scheduled until the protected offsite cancellation and any needed partner or venue details are confirmed."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-02-09T23:00:00+00:00",
+            "end": "2027-02-10T06:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block; the user requires at least seven hours of sleep per night.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "partner_shift_wed",
+            "title": "Partner's work shift",
+            "start": "2027-02-10T05:30:00+00:00",
+            "end": "2027-02-10T13:30:00+00:00",
+            "category": "partner_work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "partner"
+            ],
+            "description": "Early shift as a bus driver; the partner is home from 14:15.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "morning_wed",
+            "title": "Morning routine with the children",
+            "start": "2027-02-10T06:45:00+00:00",
+            "end": "2027-02-10T07:45:00+00:00",
+            "category": "family",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Breakfast, dressing and packing school bags for both children.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "travel_to_school_wed",
+            "title": "Travel to school and daycare",
+            "start": "2027-02-10T08:00:00+00:00",
+            "end": "2027-02-10T08:15:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "15-minute car journey from home to the school and daycare, which share the same site.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "dropoff_wed",
+            "title": "Drop-off at school and daycare",
+            "start": "2027-02-10T08:15:00+00:00",
+            "end": "2027-02-10T08:30:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Drop-off for Marta (primary school, gates close at 08:30) and Duarte (daycare, arrival until 09:00).",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_to_work_wed",
+            "title": "Commute to office",
+            "start": "2027-02-10T08:30:00+00:00",
+            "end": "2027-02-10T09:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute car journey from the school to the office.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "email_wed",
+            "title": "Email and planning",
+            "start": "2027-02-10T09:00:00+00:00",
+            "end": "2027-02-10T09:30:00+00:00",
+            "category": "work_focus",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Flexible individual work that can be moved within the working day.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "standup_wed",
+            "title": "Team stand-up",
+            "start": "2027-02-10T09:30:00+00:00",
+            "end": "2027-02-10T10:00:00+00:00",
+            "category": "work",
+            "importance": 3,
+            "fixed": true,
+            "participants": [
+              "user",
+              "team"
+            ],
+            "description": "Daily stand-up; can be joined by video.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "offsite_prep_wed",
+            "title": "Prepare offsite materials",
+            "start": "2027-02-10T10:00:00+00:00",
+            "end": "2027-02-10T12:15:00+00:00",
+            "category": "work_focus",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Slides and handouts for the strategy offsite this afternoon.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_wed",
+            "title": "Lunch",
+            "start": "2027-02-10T12:15:00+00:00",
+            "end": "2027-02-10T13:00:00+00:00",
+            "category": "meal",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch at the office canteen.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "focus_wed",
+            "title": "Final check of offsite materials",
+            "start": "2027-02-10T13:00:00+00:00",
+            "end": "2027-02-10T13:30:00+00:00",
+            "category": "work_focus",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Flexible individual work that can be moved within the working day.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "travel_to_offsite_wed",
+            "title": "Travel to offsite hotel",
+            "start": "2027-02-10T13:30:00+00:00",
+            "end": "2027-02-10T14:00:00+00:00",
+            "category": "commute",
+            "importance": 3,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute car journey from the office to the hotel.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "offsite_wed",
+            "title": "Strategy offsite",
+            "start": "2027-02-10T14:00:00+00:00",
+            "end": "2027-02-10T17:00:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user",
+              "team",
+              "director"
+            ],
+            "description": "Afternoon strategy offsite at a hotel near the motorway.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_to_school_wed",
+            "title": "Commute to school",
+            "start": "2027-02-10T17:00:00+00:00",
+            "end": "2027-02-10T17:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute journey from the office to the school and daycare.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "pickup_wed",
+            "title": "Pick up children",
+            "start": "2027-02-10T17:30:00+00:00",
+            "end": "2027-02-10T17:45:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Pick-up from the after-school programme and daycare, which close at 18:30.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "travel_to_pool_wed",
+            "title": "Travel to pool",
+            "start": "2027-02-10T17:45:00+00:00",
+            "end": "2027-02-10T18:00:00+00:00",
+            "category": "commute",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "15-minute car journey from school to the pool.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "swim_marta_wed",
+            "title": "Marta's swimming class",
+            "start": "2027-02-10T18:00:00+00:00",
+            "end": "2027-02-10T19:00:00+00:00",
+            "category": "kids_activity",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Weekly 1-hour class; Duarte waits with the parent in the viewing area.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "travel_home_wed",
+            "title": "Travel home from pool",
+            "start": "2027-02-10T19:00:00+00:00",
+            "end": "2027-02-10T19:15:00+00:00",
+            "category": "commute",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "15-minute car journey home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "dinner_wed",
+            "title": "Family dinner",
+            "start": "2027-02-10T19:30:00+00:00",
+            "end": "2027-02-10T20:30:00+00:00",
+            "category": "family",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "One-hour dinner at home with the children.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "bedtime_wed",
+            "title": "Children's bedtime routine",
+            "start": "2027-02-10T20:30:00+00:00",
+            "end": "2027-02-10T21:15:00+00:00",
+            "category": "family",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Bath, story and bedtime for both children; about 45 minutes.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_0",
+            "title": "Run",
+            "start": "2027-02-10T21:15:00+00:00",
+            "end": "2027-02-10T22:00:00+00:00",
+            "category": "exercise",
+            "importance": 2,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-02-10T23:00:00+00:00",
+            "end": "2027-02-11T06:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block; the user requires at least seven hours of sleep per night.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "partner_shift_thu",
+            "title": "Partner's work shift",
+            "start": "2027-02-11T05:30:00+00:00",
+            "end": "2027-02-11T13:30:00+00:00",
+            "category": "partner_work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "partner"
+            ],
+            "description": "Early shift as a bus driver; the partner is home from 14:15.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "morning_thu",
+            "title": "Morning routine with the children",
+            "start": "2027-02-11T06:45:00+00:00",
+            "end": "2027-02-11T07:45:00+00:00",
+            "category": "family",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Breakfast, dressing and packing school bags for both children.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "travel_to_school_thu",
+            "title": "Travel to school and daycare",
+            "start": "2027-02-11T08:00:00+00:00",
+            "end": "2027-02-11T08:15:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "15-minute car journey from home to the school and daycare, which share the same site.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "dropoff_thu",
+            "title": "Drop-off at school and daycare",
+            "start": "2027-02-11T08:15:00+00:00",
+            "end": "2027-02-11T08:30:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Drop-off for Marta (primary school, gates close at 08:30) and Duarte (daycare, arrival until 09:00). The partner works the early shift and left at 05:00.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_to_work_thu",
+            "title": "Commute to office",
+            "start": "2027-02-11T08:30:00+00:00",
+            "end": "2027-02-11T09:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute car journey from the school to the office.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "forecast_thu",
+            "title": "Quarterly forecast",
+            "start": "2027-02-11T09:00:00+00:00",
+            "end": "2027-02-11T12:30:00+00:00",
+            "category": "work_focus",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Flexible individual work that can be moved within the working day.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_thu",
+            "title": "Lunch",
+            "start": "2027-02-11T12:30:00+00:00",
+            "end": "2027-02-11T13:15:00+00:00",
+            "category": "meal",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch at the office canteen.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "focus_thu",
+            "title": "Project work",
+            "start": "2027-02-11T13:15:00+00:00",
+            "end": "2027-02-11T17:00:00+00:00",
+            "category": "work_focus",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Flexible individual work that can be moved within the working day.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_home_thu",
+            "title": "Commute home",
+            "start": "2027-02-11T17:00:00+00:00",
+            "end": "2027-02-11T17:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute journey from the office to home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "pickup_partner_thu",
+            "title": "Pick up children (partner)",
+            "start": "2027-02-11T17:30:00+00:00",
+            "end": "2027-02-11T17:45:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "partner",
+              "marta",
+              "duarte"
+            ],
+            "description": "The partner collects both children and takes them home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "groceries_thu",
+            "title": "Weekly groceries",
+            "start": "2027-02-11T18:00:00+00:00",
+            "end": "2027-02-11T19:00:00+00:00",
+            "category": "household",
+            "importance": 2,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Weekly supermarket shop; supermarket 10 minutes from home, open until 21:00.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "dinner_thu",
+            "title": "Family dinner",
+            "start": "2027-02-11T19:30:00+00:00",
+            "end": "2027-02-11T20:30:00+00:00",
+            "category": "family",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "One-hour dinner at home with the children.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "bedtime_thu",
+            "title": "Children's bedtime routine",
+            "start": "2027-02-11T20:30:00+00:00",
+            "end": "2027-02-11T21:15:00+00:00",
+            "category": "family",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Bath, story and bedtime for both children; about 45 minutes.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-02-11T23:00:00+00:00",
+            "end": "2027-02-12T06:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block; the user requires at least seven hours of sleep per night.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 3,
+          "coherence": 3,
+          "alternatives": 3,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The rationale treats the 21:15-22:00 run as safe mainly because it does not disturb childcare or protected sleep, but it does not meaningfully assess the user's practical fatigue after a dense day running from sleep ending at 06:30 through morning childcare, commute, work, offsite, pickup, swimming logistics, dinner, and bedtime.",
+          "The added run starts immediately after the 20:30-21:15 children's bedtime routine, using the first clear recovery/personal slot of the evening. That may be manageable for some people, but the proposal does not explain why this is sustainable on this specific day.",
+          "The calendar leaves 22:00-23:00 before protected sleep, which could cover showering and winding down, but the proposal does not acknowledge that post-run hygiene, decompression, and transition to sleep are still needed.",
+          "Alternatives are mostly discussed for errands and protected offsite constraints, not for the run itself. The proposal does not show whether a lower-impact exercise option, a shorter session, or a different distribution within the visible flexibility was considered.",
+          "Request satisfaction cannot be independently verified because the original request is not provided; only the proposal's stated priorities and resulting calendar are visible."
+        ],
+        "feedback": "The plan is technically coherent and preserves major visible obligations, but the human-quality issue is the newly added run at 21:15 after an already full Wednesday. The visible calendar shows a demanding sequence: protected sleep ends at 06:30, family routine starts at 06:45, school/daycare logistics run until 09:00, work and offsite commitments continue through 17:00, then pickup, pool travel, Marta's 18:00-19:00 swimming class, dinner from 19:30-20:30, and children's bedtime from 20:30-21:15. Adding a 45-minute run immediately afterward may still be realistic, especially with sleep preserved from 23:00, but the rationale does not substantiate that this is a sustainable use of the user's only late-evening recovery margin. The Proposer should reconsider or better justify the run placement with its fuller context, specifically addressing fatigue, post-run transition needs, and whether the exercise goal could be met with less strain while preserving the protected commitments.",
+        "plausibility_review": {
+          "revision_required": true,
+          "severity": "moderate",
+          "reason": "The added run could materially affect manageability because it follows a long chain of work, childcare, transport, swimming logistics, dinner, and bedtime, and it consumes the first available evening recovery slot. This is not an objective impossibility, and the 23:00 sleep block remains intact, but the rationale's claim that this is the only safe change is not enough to establish that it is a good human schedule.",
+          "suggested_improvement": "Reconsider the exercise placement or provide a grounded explanation from the fuller context showing that a 21:15-22:00 run after this particular day is sustainable, including how post-run hygiene, recovery, and transition to sleep are handled."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "User capacity for late exercise",
+            "assumption": "The user can realistically complete a 45-minute run from 21:15 to 22:00 after a full work, childcare, swimming, dinner, and bedtime sequence.",
+            "evidence_gap": "The proposal states the run is safe because it is after bedtime and does not disturb sleep, but it provides no evidence about the user's energy, exercise tolerance, or preference for late workouts.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Post-run transition before sleep",
+            "assumption": "The 22:00-23:00 interval is sufficient for showering, cooling down, winding down, and preparing for the protected sleep block.",
+            "evidence_gap": "The calendar has a free hour before sleep, but the proposal does not account for post-exercise hygiene or recovery needs.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Child supervision during the run",
+            "assumption": "The children can be safely left supervised or otherwise covered while the user runs after the 20:30-21:15 bedtime routine.",
+            "evidence_gap": "The partner's Wednesday shift indicates the partner is home from 14:15, but the run event lists only the user and the proposal does not explicitly confirm coverage during the run.",
+            "potential_impact": "potentially_blocking",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Outdoor or location conditions for the run",
+            "assumption": "A suitable and acceptable place or route is available for running at 21:15.",
+            "evidence_gap": "The event title is only 'Run' and no route, gym, lighting, access, or safety condition is specified.",
+            "potential_impact": "minor",
+            "verification_source": "unknown"
+          }
+        ],
+        "overall": 3.25
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": false,
+        "plausibility_revision_required": true,
+        "accepted": false,
+        "revision_causes": [
+          "numeric_criteria_failed",
+          "plausibility_revision_required"
+        ]
+      },
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": [],
+      "unresolved_assumptions": [
+        {
+          "subject": "User capacity for late exercise",
+          "assumption": "The user can realistically complete a 45-minute run from 21:15 to 22:00 after a full work, childcare, swimming, dinner, and bedtime sequence.",
+          "evidence_gap": "The proposal states the run is safe because it is after bedtime and does not disturb sleep, but it provides no evidence about the user's energy, exercise tolerance, or preference for late workouts.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Post-run transition before sleep",
+          "assumption": "The 22:00-23:00 interval is sufficient for showering, cooling down, winding down, and preparing for the protected sleep block.",
+          "evidence_gap": "The calendar has a free hour before sleep, but the proposal does not account for post-exercise hygiene or recovery needs.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Child supervision during the run",
+          "assumption": "The children can be safely left supervised or otherwise covered while the user runs after the 20:30-21:15 bedtime routine.",
+          "evidence_gap": "The partner's Wednesday shift indicates the partner is home from 14:15, but the run event lists only the user and the proposal does not explicitly confirm coverage during the run.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Outdoor or location conditions for the run",
+          "assumption": "A suitable and acceptable place or route is available for running at 21:15.",
+          "evidence_gap": "The event title is only 'Run' and no route, gym, lighting, access, or safety condition is specified.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        }
+      ]
+    }
+  ],
+  "initial_proposal": {
+    "changes": [
+      {
+        "type": "delete",
+        "event_id": "travel_to_offsite_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "offsite_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "commute_to_school_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": "2027-02-10T13:30:00+00:00",
+        "to_end": "2027-02-10T14:00:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Renew Marta's ID card",
+        "from_start": null,
+        "to_start": "2027-02-10T14:00:00+00:00",
+        "to_end": "2027-02-10T15:20:00+00:00",
+        "category": "children",
+        "importance": 5,
+        "participants": [
+          "user",
+          "marta"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Travel from ID office to boots shop via daycare",
+        "from_start": null,
+        "to_start": "2027-02-10T15:20:00+00:00",
+        "to_end": "2027-02-10T15:50:00+00:00",
+        "category": "commute",
+        "importance": 3,
+        "participants": [
+          "user",
+          "marta"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Buy winter boots for Duarte",
+        "from_start": null,
+        "to_start": "2027-02-10T15:50:00+00:00",
+        "to_end": "2027-02-10T16:20:00+00:00",
+        "category": "household",
+        "importance": 3,
+        "participants": [
+          "user",
+          "marta"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Return to school and daycare area",
+        "from_start": null,
+        "to_start": "2027-02-10T16:20:00+00:00",
+        "to_end": "2027-02-10T16:30:00+00:00",
+        "category": "commute",
+        "importance": 3,
+        "participants": [
+          "user",
+          "marta"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Run",
+        "from_start": null,
+        "to_start": "2027-02-10T21:15:00+00:00",
+        "to_end": "2027-02-10T22:00:00+00:00",
+        "category": "exercise",
+        "importance": 2,
+        "participants": [
+          "user"
+        ]
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "The offsite and its hotel travel can be removed because the organiser has cancelled the event and the user requested removal.",
+        "Marta's ID errand is scheduled to obtain a ticket well before the 16:30 cutoff and uses the stated 20-minute travel, 45-minute wait and 15-minute appointment.",
+        "The original school commute is moved earlier to support the early school collection, while the protected child pickup block is not deleted.",
+        "Marta's swimming, dinner by 19:30, bedtime and protected sleep are preserved.",
+        "Groceries are not moved to today because swimming, dinner, supermarket closing time and unknown travel from the shop make the same-day option unreliable without help.",
+        "No partner task is scheduled because the partner has not been asked and third-party changes require confirmation."
+      ],
+      "priorities": [
+        "ID renewal is prioritised because Marta must be present and the card expires in ten days.",
+        "Boots are fitted into the afternoon before the normal daycare pickup and swimming chain.",
+        "The run is placed after bedtime, matching the preferred evening exercise window and preserving sleep.",
+        "Tomorrow evening groceries remain the fallback already on the calendar."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Ask partner to cover daycare pickup or groceries today.",
+          "rejected_because": "This could make same-day groceries easier, but it needs the partner's agreement and was not assumed."
+        },
+        {
+          "option": "Skip or move Marta's swimming to make room for groceries today.",
+          "rejected_because": "This was rejected because the user asked to keep swimming and the class involves an external activity."
+        },
+        {
+          "option": "Do groceries online for delivery while the partner is home.",
+          "rejected_because": "This may work if delivery slots exist and the partner agrees to receive it, but availability and consent are unknown."
+        }
+      ],
+      "summary": "The plan uses the cancelled offsite window for Marta's urgent ID renewal and Duarte's boots, keeps swimming and dinner intact, adds a post-bedtime run, and leaves weekly groceries tomorrow because doing them today is not reliable without partner help or dropping another commitment."
+    }
+  },
+  "final_proposal": {
+    "changes": [
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Run",
+        "from_start": null,
+        "to_start": "2027-02-10T21:15:00+00:00",
+        "to_end": "2027-02-10T22:00:00+00:00",
+        "category": "exercise",
+        "importance": 2,
+        "participants": [
+          "user"
+        ]
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "The cancelled offsite and its travel are still fixed/protected in the supplied calendar, so this proposal cannot remove them without an externally confirmed exception accepted for those entries.",
+        "The requested afternoon errands are not operationally feasible while those protected blocks remain on the calendar.",
+        "Marta's ID renewal requires her presence, ticket availability before cutoff, the usual queue time, and a valid route from school to the office.",
+        "Duarte's boots depend on shop availability and whether Duarte must be present for sizing.",
+        "Marta's swimming, dinner by 19:30, bedtime, and protected sleep remain intact.",
+        "Groceries stay on Thursday because today has no confirmed feasible slot before the supermarket closes.",
+        "No partner task is assumed because the partner has not been asked."
+      ],
+      "priorities": [
+        "The only safe change is adding the run after bedtime without disturbing childcare or sleep.",
+        "Marta's ID card remains the highest unresolved errand because it expires soon.",
+        "Thursday's existing grocery block remains the fallback weekly shop.",
+        "Confirming the offsite cancellation in the calendar would unlock the intended afternoon replanning."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Remove the offsite and related travel after confirmed calendar cancellation.",
+          "rejected_because": "This would likely allow the ID errand and possibly boots today, but the protected entries cannot be changed under the current supplied rules."
+        },
+        {
+          "option": "Ask the partner to cover daycare pickup or groceries today.",
+          "rejected_because": "This may create room for boots or groceries, but it requires the partner's agreement."
+        },
+        {
+          "option": "Skip or move Marta's swimming.",
+          "rejected_because": "This was rejected because the user asked to keep it and it depends on an external activity."
+        },
+        {
+          "option": "Do groceries after bedtime today.",
+          "rejected_because": "This was rejected because the supermarket is only stated open until 21:00."
+        }
+      ],
+      "summary": "The selected plan keeps all protected commitments, adds the run tonight, and leaves groceries for Thursday; the main trade-off is that Marta's ID renewal and Duarte's boots cannot be safely scheduled until the protected offsite cancellation and any needed partner or venue details are confirmed."
+    }
+  },
+  "final_score": 3.25,
+  "refinements": 3,
+  "critic_accepted": false,
+  "decision": "defer",
+  "reasons": [
+    "numeric_criteria_failed",
+    "plausibility_revision_required"
+  ],
+  "status": "deferred_critic_threshold",
+  "critic_input_version": "final_calendar_v1",
+  "critic_policy_version": "uncertainty_review_v2",
+  "result_calendar_version": "validated_added_metadata_v2",
+  "final_result_calendar": {
+    "timezone": "Europe/Lisbon",
+    "coverage": "all_events_in_scenario_after_simulation",
+    "events": [
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-02-09T23:00:00+00:00",
+        "end": "2027-02-10T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block; the user requires at least seven hours of sleep per night.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "partner_shift_wed",
+        "title": "Partner's work shift",
+        "start": "2027-02-10T05:30:00+00:00",
+        "end": "2027-02-10T13:30:00+00:00",
+        "category": "partner_work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "partner"
+        ],
+        "description": "Early shift as a bus driver; the partner is home from 14:15.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "morning_wed",
+        "title": "Morning routine with the children",
+        "start": "2027-02-10T06:45:00+00:00",
+        "end": "2027-02-10T07:45:00+00:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Breakfast, dressing and packing school bags for both children.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "travel_to_school_wed",
+        "title": "Travel to school and daycare",
+        "start": "2027-02-10T08:00:00+00:00",
+        "end": "2027-02-10T08:15:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "15-minute car journey from home to the school and daycare, which share the same site.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "dropoff_wed",
+        "title": "Drop-off at school and daycare",
+        "start": "2027-02-10T08:15:00+00:00",
+        "end": "2027-02-10T08:30:00+00:00",
+        "category": "childcare",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Drop-off for Marta (primary school, gates close at 08:30) and Duarte (daycare, arrival until 09:00).",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "commute_to_work_wed",
+        "title": "Commute to office",
+        "start": "2027-02-10T08:30:00+00:00",
+        "end": "2027-02-10T09:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute car journey from the school to the office.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "email_wed",
+        "title": "Email and planning",
+        "start": "2027-02-10T09:00:00+00:00",
+        "end": "2027-02-10T09:30:00+00:00",
+        "category": "work_focus",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Flexible individual work that can be moved within the working day.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "standup_wed",
+        "title": "Team stand-up",
+        "start": "2027-02-10T09:30:00+00:00",
+        "end": "2027-02-10T10:00:00+00:00",
+        "category": "work",
+        "importance": 3,
+        "fixed": true,
+        "participants": [
+          "user",
+          "team"
+        ],
+        "description": "Daily stand-up; can be joined by video.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "offsite_prep_wed",
+        "title": "Prepare offsite materials",
+        "start": "2027-02-10T10:00:00+00:00",
+        "end": "2027-02-10T12:15:00+00:00",
+        "category": "work_focus",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Slides and handouts for the strategy offsite this afternoon.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "lunch_wed",
+        "title": "Lunch",
+        "start": "2027-02-10T12:15:00+00:00",
+        "end": "2027-02-10T13:00:00+00:00",
+        "category": "meal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch at the office canteen.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "focus_wed",
+        "title": "Final check of offsite materials",
+        "start": "2027-02-10T13:00:00+00:00",
+        "end": "2027-02-10T13:30:00+00:00",
+        "category": "work_focus",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Flexible individual work that can be moved within the working day.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "travel_to_offsite_wed",
+        "title": "Travel to offsite hotel",
+        "start": "2027-02-10T13:30:00+00:00",
+        "end": "2027-02-10T14:00:00+00:00",
+        "category": "commute",
+        "importance": 3,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute car journey from the office to the hotel.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "offsite_wed",
+        "title": "Strategy offsite",
+        "start": "2027-02-10T14:00:00+00:00",
+        "end": "2027-02-10T17:00:00+00:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user",
+          "team",
+          "director"
+        ],
+        "description": "Afternoon strategy offsite at a hotel near the motorway.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "commute_to_school_wed",
+        "title": "Commute to school",
+        "start": "2027-02-10T17:00:00+00:00",
+        "end": "2027-02-10T17:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute journey from the office to the school and daycare.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "pickup_wed",
+        "title": "Pick up children",
+        "start": "2027-02-10T17:30:00+00:00",
+        "end": "2027-02-10T17:45:00+00:00",
+        "category": "childcare",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Pick-up from the after-school programme and daycare, which close at 18:30.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "travel_to_pool_wed",
+        "title": "Travel to pool",
+        "start": "2027-02-10T17:45:00+00:00",
+        "end": "2027-02-10T18:00:00+00:00",
+        "category": "commute",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "15-minute car journey from school to the pool.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "swim_marta_wed",
+        "title": "Marta's swimming class",
+        "start": "2027-02-10T18:00:00+00:00",
+        "end": "2027-02-10T19:00:00+00:00",
+        "category": "kids_activity",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Weekly 1-hour class; Duarte waits with the parent in the viewing area.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "travel_home_wed",
+        "title": "Travel home from pool",
+        "start": "2027-02-10T19:00:00+00:00",
+        "end": "2027-02-10T19:15:00+00:00",
+        "category": "commute",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "15-minute car journey home.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "dinner_wed",
+        "title": "Family dinner",
+        "start": "2027-02-10T19:30:00+00:00",
+        "end": "2027-02-10T20:30:00+00:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "One-hour dinner at home with the children.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "bedtime_wed",
+        "title": "Children's bedtime routine",
+        "start": "2027-02-10T20:30:00+00:00",
+        "end": "2027-02-10T21:15:00+00:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Bath, story and bedtime for both children; about 45 minutes.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_0",
+        "title": "Run",
+        "start": "2027-02-10T21:15:00+00:00",
+        "end": "2027-02-10T22:00:00+00:00",
+        "category": "exercise",
+        "importance": 2,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-02-10T23:00:00+00:00",
+        "end": "2027-02-11T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block; the user requires at least seven hours of sleep per night.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "partner_shift_thu",
+        "title": "Partner's work shift",
+        "start": "2027-02-11T05:30:00+00:00",
+        "end": "2027-02-11T13:30:00+00:00",
+        "category": "partner_work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "partner"
+        ],
+        "description": "Early shift as a bus driver; the partner is home from 14:15.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "morning_thu",
+        "title": "Morning routine with the children",
+        "start": "2027-02-11T06:45:00+00:00",
+        "end": "2027-02-11T07:45:00+00:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Breakfast, dressing and packing school bags for both children.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "travel_to_school_thu",
+        "title": "Travel to school and daycare",
+        "start": "2027-02-11T08:00:00+00:00",
+        "end": "2027-02-11T08:15:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "15-minute car journey from home to the school and daycare, which share the same site.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "dropoff_thu",
+        "title": "Drop-off at school and daycare",
+        "start": "2027-02-11T08:15:00+00:00",
+        "end": "2027-02-11T08:30:00+00:00",
+        "category": "childcare",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Drop-off for Marta (primary school, gates close at 08:30) and Duarte (daycare, arrival until 09:00). The partner works the early shift and left at 05:00.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "commute_to_work_thu",
+        "title": "Commute to office",
+        "start": "2027-02-11T08:30:00+00:00",
+        "end": "2027-02-11T09:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute car journey from the school to the office.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "forecast_thu",
+        "title": "Quarterly forecast",
+        "start": "2027-02-11T09:00:00+00:00",
+        "end": "2027-02-11T12:30:00+00:00",
+        "category": "work_focus",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Flexible individual work that can be moved within the working day.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "lunch_thu",
+        "title": "Lunch",
+        "start": "2027-02-11T12:30:00+00:00",
+        "end": "2027-02-11T13:15:00+00:00",
+        "category": "meal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch at the office canteen.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "focus_thu",
+        "title": "Project work",
+        "start": "2027-02-11T13:15:00+00:00",
+        "end": "2027-02-11T17:00:00+00:00",
+        "category": "work_focus",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Flexible individual work that can be moved within the working day.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "commute_home_thu",
+        "title": "Commute home",
+        "start": "2027-02-11T17:00:00+00:00",
+        "end": "2027-02-11T17:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute journey from the office to home.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "pickup_partner_thu",
+        "title": "Pick up children (partner)",
+        "start": "2027-02-11T17:30:00+00:00",
+        "end": "2027-02-11T17:45:00+00:00",
+        "category": "childcare",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "partner",
+          "marta",
+          "duarte"
+        ],
+        "description": "The partner collects both children and takes them home.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "groceries_thu",
+        "title": "Weekly groceries",
+        "start": "2027-02-11T18:00:00+00:00",
+        "end": "2027-02-11T19:00:00+00:00",
+        "category": "household",
+        "importance": 2,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Weekly supermarket shop; supermarket 10 minutes from home, open until 21:00.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "dinner_thu",
+        "title": "Family dinner",
+        "start": "2027-02-11T19:30:00+00:00",
+        "end": "2027-02-11T20:30:00+00:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "One-hour dinner at home with the children.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "bedtime_thu",
+        "title": "Children's bedtime routine",
+        "start": "2027-02-11T20:30:00+00:00",
+        "end": "2027-02-11T21:15:00+00:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Bath, story and bedtime for both children; about 45 minutes.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-02-11T23:00:00+00:00",
+        "end": "2027-02-12T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block; the user requires at least seven hours of sleep per night.",
+        "origin": "existing",
+        "change_status": "preserved"
+      }
+    ],
+    "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+  },
+  "final_unresolved_assumptions": [
+    {
+      "subject": "User capacity for late exercise",
+      "assumption": "The user can realistically complete a 45-minute run from 21:15 to 22:00 after a full work, childcare, swimming, dinner, and bedtime sequence.",
+      "evidence_gap": "The proposal states the run is safe because it is after bedtime and does not disturb sleep, but it provides no evidence about the user's energy, exercise tolerance, or preference for late workouts.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Post-run transition before sleep",
+      "assumption": "The 22:00-23:00 interval is sufficient for showering, cooling down, winding down, and preparing for the protected sleep block.",
+      "evidence_gap": "The calendar has a free hour before sleep, but the proposal does not account for post-exercise hygiene or recovery needs.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Child supervision during the run",
+      "assumption": "The children can be safely left supervised or otherwise covered while the user runs after the 20:30-21:15 bedtime routine.",
+      "evidence_gap": "The partner's Wednesday shift indicates the partner is home from 14:15, but the run event lists only the user and the proposal does not explicitly confirm coverage during the run.",
+      "potential_impact": "potentially_blocking",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Outdoor or location conditions for the run",
+      "assumption": "A suitable and acceptable place or route is available for running at 21:15.",
+      "evidence_gap": "The event title is only 'Run' and no route, gym, lighting, access, or safety condition is specified.",
+      "potential_impact": "minor",
+      "verification_source": "unknown"
+    }
+  ],
+  "uncertainty_history": [
+    {
+      "iteration": 3,
+      "unresolved_assumptions": [
+        {
+          "subject": "User capacity for late exercise",
+          "assumption": "The user can realistically complete a 45-minute run from 21:15 to 22:00 after a full work, childcare, swimming, dinner, and bedtime sequence.",
+          "evidence_gap": "The proposal states the run is safe because it is after bedtime and does not disturb sleep, but it provides no evidence about the user's energy, exercise tolerance, or preference for late workouts.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Post-run transition before sleep",
+          "assumption": "The 22:00-23:00 interval is sufficient for showering, cooling down, winding down, and preparing for the protected sleep block.",
+          "evidence_gap": "The calendar has a free hour before sleep, but the proposal does not account for post-exercise hygiene or recovery needs.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Child supervision during the run",
+          "assumption": "The children can be safely left supervised or otherwise covered while the user runs after the 20:30-21:15 bedtime routine.",
+          "evidence_gap": "The partner's Wednesday shift indicates the partner is home from 14:15, but the run event lists only the user and the proposal does not explicitly confirm coverage during the run.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Outdoor or location conditions for the run",
+          "assumption": "A suitable and acceptable place or route is available for running at 21:15.",
+          "evidence_gap": "The event title is only 'Run' and no route, gym, lighting, access, or safety condition is specified.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        }
+      ]
+    }
+  ],
+  "unresolved_critic_weaknesses": [
+    "The rationale treats the 21:15-22:00 run as safe mainly because it does not disturb childcare or protected sleep, but it does not meaningfully assess the user's practical fatigue after a dense day running from sleep ending at 06:30 through morning childcare, commute, work, offsite, pickup, swimming logistics, dinner, and bedtime.",
+    "The added run starts immediately after the 20:30-21:15 children's bedtime routine, using the first clear recovery/personal slot of the evening. That may be manageable for some people, but the proposal does not explain why this is sustainable on this specific day.",
+    "The calendar leaves 22:00-23:00 before protected sleep, which could cover showering and winding down, but the proposal does not acknowledge that post-run hygiene, decompression, and transition to sleep are still needed.",
+    "Alternatives are mostly discussed for errands and protected offsite constraints, not for the run itself. The proposal does not show whether a lower-impact exercise option, a shorter session, or a different distribution within the visible flexibility was considered.",
+    "Request satisfaction cannot be independently verified because the original request is not provided; only the proposal's stated priorities and resulting calendar are visible."
+  ],
+  "unresolved_plausibility_review": {
+    "revision_required": true,
+    "severity": "moderate",
+    "reason": "The added run could materially affect manageability because it follows a long chain of work, childcare, transport, swimming logistics, dinner, and bedtime, and it consumes the first available evening recovery slot. This is not an objective impossibility, and the 23:00 sleep block remains intact, but the rationale's claim that this is the only safe change is not enough to establish that it is a good human schedule.",
+    "suggested_improvement": "Reconsider the exercise placement or provide a grounded explanation from the fuller context showing that a 21:15-22:00 run after this particular day is sustainable, including how post-run hygiene, recovery, and transition to sleep are handled."
+  },
+  "schema_version": "2.0",
+  "profile_id": "parent_young_children_01__parent_young_children_cancelled_offsite_free_afternoon_001",
+  "scenario_sha256": "e0beba6deae83eb45987a7f6d3676d273a18e82aaa104b1b3af1adb741c9e68a",
+  "aggregate_requirements_sha256": null,
+  "confirmed_changes_sha256": null,
+  "simulator_version": "calendar_v2_validated_added_metadata_v2",
+  "dataset_manifest_sha256": "28af38846fb8995651d5f63ab63402e36147dc0915a2bfcd5379747ea531ffad",
+  "split": "train",
+  "run_id": "92e03011f1dd46a8b6ea069877164101",
+  "experiment_id": null,
+  "repeat_index": 0,
+  "generated_at": "2026-11-24T11:37:21.008192+00:00",
+  "prompt_versions": {
+    "proposer_sha256": "ae6fa59cccb86c31f34f66d07d241660b1feadf852ebf1b594bc85addab86985",
+    "proposer_wire_schema_version": "compact_proposal_v1",
+    "proposer_wire_schema_sha256": "f504fbcd7e939c43e055e2f188feb22097a284bcd9b043227d868e559547b865",
+    "proposer_revision_sha256": "3f0fe7f221013700694a22984560612013e9804072ffde4538e1329b9708ac95",
+    "critic_sha256": "1686688cdd4bc63abb12e6633ef9dbb9b62d69b69aba1c4805a201657cc5bb34"
+  },
+  "seconds": 246.076,
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [],
+    "valid": true
+  }
+}

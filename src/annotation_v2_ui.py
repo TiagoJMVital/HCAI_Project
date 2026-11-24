@@ -1,17 +1,26 @@
 """Safe presentation adapter for v2 proposals; no persisted scientific data edits."""
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-from annotation_v2 import AUTHORS, _consensus_path, load_review, prepare
+from annotation_v2 import AUTHORS, _consensus_path, load_review
 from calendar_v2 import simulate
 from calendar_view import view_events
 from models import Proposal
-from proposal_catalog_v2 import catalog
+from proposal_catalog_v2 import catalog, training_catalog
 from scenario_v2 import load_scenario
 from final_dataset_v2 import scenario_path
+
+FAMILY_DISPLAY_NAMES = {
+    "elite_athlete_student_schedule_conflict": "Atleta-estudante",
+    "content_creator_schedule_conflict": "Criador de conteúdos",
+    "nurse_shift_worker_masters_schedule_conflict": "Enfermeira-estudante",
+    "freelancer_schedule_conflict": "Freelancer",
+    "parent_young_children_schedule_conflict": "Pai/mãe com filhos pequenos",
+    "working_student_schedule_conflict": "Trabalhador-estudante",
+}
 
 
 def temporal_overlaps(events: list) -> list[tuple[str, str]]:
@@ -64,12 +73,88 @@ def preview(root: Path, source: dict) -> tuple[dict, list, list | None, dict]:
     return packet, original, proposed, validation
 
 
-def records(root: Path, author: str) -> list[dict]:
+def active_proposed_events(events: list | None) -> list:
+    """Actual proposed calendar only; visual deletion ghosts are excluded."""
+    return [event for event in (events or [])
+            if event.change_status not in ("removed", "previous_position")]
+
+
+def _display_schedule(start: datetime | None, end: datetime | None) -> str:
+    if start is None:
+        return "—"
+    if end is None:
+        return start.strftime("%d %b, %H:%M")
+    minutes = int((end - start).total_seconds() // 60)
+    if start.date() == end.date():
+        return f"{start:%d %b}, {start:%H:%M}–{end:%H:%M} ({minutes} min)"
+    return f"{start:%d %b %H:%M}–{end:%d %b %H:%M} ({minutes} min)"
+
+
+def proposal_change_rows(root: Path, source: dict) -> list[dict]:
+    """Human-readable, complete operation overview without changing sequence semantics."""
+    scenario = load_scenario(scenario_path(root, source["scenario_id"]))
+    proposal = Proposal.model_validate(source["final_proposal"])
+    after, _ = simulate(scenario, proposal)
+    original = {event.id: event for event in scenario.calendar.events}
+    final = {event.id: event for event in (after or [])}
+    rows = []
+    for index, change in enumerate(proposal.changes):
+        event_id = change.event_id or f"new_{index}"
+        before = original.get(event_id)
+        proposed = final.get(event_id)
+        proposed_start = proposed.start if proposed is not None else None
+        proposed_end = proposed.end if proposed is not None else None
+        # Invalid scientific outcomes have no simulated final calendar, but the
+        # annotator must still see every concrete operation exactly as proposed.
+        if proposed is None and change.type in ("add", "move") and change.to_start:
+            proposed_start = datetime.fromisoformat(change.to_start)
+            if change.to_end:
+                proposed_end = datetime.fromisoformat(change.to_end)
+            elif before is not None:
+                proposed_end = proposed_start + (before.end - before.start)
+            else:
+                proposed_end = proposed_start + timedelta(hours=1)
+        title = change.title or (before.title if before is not None else event_id)
+        rows.append({
+            "sequence": index + 1,
+            "operation": change.type.upper(),
+            "event": title,
+            "event_id": event_id,
+            "original_schedule": _display_schedule(
+                before.start if before else None, before.end if before else None),
+            "proposed_schedule": _display_schedule(
+                proposed_start, proposed_end),
+            "description": (before.description if before is not None else
+                            proposed.description if proposed is not None else ""),
+        })
+    return rows
+
+
+def reviewer_progress(rows: list[dict], family_id: str) -> dict:
+    family = [row for row in rows if row["family_id"] == family_id]
+    family_complete = sum(row["state"] == "complete" for row in family)
+    overall_complete = sum(row["state"] == "complete" for row in rows)
+    return {
+        "family_total": len(family), "family_complete": family_complete,
+        "family_remaining": len(family) - family_complete,
+        "overall_total": len(rows), "overall_complete": overall_complete,
+        "overall_remaining": len(rows) - overall_complete,
+    }
+
+
+def records(root: Path, author: str, *, training_only: bool = False) -> list[dict]:
     if author not in AUTHORS:
         raise ValueError("unknown author")
-    prepare(root, author)
+    sources = training_catalog(root) if training_only else catalog(root)
     rows = []
-    for source in catalog(root):
+    for source in sources:
+        review_path = (root / "data" / "annotations" / author
+                       / f"{source['proposal_id']}.json")
+        if not review_path.exists():
+            rows.append({"id": source["proposal_id"], "scenario_id": source["scenario_id"],
+                         "profile_id": source["profile_id"], "family_id": source["family_id"],
+                         "state": "not_started"})
+            continue
         try:
             form, _ = load_review(root, author, source["proposal_id"])
             state = "complete" if form.status == "complete" else (

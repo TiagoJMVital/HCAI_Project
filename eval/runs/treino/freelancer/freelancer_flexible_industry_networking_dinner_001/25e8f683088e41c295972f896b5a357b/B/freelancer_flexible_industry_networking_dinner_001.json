@@ -1,0 +1,3116 @@
+{
+  "configuration": "B",
+  "scenario_id": "freelancer_flexible_industry_networking_dinner_001",
+  "family": "freelancer_schedule_conflict",
+  "category": "v2",
+  "proposer_provider": "iaedu",
+  "proposer_model": "GPT-5.5",
+  "proposer_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_provider": "iaedu",
+  "critic_model": "GPT-5.5",
+  "critic_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_settings": {
+    "threshold": 4.0,
+    "max_refinements": 3,
+    "min_dimension_score": 1
+  },
+  "iterations": [
+    {
+      "index": 0,
+      "proposer_feedback": null,
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [],
+        "rationale": {
+          "constraints": [
+            "The protected dinner is already present and must not be moved or deleted.",
+            "Protected sleep blocks are left unchanged.",
+            "The final calendar already schedules 32 hours of work within the checked week.",
+            "Scheduled work time satisfies the duration rule, but it is not proof that work is completed.",
+            "Work blocks are flexible under the profile rules, but flexibility does not require changing a schedule that already meets the request."
+          ],
+          "priorities": [
+            "Preserve the fixed networking dinner and protected sleep.",
+            "Maintain the morning runs as preferred.",
+            "Avoid unnecessary disruption because the reduced Wednesday work block and remaining weekday distribution already meet the target."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Add extra work on Friday afternoon.",
+              "rejected_because": "Rejected because the weekly 32-hour work target is already met."
+            },
+            {
+              "option": "Redistribute more hours from Wednesday to Monday or Tuesday.",
+              "rejected_because": "Rejected because Wednesday is already reduced and the existing distribution satisfies the typed requirement."
+            },
+            {
+              "option": "Move a morning run to create more work time.",
+              "rejected_because": "Rejected because no additional work time is needed and runs are a stated preference."
+            }
+          ],
+          "summary": "Keep the calendar unchanged: it already reflects the Wednesday dinner, a reduced Wednesday work block, and enough work across Monday, Tuesday, Thursday, and Friday to reach 32 scheduled hours while avoiding unnecessary disruption."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [
+          "no changes proposed; request satisfaction requires Critic and human review"
+        ],
+        "valid": true,
+        "aggregate_checks": [
+          {
+            "id": "weekly_hours",
+            "status": "pass",
+            "minutes": 1920.0,
+            "minimum_minutes": 1920,
+            "category": "work",
+            "evidence": "union of final calendar intervals"
+          }
+        ],
+        "aggregate_validation_version": "duration_total_v1",
+        "no_op": true
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-05-16T23:30:00+01:00",
+            "end": "2027-05-17T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "run_mon",
+            "title": "Morning Run",
+            "start": "2027-05-17T08:00:00+01:00",
+            "end": "2027-05-17T09:00:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Run.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_mon",
+            "title": "Consulting Work Block",
+            "start": "2027-05-17T10:00:00+01:00",
+            "end": "2027-05-17T18:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "8 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-05-17T23:30:00+01:00",
+            "end": "2027-05-18T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "run_tue",
+            "title": "Morning Run",
+            "start": "2027-05-18T08:00:00+01:00",
+            "end": "2027-05-18T09:00:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Run.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_tue",
+            "title": "Consulting Work Block",
+            "start": "2027-05-18T10:00:00+01:00",
+            "end": "2027-05-18T18:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "8 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-05-18T23:30:00+01:00",
+            "end": "2027-05-19T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "run_wed",
+            "title": "Morning Run",
+            "start": "2027-05-19T08:00:00+01:00",
+            "end": "2027-05-19T09:00:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Run.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_wed",
+            "title": "Consulting Work Block",
+            "start": "2027-05-19T10:00:00+01:00",
+            "end": "2027-05-19T17:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "7 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "networking_wed",
+            "title": "Industry Networking Dinner",
+            "start": "2027-05-19T19:30:00+01:00",
+            "end": "2027-05-19T23:00:00+01:00",
+            "category": "social",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "professionals"
+            ],
+            "description": "Fixed dinner event.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-05-19T23:30:00+01:00",
+            "end": "2027-05-20T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "run_thu",
+            "title": "Morning Run",
+            "start": "2027-05-20T08:00:00+01:00",
+            "end": "2027-05-20T09:00:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Run.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_thu",
+            "title": "Consulting Work Block",
+            "start": "2027-05-20T10:00:00+01:00",
+            "end": "2027-05-20T17:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "7 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-05-20T23:30:00+01:00",
+            "end": "2027-05-21T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "run_fri",
+            "title": "Morning Run",
+            "start": "2027-05-21T08:00:00+01:00",
+            "end": "2027-05-21T09:00:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Run.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_fri",
+            "title": "Consulting Work Block",
+            "start": "2027-05-21T10:00:00+01:00",
+            "end": "2027-05-21T12:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "2 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 3,
+          "coherence": 3,
+          "alternatives": 2,
+          "clarity": 3
+        },
+        "weaknesses": [
+          "The no-change rationale relies heavily on the weekly 32-hour total and low disruption, but it gives limited human-capacity analysis of the most demanding sequence: Wednesday run 08:00-09:00, work 10:00-17:00, networking dinner 19:30-23:00, sleep starting 23:30, then Thursday run 08:00-09:00 and work 10:00-17:00.",
+          "The rationale contains a concrete inconsistency: the summary says the 32 scheduled work hours are reached across Monday, Tuesday, Thursday and Friday, but those days total only 25 hours. The calendar reaches 32 hours only if Wednesday's 7-hour work block is included.",
+          "The alternatives considered focus on avoiding unnecessary extra work or preserving runs, but they do not address whether the late Wednesday dinner followed by protected sleep, a Thursday morning run and another 7-hour work block is sustainable or whether the existing flexibility should be used for recovery.",
+          "Because the original request is not available and the validator explicitly did not check request satisfaction or soft preferences, the claim that no change fully satisfies the request cannot be verified from the provided evidence alone."
+        ],
+        "feedback": "The calendar is not obviously impossible: sleep is protected, work reaches 32 scheduled hours, Friday is comparatively light, and preserving existing fixed events avoids disruption. However, the proposed no-op should be better substantiated. The key human-quality issue is not whether the events technically fit, but whether keeping Wednesday and Thursday unchanged after a late fixed networking dinner is a realistic recovery pattern. The Proposer should reconsider or explicitly justify the Wednesday-to-Thursday sequence using its fuller context, especially the 23:00 dinner end, 23:30 sleep start, Thursday 08:00 run and Thursday 10:00-17:00 work block. The Proposer should also correct the work-hour distribution explanation, because the current rationale misstates how the 32-hour total is achieved.",
+        "plausibility_review": {
+          "revision_required": true,
+          "severity": "moderate",
+          "reason": "A revision is warranted because the no-change recommendation has a material support gap: it preserves a demanding Wednesday evening to Thursday workday sequence without weighing recovery, transition time or next-day capacity, and it includes an inaccurate statement about which days produce the 32 work hours. This does not prove the calendar is unmanageable, and the issue may be acceptable given context not shown here, but the current rationale does not adequately support the human-centered sustainability of leaving everything unchanged.",
+          "suggested_improvement": "Reassess the no-change outcome with attention to the Wednesday dinner-to-Thursday routine and correct the explanation of the weekly work-hour total. If the same calendar is kept, provide a grounded reason why the late dinner, short pre-sleep interval, Thursday morning run and Thursday work block are manageable in this context."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Original request satisfaction",
+            "assumption": "Keeping the calendar unchanged satisfies the user's actual request beyond the visible 32-hour work target and protected dinner/sleep constraints.",
+            "evidence_gap": "The original request is not provided, and the technical validation explicitly did not check request satisfaction or soft preference satisfaction.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Wednesday late dinner to Thursday recovery",
+            "assumption": "The user can realistically finish the Wednesday networking dinner at 23:00, transition to sleep by 23:30, then complete the Thursday 08:00 run and 10:00-17:00 work block without unacceptable fatigue or practical strain.",
+            "evidence_gap": "No information is provided about travel, wind-down needs, dinner location, post-event obligations, or the user's recovery tolerance.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Work block sustainability",
+            "assumption": "The 8-hour and 7-hour consulting work blocks are practically usable as scheduled while still allowing ordinary breaks, food and cognitive recovery.",
+            "evidence_gap": "The calendar records continuous work blocks but does not indicate whether breaks or meals are included inside them.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Morning runs after fixed sleep",
+            "assumption": "The daily 08:00-09:00 morning runs remain beneficial and manageable across five consecutive weekdays, including after the late Wednesday dinner.",
+            "evidence_gap": "Runs are marked as preferred and high importance, but there is no evidence about current fatigue, training load, recovery needs or whether Thursday's run is flexible in practice.",
+            "potential_impact": "minor",
+            "verification_source": "user_context"
+          }
+        ],
+        "overall": 2.75
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": false,
+        "plausibility_revision_required": true,
+        "accepted": false,
+        "revision_causes": [
+          "numeric_criteria_failed",
+          "plausibility_revision_required"
+        ]
+      },
+      "operations_changed_from_previous": null,
+      "rationale_changed_from_previous": null,
+      "prior_critic_reviews": [],
+      "unresolved_assumptions": [
+        {
+          "subject": "Original request satisfaction",
+          "assumption": "Keeping the calendar unchanged satisfies the user's actual request beyond the visible 32-hour work target and protected dinner/sleep constraints.",
+          "evidence_gap": "The original request is not provided, and the technical validation explicitly did not check request satisfaction or soft preference satisfaction.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Wednesday late dinner to Thursday recovery",
+          "assumption": "The user can realistically finish the Wednesday networking dinner at 23:00, transition to sleep by 23:30, then complete the Thursday 08:00 run and 10:00-17:00 work block without unacceptable fatigue or practical strain.",
+          "evidence_gap": "No information is provided about travel, wind-down needs, dinner location, post-event obligations, or the user's recovery tolerance.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Work block sustainability",
+          "assumption": "The 8-hour and 7-hour consulting work blocks are practically usable as scheduled while still allowing ordinary breaks, food and cognitive recovery.",
+          "evidence_gap": "The calendar records continuous work blocks but does not indicate whether breaks or meals are included inside them.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Morning runs after fixed sleep",
+          "assumption": "The daily 08:00-09:00 morning runs remain beneficial and manageable across five consecutive weekdays, including after the late Wednesday dinner.",
+          "evidence_gap": "Runs are marked as preferred and high importance, but there is no evidence about current fatigue, training load, recovery needs or whether Thursday's run is flexible in practice.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "proposer_feedback": "Numeric Critic criteria failed. Scores: {\"reasoning\":3,\"coherence\":3,\"alternatives\":2,\"clarity\":3}. Plausibility revision required (moderate): A revision is warranted because the no-change recommendation has a material support gap: it preserves a demanding Wednesday evening to Thursday workday sequence without weighing recovery, transition time or next-day capacity, and it includes an inaccurate statement about which days produce the 32 work hours. This does not prove the calendar is unmanageable, and the issue may be acceptable given context not shown here, but the current rationale does not adequately support the human-centered sustainability of leaving everything unchanged. Suggested direction: Reassess the no-change outcome with attention to the Wednesday dinner-to-Thursday routine and correct the explanation of the weekly work-hour total. If the same calendar is kept, provide a grounded reason why the late dinner, short pre-sleep interval, Thursday morning run and Thursday work block are manageable in this context. The Critic lacks the full user constraints; explain if no better feasible option exists. Unverified conditions to reassess: [{'subject': 'Original request satisfaction', 'assumption': \"Keeping the calendar unchanged satisfies the user's actual request beyond the visible 32-hour work target and protected dinner/sleep constraints.\", 'evidence_gap': 'The original request is not provided, and the technical validation explicitly did not check request satisfaction or soft preference satisfaction.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Wednesday late dinner to Thursday recovery', 'assumption': 'The user can realistically finish the Wednesday networking dinner at 23:00, transition to sleep by 23:30, then complete the Thursday 08:00 run and 10:00-17:00 work block without unacceptable fatigue or practical strain.', 'evidence_gap': \"No information is provided about travel, wind-down needs, dinner location, post-event obligations, or the user's recovery tolerance.\", 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Work block sustainability', 'assumption': 'The 8-hour and 7-hour consulting work blocks are practically usable as scheduled while still allowing ordinary breaks, food and cognitive recovery.', 'evidence_gap': 'The calendar records continuous work blocks but does not indicate whether breaks or meals are included inside them.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Morning runs after fixed sleep', 'assumption': 'The daily 08:00-09:00 morning runs remain beneficial and manageable across five consecutive weekdays, including after the late Wednesday dinner.', 'evidence_gap': \"Runs are marked as preferred and high importance, but there is no evidence about current fatigue, training load, recovery needs or whether Thursday's run is flexible in practice.\", 'potential_impact': 'minor', 'verification_source': 'user_context'}] Weaknesses: ['The no-change rationale relies heavily on the weekly 32-hour total and low disruption, but it gives limited human-capacity analysis of the most demanding sequence: Wednesday run 08:00-09:00, work 10:00-17:00, networking dinner 19:30-23:00, sleep starting 23:30, then Thursday run 08:00-09:00 and work 10:00-17:00.', \"The rationale contains a concrete inconsistency: the summary says the 32 scheduled work hours are reached across Monday, Tuesday, Thursday and Friday, but those days total only 25 hours. The calendar reaches 32 hours only if Wednesday's 7-hour work block is included.\", 'The alternatives considered focus on avoiding unnecessary extra work or preserving runs, but they do not address whether the late Wednesday dinner followed by protected sleep, a Thursday morning run and another 7-hour work block is sustainable or whether the existing flexibility should be used for recovery.', 'Because the original request is not available and the validator explicitly did not check request satisfaction or soft preferences, the claim that no change fully satisfies the request cannot be verified from the provided evidence alone.']. Actionable feedback: The calendar is not obviously impossible: sleep is protected, work reaches 32 scheduled hours, Friday is comparatively light, and preserving existing fixed events avoids disruption. However, the proposed no-op should be better substantiated. The key human-quality issue is not whether the events technically fit, but whether keeping Wednesday and Thursday unchanged after a late fixed networking dinner is a realistic recovery pattern. The Proposer should reconsider or explicitly justify the Wednesday-to-Thursday sequence using its fuller context, especially the 23:00 dinner end, 23:30 sleep start, Thursday 08:00 run and Thursday 10:00-17:00 work block. The Proposer should also correct the work-hour distribution explanation, because the current rationale misstates how the 32-hour total is achieved.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "move",
+            "event_id": "work_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-05-20T11:00:00+01:00",
+            "to_end": "2027-05-20T17:00:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "work_fri",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-05-21T10:00:00+01:00",
+            "to_end": "2027-05-21T13:00:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "The fixed networking dinner and protected sleep blocks are left unchanged.",
+            "The final calendar schedules 32 hours of work in the checked week: 8, 8, 7, 6 and 3 hours by weekday.",
+            "Work blocks are flexible under the profile, so resizing Thursday and Friday work is operationally feasible in free time.",
+            "Morning runs are preserved because they are a stated preference and health-related changes may need confirmation.",
+            "Scheduled work time satisfies the duration rule, but it is not proof that work is completed.",
+            "No travel, wind-down, meal, break or recovery-tolerance data is supplied, so the plan reduces strain without proving full manageability."
+          ],
+          "priorities": [
+            "Reduce the workload immediately after the late fixed dinner while preserving the weekly work target.",
+            "Keep Wednesday only slightly reduced and distribute the remaining work across the other weekdays.",
+            "Avoid changing fixed social and sleep commitments or preferred runs.",
+            "Use Friday’s lighter schedule to absorb a modest amount of work with low disruption."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Keep the calendar unchanged.",
+              "rejected_because": "Rejected because Thursday remains unnecessarily demanding after the late dinner when Friday has unused capacity."
+            },
+            {
+              "option": "Move or shorten the Thursday morning run.",
+              "rejected_because": "Rejected because runs are preferred health activities and changing them may require confirmation."
+            },
+            {
+              "option": "Move work from Wednesday instead of Thursday.",
+              "rejected_because": "Rejected because Wednesday is already slightly reduced and the dinner is the main fixed constraint."
+            },
+            {
+              "option": "Add work after the Wednesday dinner.",
+              "rejected_because": "Rejected because it would conflict with protected sleep and worsen recovery."
+            }
+          ],
+          "summary": "Shift one hour of work pressure from Thursday to Friday, preserving the fixed dinner, sleep, and morning runs while keeping the weekly scheduled work total at 32 hours."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true,
+        "aggregate_checks": [
+          {
+            "id": "weekly_hours",
+            "status": "pass",
+            "minutes": 1920.0,
+            "minimum_minutes": 1920,
+            "category": "work",
+            "evidence": "union of final calendar intervals"
+          }
+        ],
+        "aggregate_validation_version": "duration_total_v1"
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-05-16T23:30:00+01:00",
+            "end": "2027-05-17T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "run_mon",
+            "title": "Morning Run",
+            "start": "2027-05-17T08:00:00+01:00",
+            "end": "2027-05-17T09:00:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Run.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_mon",
+            "title": "Consulting Work Block",
+            "start": "2027-05-17T10:00:00+01:00",
+            "end": "2027-05-17T18:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "8 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-05-17T23:30:00+01:00",
+            "end": "2027-05-18T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "run_tue",
+            "title": "Morning Run",
+            "start": "2027-05-18T08:00:00+01:00",
+            "end": "2027-05-18T09:00:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Run.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_tue",
+            "title": "Consulting Work Block",
+            "start": "2027-05-18T10:00:00+01:00",
+            "end": "2027-05-18T18:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "8 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-05-18T23:30:00+01:00",
+            "end": "2027-05-19T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "run_wed",
+            "title": "Morning Run",
+            "start": "2027-05-19T08:00:00+01:00",
+            "end": "2027-05-19T09:00:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Run.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_wed",
+            "title": "Consulting Work Block",
+            "start": "2027-05-19T10:00:00+01:00",
+            "end": "2027-05-19T17:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "7 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "networking_wed",
+            "title": "Industry Networking Dinner",
+            "start": "2027-05-19T19:30:00+01:00",
+            "end": "2027-05-19T23:00:00+01:00",
+            "category": "social",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "professionals"
+            ],
+            "description": "Fixed dinner event.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-05-19T23:30:00+01:00",
+            "end": "2027-05-20T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "run_thu",
+            "title": "Morning Run",
+            "start": "2027-05-20T08:00:00+01:00",
+            "end": "2027-05-20T09:00:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Run.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_thu",
+            "title": "Consulting Work Block",
+            "start": "2027-05-20T11:00:00+01:00",
+            "end": "2027-05-20T17:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "7 hours work.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-05-20T23:30:00+01:00",
+            "end": "2027-05-21T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "run_fri",
+            "title": "Morning Run",
+            "start": "2027-05-21T08:00:00+01:00",
+            "end": "2027-05-21T09:00:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Run.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_fri",
+            "title": "Consulting Work Block",
+            "start": "2027-05-21T10:00:00+01:00",
+            "end": "2027-05-21T13:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "2 hours work.",
+            "origin": "existing",
+            "change_status": "moved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 4,
+          "alternatives": 4,
+          "clarity": 3
+        },
+        "weaknesses": [
+          "The revision substantially addresses the prior Wednesday-to-Thursday recovery concern by moving Thursday work from 10:00-17:00 to 11:00-17:00 and increasing Friday work from 10:00-12:00 to 10:00-13:00, but the Thursday morning sequence still remains fairly compressed after the Wednesday networking dinner ending at 23:00, sleep beginning at 23:30, and Thursday run from 08:00-09:00.",
+          "There is a clarity inconsistency in the final calendar metadata: work_thu is scheduled from 11:00-17:00, which is 6 hours, but its description says '7 hours work'; work_fri is scheduled from 10:00-13:00, which is 3 hours, but its description says '2 hours work'. The rationale and validator appear to rely on the interval times rather than the descriptions, but this inconsistency makes the plan harder to audit.",
+          "The calendar still contains three consecutive substantial workdays before the late dinner: Monday 10:00-18:00, Tuesday 10:00-18:00, and Wednesday 10:00-17:00, each after a morning run. This appears plausible but leaves limited visible evidence about breaks, meals, or cognitive recovery inside the work blocks.",
+          "The original request is unavailable, and the technical validation explicitly did not check request satisfaction or soft preference satisfaction, so the review can assess visible manageability but cannot verify that the proposed redistribution fully satisfies the user's actual intent."
+        ],
+        "feedback": "The revised proposal is more human-centered than the prior no-change version. It recognizes the late Wednesday dinner as the main recovery pressure point and uses visible flexibility proportionately: Thursday work starts an hour later and Friday absorbs that hour while remaining relatively light. This is a reasonable improvement without disrupting fixed sleep, the fixed networking dinner, or preferred morning runs. The remaining concerns are mostly about clarity and ordinary human capacity rather than an obvious scheduling failure. The Proposer should clean up the mismatched duration descriptions for Thursday and Friday and, if fuller context is available, briefly substantiate that the Wednesday 23:00 dinner to Thursday 08:00 run and 11:00-17:00 workday is acceptable for this person. The same operations could plausibly be kept if those points are clarified.",
+        "plausibility_review": {
+          "revision_required": false,
+          "severity": "low",
+          "reason": "The main prior concern received a grounded answer: the revised calendar reduces Thursday's immediate post-dinner workload by delaying and shortening the Thursday work block, while shifting only one hour to a lighter Friday. The remaining Wednesday-to-Thursday recovery issue is not eliminated, but the visible schedule now has more morning margin after the Thursday run and a shorter Thursday workday, so there is not enough evidence of a concrete human-manageability problem requiring another revision. The strongest remaining issue is the inconsistent duration descriptions for Thursday and Friday, which affects auditability more than the practical schedule because the actual time intervals and aggregate validation support the intended 32-hour total.",
+          "suggested_improvement": "No further revision is required on human-manageability grounds. The Proposer should correct the Thursday and Friday duration descriptions and, if keeping the same operations, briefly explain whether ordinary breaks, meals, and recovery after the Wednesday dinner are expected to fit within the visible routine."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Original request satisfaction",
+            "assumption": "The revised redistribution satisfies the user's actual request beyond the visible 32-hour work target and protected dinner, sleep, and run priorities.",
+            "evidence_gap": "The original request is not provided, and the technical validation explicitly did not check request satisfaction or soft preference satisfaction.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Wednesday dinner to Thursday recovery",
+            "assumption": "The user can realistically finish the Wednesday networking dinner at 23:00, transition to sleep by 23:30, then complete the Thursday 08:00-09:00 run and 11:00-17:00 work block without unacceptable fatigue or practical strain.",
+            "evidence_gap": "The revision adds recovery margin compared with the prior calendar, but no information is provided about travel, wind-down needs, dinner location, post-event obligations, or the user's recovery tolerance.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Work block sustainability",
+            "assumption": "The continuous consulting work blocks are practically usable as scheduled while still allowing ordinary breaks, food, and cognitive recovery.",
+            "evidence_gap": "The calendar records long work blocks on Monday 10:00-18:00, Tuesday 10:00-18:00, Wednesday 10:00-17:00, and Thursday 11:00-17:00, but does not indicate whether breaks or meals are included inside them.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Duration metadata consistency",
+            "assumption": "The actual scheduled intervals, not the event descriptions, are the intended source of truth for Thursday and Friday work duration.",
+            "evidence_gap": "The final calendar shows work_thu from 11:00-17:00 and work_fri from 10:00-13:00, but their descriptions still say '7 hours work' and '2 hours work' respectively.",
+            "potential_impact": "minor",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Morning runs across the week",
+            "assumption": "The daily 08:00-09:00 morning runs remain beneficial and manageable across five consecutive weekdays, including after the late Wednesday dinner.",
+            "evidence_gap": "Runs are marked as preferred and high importance, but there is no evidence about fatigue, training load, recovery needs, or whether Thursday's run is flexible in practice.",
+            "potential_impact": "minor",
+            "verification_source": "user_context"
+          }
+        ],
+        "overall": 3.75
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": false,
+        "plausibility_revision_required": false,
+        "accepted": false,
+        "revision_causes": [
+          "numeric_criteria_failed"
+        ]
+      },
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": [
+        {
+          "iteration": 0,
+          "proposal": {
+            "changes": [],
+            "rationale": {
+              "constraints": [
+                "The protected dinner is already present and must not be moved or deleted.",
+                "Protected sleep blocks are left unchanged.",
+                "The final calendar already schedules 32 hours of work within the checked week.",
+                "Scheduled work time satisfies the duration rule, but it is not proof that work is completed.",
+                "Work blocks are flexible under the profile rules, but flexibility does not require changing a schedule that already meets the request."
+              ],
+              "priorities": [
+                "Preserve the fixed networking dinner and protected sleep.",
+                "Maintain the morning runs as preferred.",
+                "Avoid unnecessary disruption because the reduced Wednesday work block and remaining weekday distribution already meet the target."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Add extra work on Friday afternoon.",
+                  "rejected_because": "Rejected because the weekly 32-hour work target is already met."
+                },
+                {
+                  "option": "Redistribute more hours from Wednesday to Monday or Tuesday.",
+                  "rejected_because": "Rejected because Wednesday is already reduced and the existing distribution satisfies the typed requirement."
+                },
+                {
+                  "option": "Move a morning run to create more work time.",
+                  "rejected_because": "Rejected because no additional work time is needed and runs are a stated preference."
+                }
+              ],
+              "summary": "Keep the calendar unchanged: it already reflects the Wednesday dinner, a reduced Wednesday work block, and enough work across Monday, Tuesday, Thursday, and Friday to reach 32 scheduled hours while avoiding unnecessary disruption."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "sleep_mon",
+                "title": "Sleep",
+                "start": "2027-05-16T23:30:00+01:00",
+                "end": "2027-05-17T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "run_mon",
+                "title": "Morning Run",
+                "start": "2027-05-17T08:00:00+01:00",
+                "end": "2027-05-17T09:00:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Run.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_mon",
+                "title": "Consulting Work Block",
+                "start": "2027-05-17T10:00:00+01:00",
+                "end": "2027-05-17T18:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "8 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_tue",
+                "title": "Sleep",
+                "start": "2027-05-17T23:30:00+01:00",
+                "end": "2027-05-18T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "run_tue",
+                "title": "Morning Run",
+                "start": "2027-05-18T08:00:00+01:00",
+                "end": "2027-05-18T09:00:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Run.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_tue",
+                "title": "Consulting Work Block",
+                "start": "2027-05-18T10:00:00+01:00",
+                "end": "2027-05-18T18:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "8 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_wed",
+                "title": "Sleep",
+                "start": "2027-05-18T23:30:00+01:00",
+                "end": "2027-05-19T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "run_wed",
+                "title": "Morning Run",
+                "start": "2027-05-19T08:00:00+01:00",
+                "end": "2027-05-19T09:00:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Run.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_wed",
+                "title": "Consulting Work Block",
+                "start": "2027-05-19T10:00:00+01:00",
+                "end": "2027-05-19T17:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "7 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "networking_wed",
+                "title": "Industry Networking Dinner",
+                "start": "2027-05-19T19:30:00+01:00",
+                "end": "2027-05-19T23:00:00+01:00",
+                "category": "social",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "professionals"
+                ],
+                "description": "Fixed dinner event.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2027-05-19T23:30:00+01:00",
+                "end": "2027-05-20T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "run_thu",
+                "title": "Morning Run",
+                "start": "2027-05-20T08:00:00+01:00",
+                "end": "2027-05-20T09:00:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Run.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_thu",
+                "title": "Consulting Work Block",
+                "start": "2027-05-20T10:00:00+01:00",
+                "end": "2027-05-20T17:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "7 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_fri",
+                "title": "Sleep",
+                "start": "2027-05-20T23:30:00+01:00",
+                "end": "2027-05-21T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "run_fri",
+                "title": "Morning Run",
+                "start": "2027-05-21T08:00:00+01:00",
+                "end": "2027-05-21T09:00:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Run.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_fri",
+                "title": "Consulting Work Block",
+                "start": "2027-05-21T10:00:00+01:00",
+                "end": "2027-05-21T12:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "2 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              }
+            ],
+            "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+          },
+          "plausibility_review": {
+            "revision_required": true,
+            "severity": "moderate",
+            "reason": "A revision is warranted because the no-change recommendation has a material support gap: it preserves a demanding Wednesday evening to Thursday workday sequence without weighing recovery, transition time or next-day capacity, and it includes an inaccurate statement about which days produce the 32 work hours. This does not prove the calendar is unmanageable, and the issue may be acceptable given context not shown here, but the current rationale does not adequately support the human-centered sustainability of leaving everything unchanged.",
+            "suggested_improvement": "Reassess the no-change outcome with attention to the Wednesday dinner-to-Thursday routine and correct the explanation of the weekly work-hour total. If the same calendar is kept, provide a grounded reason why the late dinner, short pre-sleep interval, Thursday morning run and Thursday work block are manageable in this context."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Original request satisfaction",
+              "assumption": "Keeping the calendar unchanged satisfies the user's actual request beyond the visible 32-hour work target and protected dinner/sleep constraints.",
+              "evidence_gap": "The original request is not provided, and the technical validation explicitly did not check request satisfaction or soft preference satisfaction.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Wednesday late dinner to Thursday recovery",
+              "assumption": "The user can realistically finish the Wednesday networking dinner at 23:00, transition to sleep by 23:30, then complete the Thursday 08:00 run and 10:00-17:00 work block without unacceptable fatigue or practical strain.",
+              "evidence_gap": "No information is provided about travel, wind-down needs, dinner location, post-event obligations, or the user's recovery tolerance.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Work block sustainability",
+              "assumption": "The 8-hour and 7-hour consulting work blocks are practically usable as scheduled while still allowing ordinary breaks, food and cognitive recovery.",
+              "evidence_gap": "The calendar records continuous work blocks but does not indicate whether breaks or meals are included inside them.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Morning runs after fixed sleep",
+              "assumption": "The daily 08:00-09:00 morning runs remain beneficial and manageable across five consecutive weekdays, including after the late Wednesday dinner.",
+              "evidence_gap": "Runs are marked as preferred and high importance, but there is no evidence about current fatigue, training load, recovery needs or whether Thursday's run is flexible in practice.",
+              "potential_impact": "minor",
+              "verification_source": "user_context"
+            }
+          ],
+          "weaknesses": [
+            "The no-change rationale relies heavily on the weekly 32-hour total and low disruption, but it gives limited human-capacity analysis of the most demanding sequence: Wednesday run 08:00-09:00, work 10:00-17:00, networking dinner 19:30-23:00, sleep starting 23:30, then Thursday run 08:00-09:00 and work 10:00-17:00.",
+            "The rationale contains a concrete inconsistency: the summary says the 32 scheduled work hours are reached across Monday, Tuesday, Thursday and Friday, but those days total only 25 hours. The calendar reaches 32 hours only if Wednesday's 7-hour work block is included.",
+            "The alternatives considered focus on avoiding unnecessary extra work or preserving runs, but they do not address whether the late Wednesday dinner followed by protected sleep, a Thursday morning run and another 7-hour work block is sustainable or whether the existing flexibility should be used for recovery.",
+            "Because the original request is not available and the validator explicitly did not check request satisfaction or soft preferences, the claim that no change fully satisfies the request cannot be verified from the provided evidence alone."
+          ],
+          "feedback": "The calendar is not obviously impossible: sleep is protected, work reaches 32 scheduled hours, Friday is comparatively light, and preserving existing fixed events avoids disruption. However, the proposed no-op should be better substantiated. The key human-quality issue is not whether the events technically fit, but whether keeping Wednesday and Thursday unchanged after a late fixed networking dinner is a realistic recovery pattern. The Proposer should reconsider or explicitly justify the Wednesday-to-Thursday sequence using its fuller context, especially the 23:00 dinner end, 23:30 sleep start, Thursday 08:00 run and Thursday 10:00-17:00 work block. The Proposer should also correct the work-hour distribution explanation, because the current rationale misstates how the 32-hour total is achieved."
+        }
+      ],
+      "recovered_critic_outputs": [
+        "{\n  \"scores\": {\n    \"reasoning\": 4,\n    \"coherence\": 3,\n    \"alternatives\": 4,\n    \"clarity\": 3\n  },\n  \"weaknesses\": [\n    \"There is an objective inconsistency in the final calendar metadata: Thursday work is scheduled from 11:00 to 17:00, which is 6 hours, but its description says \\\"7 hours work.\\\" Friday work is scheduled from 10:00 to 13:00, which is 3 hours, but its description says \\\"2 hours work.\\\" The rationale correctly states the intended 8, 8, 7, 6 and 3 hour distribution, so the times and descriptions do not fully cohere.\",\n    \"The revised proposal addresses the prior recovery concern only partially. It reduces Thursday's work pressure after the Wednesday 19:30-23:00 networking dinner by moving Thursday work to 11:00-17:00 and increasing Friday work to 10:00-13:00, which is a plausible improvement. However, the schedule still preserves a tight Wednesday dinner-to-sleep transition: dinner ends at 23:00 and protected sleep begins at 23:30, followed by Thursday's 08:00-09:00 run.\",\n    \"The rationale acknowledges missing travel, wind-down, meal, break and recovery-tolerance data, but it cannot substantiate whether the 30-minute gap after the networking dinner is actually usable for transition to sleep. This is not a technical violation because the dinner and sleep are fixed and preserved, but it remains material to human manageability.\",\n    \"The alternatives considered are relevant to the prior concern and avoid unnecessary disruption, but they do not clearly discuss whether the added Friday hour creates any meaningful Friday cost beyond being described as low disruption. The resulting Friday remains light overall, so this is a limited weakness rather than a major sustainability concern.\"\n  ],\n  \"feedback\": \"The revised calendar is more human-plausible than the prior no-change plan. Moving Thursday work from 10:00-17:00 to 11:00-17:00 gives more recovery and preparation space after the late Wednesday networking dinner and Thursday morning run, while Friday's 10:00-13:00 work block remains modest. The proposal also gives a grounded reason for not moving the fixed dinner, protected sleep, or preferred runs. The main remaining issue is not the overall distribution, which looks broadly manageable over the visible week, but the calendar's internal inconsistency in the work descriptions and the still-unverified Wednesday night recovery conditions. The Proposer should correct the Thursday and Friday work-duration descriptions and, if relying on this plan as sustainable, keep explicit that the late dinner-to-sleep transition and Thursday morning run depend on user-specific recovery and logistics not visible here.\",\n  \"plausibility_review\": {\n    \"revision_required\": true,\n    \"severity\": \"low\",\n    \"reason\": \"A revision is warranted mainly because the resulting calendar contains objective duration-description contradictions for the moved work blocks: Thursday's 11:00-17:00 interval is 6 hours but is described as 7 hours, and Friday's 10:00-13:00 interval is 3 hours but is described as 2 hours. This could confuse the visible work-hour accounting even though the actual intervals and rationale support the 32-hour weekly total. From a human-manageability perspective, the revised distribution is otherwise plausible and meaningfully reduces Thursday strain after the late Wednesday dinner, so the concern is low severity rather than a sign that the schedule is unsustainable.\",\n    \"suggested_improvement\": \"Correct the moved work-block descriptions so they match the actual scheduled intervals, and preserve or briefly restate the recovery rationale for the Wednesday dinner-to-Thursday routine. If the same event times are kept, the Proposer should clarify that the plan depends on the user's ability to manage the 23:00 dinner end, 23:30 sleep start, and Thursday 08:00 run.\"\n  },\n  \"unresolved_assumptions\": [\n    {\n      \"subject\": \"Original request satisfaction\",\n      \"assumption\": \"The revised calendar satisfies the user's actual request beyond the visible 32-hour work target and protected dinner/sleep constraints.\",\n      \"evidence_gap\": \"The original request is not provided, and the technical validation explicitly did not check request satisfaction or soft preference satisfaction.\",\n      \"potential_impact\": \"material\",\n      \"verification_source\": \"user_context\"\n    },\n    {\n      \"subject\": \"Wednesday dinner to sleep transition\",\n      \"assumption\": \"The user can realistically finish the Wednesday networking dinner at 23:00 and begin protected sleep at 23:30.\",\n      \"evidence_gap\": \"No information is provided about travel, location, social overrun, wind-down needs, hygiene or post-event obligations.\",\n      \"potential_impact\": \"material\",\n      \"verification_source\": \"user_context\"\n    },\n    {\n      \"subject\": \"Thursday recovery capacity\",\n      \"assumption\": \"After the Wednesday 19:30-23:00 networking dinner and 23:30-07:30 sleep block, the user can complete the Thursday 08:00-09:00 run and 11:00-17:00 work block without unacceptable fatigue.\",\n      \"evidence_gap\": \"The revision creates more margin before work, but there is still no user-specific evidence about recovery tolerance, run intensity, or Thursday work demands.\",\n      \"potential_impact\": \"material\",\n      \"verification_source\": \"user_context\"\n    },\n    {\n      \"subject\": \"Work block usability\",\n      \"assumption\": \"The scheduled consulting work blocks, including Monday and Tuesday 10:00-18:00 and Wednesday 10:00-17:00, are practically usable while allowing food, breaks and cognitive recovery.\",\n      \"evidence_gap\": \"The calendar shows continuous work blocks but does not specify whether breaks or meals are included inside them.\",\n      \"potential_impact\": \"material\",\n      \"verification_source\": \"user_context\"\n    },\n    {\n      \"subject\": \"Morning runs across the week\",\n      \"assumption\": \"The daily 08:00-09:00 runs from Monday through Friday remain beneficial and manageable, including after the late Wednesday dinner.\",\n      \"evidence_gap\": \"Runs are marked preferred and high importance, but there is no evidence about training load, fatigue, recovery needs or whether Thursday's run is flexible in practice.\",\n      \"potential_impact\": \"minor\",\n      \"verification_source\": \"user_context\"\n    }\n  ]\n}"
+      ],
+      "unresolved_assumptions": [
+        {
+          "subject": "Original request satisfaction",
+          "assumption": "The revised redistribution satisfies the user's actual request beyond the visible 32-hour work target and protected dinner, sleep, and run priorities.",
+          "evidence_gap": "The original request is not provided, and the technical validation explicitly did not check request satisfaction or soft preference satisfaction.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Wednesday dinner to Thursday recovery",
+          "assumption": "The user can realistically finish the Wednesday networking dinner at 23:00, transition to sleep by 23:30, then complete the Thursday 08:00-09:00 run and 11:00-17:00 work block without unacceptable fatigue or practical strain.",
+          "evidence_gap": "The revision adds recovery margin compared with the prior calendar, but no information is provided about travel, wind-down needs, dinner location, post-event obligations, or the user's recovery tolerance.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Work block sustainability",
+          "assumption": "The continuous consulting work blocks are practically usable as scheduled while still allowing ordinary breaks, food, and cognitive recovery.",
+          "evidence_gap": "The calendar records long work blocks on Monday 10:00-18:00, Tuesday 10:00-18:00, Wednesday 10:00-17:00, and Thursday 11:00-17:00, but does not indicate whether breaks or meals are included inside them.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Duration metadata consistency",
+          "assumption": "The actual scheduled intervals, not the event descriptions, are the intended source of truth for Thursday and Friday work duration.",
+          "evidence_gap": "The final calendar shows work_thu from 11:00-17:00 and work_fri from 10:00-13:00, but their descriptions still say '7 hours work' and '2 hours work' respectively.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Morning runs across the week",
+          "assumption": "The daily 08:00-09:00 morning runs remain beneficial and manageable across five consecutive weekdays, including after the late Wednesday dinner.",
+          "evidence_gap": "Runs are marked as preferred and high importance, but there is no evidence about fatigue, training load, recovery needs, or whether Thursday's run is flexible in practice.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "proposer_feedback": "Numeric Critic criteria failed. Scores: {\"reasoning\":4,\"coherence\":4,\"alternatives\":4,\"clarity\":3}. Unverified conditions to reassess: [{'subject': 'Original request satisfaction', 'assumption': \"The revised redistribution satisfies the user's actual request beyond the visible 32-hour work target and protected dinner, sleep, and run priorities.\", 'evidence_gap': 'The original request is not provided, and the technical validation explicitly did not check request satisfaction or soft preference satisfaction.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Wednesday dinner to Thursday recovery', 'assumption': 'The user can realistically finish the Wednesday networking dinner at 23:00, transition to sleep by 23:30, then complete the Thursday 08:00-09:00 run and 11:00-17:00 work block without unacceptable fatigue or practical strain.', 'evidence_gap': \"The revision adds recovery margin compared with the prior calendar, but no information is provided about travel, wind-down needs, dinner location, post-event obligations, or the user's recovery tolerance.\", 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Work block sustainability', 'assumption': 'The continuous consulting work blocks are practically usable as scheduled while still allowing ordinary breaks, food, and cognitive recovery.', 'evidence_gap': 'The calendar records long work blocks on Monday 10:00-18:00, Tuesday 10:00-18:00, Wednesday 10:00-17:00, and Thursday 11:00-17:00, but does not indicate whether breaks or meals are included inside them.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Duration metadata consistency', 'assumption': 'The actual scheduled intervals, not the event descriptions, are the intended source of truth for Thursday and Friday work duration.', 'evidence_gap': \"The final calendar shows work_thu from 11:00-17:00 and work_fri from 10:00-13:00, but their descriptions still say '7 hours work' and '2 hours work' respectively.\", 'potential_impact': 'minor', 'verification_source': 'unknown'}, {'subject': 'Morning runs across the week', 'assumption': 'The daily 08:00-09:00 morning runs remain beneficial and manageable across five consecutive weekdays, including after the late Wednesday dinner.', 'evidence_gap': \"Runs are marked as preferred and high importance, but there is no evidence about fatigue, training load, recovery needs, or whether Thursday's run is flexible in practice.\", 'potential_impact': 'minor', 'verification_source': 'user_context'}] Weaknesses: ['The revision substantially addresses the prior Wednesday-to-Thursday recovery concern by moving Thursday work from 10:00-17:00 to 11:00-17:00 and increasing Friday work from 10:00-12:00 to 10:00-13:00, but the Thursday morning sequence still remains fairly compressed after the Wednesday networking dinner ending at 23:00, sleep beginning at 23:30, and Thursday run from 08:00-09:00.', \"There is a clarity inconsistency in the final calendar metadata: work_thu is scheduled from 11:00-17:00, which is 6 hours, but its description says '7 hours work'; work_fri is scheduled from 10:00-13:00, which is 3 hours, but its description says '2 hours work'. The rationale and validator appear to rely on the interval times rather than the descriptions, but this inconsistency makes the plan harder to audit.\", 'The calendar still contains three consecutive substantial workdays before the late dinner: Monday 10:00-18:00, Tuesday 10:00-18:00, and Wednesday 10:00-17:00, each after a morning run. This appears plausible but leaves limited visible evidence about breaks, meals, or cognitive recovery inside the work blocks.', \"The original request is unavailable, and the technical validation explicitly did not check request satisfaction or soft preference satisfaction, so the review can assess visible manageability but cannot verify that the proposed redistribution fully satisfies the user's actual intent.\"]. Actionable feedback: The revised proposal is more human-centered than the prior no-change version. It recognizes the late Wednesday dinner as the main recovery pressure point and uses visible flexibility proportionately: Thursday work starts an hour later and Friday absorbs that hour while remaining relatively light. This is a reasonable improvement without disrupting fixed sleep, the fixed networking dinner, or preferred morning runs. The remaining concerns are mostly about clarity and ordinary human capacity rather than an obvious scheduling failure. The Proposer should clean up the mismatched duration descriptions for Thursday and Friday and, if fuller context is available, briefly substantiate that the Wednesday 23:00 dinner to Thursday 08:00 run and 11:00-17:00 workday is acceptable for this person. The same operations could plausibly be kept if those points are clarified.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "move",
+            "event_id": "work_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-05-19T10:00:00+01:00",
+            "to_end": "2027-05-19T16:00:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Consulting Work Top-Up",
+            "from_start": null,
+            "to_start": "2027-05-17T09:30:00+01:00",
+            "to_end": "2027-05-17T10:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Consulting Work Top-Up",
+            "from_start": null,
+            "to_start": "2027-05-18T09:30:00+01:00",
+            "to_end": "2027-05-18T10:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "move",
+            "event_id": "work_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-05-20T11:00:00+01:00",
+            "to_end": "2027-05-20T17:00:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "work_fri",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-05-21T10:00:00+01:00",
+            "to_end": "2027-05-21T13:00:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "The fixed social dinner and protected sleep events are left unchanged.",
+            "The final calendar schedules 32 hours of work within the checked week.",
+            "Work blocks are flexible and single-participant, so these changes do not create a known third-party dependency.",
+            "Morning runs are preserved because they are a stated preference and health-related changes may require confirmation.",
+            "Scheduled work time satisfies the duration rule, but it is not proof that work is completed.",
+            "Breaks, meals, travel, wind-down time and recovery tolerance are not supplied, so practical sustainability remains uncertain.",
+            "Moved work intervals may make old event descriptions stale because this contract cannot edit descriptions."
+          ],
+          "priorities": [
+            "Reduce Wednesday before the late fixed dinner instead of treating the existing block as already sufficient.",
+            "Lighten Thursday after the late dinner rather than assuming next-day recovery is easy.",
+            "Spread the replacement work into visible free time on Monday, Tuesday and Friday with limited disruption.",
+            "Avoid moving runs, sleep or the fixed networking commitment."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Keep the previous two-change plan.",
+              "rejected_because": "Rejected because it did not actually reduce Wednesday and still left the recovery concern under-addressed."
+            },
+            {
+              "option": "Keep Thursday at its original workload.",
+              "rejected_because": "Rejected because the late fixed dinner makes the next morning a foreseeable strain point."
+            },
+            {
+              "option": "Move or shorten the Thursday run.",
+              "rejected_because": "Rejected because runs are preferred health activities and may require confirmation."
+            },
+            {
+              "option": "Add work after the Wednesday dinner.",
+              "rejected_because": "Rejected because it would conflict with protected sleep and worsen recovery."
+            },
+            {
+              "option": "Evenly rebalance all non-Wednesday workdays.",
+              "rejected_because": "Rejected because it would move more existing work than needed for the request."
+            }
+          ],
+          "summary": "Reduce Wednesday and Thursday by one hour each, then place the replacement work in small Monday and Tuesday top-ups plus a longer Friday block; the trade-off is added work near morning runs and Friday, but less pressure around the late Wednesday dinner."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true,
+        "aggregate_checks": [
+          {
+            "id": "weekly_hours",
+            "status": "pass",
+            "minutes": 1920.0,
+            "minimum_minutes": 1920,
+            "category": "work",
+            "evidence": "union of final calendar intervals"
+          }
+        ],
+        "aggregate_validation_version": "duration_total_v1"
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-05-16T23:30:00+01:00",
+            "end": "2027-05-17T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "run_mon",
+            "title": "Morning Run",
+            "start": "2027-05-17T08:00:00+01:00",
+            "end": "2027-05-17T09:00:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Run.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_1",
+            "title": "Consulting Work Top-Up",
+            "start": "2027-05-17T09:30:00+01:00",
+            "end": "2027-05-17T10:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "work_mon",
+            "title": "Consulting Work Block",
+            "start": "2027-05-17T10:00:00+01:00",
+            "end": "2027-05-17T18:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "8 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-05-17T23:30:00+01:00",
+            "end": "2027-05-18T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "run_tue",
+            "title": "Morning Run",
+            "start": "2027-05-18T08:00:00+01:00",
+            "end": "2027-05-18T09:00:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Run.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_2",
+            "title": "Consulting Work Top-Up",
+            "start": "2027-05-18T09:30:00+01:00",
+            "end": "2027-05-18T10:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "work_tue",
+            "title": "Consulting Work Block",
+            "start": "2027-05-18T10:00:00+01:00",
+            "end": "2027-05-18T18:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "8 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-05-18T23:30:00+01:00",
+            "end": "2027-05-19T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "run_wed",
+            "title": "Morning Run",
+            "start": "2027-05-19T08:00:00+01:00",
+            "end": "2027-05-19T09:00:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Run.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_wed",
+            "title": "Consulting Work Block",
+            "start": "2027-05-19T10:00:00+01:00",
+            "end": "2027-05-19T16:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "7 hours work.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "networking_wed",
+            "title": "Industry Networking Dinner",
+            "start": "2027-05-19T19:30:00+01:00",
+            "end": "2027-05-19T23:00:00+01:00",
+            "category": "social",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "professionals"
+            ],
+            "description": "Fixed dinner event.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-05-19T23:30:00+01:00",
+            "end": "2027-05-20T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "run_thu",
+            "title": "Morning Run",
+            "start": "2027-05-20T08:00:00+01:00",
+            "end": "2027-05-20T09:00:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Run.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_thu",
+            "title": "Consulting Work Block",
+            "start": "2027-05-20T11:00:00+01:00",
+            "end": "2027-05-20T17:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "7 hours work.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-05-20T23:30:00+01:00",
+            "end": "2027-05-21T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "run_fri",
+            "title": "Morning Run",
+            "start": "2027-05-21T08:00:00+01:00",
+            "end": "2027-05-21T09:00:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Run.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_fri",
+            "title": "Consulting Work Block",
+            "start": "2027-05-21T10:00:00+01:00",
+            "end": "2027-05-21T13:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "2 hours work.",
+            "origin": "existing",
+            "change_status": "moved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 4,
+          "alternatives": 4,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The proposal improves the prior Wednesday-to-Thursday recovery concern by reducing Wednesday work to 10:00-16:00, leaving a larger gap before the fixed Industry Networking Dinner from 19:30-23:00, and by keeping Thursday work at 11:00-17:00 after the Thursday 08:00-09:00 run. This is a coherent human-centered trade-off, but it shifts extra work into Monday and Tuesday mornings immediately after runs.",
+          "Monday and Tuesday now each have a Morning Run from 08:00-09:00, only a 30-minute gap, then work from 09:30-18:00 when the top-up and existing block are viewed together. That may be manageable, but the rationale does not specifically address whether the 30-minute post-run transition is enough for ordinary hygiene, food, setup, or recovery before a long workday.",
+          "The resulting work distribution is more protective around Wednesday evening and Thursday morning, but it creates two 8.5-hour scheduled workdays on Monday and Tuesday after exercise. The calendar does not show whether breaks or meals are included inside those work blocks, so the human sustainability of those long days remains uncertain.",
+          "Event descriptions remain inconsistent with actual intervals: work_wed is scheduled 10:00-16:00 but says '7 hours work', work_thu is scheduled 11:00-17:00 but says '7 hours work', and work_fri is scheduled 10:00-13:00 but says '2 hours work'. The rationale acknowledges stale descriptions, which reduces the concern, but it still makes the calendar harder to audit.",
+          "The original request is not available, and the technical validation explicitly did not check request satisfaction or soft preference satisfaction, so this review can assess visible manageability but cannot verify that the redistribution fully satisfies the user's actual intent."
+        ],
+        "feedback": "The revised schedule is broadly plausible and more balanced around the fixed late Wednesday dinner than the earlier versions. It uses flexibility to reduce Wednesday work before the 19:30-23:00 networking dinner and preserves a later, shorter Thursday workday after the Thursday morning run. The main trade-off is that Monday and Tuesday become heavier: each has a run from 08:00-09:00, a short 30-minute transition, then scheduled consulting work from 09:30-18:00. That is not objectively infeasible, especially if the work blocks include breaks and the user is comfortable starting soon after runs, but it is a real human-quality dependency. The Proposer should either substantiate that these post-run 8.5-hour workdays are acceptable in context or consider whether the redistributed work can be placed with less compression while preserving the benefit around Wednesday evening and Thursday recovery. The stale duration descriptions should also be corrected if the system permits, or clearly treated as non-authoritative metadata.",
+        "plausibility_review": {
+          "revision_required": false,
+          "severity": "low",
+          "reason": "The prior recovery concern receives a stronger answer in this revision: Wednesday work now ends at 16:00 before the 19:30 dinner, and Thursday remains lighter with work from 11:00-17:00. The newly added Monday and Tuesday 09:30-10:00 top-ups create heavier mornings after runs, but the added burden is limited and occurs on days without visible evening commitments. There is a material uncertainty about post-run transition time and long workday sustainability, yet the visible schedule is not so compressed or disproportionate that another revision is required on human-manageability grounds.",
+          "suggested_improvement": "No further revision is required, but the Proposer should explain whether the Monday and Tuesday 30-minute post-run transition and 09:30-18:00 combined work periods are realistic for this person, and should clean up or explicitly deprecate the stale duration descriptions."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Original request satisfaction",
+            "assumption": "The revised redistribution satisfies the user's actual request beyond the visible 32-hour work target and protected dinner, sleep, and run priorities.",
+            "evidence_gap": "The original request is not provided, and the technical validation explicitly did not check request satisfaction or soft preference satisfaction.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Monday and Tuesday post-run transition",
+            "assumption": "The user can realistically finish the 08:00-09:00 morning run and begin work at 09:30 on Monday and Tuesday with enough time for ordinary hygiene, food, preparation, and recovery.",
+            "evidence_gap": "The calendar shows only a 30-minute gap after each run before the new Consulting Work Top-Up, and no information is provided about run location, shower needs, breakfast habits, setup time, or recovery tolerance.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Long Monday and Tuesday workdays",
+            "assumption": "The combined 09:30-18:00 consulting work periods on Monday and Tuesday are practically usable while still allowing ordinary breaks, meals, and cognitive recovery.",
+            "evidence_gap": "The calendar records continuous or back-to-back work from 09:30-18:00 on both days, but does not indicate whether breaks or meals are included inside those work blocks.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Wednesday dinner to Thursday recovery",
+            "assumption": "The user can realistically finish the Wednesday networking dinner at 23:00, transition to sleep by 23:30, then complete the Thursday 08:00-09:00 run and 11:00-17:00 work block without unacceptable fatigue or practical strain.",
+            "evidence_gap": "The revision adds more Wednesday pre-dinner margin and preserves the later Thursday work start, but no information is provided about travel, wind-down needs, dinner location, post-event obligations, or the user's recovery tolerance.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Duration metadata consistency",
+            "assumption": "The actual scheduled intervals, not the event descriptions, are the intended source of truth for Wednesday, Thursday, and Friday work duration.",
+            "evidence_gap": "The final calendar shows work_wed from 10:00-16:00, work_thu from 11:00-17:00, and work_fri from 10:00-13:00, but their descriptions still say '7 hours work', '7 hours work', and '2 hours work' respectively.",
+            "potential_impact": "minor",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Morning runs across the week",
+            "assumption": "The daily 08:00-09:00 morning runs remain beneficial and manageable across five consecutive weekdays, including after the late Wednesday dinner.",
+            "evidence_gap": "Runs are marked as preferred and high importance, but there is no evidence about fatigue, training load, recovery needs, or whether Thursday's run is flexible in practice.",
+            "potential_impact": "minor",
+            "verification_source": "user_context"
+          }
+        ],
+        "overall": 4.0
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": true,
+        "plausibility_revision_required": false,
+        "accepted": true,
+        "revision_causes": []
+      },
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": [
+        {
+          "iteration": 0,
+          "proposal": {
+            "changes": [],
+            "rationale": {
+              "constraints": [
+                "The protected dinner is already present and must not be moved or deleted.",
+                "Protected sleep blocks are left unchanged.",
+                "The final calendar already schedules 32 hours of work within the checked week.",
+                "Scheduled work time satisfies the duration rule, but it is not proof that work is completed.",
+                "Work blocks are flexible under the profile rules, but flexibility does not require changing a schedule that already meets the request."
+              ],
+              "priorities": [
+                "Preserve the fixed networking dinner and protected sleep.",
+                "Maintain the morning runs as preferred.",
+                "Avoid unnecessary disruption because the reduced Wednesday work block and remaining weekday distribution already meet the target."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Add extra work on Friday afternoon.",
+                  "rejected_because": "Rejected because the weekly 32-hour work target is already met."
+                },
+                {
+                  "option": "Redistribute more hours from Wednesday to Monday or Tuesday.",
+                  "rejected_because": "Rejected because Wednesday is already reduced and the existing distribution satisfies the typed requirement."
+                },
+                {
+                  "option": "Move a morning run to create more work time.",
+                  "rejected_because": "Rejected because no additional work time is needed and runs are a stated preference."
+                }
+              ],
+              "summary": "Keep the calendar unchanged: it already reflects the Wednesday dinner, a reduced Wednesday work block, and enough work across Monday, Tuesday, Thursday, and Friday to reach 32 scheduled hours while avoiding unnecessary disruption."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "sleep_mon",
+                "title": "Sleep",
+                "start": "2027-05-16T23:30:00+01:00",
+                "end": "2027-05-17T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "run_mon",
+                "title": "Morning Run",
+                "start": "2027-05-17T08:00:00+01:00",
+                "end": "2027-05-17T09:00:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Run.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_mon",
+                "title": "Consulting Work Block",
+                "start": "2027-05-17T10:00:00+01:00",
+                "end": "2027-05-17T18:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "8 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_tue",
+                "title": "Sleep",
+                "start": "2027-05-17T23:30:00+01:00",
+                "end": "2027-05-18T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "run_tue",
+                "title": "Morning Run",
+                "start": "2027-05-18T08:00:00+01:00",
+                "end": "2027-05-18T09:00:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Run.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_tue",
+                "title": "Consulting Work Block",
+                "start": "2027-05-18T10:00:00+01:00",
+                "end": "2027-05-18T18:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "8 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_wed",
+                "title": "Sleep",
+                "start": "2027-05-18T23:30:00+01:00",
+                "end": "2027-05-19T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "run_wed",
+                "title": "Morning Run",
+                "start": "2027-05-19T08:00:00+01:00",
+                "end": "2027-05-19T09:00:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Run.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_wed",
+                "title": "Consulting Work Block",
+                "start": "2027-05-19T10:00:00+01:00",
+                "end": "2027-05-19T17:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "7 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "networking_wed",
+                "title": "Industry Networking Dinner",
+                "start": "2027-05-19T19:30:00+01:00",
+                "end": "2027-05-19T23:00:00+01:00",
+                "category": "social",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "professionals"
+                ],
+                "description": "Fixed dinner event.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2027-05-19T23:30:00+01:00",
+                "end": "2027-05-20T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "run_thu",
+                "title": "Morning Run",
+                "start": "2027-05-20T08:00:00+01:00",
+                "end": "2027-05-20T09:00:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Run.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_thu",
+                "title": "Consulting Work Block",
+                "start": "2027-05-20T10:00:00+01:00",
+                "end": "2027-05-20T17:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "7 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_fri",
+                "title": "Sleep",
+                "start": "2027-05-20T23:30:00+01:00",
+                "end": "2027-05-21T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "run_fri",
+                "title": "Morning Run",
+                "start": "2027-05-21T08:00:00+01:00",
+                "end": "2027-05-21T09:00:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Run.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_fri",
+                "title": "Consulting Work Block",
+                "start": "2027-05-21T10:00:00+01:00",
+                "end": "2027-05-21T12:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "2 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              }
+            ],
+            "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+          },
+          "plausibility_review": {
+            "revision_required": true,
+            "severity": "moderate",
+            "reason": "A revision is warranted because the no-change recommendation has a material support gap: it preserves a demanding Wednesday evening to Thursday workday sequence without weighing recovery, transition time or next-day capacity, and it includes an inaccurate statement about which days produce the 32 work hours. This does not prove the calendar is unmanageable, and the issue may be acceptable given context not shown here, but the current rationale does not adequately support the human-centered sustainability of leaving everything unchanged.",
+            "suggested_improvement": "Reassess the no-change outcome with attention to the Wednesday dinner-to-Thursday routine and correct the explanation of the weekly work-hour total. If the same calendar is kept, provide a grounded reason why the late dinner, short pre-sleep interval, Thursday morning run and Thursday work block are manageable in this context."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Original request satisfaction",
+              "assumption": "Keeping the calendar unchanged satisfies the user's actual request beyond the visible 32-hour work target and protected dinner/sleep constraints.",
+              "evidence_gap": "The original request is not provided, and the technical validation explicitly did not check request satisfaction or soft preference satisfaction.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Wednesday late dinner to Thursday recovery",
+              "assumption": "The user can realistically finish the Wednesday networking dinner at 23:00, transition to sleep by 23:30, then complete the Thursday 08:00 run and 10:00-17:00 work block without unacceptable fatigue or practical strain.",
+              "evidence_gap": "No information is provided about travel, wind-down needs, dinner location, post-event obligations, or the user's recovery tolerance.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Work block sustainability",
+              "assumption": "The 8-hour and 7-hour consulting work blocks are practically usable as scheduled while still allowing ordinary breaks, food and cognitive recovery.",
+              "evidence_gap": "The calendar records continuous work blocks but does not indicate whether breaks or meals are included inside them.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Morning runs after fixed sleep",
+              "assumption": "The daily 08:00-09:00 morning runs remain beneficial and manageable across five consecutive weekdays, including after the late Wednesday dinner.",
+              "evidence_gap": "Runs are marked as preferred and high importance, but there is no evidence about current fatigue, training load, recovery needs or whether Thursday's run is flexible in practice.",
+              "potential_impact": "minor",
+              "verification_source": "user_context"
+            }
+          ],
+          "weaknesses": [
+            "The no-change rationale relies heavily on the weekly 32-hour total and low disruption, but it gives limited human-capacity analysis of the most demanding sequence: Wednesday run 08:00-09:00, work 10:00-17:00, networking dinner 19:30-23:00, sleep starting 23:30, then Thursday run 08:00-09:00 and work 10:00-17:00.",
+            "The rationale contains a concrete inconsistency: the summary says the 32 scheduled work hours are reached across Monday, Tuesday, Thursday and Friday, but those days total only 25 hours. The calendar reaches 32 hours only if Wednesday's 7-hour work block is included.",
+            "The alternatives considered focus on avoiding unnecessary extra work or preserving runs, but they do not address whether the late Wednesday dinner followed by protected sleep, a Thursday morning run and another 7-hour work block is sustainable or whether the existing flexibility should be used for recovery.",
+            "Because the original request is not available and the validator explicitly did not check request satisfaction or soft preferences, the claim that no change fully satisfies the request cannot be verified from the provided evidence alone."
+          ],
+          "feedback": "The calendar is not obviously impossible: sleep is protected, work reaches 32 scheduled hours, Friday is comparatively light, and preserving existing fixed events avoids disruption. However, the proposed no-op should be better substantiated. The key human-quality issue is not whether the events technically fit, but whether keeping Wednesday and Thursday unchanged after a late fixed networking dinner is a realistic recovery pattern. The Proposer should reconsider or explicitly justify the Wednesday-to-Thursday sequence using its fuller context, especially the 23:00 dinner end, 23:30 sleep start, Thursday 08:00 run and Thursday 10:00-17:00 work block. The Proposer should also correct the work-hour distribution explanation, because the current rationale misstates how the 32-hour total is achieved."
+        },
+        {
+          "iteration": 1,
+          "proposal": {
+            "changes": [
+              {
+                "type": "move",
+                "event_id": "work_thu",
+                "title": null,
+                "from_start": null,
+                "to_start": "2027-05-20T11:00:00+01:00",
+                "to_end": "2027-05-20T17:00:00+01:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "move",
+                "event_id": "work_fri",
+                "title": null,
+                "from_start": null,
+                "to_start": "2027-05-21T10:00:00+01:00",
+                "to_end": "2027-05-21T13:00:00+01:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              }
+            ],
+            "rationale": {
+              "constraints": [
+                "The fixed networking dinner and protected sleep blocks are left unchanged.",
+                "The final calendar schedules 32 hours of work in the checked week: 8, 8, 7, 6 and 3 hours by weekday.",
+                "Work blocks are flexible under the profile, so resizing Thursday and Friday work is operationally feasible in free time.",
+                "Morning runs are preserved because they are a stated preference and health-related changes may need confirmation.",
+                "Scheduled work time satisfies the duration rule, but it is not proof that work is completed.",
+                "No travel, wind-down, meal, break or recovery-tolerance data is supplied, so the plan reduces strain without proving full manageability."
+              ],
+              "priorities": [
+                "Reduce the workload immediately after the late fixed dinner while preserving the weekly work target.",
+                "Keep Wednesday only slightly reduced and distribute the remaining work across the other weekdays.",
+                "Avoid changing fixed social and sleep commitments or preferred runs.",
+                "Use Friday’s lighter schedule to absorb a modest amount of work with low disruption."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Keep the calendar unchanged.",
+                  "rejected_because": "Rejected because Thursday remains unnecessarily demanding after the late dinner when Friday has unused capacity."
+                },
+                {
+                  "option": "Move or shorten the Thursday morning run.",
+                  "rejected_because": "Rejected because runs are preferred health activities and changing them may require confirmation."
+                },
+                {
+                  "option": "Move work from Wednesday instead of Thursday.",
+                  "rejected_because": "Rejected because Wednesday is already slightly reduced and the dinner is the main fixed constraint."
+                },
+                {
+                  "option": "Add work after the Wednesday dinner.",
+                  "rejected_because": "Rejected because it would conflict with protected sleep and worsen recovery."
+                }
+              ],
+              "summary": "Shift one hour of work pressure from Thursday to Friday, preserving the fixed dinner, sleep, and morning runs while keeping the weekly scheduled work total at 32 hours."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "sleep_mon",
+                "title": "Sleep",
+                "start": "2027-05-16T23:30:00+01:00",
+                "end": "2027-05-17T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "run_mon",
+                "title": "Morning Run",
+                "start": "2027-05-17T08:00:00+01:00",
+                "end": "2027-05-17T09:00:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Run.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_mon",
+                "title": "Consulting Work Block",
+                "start": "2027-05-17T10:00:00+01:00",
+                "end": "2027-05-17T18:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "8 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_tue",
+                "title": "Sleep",
+                "start": "2027-05-17T23:30:00+01:00",
+                "end": "2027-05-18T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "run_tue",
+                "title": "Morning Run",
+                "start": "2027-05-18T08:00:00+01:00",
+                "end": "2027-05-18T09:00:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Run.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_tue",
+                "title": "Consulting Work Block",
+                "start": "2027-05-18T10:00:00+01:00",
+                "end": "2027-05-18T18:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "8 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_wed",
+                "title": "Sleep",
+                "start": "2027-05-18T23:30:00+01:00",
+                "end": "2027-05-19T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "run_wed",
+                "title": "Morning Run",
+                "start": "2027-05-19T08:00:00+01:00",
+                "end": "2027-05-19T09:00:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Run.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_wed",
+                "title": "Consulting Work Block",
+                "start": "2027-05-19T10:00:00+01:00",
+                "end": "2027-05-19T17:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "7 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "networking_wed",
+                "title": "Industry Networking Dinner",
+                "start": "2027-05-19T19:30:00+01:00",
+                "end": "2027-05-19T23:00:00+01:00",
+                "category": "social",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "professionals"
+                ],
+                "description": "Fixed dinner event.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2027-05-19T23:30:00+01:00",
+                "end": "2027-05-20T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "run_thu",
+                "title": "Morning Run",
+                "start": "2027-05-20T08:00:00+01:00",
+                "end": "2027-05-20T09:00:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Run.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_thu",
+                "title": "Consulting Work Block",
+                "start": "2027-05-20T11:00:00+01:00",
+                "end": "2027-05-20T17:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "7 hours work.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "sleep_fri",
+                "title": "Sleep",
+                "start": "2027-05-20T23:30:00+01:00",
+                "end": "2027-05-21T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "run_fri",
+                "title": "Morning Run",
+                "start": "2027-05-21T08:00:00+01:00",
+                "end": "2027-05-21T09:00:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Run.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_fri",
+                "title": "Consulting Work Block",
+                "start": "2027-05-21T10:00:00+01:00",
+                "end": "2027-05-21T13:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "2 hours work.",
+                "origin": "existing",
+                "change_status": "moved"
+              }
+            ],
+            "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+          },
+          "plausibility_review": {
+            "revision_required": false,
+            "severity": "low",
+            "reason": "The main prior concern received a grounded answer: the revised calendar reduces Thursday's immediate post-dinner workload by delaying and shortening the Thursday work block, while shifting only one hour to a lighter Friday. The remaining Wednesday-to-Thursday recovery issue is not eliminated, but the visible schedule now has more morning margin after the Thursday run and a shorter Thursday workday, so there is not enough evidence of a concrete human-manageability problem requiring another revision. The strongest remaining issue is the inconsistent duration descriptions for Thursday and Friday, which affects auditability more than the practical schedule because the actual time intervals and aggregate validation support the intended 32-hour total.",
+            "suggested_improvement": "No further revision is required on human-manageability grounds. The Proposer should correct the Thursday and Friday duration descriptions and, if keeping the same operations, briefly explain whether ordinary breaks, meals, and recovery after the Wednesday dinner are expected to fit within the visible routine."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Original request satisfaction",
+              "assumption": "The revised redistribution satisfies the user's actual request beyond the visible 32-hour work target and protected dinner, sleep, and run priorities.",
+              "evidence_gap": "The original request is not provided, and the technical validation explicitly did not check request satisfaction or soft preference satisfaction.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Wednesday dinner to Thursday recovery",
+              "assumption": "The user can realistically finish the Wednesday networking dinner at 23:00, transition to sleep by 23:30, then complete the Thursday 08:00-09:00 run and 11:00-17:00 work block without unacceptable fatigue or practical strain.",
+              "evidence_gap": "The revision adds recovery margin compared with the prior calendar, but no information is provided about travel, wind-down needs, dinner location, post-event obligations, or the user's recovery tolerance.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Work block sustainability",
+              "assumption": "The continuous consulting work blocks are practically usable as scheduled while still allowing ordinary breaks, food, and cognitive recovery.",
+              "evidence_gap": "The calendar records long work blocks on Monday 10:00-18:00, Tuesday 10:00-18:00, Wednesday 10:00-17:00, and Thursday 11:00-17:00, but does not indicate whether breaks or meals are included inside them.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Duration metadata consistency",
+              "assumption": "The actual scheduled intervals, not the event descriptions, are the intended source of truth for Thursday and Friday work duration.",
+              "evidence_gap": "The final calendar shows work_thu from 11:00-17:00 and work_fri from 10:00-13:00, but their descriptions still say '7 hours work' and '2 hours work' respectively.",
+              "potential_impact": "minor",
+              "verification_source": "unknown"
+            },
+            {
+              "subject": "Morning runs across the week",
+              "assumption": "The daily 08:00-09:00 morning runs remain beneficial and manageable across five consecutive weekdays, including after the late Wednesday dinner.",
+              "evidence_gap": "Runs are marked as preferred and high importance, but there is no evidence about fatigue, training load, recovery needs, or whether Thursday's run is flexible in practice.",
+              "potential_impact": "minor",
+              "verification_source": "user_context"
+            }
+          ],
+          "weaknesses": [
+            "The revision substantially addresses the prior Wednesday-to-Thursday recovery concern by moving Thursday work from 10:00-17:00 to 11:00-17:00 and increasing Friday work from 10:00-12:00 to 10:00-13:00, but the Thursday morning sequence still remains fairly compressed after the Wednesday networking dinner ending at 23:00, sleep beginning at 23:30, and Thursday run from 08:00-09:00.",
+            "There is a clarity inconsistency in the final calendar metadata: work_thu is scheduled from 11:00-17:00, which is 6 hours, but its description says '7 hours work'; work_fri is scheduled from 10:00-13:00, which is 3 hours, but its description says '2 hours work'. The rationale and validator appear to rely on the interval times rather than the descriptions, but this inconsistency makes the plan harder to audit.",
+            "The calendar still contains three consecutive substantial workdays before the late dinner: Monday 10:00-18:00, Tuesday 10:00-18:00, and Wednesday 10:00-17:00, each after a morning run. This appears plausible but leaves limited visible evidence about breaks, meals, or cognitive recovery inside the work blocks.",
+            "The original request is unavailable, and the technical validation explicitly did not check request satisfaction or soft preference satisfaction, so the review can assess visible manageability but cannot verify that the proposed redistribution fully satisfies the user's actual intent."
+          ],
+          "feedback": "The revised proposal is more human-centered than the prior no-change version. It recognizes the late Wednesday dinner as the main recovery pressure point and uses visible flexibility proportionately: Thursday work starts an hour later and Friday absorbs that hour while remaining relatively light. This is a reasonable improvement without disrupting fixed sleep, the fixed networking dinner, or preferred morning runs. The remaining concerns are mostly about clarity and ordinary human capacity rather than an obvious scheduling failure. The Proposer should clean up the mismatched duration descriptions for Thursday and Friday and, if fuller context is available, briefly substantiate that the Wednesday 23:00 dinner to Thursday 08:00 run and 11:00-17:00 workday is acceptable for this person. The same operations could plausibly be kept if those points are clarified."
+        }
+      ],
+      "unresolved_assumptions": [
+        {
+          "subject": "Original request satisfaction",
+          "assumption": "The revised redistribution satisfies the user's actual request beyond the visible 32-hour work target and protected dinner, sleep, and run priorities.",
+          "evidence_gap": "The original request is not provided, and the technical validation explicitly did not check request satisfaction or soft preference satisfaction.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Monday and Tuesday post-run transition",
+          "assumption": "The user can realistically finish the 08:00-09:00 morning run and begin work at 09:30 on Monday and Tuesday with enough time for ordinary hygiene, food, preparation, and recovery.",
+          "evidence_gap": "The calendar shows only a 30-minute gap after each run before the new Consulting Work Top-Up, and no information is provided about run location, shower needs, breakfast habits, setup time, or recovery tolerance.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Long Monday and Tuesday workdays",
+          "assumption": "The combined 09:30-18:00 consulting work periods on Monday and Tuesday are practically usable while still allowing ordinary breaks, meals, and cognitive recovery.",
+          "evidence_gap": "The calendar records continuous or back-to-back work from 09:30-18:00 on both days, but does not indicate whether breaks or meals are included inside those work blocks.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Wednesday dinner to Thursday recovery",
+          "assumption": "The user can realistically finish the Wednesday networking dinner at 23:00, transition to sleep by 23:30, then complete the Thursday 08:00-09:00 run and 11:00-17:00 work block without unacceptable fatigue or practical strain.",
+          "evidence_gap": "The revision adds more Wednesday pre-dinner margin and preserves the later Thursday work start, but no information is provided about travel, wind-down needs, dinner location, post-event obligations, or the user's recovery tolerance.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Duration metadata consistency",
+          "assumption": "The actual scheduled intervals, not the event descriptions, are the intended source of truth for Wednesday, Thursday, and Friday work duration.",
+          "evidence_gap": "The final calendar shows work_wed from 10:00-16:00, work_thu from 11:00-17:00, and work_fri from 10:00-13:00, but their descriptions still say '7 hours work', '7 hours work', and '2 hours work' respectively.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Morning runs across the week",
+          "assumption": "The daily 08:00-09:00 morning runs remain beneficial and manageable across five consecutive weekdays, including after the late Wednesday dinner.",
+          "evidence_gap": "Runs are marked as preferred and high importance, but there is no evidence about fatigue, training load, recovery needs, or whether Thursday's run is flexible in practice.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        }
+      ]
+    }
+  ],
+  "initial_proposal": {
+    "changes": [],
+    "rationale": {
+      "constraints": [
+        "The protected dinner is already present and must not be moved or deleted.",
+        "Protected sleep blocks are left unchanged.",
+        "The final calendar already schedules 32 hours of work within the checked week.",
+        "Scheduled work time satisfies the duration rule, but it is not proof that work is completed.",
+        "Work blocks are flexible under the profile rules, but flexibility does not require changing a schedule that already meets the request."
+      ],
+      "priorities": [
+        "Preserve the fixed networking dinner and protected sleep.",
+        "Maintain the morning runs as preferred.",
+        "Avoid unnecessary disruption because the reduced Wednesday work block and remaining weekday distribution already meet the target."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Add extra work on Friday afternoon.",
+          "rejected_because": "Rejected because the weekly 32-hour work target is already met."
+        },
+        {
+          "option": "Redistribute more hours from Wednesday to Monday or Tuesday.",
+          "rejected_because": "Rejected because Wednesday is already reduced and the existing distribution satisfies the typed requirement."
+        },
+        {
+          "option": "Move a morning run to create more work time.",
+          "rejected_because": "Rejected because no additional work time is needed and runs are a stated preference."
+        }
+      ],
+      "summary": "Keep the calendar unchanged: it already reflects the Wednesday dinner, a reduced Wednesday work block, and enough work across Monday, Tuesday, Thursday, and Friday to reach 32 scheduled hours while avoiding unnecessary disruption."
+    }
+  },
+  "final_proposal": {
+    "changes": [
+      {
+        "type": "move",
+        "event_id": "work_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": "2027-05-19T10:00:00+01:00",
+        "to_end": "2027-05-19T16:00:00+01:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Consulting Work Top-Up",
+        "from_start": null,
+        "to_start": "2027-05-17T09:30:00+01:00",
+        "to_end": "2027-05-17T10:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Consulting Work Top-Up",
+        "from_start": null,
+        "to_start": "2027-05-18T09:30:00+01:00",
+        "to_end": "2027-05-18T10:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "move",
+        "event_id": "work_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": "2027-05-20T11:00:00+01:00",
+        "to_end": "2027-05-20T17:00:00+01:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "work_fri",
+        "title": null,
+        "from_start": null,
+        "to_start": "2027-05-21T10:00:00+01:00",
+        "to_end": "2027-05-21T13:00:00+01:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "The fixed social dinner and protected sleep events are left unchanged.",
+        "The final calendar schedules 32 hours of work within the checked week.",
+        "Work blocks are flexible and single-participant, so these changes do not create a known third-party dependency.",
+        "Morning runs are preserved because they are a stated preference and health-related changes may require confirmation.",
+        "Scheduled work time satisfies the duration rule, but it is not proof that work is completed.",
+        "Breaks, meals, travel, wind-down time and recovery tolerance are not supplied, so practical sustainability remains uncertain.",
+        "Moved work intervals may make old event descriptions stale because this contract cannot edit descriptions."
+      ],
+      "priorities": [
+        "Reduce Wednesday before the late fixed dinner instead of treating the existing block as already sufficient.",
+        "Lighten Thursday after the late dinner rather than assuming next-day recovery is easy.",
+        "Spread the replacement work into visible free time on Monday, Tuesday and Friday with limited disruption.",
+        "Avoid moving runs, sleep or the fixed networking commitment."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Keep the previous two-change plan.",
+          "rejected_because": "Rejected because it did not actually reduce Wednesday and still left the recovery concern under-addressed."
+        },
+        {
+          "option": "Keep Thursday at its original workload.",
+          "rejected_because": "Rejected because the late fixed dinner makes the next morning a foreseeable strain point."
+        },
+        {
+          "option": "Move or shorten the Thursday run.",
+          "rejected_because": "Rejected because runs are preferred health activities and may require confirmation."
+        },
+        {
+          "option": "Add work after the Wednesday dinner.",
+          "rejected_because": "Rejected because it would conflict with protected sleep and worsen recovery."
+        },
+        {
+          "option": "Evenly rebalance all non-Wednesday workdays.",
+          "rejected_because": "Rejected because it would move more existing work than needed for the request."
+        }
+      ],
+      "summary": "Reduce Wednesday and Thursday by one hour each, then place the replacement work in small Monday and Tuesday top-ups plus a longer Friday block; the trade-off is added work near morning runs and Friday, but less pressure around the late Wednesday dinner."
+    }
+  },
+  "final_score": 4.0,
+  "refinements": 2,
+  "critic_accepted": true,
+  "decision": "defer",
+  "reasons": [
+    "mais de 2 mudanças",
+    "toca em evento importante (work_wed, importância 4)",
+    "toca em evento importante (work_thu, importância 4)",
+    "toca em evento importante (work_fri, importância 4)"
+  ],
+  "status": "proposal_ready",
+  "critic_input_version": "final_calendar_v1",
+  "critic_policy_version": "uncertainty_review_v2",
+  "result_calendar_version": "validated_added_metadata_v2",
+  "final_result_calendar": {
+    "timezone": "Europe/Lisbon",
+    "coverage": "all_events_in_scenario_after_simulation",
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-05-16T23:30:00+01:00",
+        "end": "2027-05-17T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "run_mon",
+        "title": "Morning Run",
+        "start": "2027-05-17T08:00:00+01:00",
+        "end": "2027-05-17T09:00:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Run.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_1",
+        "title": "Consulting Work Top-Up",
+        "start": "2027-05-17T09:30:00+01:00",
+        "end": "2027-05-17T10:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "work_mon",
+        "title": "Consulting Work Block",
+        "start": "2027-05-17T10:00:00+01:00",
+        "end": "2027-05-17T18:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "8 hours work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-05-17T23:30:00+01:00",
+        "end": "2027-05-18T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "run_tue",
+        "title": "Morning Run",
+        "start": "2027-05-18T08:00:00+01:00",
+        "end": "2027-05-18T09:00:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Run.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_2",
+        "title": "Consulting Work Top-Up",
+        "start": "2027-05-18T09:30:00+01:00",
+        "end": "2027-05-18T10:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "work_tue",
+        "title": "Consulting Work Block",
+        "start": "2027-05-18T10:00:00+01:00",
+        "end": "2027-05-18T18:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "8 hours work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-05-18T23:30:00+01:00",
+        "end": "2027-05-19T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "run_wed",
+        "title": "Morning Run",
+        "start": "2027-05-19T08:00:00+01:00",
+        "end": "2027-05-19T09:00:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Run.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_wed",
+        "title": "Consulting Work Block",
+        "start": "2027-05-19T10:00:00+01:00",
+        "end": "2027-05-19T16:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "7 hours work.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "networking_wed",
+        "title": "Industry Networking Dinner",
+        "start": "2027-05-19T19:30:00+01:00",
+        "end": "2027-05-19T23:00:00+01:00",
+        "category": "social",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "professionals"
+        ],
+        "description": "Fixed dinner event.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-05-19T23:30:00+01:00",
+        "end": "2027-05-20T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "run_thu",
+        "title": "Morning Run",
+        "start": "2027-05-20T08:00:00+01:00",
+        "end": "2027-05-20T09:00:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Run.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_thu",
+        "title": "Consulting Work Block",
+        "start": "2027-05-20T11:00:00+01:00",
+        "end": "2027-05-20T17:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "7 hours work.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-05-20T23:30:00+01:00",
+        "end": "2027-05-21T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "run_fri",
+        "title": "Morning Run",
+        "start": "2027-05-21T08:00:00+01:00",
+        "end": "2027-05-21T09:00:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Run.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_fri",
+        "title": "Consulting Work Block",
+        "start": "2027-05-21T10:00:00+01:00",
+        "end": "2027-05-21T13:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "2 hours work.",
+        "origin": "existing",
+        "change_status": "moved"
+      }
+    ],
+    "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+  },
+  "final_unresolved_assumptions": [
+    {
+      "subject": "Original request satisfaction",
+      "assumption": "The revised redistribution satisfies the user's actual request beyond the visible 32-hour work target and protected dinner, sleep, and run priorities.",
+      "evidence_gap": "The original request is not provided, and the technical validation explicitly did not check request satisfaction or soft preference satisfaction.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Monday and Tuesday post-run transition",
+      "assumption": "The user can realistically finish the 08:00-09:00 morning run and begin work at 09:30 on Monday and Tuesday with enough time for ordinary hygiene, food, preparation, and recovery.",
+      "evidence_gap": "The calendar shows only a 30-minute gap after each run before the new Consulting Work Top-Up, and no information is provided about run location, shower needs, breakfast habits, setup time, or recovery tolerance.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Long Monday and Tuesday workdays",
+      "assumption": "The combined 09:30-18:00 consulting work periods on Monday and Tuesday are practically usable while still allowing ordinary breaks, meals, and cognitive recovery.",
+      "evidence_gap": "The calendar records continuous or back-to-back work from 09:30-18:00 on both days, but does not indicate whether breaks or meals are included inside those work blocks.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Wednesday dinner to Thursday recovery",
+      "assumption": "The user can realistically finish the Wednesday networking dinner at 23:00, transition to sleep by 23:30, then complete the Thursday 08:00-09:00 run and 11:00-17:00 work block without unacceptable fatigue or practical strain.",
+      "evidence_gap": "The revision adds more Wednesday pre-dinner margin and preserves the later Thursday work start, but no information is provided about travel, wind-down needs, dinner location, post-event obligations, or the user's recovery tolerance.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Duration metadata consistency",
+      "assumption": "The actual scheduled intervals, not the event descriptions, are the intended source of truth for Wednesday, Thursday, and Friday work duration.",
+      "evidence_gap": "The final calendar shows work_wed from 10:00-16:00, work_thu from 11:00-17:00, and work_fri from 10:00-13:00, but their descriptions still say '7 hours work', '7 hours work', and '2 hours work' respectively.",
+      "potential_impact": "minor",
+      "verification_source": "unknown"
+    },
+    {
+      "subject": "Morning runs across the week",
+      "assumption": "The daily 08:00-09:00 morning runs remain beneficial and manageable across five consecutive weekdays, including after the late Wednesday dinner.",
+      "evidence_gap": "Runs are marked as preferred and high importance, but there is no evidence about fatigue, training load, recovery needs, or whether Thursday's run is flexible in practice.",
+      "potential_impact": "minor",
+      "verification_source": "user_context"
+    }
+  ],
+  "uncertainty_history": [
+    {
+      "iteration": 0,
+      "unresolved_assumptions": [
+        {
+          "subject": "Original request satisfaction",
+          "assumption": "Keeping the calendar unchanged satisfies the user's actual request beyond the visible 32-hour work target and protected dinner/sleep constraints.",
+          "evidence_gap": "The original request is not provided, and the technical validation explicitly did not check request satisfaction or soft preference satisfaction.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Wednesday late dinner to Thursday recovery",
+          "assumption": "The user can realistically finish the Wednesday networking dinner at 23:00, transition to sleep by 23:30, then complete the Thursday 08:00 run and 10:00-17:00 work block without unacceptable fatigue or practical strain.",
+          "evidence_gap": "No information is provided about travel, wind-down needs, dinner location, post-event obligations, or the user's recovery tolerance.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Work block sustainability",
+          "assumption": "The 8-hour and 7-hour consulting work blocks are practically usable as scheduled while still allowing ordinary breaks, food and cognitive recovery.",
+          "evidence_gap": "The calendar records continuous work blocks but does not indicate whether breaks or meals are included inside them.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Morning runs after fixed sleep",
+          "assumption": "The daily 08:00-09:00 morning runs remain beneficial and manageable across five consecutive weekdays, including after the late Wednesday dinner.",
+          "evidence_gap": "Runs are marked as preferred and high importance, but there is no evidence about current fatigue, training load, recovery needs or whether Thursday's run is flexible in practice.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        }
+      ]
+    },
+    {
+      "iteration": 1,
+      "unresolved_assumptions": [
+        {
+          "subject": "Original request satisfaction",
+          "assumption": "The revised redistribution satisfies the user's actual request beyond the visible 32-hour work target and protected dinner, sleep, and run priorities.",
+          "evidence_gap": "The original request is not provided, and the technical validation explicitly did not check request satisfaction or soft preference satisfaction.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Wednesday dinner to Thursday recovery",
+          "assumption": "The user can realistically finish the Wednesday networking dinner at 23:00, transition to sleep by 23:30, then complete the Thursday 08:00-09:00 run and 11:00-17:00 work block without unacceptable fatigue or practical strain.",
+          "evidence_gap": "The revision adds recovery margin compared with the prior calendar, but no information is provided about travel, wind-down needs, dinner location, post-event obligations, or the user's recovery tolerance.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Work block sustainability",
+          "assumption": "The continuous consulting work blocks are practically usable as scheduled while still allowing ordinary breaks, food, and cognitive recovery.",
+          "evidence_gap": "The calendar records long work blocks on Monday 10:00-18:00, Tuesday 10:00-18:00, Wednesday 10:00-17:00, and Thursday 11:00-17:00, but does not indicate whether breaks or meals are included inside them.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Duration metadata consistency",
+          "assumption": "The actual scheduled intervals, not the event descriptions, are the intended source of truth for Thursday and Friday work duration.",
+          "evidence_gap": "The final calendar shows work_thu from 11:00-17:00 and work_fri from 10:00-13:00, but their descriptions still say '7 hours work' and '2 hours work' respectively.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Morning runs across the week",
+          "assumption": "The daily 08:00-09:00 morning runs remain beneficial and manageable across five consecutive weekdays, including after the late Wednesday dinner.",
+          "evidence_gap": "Runs are marked as preferred and high importance, but there is no evidence about fatigue, training load, recovery needs, or whether Thursday's run is flexible in practice.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        }
+      ]
+    },
+    {
+      "iteration": 2,
+      "unresolved_assumptions": [
+        {
+          "subject": "Original request satisfaction",
+          "assumption": "The revised redistribution satisfies the user's actual request beyond the visible 32-hour work target and protected dinner, sleep, and run priorities.",
+          "evidence_gap": "The original request is not provided, and the technical validation explicitly did not check request satisfaction or soft preference satisfaction.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Monday and Tuesday post-run transition",
+          "assumption": "The user can realistically finish the 08:00-09:00 morning run and begin work at 09:30 on Monday and Tuesday with enough time for ordinary hygiene, food, preparation, and recovery.",
+          "evidence_gap": "The calendar shows only a 30-minute gap after each run before the new Consulting Work Top-Up, and no information is provided about run location, shower needs, breakfast habits, setup time, or recovery tolerance.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Long Monday and Tuesday workdays",
+          "assumption": "The combined 09:30-18:00 consulting work periods on Monday and Tuesday are practically usable while still allowing ordinary breaks, meals, and cognitive recovery.",
+          "evidence_gap": "The calendar records continuous or back-to-back work from 09:30-18:00 on both days, but does not indicate whether breaks or meals are included inside those work blocks.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Wednesday dinner to Thursday recovery",
+          "assumption": "The user can realistically finish the Wednesday networking dinner at 23:00, transition to sleep by 23:30, then complete the Thursday 08:00-09:00 run and 11:00-17:00 work block without unacceptable fatigue or practical strain.",
+          "evidence_gap": "The revision adds more Wednesday pre-dinner margin and preserves the later Thursday work start, but no information is provided about travel, wind-down needs, dinner location, post-event obligations, or the user's recovery tolerance.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Duration metadata consistency",
+          "assumption": "The actual scheduled intervals, not the event descriptions, are the intended source of truth for Wednesday, Thursday, and Friday work duration.",
+          "evidence_gap": "The final calendar shows work_wed from 10:00-16:00, work_thu from 11:00-17:00, and work_fri from 10:00-13:00, but their descriptions still say '7 hours work', '7 hours work', and '2 hours work' respectively.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Morning runs across the week",
+          "assumption": "The daily 08:00-09:00 morning runs remain beneficial and manageable across five consecutive weekdays, including after the late Wednesday dinner.",
+          "evidence_gap": "Runs are marked as preferred and high importance, but there is no evidence about fatigue, training load, recovery needs, or whether Thursday's run is flexible in practice.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        }
+      ]
+    }
+  ],
+  "schema_version": "2.0",
+  "profile_id": "freelancer_flexible_01__freelancer_flexible_industry_networking_dinner_001",
+  "scenario_sha256": "f8d84b7382d441a165378cc6c513db5a0bbd908b25aa383dce8f1182ce699cec",
+  "aggregate_requirements_sha256": "12c2bd0e4920295d1235c1f1a56ef78855b41f70616be1113141f745e8e193bb",
+  "confirmed_changes_sha256": null,
+  "simulator_version": "calendar_v2_validated_added_metadata_v2",
+  "dataset_manifest_sha256": "28af38846fb8995651d5f63ab63402e36147dc0915a2bfcd5379747ea531ffad",
+  "split": "train",
+  "run_id": "25e8f683088e41c295972f896b5a357b",
+  "experiment_id": null,
+  "repeat_index": 0,
+  "generated_at": "2026-11-24T10:18:47.555458+00:00",
+  "prompt_versions": {
+    "proposer_sha256": "ae6fa59cccb86c31f34f66d07d241660b1feadf852ebf1b594bc85addab86985",
+    "proposer_wire_schema_version": "compact_proposal_v1",
+    "proposer_wire_schema_sha256": "f504fbcd7e939c43e055e2f188feb22097a284bcd9b043227d868e559547b865",
+    "proposer_revision_sha256": "3f0fe7f221013700694a22984560612013e9804072ffde4538e1329b9708ac95",
+    "critic_sha256": "1686688cdd4bc63abb12e6633ef9dbb9b62d69b69aba1c4805a201657cc5bb34"
+  },
+  "seconds": 175.546,
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [],
+    "valid": true,
+    "aggregate_checks": [
+      {
+        "id": "weekly_hours",
+        "status": "pass",
+        "minutes": 1920.0,
+        "minimum_minutes": 1920,
+        "category": "work",
+        "evidence": "union of final calendar intervals"
+      }
+    ],
+    "aggregate_validation_version": "duration_total_v1"
+  }
+}

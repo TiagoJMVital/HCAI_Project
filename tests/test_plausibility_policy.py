@@ -294,7 +294,7 @@ def test_importer_and_gate_features_preserve_separation(context):
     record["iterations"][0]["critic_evaluation"].pop("unresolved_assumptions")
     altered = root / "tampered_uncertainty.json"
     altered.write_text(json.dumps(record))
-    with pytest.raises(ValidationError):
+    with pytest.raises(ValueError, match="invalid Critic evaluation"):
         import_result(root, altered)
     record = json.loads(path.read_text())
     record["final_unresolved_assumptions"] = []
@@ -326,8 +326,18 @@ def test_streamlit_displays_new_uncertainty_without_claiming_execution(context, 
                        f"annotation_app.ROOT = Path({str(root)!r})\nannotation_app.main()\n")
     app = AppTest.from_file(wrapper, default_timeout=10).run()
     assert not app.exception
-    assert any("não garante viabilidade externa" in item.value for item in app.caption)
-    assert any("no operating hours are provided" in item.value for item in app.caption)
+    assert not any("não garante viabilidade externa" in item.value for item in app.caption)
+    diagnostic = tmp_path / "uncertainty_diagnostic.py"
+    diagnostic.write_text(
+        f"import json, sys\nsys.path.insert(0, {str(ROOT)!r})\n"
+        f"import annotation_app, streamlit as st\n"
+        f"record = json.load(open({str(path)!r}))\n"
+        "annotation_app._critic_history(record)\n"
+        "st.write('Incertezas finais B:', record.get('final_unresolved_assumptions'))\n")
+    diagnostic_app = AppTest.from_file(diagnostic, default_timeout=10).run()
+    assert not diagnostic_app.exception
+    assert any(item.label == "Iteração 0" for item in diagnostic_app.expander)
+    assert any("Incertezas finais B:" in item.value for item in diagnostic_app.markdown)
 
 
 def test_repeated_technical_validity_does_not_force_critic_acceptance(context):
@@ -472,5 +482,16 @@ def test_streamlit_reads_reassessment_history(context, tmp_path):
                        f"annotation_app.ROOT = Path({str(root)!r})\nannotation_app.main()\n")
     app = AppTest.from_file(wrapper, default_timeout=10).run()
     assert not app.exception
-    assert any(f"Política do Critic: {CRITIC_POLICY_VERSION}" in x.value for x in app.caption)
-    assert any("Reavaliação da dúvida anterior" in x.value for x in app.caption)
+    assert not any(f"Política do Critic: {CRITIC_POLICY_VERSION}" in x.value for x in app.caption)
+    diagnostic = tmp_path / "review_diagnostic.py"
+    diagnostic.write_text(
+        f"import json, sys\nsys.path.insert(0, {str(ROOT)!r})\n"
+        f"import annotation_app, streamlit as st\n"
+        f"record = json.load(open({str(path)!r}))\n"
+        "st.caption('Política do Critic: ' + record['critic_policy_version'])\n"
+        "annotation_app._critic_history(record)\n")
+    diagnostic_app = AppTest.from_file(diagnostic, default_timeout=10).run()
+    assert not diagnostic_app.exception
+    assert any(f"Política do Critic: {CRITIC_POLICY_VERSION}" in x.value
+               for x in diagnostic_app.caption)
+    assert len(diagnostic_app.expander) == 2

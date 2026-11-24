@@ -1,0 +1,3797 @@
+{
+  "proposal_id": "v2p_d31dedcc16b28f8824c5535e",
+  "scenario_id": "parent_young_children_boiler_repair_grandparents_001",
+  "family_id": "parent_young_children_schedule_conflict",
+  "profile_id": "parent_young_children_01__parent_young_children_boiler_repair_grandparents_001",
+  "split": "train",
+  "run_id": "bca40a201a6849ea9be335ab8ce5e32a",
+  "configuration": "B",
+  "generated_at": "2026-11-24T11:32:14.913743+00:00",
+  "proposer_provider": "iaedu",
+  "proposer_model": "GPT-5.5",
+  "proposer_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_provider": "iaedu",
+  "critic_model": "GPT-5.5",
+  "critic_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "prompt_versions": {
+    "proposer_sha256": "ae6fa59cccb86c31f34f66d07d241660b1feadf852ebf1b594bc85addab86985",
+    "proposer_wire_schema_version": "compact_proposal_v1",
+    "proposer_wire_schema_sha256": "f504fbcd7e939c43e055e2f188feb22097a284bcd9b043227d868e559547b865",
+    "proposer_revision_sha256": "3f0fe7f221013700694a22984560612013e9804072ffde4538e1329b9708ac95",
+    "critic_sha256": "1686688cdd4bc63abb12e6633ef9dbb9b62d69b69aba1c4805a201657cc5bb34"
+  },
+  "critic_settings": {
+    "threshold": 4.0,
+    "max_refinements": 3,
+    "min_dimension_score": 1
+  },
+  "experiment_id": null,
+  "repeat_index": 0,
+  "seconds": 261.534,
+  "critic_score": 4.0,
+  "critic_accepted": true,
+  "iterations": [
+    {
+      "index": 0,
+      "proposer_feedback": null,
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Travel from office to home",
+            "from_start": null,
+            "to_start": "2027-04-15T12:30:00+01:00",
+            "to_end": "2027-04-15T12:55:00+01:00",
+            "category": "commute",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "move",
+            "event_id": "lunch_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-04-15T12:55:00+01:00",
+            "to_end": "2027-04-15T13:15:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Confirm/order dinner for five",
+            "from_start": null,
+            "to_start": "2027-04-15T13:15:00+01:00",
+            "to_end": "2027-04-15T13:30:00+01:00",
+            "category": "household",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Boiler technician home access window",
+            "from_start": null,
+            "to_start": "2027-04-15T13:30:00+01:00",
+            "to_end": "2027-04-15T15:30:00+01:00",
+            "category": "household",
+            "importance": 5,
+            "participants": [
+              "user",
+              "technician"
+            ]
+          },
+          {
+            "type": "delete",
+            "event_id": "groceries_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Travel from school to central station",
+            "from_start": null,
+            "to_start": "2027-04-15T17:45:00+01:00",
+            "to_end": "2027-04-15T18:00:00+01:00",
+            "category": "commute",
+            "importance": 4,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Pick up parents at central station",
+            "from_start": null,
+            "to_start": "2027-04-15T18:15:00+01:00",
+            "to_end": "2027-04-15T18:25:00+01:00",
+            "category": "family",
+            "importance": 5,
+            "participants": [
+              "user",
+              "parents",
+              "marta",
+              "duarte"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Travel home from central station",
+            "from_start": null,
+            "to_start": "2027-04-15T18:25:00+01:00",
+            "to_end": "2027-04-15T18:45:00+01:00",
+            "category": "commute",
+            "importance": 4,
+            "participants": [
+              "user",
+              "parents",
+              "marta",
+              "duarte"
+            ]
+          },
+          {
+            "type": "move",
+            "event_id": "dinner_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-04-15T19:15:00+01:00",
+            "to_end": "2027-04-15T20:00:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "bedtime_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-04-15T20:00:00+01:00",
+            "to_end": "2027-04-15T20:45:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "The architecture review is protected work, so it is not moved despite overlapping the technician window.",
+            "Technician access may interrupt the review, so remote attendance and brief interruption cover should be confirmed with the team or architect.",
+            "Childcare pickup is protected and remains on time before the station pickup.",
+            "The partner shift is fixed and unreachable, so the plan does not rely on the partner before 21:30.",
+            "Sleep is protected and unchanged.",
+            "Dinner ordering depends on provider availability; no delivery or opening hours are assumed.",
+            "The fixed office-to-school commute is not altered, even though working from home makes the operational travel route different."
+          ],
+          "priorities": [
+            "Get home before the emergency technician window because the boiler failure affects heat and hot water.",
+            "Use ordering instead of weekly groceries tonight to preserve the parents pickup and bedtime routine.",
+            "Collect the parents from the station after school pickup using the supplied travel times.",
+            "Keep dinner and bedtime close to the children’s routine, finishing well before 21:30."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Ask the technician to arrive outside 14:00-15:30 within the stated window.",
+              "rejected_because": "This would reduce review disruption, but the window is externally constrained and may not be steerable."
+            },
+            {
+              "option": "Ask a colleague to cover any door-answering interruption during the review.",
+              "rejected_because": "This keeps the protected meeting intact while acknowledging the unavoidable home repair overlap."
+            },
+            {
+              "option": "Ask the parents to take a taxi from the station to home.",
+              "rejected_because": "This protects dinner and bedtime if the review, technician, or food order runs late."
+            },
+            {
+              "option": "Move weekly groceries to another day or use online delivery.",
+              "rejected_because": "Tonight’s station pickup makes the existing grocery slot infeasible, and tonight’s food still needs separate confirmation."
+            }
+          ],
+          "summary": "The selected plan gets the user home before the technician window, keeps the protected review and childcare pickup, skips weekly groceries in favor of ordering food, collects the parents, and preserves an earlier dinner and bedtime; the main trade-off is uncertainty around technician interruption and dinner-order availability."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [
+          "new_3: overlaps protected event architecture_review_thu"
+        ],
+        "warnings": [
+          "dinner_thu: overlaps contextual event partner_shift_thu for another participant",
+          "new_7: overlaps contextual event partner_shift_thu for another participant",
+          "new_3: overlaps contextual event partner_shift_thu for another participant",
+          "new_5: overlaps contextual event partner_shift_thu for another participant",
+          "new_6: overlaps contextual event partner_shift_thu for another participant",
+          "bedtime_thu: overlaps contextual event partner_shift_thu for another participant"
+        ],
+        "valid": false
+      },
+      "result_calendar": null,
+      "critic_evaluation": null,
+      "acceptance_policy": null,
+      "operations_changed_from_previous": null,
+      "rationale_changed_from_previous": null,
+      "prior_critic_reviews": []
+    },
+    {
+      "index": 1,
+      "proposer_feedback": "Deterministic validation found these operational problems: new_3: overlaps protected event architecture_review_thu. Revise the changes before any Critic assessment.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Travel from office to home",
+            "from_start": null,
+            "to_start": "2027-04-15T12:30:00+01:00",
+            "to_end": "2027-04-15T12:55:00+01:00",
+            "category": "commute",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "move",
+            "event_id": "lunch_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-04-15T12:55:00+01:00",
+            "to_end": "2027-04-15T13:15:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Confirm technician access, review cover, and dinner order",
+            "from_start": null,
+            "to_start": "2027-04-15T13:15:00+01:00",
+            "to_end": "2027-04-15T13:30:00+01:00",
+            "category": "household",
+            "importance": 5,
+            "participants": [
+              "user",
+              "technician",
+              "team",
+              "architect"
+            ]
+          },
+          {
+            "type": "delete",
+            "event_id": "groceries_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Travel from school to central station",
+            "from_start": null,
+            "to_start": "2027-04-15T17:45:00+01:00",
+            "to_end": "2027-04-15T18:00:00+01:00",
+            "category": "commute",
+            "importance": 4,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Pick up parents at central station",
+            "from_start": null,
+            "to_start": "2027-04-15T18:15:00+01:00",
+            "to_end": null,
+            "category": "family",
+            "importance": 5,
+            "participants": [
+              "user",
+              "parents",
+              "marta",
+              "duarte"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Travel home from central station",
+            "from_start": null,
+            "to_start": "2027-04-15T18:15:00+01:00",
+            "to_end": "2027-04-15T18:35:00+01:00",
+            "category": "commute",
+            "importance": 4,
+            "participants": [
+              "user",
+              "parents",
+              "marta",
+              "duarte"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "The architecture review is protected work, so it is kept rather than moved or overlapped by a new calendar block.",
+            "The technician may still arrive during the review, so brief interruption cover must be confirmed with the team or architect.",
+            "The technician window is an external dependency, and exact arrival time within it is unknown.",
+            "Childcare pickup is protected and remains the anchor before the station trip.",
+            "The partner shift is fixed and cannot be relied on before the evening return.",
+            "Sleep is protected and unchanged.",
+            "The office-to-school commute entry is fixed, but working from home makes the operational route different rather than freely movable here.",
+            "Dinner ordering depends on provider availability, so it needs confirmation rather than assumed success.",
+            "Station meeting time is uncertain, and any delay reduces the buffer before dinner."
+          ],
+          "priorities": [
+            "Get home before the repair window because heating and hot water are unavailable.",
+            "Preserve the protected review while arranging explicit cover for any door interruption.",
+            "Replace weekly groceries with a dinner order to make food for five possible tonight.",
+            "Collect the parents after school pickup using only the supplied travel times.",
+            "Keep the existing dinner and bedtime routine unchanged if the food plan is confirmed."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Ask the technician to target before the review starts.",
+              "rejected_because": "This would reduce work disruption, but the stated two-hour window may not be steerable."
+            },
+            {
+              "option": "Ask the parents to take a taxi from the station to home.",
+              "rejected_because": "This protects dinner and bedtime if the technician, review, or food order runs late."
+            },
+            {
+              "option": "Move weekly groceries to another day or use online delivery.",
+              "rejected_because": "The existing grocery slot conflicts with the station pickup, and tonight still needs a confirmed food source."
+            },
+            {
+              "option": "Ask a colleague to host or cover any review segment missed at the door.",
+              "rejected_because": "This keeps the protected meeting intact while handling the unavoidable home access risk."
+            }
+          ],
+          "summary": "The selected plan gets the user home before the repair window, keeps the protected review, childcare pickup, sleep, dinner and bedtime intact, skips the weekly groceries, orders food for five, and adds the station pickup; the main trade-off is that technician arrival during the review remains operationally possible and must be confirmed with others."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [
+          "new_4: overlaps contextual event partner_shift_thu for another participant",
+          "new_5: overlaps contextual event partner_shift_thu for another participant",
+          "new_6: overlaps contextual event partner_shift_thu for another participant",
+          "new temporal overlap (not automatically a hard-rule violation): new_5 x new_6"
+        ],
+        "valid": true
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-04-14T23:00:00+01:00",
+            "end": "2027-04-15T06:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "morning_thu",
+            "title": "Morning routine with the children",
+            "start": "2027-04-15T06:45:00+01:00",
+            "end": "2027-04-15T07:45:00+01:00",
+            "category": "family",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Breakfast, dressing and school bags.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "travel_to_school_thu",
+            "title": "Travel to school and daycare",
+            "start": "2027-04-15T08:00:00+01:00",
+            "end": "2027-04-15T08:15:00+01:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "15-minute car journey from home to school/daycare.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "dropoff_thu",
+            "title": "Drop-off at school and daycare",
+            "start": "2027-04-15T08:15:00+01:00",
+            "end": "2027-04-15T08:30:00+01:00",
+            "category": "childcare",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Drop-off for Marta and Duarte.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_to_work_thu",
+            "title": "Commute to office",
+            "start": "2027-04-15T08:30:00+01:00",
+            "end": "2027-04-15T09:00:00+01:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute car journey from school to the office (25 minutes from office directly to home).",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "standup_thu",
+            "title": "Team stand-up",
+            "start": "2027-04-15T09:30:00+01:00",
+            "end": "2027-04-15T10:00:00+01:00",
+            "category": "work",
+            "importance": 3,
+            "fixed": true,
+            "participants": [
+              "user",
+              "team"
+            ],
+            "description": "Daily stand-up; can be joined by video.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "focus_am_thu",
+            "title": "Audit compliance documentation",
+            "start": "2027-04-15T10:00:00+01:00",
+            "end": "2027-04-15T12:30:00+01:00",
+            "category": "work_focus",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Important individual task due tomorrow at noon; can be done from home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_0",
+            "title": "Travel from office to home",
+            "start": "2027-04-15T12:30:00+01:00",
+            "end": "2027-04-15T12:55:00+01:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "lunch_thu",
+            "title": "Lunch",
+            "start": "2027-04-15T12:55:00+01:00",
+            "end": "2027-04-15T13:15:00+01:00",
+            "category": "meal",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "new_2",
+            "title": "Confirm technician access, review cover, and dinner order",
+            "start": "2027-04-15T13:15:00+01:00",
+            "end": "2027-04-15T13:30:00+01:00",
+            "category": "household",
+            "importance": 5,
+            "fixed": null,
+            "participants": [
+              "user",
+              "technician",
+              "team",
+              "architect"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "partner_shift_thu",
+            "title": "Partner's work shift",
+            "start": "2027-04-15T13:30:00+01:00",
+            "end": "2027-04-15T21:30:00+01:00",
+            "category": "partner_work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "partner"
+            ],
+            "description": "Late shift as a bus driver; leaves home at 12:45 and is unreachable until 21:30.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "architecture_review_thu",
+            "title": "System architecture review",
+            "start": "2027-04-15T14:00:00+01:00",
+            "end": "2027-04-15T15:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "team",
+              "architect"
+            ],
+            "description": "Critical technical review; user can join by video call as long as there are no interruptions.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "focus_pm_thu",
+            "title": "Code review and PR approvals",
+            "start": "2027-04-15T15:30:00+01:00",
+            "end": "2027-04-15T17:00:00+01:00",
+            "category": "work_focus",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Flexible individual work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_to_school_thu",
+            "title": "Commute to school",
+            "start": "2027-04-15T17:00:00+01:00",
+            "end": "2027-04-15T17:30:00+01:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute journey from office to school (15 minutes from home to school).",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "pickup_thu",
+            "title": "Pick up children",
+            "start": "2027-04-15T17:30:00+01:00",
+            "end": "2027-04-15T17:45:00+01:00",
+            "category": "childcare",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Pick-up from after-school programme and daycare (close at 18:30).",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_4",
+            "title": "Travel from school to central station",
+            "start": "2027-04-15T17:45:00+01:00",
+            "end": "2027-04-15T18:00:00+01:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "new_5",
+            "title": "Pick up parents at central station",
+            "start": "2027-04-15T18:15:00+01:00",
+            "end": "2027-04-15T19:15:00+01:00",
+            "category": "family",
+            "importance": 5,
+            "fixed": null,
+            "participants": [
+              "user",
+              "parents",
+              "marta",
+              "duarte"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "new_6",
+            "title": "Travel home from central station",
+            "start": "2027-04-15T18:15:00+01:00",
+            "end": "2027-04-15T18:35:00+01:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user",
+              "parents",
+              "marta",
+              "duarte"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "dinner_thu",
+            "title": "Family dinner",
+            "start": "2027-04-15T19:30:00+01:00",
+            "end": "2027-04-15T20:30:00+01:00",
+            "category": "family",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Dinner at home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "bedtime_thu",
+            "title": "Children's bedtime routine",
+            "start": "2027-04-15T20:30:00+01:00",
+            "end": "2027-04-15T21:15:00+01:00",
+            "category": "family",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Bath, story and bedtime.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "run_thu",
+            "title": "Evening run",
+            "start": "2027-04-15T21:30:00+01:00",
+            "end": "2027-04-15T22:15:00+01:00",
+            "category": "exercise",
+            "importance": 2,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "45-minute run after the partner returns home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-04-15T23:00:00+01:00",
+            "end": "2027-04-16T06:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 3,
+          "coherence": 2,
+          "alternatives": 3,
+          "clarity": 3
+        },
+        "weaknesses": [
+          "The resulting evening calendar contains a concrete inconsistency: “Pick up parents at central station” runs from 18:15 to 19:15 while “Travel home from central station” also starts at 18:15 and ends at 18:35, with the same user, parents and children involved. That makes the station pickup and return-home sequence unclear and could undermine the preserved 19:30 dinner.",
+          "The rationale says the plan keeps dinner and bedtime intact, but the visible buffer is fragile. After school pickup at 17:30-17:45, travel to the station at 17:45-18:00, an uncertain station meeting at 18:15, and dinner at 19:30 leave little room if parents are delayed, the pickup takes longer, or the travel-home block cannot actually begin at 18:15.",
+          "The 13:15-13:30 block combines several consequential tasks: confirming technician access, arranging review cover, and confirming a dinner order. Fifteen minutes may be possible, but the rationale does not substantiate that this is enough for coordination with the technician, team or architect plus food ordering.",
+          "The plan relies on a dinner order replacing groceries, but the dinner event remains unchanged and still lists only the user and children as participants, while the proposal goal is food for five. This is not necessarily impossible, but the resulting calendar does not clearly show that the parents’ meal logistics are actually accommodated.",
+          "The user is moved home before the repair window, but the preserved 17:00-17:30 “Commute to school” still describes a journey from the office to school, even though the visible calendar has the user at home from 12:55 onward. The rationale notes this as a fixed entry with a different operational route, but the practical consequence is not clearly represented.",
+          "The technician risk during the 14:00-15:30 architecture review is acknowledged, but the proposed mitigation is only a 15-minute confirmation block beforehand. The calendar does not show the repair window itself or any practical margin during the review if door access, communication, or disruption actually occurs."
+        ],
+        "feedback": "The proposal shows awareness of the main pressures: protected work, childcare pickup, the partner’s unavailable shift, the heating/hot-water repair, groceries being displaced, and the parents’ station pickup. However, the final routine is not yet convincingly workable because the evening sequence is internally inconsistent and the downstream dinner/bedtime protection depends on several tight, unverified handoffs. The most important issue to reconsider is the station pickup and return-home representation: if the parents are picked up at 18:15 and everyone leaves immediately, the pickup block should not visibly continue until 19:15; if the pickup really occupies that period, the 18:15-18:35 travel-home block and 19:30 dinner become unrealistic. The Proposer should use its fuller context to clarify the intended station timing and whether the dinner plan still has enough practical margin. It should also better substantiate whether the 13:15-13:30 coordination block can realistically handle technician access, review cover, and dinner ordering, or whether the plan is relying on too much happening successfully in a narrow window.",
+        "plausibility_review": {
+          "revision_required": true,
+          "severity": "high",
+          "reason": "The final calendar has a material evening contradiction: the user, children and parents are scheduled both in a station pickup from 18:15 to 19:15 and in travel home from 18:15 to 18:35. This is more than a cosmetic issue because the proposal’s claimed success depends on preserving the 19:30 dinner and 20:30 bedtime routine after school pickup, station collection and food-order logistics. If the station event duration is real, dinner is likely compressed or delayed; if it is not real, the calendar misrepresents the plan. The technician/review and dinner-order confirmations also remain operationally thin, but the station overlap is the clearest reason the plan needs reconsideration.",
+          "suggested_improvement": "Reconsider the evening pickup and return-home sequence using the fuller context: clarify whether the station pickup is a brief handoff, a waiting window, or a longer family obligation, and then reassess whether dinner and bedtime remain realistically protected. Also revisit whether the pre-review confirmation block has enough practical capacity for technician access, review cover and dinner ordering, or provide grounded support for keeping it as is."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Station pickup duration",
+            "assumption": "The parents can be collected at the central station around 18:15 and the family can depart for home immediately enough to arrive by 18:35.",
+            "evidence_gap": "The final calendar also shows the pickup event continuing until 19:15 with the same participants, so it is unclear whether the pickup is a brief handoff or a one-hour obligation.",
+            "potential_impact": "potentially_blocking",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Parents' actual arrival time",
+            "assumption": "The parents will be available at the station in time for the planned 18:15 pickup and will not be delayed in a way that compresses dinner and bedtime.",
+            "evidence_gap": "The rationale states that station meeting time is uncertain and any delay reduces the buffer before dinner, but the final calendar schedules the evening as though the timing is sufficiently reliable.",
+            "potential_impact": "material",
+            "verification_source": "third_party"
+          },
+          {
+            "subject": "Dinner order availability",
+            "assumption": "A dinner order for five can be confirmed during the 13:15-13:30 block and will support the unchanged 19:30 dinner.",
+            "evidence_gap": "The rationale acknowledges provider availability is not guaranteed, and the calendar contains only a confirmation task, not evidence that food for five is actually secured.",
+            "potential_impact": "material",
+            "verification_source": "external_source"
+          },
+          {
+            "subject": "Pre-review coordination capacity",
+            "assumption": "Fifteen minutes from 13:15 to 13:30 is enough to confirm technician access, arrange review cover with the team or architect, and handle the dinner order.",
+            "evidence_gap": "The block combines several coordination tasks involving different parties, but no evidence is provided that these parties will respond within that window.",
+            "potential_impact": "material",
+            "verification_source": "third_party"
+          },
+          {
+            "subject": "Technician arrival during architecture review",
+            "assumption": "If the technician arrives during the 14:00-15:30 architecture review, the arranged cover or access plan will prevent meaningful disruption.",
+            "evidence_gap": "The rationale identifies this as a risk, but the calendar does not show the repair window or any explicit protected handling time during the review.",
+            "potential_impact": "material",
+            "verification_source": "third_party"
+          },
+          {
+            "subject": "Afternoon school commute route",
+            "assumption": "The preserved 17:00-17:30 commute to school remains practically valid even though the user appears to be at home after 12:55 and the event description refers to the office-to-school route.",
+            "evidence_gap": "The rationale says the fixed entry represents an operational route issue rather than a freely movable block, but the visible calendar does not clarify whether the travel duration or starting location is accurate.",
+            "potential_impact": "minor",
+            "verification_source": "user_context"
+          }
+        ],
+        "overall": 2.75
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": false,
+        "plausibility_revision_required": true,
+        "accepted": false,
+        "revision_causes": [
+          "numeric_criteria_failed",
+          "plausibility_revision_required"
+        ]
+      },
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": [],
+      "unresolved_assumptions": [
+        {
+          "subject": "Station pickup duration",
+          "assumption": "The parents can be collected at the central station around 18:15 and the family can depart for home immediately enough to arrive by 18:35.",
+          "evidence_gap": "The final calendar also shows the pickup event continuing until 19:15 with the same participants, so it is unclear whether the pickup is a brief handoff or a one-hour obligation.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Parents' actual arrival time",
+          "assumption": "The parents will be available at the station in time for the planned 18:15 pickup and will not be delayed in a way that compresses dinner and bedtime.",
+          "evidence_gap": "The rationale states that station meeting time is uncertain and any delay reduces the buffer before dinner, but the final calendar schedules the evening as though the timing is sufficiently reliable.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Dinner order availability",
+          "assumption": "A dinner order for five can be confirmed during the 13:15-13:30 block and will support the unchanged 19:30 dinner.",
+          "evidence_gap": "The rationale acknowledges provider availability is not guaranteed, and the calendar contains only a confirmation task, not evidence that food for five is actually secured.",
+          "potential_impact": "material",
+          "verification_source": "external_source"
+        },
+        {
+          "subject": "Pre-review coordination capacity",
+          "assumption": "Fifteen minutes from 13:15 to 13:30 is enough to confirm technician access, arrange review cover with the team or architect, and handle the dinner order.",
+          "evidence_gap": "The block combines several coordination tasks involving different parties, but no evidence is provided that these parties will respond within that window.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Technician arrival during architecture review",
+          "assumption": "If the technician arrives during the 14:00-15:30 architecture review, the arranged cover or access plan will prevent meaningful disruption.",
+          "evidence_gap": "The rationale identifies this as a risk, but the calendar does not show the repair window or any explicit protected handling time during the review.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Afternoon school commute route",
+          "assumption": "The preserved 17:00-17:30 commute to school remains practically valid even though the user appears to be at home after 12:55 and the event description refers to the office-to-school route.",
+          "evidence_gap": "The rationale says the fixed entry represents an operational route issue rather than a freely movable block, but the visible calendar does not clarify whether the travel duration or starting location is accurate.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "proposer_feedback": "Numeric Critic criteria failed. Scores: {\"reasoning\":3,\"coherence\":2,\"alternatives\":3,\"clarity\":3}. Plausibility revision required (high): The final calendar has a material evening contradiction: the user, children and parents are scheduled both in a station pickup from 18:15 to 19:15 and in travel home from 18:15 to 18:35. This is more than a cosmetic issue because the proposal’s claimed success depends on preserving the 19:30 dinner and 20:30 bedtime routine after school pickup, station collection and food-order logistics. If the station event duration is real, dinner is likely compressed or delayed; if it is not real, the calendar misrepresents the plan. The technician/review and dinner-order confirmations also remain operationally thin, but the station overlap is the clearest reason the plan needs reconsideration. Suggested direction: Reconsider the evening pickup and return-home sequence using the fuller context: clarify whether the station pickup is a brief handoff, a waiting window, or a longer family obligation, and then reassess whether dinner and bedtime remain realistically protected. Also revisit whether the pre-review confirmation block has enough practical capacity for technician access, review cover and dinner ordering, or provide grounded support for keeping it as is. The Critic lacks the full user constraints; explain if no better feasible option exists. Unverified conditions to reassess: [{'subject': 'Station pickup duration', 'assumption': 'The parents can be collected at the central station around 18:15 and the family can depart for home immediately enough to arrive by 18:35.', 'evidence_gap': 'The final calendar also shows the pickup event continuing until 19:15 with the same participants, so it is unclear whether the pickup is a brief handoff or a one-hour obligation.', 'potential_impact': 'potentially_blocking', 'verification_source': 'user_context'}, {'subject': \"Parents' actual arrival time\", 'assumption': 'The parents will be available at the station in time for the planned 18:15 pickup and will not be delayed in a way that compresses dinner and bedtime.', 'evidence_gap': 'The rationale states that station meeting time is uncertain and any delay reduces the buffer before dinner, but the final calendar schedules the evening as though the timing is sufficiently reliable.', 'potential_impact': 'material', 'verification_source': 'third_party'}, {'subject': 'Dinner order availability', 'assumption': 'A dinner order for five can be confirmed during the 13:15-13:30 block and will support the unchanged 19:30 dinner.', 'evidence_gap': 'The rationale acknowledges provider availability is not guaranteed, and the calendar contains only a confirmation task, not evidence that food for five is actually secured.', 'potential_impact': 'material', 'verification_source': 'external_source'}, {'subject': 'Pre-review coordination capacity', 'assumption': 'Fifteen minutes from 13:15 to 13:30 is enough to confirm technician access, arrange review cover with the team or architect, and handle the dinner order.', 'evidence_gap': 'The block combines several coordination tasks involving different parties, but no evidence is provided that these parties will respond within that window.', 'potential_impact': 'material', 'verification_source': 'third_party'}, {'subject': 'Technician arrival during architecture review', 'assumption': 'If the technician arrives during the 14:00-15:30 architecture review, the arranged cover or access plan will prevent meaningful disruption.', 'evidence_gap': 'The rationale identifies this as a risk, but the calendar does not show the repair window or any explicit protected handling time during the review.', 'potential_impact': 'material', 'verification_source': 'third_party'}, {'subject': 'Afternoon school commute route', 'assumption': 'The preserved 17:00-17:30 commute to school remains practically valid even though the user appears to be at home after 12:55 and the event description refers to the office-to-school route.', 'evidence_gap': 'The rationale says the fixed entry represents an operational route issue rather than a freely movable block, but the visible calendar does not clarify whether the travel duration or starting location is accurate.', 'potential_impact': 'minor', 'verification_source': 'user_context'}] Weaknesses: ['The resulting evening calendar contains a concrete inconsistency: “Pick up parents at central station” runs from 18:15 to 19:15 while “Travel home from central station” also starts at 18:15 and ends at 18:35, with the same user, parents and children involved. That makes the station pickup and return-home sequence unclear and could undermine the preserved 19:30 dinner.', 'The rationale says the plan keeps dinner and bedtime intact, but the visible buffer is fragile. After school pickup at 17:30-17:45, travel to the station at 17:45-18:00, an uncertain station meeting at 18:15, and dinner at 19:30 leave little room if parents are delayed, the pickup takes longer, or the travel-home block cannot actually begin at 18:15.', 'The 13:15-13:30 block combines several consequential tasks: confirming technician access, arranging review cover, and confirming a dinner order. Fifteen minutes may be possible, but the rationale does not substantiate that this is enough for coordination with the technician, team or architect plus food ordering.', 'The plan relies on a dinner order replacing groceries, but the dinner event remains unchanged and still lists only the user and children as participants, while the proposal goal is food for five. This is not necessarily impossible, but the resulting calendar does not clearly show that the parents’ meal logistics are actually accommodated.', 'The user is moved home before the repair window, but the preserved 17:00-17:30 “Commute to school” still describes a journey from the office to school, even though the visible calendar has the user at home from 12:55 onward. The rationale notes this as a fixed entry with a different operational route, but the practical consequence is not clearly represented.', 'The technician risk during the 14:00-15:30 architecture review is acknowledged, but the proposed mitigation is only a 15-minute confirmation block beforehand. The calendar does not show the repair window itself or any practical margin during the review if door access, communication, or disruption actually occurs.']. Actionable feedback: The proposal shows awareness of the main pressures: protected work, childcare pickup, the partner’s unavailable shift, the heating/hot-water repair, groceries being displaced, and the parents’ station pickup. However, the final routine is not yet convincingly workable because the evening sequence is internally inconsistent and the downstream dinner/bedtime protection depends on several tight, unverified handoffs. The most important issue to reconsider is the station pickup and return-home representation: if the parents are picked up at 18:15 and everyone leaves immediately, the pickup block should not visibly continue until 19:15; if the pickup really occupies that period, the 18:15-18:35 travel-home block and 19:30 dinner become unrealistic. The Proposer should use its fuller context to clarify the intended station timing and whether the dinner plan still has enough practical margin. It should also better substantiate whether the 13:15-13:30 coordination block can realistically handle technician access, review cover, and dinner ordering, or whether the plan is relying on too much happening successfully in a narrow window.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Travel from office to home",
+            "from_start": null,
+            "to_start": "2027-04-15T12:30:00+01:00",
+            "to_end": "2027-04-15T12:55:00+01:00",
+            "category": "commute",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Confirm technician access, review cover, parents timing, and dinner order",
+            "from_start": null,
+            "to_start": "2027-04-15T12:55:00+01:00",
+            "to_end": "2027-04-15T13:25:00+01:00",
+            "category": null,
+            "importance": 5,
+            "participants": [
+              "user",
+              "technician",
+              "team",
+              "architect",
+              "parents"
+            ]
+          },
+          {
+            "type": "move",
+            "event_id": "lunch_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-04-15T13:25:00+01:00",
+            "to_end": "2027-04-15T13:55:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Boiler technician access window",
+            "from_start": null,
+            "to_start": "2027-04-15T13:30:00+01:00",
+            "to_end": "2027-04-15T15:30:00+01:00",
+            "category": "household",
+            "importance": 5,
+            "participants": [
+              "user",
+              "technician"
+            ]
+          },
+          {
+            "type": "delete",
+            "event_id": "groceries_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Travel from school to central station",
+            "from_start": null,
+            "to_start": "2027-04-15T17:45:00+01:00",
+            "to_end": "2027-04-15T18:00:00+01:00",
+            "category": "commute",
+            "importance": 4,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Meet parents at central station",
+            "from_start": null,
+            "to_start": "2027-04-15T18:15:00+01:00",
+            "to_end": "2027-04-15T18:20:00+01:00",
+            "category": "family",
+            "importance": 5,
+            "participants": [
+              "user",
+              "parents",
+              "marta",
+              "duarte"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Travel home from central station",
+            "from_start": null,
+            "to_start": "2027-04-15T18:20:00+01:00",
+            "to_end": "2027-04-15T18:40:00+01:00",
+            "category": "commute",
+            "importance": 4,
+            "participants": [
+              "user",
+              "parents",
+              "marta",
+              "duarte"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Settle in and organise dinner for five",
+            "from_start": null,
+            "to_start": "2027-04-15T18:40:00+01:00",
+            "to_end": "2027-04-15T19:30:00+01:00",
+            "category": "family",
+            "importance": 4,
+            "participants": [
+              "user",
+              "parents",
+              "marta",
+              "duarte"
+            ]
+          },
+          {
+            "type": "delete",
+            "event_id": "dinner_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Dinner at home for five",
+            "from_start": null,
+            "to_start": "2027-04-15T19:30:00+01:00",
+            "to_end": "2027-04-15T20:20:00+01:00",
+            "category": "family",
+            "importance": 5,
+            "participants": [
+              "user",
+              "parents",
+              "marta",
+              "duarte"
+            ]
+          },
+          {
+            "type": "move",
+            "event_id": "bedtime_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-04-15T20:20:00+01:00",
+            "to_end": "2027-04-15T21:05:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "run_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "The protected architecture review, childcare pickup, partner shift, and sleep block are left in place.",
+            "The technician window is an external dependency and may still interrupt the protected review.",
+            "Review interruption cover must be confirmed with the team or architect before the meeting.",
+            "Dinner for five depends on a confirmed order or equivalent food source because groceries are removed.",
+            "The parents’ actual train arrival and ability to leave the station promptly must be confirmed with them.",
+            "The fixed school commute remains on the calendar, but working from home changes the practical route.",
+            "Lunch is shortened below the usual preference to make room for urgent coordination."
+          ],
+          "priorities": [
+            "Get home before the repair window because there is no hot water or heating.",
+            "Make the unavoidable technician risk visible instead of hiding it behind free time.",
+            "Use the school-to-station route after protected childcare pickup.",
+            "Replace the grocery trip with confirmed food for five tonight.",
+            "Keep dinner and bedtime close to the children’s routine by skipping lower-priority exercise."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Ask the technician to avoid the review if possible.",
+              "rejected_because": "This would reduce work disruption, but the supplied window does not guarantee that level of control."
+            },
+            {
+              "option": "Ask the parents to take a taxi home if delayed.",
+              "rejected_because": "This protects dinner and bedtime if the station handoff slips."
+            },
+            {
+              "option": "Use online groceries or delivery instead of a dinner order.",
+              "rejected_because": "This may solve food for tonight, but availability and delivery timing are not supplied."
+            },
+            {
+              "option": "Keep the evening run only if all handoffs succeed early.",
+              "rejected_because": "Exercise is lower priority today and keeping it would reduce recovery buffer after a disrupted day."
+            }
+          ],
+          "summary": "The selected plan gets the user home for the boiler repair, preserves protected work and childcare, makes the review interruption risk explicit, replaces groceries with a confirmed food plan, collects the parents without overlapping station and return travel, and protects the children’s evening routine by dropping the run; the main trade-off is reliance on several same-day confirmations."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [
+          "new_3: overlaps protected event architecture_review_thu"
+        ],
+        "warnings": [
+          "new_1: missing added-event metadata (category); simulation uses neutral internal defaults for those fields",
+          "new_7: overlaps contextual event partner_shift_thu for another participant",
+          "new_3: overlaps contextual event partner_shift_thu for another participant",
+          "new_5: overlaps contextual event partner_shift_thu for another participant",
+          "new_8: overlaps contextual event partner_shift_thu for another participant",
+          "new_6: overlaps contextual event partner_shift_thu for another participant",
+          "lunch_thu: overlaps contextual event partner_shift_thu for another participant",
+          "bedtime_thu: overlaps contextual event partner_shift_thu for another participant",
+          "new_10: overlaps contextual event partner_shift_thu for another participant",
+          "new temporal overlap (not automatically a hard-rule violation): lunch_thu x new_3"
+        ],
+        "valid": false
+      },
+      "result_calendar": null,
+      "critic_evaluation": null,
+      "acceptance_policy": null,
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": [
+        {
+          "iteration": 1,
+          "proposal": {
+            "changes": [
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Travel from office to home",
+                "from_start": null,
+                "to_start": "2027-04-15T12:30:00+01:00",
+                "to_end": "2027-04-15T12:55:00+01:00",
+                "category": "commute",
+                "importance": 4,
+                "participants": [
+                  "user"
+                ]
+              },
+              {
+                "type": "move",
+                "event_id": "lunch_thu",
+                "title": null,
+                "from_start": null,
+                "to_start": "2027-04-15T12:55:00+01:00",
+                "to_end": "2027-04-15T13:15:00+01:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Confirm technician access, review cover, and dinner order",
+                "from_start": null,
+                "to_start": "2027-04-15T13:15:00+01:00",
+                "to_end": "2027-04-15T13:30:00+01:00",
+                "category": "household",
+                "importance": 5,
+                "participants": [
+                  "user",
+                  "technician",
+                  "team",
+                  "architect"
+                ]
+              },
+              {
+                "type": "delete",
+                "event_id": "groceries_thu",
+                "title": null,
+                "from_start": null,
+                "to_start": null,
+                "to_end": null,
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Travel from school to central station",
+                "from_start": null,
+                "to_start": "2027-04-15T17:45:00+01:00",
+                "to_end": "2027-04-15T18:00:00+01:00",
+                "category": "commute",
+                "importance": 4,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ]
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Pick up parents at central station",
+                "from_start": null,
+                "to_start": "2027-04-15T18:15:00+01:00",
+                "to_end": null,
+                "category": "family",
+                "importance": 5,
+                "participants": [
+                  "user",
+                  "parents",
+                  "marta",
+                  "duarte"
+                ]
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Travel home from central station",
+                "from_start": null,
+                "to_start": "2027-04-15T18:15:00+01:00",
+                "to_end": "2027-04-15T18:35:00+01:00",
+                "category": "commute",
+                "importance": 4,
+                "participants": [
+                  "user",
+                  "parents",
+                  "marta",
+                  "duarte"
+                ]
+              }
+            ],
+            "rationale": {
+              "constraints": [
+                "The architecture review is protected work, so it is kept rather than moved or overlapped by a new calendar block.",
+                "The technician may still arrive during the review, so brief interruption cover must be confirmed with the team or architect.",
+                "The technician window is an external dependency, and exact arrival time within it is unknown.",
+                "Childcare pickup is protected and remains the anchor before the station trip.",
+                "The partner shift is fixed and cannot be relied on before the evening return.",
+                "Sleep is protected and unchanged.",
+                "The office-to-school commute entry is fixed, but working from home makes the operational route different rather than freely movable here.",
+                "Dinner ordering depends on provider availability, so it needs confirmation rather than assumed success.",
+                "Station meeting time is uncertain, and any delay reduces the buffer before dinner."
+              ],
+              "priorities": [
+                "Get home before the repair window because heating and hot water are unavailable.",
+                "Preserve the protected review while arranging explicit cover for any door interruption.",
+                "Replace weekly groceries with a dinner order to make food for five possible tonight.",
+                "Collect the parents after school pickup using only the supplied travel times.",
+                "Keep the existing dinner and bedtime routine unchanged if the food plan is confirmed."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Ask the technician to target before the review starts.",
+                  "rejected_because": "This would reduce work disruption, but the stated two-hour window may not be steerable."
+                },
+                {
+                  "option": "Ask the parents to take a taxi from the station to home.",
+                  "rejected_because": "This protects dinner and bedtime if the technician, review, or food order runs late."
+                },
+                {
+                  "option": "Move weekly groceries to another day or use online delivery.",
+                  "rejected_because": "The existing grocery slot conflicts with the station pickup, and tonight still needs a confirmed food source."
+                },
+                {
+                  "option": "Ask a colleague to host or cover any review segment missed at the door.",
+                  "rejected_because": "This keeps the protected meeting intact while handling the unavoidable home access risk."
+                }
+              ],
+              "summary": "The selected plan gets the user home before the repair window, keeps the protected review, childcare pickup, sleep, dinner and bedtime intact, skips the weekly groceries, orders food for five, and adds the station pickup; the main trade-off is that technician arrival during the review remains operationally possible and must be confirmed with others."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2027-04-14T23:00:00+01:00",
+                "end": "2027-04-15T06:30:00+01:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "morning_thu",
+                "title": "Morning routine with the children",
+                "start": "2027-04-15T06:45:00+01:00",
+                "end": "2027-04-15T07:45:00+01:00",
+                "category": "family",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "Breakfast, dressing and school bags.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "travel_to_school_thu",
+                "title": "Travel to school and daycare",
+                "start": "2027-04-15T08:00:00+01:00",
+                "end": "2027-04-15T08:15:00+01:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "15-minute car journey from home to school/daycare.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "dropoff_thu",
+                "title": "Drop-off at school and daycare",
+                "start": "2027-04-15T08:15:00+01:00",
+                "end": "2027-04-15T08:30:00+01:00",
+                "category": "childcare",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "Drop-off for Marta and Duarte.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "commute_to_work_thu",
+                "title": "Commute to office",
+                "start": "2027-04-15T08:30:00+01:00",
+                "end": "2027-04-15T09:00:00+01:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute car journey from school to the office (25 minutes from office directly to home).",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "standup_thu",
+                "title": "Team stand-up",
+                "start": "2027-04-15T09:30:00+01:00",
+                "end": "2027-04-15T10:00:00+01:00",
+                "category": "work",
+                "importance": 3,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "team"
+                ],
+                "description": "Daily stand-up; can be joined by video.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "focus_am_thu",
+                "title": "Audit compliance documentation",
+                "start": "2027-04-15T10:00:00+01:00",
+                "end": "2027-04-15T12:30:00+01:00",
+                "category": "work_focus",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Important individual task due tomorrow at noon; can be done from home.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_0",
+                "title": "Travel from office to home",
+                "start": "2027-04-15T12:30:00+01:00",
+                "end": "2027-04-15T12:55:00+01:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": null,
+                "participants": [
+                  "user"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "lunch_thu",
+                "title": "Lunch",
+                "start": "2027-04-15T12:55:00+01:00",
+                "end": "2027-04-15T13:15:00+01:00",
+                "category": "meal",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Lunch break.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "new_2",
+                "title": "Confirm technician access, review cover, and dinner order",
+                "start": "2027-04-15T13:15:00+01:00",
+                "end": "2027-04-15T13:30:00+01:00",
+                "category": "household",
+                "importance": 5,
+                "fixed": null,
+                "participants": [
+                  "user",
+                  "technician",
+                  "team",
+                  "architect"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "partner_shift_thu",
+                "title": "Partner's work shift",
+                "start": "2027-04-15T13:30:00+01:00",
+                "end": "2027-04-15T21:30:00+01:00",
+                "category": "partner_work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "partner"
+                ],
+                "description": "Late shift as a bus driver; leaves home at 12:45 and is unreachable until 21:30.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "architecture_review_thu",
+                "title": "System architecture review",
+                "start": "2027-04-15T14:00:00+01:00",
+                "end": "2027-04-15T15:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "team",
+                  "architect"
+                ],
+                "description": "Critical technical review; user can join by video call as long as there are no interruptions.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "focus_pm_thu",
+                "title": "Code review and PR approvals",
+                "start": "2027-04-15T15:30:00+01:00",
+                "end": "2027-04-15T17:00:00+01:00",
+                "category": "work_focus",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Flexible individual work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "commute_to_school_thu",
+                "title": "Commute to school",
+                "start": "2027-04-15T17:00:00+01:00",
+                "end": "2027-04-15T17:30:00+01:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute journey from office to school (15 minutes from home to school).",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "pickup_thu",
+                "title": "Pick up children",
+                "start": "2027-04-15T17:30:00+01:00",
+                "end": "2027-04-15T17:45:00+01:00",
+                "category": "childcare",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "Pick-up from after-school programme and daycare (close at 18:30).",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_4",
+                "title": "Travel from school to central station",
+                "start": "2027-04-15T17:45:00+01:00",
+                "end": "2027-04-15T18:00:00+01:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": null,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "new_5",
+                "title": "Pick up parents at central station",
+                "start": "2027-04-15T18:15:00+01:00",
+                "end": "2027-04-15T19:15:00+01:00",
+                "category": "family",
+                "importance": 5,
+                "fixed": null,
+                "participants": [
+                  "user",
+                  "parents",
+                  "marta",
+                  "duarte"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "new_6",
+                "title": "Travel home from central station",
+                "start": "2027-04-15T18:15:00+01:00",
+                "end": "2027-04-15T18:35:00+01:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": null,
+                "participants": [
+                  "user",
+                  "parents",
+                  "marta",
+                  "duarte"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "dinner_thu",
+                "title": "Family dinner",
+                "start": "2027-04-15T19:30:00+01:00",
+                "end": "2027-04-15T20:30:00+01:00",
+                "category": "family",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "Dinner at home.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "bedtime_thu",
+                "title": "Children's bedtime routine",
+                "start": "2027-04-15T20:30:00+01:00",
+                "end": "2027-04-15T21:15:00+01:00",
+                "category": "family",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "Bath, story and bedtime.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "run_thu",
+                "title": "Evening run",
+                "start": "2027-04-15T21:30:00+01:00",
+                "end": "2027-04-15T22:15:00+01:00",
+                "category": "exercise",
+                "importance": 2,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "45-minute run after the partner returns home.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_fri",
+                "title": "Sleep",
+                "start": "2027-04-15T23:00:00+01:00",
+                "end": "2027-04-16T06:30:00+01:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              }
+            ],
+            "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+          },
+          "plausibility_review": {
+            "revision_required": true,
+            "severity": "high",
+            "reason": "The final calendar has a material evening contradiction: the user, children and parents are scheduled both in a station pickup from 18:15 to 19:15 and in travel home from 18:15 to 18:35. This is more than a cosmetic issue because the proposal’s claimed success depends on preserving the 19:30 dinner and 20:30 bedtime routine after school pickup, station collection and food-order logistics. If the station event duration is real, dinner is likely compressed or delayed; if it is not real, the calendar misrepresents the plan. The technician/review and dinner-order confirmations also remain operationally thin, but the station overlap is the clearest reason the plan needs reconsideration.",
+            "suggested_improvement": "Reconsider the evening pickup and return-home sequence using the fuller context: clarify whether the station pickup is a brief handoff, a waiting window, or a longer family obligation, and then reassess whether dinner and bedtime remain realistically protected. Also revisit whether the pre-review confirmation block has enough practical capacity for technician access, review cover and dinner ordering, or provide grounded support for keeping it as is."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Station pickup duration",
+              "assumption": "The parents can be collected at the central station around 18:15 and the family can depart for home immediately enough to arrive by 18:35.",
+              "evidence_gap": "The final calendar also shows the pickup event continuing until 19:15 with the same participants, so it is unclear whether the pickup is a brief handoff or a one-hour obligation.",
+              "potential_impact": "potentially_blocking",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Parents' actual arrival time",
+              "assumption": "The parents will be available at the station in time for the planned 18:15 pickup and will not be delayed in a way that compresses dinner and bedtime.",
+              "evidence_gap": "The rationale states that station meeting time is uncertain and any delay reduces the buffer before dinner, but the final calendar schedules the evening as though the timing is sufficiently reliable.",
+              "potential_impact": "material",
+              "verification_source": "third_party"
+            },
+            {
+              "subject": "Dinner order availability",
+              "assumption": "A dinner order for five can be confirmed during the 13:15-13:30 block and will support the unchanged 19:30 dinner.",
+              "evidence_gap": "The rationale acknowledges provider availability is not guaranteed, and the calendar contains only a confirmation task, not evidence that food for five is actually secured.",
+              "potential_impact": "material",
+              "verification_source": "external_source"
+            },
+            {
+              "subject": "Pre-review coordination capacity",
+              "assumption": "Fifteen minutes from 13:15 to 13:30 is enough to confirm technician access, arrange review cover with the team or architect, and handle the dinner order.",
+              "evidence_gap": "The block combines several coordination tasks involving different parties, but no evidence is provided that these parties will respond within that window.",
+              "potential_impact": "material",
+              "verification_source": "third_party"
+            },
+            {
+              "subject": "Technician arrival during architecture review",
+              "assumption": "If the technician arrives during the 14:00-15:30 architecture review, the arranged cover or access plan will prevent meaningful disruption.",
+              "evidence_gap": "The rationale identifies this as a risk, but the calendar does not show the repair window or any explicit protected handling time during the review.",
+              "potential_impact": "material",
+              "verification_source": "third_party"
+            },
+            {
+              "subject": "Afternoon school commute route",
+              "assumption": "The preserved 17:00-17:30 commute to school remains practically valid even though the user appears to be at home after 12:55 and the event description refers to the office-to-school route.",
+              "evidence_gap": "The rationale says the fixed entry represents an operational route issue rather than a freely movable block, but the visible calendar does not clarify whether the travel duration or starting location is accurate.",
+              "potential_impact": "minor",
+              "verification_source": "user_context"
+            }
+          ],
+          "weaknesses": [
+            "The resulting evening calendar contains a concrete inconsistency: “Pick up parents at central station” runs from 18:15 to 19:15 while “Travel home from central station” also starts at 18:15 and ends at 18:35, with the same user, parents and children involved. That makes the station pickup and return-home sequence unclear and could undermine the preserved 19:30 dinner.",
+            "The rationale says the plan keeps dinner and bedtime intact, but the visible buffer is fragile. After school pickup at 17:30-17:45, travel to the station at 17:45-18:00, an uncertain station meeting at 18:15, and dinner at 19:30 leave little room if parents are delayed, the pickup takes longer, or the travel-home block cannot actually begin at 18:15.",
+            "The 13:15-13:30 block combines several consequential tasks: confirming technician access, arranging review cover, and confirming a dinner order. Fifteen minutes may be possible, but the rationale does not substantiate that this is enough for coordination with the technician, team or architect plus food ordering.",
+            "The plan relies on a dinner order replacing groceries, but the dinner event remains unchanged and still lists only the user and children as participants, while the proposal goal is food for five. This is not necessarily impossible, but the resulting calendar does not clearly show that the parents’ meal logistics are actually accommodated.",
+            "The user is moved home before the repair window, but the preserved 17:00-17:30 “Commute to school” still describes a journey from the office to school, even though the visible calendar has the user at home from 12:55 onward. The rationale notes this as a fixed entry with a different operational route, but the practical consequence is not clearly represented.",
+            "The technician risk during the 14:00-15:30 architecture review is acknowledged, but the proposed mitigation is only a 15-minute confirmation block beforehand. The calendar does not show the repair window itself or any practical margin during the review if door access, communication, or disruption actually occurs."
+          ],
+          "feedback": "The proposal shows awareness of the main pressures: protected work, childcare pickup, the partner’s unavailable shift, the heating/hot-water repair, groceries being displaced, and the parents’ station pickup. However, the final routine is not yet convincingly workable because the evening sequence is internally inconsistent and the downstream dinner/bedtime protection depends on several tight, unverified handoffs. The most important issue to reconsider is the station pickup and return-home representation: if the parents are picked up at 18:15 and everyone leaves immediately, the pickup block should not visibly continue until 19:15; if the pickup really occupies that period, the 18:15-18:35 travel-home block and 19:30 dinner become unrealistic. The Proposer should use its fuller context to clarify the intended station timing and whether the dinner plan still has enough practical margin. It should also better substantiate whether the 13:15-13:30 coordination block can realistically handle technician access, review cover, and dinner ordering, or whether the plan is relying on too much happening successfully in a narrow window."
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "proposer_feedback": "Deterministic validation found these operational problems: new_3: overlaps protected event architecture_review_thu. Revise the changes before any Critic assessment.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Travel from office to home",
+            "from_start": null,
+            "to_start": "2027-04-15T12:30:00+01:00",
+            "to_end": "2027-04-15T12:55:00+01:00",
+            "category": "commute",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "move",
+            "event_id": "lunch_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-04-15T12:55:00+01:00",
+            "to_end": "2027-04-15T13:25:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Confirm technician access, review cover, parents timing, and dinner order",
+            "from_start": null,
+            "to_start": "2027-04-15T13:25:00+01:00",
+            "to_end": "2027-04-15T13:55:00+01:00",
+            "category": null,
+            "importance": 5,
+            "participants": [
+              "user",
+              "technician",
+              "team",
+              "architect",
+              "parents"
+            ]
+          },
+          {
+            "type": "delete",
+            "event_id": "groceries_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Travel from school to central station",
+            "from_start": null,
+            "to_start": "2027-04-15T17:45:00+01:00",
+            "to_end": "2027-04-15T18:00:00+01:00",
+            "category": "commute",
+            "importance": 4,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Meet parents at central station",
+            "from_start": null,
+            "to_start": "2027-04-15T18:15:00+01:00",
+            "to_end": "2027-04-15T18:20:00+01:00",
+            "category": "family",
+            "importance": 5,
+            "participants": [
+              "user",
+              "parents",
+              "marta",
+              "duarte"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Travel home from central station",
+            "from_start": null,
+            "to_start": "2027-04-15T18:20:00+01:00",
+            "to_end": "2027-04-15T18:40:00+01:00",
+            "category": "commute",
+            "importance": 4,
+            "participants": [
+              "user",
+              "parents",
+              "marta",
+              "duarte"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Settle in and organise dinner for five",
+            "from_start": null,
+            "to_start": "2027-04-15T18:40:00+01:00",
+            "to_end": "2027-04-15T19:30:00+01:00",
+            "category": "family",
+            "importance": 4,
+            "participants": [
+              "user",
+              "parents",
+              "marta",
+              "duarte"
+            ]
+          },
+          {
+            "type": "delete",
+            "event_id": "dinner_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Dinner at home for five",
+            "from_start": null,
+            "to_start": "2027-04-15T19:30:00+01:00",
+            "to_end": "2027-04-15T20:20:00+01:00",
+            "category": "family",
+            "importance": 5,
+            "participants": [
+              "user",
+              "parents",
+              "marta",
+              "duarte"
+            ]
+          },
+          {
+            "type": "move",
+            "event_id": "bedtime_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-04-15T20:20:00+01:00",
+            "to_end": "2027-04-15T21:05:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "run_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "The protected architecture review, childcare pickup, partner shift, and sleep block are left unchanged.",
+            "The technician window still overlaps the review, so access during the meeting is not operationally resolved without confirmation.",
+            "Review interruption cover must be confirmed with the team or architect before the meeting.",
+            "The technician’s exact arrival time and tolerance for a brief meeting interruption are unknown.",
+            "Dinner for five depends on a confirmed order or other food source because groceries are removed.",
+            "The parents’ actual arrival and ability to leave the station promptly must be confirmed with them.",
+            "The fixed school commute is not moved, but working from home changes the practical route to pickup.",
+            "Lunch is shortened below the usual preference to prioritise the boiler emergency."
+          ],
+          "priorities": [
+            "Get home before the repair window because heating and hot water are unavailable.",
+            "Avoid creating a calendar event that conflicts with the protected review while still flagging the real-world clash.",
+            "Use the school-to-station route after protected childcare pickup.",
+            "Replace the grocery trip with a confirmed food plan for tonight.",
+            "Keep dinner and bedtime close to routine by dropping lower-priority exercise.",
+            "Protect overnight rest after a high-disruption day."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Ask the technician to come outside the review portion of the window.",
+              "rejected_because": "This would best protect work, but the supplied availability only guarantees a broad two-hour window."
+            },
+            {
+              "option": "Ask the team or architect to allow brief interruptions or provide cover.",
+              "rejected_because": "This manages the unavoidable clash, but it changes expectations for a protected work meeting."
+            },
+            {
+              "option": "Ask the parents to take a taxi home if the station pickup slips.",
+              "rejected_because": "This protects dinner and bedtime if the handoff is delayed."
+            },
+            {
+              "option": "Use online groceries instead of a dinner order.",
+              "rejected_because": "This may solve tonight’s food need, but delivery availability and timing are not supplied."
+            },
+            {
+              "option": "Keep the evening run only if all handoffs finish early.",
+              "rejected_because": "Exercise is lower priority today and would reduce recovery buffer before protected sleep."
+            }
+          ],
+          "summary": "The selected plan gets the user home for the emergency, keeps protected work and childcare formally unchanged, replaces groceries with a confirmed food plan, collects the parents after pickup, and preserves the children’s evening routine by dropping the run; the main trade-off is that technician access during the review still requires confirmation with others."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [
+          "new_2: missing added-event metadata (category); simulation uses neutral internal defaults for those fields",
+          "new_4: overlaps contextual event partner_shift_thu for another participant",
+          "new_7: overlaps contextual event partner_shift_thu for another participant",
+          "new_5: overlaps contextual event partner_shift_thu for another participant",
+          "new_9: overlaps contextual event partner_shift_thu for another participant",
+          "new_6: overlaps contextual event partner_shift_thu for another participant",
+          "new_2: overlaps contextual event partner_shift_thu for another participant",
+          "bedtime_thu: overlaps contextual event partner_shift_thu for another participant"
+        ],
+        "valid": true
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-04-14T23:00:00+01:00",
+            "end": "2027-04-15T06:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "morning_thu",
+            "title": "Morning routine with the children",
+            "start": "2027-04-15T06:45:00+01:00",
+            "end": "2027-04-15T07:45:00+01:00",
+            "category": "family",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Breakfast, dressing and school bags.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "travel_to_school_thu",
+            "title": "Travel to school and daycare",
+            "start": "2027-04-15T08:00:00+01:00",
+            "end": "2027-04-15T08:15:00+01:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "15-minute car journey from home to school/daycare.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "dropoff_thu",
+            "title": "Drop-off at school and daycare",
+            "start": "2027-04-15T08:15:00+01:00",
+            "end": "2027-04-15T08:30:00+01:00",
+            "category": "childcare",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Drop-off for Marta and Duarte.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_to_work_thu",
+            "title": "Commute to office",
+            "start": "2027-04-15T08:30:00+01:00",
+            "end": "2027-04-15T09:00:00+01:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute car journey from school to the office (25 minutes from office directly to home).",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "standup_thu",
+            "title": "Team stand-up",
+            "start": "2027-04-15T09:30:00+01:00",
+            "end": "2027-04-15T10:00:00+01:00",
+            "category": "work",
+            "importance": 3,
+            "fixed": true,
+            "participants": [
+              "user",
+              "team"
+            ],
+            "description": "Daily stand-up; can be joined by video.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "focus_am_thu",
+            "title": "Audit compliance documentation",
+            "start": "2027-04-15T10:00:00+01:00",
+            "end": "2027-04-15T12:30:00+01:00",
+            "category": "work_focus",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Important individual task due tomorrow at noon; can be done from home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_0",
+            "title": "Travel from office to home",
+            "start": "2027-04-15T12:30:00+01:00",
+            "end": "2027-04-15T12:55:00+01:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "lunch_thu",
+            "title": "Lunch",
+            "start": "2027-04-15T12:55:00+01:00",
+            "end": "2027-04-15T13:25:00+01:00",
+            "category": "meal",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "new_2",
+            "title": "Confirm technician access, review cover, parents timing, and dinner order",
+            "start": "2027-04-15T13:25:00+01:00",
+            "end": "2027-04-15T13:55:00+01:00",
+            "category": null,
+            "importance": 5,
+            "fixed": null,
+            "participants": [
+              "user",
+              "technician",
+              "team",
+              "architect",
+              "parents"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "partner_shift_thu",
+            "title": "Partner's work shift",
+            "start": "2027-04-15T13:30:00+01:00",
+            "end": "2027-04-15T21:30:00+01:00",
+            "category": "partner_work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "partner"
+            ],
+            "description": "Late shift as a bus driver; leaves home at 12:45 and is unreachable until 21:30.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "architecture_review_thu",
+            "title": "System architecture review",
+            "start": "2027-04-15T14:00:00+01:00",
+            "end": "2027-04-15T15:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "team",
+              "architect"
+            ],
+            "description": "Critical technical review; user can join by video call as long as there are no interruptions.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "focus_pm_thu",
+            "title": "Code review and PR approvals",
+            "start": "2027-04-15T15:30:00+01:00",
+            "end": "2027-04-15T17:00:00+01:00",
+            "category": "work_focus",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Flexible individual work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_to_school_thu",
+            "title": "Commute to school",
+            "start": "2027-04-15T17:00:00+01:00",
+            "end": "2027-04-15T17:30:00+01:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute journey from office to school (15 minutes from home to school).",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "pickup_thu",
+            "title": "Pick up children",
+            "start": "2027-04-15T17:30:00+01:00",
+            "end": "2027-04-15T17:45:00+01:00",
+            "category": "childcare",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Pick-up from after-school programme and daycare (close at 18:30).",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_4",
+            "title": "Travel from school to central station",
+            "start": "2027-04-15T17:45:00+01:00",
+            "end": "2027-04-15T18:00:00+01:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "new_5",
+            "title": "Meet parents at central station",
+            "start": "2027-04-15T18:15:00+01:00",
+            "end": "2027-04-15T18:20:00+01:00",
+            "category": "family",
+            "importance": 5,
+            "fixed": null,
+            "participants": [
+              "user",
+              "parents",
+              "marta",
+              "duarte"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "new_6",
+            "title": "Travel home from central station",
+            "start": "2027-04-15T18:20:00+01:00",
+            "end": "2027-04-15T18:40:00+01:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user",
+              "parents",
+              "marta",
+              "duarte"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "new_7",
+            "title": "Settle in and organise dinner for five",
+            "start": "2027-04-15T18:40:00+01:00",
+            "end": "2027-04-15T19:30:00+01:00",
+            "category": "family",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user",
+              "parents",
+              "marta",
+              "duarte"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "new_9",
+            "title": "Dinner at home for five",
+            "start": "2027-04-15T19:30:00+01:00",
+            "end": "2027-04-15T20:20:00+01:00",
+            "category": "family",
+            "importance": 5,
+            "fixed": null,
+            "participants": [
+              "user",
+              "parents",
+              "marta",
+              "duarte"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "bedtime_thu",
+            "title": "Children's bedtime routine",
+            "start": "2027-04-15T20:20:00+01:00",
+            "end": "2027-04-15T21:05:00+01:00",
+            "category": "family",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Bath, story and bedtime.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-04-15T23:00:00+01:00",
+            "end": "2027-04-16T06:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied only from validated Proposal fields. Null values identify fields not supplied by the Proposal; simulator defaults are internal. Missing by event: {'new_2': ['category']}"
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 4,
+          "alternatives": 4,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The prior station-pickup contradiction is largely resolved: the new calendar now shows a brief 18:15-18:20 meeting at the central station followed by 18:20-18:40 travel home, rather than overlapping a long pickup with travel. However, the evening still depends on the parents being available promptly at 18:15 after the family arrives at the station by 18:00, with only a short visible margin before the 18:40-19:30 settle-in and dinner-organisation block.",
+          "The most material remaining risk is still the technician versus architecture-review dependency. The 14:00-15:30 System architecture review says the user can join by video call as long as there are no interruptions, while the rationale acknowledges that the technician window may overlap the review and that access is not operationally resolved without confirmation. The 13:25-13:55 confirmation block improves the plan, but it is very close to the 14:00 review and may not provide much practical recovery if the technician, team, architect, parents, or dinner provider do not respond promptly.",
+          "The 13:25-13:55 block combines several consequential coordination tasks: technician access, review cover, parents timing, and dinner order. Thirty minutes is more plausible than the prior fifteen-minute version, but the plan still relies on multiple third parties being reachable and decisive in one block immediately before a protected meeting.",
+          "The dinner plan is clearer than before because groceries are removed and a dedicated 18:40-19:30 organise-dinner block plus 19:30-20:20 dinner for five are added. Still, the food source remains conditional on a confirmed order or equivalent arrangement, and the proposal does not show what happens if that confirmation fails.",
+          "The preserved 17:00-17:30 Commute to school remains descriptively awkward because it still describes a 30-minute office-to-school journey even though the user has been at home since 12:55 and the same calendar notes home-to-school travel as 15 minutes elsewhere. This may be a harmless fixed placeholder or conservative buffer, but the visible calendar does not fully explain the practical route."
+        ],
+        "feedback": "The revised proposal meaningfully addresses the strongest prior concern. The station sequence is now coherent, the dinner-for-five logistics are represented directly, the run is removed to protect recovery, lunch is less compressed, and the coordination block is expanded. As a whole, the day remains demanding but not obviously unmanageable: it preserves sleep, drops lower-priority exercise, and creates an evening structure after school pickup, parents’ arrival, dinner, and bedtime. The remaining weakness is not a simple calendar overlap but a practical dependency: the boiler emergency is being handled during a day with a protected architecture review that explicitly requires no interruptions. The Proposer has acknowledged this and added a confirmation block, so the same operations may be defensible if its fuller context supports the technician-access and review-cover plan. The plan would be stronger if it more clearly explained what practical arrangement prevents a technician arrival from disrupting the 14:00-15:30 review, and what fallback exists if the 13:25-13:55 confirmations do not land in time.",
+        "plausibility_review": {
+          "revision_required": false,
+          "severity": "low",
+          "reason": "The revision resolves the prior high-severity evening inconsistency and improves human manageability by adding a brief station handoff, explicit dinner preparation, dinner for five, a less compressed lunch, a longer confirmation block, and removal of the evening run. The remaining technician/review issue is material if unresolved, but the proposal transparently identifies it as an operational condition rather than pretending it is solved. On the visible calendar alone, the day is tight and conditional but plausibly manageable if the confirmations succeed.",
+          "suggested_improvement": "Use the fuller context to substantiate the technician-access and review-cover arrangement, especially because the architecture review depends on no interruptions. Also keep the dinner-order and parents-arrival contingencies explicit rather than assuming the 13:25-13:55 coordination block will resolve every dependency."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Technician arrival during architecture review",
+            "assumption": "If the technician arrives during the 14:00-15:30 architecture review, the access or cover arrangement will prevent meaningful interruption to a meeting that requires no interruptions.",
+            "evidence_gap": "The rationale acknowledges the technician window may overlap the review and says access during the meeting is not operationally resolved without confirmation; the calendar only adds a 13:25-13:55 confirmation block and does not show the repair window or a confirmed handling plan.",
+            "potential_impact": "material",
+            "verification_source": "third_party"
+          },
+          {
+            "subject": "Pre-review coordination success",
+            "assumption": "Thirty minutes from 13:25 to 13:55 is enough to confirm technician access, review cover, parents timing, and a dinner order with all relevant parties before the 14:00 review.",
+            "evidence_gap": "The event involves multiple parties and decisions immediately before a protected meeting, but there is no evidence that the technician, team, architect, parents, or dinner provider will respond within that window.",
+            "potential_impact": "material",
+            "verification_source": "third_party"
+          },
+          {
+            "subject": "Dinner food source",
+            "assumption": "A dinner order or equivalent food source for five can be confirmed and will be available in time for the 19:30-20:20 dinner.",
+            "evidence_gap": "Groceries are deleted and the rationale states dinner depends on a confirmed order or other food source; the calendar includes organisation time but not evidence that food availability is secured.",
+            "potential_impact": "material",
+            "verification_source": "external_source"
+          },
+          {
+            "subject": "Parents' station timing",
+            "assumption": "The parents will be at the central station and ready to leave promptly during the 18:15-18:20 meeting window.",
+            "evidence_gap": "The revised calendar makes the pickup a brief handoff, but the rationale still notes that the parents’ actual arrival and ability to leave promptly must be confirmed.",
+            "potential_impact": "material",
+            "verification_source": "third_party"
+          },
+          {
+            "subject": "Afternoon school commute route",
+            "assumption": "The preserved 17:00-17:30 commute to school remains practically valid even though the user appears to be at home after 12:55 and the event description refers to the office-to-school route.",
+            "evidence_gap": "The rationale says working from home changes the practical route to pickup, while the visible event still describes a 30-minute journey from the office to school and elsewhere identifies home-to-school travel as 15 minutes.",
+            "potential_impact": "minor",
+            "verification_source": "user_context"
+          }
+        ],
+        "overall": 4.0
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": true,
+        "plausibility_revision_required": false,
+        "accepted": true,
+        "revision_causes": []
+      },
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": [
+        {
+          "iteration": 1,
+          "proposal": {
+            "changes": [
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Travel from office to home",
+                "from_start": null,
+                "to_start": "2027-04-15T12:30:00+01:00",
+                "to_end": "2027-04-15T12:55:00+01:00",
+                "category": "commute",
+                "importance": 4,
+                "participants": [
+                  "user"
+                ]
+              },
+              {
+                "type": "move",
+                "event_id": "lunch_thu",
+                "title": null,
+                "from_start": null,
+                "to_start": "2027-04-15T12:55:00+01:00",
+                "to_end": "2027-04-15T13:15:00+01:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Confirm technician access, review cover, and dinner order",
+                "from_start": null,
+                "to_start": "2027-04-15T13:15:00+01:00",
+                "to_end": "2027-04-15T13:30:00+01:00",
+                "category": "household",
+                "importance": 5,
+                "participants": [
+                  "user",
+                  "technician",
+                  "team",
+                  "architect"
+                ]
+              },
+              {
+                "type": "delete",
+                "event_id": "groceries_thu",
+                "title": null,
+                "from_start": null,
+                "to_start": null,
+                "to_end": null,
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Travel from school to central station",
+                "from_start": null,
+                "to_start": "2027-04-15T17:45:00+01:00",
+                "to_end": "2027-04-15T18:00:00+01:00",
+                "category": "commute",
+                "importance": 4,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ]
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Pick up parents at central station",
+                "from_start": null,
+                "to_start": "2027-04-15T18:15:00+01:00",
+                "to_end": null,
+                "category": "family",
+                "importance": 5,
+                "participants": [
+                  "user",
+                  "parents",
+                  "marta",
+                  "duarte"
+                ]
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Travel home from central station",
+                "from_start": null,
+                "to_start": "2027-04-15T18:15:00+01:00",
+                "to_end": "2027-04-15T18:35:00+01:00",
+                "category": "commute",
+                "importance": 4,
+                "participants": [
+                  "user",
+                  "parents",
+                  "marta",
+                  "duarte"
+                ]
+              }
+            ],
+            "rationale": {
+              "constraints": [
+                "The architecture review is protected work, so it is kept rather than moved or overlapped by a new calendar block.",
+                "The technician may still arrive during the review, so brief interruption cover must be confirmed with the team or architect.",
+                "The technician window is an external dependency, and exact arrival time within it is unknown.",
+                "Childcare pickup is protected and remains the anchor before the station trip.",
+                "The partner shift is fixed and cannot be relied on before the evening return.",
+                "Sleep is protected and unchanged.",
+                "The office-to-school commute entry is fixed, but working from home makes the operational route different rather than freely movable here.",
+                "Dinner ordering depends on provider availability, so it needs confirmation rather than assumed success.",
+                "Station meeting time is uncertain, and any delay reduces the buffer before dinner."
+              ],
+              "priorities": [
+                "Get home before the repair window because heating and hot water are unavailable.",
+                "Preserve the protected review while arranging explicit cover for any door interruption.",
+                "Replace weekly groceries with a dinner order to make food for five possible tonight.",
+                "Collect the parents after school pickup using only the supplied travel times.",
+                "Keep the existing dinner and bedtime routine unchanged if the food plan is confirmed."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Ask the technician to target before the review starts.",
+                  "rejected_because": "This would reduce work disruption, but the stated two-hour window may not be steerable."
+                },
+                {
+                  "option": "Ask the parents to take a taxi from the station to home.",
+                  "rejected_because": "This protects dinner and bedtime if the technician, review, or food order runs late."
+                },
+                {
+                  "option": "Move weekly groceries to another day or use online delivery.",
+                  "rejected_because": "The existing grocery slot conflicts with the station pickup, and tonight still needs a confirmed food source."
+                },
+                {
+                  "option": "Ask a colleague to host or cover any review segment missed at the door.",
+                  "rejected_because": "This keeps the protected meeting intact while handling the unavoidable home access risk."
+                }
+              ],
+              "summary": "The selected plan gets the user home before the repair window, keeps the protected review, childcare pickup, sleep, dinner and bedtime intact, skips the weekly groceries, orders food for five, and adds the station pickup; the main trade-off is that technician arrival during the review remains operationally possible and must be confirmed with others."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2027-04-14T23:00:00+01:00",
+                "end": "2027-04-15T06:30:00+01:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "morning_thu",
+                "title": "Morning routine with the children",
+                "start": "2027-04-15T06:45:00+01:00",
+                "end": "2027-04-15T07:45:00+01:00",
+                "category": "family",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "Breakfast, dressing and school bags.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "travel_to_school_thu",
+                "title": "Travel to school and daycare",
+                "start": "2027-04-15T08:00:00+01:00",
+                "end": "2027-04-15T08:15:00+01:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "15-minute car journey from home to school/daycare.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "dropoff_thu",
+                "title": "Drop-off at school and daycare",
+                "start": "2027-04-15T08:15:00+01:00",
+                "end": "2027-04-15T08:30:00+01:00",
+                "category": "childcare",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "Drop-off for Marta and Duarte.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "commute_to_work_thu",
+                "title": "Commute to office",
+                "start": "2027-04-15T08:30:00+01:00",
+                "end": "2027-04-15T09:00:00+01:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute car journey from school to the office (25 minutes from office directly to home).",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "standup_thu",
+                "title": "Team stand-up",
+                "start": "2027-04-15T09:30:00+01:00",
+                "end": "2027-04-15T10:00:00+01:00",
+                "category": "work",
+                "importance": 3,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "team"
+                ],
+                "description": "Daily stand-up; can be joined by video.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "focus_am_thu",
+                "title": "Audit compliance documentation",
+                "start": "2027-04-15T10:00:00+01:00",
+                "end": "2027-04-15T12:30:00+01:00",
+                "category": "work_focus",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Important individual task due tomorrow at noon; can be done from home.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_0",
+                "title": "Travel from office to home",
+                "start": "2027-04-15T12:30:00+01:00",
+                "end": "2027-04-15T12:55:00+01:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": null,
+                "participants": [
+                  "user"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "lunch_thu",
+                "title": "Lunch",
+                "start": "2027-04-15T12:55:00+01:00",
+                "end": "2027-04-15T13:15:00+01:00",
+                "category": "meal",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Lunch break.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "new_2",
+                "title": "Confirm technician access, review cover, and dinner order",
+                "start": "2027-04-15T13:15:00+01:00",
+                "end": "2027-04-15T13:30:00+01:00",
+                "category": "household",
+                "importance": 5,
+                "fixed": null,
+                "participants": [
+                  "user",
+                  "technician",
+                  "team",
+                  "architect"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "partner_shift_thu",
+                "title": "Partner's work shift",
+                "start": "2027-04-15T13:30:00+01:00",
+                "end": "2027-04-15T21:30:00+01:00",
+                "category": "partner_work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "partner"
+                ],
+                "description": "Late shift as a bus driver; leaves home at 12:45 and is unreachable until 21:30.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "architecture_review_thu",
+                "title": "System architecture review",
+                "start": "2027-04-15T14:00:00+01:00",
+                "end": "2027-04-15T15:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "team",
+                  "architect"
+                ],
+                "description": "Critical technical review; user can join by video call as long as there are no interruptions.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "focus_pm_thu",
+                "title": "Code review and PR approvals",
+                "start": "2027-04-15T15:30:00+01:00",
+                "end": "2027-04-15T17:00:00+01:00",
+                "category": "work_focus",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Flexible individual work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "commute_to_school_thu",
+                "title": "Commute to school",
+                "start": "2027-04-15T17:00:00+01:00",
+                "end": "2027-04-15T17:30:00+01:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute journey from office to school (15 minutes from home to school).",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "pickup_thu",
+                "title": "Pick up children",
+                "start": "2027-04-15T17:30:00+01:00",
+                "end": "2027-04-15T17:45:00+01:00",
+                "category": "childcare",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "Pick-up from after-school programme and daycare (close at 18:30).",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_4",
+                "title": "Travel from school to central station",
+                "start": "2027-04-15T17:45:00+01:00",
+                "end": "2027-04-15T18:00:00+01:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": null,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "new_5",
+                "title": "Pick up parents at central station",
+                "start": "2027-04-15T18:15:00+01:00",
+                "end": "2027-04-15T19:15:00+01:00",
+                "category": "family",
+                "importance": 5,
+                "fixed": null,
+                "participants": [
+                  "user",
+                  "parents",
+                  "marta",
+                  "duarte"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "new_6",
+                "title": "Travel home from central station",
+                "start": "2027-04-15T18:15:00+01:00",
+                "end": "2027-04-15T18:35:00+01:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": null,
+                "participants": [
+                  "user",
+                  "parents",
+                  "marta",
+                  "duarte"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "dinner_thu",
+                "title": "Family dinner",
+                "start": "2027-04-15T19:30:00+01:00",
+                "end": "2027-04-15T20:30:00+01:00",
+                "category": "family",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "Dinner at home.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "bedtime_thu",
+                "title": "Children's bedtime routine",
+                "start": "2027-04-15T20:30:00+01:00",
+                "end": "2027-04-15T21:15:00+01:00",
+                "category": "family",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "Bath, story and bedtime.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "run_thu",
+                "title": "Evening run",
+                "start": "2027-04-15T21:30:00+01:00",
+                "end": "2027-04-15T22:15:00+01:00",
+                "category": "exercise",
+                "importance": 2,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "45-minute run after the partner returns home.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_fri",
+                "title": "Sleep",
+                "start": "2027-04-15T23:00:00+01:00",
+                "end": "2027-04-16T06:30:00+01:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              }
+            ],
+            "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+          },
+          "plausibility_review": {
+            "revision_required": true,
+            "severity": "high",
+            "reason": "The final calendar has a material evening contradiction: the user, children and parents are scheduled both in a station pickup from 18:15 to 19:15 and in travel home from 18:15 to 18:35. This is more than a cosmetic issue because the proposal’s claimed success depends on preserving the 19:30 dinner and 20:30 bedtime routine after school pickup, station collection and food-order logistics. If the station event duration is real, dinner is likely compressed or delayed; if it is not real, the calendar misrepresents the plan. The technician/review and dinner-order confirmations also remain operationally thin, but the station overlap is the clearest reason the plan needs reconsideration.",
+            "suggested_improvement": "Reconsider the evening pickup and return-home sequence using the fuller context: clarify whether the station pickup is a brief handoff, a waiting window, or a longer family obligation, and then reassess whether dinner and bedtime remain realistically protected. Also revisit whether the pre-review confirmation block has enough practical capacity for technician access, review cover and dinner ordering, or provide grounded support for keeping it as is."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Station pickup duration",
+              "assumption": "The parents can be collected at the central station around 18:15 and the family can depart for home immediately enough to arrive by 18:35.",
+              "evidence_gap": "The final calendar also shows the pickup event continuing until 19:15 with the same participants, so it is unclear whether the pickup is a brief handoff or a one-hour obligation.",
+              "potential_impact": "potentially_blocking",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Parents' actual arrival time",
+              "assumption": "The parents will be available at the station in time for the planned 18:15 pickup and will not be delayed in a way that compresses dinner and bedtime.",
+              "evidence_gap": "The rationale states that station meeting time is uncertain and any delay reduces the buffer before dinner, but the final calendar schedules the evening as though the timing is sufficiently reliable.",
+              "potential_impact": "material",
+              "verification_source": "third_party"
+            },
+            {
+              "subject": "Dinner order availability",
+              "assumption": "A dinner order for five can be confirmed during the 13:15-13:30 block and will support the unchanged 19:30 dinner.",
+              "evidence_gap": "The rationale acknowledges provider availability is not guaranteed, and the calendar contains only a confirmation task, not evidence that food for five is actually secured.",
+              "potential_impact": "material",
+              "verification_source": "external_source"
+            },
+            {
+              "subject": "Pre-review coordination capacity",
+              "assumption": "Fifteen minutes from 13:15 to 13:30 is enough to confirm technician access, arrange review cover with the team or architect, and handle the dinner order.",
+              "evidence_gap": "The block combines several coordination tasks involving different parties, but no evidence is provided that these parties will respond within that window.",
+              "potential_impact": "material",
+              "verification_source": "third_party"
+            },
+            {
+              "subject": "Technician arrival during architecture review",
+              "assumption": "If the technician arrives during the 14:00-15:30 architecture review, the arranged cover or access plan will prevent meaningful disruption.",
+              "evidence_gap": "The rationale identifies this as a risk, but the calendar does not show the repair window or any explicit protected handling time during the review.",
+              "potential_impact": "material",
+              "verification_source": "third_party"
+            },
+            {
+              "subject": "Afternoon school commute route",
+              "assumption": "The preserved 17:00-17:30 commute to school remains practically valid even though the user appears to be at home after 12:55 and the event description refers to the office-to-school route.",
+              "evidence_gap": "The rationale says the fixed entry represents an operational route issue rather than a freely movable block, but the visible calendar does not clarify whether the travel duration or starting location is accurate.",
+              "potential_impact": "minor",
+              "verification_source": "user_context"
+            }
+          ],
+          "weaknesses": [
+            "The resulting evening calendar contains a concrete inconsistency: “Pick up parents at central station” runs from 18:15 to 19:15 while “Travel home from central station” also starts at 18:15 and ends at 18:35, with the same user, parents and children involved. That makes the station pickup and return-home sequence unclear and could undermine the preserved 19:30 dinner.",
+            "The rationale says the plan keeps dinner and bedtime intact, but the visible buffer is fragile. After school pickup at 17:30-17:45, travel to the station at 17:45-18:00, an uncertain station meeting at 18:15, and dinner at 19:30 leave little room if parents are delayed, the pickup takes longer, or the travel-home block cannot actually begin at 18:15.",
+            "The 13:15-13:30 block combines several consequential tasks: confirming technician access, arranging review cover, and confirming a dinner order. Fifteen minutes may be possible, but the rationale does not substantiate that this is enough for coordination with the technician, team or architect plus food ordering.",
+            "The plan relies on a dinner order replacing groceries, but the dinner event remains unchanged and still lists only the user and children as participants, while the proposal goal is food for five. This is not necessarily impossible, but the resulting calendar does not clearly show that the parents’ meal logistics are actually accommodated.",
+            "The user is moved home before the repair window, but the preserved 17:00-17:30 “Commute to school” still describes a journey from the office to school, even though the visible calendar has the user at home from 12:55 onward. The rationale notes this as a fixed entry with a different operational route, but the practical consequence is not clearly represented.",
+            "The technician risk during the 14:00-15:30 architecture review is acknowledged, but the proposed mitigation is only a 15-minute confirmation block beforehand. The calendar does not show the repair window itself or any practical margin during the review if door access, communication, or disruption actually occurs."
+          ],
+          "feedback": "The proposal shows awareness of the main pressures: protected work, childcare pickup, the partner’s unavailable shift, the heating/hot-water repair, groceries being displaced, and the parents’ station pickup. However, the final routine is not yet convincingly workable because the evening sequence is internally inconsistent and the downstream dinner/bedtime protection depends on several tight, unverified handoffs. The most important issue to reconsider is the station pickup and return-home representation: if the parents are picked up at 18:15 and everyone leaves immediately, the pickup block should not visibly continue until 19:15; if the pickup really occupies that period, the 18:15-18:35 travel-home block and 19:30 dinner become unrealistic. The Proposer should use its fuller context to clarify the intended station timing and whether the dinner plan still has enough practical margin. It should also better substantiate whether the 13:15-13:30 coordination block can realistically handle technician access, review cover, and dinner ordering, or whether the plan is relying on too much happening successfully in a narrow window."
+        }
+      ],
+      "unresolved_assumptions": [
+        {
+          "subject": "Technician arrival during architecture review",
+          "assumption": "If the technician arrives during the 14:00-15:30 architecture review, the access or cover arrangement will prevent meaningful interruption to a meeting that requires no interruptions.",
+          "evidence_gap": "The rationale acknowledges the technician window may overlap the review and says access during the meeting is not operationally resolved without confirmation; the calendar only adds a 13:25-13:55 confirmation block and does not show the repair window or a confirmed handling plan.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Pre-review coordination success",
+          "assumption": "Thirty minutes from 13:25 to 13:55 is enough to confirm technician access, review cover, parents timing, and a dinner order with all relevant parties before the 14:00 review.",
+          "evidence_gap": "The event involves multiple parties and decisions immediately before a protected meeting, but there is no evidence that the technician, team, architect, parents, or dinner provider will respond within that window.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Dinner food source",
+          "assumption": "A dinner order or equivalent food source for five can be confirmed and will be available in time for the 19:30-20:20 dinner.",
+          "evidence_gap": "Groceries are deleted and the rationale states dinner depends on a confirmed order or other food source; the calendar includes organisation time but not evidence that food availability is secured.",
+          "potential_impact": "material",
+          "verification_source": "external_source"
+        },
+        {
+          "subject": "Parents' station timing",
+          "assumption": "The parents will be at the central station and ready to leave promptly during the 18:15-18:20 meeting window.",
+          "evidence_gap": "The revised calendar makes the pickup a brief handoff, but the rationale still notes that the parents’ actual arrival and ability to leave promptly must be confirmed.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Afternoon school commute route",
+          "assumption": "The preserved 17:00-17:30 commute to school remains practically valid even though the user appears to be at home after 12:55 and the event description refers to the office-to-school route.",
+          "evidence_gap": "The rationale says working from home changes the practical route to pickup, while the visible event still describes a 30-minute journey from the office to school and elsewhere identifies home-to-school travel as 15 minutes.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        }
+      ]
+    }
+  ],
+  "refinements": 3,
+  "source_status": "proposal_ready",
+  "final_proposal": {
+    "changes": [
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Travel from office to home",
+        "from_start": null,
+        "to_start": "2027-04-15T12:30:00+01:00",
+        "to_end": "2027-04-15T12:55:00+01:00",
+        "category": "commute",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "move",
+        "event_id": "lunch_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": "2027-04-15T12:55:00+01:00",
+        "to_end": "2027-04-15T13:25:00+01:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Confirm technician access, review cover, parents timing, and dinner order",
+        "from_start": null,
+        "to_start": "2027-04-15T13:25:00+01:00",
+        "to_end": "2027-04-15T13:55:00+01:00",
+        "category": null,
+        "importance": 5,
+        "participants": [
+          "user",
+          "technician",
+          "team",
+          "architect",
+          "parents"
+        ]
+      },
+      {
+        "type": "delete",
+        "event_id": "groceries_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Travel from school to central station",
+        "from_start": null,
+        "to_start": "2027-04-15T17:45:00+01:00",
+        "to_end": "2027-04-15T18:00:00+01:00",
+        "category": "commute",
+        "importance": 4,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Meet parents at central station",
+        "from_start": null,
+        "to_start": "2027-04-15T18:15:00+01:00",
+        "to_end": "2027-04-15T18:20:00+01:00",
+        "category": "family",
+        "importance": 5,
+        "participants": [
+          "user",
+          "parents",
+          "marta",
+          "duarte"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Travel home from central station",
+        "from_start": null,
+        "to_start": "2027-04-15T18:20:00+01:00",
+        "to_end": "2027-04-15T18:40:00+01:00",
+        "category": "commute",
+        "importance": 4,
+        "participants": [
+          "user",
+          "parents",
+          "marta",
+          "duarte"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Settle in and organise dinner for five",
+        "from_start": null,
+        "to_start": "2027-04-15T18:40:00+01:00",
+        "to_end": "2027-04-15T19:30:00+01:00",
+        "category": "family",
+        "importance": 4,
+        "participants": [
+          "user",
+          "parents",
+          "marta",
+          "duarte"
+        ]
+      },
+      {
+        "type": "delete",
+        "event_id": "dinner_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Dinner at home for five",
+        "from_start": null,
+        "to_start": "2027-04-15T19:30:00+01:00",
+        "to_end": "2027-04-15T20:20:00+01:00",
+        "category": "family",
+        "importance": 5,
+        "participants": [
+          "user",
+          "parents",
+          "marta",
+          "duarte"
+        ]
+      },
+      {
+        "type": "move",
+        "event_id": "bedtime_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": "2027-04-15T20:20:00+01:00",
+        "to_end": "2027-04-15T21:05:00+01:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "run_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "The protected architecture review, childcare pickup, partner shift, and sleep block are left unchanged.",
+        "The technician window still overlaps the review, so access during the meeting is not operationally resolved without confirmation.",
+        "Review interruption cover must be confirmed with the team or architect before the meeting.",
+        "The technician’s exact arrival time and tolerance for a brief meeting interruption are unknown.",
+        "Dinner for five depends on a confirmed order or other food source because groceries are removed.",
+        "The parents’ actual arrival and ability to leave the station promptly must be confirmed with them.",
+        "The fixed school commute is not moved, but working from home changes the practical route to pickup.",
+        "Lunch is shortened below the usual preference to prioritise the boiler emergency."
+      ],
+      "priorities": [
+        "Get home before the repair window because heating and hot water are unavailable.",
+        "Avoid creating a calendar event that conflicts with the protected review while still flagging the real-world clash.",
+        "Use the school-to-station route after protected childcare pickup.",
+        "Replace the grocery trip with a confirmed food plan for tonight.",
+        "Keep dinner and bedtime close to routine by dropping lower-priority exercise.",
+        "Protect overnight rest after a high-disruption day."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Ask the technician to come outside the review portion of the window.",
+          "rejected_because": "This would best protect work, but the supplied availability only guarantees a broad two-hour window."
+        },
+        {
+          "option": "Ask the team or architect to allow brief interruptions or provide cover.",
+          "rejected_because": "This manages the unavoidable clash, but it changes expectations for a protected work meeting."
+        },
+        {
+          "option": "Ask the parents to take a taxi home if the station pickup slips.",
+          "rejected_because": "This protects dinner and bedtime if the handoff is delayed."
+        },
+        {
+          "option": "Use online groceries instead of a dinner order.",
+          "rejected_because": "This may solve tonight’s food need, but delivery availability and timing are not supplied."
+        },
+        {
+          "option": "Keep the evening run only if all handoffs finish early.",
+          "rejected_because": "Exercise is lower priority today and would reduce recovery buffer before protected sleep."
+        }
+      ],
+      "summary": "The selected plan gets the user home for the emergency, keeps protected work and childcare formally unchanged, replaces groceries with a confirmed food plan, collects the parents after pickup, and preserves the children’s evening routine by dropping the run; the main trade-off is that technician access during the review still requires confirmation with others."
+    }
+  },
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [
+      "new_2: missing added-event metadata (category); simulation uses neutral internal defaults for those fields",
+      "bedtime_thu: overlaps contextual event partner_shift_thu for another participant",
+      "new_9: overlaps contextual event partner_shift_thu for another participant",
+      "new_6: overlaps contextual event partner_shift_thu for another participant",
+      "new_4: overlaps contextual event partner_shift_thu for another participant",
+      "new_5: overlaps contextual event partner_shift_thu for another participant",
+      "new_7: overlaps contextual event partner_shift_thu for another participant",
+      "new_2: overlaps contextual event partner_shift_thu for another participant"
+    ],
+    "valid": true
+  },
+  "source_result_sha256": "a81d2013117164d7bc5bec54dd3de710a564d91c39068dd86059f37651796381",
+  "scenario_sha256": "19c29fef96a8e923c737dd375310d6c5be1cb6cbb52459079c168e5b68d1bc9f",
+  "aggregate_requirements_sha256": null,
+  "confirmed_changes_sha256": null,
+  "critic_input_version": "final_calendar_v1",
+  "critic_policy_version": "uncertainty_review_v2",
+  "result_calendar_version": "validated_added_metadata_v2",
+  "final_result_calendar": {
+    "timezone": "Europe/Lisbon",
+    "coverage": "all_events_in_scenario_after_simulation",
+    "events": [
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-04-14T23:00:00+01:00",
+        "end": "2027-04-15T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "morning_thu",
+        "title": "Morning routine with the children",
+        "start": "2027-04-15T06:45:00+01:00",
+        "end": "2027-04-15T07:45:00+01:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Breakfast, dressing and school bags.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "travel_to_school_thu",
+        "title": "Travel to school and daycare",
+        "start": "2027-04-15T08:00:00+01:00",
+        "end": "2027-04-15T08:15:00+01:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "15-minute car journey from home to school/daycare.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "dropoff_thu",
+        "title": "Drop-off at school and daycare",
+        "start": "2027-04-15T08:15:00+01:00",
+        "end": "2027-04-15T08:30:00+01:00",
+        "category": "childcare",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Drop-off for Marta and Duarte.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "commute_to_work_thu",
+        "title": "Commute to office",
+        "start": "2027-04-15T08:30:00+01:00",
+        "end": "2027-04-15T09:00:00+01:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute car journey from school to the office (25 minutes from office directly to home).",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "standup_thu",
+        "title": "Team stand-up",
+        "start": "2027-04-15T09:30:00+01:00",
+        "end": "2027-04-15T10:00:00+01:00",
+        "category": "work",
+        "importance": 3,
+        "fixed": true,
+        "participants": [
+          "user",
+          "team"
+        ],
+        "description": "Daily stand-up; can be joined by video.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "focus_am_thu",
+        "title": "Audit compliance documentation",
+        "start": "2027-04-15T10:00:00+01:00",
+        "end": "2027-04-15T12:30:00+01:00",
+        "category": "work_focus",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Important individual task due tomorrow at noon; can be done from home.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_0",
+        "title": "Travel from office to home",
+        "start": "2027-04-15T12:30:00+01:00",
+        "end": "2027-04-15T12:55:00+01:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "lunch_thu",
+        "title": "Lunch",
+        "start": "2027-04-15T12:55:00+01:00",
+        "end": "2027-04-15T13:25:00+01:00",
+        "category": "meal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "new_2",
+        "title": "Confirm technician access, review cover, parents timing, and dinner order",
+        "start": "2027-04-15T13:25:00+01:00",
+        "end": "2027-04-15T13:55:00+01:00",
+        "category": null,
+        "importance": 5,
+        "fixed": null,
+        "participants": [
+          "user",
+          "technician",
+          "team",
+          "architect",
+          "parents"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "partner_shift_thu",
+        "title": "Partner's work shift",
+        "start": "2027-04-15T13:30:00+01:00",
+        "end": "2027-04-15T21:30:00+01:00",
+        "category": "partner_work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "partner"
+        ],
+        "description": "Late shift as a bus driver; leaves home at 12:45 and is unreachable until 21:30.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "architecture_review_thu",
+        "title": "System architecture review",
+        "start": "2027-04-15T14:00:00+01:00",
+        "end": "2027-04-15T15:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "team",
+          "architect"
+        ],
+        "description": "Critical technical review; user can join by video call as long as there are no interruptions.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "focus_pm_thu",
+        "title": "Code review and PR approvals",
+        "start": "2027-04-15T15:30:00+01:00",
+        "end": "2027-04-15T17:00:00+01:00",
+        "category": "work_focus",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Flexible individual work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "commute_to_school_thu",
+        "title": "Commute to school",
+        "start": "2027-04-15T17:00:00+01:00",
+        "end": "2027-04-15T17:30:00+01:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute journey from office to school (15 minutes from home to school).",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "pickup_thu",
+        "title": "Pick up children",
+        "start": "2027-04-15T17:30:00+01:00",
+        "end": "2027-04-15T17:45:00+01:00",
+        "category": "childcare",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Pick-up from after-school programme and daycare (close at 18:30).",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_4",
+        "title": "Travel from school to central station",
+        "start": "2027-04-15T17:45:00+01:00",
+        "end": "2027-04-15T18:00:00+01:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "new_5",
+        "title": "Meet parents at central station",
+        "start": "2027-04-15T18:15:00+01:00",
+        "end": "2027-04-15T18:20:00+01:00",
+        "category": "family",
+        "importance": 5,
+        "fixed": null,
+        "participants": [
+          "user",
+          "parents",
+          "marta",
+          "duarte"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "new_6",
+        "title": "Travel home from central station",
+        "start": "2027-04-15T18:20:00+01:00",
+        "end": "2027-04-15T18:40:00+01:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user",
+          "parents",
+          "marta",
+          "duarte"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "new_7",
+        "title": "Settle in and organise dinner for five",
+        "start": "2027-04-15T18:40:00+01:00",
+        "end": "2027-04-15T19:30:00+01:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user",
+          "parents",
+          "marta",
+          "duarte"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "new_9",
+        "title": "Dinner at home for five",
+        "start": "2027-04-15T19:30:00+01:00",
+        "end": "2027-04-15T20:20:00+01:00",
+        "category": "family",
+        "importance": 5,
+        "fixed": null,
+        "participants": [
+          "user",
+          "parents",
+          "marta",
+          "duarte"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "bedtime_thu",
+        "title": "Children's bedtime routine",
+        "start": "2027-04-15T20:20:00+01:00",
+        "end": "2027-04-15T21:05:00+01:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Bath, story and bedtime.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-04-15T23:00:00+01:00",
+        "end": "2027-04-16T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      }
+    ],
+    "metadata_note": "Added-event metadata is copied only from validated Proposal fields. Null values identify fields not supplied by the Proposal; simulator defaults are internal. Missing by event: {'new_2': ['category']}"
+  },
+  "final_unresolved_assumptions": [
+    {
+      "subject": "Technician arrival during architecture review",
+      "assumption": "If the technician arrives during the 14:00-15:30 architecture review, the access or cover arrangement will prevent meaningful interruption to a meeting that requires no interruptions.",
+      "evidence_gap": "The rationale acknowledges the technician window may overlap the review and says access during the meeting is not operationally resolved without confirmation; the calendar only adds a 13:25-13:55 confirmation block and does not show the repair window or a confirmed handling plan.",
+      "potential_impact": "material",
+      "verification_source": "third_party"
+    },
+    {
+      "subject": "Pre-review coordination success",
+      "assumption": "Thirty minutes from 13:25 to 13:55 is enough to confirm technician access, review cover, parents timing, and a dinner order with all relevant parties before the 14:00 review.",
+      "evidence_gap": "The event involves multiple parties and decisions immediately before a protected meeting, but there is no evidence that the technician, team, architect, parents, or dinner provider will respond within that window.",
+      "potential_impact": "material",
+      "verification_source": "third_party"
+    },
+    {
+      "subject": "Dinner food source",
+      "assumption": "A dinner order or equivalent food source for five can be confirmed and will be available in time for the 19:30-20:20 dinner.",
+      "evidence_gap": "Groceries are deleted and the rationale states dinner depends on a confirmed order or other food source; the calendar includes organisation time but not evidence that food availability is secured.",
+      "potential_impact": "material",
+      "verification_source": "external_source"
+    },
+    {
+      "subject": "Parents' station timing",
+      "assumption": "The parents will be at the central station and ready to leave promptly during the 18:15-18:20 meeting window.",
+      "evidence_gap": "The revised calendar makes the pickup a brief handoff, but the rationale still notes that the parents’ actual arrival and ability to leave promptly must be confirmed.",
+      "potential_impact": "material",
+      "verification_source": "third_party"
+    },
+    {
+      "subject": "Afternoon school commute route",
+      "assumption": "The preserved 17:00-17:30 commute to school remains practically valid even though the user appears to be at home after 12:55 and the event description refers to the office-to-school route.",
+      "evidence_gap": "The rationale says working from home changes the practical route to pickup, while the visible event still describes a 30-minute journey from the office to school and elsewhere identifies home-to-school travel as 15 minutes.",
+      "potential_impact": "minor",
+      "verification_source": "user_context"
+    }
+  ],
+  "uncertainty_history": [
+    {
+      "iteration": 1,
+      "unresolved_assumptions": [
+        {
+          "subject": "Station pickup duration",
+          "assumption": "The parents can be collected at the central station around 18:15 and the family can depart for home immediately enough to arrive by 18:35.",
+          "evidence_gap": "The final calendar also shows the pickup event continuing until 19:15 with the same participants, so it is unclear whether the pickup is a brief handoff or a one-hour obligation.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Parents' actual arrival time",
+          "assumption": "The parents will be available at the station in time for the planned 18:15 pickup and will not be delayed in a way that compresses dinner and bedtime.",
+          "evidence_gap": "The rationale states that station meeting time is uncertain and any delay reduces the buffer before dinner, but the final calendar schedules the evening as though the timing is sufficiently reliable.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Dinner order availability",
+          "assumption": "A dinner order for five can be confirmed during the 13:15-13:30 block and will support the unchanged 19:30 dinner.",
+          "evidence_gap": "The rationale acknowledges provider availability is not guaranteed, and the calendar contains only a confirmation task, not evidence that food for five is actually secured.",
+          "potential_impact": "material",
+          "verification_source": "external_source"
+        },
+        {
+          "subject": "Pre-review coordination capacity",
+          "assumption": "Fifteen minutes from 13:15 to 13:30 is enough to confirm technician access, arrange review cover with the team or architect, and handle the dinner order.",
+          "evidence_gap": "The block combines several coordination tasks involving different parties, but no evidence is provided that these parties will respond within that window.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Technician arrival during architecture review",
+          "assumption": "If the technician arrives during the 14:00-15:30 architecture review, the arranged cover or access plan will prevent meaningful disruption.",
+          "evidence_gap": "The rationale identifies this as a risk, but the calendar does not show the repair window or any explicit protected handling time during the review.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Afternoon school commute route",
+          "assumption": "The preserved 17:00-17:30 commute to school remains practically valid even though the user appears to be at home after 12:55 and the event description refers to the office-to-school route.",
+          "evidence_gap": "The rationale says the fixed entry represents an operational route issue rather than a freely movable block, but the visible calendar does not clarify whether the travel duration or starting location is accurate.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        }
+      ]
+    },
+    {
+      "iteration": 3,
+      "unresolved_assumptions": [
+        {
+          "subject": "Technician arrival during architecture review",
+          "assumption": "If the technician arrives during the 14:00-15:30 architecture review, the access or cover arrangement will prevent meaningful interruption to a meeting that requires no interruptions.",
+          "evidence_gap": "The rationale acknowledges the technician window may overlap the review and says access during the meeting is not operationally resolved without confirmation; the calendar only adds a 13:25-13:55 confirmation block and does not show the repair window or a confirmed handling plan.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Pre-review coordination success",
+          "assumption": "Thirty minutes from 13:25 to 13:55 is enough to confirm technician access, review cover, parents timing, and a dinner order with all relevant parties before the 14:00 review.",
+          "evidence_gap": "The event involves multiple parties and decisions immediately before a protected meeting, but there is no evidence that the technician, team, architect, parents, or dinner provider will respond within that window.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Dinner food source",
+          "assumption": "A dinner order or equivalent food source for five can be confirmed and will be available in time for the 19:30-20:20 dinner.",
+          "evidence_gap": "Groceries are deleted and the rationale states dinner depends on a confirmed order or other food source; the calendar includes organisation time but not evidence that food availability is secured.",
+          "potential_impact": "material",
+          "verification_source": "external_source"
+        },
+        {
+          "subject": "Parents' station timing",
+          "assumption": "The parents will be at the central station and ready to leave promptly during the 18:15-18:20 meeting window.",
+          "evidence_gap": "The revised calendar makes the pickup a brief handoff, but the rationale still notes that the parents’ actual arrival and ability to leave promptly must be confirmed.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Afternoon school commute route",
+          "assumption": "The preserved 17:00-17:30 commute to school remains practically valid even though the user appears to be at home after 12:55 and the event description refers to the office-to-school route.",
+          "evidence_gap": "The rationale says working from home changes the practical route to pickup, while the visible event still describes a 30-minute journey from the office to school and elsewhere identifies home-to-school travel as 15 minutes.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        }
+      ]
+    }
+  ]
+}

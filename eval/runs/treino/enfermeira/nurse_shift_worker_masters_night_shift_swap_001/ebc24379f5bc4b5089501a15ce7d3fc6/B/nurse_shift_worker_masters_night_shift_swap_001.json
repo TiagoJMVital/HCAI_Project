@@ -1,0 +1,3669 @@
+{
+  "configuration": "B",
+  "scenario_id": "nurse_shift_worker_masters_night_shift_swap_001",
+  "family": "nurse_shift_worker_masters_schedule_conflict",
+  "category": "v2",
+  "proposer_provider": "iaedu",
+  "proposer_model": "GPT-5.5",
+  "proposer_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_provider": "iaedu",
+  "critic_model": "GPT-5.5",
+  "critic_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_settings": {
+    "threshold": 4.0,
+    "max_refinements": 3,
+    "min_dimension_score": 1
+  },
+  "iterations": [
+    {
+      "index": 0,
+      "proposer_feedback": null,
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "move",
+            "event_id": "work_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-11-25T20:00:00+00:00",
+            "to_end": "2026-11-26T08:00:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "work_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Commute to hospital",
+            "from_start": null,
+            "to_start": "2026-11-25T19:30:00+00:00",
+            "to_end": "2026-11-25T20:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Commute home",
+            "from_start": null,
+            "to_start": "2026-11-26T08:00:00+00:00",
+            "to_end": "2026-11-26T08:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Sleep",
+            "from_start": null,
+            "to_start": "2026-11-26T08:30:00+00:00",
+            "to_end": "2026-11-26T12:00:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Sleep",
+            "from_start": null,
+            "to_start": "2026-11-26T15:00:00+00:00",
+            "to_end": "2026-11-26T19:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "move",
+            "event_id": "thesis_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-11-26T19:30:00+00:00",
+            "to_end": "2026-11-26T21:30:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Dinner",
+            "from_start": null,
+            "to_start": "2026-11-26T21:30:00+00:00",
+            "to_end": "2026-11-26T22:30:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "move",
+            "event_id": "gym_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-11-28T08:00:00+00:00",
+            "to_end": "2026-11-28T10:00:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "Only the supplied exceptions authorize moving the Wednesday work shift and deleting the Thursday work shift.",
+            "Friday's hospital shift is left unchanged.",
+            "Protected sleep and fixed commute events without exact exceptions are not moved or deleted, even where the swap makes them operationally awkward.",
+            "The added Thursday recovery sleep is split to preserve the supervision meeting, lunch, and remaining fixed commute events.",
+            "The Thursday thesis block is kept on Thursday so the daily two-hour thesis requirement remains satisfied.",
+            "The dinner with a friend and the thesis supervision meeting are preserved because they involve other people.",
+            "The new night-shift commutes use the existing 30-minute hospital commute pattern; exact logistics after dinner remain uncertain."
+          ],
+          "priorities": [
+            "Apply the externally confirmed hospital swap.",
+            "Protect eight hours of scheduled sleep around the night shift as far as operationally feasible.",
+            "Preserve daily thesis time before lower-priority gym training.",
+            "Keep commitments involving other people unchanged.",
+            "Use the freed Thursday evening for thesis and recovery rather than extra optional activities."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Move the thesis supervision meeting",
+              "rejected_because": "Rejected because it involves the supervisor and the calendar says no other slot is available this week."
+            },
+            {
+              "option": "Keep the Thursday gym session in its original slot",
+              "rejected_because": "Rejected because it would conflict with needed recovery sleep after the night shift."
+            },
+            {
+              "option": "Use one continuous daytime sleep block on Thursday",
+              "rejected_because": "Rejected because it would collide with the supervision meeting, lunch, or fixed commute events."
+            },
+            {
+              "option": "Remove the old Thursday commute events",
+              "rejected_because": "Rejected because they are fixed and no exact exception was supplied for those events."
+            }
+          ],
+          "summary": "The plan applies the confirmed work swap, adds night-shift commutes and split Thursday recovery sleep, keeps other-person commitments, and moves only flexible thesis and gym time; the main trade-off is accepting split sleep and leaving some fixed legacy commute/protected events untouched because no exact exception authorizes changing them."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [
+          "work_wed: overlaps protected event sleep_thu"
+        ],
+        "warnings": [],
+        "valid": false,
+        "aggregate_checks": [
+          {
+            "id": "thesis_daily_time_2026-11-23",
+            "status": "pass",
+            "minutes": 120.0,
+            "minimum_minutes": 120,
+            "category": "thesis",
+            "evidence": "union of final calendar intervals"
+          },
+          {
+            "id": "thesis_daily_time_2026-11-24",
+            "status": "pass",
+            "minutes": 120.0,
+            "minimum_minutes": 120,
+            "category": "thesis",
+            "evidence": "union of final calendar intervals"
+          },
+          {
+            "id": "thesis_daily_time_2026-11-25",
+            "status": "pass",
+            "minutes": 120.0,
+            "minimum_minutes": 120,
+            "category": "thesis",
+            "evidence": "union of final calendar intervals"
+          },
+          {
+            "id": "thesis_daily_time_2026-11-26",
+            "status": "pass",
+            "minutes": 120.0,
+            "minimum_minutes": 120,
+            "category": "thesis",
+            "evidence": "union of final calendar intervals"
+          },
+          {
+            "id": "thesis_daily_time_2026-11-27",
+            "status": "pass",
+            "minutes": 120.0,
+            "minimum_minutes": 120,
+            "category": "thesis",
+            "evidence": "union of final calendar intervals"
+          }
+        ],
+        "aggregate_validation_version": "duration_total_v1",
+        "confirmed_change_authorizations": [
+          {
+            "event_id": "work_wed",
+            "type": "move",
+            "to_start": "2026-11-25T20:00:00+00:00",
+            "to_end": "2026-11-26T08:00:00+00:00"
+          },
+          {
+            "event_id": "work_thu",
+            "type": "delete",
+            "to_start": null,
+            "to_end": null
+          }
+        ]
+      },
+      "result_calendar": null,
+      "critic_evaluation": null,
+      "acceptance_policy": null,
+      "operations_changed_from_previous": null,
+      "rationale_changed_from_previous": null,
+      "prior_critic_reviews": []
+    },
+    {
+      "index": 1,
+      "proposer_feedback": "Deterministic validation found these operational problems: work_wed: overlaps protected event sleep_thu. Revise the changes before any Critic assessment.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "move",
+            "event_id": "work_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-11-25T20:00:00+00:00",
+            "to_end": "2026-11-26T08:00:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "work_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Commute to hospital",
+            "from_start": null,
+            "to_start": "2026-11-25T19:30:00+00:00",
+            "to_end": "2026-11-25T20:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Commute home",
+            "from_start": null,
+            "to_start": "2026-11-26T08:00:00+00:00",
+            "to_end": "2026-11-26T08:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Sleep",
+            "from_start": null,
+            "to_start": "2026-11-26T08:30:00+00:00",
+            "to_end": "2026-11-26T12:00:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Sleep",
+            "from_start": null,
+            "to_start": "2026-11-26T15:00:00+00:00",
+            "to_end": "2026-11-26T19:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "move",
+            "event_id": "thesis_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-11-26T19:30:00+00:00",
+            "to_end": "2026-11-26T21:30:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Dinner",
+            "from_start": null,
+            "to_start": "2026-11-26T21:30:00+00:00",
+            "to_end": "2026-11-26T22:30:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "move",
+            "event_id": "gym_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-11-28T08:00:00+00:00",
+            "to_end": "2026-11-28T10:00:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "Only the supplied exceptions authorize moving the Wednesday work shift and deleting the Thursday work shift.",
+            "The confirmed night shift conflicts with an existing protected sleep block, so a fully conflict-free calendar is not feasible without authority to change sleep.",
+            "Friday's hospital shift is left unchanged.",
+            "Protected sleep and fixed commute events without exact exceptions are not moved or deleted.",
+            "The added recovery sleep is a practical replacement opportunity, not a move or deletion of the protected block.",
+            "The Thursday thesis block remains on Thursday so the daily thesis duration requirement stays satisfied.",
+            "The dinner with a friend and the thesis supervision meeting are preserved because they involve other people.",
+            "The new night-shift commutes follow the existing 30-minute commute pattern; exact post-dinner logistics remain uncertain."
+          ],
+          "priorities": [
+            "Apply the externally confirmed hospital swap despite the unresolved protected-sleep conflict.",
+            "Preserve eight hours of scheduled recovery sleep after the night shift where the calendar is actually usable.",
+            "Keep daily thesis time ahead of lower-priority gym training.",
+            "Avoid changing commitments involving other people.",
+            "Use the freed Thursday evening for thesis, dinner and recovery rather than optional activity."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Move the protected overnight sleep block",
+              "rejected_because": "Rejected because no exact exception authorizes changing that protected event."
+            },
+            {
+              "option": "Do not move the Wednesday hospital shift",
+              "rejected_because": "Rejected because it would ignore the externally confirmed hospital swap requested by the user."
+            },
+            {
+              "option": "Move the thesis supervision meeting",
+              "rejected_because": "Rejected because it involves another person and the calendar says no other slot is available this week."
+            },
+            {
+              "option": "Keep the Thursday gym session in its original slot",
+              "rejected_because": "Rejected because it would use time needed for recovery after the night shift."
+            },
+            {
+              "option": "Remove the old Thursday commute events",
+              "rejected_because": "Rejected because they are fixed and no exact exception was supplied for those events."
+            }
+          ],
+          "summary": "The plan applies the confirmed work swap, preserves other-person commitments, adds usable recovery sleep after the night shift, and moves only flexible thesis and gym time; the main trade-off is that the supplied constraints leave an unresolved overlap with a protected sleep block that cannot be legally moved or deleted here."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [
+          "work_wed: overlaps protected event sleep_thu"
+        ],
+        "warnings": [],
+        "valid": false,
+        "aggregate_checks": [
+          {
+            "id": "thesis_daily_time_2026-11-23",
+            "status": "pass",
+            "minutes": 120.0,
+            "minimum_minutes": 120,
+            "category": "thesis",
+            "evidence": "union of final calendar intervals"
+          },
+          {
+            "id": "thesis_daily_time_2026-11-24",
+            "status": "pass",
+            "minutes": 120.0,
+            "minimum_minutes": 120,
+            "category": "thesis",
+            "evidence": "union of final calendar intervals"
+          },
+          {
+            "id": "thesis_daily_time_2026-11-25",
+            "status": "pass",
+            "minutes": 120.0,
+            "minimum_minutes": 120,
+            "category": "thesis",
+            "evidence": "union of final calendar intervals"
+          },
+          {
+            "id": "thesis_daily_time_2026-11-26",
+            "status": "pass",
+            "minutes": 120.0,
+            "minimum_minutes": 120,
+            "category": "thesis",
+            "evidence": "union of final calendar intervals"
+          },
+          {
+            "id": "thesis_daily_time_2026-11-27",
+            "status": "pass",
+            "minutes": 120.0,
+            "minimum_minutes": 120,
+            "category": "thesis",
+            "evidence": "union of final calendar intervals"
+          }
+        ],
+        "aggregate_validation_version": "duration_total_v1",
+        "confirmed_change_authorizations": [
+          {
+            "event_id": "work_wed",
+            "type": "move",
+            "to_start": "2026-11-25T20:00:00+00:00",
+            "to_end": "2026-11-26T08:00:00+00:00"
+          },
+          {
+            "event_id": "work_thu",
+            "type": "delete",
+            "to_start": null,
+            "to_end": null
+          }
+        ]
+      },
+      "result_calendar": null,
+      "critic_evaluation": null,
+      "acceptance_policy": null,
+      "operations_changed_from_previous": false,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": []
+    },
+    {
+      "index": 2,
+      "proposer_feedback": "Deterministic validation found these operational problems: work_wed: overlaps protected event sleep_thu. Revise the changes before any Critic assessment.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "delete",
+            "event_id": "work_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Dinner",
+            "from_start": null,
+            "to_start": "2026-11-26T19:00:00+00:00",
+            "to_end": "2026-11-26T20:00:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "The Thursday shift deletion is exactly authorized by the supplied exception.",
+            "Moving the Wednesday shift as requested would overlap a protected sleep event that has no supplied exception.",
+            "Friday's hospital shift is left unchanged.",
+            "Fixed commute events are not moved or deleted because no exact exception was supplied for them.",
+            "Daily thesis duration remains satisfied by the existing thesis events.",
+            "The dinner with a friend and the thesis supervision meeting are preserved because they involve other people."
+          ],
+          "priorities": [
+            "Apply the feasible confirmed part of the hospital change without violating protected sleep.",
+            "Use the freed Thursday evening for an ordinary dinner within the preferred meal window.",
+            "Preserve daily sleep and thesis time ahead of optional rearrangements.",
+            "Avoid creating changes that depend on unconfirmed external availability."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Move the Wednesday hospital shift to the night shift",
+              "rejected_because": "Rejected because it would create an unresolved overlap with protected sleep."
+            },
+            {
+              "option": "Move or delete the protected sleep block",
+              "rejected_because": "Rejected because no exact exception authorizes changing that sleep event."
+            },
+            {
+              "option": "Delete the old Thursday commute events",
+              "rejected_because": "Rejected because they are fixed and no exact exception was supplied for those events."
+            },
+            {
+              "option": "Move the thesis supervision meeting",
+              "rejected_because": "Rejected because it involves another person and the calendar says no other slot is available this week."
+            }
+          ],
+          "summary": "The selected plan applies only the feasible confirmed Thursday shift removal and adds a Thursday dinner, while leaving the requested Wednesday night-shift swap unapplied because it would conflict with protected sleep that cannot be changed under the supplied rules."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true,
+        "aggregate_checks": [
+          {
+            "id": "thesis_daily_time_2026-11-23",
+            "status": "pass",
+            "minutes": 120.0,
+            "minimum_minutes": 120,
+            "category": "thesis",
+            "evidence": "union of final calendar intervals"
+          },
+          {
+            "id": "thesis_daily_time_2026-11-24",
+            "status": "pass",
+            "minutes": 120.0,
+            "minimum_minutes": 120,
+            "category": "thesis",
+            "evidence": "union of final calendar intervals"
+          },
+          {
+            "id": "thesis_daily_time_2026-11-25",
+            "status": "pass",
+            "minutes": 120.0,
+            "minimum_minutes": 120,
+            "category": "thesis",
+            "evidence": "union of final calendar intervals"
+          },
+          {
+            "id": "thesis_daily_time_2026-11-26",
+            "status": "pass",
+            "minutes": 120.0,
+            "minimum_minutes": 120,
+            "category": "thesis",
+            "evidence": "union of final calendar intervals"
+          },
+          {
+            "id": "thesis_daily_time_2026-11-27",
+            "status": "pass",
+            "minutes": 120.0,
+            "minimum_minutes": 120,
+            "category": "thesis",
+            "evidence": "union of final calendar intervals"
+          }
+        ],
+        "aggregate_validation_version": "duration_total_v1",
+        "confirmed_change_authorizations": [
+          {
+            "event_id": "work_wed",
+            "type": "move",
+            "to_start": "2026-11-25T20:00:00+00:00",
+            "to_end": "2026-11-26T08:00:00+00:00"
+          },
+          {
+            "event_id": "work_thu",
+            "type": "delete",
+            "to_start": null,
+            "to_end": null
+          }
+        ]
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2026-11-22T22:00:00+00:00",
+            "end": "2026-11-23T06:00:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block; the user requires at least eight hours of sleep per day.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_to_work_mon",
+            "title": "Commute to hospital",
+            "start": "2026-11-23T06:30:00+00:00",
+            "end": "2026-11-23T07:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute journey from home to the hospital.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_mon",
+            "title": "Hospital shift",
+            "start": "2026-11-23T07:00:00+00:00",
+            "end": "2026-11-23T15:00:00+00:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Fixed nursing shift at the hospital.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_home_mon",
+            "title": "Commute home",
+            "start": "2026-11-23T15:00:00+00:00",
+            "end": "2026-11-23T15:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute journey from the hospital to home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "thesis_mon",
+            "title": "Master's thesis",
+            "start": "2026-11-23T16:00:00+00:00",
+            "end": "2026-11-23T18:00:00+00:00",
+            "category": "thesis",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Two-hour focused work block dedicated to the master's thesis.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_mon",
+            "title": "Gym session",
+            "start": "2026-11-23T18:00:00+00:00",
+            "end": "2026-11-23T20:00:00+00:00",
+            "category": "gym",
+            "importance": 2,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym session; the gym is next to home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "dinner_mon",
+            "title": "Dinner",
+            "start": "2026-11-23T20:00:00+00:00",
+            "end": "2026-11-23T21:00:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "One-hour dinner at home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2026-11-23T22:00:00+00:00",
+            "end": "2026-11-24T06:00:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block; the user requires at least eight hours of sleep per day.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_to_work_tue",
+            "title": "Commute to hospital",
+            "start": "2026-11-24T06:30:00+00:00",
+            "end": "2026-11-24T07:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute journey from home to the hospital.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_tue",
+            "title": "Hospital shift",
+            "start": "2026-11-24T07:00:00+00:00",
+            "end": "2026-11-24T15:00:00+00:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Fixed nursing shift at the hospital.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_home_tue",
+            "title": "Commute home",
+            "start": "2026-11-24T15:00:00+00:00",
+            "end": "2026-11-24T15:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute journey from the hospital to home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "thesis_tue",
+            "title": "Master's thesis",
+            "start": "2026-11-24T16:00:00+00:00",
+            "end": "2026-11-24T18:00:00+00:00",
+            "category": "thesis",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Two-hour focused work block dedicated to the master's thesis.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_tue",
+            "title": "Gym session",
+            "start": "2026-11-24T18:00:00+00:00",
+            "end": "2026-11-24T20:00:00+00:00",
+            "category": "gym",
+            "importance": 2,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym session; the gym is next to home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "dinner_tue",
+            "title": "Dinner",
+            "start": "2026-11-24T20:00:00+00:00",
+            "end": "2026-11-24T21:00:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "One-hour dinner at home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2026-11-24T22:00:00+00:00",
+            "end": "2026-11-25T06:00:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block; the user requires at least eight hours of sleep per day.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_to_work_wed",
+            "title": "Commute to hospital",
+            "start": "2026-11-25T06:30:00+00:00",
+            "end": "2026-11-25T07:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute journey from home to the hospital.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_wed",
+            "title": "Hospital shift",
+            "start": "2026-11-25T07:00:00+00:00",
+            "end": "2026-11-25T15:00:00+00:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Fixed nursing shift at the hospital.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_home_wed",
+            "title": "Commute home",
+            "start": "2026-11-25T15:00:00+00:00",
+            "end": "2026-11-25T15:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute journey from the hospital to home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "thesis_wed",
+            "title": "Master's thesis",
+            "start": "2026-11-25T16:00:00+00:00",
+            "end": "2026-11-25T18:00:00+00:00",
+            "category": "thesis",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Two-hour focused work block dedicated to the master's thesis.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "dinner_wed",
+            "title": "Dinner with friend",
+            "start": "2026-11-25T18:30:00+00:00",
+            "end": "2026-11-25T19:30:00+00:00",
+            "category": "social",
+            "importance": 3,
+            "fixed": true,
+            "participants": [
+              "user",
+              "friend"
+            ],
+            "description": "Pre-arranged early dinner with a friend; the restaurant is next to home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2026-11-25T23:00:00+00:00",
+            "end": "2026-11-26T07:00:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block; the user requires at least eight hours of sleep per day.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "thesis_thu",
+            "title": "Master's thesis",
+            "start": "2026-11-26T08:00:00+00:00",
+            "end": "2026-11-26T10:00:00+00:00",
+            "category": "thesis",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Two-hour focused work block dedicated to the master's thesis.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_thu",
+            "title": "Gym session",
+            "start": "2026-11-26T10:00:00+00:00",
+            "end": "2026-11-26T12:00:00+00:00",
+            "category": "gym",
+            "importance": 2,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym session; the gym is next to home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "supervisor_thu",
+            "title": "Thesis supervision meeting",
+            "start": "2026-11-26T12:00:00+00:00",
+            "end": "2026-11-26T12:45:00+00:00",
+            "category": "academic",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "supervisor"
+            ],
+            "description": "Video call with the thesis supervisor to review the methodology chapter; the supervisor has no other free slot this week.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_thu",
+            "title": "Lunch",
+            "start": "2026-11-26T13:00:00+00:00",
+            "end": "2026-11-26T14:00:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "One-hour lunch before the afternoon shift.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_to_work_thu",
+            "title": "Commute to hospital",
+            "start": "2026-11-26T14:30:00+00:00",
+            "end": "2026-11-26T15:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute journey from home to the hospital.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_1",
+            "title": "Dinner",
+            "start": "2026-11-26T19:00:00+00:00",
+            "end": "2026-11-26T20:00:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "commute_home_thu",
+            "title": "Commute home",
+            "start": "2026-11-26T23:00:00+00:00",
+            "end": "2026-11-26T23:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute journey from the hospital to home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2026-11-26T23:30:00+00:00",
+            "end": "2026-11-27T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block; the user requires at least eight hours of sleep per day.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "thesis_fri",
+            "title": "Master's thesis",
+            "start": "2026-11-27T08:00:00+00:00",
+            "end": "2026-11-27T10:00:00+00:00",
+            "category": "thesis",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Two-hour focused work block dedicated to the master's thesis.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_fri",
+            "title": "Gym session",
+            "start": "2026-11-27T10:00:00+00:00",
+            "end": "2026-11-27T12:00:00+00:00",
+            "category": "gym",
+            "importance": 2,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym session; the gym is next to home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_fri",
+            "title": "Lunch",
+            "start": "2026-11-27T13:00:00+00:00",
+            "end": "2026-11-27T14:00:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "One-hour lunch before the afternoon shift.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_to_work_fri",
+            "title": "Commute to hospital",
+            "start": "2026-11-27T14:30:00+00:00",
+            "end": "2026-11-27T15:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute journey from home to the hospital.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_fri",
+            "title": "Hospital shift",
+            "start": "2026-11-27T15:00:00+00:00",
+            "end": "2026-11-27T23:00:00+00:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Fixed nursing shift at the hospital.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_home_fri",
+            "title": "Commute home",
+            "start": "2026-11-27T23:00:00+00:00",
+            "end": "2026-11-27T23:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute journey from the hospital to home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_after_fri",
+            "title": "Sleep",
+            "start": "2026-11-27T23:30:00+00:00",
+            "end": "2026-11-28T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected eight-hour sleep block after the Friday evening shift.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 3,
+          "coherence": 2,
+          "alternatives": 2,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The proposal deletes the Thursday hospital shift but preserves the Thursday commute to hospital at 14:30-15:00 and commute home at 23:00-23:30. This creates a long, unexplained 15:00-23:00 hospital-side interval with no work event, while the rationale treats Thursday evening as freed.",
+          "The added Thursday dinner at 19:00-20:00 is only weakly supported by the resulting calendar. Because the user is still scheduled to commute to the hospital at 14:30 and only commute home at 23:00, the plan does not explain whether dinner is realistically accessible, where it occurs, or whether the preserved commute pattern makes it awkward or impractical.",
+          "The rationale focuses heavily on authorization and technical protection rules, but does not sufficiently evaluate the human consequence of preserving commute events after deleting the shift they appear to serve.",
+          "Relevant alternatives were considered mostly from a rule-compliance perspective. The proposal rejects deleting commute events because they are fixed, but does not consider whether the resulting plan should be left without the dinner addition, or whether the freed evening claim needs qualification given the preserved commute structure.",
+          "The Thursday sequence is internally strained from a practical standpoint: thesis 08:00-10:00, gym 10:00-12:00, supervision 12:00-12:45, lunch 13:00-14:00, commute to hospital 14:30-15:00, then an unexplained afternoon/evening away pattern before sleep immediately after the 23:00-23:30 commute."
+        ],
+        "feedback": "The plan is technically valid and the rationale is clear about why the Wednesday night-shift move was not applied. However, the human-quality issue is the Thursday result: deleting the shift while preserving both hospital commutes makes the added dinner and the claim of a freed evening hard to assess as a realistic routine. The proposer should reconsider or better substantiate how Thursday evening is meant to work in practice with the fixed commutes still present. If the commutes truly cannot be removed, the rationale should explain the practical purpose of going to and remaining associated with the hospital-side schedule after the deleted shift, and whether adding dinner at 19:00 still improves the day rather than creating an awkward placeholder plan.",
+        "plausibility_review": {
+          "revision_required": true,
+          "severity": "moderate",
+          "reason": "A concrete manageability concern arises because the proposal deletes the Thursday work shift but leaves the Thursday commute-to-hospital and commute-home events intact, then adds dinner during the resulting unexplained interval. This could significantly affect whether the schedule is actually useful or sustainable: the user may end up with a technically free but practically awkward evening structured around unnecessary travel or an unexplained location constraint. The concern is not an objective validation failure, because the commute events are marked fixed and there is no overlap, but the plan's human rationale does not account for the consequences.",
+          "suggested_improvement": "Reconsider the Thursday evening organization using the fuller context: either explain why the preserved commutes remain practically meaningful after the shift deletion and how dinner fits around them, or adjust the plan in a way that avoids treating a technically free but commute-bound interval as straightforward recovery or meal time."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Thursday fixed commute events after deleted shift",
+            "assumption": "The user still has a practical reason to commute to the hospital at 14:30 and return at 23:00 even though the Thursday hospital shift was deleted.",
+            "evidence_gap": "The calendar descriptions define these as journeys between home and hospital, but the associated Thursday work event has been removed and the rationale only says the commutes are fixed, not why they remain useful or manageable.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Thursday 19:00 dinner feasibility",
+            "assumption": "The added dinner can realistically occur at 19:00-20:00 despite the user being scheduled to have commuted to the hospital earlier and not scheduled to return home until 23:00.",
+            "evidence_gap": "The added dinner has no location or description, while existing commute descriptions imply the user travels from home to the hospital at 14:30 and from the hospital to home at 23:00.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Usefulness of the freed Thursday evening",
+            "assumption": "The deletion of the Thursday shift creates usable recovery or personal time rather than an awkward unstructured block constrained by preserved commute events.",
+            "evidence_gap": "The rationale describes the evening as freed, but the resulting calendar still includes a hospital-bound commute pattern from 14:30 to 23:30 with no explanation of location, obligations, or intended use of the intervening time.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          }
+        ],
+        "overall": 2.75
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": false,
+        "plausibility_revision_required": true,
+        "accepted": false,
+        "revision_causes": [
+          "numeric_criteria_failed",
+          "plausibility_revision_required"
+        ]
+      },
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": [],
+      "unresolved_assumptions": [
+        {
+          "subject": "Thursday fixed commute events after deleted shift",
+          "assumption": "The user still has a practical reason to commute to the hospital at 14:30 and return at 23:00 even though the Thursday hospital shift was deleted.",
+          "evidence_gap": "The calendar descriptions define these as journeys between home and hospital, but the associated Thursday work event has been removed and the rationale only says the commutes are fixed, not why they remain useful or manageable.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Thursday 19:00 dinner feasibility",
+          "assumption": "The added dinner can realistically occur at 19:00-20:00 despite the user being scheduled to have commuted to the hospital earlier and not scheduled to return home until 23:00.",
+          "evidence_gap": "The added dinner has no location or description, while existing commute descriptions imply the user travels from home to the hospital at 14:30 and from the hospital to home at 23:00.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Usefulness of the freed Thursday evening",
+          "assumption": "The deletion of the Thursday shift creates usable recovery or personal time rather than an awkward unstructured block constrained by preserved commute events.",
+          "evidence_gap": "The rationale describes the evening as freed, but the resulting calendar still includes a hospital-bound commute pattern from 14:30 to 23:30 with no explanation of location, obligations, or intended use of the intervening time.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "proposer_feedback": "Numeric Critic criteria failed. Scores: {\"reasoning\":3,\"coherence\":2,\"alternatives\":2,\"clarity\":4}. Plausibility revision required (moderate): A concrete manageability concern arises because the proposal deletes the Thursday work shift but leaves the Thursday commute-to-hospital and commute-home events intact, then adds dinner during the resulting unexplained interval. This could significantly affect whether the schedule is actually useful or sustainable: the user may end up with a technically free but practically awkward evening structured around unnecessary travel or an unexplained location constraint. The concern is not an objective validation failure, because the commute events are marked fixed and there is no overlap, but the plan's human rationale does not account for the consequences. Suggested direction: Reconsider the Thursday evening organization using the fuller context: either explain why the preserved commutes remain practically meaningful after the shift deletion and how dinner fits around them, or adjust the plan in a way that avoids treating a technically free but commute-bound interval as straightforward recovery or meal time. The Critic lacks the full user constraints; explain if no better feasible option exists. Unverified conditions to reassess: [{'subject': 'Thursday fixed commute events after deleted shift', 'assumption': 'The user still has a practical reason to commute to the hospital at 14:30 and return at 23:00 even though the Thursday hospital shift was deleted.', 'evidence_gap': 'The calendar descriptions define these as journeys between home and hospital, but the associated Thursday work event has been removed and the rationale only says the commutes are fixed, not why they remain useful or manageable.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Thursday 19:00 dinner feasibility', 'assumption': 'The added dinner can realistically occur at 19:00-20:00 despite the user being scheduled to have commuted to the hospital earlier and not scheduled to return home until 23:00.', 'evidence_gap': 'The added dinner has no location or description, while existing commute descriptions imply the user travels from home to the hospital at 14:30 and from the hospital to home at 23:00.', 'potential_impact': 'material', 'verification_source': 'unknown'}, {'subject': 'Usefulness of the freed Thursday evening', 'assumption': 'The deletion of the Thursday shift creates usable recovery or personal time rather than an awkward unstructured block constrained by preserved commute events.', 'evidence_gap': 'The rationale describes the evening as freed, but the resulting calendar still includes a hospital-bound commute pattern from 14:30 to 23:30 with no explanation of location, obligations, or intended use of the intervening time.', 'potential_impact': 'material', 'verification_source': 'user_context'}] Weaknesses: ['The proposal deletes the Thursday hospital shift but preserves the Thursday commute to hospital at 14:30-15:00 and commute home at 23:00-23:30. This creates a long, unexplained 15:00-23:00 hospital-side interval with no work event, while the rationale treats Thursday evening as freed.', 'The added Thursday dinner at 19:00-20:00 is only weakly supported by the resulting calendar. Because the user is still scheduled to commute to the hospital at 14:30 and only commute home at 23:00, the plan does not explain whether dinner is realistically accessible, where it occurs, or whether the preserved commute pattern makes it awkward or impractical.', 'The rationale focuses heavily on authorization and technical protection rules, but does not sufficiently evaluate the human consequence of preserving commute events after deleting the shift they appear to serve.', 'Relevant alternatives were considered mostly from a rule-compliance perspective. The proposal rejects deleting commute events because they are fixed, but does not consider whether the resulting plan should be left without the dinner addition, or whether the freed evening claim needs qualification given the preserved commute structure.', 'The Thursday sequence is internally strained from a practical standpoint: thesis 08:00-10:00, gym 10:00-12:00, supervision 12:00-12:45, lunch 13:00-14:00, commute to hospital 14:30-15:00, then an unexplained afternoon/evening away pattern before sleep immediately after the 23:00-23:30 commute.']. Actionable feedback: The plan is technically valid and the rationale is clear about why the Wednesday night-shift move was not applied. However, the human-quality issue is the Thursday result: deleting the shift while preserving both hospital commutes makes the added dinner and the claim of a freed evening hard to assess as a realistic routine. The proposer should reconsider or better substantiate how Thursday evening is meant to work in practice with the fixed commutes still present. If the commutes truly cannot be removed, the rationale should explain the practical purpose of going to and remaining associated with the hospital-side schedule after the deleted shift, and whether adding dinner at 19:00 still improves the day rather than creating an awkward placeholder plan.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "delete",
+            "event_id": "work_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "The Thursday shift removal is exactly authorized by the supplied exception.",
+            "The requested Wednesday night shift is authorized for work but would overlap protected sleep without a sleep exception.",
+            "Friday's hospital shift is unchanged as requested.",
+            "Fixed Thursday commute events are preserved because no exact exception authorizes changing them.",
+            "Daily thesis duration remains satisfied by existing thesis blocks.",
+            "Commitments involving other people are preserved.",
+            "It is unknown whether the remaining Thursday commute pattern is still practically necessary after the shift removal."
+          ],
+          "priorities": [
+            "Apply the feasible confirmed hospital change without violating protected sleep.",
+            "Avoid adding Thursday evening plans that assume the user is at home or fully free.",
+            "Preserve sleep, thesis time and third-party commitments over optional gym or meal optimization.",
+            "Limit new external or location assumptions where the calendar no longer explains them."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Move the Wednesday shift to the night shift",
+              "rejected_because": "Rejected because it creates an unresolved conflict with protected sleep."
+            },
+            {
+              "option": "Move or delete the protected sleep block",
+              "rejected_because": "Rejected because no exact exception authorizes changing that sleep event."
+            },
+            {
+              "option": "Delete the Thursday commute events",
+              "rejected_because": "Rejected because they are fixed and the supplied exception only covers the work event."
+            },
+            {
+              "option": "Add a Thursday dinner in the preferred window",
+              "rejected_because": "Rejected because the preserved commute pattern makes the location and feasibility uncertain."
+            }
+          ],
+          "summary": "The selected plan removes only the confirmed Thursday shift and avoids adding new Thursday evening activities, accepting an awkward fixed-commute remainder rather than inventing availability or violating protected sleep."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true,
+        "aggregate_checks": [
+          {
+            "id": "thesis_daily_time_2026-11-23",
+            "status": "pass",
+            "minutes": 120.0,
+            "minimum_minutes": 120,
+            "category": "thesis",
+            "evidence": "union of final calendar intervals"
+          },
+          {
+            "id": "thesis_daily_time_2026-11-24",
+            "status": "pass",
+            "minutes": 120.0,
+            "minimum_minutes": 120,
+            "category": "thesis",
+            "evidence": "union of final calendar intervals"
+          },
+          {
+            "id": "thesis_daily_time_2026-11-25",
+            "status": "pass",
+            "minutes": 120.0,
+            "minimum_minutes": 120,
+            "category": "thesis",
+            "evidence": "union of final calendar intervals"
+          },
+          {
+            "id": "thesis_daily_time_2026-11-26",
+            "status": "pass",
+            "minutes": 120.0,
+            "minimum_minutes": 120,
+            "category": "thesis",
+            "evidence": "union of final calendar intervals"
+          },
+          {
+            "id": "thesis_daily_time_2026-11-27",
+            "status": "pass",
+            "minutes": 120.0,
+            "minimum_minutes": 120,
+            "category": "thesis",
+            "evidence": "union of final calendar intervals"
+          }
+        ],
+        "aggregate_validation_version": "duration_total_v1",
+        "confirmed_change_authorizations": [
+          {
+            "event_id": "work_wed",
+            "type": "move",
+            "to_start": "2026-11-25T20:00:00+00:00",
+            "to_end": "2026-11-26T08:00:00+00:00"
+          },
+          {
+            "event_id": "work_thu",
+            "type": "delete",
+            "to_start": null,
+            "to_end": null
+          }
+        ]
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2026-11-22T22:00:00+00:00",
+            "end": "2026-11-23T06:00:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block; the user requires at least eight hours of sleep per day.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_to_work_mon",
+            "title": "Commute to hospital",
+            "start": "2026-11-23T06:30:00+00:00",
+            "end": "2026-11-23T07:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute journey from home to the hospital.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_mon",
+            "title": "Hospital shift",
+            "start": "2026-11-23T07:00:00+00:00",
+            "end": "2026-11-23T15:00:00+00:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Fixed nursing shift at the hospital.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_home_mon",
+            "title": "Commute home",
+            "start": "2026-11-23T15:00:00+00:00",
+            "end": "2026-11-23T15:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute journey from the hospital to home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "thesis_mon",
+            "title": "Master's thesis",
+            "start": "2026-11-23T16:00:00+00:00",
+            "end": "2026-11-23T18:00:00+00:00",
+            "category": "thesis",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Two-hour focused work block dedicated to the master's thesis.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_mon",
+            "title": "Gym session",
+            "start": "2026-11-23T18:00:00+00:00",
+            "end": "2026-11-23T20:00:00+00:00",
+            "category": "gym",
+            "importance": 2,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym session; the gym is next to home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "dinner_mon",
+            "title": "Dinner",
+            "start": "2026-11-23T20:00:00+00:00",
+            "end": "2026-11-23T21:00:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "One-hour dinner at home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2026-11-23T22:00:00+00:00",
+            "end": "2026-11-24T06:00:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block; the user requires at least eight hours of sleep per day.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_to_work_tue",
+            "title": "Commute to hospital",
+            "start": "2026-11-24T06:30:00+00:00",
+            "end": "2026-11-24T07:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute journey from home to the hospital.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_tue",
+            "title": "Hospital shift",
+            "start": "2026-11-24T07:00:00+00:00",
+            "end": "2026-11-24T15:00:00+00:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Fixed nursing shift at the hospital.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_home_tue",
+            "title": "Commute home",
+            "start": "2026-11-24T15:00:00+00:00",
+            "end": "2026-11-24T15:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute journey from the hospital to home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "thesis_tue",
+            "title": "Master's thesis",
+            "start": "2026-11-24T16:00:00+00:00",
+            "end": "2026-11-24T18:00:00+00:00",
+            "category": "thesis",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Two-hour focused work block dedicated to the master's thesis.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_tue",
+            "title": "Gym session",
+            "start": "2026-11-24T18:00:00+00:00",
+            "end": "2026-11-24T20:00:00+00:00",
+            "category": "gym",
+            "importance": 2,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym session; the gym is next to home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "dinner_tue",
+            "title": "Dinner",
+            "start": "2026-11-24T20:00:00+00:00",
+            "end": "2026-11-24T21:00:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "One-hour dinner at home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2026-11-24T22:00:00+00:00",
+            "end": "2026-11-25T06:00:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block; the user requires at least eight hours of sleep per day.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_to_work_wed",
+            "title": "Commute to hospital",
+            "start": "2026-11-25T06:30:00+00:00",
+            "end": "2026-11-25T07:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute journey from home to the hospital.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_wed",
+            "title": "Hospital shift",
+            "start": "2026-11-25T07:00:00+00:00",
+            "end": "2026-11-25T15:00:00+00:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Fixed nursing shift at the hospital.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_home_wed",
+            "title": "Commute home",
+            "start": "2026-11-25T15:00:00+00:00",
+            "end": "2026-11-25T15:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute journey from the hospital to home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "thesis_wed",
+            "title": "Master's thesis",
+            "start": "2026-11-25T16:00:00+00:00",
+            "end": "2026-11-25T18:00:00+00:00",
+            "category": "thesis",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Two-hour focused work block dedicated to the master's thesis.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "dinner_wed",
+            "title": "Dinner with friend",
+            "start": "2026-11-25T18:30:00+00:00",
+            "end": "2026-11-25T19:30:00+00:00",
+            "category": "social",
+            "importance": 3,
+            "fixed": true,
+            "participants": [
+              "user",
+              "friend"
+            ],
+            "description": "Pre-arranged early dinner with a friend; the restaurant is next to home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2026-11-25T23:00:00+00:00",
+            "end": "2026-11-26T07:00:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block; the user requires at least eight hours of sleep per day.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "thesis_thu",
+            "title": "Master's thesis",
+            "start": "2026-11-26T08:00:00+00:00",
+            "end": "2026-11-26T10:00:00+00:00",
+            "category": "thesis",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Two-hour focused work block dedicated to the master's thesis.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_thu",
+            "title": "Gym session",
+            "start": "2026-11-26T10:00:00+00:00",
+            "end": "2026-11-26T12:00:00+00:00",
+            "category": "gym",
+            "importance": 2,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym session; the gym is next to home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "supervisor_thu",
+            "title": "Thesis supervision meeting",
+            "start": "2026-11-26T12:00:00+00:00",
+            "end": "2026-11-26T12:45:00+00:00",
+            "category": "academic",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "supervisor"
+            ],
+            "description": "Video call with the thesis supervisor to review the methodology chapter; the supervisor has no other free slot this week.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_thu",
+            "title": "Lunch",
+            "start": "2026-11-26T13:00:00+00:00",
+            "end": "2026-11-26T14:00:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "One-hour lunch before the afternoon shift.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_to_work_thu",
+            "title": "Commute to hospital",
+            "start": "2026-11-26T14:30:00+00:00",
+            "end": "2026-11-26T15:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute journey from home to the hospital.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_home_thu",
+            "title": "Commute home",
+            "start": "2026-11-26T23:00:00+00:00",
+            "end": "2026-11-26T23:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute journey from the hospital to home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2026-11-26T23:30:00+00:00",
+            "end": "2026-11-27T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block; the user requires at least eight hours of sleep per day.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "thesis_fri",
+            "title": "Master's thesis",
+            "start": "2026-11-27T08:00:00+00:00",
+            "end": "2026-11-27T10:00:00+00:00",
+            "category": "thesis",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Two-hour focused work block dedicated to the master's thesis.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_fri",
+            "title": "Gym session",
+            "start": "2026-11-27T10:00:00+00:00",
+            "end": "2026-11-27T12:00:00+00:00",
+            "category": "gym",
+            "importance": 2,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym session; the gym is next to home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_fri",
+            "title": "Lunch",
+            "start": "2026-11-27T13:00:00+00:00",
+            "end": "2026-11-27T14:00:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "One-hour lunch before the afternoon shift.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_to_work_fri",
+            "title": "Commute to hospital",
+            "start": "2026-11-27T14:30:00+00:00",
+            "end": "2026-11-27T15:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute journey from home to the hospital.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_fri",
+            "title": "Hospital shift",
+            "start": "2026-11-27T15:00:00+00:00",
+            "end": "2026-11-27T23:00:00+00:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Fixed nursing shift at the hospital.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_home_fri",
+            "title": "Commute home",
+            "start": "2026-11-27T23:00:00+00:00",
+            "end": "2026-11-27T23:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute journey from the hospital to home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_after_fri",
+            "title": "Sleep",
+            "start": "2026-11-27T23:30:00+00:00",
+            "end": "2026-11-28T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected eight-hour sleep block after the Friday evening shift.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 3,
+          "alternatives": 4,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The revised proposal addresses the prior dinner-specific concern by removing the added Thursday 19:00-20:00 dinner, but the Thursday commute pattern remains practically unexplained: commute to hospital 14:30-15:00 and commute home 23:00-23:30 persist after the Thursday hospital shift has been deleted.",
+          "Thursday still contains a long, unstructured hospital-side interval from 15:00 to 23:00 with no visible work, appointment, study block, meal, or recovery purpose. This is not an objective conflict, but it limits confidence that the deleted shift actually creates usable rest or personal time.",
+          "The rationale appropriately says the fixed Thursday commutes are preserved because no exact exception authorizes changing them, but it does not substantiate whether the resulting day is practically meaningful for the user. The plan is therefore coherent as a constrained operation, but only partially coherent as a human routine.",
+          "The Thursday daytime sequence remains fairly dense before the unexplained commute: thesis 08:00-10:00, gym 10:00-12:00, thesis supervision 12:00-12:45, lunch 13:00-14:00, then commute at 14:30. This was largely pre-existing, but the removed shift changes the practical meaning of the afternoon and evening.",
+          "Request satisfaction cannot be verified from the supplied materials because the original request is not available, and the technical validation explicitly does not check request satisfaction or soft preference satisfaction."
+        ],
+        "feedback": "The revision materially improves the prior proposal by no longer adding a Thursday dinner into an unexplained hospital-bound interval. The proposer also now acknowledges that the preserved Thursday commute pattern may not be practically necessary after deleting the shift, which is a clearer and more cautious human-quality rationale than treating the evening as straightforwardly free. The main remaining issue is that Thursday is still awkward: the user is scheduled to commute to the hospital at 14:30 and return home at 23:00 even though there is no visible Thursday hospital shift. Because those commute events are fixed and no exception is shown for changing them, this does not by itself require another revision. It should remain an unresolved assumption rather than be treated as a technical failure. With the fuller context, the proposer should continue to avoid adding activities that depend on the user being at home or freely available during that interval unless the purpose and location implications of the preserved commutes are known.",
+        "plausibility_review": {
+          "revision_required": false,
+          "severity": "low",
+          "reason": "The prior material concern has been partly resolved: the unsupported Thursday dinner was removed, and the rationale now explicitly avoids assuming Thursday evening availability while acknowledging the awkward fixed-commute remainder. The remaining commute issue could materially affect how useful the deleted shift is in real life, but the proposal does not worsen it with a new activity and appears constrained by fixed-event protection. There is no objective incompatibility in the visible calendar, and another review would likely only repeat the same uncertainty unless additional authorization or user context is supplied.",
+          "suggested_improvement": "If fuller context is available, explain why the Thursday 14:30-15:00 and 23:00-23:30 hospital commutes remain fixed after the shift deletion, or qualify the benefit of the deleted shift as reduced work time rather than necessarily usable home-based recovery time."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Thursday fixed commute events after deleted shift",
+            "assumption": "The user still has a practical reason or obligation to commute to the hospital at 14:30 and return at 23:00 despite the Thursday hospital shift being deleted.",
+            "evidence_gap": "The final calendar preserves commute_to_work_thu at 14:30-15:00 and commute_home_thu at 23:00-23:30, but the associated work_thu event has been deleted and no remaining Thursday hospital obligation is visible.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Usefulness of the freed Thursday evening",
+            "assumption": "Deleting the Thursday shift creates meaningful recovery, personal, or flexible time rather than an unusable or location-constrained interval between hospital commutes.",
+            "evidence_gap": "The proposal removes the work shift but leaves an unexplained 15:00-23:00 interval between hospital-related commutes, and the rationale states that the practical necessity of the commute pattern is unknown.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Thursday location and availability",
+            "assumption": "The user should not be treated as plainly at home or fully available on Thursday evening after the shift removal.",
+            "evidence_gap": "The calendar descriptions imply travel from home to hospital at 14:30 and from hospital to home at 23:00, but there is no event explaining where the user is or what constraints apply from 15:00 to 23:00.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Original request satisfaction",
+            "assumption": "The retained operations satisfy the user's actual scheduling goal as far as possible under the visible constraints.",
+            "evidence_gap": "The original request is not included, and the technical validation explicitly does not check request satisfaction or soft preference satisfaction.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          }
+        ],
+        "overall": 3.75
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": false,
+        "plausibility_revision_required": false,
+        "accepted": false,
+        "revision_causes": [
+          "numeric_criteria_failed"
+        ]
+      },
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": [
+        {
+          "iteration": 2,
+          "proposal": {
+            "changes": [
+              {
+                "type": "delete",
+                "event_id": "work_thu",
+                "title": null,
+                "from_start": null,
+                "to_start": null,
+                "to_end": null,
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Dinner",
+                "from_start": null,
+                "to_start": "2026-11-26T19:00:00+00:00",
+                "to_end": "2026-11-26T20:00:00+00:00",
+                "category": "meal",
+                "importance": 4,
+                "participants": [
+                  "user"
+                ]
+              }
+            ],
+            "rationale": {
+              "constraints": [
+                "The Thursday shift deletion is exactly authorized by the supplied exception.",
+                "Moving the Wednesday shift as requested would overlap a protected sleep event that has no supplied exception.",
+                "Friday's hospital shift is left unchanged.",
+                "Fixed commute events are not moved or deleted because no exact exception was supplied for them.",
+                "Daily thesis duration remains satisfied by the existing thesis events.",
+                "The dinner with a friend and the thesis supervision meeting are preserved because they involve other people."
+              ],
+              "priorities": [
+                "Apply the feasible confirmed part of the hospital change without violating protected sleep.",
+                "Use the freed Thursday evening for an ordinary dinner within the preferred meal window.",
+                "Preserve daily sleep and thesis time ahead of optional rearrangements.",
+                "Avoid creating changes that depend on unconfirmed external availability."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Move the Wednesday hospital shift to the night shift",
+                  "rejected_because": "Rejected because it would create an unresolved overlap with protected sleep."
+                },
+                {
+                  "option": "Move or delete the protected sleep block",
+                  "rejected_because": "Rejected because no exact exception authorizes changing that sleep event."
+                },
+                {
+                  "option": "Delete the old Thursday commute events",
+                  "rejected_because": "Rejected because they are fixed and no exact exception was supplied for those events."
+                },
+                {
+                  "option": "Move the thesis supervision meeting",
+                  "rejected_because": "Rejected because it involves another person and the calendar says no other slot is available this week."
+                }
+              ],
+              "summary": "The selected plan applies only the feasible confirmed Thursday shift removal and adds a Thursday dinner, while leaving the requested Wednesday night-shift swap unapplied because it would conflict with protected sleep that cannot be changed under the supplied rules."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "sleep_mon",
+                "title": "Sleep",
+                "start": "2026-11-22T22:00:00+00:00",
+                "end": "2026-11-23T06:00:00+00:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block; the user requires at least eight hours of sleep per day.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "commute_to_work_mon",
+                "title": "Commute to hospital",
+                "start": "2026-11-23T06:30:00+00:00",
+                "end": "2026-11-23T07:00:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute journey from home to the hospital.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_mon",
+                "title": "Hospital shift",
+                "start": "2026-11-23T07:00:00+00:00",
+                "end": "2026-11-23T15:00:00+00:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Fixed nursing shift at the hospital.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "commute_home_mon",
+                "title": "Commute home",
+                "start": "2026-11-23T15:00:00+00:00",
+                "end": "2026-11-23T15:30:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute journey from the hospital to home.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "thesis_mon",
+                "title": "Master's thesis",
+                "start": "2026-11-23T16:00:00+00:00",
+                "end": "2026-11-23T18:00:00+00:00",
+                "category": "thesis",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Two-hour focused work block dedicated to the master's thesis.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_mon",
+                "title": "Gym session",
+                "start": "2026-11-23T18:00:00+00:00",
+                "end": "2026-11-23T20:00:00+00:00",
+                "category": "gym",
+                "importance": 2,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Gym session; the gym is next to home.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "dinner_mon",
+                "title": "Dinner",
+                "start": "2026-11-23T20:00:00+00:00",
+                "end": "2026-11-23T21:00:00+00:00",
+                "category": "meal",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "One-hour dinner at home.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_tue",
+                "title": "Sleep",
+                "start": "2026-11-23T22:00:00+00:00",
+                "end": "2026-11-24T06:00:00+00:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block; the user requires at least eight hours of sleep per day.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "commute_to_work_tue",
+                "title": "Commute to hospital",
+                "start": "2026-11-24T06:30:00+00:00",
+                "end": "2026-11-24T07:00:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute journey from home to the hospital.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_tue",
+                "title": "Hospital shift",
+                "start": "2026-11-24T07:00:00+00:00",
+                "end": "2026-11-24T15:00:00+00:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Fixed nursing shift at the hospital.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "commute_home_tue",
+                "title": "Commute home",
+                "start": "2026-11-24T15:00:00+00:00",
+                "end": "2026-11-24T15:30:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute journey from the hospital to home.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "thesis_tue",
+                "title": "Master's thesis",
+                "start": "2026-11-24T16:00:00+00:00",
+                "end": "2026-11-24T18:00:00+00:00",
+                "category": "thesis",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Two-hour focused work block dedicated to the master's thesis.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_tue",
+                "title": "Gym session",
+                "start": "2026-11-24T18:00:00+00:00",
+                "end": "2026-11-24T20:00:00+00:00",
+                "category": "gym",
+                "importance": 2,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Gym session; the gym is next to home.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "dinner_tue",
+                "title": "Dinner",
+                "start": "2026-11-24T20:00:00+00:00",
+                "end": "2026-11-24T21:00:00+00:00",
+                "category": "meal",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "One-hour dinner at home.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_wed",
+                "title": "Sleep",
+                "start": "2026-11-24T22:00:00+00:00",
+                "end": "2026-11-25T06:00:00+00:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block; the user requires at least eight hours of sleep per day.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "commute_to_work_wed",
+                "title": "Commute to hospital",
+                "start": "2026-11-25T06:30:00+00:00",
+                "end": "2026-11-25T07:00:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute journey from home to the hospital.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_wed",
+                "title": "Hospital shift",
+                "start": "2026-11-25T07:00:00+00:00",
+                "end": "2026-11-25T15:00:00+00:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Fixed nursing shift at the hospital.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "commute_home_wed",
+                "title": "Commute home",
+                "start": "2026-11-25T15:00:00+00:00",
+                "end": "2026-11-25T15:30:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute journey from the hospital to home.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "thesis_wed",
+                "title": "Master's thesis",
+                "start": "2026-11-25T16:00:00+00:00",
+                "end": "2026-11-25T18:00:00+00:00",
+                "category": "thesis",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Two-hour focused work block dedicated to the master's thesis.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "dinner_wed",
+                "title": "Dinner with friend",
+                "start": "2026-11-25T18:30:00+00:00",
+                "end": "2026-11-25T19:30:00+00:00",
+                "category": "social",
+                "importance": 3,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "friend"
+                ],
+                "description": "Pre-arranged early dinner with a friend; the restaurant is next to home.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2026-11-25T23:00:00+00:00",
+                "end": "2026-11-26T07:00:00+00:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block; the user requires at least eight hours of sleep per day.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "thesis_thu",
+                "title": "Master's thesis",
+                "start": "2026-11-26T08:00:00+00:00",
+                "end": "2026-11-26T10:00:00+00:00",
+                "category": "thesis",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Two-hour focused work block dedicated to the master's thesis.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_thu",
+                "title": "Gym session",
+                "start": "2026-11-26T10:00:00+00:00",
+                "end": "2026-11-26T12:00:00+00:00",
+                "category": "gym",
+                "importance": 2,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Gym session; the gym is next to home.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "supervisor_thu",
+                "title": "Thesis supervision meeting",
+                "start": "2026-11-26T12:00:00+00:00",
+                "end": "2026-11-26T12:45:00+00:00",
+                "category": "academic",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "supervisor"
+                ],
+                "description": "Video call with the thesis supervisor to review the methodology chapter; the supervisor has no other free slot this week.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "lunch_thu",
+                "title": "Lunch",
+                "start": "2026-11-26T13:00:00+00:00",
+                "end": "2026-11-26T14:00:00+00:00",
+                "category": "meal",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "One-hour lunch before the afternoon shift.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "commute_to_work_thu",
+                "title": "Commute to hospital",
+                "start": "2026-11-26T14:30:00+00:00",
+                "end": "2026-11-26T15:00:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute journey from home to the hospital.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_1",
+                "title": "Dinner",
+                "start": "2026-11-26T19:00:00+00:00",
+                "end": "2026-11-26T20:00:00+00:00",
+                "category": "meal",
+                "importance": 4,
+                "fixed": null,
+                "participants": [
+                  "user"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "commute_home_thu",
+                "title": "Commute home",
+                "start": "2026-11-26T23:00:00+00:00",
+                "end": "2026-11-26T23:30:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute journey from the hospital to home.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_fri",
+                "title": "Sleep",
+                "start": "2026-11-26T23:30:00+00:00",
+                "end": "2026-11-27T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block; the user requires at least eight hours of sleep per day.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "thesis_fri",
+                "title": "Master's thesis",
+                "start": "2026-11-27T08:00:00+00:00",
+                "end": "2026-11-27T10:00:00+00:00",
+                "category": "thesis",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Two-hour focused work block dedicated to the master's thesis.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_fri",
+                "title": "Gym session",
+                "start": "2026-11-27T10:00:00+00:00",
+                "end": "2026-11-27T12:00:00+00:00",
+                "category": "gym",
+                "importance": 2,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Gym session; the gym is next to home.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "lunch_fri",
+                "title": "Lunch",
+                "start": "2026-11-27T13:00:00+00:00",
+                "end": "2026-11-27T14:00:00+00:00",
+                "category": "meal",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "One-hour lunch before the afternoon shift.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "commute_to_work_fri",
+                "title": "Commute to hospital",
+                "start": "2026-11-27T14:30:00+00:00",
+                "end": "2026-11-27T15:00:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute journey from home to the hospital.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_fri",
+                "title": "Hospital shift",
+                "start": "2026-11-27T15:00:00+00:00",
+                "end": "2026-11-27T23:00:00+00:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Fixed nursing shift at the hospital.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "commute_home_fri",
+                "title": "Commute home",
+                "start": "2026-11-27T23:00:00+00:00",
+                "end": "2026-11-27T23:30:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute journey from the hospital to home.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_after_fri",
+                "title": "Sleep",
+                "start": "2026-11-27T23:30:00+00:00",
+                "end": "2026-11-28T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected eight-hour sleep block after the Friday evening shift.",
+                "origin": "existing",
+                "change_status": "preserved"
+              }
+            ],
+            "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+          },
+          "plausibility_review": {
+            "revision_required": true,
+            "severity": "moderate",
+            "reason": "A concrete manageability concern arises because the proposal deletes the Thursday work shift but leaves the Thursday commute-to-hospital and commute-home events intact, then adds dinner during the resulting unexplained interval. This could significantly affect whether the schedule is actually useful or sustainable: the user may end up with a technically free but practically awkward evening structured around unnecessary travel or an unexplained location constraint. The concern is not an objective validation failure, because the commute events are marked fixed and there is no overlap, but the plan's human rationale does not account for the consequences.",
+            "suggested_improvement": "Reconsider the Thursday evening organization using the fuller context: either explain why the preserved commutes remain practically meaningful after the shift deletion and how dinner fits around them, or adjust the plan in a way that avoids treating a technically free but commute-bound interval as straightforward recovery or meal time."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Thursday fixed commute events after deleted shift",
+              "assumption": "The user still has a practical reason to commute to the hospital at 14:30 and return at 23:00 even though the Thursday hospital shift was deleted.",
+              "evidence_gap": "The calendar descriptions define these as journeys between home and hospital, but the associated Thursday work event has been removed and the rationale only says the commutes are fixed, not why they remain useful or manageable.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Thursday 19:00 dinner feasibility",
+              "assumption": "The added dinner can realistically occur at 19:00-20:00 despite the user being scheduled to have commuted to the hospital earlier and not scheduled to return home until 23:00.",
+              "evidence_gap": "The added dinner has no location or description, while existing commute descriptions imply the user travels from home to the hospital at 14:30 and from the hospital to home at 23:00.",
+              "potential_impact": "material",
+              "verification_source": "unknown"
+            },
+            {
+              "subject": "Usefulness of the freed Thursday evening",
+              "assumption": "The deletion of the Thursday shift creates usable recovery or personal time rather than an awkward unstructured block constrained by preserved commute events.",
+              "evidence_gap": "The rationale describes the evening as freed, but the resulting calendar still includes a hospital-bound commute pattern from 14:30 to 23:30 with no explanation of location, obligations, or intended use of the intervening time.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            }
+          ],
+          "weaknesses": [
+            "The proposal deletes the Thursday hospital shift but preserves the Thursday commute to hospital at 14:30-15:00 and commute home at 23:00-23:30. This creates a long, unexplained 15:00-23:00 hospital-side interval with no work event, while the rationale treats Thursday evening as freed.",
+            "The added Thursday dinner at 19:00-20:00 is only weakly supported by the resulting calendar. Because the user is still scheduled to commute to the hospital at 14:30 and only commute home at 23:00, the plan does not explain whether dinner is realistically accessible, where it occurs, or whether the preserved commute pattern makes it awkward or impractical.",
+            "The rationale focuses heavily on authorization and technical protection rules, but does not sufficiently evaluate the human consequence of preserving commute events after deleting the shift they appear to serve.",
+            "Relevant alternatives were considered mostly from a rule-compliance perspective. The proposal rejects deleting commute events because they are fixed, but does not consider whether the resulting plan should be left without the dinner addition, or whether the freed evening claim needs qualification given the preserved commute structure.",
+            "The Thursday sequence is internally strained from a practical standpoint: thesis 08:00-10:00, gym 10:00-12:00, supervision 12:00-12:45, lunch 13:00-14:00, commute to hospital 14:30-15:00, then an unexplained afternoon/evening away pattern before sleep immediately after the 23:00-23:30 commute."
+          ],
+          "feedback": "The plan is technically valid and the rationale is clear about why the Wednesday night-shift move was not applied. However, the human-quality issue is the Thursday result: deleting the shift while preserving both hospital commutes makes the added dinner and the claim of a freed evening hard to assess as a realistic routine. The proposer should reconsider or better substantiate how Thursday evening is meant to work in practice with the fixed commutes still present. If the commutes truly cannot be removed, the rationale should explain the practical purpose of going to and remaining associated with the hospital-side schedule after the deleted shift, and whether adding dinner at 19:00 still improves the day rather than creating an awkward placeholder plan."
+        }
+      ],
+      "unresolved_assumptions": [
+        {
+          "subject": "Thursday fixed commute events after deleted shift",
+          "assumption": "The user still has a practical reason or obligation to commute to the hospital at 14:30 and return at 23:00 despite the Thursday hospital shift being deleted.",
+          "evidence_gap": "The final calendar preserves commute_to_work_thu at 14:30-15:00 and commute_home_thu at 23:00-23:30, but the associated work_thu event has been deleted and no remaining Thursday hospital obligation is visible.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Usefulness of the freed Thursday evening",
+          "assumption": "Deleting the Thursday shift creates meaningful recovery, personal, or flexible time rather than an unusable or location-constrained interval between hospital commutes.",
+          "evidence_gap": "The proposal removes the work shift but leaves an unexplained 15:00-23:00 interval between hospital-related commutes, and the rationale states that the practical necessity of the commute pattern is unknown.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Thursday location and availability",
+          "assumption": "The user should not be treated as plainly at home or fully available on Thursday evening after the shift removal.",
+          "evidence_gap": "The calendar descriptions imply travel from home to hospital at 14:30 and from hospital to home at 23:00, but there is no event explaining where the user is or what constraints apply from 15:00 to 23:00.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Original request satisfaction",
+          "assumption": "The retained operations satisfy the user's actual scheduling goal as far as possible under the visible constraints.",
+          "evidence_gap": "The original request is not included, and the technical validation explicitly does not check request satisfaction or soft preference satisfaction.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    }
+  ],
+  "initial_proposal": {
+    "changes": [
+      {
+        "type": "move",
+        "event_id": "work_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-11-25T20:00:00+00:00",
+        "to_end": "2026-11-26T08:00:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "work_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Commute to hospital",
+        "from_start": null,
+        "to_start": "2026-11-25T19:30:00+00:00",
+        "to_end": "2026-11-25T20:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Commute home",
+        "from_start": null,
+        "to_start": "2026-11-26T08:00:00+00:00",
+        "to_end": "2026-11-26T08:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Sleep",
+        "from_start": null,
+        "to_start": "2026-11-26T08:30:00+00:00",
+        "to_end": "2026-11-26T12:00:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Sleep",
+        "from_start": null,
+        "to_start": "2026-11-26T15:00:00+00:00",
+        "to_end": "2026-11-26T19:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "move",
+        "event_id": "thesis_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-11-26T19:30:00+00:00",
+        "to_end": "2026-11-26T21:30:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Dinner",
+        "from_start": null,
+        "to_start": "2026-11-26T21:30:00+00:00",
+        "to_end": "2026-11-26T22:30:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "move",
+        "event_id": "gym_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-11-28T08:00:00+00:00",
+        "to_end": "2026-11-28T10:00:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "Only the supplied exceptions authorize moving the Wednesday work shift and deleting the Thursday work shift.",
+        "Friday's hospital shift is left unchanged.",
+        "Protected sleep and fixed commute events without exact exceptions are not moved or deleted, even where the swap makes them operationally awkward.",
+        "The added Thursday recovery sleep is split to preserve the supervision meeting, lunch, and remaining fixed commute events.",
+        "The Thursday thesis block is kept on Thursday so the daily two-hour thesis requirement remains satisfied.",
+        "The dinner with a friend and the thesis supervision meeting are preserved because they involve other people.",
+        "The new night-shift commutes use the existing 30-minute hospital commute pattern; exact logistics after dinner remain uncertain."
+      ],
+      "priorities": [
+        "Apply the externally confirmed hospital swap.",
+        "Protect eight hours of scheduled sleep around the night shift as far as operationally feasible.",
+        "Preserve daily thesis time before lower-priority gym training.",
+        "Keep commitments involving other people unchanged.",
+        "Use the freed Thursday evening for thesis and recovery rather than extra optional activities."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Move the thesis supervision meeting",
+          "rejected_because": "Rejected because it involves the supervisor and the calendar says no other slot is available this week."
+        },
+        {
+          "option": "Keep the Thursday gym session in its original slot",
+          "rejected_because": "Rejected because it would conflict with needed recovery sleep after the night shift."
+        },
+        {
+          "option": "Use one continuous daytime sleep block on Thursday",
+          "rejected_because": "Rejected because it would collide with the supervision meeting, lunch, or fixed commute events."
+        },
+        {
+          "option": "Remove the old Thursday commute events",
+          "rejected_because": "Rejected because they are fixed and no exact exception was supplied for those events."
+        }
+      ],
+      "summary": "The plan applies the confirmed work swap, adds night-shift commutes and split Thursday recovery sleep, keeps other-person commitments, and moves only flexible thesis and gym time; the main trade-off is accepting split sleep and leaving some fixed legacy commute/protected events untouched because no exact exception authorizes changing them."
+    }
+  },
+  "final_proposal": {
+    "changes": [
+      {
+        "type": "delete",
+        "event_id": "work_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "The Thursday shift removal is exactly authorized by the supplied exception.",
+        "The requested Wednesday night shift is authorized for work but would overlap protected sleep without a sleep exception.",
+        "Friday's hospital shift is unchanged as requested.",
+        "Fixed Thursday commute events are preserved because no exact exception authorizes changing them.",
+        "Daily thesis duration remains satisfied by existing thesis blocks.",
+        "Commitments involving other people are preserved.",
+        "It is unknown whether the remaining Thursday commute pattern is still practically necessary after the shift removal."
+      ],
+      "priorities": [
+        "Apply the feasible confirmed hospital change without violating protected sleep.",
+        "Avoid adding Thursday evening plans that assume the user is at home or fully free.",
+        "Preserve sleep, thesis time and third-party commitments over optional gym or meal optimization.",
+        "Limit new external or location assumptions where the calendar no longer explains them."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Move the Wednesday shift to the night shift",
+          "rejected_because": "Rejected because it creates an unresolved conflict with protected sleep."
+        },
+        {
+          "option": "Move or delete the protected sleep block",
+          "rejected_because": "Rejected because no exact exception authorizes changing that sleep event."
+        },
+        {
+          "option": "Delete the Thursday commute events",
+          "rejected_because": "Rejected because they are fixed and the supplied exception only covers the work event."
+        },
+        {
+          "option": "Add a Thursday dinner in the preferred window",
+          "rejected_because": "Rejected because the preserved commute pattern makes the location and feasibility uncertain."
+        }
+      ],
+      "summary": "The selected plan removes only the confirmed Thursday shift and avoids adding new Thursday evening activities, accepting an awkward fixed-commute remainder rather than inventing availability or violating protected sleep."
+    }
+  },
+  "final_score": 3.75,
+  "refinements": 3,
+  "critic_accepted": false,
+  "decision": "defer",
+  "reasons": [
+    "numeric_criteria_failed"
+  ],
+  "status": "deferred_critic_threshold",
+  "critic_input_version": "final_calendar_v1",
+  "critic_policy_version": "uncertainty_review_v2",
+  "result_calendar_version": "validated_added_metadata_v2",
+  "final_result_calendar": {
+    "timezone": "Europe/Lisbon",
+    "coverage": "all_events_in_scenario_after_simulation",
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2026-11-22T22:00:00+00:00",
+        "end": "2026-11-23T06:00:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block; the user requires at least eight hours of sleep per day.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "commute_to_work_mon",
+        "title": "Commute to hospital",
+        "start": "2026-11-23T06:30:00+00:00",
+        "end": "2026-11-23T07:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute journey from home to the hospital.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_mon",
+        "title": "Hospital shift",
+        "start": "2026-11-23T07:00:00+00:00",
+        "end": "2026-11-23T15:00:00+00:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Fixed nursing shift at the hospital.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "commute_home_mon",
+        "title": "Commute home",
+        "start": "2026-11-23T15:00:00+00:00",
+        "end": "2026-11-23T15:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute journey from the hospital to home.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "thesis_mon",
+        "title": "Master's thesis",
+        "start": "2026-11-23T16:00:00+00:00",
+        "end": "2026-11-23T18:00:00+00:00",
+        "category": "thesis",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Two-hour focused work block dedicated to the master's thesis.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_mon",
+        "title": "Gym session",
+        "start": "2026-11-23T18:00:00+00:00",
+        "end": "2026-11-23T20:00:00+00:00",
+        "category": "gym",
+        "importance": 2,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym session; the gym is next to home.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "dinner_mon",
+        "title": "Dinner",
+        "start": "2026-11-23T20:00:00+00:00",
+        "end": "2026-11-23T21:00:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "One-hour dinner at home.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2026-11-23T22:00:00+00:00",
+        "end": "2026-11-24T06:00:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block; the user requires at least eight hours of sleep per day.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "commute_to_work_tue",
+        "title": "Commute to hospital",
+        "start": "2026-11-24T06:30:00+00:00",
+        "end": "2026-11-24T07:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute journey from home to the hospital.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_tue",
+        "title": "Hospital shift",
+        "start": "2026-11-24T07:00:00+00:00",
+        "end": "2026-11-24T15:00:00+00:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Fixed nursing shift at the hospital.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "commute_home_tue",
+        "title": "Commute home",
+        "start": "2026-11-24T15:00:00+00:00",
+        "end": "2026-11-24T15:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute journey from the hospital to home.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "thesis_tue",
+        "title": "Master's thesis",
+        "start": "2026-11-24T16:00:00+00:00",
+        "end": "2026-11-24T18:00:00+00:00",
+        "category": "thesis",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Two-hour focused work block dedicated to the master's thesis.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_tue",
+        "title": "Gym session",
+        "start": "2026-11-24T18:00:00+00:00",
+        "end": "2026-11-24T20:00:00+00:00",
+        "category": "gym",
+        "importance": 2,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym session; the gym is next to home.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "dinner_tue",
+        "title": "Dinner",
+        "start": "2026-11-24T20:00:00+00:00",
+        "end": "2026-11-24T21:00:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "One-hour dinner at home.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2026-11-24T22:00:00+00:00",
+        "end": "2026-11-25T06:00:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block; the user requires at least eight hours of sleep per day.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "commute_to_work_wed",
+        "title": "Commute to hospital",
+        "start": "2026-11-25T06:30:00+00:00",
+        "end": "2026-11-25T07:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute journey from home to the hospital.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_wed",
+        "title": "Hospital shift",
+        "start": "2026-11-25T07:00:00+00:00",
+        "end": "2026-11-25T15:00:00+00:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Fixed nursing shift at the hospital.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "commute_home_wed",
+        "title": "Commute home",
+        "start": "2026-11-25T15:00:00+00:00",
+        "end": "2026-11-25T15:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute journey from the hospital to home.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "thesis_wed",
+        "title": "Master's thesis",
+        "start": "2026-11-25T16:00:00+00:00",
+        "end": "2026-11-25T18:00:00+00:00",
+        "category": "thesis",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Two-hour focused work block dedicated to the master's thesis.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "dinner_wed",
+        "title": "Dinner with friend",
+        "start": "2026-11-25T18:30:00+00:00",
+        "end": "2026-11-25T19:30:00+00:00",
+        "category": "social",
+        "importance": 3,
+        "fixed": true,
+        "participants": [
+          "user",
+          "friend"
+        ],
+        "description": "Pre-arranged early dinner with a friend; the restaurant is next to home.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2026-11-25T23:00:00+00:00",
+        "end": "2026-11-26T07:00:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block; the user requires at least eight hours of sleep per day.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "thesis_thu",
+        "title": "Master's thesis",
+        "start": "2026-11-26T08:00:00+00:00",
+        "end": "2026-11-26T10:00:00+00:00",
+        "category": "thesis",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Two-hour focused work block dedicated to the master's thesis.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_thu",
+        "title": "Gym session",
+        "start": "2026-11-26T10:00:00+00:00",
+        "end": "2026-11-26T12:00:00+00:00",
+        "category": "gym",
+        "importance": 2,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym session; the gym is next to home.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "supervisor_thu",
+        "title": "Thesis supervision meeting",
+        "start": "2026-11-26T12:00:00+00:00",
+        "end": "2026-11-26T12:45:00+00:00",
+        "category": "academic",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "supervisor"
+        ],
+        "description": "Video call with the thesis supervisor to review the methodology chapter; the supervisor has no other free slot this week.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "lunch_thu",
+        "title": "Lunch",
+        "start": "2026-11-26T13:00:00+00:00",
+        "end": "2026-11-26T14:00:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "One-hour lunch before the afternoon shift.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "commute_to_work_thu",
+        "title": "Commute to hospital",
+        "start": "2026-11-26T14:30:00+00:00",
+        "end": "2026-11-26T15:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute journey from home to the hospital.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "commute_home_thu",
+        "title": "Commute home",
+        "start": "2026-11-26T23:00:00+00:00",
+        "end": "2026-11-26T23:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute journey from the hospital to home.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2026-11-26T23:30:00+00:00",
+        "end": "2026-11-27T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block; the user requires at least eight hours of sleep per day.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "thesis_fri",
+        "title": "Master's thesis",
+        "start": "2026-11-27T08:00:00+00:00",
+        "end": "2026-11-27T10:00:00+00:00",
+        "category": "thesis",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Two-hour focused work block dedicated to the master's thesis.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_fri",
+        "title": "Gym session",
+        "start": "2026-11-27T10:00:00+00:00",
+        "end": "2026-11-27T12:00:00+00:00",
+        "category": "gym",
+        "importance": 2,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym session; the gym is next to home.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "lunch_fri",
+        "title": "Lunch",
+        "start": "2026-11-27T13:00:00+00:00",
+        "end": "2026-11-27T14:00:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "One-hour lunch before the afternoon shift.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "commute_to_work_fri",
+        "title": "Commute to hospital",
+        "start": "2026-11-27T14:30:00+00:00",
+        "end": "2026-11-27T15:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute journey from home to the hospital.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_fri",
+        "title": "Hospital shift",
+        "start": "2026-11-27T15:00:00+00:00",
+        "end": "2026-11-27T23:00:00+00:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Fixed nursing shift at the hospital.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "commute_home_fri",
+        "title": "Commute home",
+        "start": "2026-11-27T23:00:00+00:00",
+        "end": "2026-11-27T23:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute journey from the hospital to home.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_after_fri",
+        "title": "Sleep",
+        "start": "2026-11-27T23:30:00+00:00",
+        "end": "2026-11-28T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected eight-hour sleep block after the Friday evening shift.",
+        "origin": "existing",
+        "change_status": "preserved"
+      }
+    ],
+    "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+  },
+  "final_unresolved_assumptions": [
+    {
+      "subject": "Thursday fixed commute events after deleted shift",
+      "assumption": "The user still has a practical reason or obligation to commute to the hospital at 14:30 and return at 23:00 despite the Thursday hospital shift being deleted.",
+      "evidence_gap": "The final calendar preserves commute_to_work_thu at 14:30-15:00 and commute_home_thu at 23:00-23:30, but the associated work_thu event has been deleted and no remaining Thursday hospital obligation is visible.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Usefulness of the freed Thursday evening",
+      "assumption": "Deleting the Thursday shift creates meaningful recovery, personal, or flexible time rather than an unusable or location-constrained interval between hospital commutes.",
+      "evidence_gap": "The proposal removes the work shift but leaves an unexplained 15:00-23:00 interval between hospital-related commutes, and the rationale states that the practical necessity of the commute pattern is unknown.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Thursday location and availability",
+      "assumption": "The user should not be treated as plainly at home or fully available on Thursday evening after the shift removal.",
+      "evidence_gap": "The calendar descriptions imply travel from home to hospital at 14:30 and from hospital to home at 23:00, but there is no event explaining where the user is or what constraints apply from 15:00 to 23:00.",
+      "potential_impact": "material",
+      "verification_source": "unknown"
+    },
+    {
+      "subject": "Original request satisfaction",
+      "assumption": "The retained operations satisfy the user's actual scheduling goal as far as possible under the visible constraints.",
+      "evidence_gap": "The original request is not included, and the technical validation explicitly does not check request satisfaction or soft preference satisfaction.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    }
+  ],
+  "uncertainty_history": [
+    {
+      "iteration": 2,
+      "unresolved_assumptions": [
+        {
+          "subject": "Thursday fixed commute events after deleted shift",
+          "assumption": "The user still has a practical reason to commute to the hospital at 14:30 and return at 23:00 even though the Thursday hospital shift was deleted.",
+          "evidence_gap": "The calendar descriptions define these as journeys between home and hospital, but the associated Thursday work event has been removed and the rationale only says the commutes are fixed, not why they remain useful or manageable.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Thursday 19:00 dinner feasibility",
+          "assumption": "The added dinner can realistically occur at 19:00-20:00 despite the user being scheduled to have commuted to the hospital earlier and not scheduled to return home until 23:00.",
+          "evidence_gap": "The added dinner has no location or description, while existing commute descriptions imply the user travels from home to the hospital at 14:30 and from the hospital to home at 23:00.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Usefulness of the freed Thursday evening",
+          "assumption": "The deletion of the Thursday shift creates usable recovery or personal time rather than an awkward unstructured block constrained by preserved commute events.",
+          "evidence_gap": "The rationale describes the evening as freed, but the resulting calendar still includes a hospital-bound commute pattern from 14:30 to 23:30 with no explanation of location, obligations, or intended use of the intervening time.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    },
+    {
+      "iteration": 3,
+      "unresolved_assumptions": [
+        {
+          "subject": "Thursday fixed commute events after deleted shift",
+          "assumption": "The user still has a practical reason or obligation to commute to the hospital at 14:30 and return at 23:00 despite the Thursday hospital shift being deleted.",
+          "evidence_gap": "The final calendar preserves commute_to_work_thu at 14:30-15:00 and commute_home_thu at 23:00-23:30, but the associated work_thu event has been deleted and no remaining Thursday hospital obligation is visible.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Usefulness of the freed Thursday evening",
+          "assumption": "Deleting the Thursday shift creates meaningful recovery, personal, or flexible time rather than an unusable or location-constrained interval between hospital commutes.",
+          "evidence_gap": "The proposal removes the work shift but leaves an unexplained 15:00-23:00 interval between hospital-related commutes, and the rationale states that the practical necessity of the commute pattern is unknown.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Thursday location and availability",
+          "assumption": "The user should not be treated as plainly at home or fully available on Thursday evening after the shift removal.",
+          "evidence_gap": "The calendar descriptions imply travel from home to hospital at 14:30 and from hospital to home at 23:00, but there is no event explaining where the user is or what constraints apply from 15:00 to 23:00.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Original request satisfaction",
+          "assumption": "The retained operations satisfy the user's actual scheduling goal as far as possible under the visible constraints.",
+          "evidence_gap": "The original request is not included, and the technical validation explicitly does not check request satisfaction or soft preference satisfaction.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    }
+  ],
+  "unresolved_critic_weaknesses": [
+    "The revised proposal addresses the prior dinner-specific concern by removing the added Thursday 19:00-20:00 dinner, but the Thursday commute pattern remains practically unexplained: commute to hospital 14:30-15:00 and commute home 23:00-23:30 persist after the Thursday hospital shift has been deleted.",
+    "Thursday still contains a long, unstructured hospital-side interval from 15:00 to 23:00 with no visible work, appointment, study block, meal, or recovery purpose. This is not an objective conflict, but it limits confidence that the deleted shift actually creates usable rest or personal time.",
+    "The rationale appropriately says the fixed Thursday commutes are preserved because no exact exception authorizes changing them, but it does not substantiate whether the resulting day is practically meaningful for the user. The plan is therefore coherent as a constrained operation, but only partially coherent as a human routine.",
+    "The Thursday daytime sequence remains fairly dense before the unexplained commute: thesis 08:00-10:00, gym 10:00-12:00, thesis supervision 12:00-12:45, lunch 13:00-14:00, then commute at 14:30. This was largely pre-existing, but the removed shift changes the practical meaning of the afternoon and evening.",
+    "Request satisfaction cannot be verified from the supplied materials because the original request is not available, and the technical validation explicitly does not check request satisfaction or soft preference satisfaction."
+  ],
+  "unresolved_plausibility_review": null,
+  "schema_version": "2.0",
+  "profile_id": "nurse_masters_02__nurse_shift_worker_masters_night_shift_swap_001",
+  "scenario_sha256": "52fe56bcf186bef44b2552a251907add5219997253ee6b1964123748e4b632fd",
+  "aggregate_requirements_sha256": "d677bb63b83ab69155cea0d1559c36cf432d62c78ab140aa70a31610fa58f7e1",
+  "confirmed_changes_sha256": "ff47470ee665415d43d3c677ada45f69bd0172a9f9ac4ce20729f4189d8e2d0c",
+  "simulator_version": "calendar_v2_validated_added_metadata_v2",
+  "dataset_manifest_sha256": "28af38846fb8995651d5f63ab63402e36147dc0915a2bfcd5379747ea531ffad",
+  "split": "train",
+  "run_id": "ebc24379f5bc4b5089501a15ce7d3fc6",
+  "experiment_id": null,
+  "repeat_index": 0,
+  "generated_at": "2026-11-24T10:50:09.759010+00:00",
+  "prompt_versions": {
+    "proposer_sha256": "ae6fa59cccb86c31f34f66d07d241660b1feadf852ebf1b594bc85addab86985",
+    "proposer_wire_schema_version": "compact_proposal_v1",
+    "proposer_wire_schema_sha256": "f504fbcd7e939c43e055e2f188feb22097a284bcd9b043227d868e559547b865",
+    "proposer_revision_sha256": "3f0fe7f221013700694a22984560612013e9804072ffde4538e1329b9708ac95",
+    "critic_sha256": "1686688cdd4bc63abb12e6633ef9dbb9b62d69b69aba1c4805a201657cc5bb34"
+  },
+  "seconds": 172.549,
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [],
+    "valid": true,
+    "aggregate_checks": [
+      {
+        "id": "thesis_daily_time_2026-11-23",
+        "status": "pass",
+        "minutes": 120.0,
+        "minimum_minutes": 120,
+        "category": "thesis",
+        "evidence": "union of final calendar intervals"
+      },
+      {
+        "id": "thesis_daily_time_2026-11-24",
+        "status": "pass",
+        "minutes": 120.0,
+        "minimum_minutes": 120,
+        "category": "thesis",
+        "evidence": "union of final calendar intervals"
+      },
+      {
+        "id": "thesis_daily_time_2026-11-25",
+        "status": "pass",
+        "minutes": 120.0,
+        "minimum_minutes": 120,
+        "category": "thesis",
+        "evidence": "union of final calendar intervals"
+      },
+      {
+        "id": "thesis_daily_time_2026-11-26",
+        "status": "pass",
+        "minutes": 120.0,
+        "minimum_minutes": 120,
+        "category": "thesis",
+        "evidence": "union of final calendar intervals"
+      },
+      {
+        "id": "thesis_daily_time_2026-11-27",
+        "status": "pass",
+        "minutes": 120.0,
+        "minimum_minutes": 120,
+        "category": "thesis",
+        "evidence": "union of final calendar intervals"
+      }
+    ],
+    "aggregate_validation_version": "duration_total_v1",
+    "confirmed_change_authorizations": [
+      {
+        "event_id": "work_wed",
+        "type": "move",
+        "to_start": "2026-11-25T20:00:00+00:00",
+        "to_end": "2026-11-26T08:00:00+00:00"
+      },
+      {
+        "event_id": "work_thu",
+        "type": "delete",
+        "to_start": null,
+        "to_end": null
+      }
+    ]
+  }
+}

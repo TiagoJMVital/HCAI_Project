@@ -1,0 +1,2667 @@
+{
+  "proposal_id": "v2p_98f5db99dee5d8507cb55165",
+  "scenario_id": "freelancer_flexible_workshop_client_launch_001",
+  "family_id": "freelancer_schedule_conflict",
+  "profile_id": "freelancer_flexible_01__freelancer_flexible_workshop_client_launch_001",
+  "split": "train",
+  "run_id": "d5e49b2b7d8348bfadc9f9e0e46dae5f",
+  "configuration": "B",
+  "generated_at": "2026-11-24T10:26:16.756152+00:00",
+  "proposer_provider": "iaedu",
+  "proposer_model": "GPT-5.5",
+  "proposer_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_provider": "iaedu",
+  "critic_model": "GPT-5.5",
+  "critic_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "prompt_versions": {
+    "proposer_sha256": "ae6fa59cccb86c31f34f66d07d241660b1feadf852ebf1b594bc85addab86985",
+    "proposer_wire_schema_version": "compact_proposal_v1",
+    "proposer_wire_schema_sha256": "f504fbcd7e939c43e055e2f188feb22097a284bcd9b043227d868e559547b865",
+    "proposer_revision_sha256": "3f0fe7f221013700694a22984560612013e9804072ffde4538e1329b9708ac95",
+    "critic_sha256": "1686688cdd4bc63abb12e6633ef9dbb9b62d69b69aba1c4805a201657cc5bb34"
+  },
+  "critic_settings": {
+    "threshold": 4.0,
+    "max_refinements": 3,
+    "min_dimension_score": 1
+  },
+  "experiment_id": null,
+  "repeat_index": 0,
+  "seconds": 128.805,
+  "critic_score": 4.0,
+  "critic_accepted": true,
+  "iterations": [
+    {
+      "index": 0,
+      "proposer_feedback": null,
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [],
+        "rationale": {
+          "constraints": [
+            "Workshop events are fixed/protected by category and already occupy Tuesday and Wednesday 09:30 to 17:30.",
+            "No client work is scheduled on Tuesday or Wednesday.",
+            "Protected sleep blocks remain untouched.",
+            "Morning gym sessions on Monday, Thursday and Friday remain untouched.",
+            "Existing work blocks total 26 hours within the required week."
+          ],
+          "priorities": [
+            "Keep health routines and sleep protected while meeting the client design target.",
+            "Use Monday, Thursday and Friday only for client design work as requested.",
+            "Avoid unnecessary disruption because the current calendar already satisfies the duration requirement."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Extend Monday or Thursday work instead of using Friday 10 hours.",
+              "rejected_because": "Rejected because it would create a larger change without improving compliance with the 26-hour target."
+            },
+            {
+              "option": "Move gym sessions to create earlier work starts.",
+              "rejected_because": "Rejected because the request specifically protects morning gym routines."
+            }
+          ],
+          "summary": "The selected plan makes no changes because the current calendar already allocates 26 hours of client design work across Monday, Thursday and Friday while preserving workshop days, sleep and morning gym routines."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [
+          "no changes proposed; request satisfaction requires Critic and human review"
+        ],
+        "valid": true,
+        "aggregate_checks": [
+          {
+            "id": "weekly_hours",
+            "status": "pass",
+            "minutes": 1560.0,
+            "minimum_minutes": 1560,
+            "category": "work",
+            "evidence": "union of final calendar intervals"
+          }
+        ],
+        "aggregate_validation_version": "duration_total_v1",
+        "no_op": true
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-02-21T23:30:00+00:00",
+            "end": "2027-02-22T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_mon",
+            "title": "Gym Workout",
+            "start": "2027-02-22T08:00:00+00:00",
+            "end": "2027-02-22T09:30:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_mon",
+            "title": "Design Work Block",
+            "start": "2027-02-22T10:30:00+00:00",
+            "end": "2027-02-22T18:30:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "8 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-02-22T23:30:00+00:00",
+            "end": "2027-02-23T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "workshop_tue",
+            "title": "Professional UI/UX Workshop - Day 1",
+            "start": "2027-02-23T09:30:00+00:00",
+            "end": "2027-02-23T17:30:00+00:00",
+            "category": "exam",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "instructors"
+            ],
+            "description": "Fixed workshop downtown.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-02-23T23:30:00+00:00",
+            "end": "2027-02-24T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "workshop_wed",
+            "title": "Professional UI/UX Workshop - Day 2",
+            "start": "2027-02-24T09:30:00+00:00",
+            "end": "2027-02-24T17:30:00+00:00",
+            "category": "exam",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "instructors"
+            ],
+            "description": "Fixed workshop downtown.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-02-24T23:30:00+00:00",
+            "end": "2027-02-25T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_thu",
+            "title": "Gym Workout",
+            "start": "2027-02-25T08:00:00+00:00",
+            "end": "2027-02-25T09:30:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_thu",
+            "title": "Design Work Block",
+            "start": "2027-02-25T10:30:00+00:00",
+            "end": "2027-02-25T18:30:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "8 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-02-25T23:30:00+00:00",
+            "end": "2027-02-26T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_fri",
+            "title": "Gym Workout",
+            "start": "2027-02-26T08:00:00+00:00",
+            "end": "2027-02-26T09:30:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_fri",
+            "title": "Design Work Block",
+            "start": "2027-02-26T10:30:00+00:00",
+            "end": "2027-02-26T20:30:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "10 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 3,
+          "coherence": 3,
+          "alternatives": 2,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The rationale relies heavily on the fact that the calendar already reaches 26 hours of work, but it does not adequately assess whether the existing distribution is manageable: Monday 10:30-18:30, Thursday 10:30-18:30, and especially Friday 10:30-20:30 after a 08:00-09:30 gym session.",
+          "The visible week contains a sustained demanding sequence: Monday gym plus 8 hours design work, Tuesday and Wednesday 09:30-17:30 fixed workshops, Thursday gym plus 8 hours design work, and Friday gym plus 10 hours design work. The no-change rationale does not address cumulative fatigue or recovery across these five consecutive days.",
+          "Friday’s 10-hour design block ending at 20:30 is treated as acceptable because it is existing and technically conflict-free, but the rationale does not discuss food, breaks, cognitive load, or whether a 10-hour creative/design workday after morning exercise is realistically sustainable.",
+          "The alternatives considered are narrow. The proposal rejects extending Monday or Thursday only because it would be a larger change and would not improve numeric compliance, but it does not weigh whether a less concentrated Friday workload could improve human manageability despite involving some disruption.",
+          "Because the original request is not visible, satisfaction of the user’s actual intent cannot be verified beyond the stated proposal goals and the technical weekly-hours check."
+        ],
+        "feedback": "The no-change decision is technically coherent with the visible target of 26 hours and preserves fixed workshops, sleep, and gym sessions. However, as a human-centered schedule, the calendar is only partially substantiated. The main concern is not that the events overlap, but that the preserved arrangement creates a very dense week with limited visible recovery: two 8-hour workdays around two full workshop days, followed by a 10-hour Friday work block after gym. The proposal should either provide a grounded reason why the existing Friday concentration is acceptable in the fuller context, or reconsider whether the same 26-hour target could be distributed in a way that reduces end-of-week load without undermining protected sleep, gym, and workshop commitments. This does not prove the calendar is impossible, and the issue may be pre-existing rather than introduced by the proposal, but choosing no changes still requires explaining why the visible burden is sustainable.",
+        "plausibility_review": {
+          "revision_required": true,
+          "severity": "moderate",
+          "reason": "The proposed no-change outcome preserves a potentially strenuous pattern: gym plus 8 hours of work on Monday, two consecutive full workshop days, gym plus 8 hours of work on Thursday, and gym plus 10 hours of work on Friday ending at 20:30. The rationale confirms numeric compliance but does not address the human cost of this distribution, especially the concentrated Friday workload after several demanding days. Since another distribution or a fuller justification could reasonably improve or substantiate manageability, revision is warranted.",
+          "suggested_improvement": "Reassess the preserved 26-hour distribution from a sustainability perspective, especially the Friday 10-hour block, and either justify why it is manageable with the fuller context or consider a less concentrated allocation that still protects sleep, gym routines, workshop days, and the visible client-work target."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Friday 10-hour design block",
+            "assumption": "The user can realistically sustain 10 hours of design work from 10:30 to 20:30 after a 08:00-09:30 gym session.",
+            "evidence_gap": "The calendar shows the block and gym session, but does not show breaks, meals, task intensity, deadlines, or the user's tolerance for long creative workdays.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Cumulative weekly load",
+            "assumption": "The user can manage five consecutive demanding days consisting of work, workshops, and gym without excessive fatigue or reduced effectiveness.",
+            "evidence_gap": "The proposal notes protected sleep and preserved routines but does not assess recovery needs across Monday through Friday.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Workshop logistics",
+            "assumption": "The Tuesday and Wednesday workshops require no additional preparation, travel burden, or recovery time beyond the visible 09:30-17:30 blocks.",
+            "evidence_gap": "The workshops are described as fixed and downtown, but the calendar does not provide commute time, preparation requirements, or post-workshop obligations.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Client design work flexibility",
+            "assumption": "The existing Monday, Thursday, and Friday work blocks are the best available distribution for the 26-hour target.",
+            "evidence_gap": "The rationale considers avoiding disruption but does not show whether the 10-hour Friday block was compared against less concentrated options on human manageability grounds.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          }
+        ],
+        "overall": 3.0
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": false,
+        "plausibility_revision_required": true,
+        "accepted": false,
+        "revision_causes": [
+          "numeric_criteria_failed",
+          "plausibility_revision_required"
+        ]
+      },
+      "operations_changed_from_previous": null,
+      "rationale_changed_from_previous": null,
+      "prior_critic_reviews": [],
+      "unresolved_assumptions": [
+        {
+          "subject": "Friday 10-hour design block",
+          "assumption": "The user can realistically sustain 10 hours of design work from 10:30 to 20:30 after a 08:00-09:30 gym session.",
+          "evidence_gap": "The calendar shows the block and gym session, but does not show breaks, meals, task intensity, deadlines, or the user's tolerance for long creative workdays.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Cumulative weekly load",
+          "assumption": "The user can manage five consecutive demanding days consisting of work, workshops, and gym without excessive fatigue or reduced effectiveness.",
+          "evidence_gap": "The proposal notes protected sleep and preserved routines but does not assess recovery needs across Monday through Friday.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Workshop logistics",
+          "assumption": "The Tuesday and Wednesday workshops require no additional preparation, travel burden, or recovery time beyond the visible 09:30-17:30 blocks.",
+          "evidence_gap": "The workshops are described as fixed and downtown, but the calendar does not provide commute time, preparation requirements, or post-workshop obligations.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Client design work flexibility",
+          "assumption": "The existing Monday, Thursday, and Friday work blocks are the best available distribution for the 26-hour target.",
+          "evidence_gap": "The rationale considers avoiding disruption but does not show whether the 10-hour Friday block was compared against less concentrated options on human manageability grounds.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "proposer_feedback": "Numeric Critic criteria failed. Scores: {\"reasoning\":3,\"coherence\":3,\"alternatives\":2,\"clarity\":4}. Plausibility revision required (moderate): The proposed no-change outcome preserves a potentially strenuous pattern: gym plus 8 hours of work on Monday, two consecutive full workshop days, gym plus 8 hours of work on Thursday, and gym plus 10 hours of work on Friday ending at 20:30. The rationale confirms numeric compliance but does not address the human cost of this distribution, especially the concentrated Friday workload after several demanding days. Since another distribution or a fuller justification could reasonably improve or substantiate manageability, revision is warranted. Suggested direction: Reassess the preserved 26-hour distribution from a sustainability perspective, especially the Friday 10-hour block, and either justify why it is manageable with the fuller context or consider a less concentrated allocation that still protects sleep, gym routines, workshop days, and the visible client-work target. The Critic lacks the full user constraints; explain if no better feasible option exists. Unverified conditions to reassess: [{'subject': 'Friday 10-hour design block', 'assumption': 'The user can realistically sustain 10 hours of design work from 10:30 to 20:30 after a 08:00-09:30 gym session.', 'evidence_gap': \"The calendar shows the block and gym session, but does not show breaks, meals, task intensity, deadlines, or the user's tolerance for long creative workdays.\", 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Cumulative weekly load', 'assumption': 'The user can manage five consecutive demanding days consisting of work, workshops, and gym without excessive fatigue or reduced effectiveness.', 'evidence_gap': 'The proposal notes protected sleep and preserved routines but does not assess recovery needs across Monday through Friday.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Workshop logistics', 'assumption': 'The Tuesday and Wednesday workshops require no additional preparation, travel burden, or recovery time beyond the visible 09:30-17:30 blocks.', 'evidence_gap': 'The workshops are described as fixed and downtown, but the calendar does not provide commute time, preparation requirements, or post-workshop obligations.', 'potential_impact': 'material', 'verification_source': 'unknown'}, {'subject': 'Client design work flexibility', 'assumption': 'The existing Monday, Thursday, and Friday work blocks are the best available distribution for the 26-hour target.', 'evidence_gap': 'The rationale considers avoiding disruption but does not show whether the 10-hour Friday block was compared against less concentrated options on human manageability grounds.', 'potential_impact': 'material', 'verification_source': 'user_context'}] Weaknesses: ['The rationale relies heavily on the fact that the calendar already reaches 26 hours of work, but it does not adequately assess whether the existing distribution is manageable: Monday 10:30-18:30, Thursday 10:30-18:30, and especially Friday 10:30-20:30 after a 08:00-09:30 gym session.', 'The visible week contains a sustained demanding sequence: Monday gym plus 8 hours design work, Tuesday and Wednesday 09:30-17:30 fixed workshops, Thursday gym plus 8 hours design work, and Friday gym plus 10 hours design work. The no-change rationale does not address cumulative fatigue or recovery across these five consecutive days.', 'Friday’s 10-hour design block ending at 20:30 is treated as acceptable because it is existing and technically conflict-free, but the rationale does not discuss food, breaks, cognitive load, or whether a 10-hour creative/design workday after morning exercise is realistically sustainable.', 'The alternatives considered are narrow. The proposal rejects extending Monday or Thursday only because it would be a larger change and would not improve numeric compliance, but it does not weigh whether a less concentrated Friday workload could improve human manageability despite involving some disruption.', 'Because the original request is not visible, satisfaction of the user’s actual intent cannot be verified beyond the stated proposal goals and the technical weekly-hours check.']. Actionable feedback: The no-change decision is technically coherent with the visible target of 26 hours and preserves fixed workshops, sleep, and gym sessions. However, as a human-centered schedule, the calendar is only partially substantiated. The main concern is not that the events overlap, but that the preserved arrangement creates a very dense week with limited visible recovery: two 8-hour workdays around two full workshop days, followed by a 10-hour Friday work block after gym. The proposal should either provide a grounded reason why the existing Friday concentration is acceptable in the fuller context, or reconsider whether the same 26-hour target could be distributed in a way that reduces end-of-week load without undermining protected sleep, gym, and workshop commitments. This does not prove the calendar is impossible, and the issue may be pre-existing rather than introduced by the proposal, but choosing no changes still requires explaining why the visible burden is sustainable.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "move",
+            "event_id": "work_mon",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-02-22T10:30:00+00:00",
+            "to_end": "2027-02-22T19:30:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "work_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-02-25T10:30:00+00:00",
+            "to_end": "2027-02-25T19:30:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "work_fri",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-02-26T10:30:00+00:00",
+            "to_end": "2027-02-26T18:30:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "Workshop events are fixed/protected and remain untouched.",
+            "No client work is scheduled on Tuesday or Wednesday.",
+            "Protected sleep blocks remain untouched.",
+            "Morning gym routines remain untouched.",
+            "Final scheduled work time remains 26 hours within the checked week.",
+            "The work blocks appear user-only and flexible, so resizing them is operationally feasible under known rules.",
+            "Meals, breaks, commute, workshop preparation and user tolerance for long creative days are not specified."
+          ],
+          "priorities": [
+            "Reduce the end-of-week workload rather than preserving a concentrated Friday block.",
+            "Keep all added burden on eligible client-work days only.",
+            "Avoid moving health, sleep or protected workshop commitments.",
+            "Use the existing client-work blocks instead of creating new fragmented sessions."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Keep the original 8/8/10 distribution.",
+              "rejected_because": "Rejected because it leaves the heaviest client-work day after gym and two workshop days without a known recovery buffer."
+            },
+            {
+              "option": "Make all three workdays exactly equal.",
+              "rejected_because": "Rejected because fractional end times would reduce clarity while still leaving every day moderately long."
+            },
+            {
+              "option": "Move or shorten gym sessions to open earlier work time.",
+              "rejected_because": "Rejected because the request protects morning gym routines."
+            }
+          ],
+          "summary": "The selected plan redistributes the same 26 client-work hours into a less back-loaded pattern by extending Monday and Thursday and shortening Friday, trading two moderately longer days for a more manageable end of week while preserving sleep, gym routines and fixed workshops."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true,
+        "aggregate_checks": [
+          {
+            "id": "weekly_hours",
+            "status": "pass",
+            "minutes": 1560.0,
+            "minimum_minutes": 1560,
+            "category": "work",
+            "evidence": "union of final calendar intervals"
+          }
+        ],
+        "aggregate_validation_version": "duration_total_v1"
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-02-21T23:30:00+00:00",
+            "end": "2027-02-22T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_mon",
+            "title": "Gym Workout",
+            "start": "2027-02-22T08:00:00+00:00",
+            "end": "2027-02-22T09:30:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_mon",
+            "title": "Design Work Block",
+            "start": "2027-02-22T10:30:00+00:00",
+            "end": "2027-02-22T19:30:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "8 hours work.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-02-22T23:30:00+00:00",
+            "end": "2027-02-23T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "workshop_tue",
+            "title": "Professional UI/UX Workshop - Day 1",
+            "start": "2027-02-23T09:30:00+00:00",
+            "end": "2027-02-23T17:30:00+00:00",
+            "category": "exam",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "instructors"
+            ],
+            "description": "Fixed workshop downtown.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-02-23T23:30:00+00:00",
+            "end": "2027-02-24T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "workshop_wed",
+            "title": "Professional UI/UX Workshop - Day 2",
+            "start": "2027-02-24T09:30:00+00:00",
+            "end": "2027-02-24T17:30:00+00:00",
+            "category": "exam",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "instructors"
+            ],
+            "description": "Fixed workshop downtown.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-02-24T23:30:00+00:00",
+            "end": "2027-02-25T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_thu",
+            "title": "Gym Workout",
+            "start": "2027-02-25T08:00:00+00:00",
+            "end": "2027-02-25T09:30:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_thu",
+            "title": "Design Work Block",
+            "start": "2027-02-25T10:30:00+00:00",
+            "end": "2027-02-25T19:30:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "8 hours work.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-02-25T23:30:00+00:00",
+            "end": "2027-02-26T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_fri",
+            "title": "Gym Workout",
+            "start": "2027-02-26T08:00:00+00:00",
+            "end": "2027-02-26T09:30:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_fri",
+            "title": "Design Work Block",
+            "start": "2027-02-26T10:30:00+00:00",
+            "end": "2027-02-26T18:30:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "10 hours work.",
+            "origin": "existing",
+            "change_status": "moved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 4,
+          "alternatives": 3,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The revision materially addresses the prior concern by reducing Friday from 10:30-20:30 to 10:30-18:30, but it does so by making Monday and Thursday longer, each now running 10:30-19:30 after 08:00-09:30 gym sessions. That is a plausible trade-off, not an objective problem, but it still leaves two gym-plus-9-hour workdays.",
+          "Thursday remains a potentially demanding day because it follows two fixed workshop days, Tuesday and Wednesday 09:30-17:30, and then includes gym 08:00-09:30 plus work 10:30-19:30. The rationale acknowledges the trade-off but does not fully substantiate the user's tolerance for that cumulative load.",
+          "The event descriptions appear stale or inconsistent with the simulated times: Monday and Thursday design work blocks are described as '8 hours work' despite running 9 hours, while Friday is described as '10 hours work' despite running 8 hours. The technical weekly total is consistent at 26 hours, but this metadata mismatch reduces practical clarity.",
+          "The alternatives considered are relevant but somewhat narrow. The rationale compares the original 8/8/10 pattern, equal distribution, and moving gym, but it does not deeply assess other lower-burden distributions within the visible Monday/Thursday/Friday work structure. Without the original request, it is not possible to verify whether such alternatives were allowed or desirable.",
+          "Request satisfaction cannot be verified beyond the proposal's visible goals and the technical validation, because the original request and fuller user context are not available."
+        ],
+        "feedback": "The revised schedule is more human-manageable than the prior no-change version because it removes the most visibly strenuous feature: the Friday 10:30-20:30 design block after gym. The resulting pattern is still a full week: Monday gym plus 9 hours of design work, two fixed workshop days, Thursday gym plus 9 hours of design work, and Friday gym plus 8 hours of design work. However, the burden is now distributed more evenly and Friday ends earlier at 18:30, which plausibly improves end-of-week recovery. The proposal also explicitly acknowledges missing information about meals, breaks, commute, workshop preparation, and tolerance for long creative days. The remaining concerns are real but not strong enough on the visible record to require another revision: there is no objective incompatibility, protected sleep remains intact, Tuesday and Wednesday are kept free of client work, and the prior concern has received a grounded response through an actual redistribution. The Proposer should still clean up the stale work-duration descriptions and, if fuller context is available, confirm that the longer Monday and Thursday workdays are preferable to the prior Friday concentration.",
+        "plausibility_review": {
+          "revision_required": false,
+          "severity": "low",
+          "reason": "The prior material concern about the Friday 10-hour block has been addressed in a concrete way: Friday design work now runs 10:30-18:30 instead of 10:30-20:30, with the same 26 weekly work hours preserved. The new plan introduces two longer 9-hour workdays on Monday and Thursday, both after gym, and Thursday follows two workshop days, so cumulative fatigue remains a material uncertainty if the user has low tolerance for long creative workdays. Still, the visible evidence shows improvement rather than deterioration, and the remaining uncertainty is not enough by itself to require another revision because the calendar preserves sleep, fixed workshops, gym routines, and avoids client work on Tuesday and Wednesday. Another review could help only if fuller context reveals that 9-hour workdays after gym are not sustainable; otherwise the current trade-off is plausibly manageable.",
+          "suggested_improvement": "Keep the redistributed structure if it matches the fuller context, but correct the event-duration descriptions and verify whether Monday and Thursday 10:30-19:30 are genuinely preferable to a heavier Friday or another permitted distribution."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Monday and Thursday 9-hour design blocks",
+            "assumption": "The user can realistically sustain design work from 10:30 to 19:30 after 08:00-09:30 gym sessions.",
+            "evidence_gap": "The calendar shows a one-hour gap after gym before work, but does not show breaks, meals, work intensity, commute from gym, or the user's tolerance for long creative workdays.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Cumulative weekly load",
+            "assumption": "The user can manage Monday gym plus 9 hours of design work, two consecutive 09:30-17:30 workshop days, Thursday gym plus 9 hours of design work, and Friday gym plus 8 hours of design work without excessive fatigue.",
+            "evidence_gap": "The proposal discusses reducing Friday's burden but does not provide direct evidence about recovery needs or the user's capacity across the five-day sequence.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Workshop logistics",
+            "assumption": "The Tuesday and Wednesday workshops require no additional preparation, travel burden, or recovery time beyond the visible 09:30-17:30 blocks.",
+            "evidence_gap": "The workshops are described as fixed and downtown, but commute time, preparation requirements, and post-workshop obligations are not shown.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Work-block flexibility",
+            "assumption": "The Monday, Thursday, and Friday design work blocks may be resized as shown and remain acceptable for the client work target.",
+            "evidence_gap": "The proposal states the blocks appear user-only and flexible, but the original request and any client-side expectations are not visible.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Calendar metadata accuracy",
+            "assumption": "The actual intended work durations are the simulated event times, not the stale descriptions attached to the events.",
+            "evidence_gap": "Monday and Thursday run 9 hours while described as 8 hours, and Friday runs 8 hours while described as 10 hours.",
+            "potential_impact": "minor",
+            "verification_source": "unknown"
+          }
+        ],
+        "overall": 3.75
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": false,
+        "plausibility_revision_required": false,
+        "accepted": false,
+        "revision_causes": [
+          "numeric_criteria_failed"
+        ]
+      },
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": [
+        {
+          "iteration": 0,
+          "proposal": {
+            "changes": [],
+            "rationale": {
+              "constraints": [
+                "Workshop events are fixed/protected by category and already occupy Tuesday and Wednesday 09:30 to 17:30.",
+                "No client work is scheduled on Tuesday or Wednesday.",
+                "Protected sleep blocks remain untouched.",
+                "Morning gym sessions on Monday, Thursday and Friday remain untouched.",
+                "Existing work blocks total 26 hours within the required week."
+              ],
+              "priorities": [
+                "Keep health routines and sleep protected while meeting the client design target.",
+                "Use Monday, Thursday and Friday only for client design work as requested.",
+                "Avoid unnecessary disruption because the current calendar already satisfies the duration requirement."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Extend Monday or Thursday work instead of using Friday 10 hours.",
+                  "rejected_because": "Rejected because it would create a larger change without improving compliance with the 26-hour target."
+                },
+                {
+                  "option": "Move gym sessions to create earlier work starts.",
+                  "rejected_because": "Rejected because the request specifically protects morning gym routines."
+                }
+              ],
+              "summary": "The selected plan makes no changes because the current calendar already allocates 26 hours of client design work across Monday, Thursday and Friday while preserving workshop days, sleep and morning gym routines."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "sleep_mon",
+                "title": "Sleep",
+                "start": "2027-02-21T23:30:00+00:00",
+                "end": "2027-02-22T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_mon",
+                "title": "Gym Workout",
+                "start": "2027-02-22T08:00:00+00:00",
+                "end": "2027-02-22T09:30:00+00:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Gym.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_mon",
+                "title": "Design Work Block",
+                "start": "2027-02-22T10:30:00+00:00",
+                "end": "2027-02-22T18:30:00+00:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "8 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_tue",
+                "title": "Sleep",
+                "start": "2027-02-22T23:30:00+00:00",
+                "end": "2027-02-23T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "workshop_tue",
+                "title": "Professional UI/UX Workshop - Day 1",
+                "start": "2027-02-23T09:30:00+00:00",
+                "end": "2027-02-23T17:30:00+00:00",
+                "category": "exam",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "instructors"
+                ],
+                "description": "Fixed workshop downtown.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_wed",
+                "title": "Sleep",
+                "start": "2027-02-23T23:30:00+00:00",
+                "end": "2027-02-24T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "workshop_wed",
+                "title": "Professional UI/UX Workshop - Day 2",
+                "start": "2027-02-24T09:30:00+00:00",
+                "end": "2027-02-24T17:30:00+00:00",
+                "category": "exam",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "instructors"
+                ],
+                "description": "Fixed workshop downtown.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2027-02-24T23:30:00+00:00",
+                "end": "2027-02-25T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_thu",
+                "title": "Gym Workout",
+                "start": "2027-02-25T08:00:00+00:00",
+                "end": "2027-02-25T09:30:00+00:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Gym.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_thu",
+                "title": "Design Work Block",
+                "start": "2027-02-25T10:30:00+00:00",
+                "end": "2027-02-25T18:30:00+00:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "8 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_fri",
+                "title": "Sleep",
+                "start": "2027-02-25T23:30:00+00:00",
+                "end": "2027-02-26T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_fri",
+                "title": "Gym Workout",
+                "start": "2027-02-26T08:00:00+00:00",
+                "end": "2027-02-26T09:30:00+00:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Gym.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_fri",
+                "title": "Design Work Block",
+                "start": "2027-02-26T10:30:00+00:00",
+                "end": "2027-02-26T20:30:00+00:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "10 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              }
+            ],
+            "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+          },
+          "plausibility_review": {
+            "revision_required": true,
+            "severity": "moderate",
+            "reason": "The proposed no-change outcome preserves a potentially strenuous pattern: gym plus 8 hours of work on Monday, two consecutive full workshop days, gym plus 8 hours of work on Thursday, and gym plus 10 hours of work on Friday ending at 20:30. The rationale confirms numeric compliance but does not address the human cost of this distribution, especially the concentrated Friday workload after several demanding days. Since another distribution or a fuller justification could reasonably improve or substantiate manageability, revision is warranted.",
+            "suggested_improvement": "Reassess the preserved 26-hour distribution from a sustainability perspective, especially the Friday 10-hour block, and either justify why it is manageable with the fuller context or consider a less concentrated allocation that still protects sleep, gym routines, workshop days, and the visible client-work target."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Friday 10-hour design block",
+              "assumption": "The user can realistically sustain 10 hours of design work from 10:30 to 20:30 after a 08:00-09:30 gym session.",
+              "evidence_gap": "The calendar shows the block and gym session, but does not show breaks, meals, task intensity, deadlines, or the user's tolerance for long creative workdays.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Cumulative weekly load",
+              "assumption": "The user can manage five consecutive demanding days consisting of work, workshops, and gym without excessive fatigue or reduced effectiveness.",
+              "evidence_gap": "The proposal notes protected sleep and preserved routines but does not assess recovery needs across Monday through Friday.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Workshop logistics",
+              "assumption": "The Tuesday and Wednesday workshops require no additional preparation, travel burden, or recovery time beyond the visible 09:30-17:30 blocks.",
+              "evidence_gap": "The workshops are described as fixed and downtown, but the calendar does not provide commute time, preparation requirements, or post-workshop obligations.",
+              "potential_impact": "material",
+              "verification_source": "unknown"
+            },
+            {
+              "subject": "Client design work flexibility",
+              "assumption": "The existing Monday, Thursday, and Friday work blocks are the best available distribution for the 26-hour target.",
+              "evidence_gap": "The rationale considers avoiding disruption but does not show whether the 10-hour Friday block was compared against less concentrated options on human manageability grounds.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            }
+          ],
+          "weaknesses": [
+            "The rationale relies heavily on the fact that the calendar already reaches 26 hours of work, but it does not adequately assess whether the existing distribution is manageable: Monday 10:30-18:30, Thursday 10:30-18:30, and especially Friday 10:30-20:30 after a 08:00-09:30 gym session.",
+            "The visible week contains a sustained demanding sequence: Monday gym plus 8 hours design work, Tuesday and Wednesday 09:30-17:30 fixed workshops, Thursday gym plus 8 hours design work, and Friday gym plus 10 hours design work. The no-change rationale does not address cumulative fatigue or recovery across these five consecutive days.",
+            "Friday’s 10-hour design block ending at 20:30 is treated as acceptable because it is existing and technically conflict-free, but the rationale does not discuss food, breaks, cognitive load, or whether a 10-hour creative/design workday after morning exercise is realistically sustainable.",
+            "The alternatives considered are narrow. The proposal rejects extending Monday or Thursday only because it would be a larger change and would not improve numeric compliance, but it does not weigh whether a less concentrated Friday workload could improve human manageability despite involving some disruption.",
+            "Because the original request is not visible, satisfaction of the user’s actual intent cannot be verified beyond the stated proposal goals and the technical weekly-hours check."
+          ],
+          "feedback": "The no-change decision is technically coherent with the visible target of 26 hours and preserves fixed workshops, sleep, and gym sessions. However, as a human-centered schedule, the calendar is only partially substantiated. The main concern is not that the events overlap, but that the preserved arrangement creates a very dense week with limited visible recovery: two 8-hour workdays around two full workshop days, followed by a 10-hour Friday work block after gym. The proposal should either provide a grounded reason why the existing Friday concentration is acceptable in the fuller context, or reconsider whether the same 26-hour target could be distributed in a way that reduces end-of-week load without undermining protected sleep, gym, and workshop commitments. This does not prove the calendar is impossible, and the issue may be pre-existing rather than introduced by the proposal, but choosing no changes still requires explaining why the visible burden is sustainable."
+        }
+      ],
+      "unresolved_assumptions": [
+        {
+          "subject": "Monday and Thursday 9-hour design blocks",
+          "assumption": "The user can realistically sustain design work from 10:30 to 19:30 after 08:00-09:30 gym sessions.",
+          "evidence_gap": "The calendar shows a one-hour gap after gym before work, but does not show breaks, meals, work intensity, commute from gym, or the user's tolerance for long creative workdays.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Cumulative weekly load",
+          "assumption": "The user can manage Monday gym plus 9 hours of design work, two consecutive 09:30-17:30 workshop days, Thursday gym plus 9 hours of design work, and Friday gym plus 8 hours of design work without excessive fatigue.",
+          "evidence_gap": "The proposal discusses reducing Friday's burden but does not provide direct evidence about recovery needs or the user's capacity across the five-day sequence.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Workshop logistics",
+          "assumption": "The Tuesday and Wednesday workshops require no additional preparation, travel burden, or recovery time beyond the visible 09:30-17:30 blocks.",
+          "evidence_gap": "The workshops are described as fixed and downtown, but commute time, preparation requirements, and post-workshop obligations are not shown.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Work-block flexibility",
+          "assumption": "The Monday, Thursday, and Friday design work blocks may be resized as shown and remain acceptable for the client work target.",
+          "evidence_gap": "The proposal states the blocks appear user-only and flexible, but the original request and any client-side expectations are not visible.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Calendar metadata accuracy",
+          "assumption": "The actual intended work durations are the simulated event times, not the stale descriptions attached to the events.",
+          "evidence_gap": "Monday and Thursday run 9 hours while described as 8 hours, and Friday runs 8 hours while described as 10 hours.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "proposer_feedback": "Numeric Critic criteria failed. Scores: {\"reasoning\":4,\"coherence\":4,\"alternatives\":3,\"clarity\":4}. Unverified conditions to reassess: [{'subject': 'Monday and Thursday 9-hour design blocks', 'assumption': 'The user can realistically sustain design work from 10:30 to 19:30 after 08:00-09:30 gym sessions.', 'evidence_gap': \"The calendar shows a one-hour gap after gym before work, but does not show breaks, meals, work intensity, commute from gym, or the user's tolerance for long creative workdays.\", 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Cumulative weekly load', 'assumption': 'The user can manage Monday gym plus 9 hours of design work, two consecutive 09:30-17:30 workshop days, Thursday gym plus 9 hours of design work, and Friday gym plus 8 hours of design work without excessive fatigue.', 'evidence_gap': \"The proposal discusses reducing Friday's burden but does not provide direct evidence about recovery needs or the user's capacity across the five-day sequence.\", 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Workshop logistics', 'assumption': 'The Tuesday and Wednesday workshops require no additional preparation, travel burden, or recovery time beyond the visible 09:30-17:30 blocks.', 'evidence_gap': 'The workshops are described as fixed and downtown, but commute time, preparation requirements, and post-workshop obligations are not shown.', 'potential_impact': 'material', 'verification_source': 'unknown'}, {'subject': 'Work-block flexibility', 'assumption': 'The Monday, Thursday, and Friday design work blocks may be resized as shown and remain acceptable for the client work target.', 'evidence_gap': 'The proposal states the blocks appear user-only and flexible, but the original request and any client-side expectations are not visible.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Calendar metadata accuracy', 'assumption': 'The actual intended work durations are the simulated event times, not the stale descriptions attached to the events.', 'evidence_gap': 'Monday and Thursday run 9 hours while described as 8 hours, and Friday runs 8 hours while described as 10 hours.', 'potential_impact': 'minor', 'verification_source': 'unknown'}] Weaknesses: ['The revision materially addresses the prior concern by reducing Friday from 10:30-20:30 to 10:30-18:30, but it does so by making Monday and Thursday longer, each now running 10:30-19:30 after 08:00-09:30 gym sessions. That is a plausible trade-off, not an objective problem, but it still leaves two gym-plus-9-hour workdays.', \"Thursday remains a potentially demanding day because it follows two fixed workshop days, Tuesday and Wednesday 09:30-17:30, and then includes gym 08:00-09:30 plus work 10:30-19:30. The rationale acknowledges the trade-off but does not fully substantiate the user's tolerance for that cumulative load.\", \"The event descriptions appear stale or inconsistent with the simulated times: Monday and Thursday design work blocks are described as '8 hours work' despite running 9 hours, while Friday is described as '10 hours work' despite running 8 hours. The technical weekly total is consistent at 26 hours, but this metadata mismatch reduces practical clarity.\", 'The alternatives considered are relevant but somewhat narrow. The rationale compares the original 8/8/10 pattern, equal distribution, and moving gym, but it does not deeply assess other lower-burden distributions within the visible Monday/Thursday/Friday work structure. Without the original request, it is not possible to verify whether such alternatives were allowed or desirable.', \"Request satisfaction cannot be verified beyond the proposal's visible goals and the technical validation, because the original request and fuller user context are not available.\"]. Actionable feedback: The revised schedule is more human-manageable than the prior no-change version because it removes the most visibly strenuous feature: the Friday 10:30-20:30 design block after gym. The resulting pattern is still a full week: Monday gym plus 9 hours of design work, two fixed workshop days, Thursday gym plus 9 hours of design work, and Friday gym plus 8 hours of design work. However, the burden is now distributed more evenly and Friday ends earlier at 18:30, which plausibly improves end-of-week recovery. The proposal also explicitly acknowledges missing information about meals, breaks, commute, workshop preparation, and tolerance for long creative days. The remaining concerns are real but not strong enough on the visible record to require another revision: there is no objective incompatibility, protected sleep remains intact, Tuesday and Wednesday are kept free of client work, and the prior concern has received a grounded response through an actual redistribution. The Proposer should still clean up the stale work-duration descriptions and, if fuller context is available, confirm that the longer Monday and Thursday workdays are preferable to the prior Friday concentration.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Client Design Work",
+            "from_start": null,
+            "to_start": "2027-02-22T18:30:00+00:00",
+            "to_end": "2027-02-22T19:30:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "move",
+            "event_id": "work_fri",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-02-26T10:30:00+00:00",
+            "to_end": "2027-02-26T19:30:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "Workshop events are fixed/protected and remain untouched.",
+            "No client work is scheduled on Tuesday or Wednesday.",
+            "Protected sleep blocks and morning gym routines remain untouched.",
+            "Final scheduled client design work reaches 26 hours within the checked week.",
+            "The added work category is supported by the request and existing client-work category.",
+            "Existing work appears user-only and non-fixed, but client-side timing expectations are not shown.",
+            "Meals, breaks, commutes, workshop preparation, recovery needs and tolerance for long creative days are not specified.",
+            "Calendar descriptions may remain stale because the available operations do not edit descriptions."
+          ],
+          "priorities": [
+            "Avoid adding load to Thursday after two fixed workshop days.",
+            "Reduce the original Friday concentration without moving health or sleep events.",
+            "Use a small Monday extension because it precedes the workshop days.",
+            "Keep the plan within visible free calendar intervals while not assuming external availability."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Keep the original 8/8/10 distribution.",
+              "rejected_because": "Rejected because Friday remains the heaviest workday after gym and the workshop sequence."
+            },
+            {
+              "option": "Use the prior 9/9/8 distribution.",
+              "rejected_because": "Rejected because it makes Thursday longer immediately after two fixed workshop days."
+            },
+            {
+              "option": "Split work into evening fragments on multiple days.",
+              "rejected_because": "Rejected because no meal, recovery or external availability facts support extra fragmentation."
+            },
+            {
+              "option": "Move or shorten gym sessions.",
+              "rejected_because": "Rejected because the request protects morning gym routines."
+            }
+          ],
+          "summary": "The selected plan uses Monday for one extra client-work hour and shortens Friday by one hour, trading a modest early-week extension for less end-of-week concentration while leaving Thursday, sleep, gym and fixed workshops unchanged."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true,
+        "aggregate_checks": [
+          {
+            "id": "weekly_hours",
+            "status": "pass",
+            "minutes": 1560.0,
+            "minimum_minutes": 1560,
+            "category": "work",
+            "evidence": "union of final calendar intervals"
+          }
+        ],
+        "aggregate_validation_version": "duration_total_v1"
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-02-21T23:30:00+00:00",
+            "end": "2027-02-22T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_mon",
+            "title": "Gym Workout",
+            "start": "2027-02-22T08:00:00+00:00",
+            "end": "2027-02-22T09:30:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_mon",
+            "title": "Design Work Block",
+            "start": "2027-02-22T10:30:00+00:00",
+            "end": "2027-02-22T18:30:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "8 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_0",
+            "title": "Client Design Work",
+            "start": "2027-02-22T18:30:00+00:00",
+            "end": "2027-02-22T19:30:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-02-22T23:30:00+00:00",
+            "end": "2027-02-23T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "workshop_tue",
+            "title": "Professional UI/UX Workshop - Day 1",
+            "start": "2027-02-23T09:30:00+00:00",
+            "end": "2027-02-23T17:30:00+00:00",
+            "category": "exam",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "instructors"
+            ],
+            "description": "Fixed workshop downtown.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-02-23T23:30:00+00:00",
+            "end": "2027-02-24T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "workshop_wed",
+            "title": "Professional UI/UX Workshop - Day 2",
+            "start": "2027-02-24T09:30:00+00:00",
+            "end": "2027-02-24T17:30:00+00:00",
+            "category": "exam",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "instructors"
+            ],
+            "description": "Fixed workshop downtown.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-02-24T23:30:00+00:00",
+            "end": "2027-02-25T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_thu",
+            "title": "Gym Workout",
+            "start": "2027-02-25T08:00:00+00:00",
+            "end": "2027-02-25T09:30:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_thu",
+            "title": "Design Work Block",
+            "start": "2027-02-25T10:30:00+00:00",
+            "end": "2027-02-25T18:30:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "8 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-02-25T23:30:00+00:00",
+            "end": "2027-02-26T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_fri",
+            "title": "Gym Workout",
+            "start": "2027-02-26T08:00:00+00:00",
+            "end": "2027-02-26T09:30:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_fri",
+            "title": "Design Work Block",
+            "start": "2027-02-26T10:30:00+00:00",
+            "end": "2027-02-26T19:30:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "10 hours work.",
+            "origin": "existing",
+            "change_status": "moved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 4,
+          "alternatives": 4,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The plan improves on the original Friday 10:30-20:30 concentration, but it still leaves Friday as a long day: gym from 08:00-09:30 followed by design work from 10:30-19:30. This is plausibly manageable, but remains a material human-capacity assumption rather than something demonstrated by the calendar.",
+          "Monday now effectively becomes a 9-hour design-work day from 10:30-19:30, split into the existing 10:30-18:30 block and the added 18:30-19:30 client-work block, after a 08:00-09:30 gym session. The contiguous added hour may be reasonable, but the rationale does not show whether breaks, meals, or end-of-day recovery are practically accommodated.",
+          "The week remains demanding overall: Monday gym plus 9 hours of work, Tuesday and Wednesday fixed workshops from 09:30-17:30, Thursday gym plus 8 hours of work, and Friday gym plus 9 hours of work. The proposal acknowledges missing information about meals, recovery, commutes and tolerance for long creative days, but cannot substantiate these from the visible calendar.",
+          "The moved Friday event still has the stale description '10 hours work' despite running from 10:30 to 19:30, which is 9 hours. The rationale notes that descriptions may remain stale, so this is not a manageability failure, but it could reduce practical clarity for the user.",
+          "Request satisfaction cannot be verified beyond the visible proposal goals and the technical validation, because the original request and fuller user context are not available."
+        ],
+        "feedback": "The current proposal gives a grounded response to the earlier concern about end-of-week overload without simply reverting to the prior 9/9/8 version. It reduces the original Friday concentration from a 10-hour block ending at 20:30 to a 9-hour block ending at 19:30, while avoiding the prior revision's heavier Thursday immediately after two fixed workshop days. That is a plausible and human-centered trade-off: Monday absorbs one additional hour before the workshop sequence, Thursday stays at 8 hours after the workshops, and Friday remains long but less extreme than the original. The schedule is still dense and depends on the user's tolerance for gym-plus-long-work days and a five-day demanding sequence, but the proposal explicitly acknowledges those unknowns and considers relevant alternatives. On the visible record, another revision is not required; the Proposer should retain or further justify this distribution using fuller context, especially around Friday stamina, meals, breaks, and whether the stale Friday description can be corrected outside the available operations.",
+        "plausibility_review": {
+          "revision_required": false,
+          "severity": "low",
+          "reason": "The proposed organization is plausibly more sustainable than the original no-change calendar and is not clearly worse than the prior redistributed version. It addresses the main earlier issue by shortening Friday from the original 10:30-20:30 pattern to 10:30-19:30, while also reducing Thursday back to 10:30-18:30 after the two workshop days. The remaining concern is that Monday and Friday are still 9-hour design-work days after gym, and the full Monday-to-Friday sequence is demanding, but the rationale recognizes these uncertainties and makes a reasonable trade-off rather than relying only on free slots or numeric compliance.",
+          "suggested_improvement": "Keep the general distribution if the fuller context supports the user's stamina and client flexibility, but verify whether the user can realistically handle the Monday and Friday 9-hour creative-work days after gym, and clean up stale event-duration descriptions if editing metadata is available."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Monday 9-hour design-work span",
+            "assumption": "The user can realistically sustain design work from 10:30 to 19:30 after the 08:00-09:30 gym session, including the added 18:30-19:30 client-work hour.",
+            "evidence_gap": "The calendar shows a one-hour gap after gym and a contiguous work span, but does not show breaks, meals, work intensity, commute from gym, or the user's tolerance for long creative workdays.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Friday 9-hour design-work block",
+            "assumption": "The user can manage design work from 10:30 to 19:30 after the 08:00-09:30 gym session and after the preceding workshop and work sequence.",
+            "evidence_gap": "The proposal reduces Friday compared with the original 10-hour block, but does not provide direct evidence about fatigue level, breaks, meal timing, or end-of-week capacity.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Cumulative weekly load",
+            "assumption": "The user can manage Monday gym plus 9 hours of work, two consecutive 09:30-17:30 workshop days, Thursday gym plus 8 hours of work, and Friday gym plus 9 hours of work without excessive fatigue or reduced effectiveness.",
+            "evidence_gap": "The rationale discusses distribution trade-offs, but the visible calendar does not show recovery needs, non-calendar obligations, or the user's capacity across the five-day sequence.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Workshop logistics",
+            "assumption": "The Tuesday and Wednesday downtown workshops require no additional preparation, travel burden, or recovery time beyond the visible 09:30-17:30 blocks.",
+            "evidence_gap": "The workshops are fixed and described as downtown, but commute time, preparation requirements, and post-workshop obligations are not shown.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Client design work flexibility",
+            "assumption": "The Monday added hour and the moved Friday block are acceptable for the client-work target and any client-side timing expectations.",
+            "evidence_gap": "The proposal states that existing work appears user-only and non-fixed, but client-side expectations and the original request are not visible.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Calendar metadata accuracy",
+            "assumption": "The intended work durations are the simulated event times rather than the stale descriptions.",
+            "evidence_gap": "The Friday event runs from 10:30 to 19:30 but still has the description '10 hours work'; the rationale says descriptions may remain stale because the available operations do not edit descriptions.",
+            "potential_impact": "minor",
+            "verification_source": "unknown"
+          }
+        ],
+        "overall": 4.0
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": true,
+        "plausibility_revision_required": false,
+        "accepted": true,
+        "revision_causes": []
+      },
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": [
+        {
+          "iteration": 0,
+          "proposal": {
+            "changes": [],
+            "rationale": {
+              "constraints": [
+                "Workshop events are fixed/protected by category and already occupy Tuesday and Wednesday 09:30 to 17:30.",
+                "No client work is scheduled on Tuesday or Wednesday.",
+                "Protected sleep blocks remain untouched.",
+                "Morning gym sessions on Monday, Thursday and Friday remain untouched.",
+                "Existing work blocks total 26 hours within the required week."
+              ],
+              "priorities": [
+                "Keep health routines and sleep protected while meeting the client design target.",
+                "Use Monday, Thursday and Friday only for client design work as requested.",
+                "Avoid unnecessary disruption because the current calendar already satisfies the duration requirement."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Extend Monday or Thursday work instead of using Friday 10 hours.",
+                  "rejected_because": "Rejected because it would create a larger change without improving compliance with the 26-hour target."
+                },
+                {
+                  "option": "Move gym sessions to create earlier work starts.",
+                  "rejected_because": "Rejected because the request specifically protects morning gym routines."
+                }
+              ],
+              "summary": "The selected plan makes no changes because the current calendar already allocates 26 hours of client design work across Monday, Thursday and Friday while preserving workshop days, sleep and morning gym routines."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "sleep_mon",
+                "title": "Sleep",
+                "start": "2027-02-21T23:30:00+00:00",
+                "end": "2027-02-22T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_mon",
+                "title": "Gym Workout",
+                "start": "2027-02-22T08:00:00+00:00",
+                "end": "2027-02-22T09:30:00+00:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Gym.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_mon",
+                "title": "Design Work Block",
+                "start": "2027-02-22T10:30:00+00:00",
+                "end": "2027-02-22T18:30:00+00:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "8 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_tue",
+                "title": "Sleep",
+                "start": "2027-02-22T23:30:00+00:00",
+                "end": "2027-02-23T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "workshop_tue",
+                "title": "Professional UI/UX Workshop - Day 1",
+                "start": "2027-02-23T09:30:00+00:00",
+                "end": "2027-02-23T17:30:00+00:00",
+                "category": "exam",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "instructors"
+                ],
+                "description": "Fixed workshop downtown.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_wed",
+                "title": "Sleep",
+                "start": "2027-02-23T23:30:00+00:00",
+                "end": "2027-02-24T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "workshop_wed",
+                "title": "Professional UI/UX Workshop - Day 2",
+                "start": "2027-02-24T09:30:00+00:00",
+                "end": "2027-02-24T17:30:00+00:00",
+                "category": "exam",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "instructors"
+                ],
+                "description": "Fixed workshop downtown.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2027-02-24T23:30:00+00:00",
+                "end": "2027-02-25T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_thu",
+                "title": "Gym Workout",
+                "start": "2027-02-25T08:00:00+00:00",
+                "end": "2027-02-25T09:30:00+00:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Gym.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_thu",
+                "title": "Design Work Block",
+                "start": "2027-02-25T10:30:00+00:00",
+                "end": "2027-02-25T18:30:00+00:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "8 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_fri",
+                "title": "Sleep",
+                "start": "2027-02-25T23:30:00+00:00",
+                "end": "2027-02-26T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_fri",
+                "title": "Gym Workout",
+                "start": "2027-02-26T08:00:00+00:00",
+                "end": "2027-02-26T09:30:00+00:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Gym.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_fri",
+                "title": "Design Work Block",
+                "start": "2027-02-26T10:30:00+00:00",
+                "end": "2027-02-26T20:30:00+00:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "10 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              }
+            ],
+            "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+          },
+          "plausibility_review": {
+            "revision_required": true,
+            "severity": "moderate",
+            "reason": "The proposed no-change outcome preserves a potentially strenuous pattern: gym plus 8 hours of work on Monday, two consecutive full workshop days, gym plus 8 hours of work on Thursday, and gym plus 10 hours of work on Friday ending at 20:30. The rationale confirms numeric compliance but does not address the human cost of this distribution, especially the concentrated Friday workload after several demanding days. Since another distribution or a fuller justification could reasonably improve or substantiate manageability, revision is warranted.",
+            "suggested_improvement": "Reassess the preserved 26-hour distribution from a sustainability perspective, especially the Friday 10-hour block, and either justify why it is manageable with the fuller context or consider a less concentrated allocation that still protects sleep, gym routines, workshop days, and the visible client-work target."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Friday 10-hour design block",
+              "assumption": "The user can realistically sustain 10 hours of design work from 10:30 to 20:30 after a 08:00-09:30 gym session.",
+              "evidence_gap": "The calendar shows the block and gym session, but does not show breaks, meals, task intensity, deadlines, or the user's tolerance for long creative workdays.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Cumulative weekly load",
+              "assumption": "The user can manage five consecutive demanding days consisting of work, workshops, and gym without excessive fatigue or reduced effectiveness.",
+              "evidence_gap": "The proposal notes protected sleep and preserved routines but does not assess recovery needs across Monday through Friday.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Workshop logistics",
+              "assumption": "The Tuesday and Wednesday workshops require no additional preparation, travel burden, or recovery time beyond the visible 09:30-17:30 blocks.",
+              "evidence_gap": "The workshops are described as fixed and downtown, but the calendar does not provide commute time, preparation requirements, or post-workshop obligations.",
+              "potential_impact": "material",
+              "verification_source": "unknown"
+            },
+            {
+              "subject": "Client design work flexibility",
+              "assumption": "The existing Monday, Thursday, and Friday work blocks are the best available distribution for the 26-hour target.",
+              "evidence_gap": "The rationale considers avoiding disruption but does not show whether the 10-hour Friday block was compared against less concentrated options on human manageability grounds.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            }
+          ],
+          "weaknesses": [
+            "The rationale relies heavily on the fact that the calendar already reaches 26 hours of work, but it does not adequately assess whether the existing distribution is manageable: Monday 10:30-18:30, Thursday 10:30-18:30, and especially Friday 10:30-20:30 after a 08:00-09:30 gym session.",
+            "The visible week contains a sustained demanding sequence: Monday gym plus 8 hours design work, Tuesday and Wednesday 09:30-17:30 fixed workshops, Thursday gym plus 8 hours design work, and Friday gym plus 10 hours design work. The no-change rationale does not address cumulative fatigue or recovery across these five consecutive days.",
+            "Friday’s 10-hour design block ending at 20:30 is treated as acceptable because it is existing and technically conflict-free, but the rationale does not discuss food, breaks, cognitive load, or whether a 10-hour creative/design workday after morning exercise is realistically sustainable.",
+            "The alternatives considered are narrow. The proposal rejects extending Monday or Thursday only because it would be a larger change and would not improve numeric compliance, but it does not weigh whether a less concentrated Friday workload could improve human manageability despite involving some disruption.",
+            "Because the original request is not visible, satisfaction of the user’s actual intent cannot be verified beyond the stated proposal goals and the technical weekly-hours check."
+          ],
+          "feedback": "The no-change decision is technically coherent with the visible target of 26 hours and preserves fixed workshops, sleep, and gym sessions. However, as a human-centered schedule, the calendar is only partially substantiated. The main concern is not that the events overlap, but that the preserved arrangement creates a very dense week with limited visible recovery: two 8-hour workdays around two full workshop days, followed by a 10-hour Friday work block after gym. The proposal should either provide a grounded reason why the existing Friday concentration is acceptable in the fuller context, or reconsider whether the same 26-hour target could be distributed in a way that reduces end-of-week load without undermining protected sleep, gym, and workshop commitments. This does not prove the calendar is impossible, and the issue may be pre-existing rather than introduced by the proposal, but choosing no changes still requires explaining why the visible burden is sustainable."
+        },
+        {
+          "iteration": 1,
+          "proposal": {
+            "changes": [
+              {
+                "type": "move",
+                "event_id": "work_mon",
+                "title": null,
+                "from_start": null,
+                "to_start": "2027-02-22T10:30:00+00:00",
+                "to_end": "2027-02-22T19:30:00+00:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "move",
+                "event_id": "work_thu",
+                "title": null,
+                "from_start": null,
+                "to_start": "2027-02-25T10:30:00+00:00",
+                "to_end": "2027-02-25T19:30:00+00:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "move",
+                "event_id": "work_fri",
+                "title": null,
+                "from_start": null,
+                "to_start": "2027-02-26T10:30:00+00:00",
+                "to_end": "2027-02-26T18:30:00+00:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              }
+            ],
+            "rationale": {
+              "constraints": [
+                "Workshop events are fixed/protected and remain untouched.",
+                "No client work is scheduled on Tuesday or Wednesday.",
+                "Protected sleep blocks remain untouched.",
+                "Morning gym routines remain untouched.",
+                "Final scheduled work time remains 26 hours within the checked week.",
+                "The work blocks appear user-only and flexible, so resizing them is operationally feasible under known rules.",
+                "Meals, breaks, commute, workshop preparation and user tolerance for long creative days are not specified."
+              ],
+              "priorities": [
+                "Reduce the end-of-week workload rather than preserving a concentrated Friday block.",
+                "Keep all added burden on eligible client-work days only.",
+                "Avoid moving health, sleep or protected workshop commitments.",
+                "Use the existing client-work blocks instead of creating new fragmented sessions."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Keep the original 8/8/10 distribution.",
+                  "rejected_because": "Rejected because it leaves the heaviest client-work day after gym and two workshop days without a known recovery buffer."
+                },
+                {
+                  "option": "Make all three workdays exactly equal.",
+                  "rejected_because": "Rejected because fractional end times would reduce clarity while still leaving every day moderately long."
+                },
+                {
+                  "option": "Move or shorten gym sessions to open earlier work time.",
+                  "rejected_because": "Rejected because the request protects morning gym routines."
+                }
+              ],
+              "summary": "The selected plan redistributes the same 26 client-work hours into a less back-loaded pattern by extending Monday and Thursday and shortening Friday, trading two moderately longer days for a more manageable end of week while preserving sleep, gym routines and fixed workshops."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "sleep_mon",
+                "title": "Sleep",
+                "start": "2027-02-21T23:30:00+00:00",
+                "end": "2027-02-22T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_mon",
+                "title": "Gym Workout",
+                "start": "2027-02-22T08:00:00+00:00",
+                "end": "2027-02-22T09:30:00+00:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Gym.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_mon",
+                "title": "Design Work Block",
+                "start": "2027-02-22T10:30:00+00:00",
+                "end": "2027-02-22T19:30:00+00:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "8 hours work.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "sleep_tue",
+                "title": "Sleep",
+                "start": "2027-02-22T23:30:00+00:00",
+                "end": "2027-02-23T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "workshop_tue",
+                "title": "Professional UI/UX Workshop - Day 1",
+                "start": "2027-02-23T09:30:00+00:00",
+                "end": "2027-02-23T17:30:00+00:00",
+                "category": "exam",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "instructors"
+                ],
+                "description": "Fixed workshop downtown.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_wed",
+                "title": "Sleep",
+                "start": "2027-02-23T23:30:00+00:00",
+                "end": "2027-02-24T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "workshop_wed",
+                "title": "Professional UI/UX Workshop - Day 2",
+                "start": "2027-02-24T09:30:00+00:00",
+                "end": "2027-02-24T17:30:00+00:00",
+                "category": "exam",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "instructors"
+                ],
+                "description": "Fixed workshop downtown.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2027-02-24T23:30:00+00:00",
+                "end": "2027-02-25T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_thu",
+                "title": "Gym Workout",
+                "start": "2027-02-25T08:00:00+00:00",
+                "end": "2027-02-25T09:30:00+00:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Gym.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_thu",
+                "title": "Design Work Block",
+                "start": "2027-02-25T10:30:00+00:00",
+                "end": "2027-02-25T19:30:00+00:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "8 hours work.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "sleep_fri",
+                "title": "Sleep",
+                "start": "2027-02-25T23:30:00+00:00",
+                "end": "2027-02-26T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_fri",
+                "title": "Gym Workout",
+                "start": "2027-02-26T08:00:00+00:00",
+                "end": "2027-02-26T09:30:00+00:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Gym.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_fri",
+                "title": "Design Work Block",
+                "start": "2027-02-26T10:30:00+00:00",
+                "end": "2027-02-26T18:30:00+00:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "10 hours work.",
+                "origin": "existing",
+                "change_status": "moved"
+              }
+            ],
+            "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+          },
+          "plausibility_review": {
+            "revision_required": false,
+            "severity": "low",
+            "reason": "The prior material concern about the Friday 10-hour block has been addressed in a concrete way: Friday design work now runs 10:30-18:30 instead of 10:30-20:30, with the same 26 weekly work hours preserved. The new plan introduces two longer 9-hour workdays on Monday and Thursday, both after gym, and Thursday follows two workshop days, so cumulative fatigue remains a material uncertainty if the user has low tolerance for long creative workdays. Still, the visible evidence shows improvement rather than deterioration, and the remaining uncertainty is not enough by itself to require another revision because the calendar preserves sleep, fixed workshops, gym routines, and avoids client work on Tuesday and Wednesday. Another review could help only if fuller context reveals that 9-hour workdays after gym are not sustainable; otherwise the current trade-off is plausibly manageable.",
+            "suggested_improvement": "Keep the redistributed structure if it matches the fuller context, but correct the event-duration descriptions and verify whether Monday and Thursday 10:30-19:30 are genuinely preferable to a heavier Friday or another permitted distribution."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Monday and Thursday 9-hour design blocks",
+              "assumption": "The user can realistically sustain design work from 10:30 to 19:30 after 08:00-09:30 gym sessions.",
+              "evidence_gap": "The calendar shows a one-hour gap after gym before work, but does not show breaks, meals, work intensity, commute from gym, or the user's tolerance for long creative workdays.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Cumulative weekly load",
+              "assumption": "The user can manage Monday gym plus 9 hours of design work, two consecutive 09:30-17:30 workshop days, Thursday gym plus 9 hours of design work, and Friday gym plus 8 hours of design work without excessive fatigue.",
+              "evidence_gap": "The proposal discusses reducing Friday's burden but does not provide direct evidence about recovery needs or the user's capacity across the five-day sequence.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Workshop logistics",
+              "assumption": "The Tuesday and Wednesday workshops require no additional preparation, travel burden, or recovery time beyond the visible 09:30-17:30 blocks.",
+              "evidence_gap": "The workshops are described as fixed and downtown, but commute time, preparation requirements, and post-workshop obligations are not shown.",
+              "potential_impact": "material",
+              "verification_source": "unknown"
+            },
+            {
+              "subject": "Work-block flexibility",
+              "assumption": "The Monday, Thursday, and Friday design work blocks may be resized as shown and remain acceptable for the client work target.",
+              "evidence_gap": "The proposal states the blocks appear user-only and flexible, but the original request and any client-side expectations are not visible.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Calendar metadata accuracy",
+              "assumption": "The actual intended work durations are the simulated event times, not the stale descriptions attached to the events.",
+              "evidence_gap": "Monday and Thursday run 9 hours while described as 8 hours, and Friday runs 8 hours while described as 10 hours.",
+              "potential_impact": "minor",
+              "verification_source": "unknown"
+            }
+          ],
+          "weaknesses": [
+            "The revision materially addresses the prior concern by reducing Friday from 10:30-20:30 to 10:30-18:30, but it does so by making Monday and Thursday longer, each now running 10:30-19:30 after 08:00-09:30 gym sessions. That is a plausible trade-off, not an objective problem, but it still leaves two gym-plus-9-hour workdays.",
+            "Thursday remains a potentially demanding day because it follows two fixed workshop days, Tuesday and Wednesday 09:30-17:30, and then includes gym 08:00-09:30 plus work 10:30-19:30. The rationale acknowledges the trade-off but does not fully substantiate the user's tolerance for that cumulative load.",
+            "The event descriptions appear stale or inconsistent with the simulated times: Monday and Thursday design work blocks are described as '8 hours work' despite running 9 hours, while Friday is described as '10 hours work' despite running 8 hours. The technical weekly total is consistent at 26 hours, but this metadata mismatch reduces practical clarity.",
+            "The alternatives considered are relevant but somewhat narrow. The rationale compares the original 8/8/10 pattern, equal distribution, and moving gym, but it does not deeply assess other lower-burden distributions within the visible Monday/Thursday/Friday work structure. Without the original request, it is not possible to verify whether such alternatives were allowed or desirable.",
+            "Request satisfaction cannot be verified beyond the proposal's visible goals and the technical validation, because the original request and fuller user context are not available."
+          ],
+          "feedback": "The revised schedule is more human-manageable than the prior no-change version because it removes the most visibly strenuous feature: the Friday 10:30-20:30 design block after gym. The resulting pattern is still a full week: Monday gym plus 9 hours of design work, two fixed workshop days, Thursday gym plus 9 hours of design work, and Friday gym plus 8 hours of design work. However, the burden is now distributed more evenly and Friday ends earlier at 18:30, which plausibly improves end-of-week recovery. The proposal also explicitly acknowledges missing information about meals, breaks, commute, workshop preparation, and tolerance for long creative days. The remaining concerns are real but not strong enough on the visible record to require another revision: there is no objective incompatibility, protected sleep remains intact, Tuesday and Wednesday are kept free of client work, and the prior concern has received a grounded response through an actual redistribution. The Proposer should still clean up the stale work-duration descriptions and, if fuller context is available, confirm that the longer Monday and Thursday workdays are preferable to the prior Friday concentration."
+        }
+      ],
+      "unresolved_assumptions": [
+        {
+          "subject": "Monday 9-hour design-work span",
+          "assumption": "The user can realistically sustain design work from 10:30 to 19:30 after the 08:00-09:30 gym session, including the added 18:30-19:30 client-work hour.",
+          "evidence_gap": "The calendar shows a one-hour gap after gym and a contiguous work span, but does not show breaks, meals, work intensity, commute from gym, or the user's tolerance for long creative workdays.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Friday 9-hour design-work block",
+          "assumption": "The user can manage design work from 10:30 to 19:30 after the 08:00-09:30 gym session and after the preceding workshop and work sequence.",
+          "evidence_gap": "The proposal reduces Friday compared with the original 10-hour block, but does not provide direct evidence about fatigue level, breaks, meal timing, or end-of-week capacity.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Cumulative weekly load",
+          "assumption": "The user can manage Monday gym plus 9 hours of work, two consecutive 09:30-17:30 workshop days, Thursday gym plus 8 hours of work, and Friday gym plus 9 hours of work without excessive fatigue or reduced effectiveness.",
+          "evidence_gap": "The rationale discusses distribution trade-offs, but the visible calendar does not show recovery needs, non-calendar obligations, or the user's capacity across the five-day sequence.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Workshop logistics",
+          "assumption": "The Tuesday and Wednesday downtown workshops require no additional preparation, travel burden, or recovery time beyond the visible 09:30-17:30 blocks.",
+          "evidence_gap": "The workshops are fixed and described as downtown, but commute time, preparation requirements, and post-workshop obligations are not shown.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Client design work flexibility",
+          "assumption": "The Monday added hour and the moved Friday block are acceptable for the client-work target and any client-side timing expectations.",
+          "evidence_gap": "The proposal states that existing work appears user-only and non-fixed, but client-side expectations and the original request are not visible.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Calendar metadata accuracy",
+          "assumption": "The intended work durations are the simulated event times rather than the stale descriptions.",
+          "evidence_gap": "The Friday event runs from 10:30 to 19:30 but still has the description '10 hours work'; the rationale says descriptions may remain stale because the available operations do not edit descriptions.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        }
+      ]
+    }
+  ],
+  "refinements": 2,
+  "source_status": "proposal_ready",
+  "final_proposal": {
+    "changes": [
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Client Design Work",
+        "from_start": null,
+        "to_start": "2027-02-22T18:30:00+00:00",
+        "to_end": "2027-02-22T19:30:00+00:00",
+        "category": "work",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "move",
+        "event_id": "work_fri",
+        "title": null,
+        "from_start": null,
+        "to_start": "2027-02-26T10:30:00+00:00",
+        "to_end": "2027-02-26T19:30:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "Workshop events are fixed/protected and remain untouched.",
+        "No client work is scheduled on Tuesday or Wednesday.",
+        "Protected sleep blocks and morning gym routines remain untouched.",
+        "Final scheduled client design work reaches 26 hours within the checked week.",
+        "The added work category is supported by the request and existing client-work category.",
+        "Existing work appears user-only and non-fixed, but client-side timing expectations are not shown.",
+        "Meals, breaks, commutes, workshop preparation, recovery needs and tolerance for long creative days are not specified.",
+        "Calendar descriptions may remain stale because the available operations do not edit descriptions."
+      ],
+      "priorities": [
+        "Avoid adding load to Thursday after two fixed workshop days.",
+        "Reduce the original Friday concentration without moving health or sleep events.",
+        "Use a small Monday extension because it precedes the workshop days.",
+        "Keep the plan within visible free calendar intervals while not assuming external availability."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Keep the original 8/8/10 distribution.",
+          "rejected_because": "Rejected because Friday remains the heaviest workday after gym and the workshop sequence."
+        },
+        {
+          "option": "Use the prior 9/9/8 distribution.",
+          "rejected_because": "Rejected because it makes Thursday longer immediately after two fixed workshop days."
+        },
+        {
+          "option": "Split work into evening fragments on multiple days.",
+          "rejected_because": "Rejected because no meal, recovery or external availability facts support extra fragmentation."
+        },
+        {
+          "option": "Move or shorten gym sessions.",
+          "rejected_because": "Rejected because the request protects morning gym routines."
+        }
+      ],
+      "summary": "The selected plan uses Monday for one extra client-work hour and shortens Friday by one hour, trading a modest early-week extension for less end-of-week concentration while leaving Thursday, sleep, gym and fixed workshops unchanged."
+    }
+  },
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [],
+    "valid": true,
+    "aggregate_checks": [
+      {
+        "id": "weekly_hours",
+        "status": "pass",
+        "minutes": 1560.0,
+        "minimum_minutes": 1560,
+        "category": "work",
+        "evidence": "union of final calendar intervals"
+      }
+    ],
+    "aggregate_validation_version": "duration_total_v1"
+  },
+  "source_result_sha256": "b158d831cce35c7b77380b32fc32a61d4270553630071cb4c2049ec4c2d21362",
+  "scenario_sha256": "874410f03ae0989eb822b7c0399123d7a0f078de2dba69a3c18afddc611ef8b7",
+  "aggregate_requirements_sha256": "e5135845124430a5c0538bc4e7bedb88d9ef40a8cc86e842c569b4d9a8969d9a",
+  "confirmed_changes_sha256": null,
+  "critic_input_version": "final_calendar_v1",
+  "critic_policy_version": "uncertainty_review_v2",
+  "result_calendar_version": "validated_added_metadata_v2",
+  "final_result_calendar": {
+    "timezone": "Europe/Lisbon",
+    "coverage": "all_events_in_scenario_after_simulation",
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-02-21T23:30:00+00:00",
+        "end": "2027-02-22T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_mon",
+        "title": "Gym Workout",
+        "start": "2027-02-22T08:00:00+00:00",
+        "end": "2027-02-22T09:30:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_mon",
+        "title": "Design Work Block",
+        "start": "2027-02-22T10:30:00+00:00",
+        "end": "2027-02-22T18:30:00+00:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "8 hours work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_0",
+        "title": "Client Design Work",
+        "start": "2027-02-22T18:30:00+00:00",
+        "end": "2027-02-22T19:30:00+00:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-02-22T23:30:00+00:00",
+        "end": "2027-02-23T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "workshop_tue",
+        "title": "Professional UI/UX Workshop - Day 1",
+        "start": "2027-02-23T09:30:00+00:00",
+        "end": "2027-02-23T17:30:00+00:00",
+        "category": "exam",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "instructors"
+        ],
+        "description": "Fixed workshop downtown.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-02-23T23:30:00+00:00",
+        "end": "2027-02-24T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "workshop_wed",
+        "title": "Professional UI/UX Workshop - Day 2",
+        "start": "2027-02-24T09:30:00+00:00",
+        "end": "2027-02-24T17:30:00+00:00",
+        "category": "exam",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "instructors"
+        ],
+        "description": "Fixed workshop downtown.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-02-24T23:30:00+00:00",
+        "end": "2027-02-25T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_thu",
+        "title": "Gym Workout",
+        "start": "2027-02-25T08:00:00+00:00",
+        "end": "2027-02-25T09:30:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_thu",
+        "title": "Design Work Block",
+        "start": "2027-02-25T10:30:00+00:00",
+        "end": "2027-02-25T18:30:00+00:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "8 hours work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-02-25T23:30:00+00:00",
+        "end": "2027-02-26T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_fri",
+        "title": "Gym Workout",
+        "start": "2027-02-26T08:00:00+00:00",
+        "end": "2027-02-26T09:30:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_fri",
+        "title": "Design Work Block",
+        "start": "2027-02-26T10:30:00+00:00",
+        "end": "2027-02-26T19:30:00+00:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "10 hours work.",
+        "origin": "existing",
+        "change_status": "moved"
+      }
+    ],
+    "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+  },
+  "final_unresolved_assumptions": [
+    {
+      "subject": "Monday 9-hour design-work span",
+      "assumption": "The user can realistically sustain design work from 10:30 to 19:30 after the 08:00-09:30 gym session, including the added 18:30-19:30 client-work hour.",
+      "evidence_gap": "The calendar shows a one-hour gap after gym and a contiguous work span, but does not show breaks, meals, work intensity, commute from gym, or the user's tolerance for long creative workdays.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Friday 9-hour design-work block",
+      "assumption": "The user can manage design work from 10:30 to 19:30 after the 08:00-09:30 gym session and after the preceding workshop and work sequence.",
+      "evidence_gap": "The proposal reduces Friday compared with the original 10-hour block, but does not provide direct evidence about fatigue level, breaks, meal timing, or end-of-week capacity.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Cumulative weekly load",
+      "assumption": "The user can manage Monday gym plus 9 hours of work, two consecutive 09:30-17:30 workshop days, Thursday gym plus 8 hours of work, and Friday gym plus 9 hours of work without excessive fatigue or reduced effectiveness.",
+      "evidence_gap": "The rationale discusses distribution trade-offs, but the visible calendar does not show recovery needs, non-calendar obligations, or the user's capacity across the five-day sequence.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Workshop logistics",
+      "assumption": "The Tuesday and Wednesday downtown workshops require no additional preparation, travel burden, or recovery time beyond the visible 09:30-17:30 blocks.",
+      "evidence_gap": "The workshops are fixed and described as downtown, but commute time, preparation requirements, and post-workshop obligations are not shown.",
+      "potential_impact": "material",
+      "verification_source": "unknown"
+    },
+    {
+      "subject": "Client design work flexibility",
+      "assumption": "The Monday added hour and the moved Friday block are acceptable for the client-work target and any client-side timing expectations.",
+      "evidence_gap": "The proposal states that existing work appears user-only and non-fixed, but client-side expectations and the original request are not visible.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Calendar metadata accuracy",
+      "assumption": "The intended work durations are the simulated event times rather than the stale descriptions.",
+      "evidence_gap": "The Friday event runs from 10:30 to 19:30 but still has the description '10 hours work'; the rationale says descriptions may remain stale because the available operations do not edit descriptions.",
+      "potential_impact": "minor",
+      "verification_source": "unknown"
+    }
+  ],
+  "uncertainty_history": [
+    {
+      "iteration": 0,
+      "unresolved_assumptions": [
+        {
+          "subject": "Friday 10-hour design block",
+          "assumption": "The user can realistically sustain 10 hours of design work from 10:30 to 20:30 after a 08:00-09:30 gym session.",
+          "evidence_gap": "The calendar shows the block and gym session, but does not show breaks, meals, task intensity, deadlines, or the user's tolerance for long creative workdays.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Cumulative weekly load",
+          "assumption": "The user can manage five consecutive demanding days consisting of work, workshops, and gym without excessive fatigue or reduced effectiveness.",
+          "evidence_gap": "The proposal notes protected sleep and preserved routines but does not assess recovery needs across Monday through Friday.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Workshop logistics",
+          "assumption": "The Tuesday and Wednesday workshops require no additional preparation, travel burden, or recovery time beyond the visible 09:30-17:30 blocks.",
+          "evidence_gap": "The workshops are described as fixed and downtown, but the calendar does not provide commute time, preparation requirements, or post-workshop obligations.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Client design work flexibility",
+          "assumption": "The existing Monday, Thursday, and Friday work blocks are the best available distribution for the 26-hour target.",
+          "evidence_gap": "The rationale considers avoiding disruption but does not show whether the 10-hour Friday block was compared against less concentrated options on human manageability grounds.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    },
+    {
+      "iteration": 1,
+      "unresolved_assumptions": [
+        {
+          "subject": "Monday and Thursday 9-hour design blocks",
+          "assumption": "The user can realistically sustain design work from 10:30 to 19:30 after 08:00-09:30 gym sessions.",
+          "evidence_gap": "The calendar shows a one-hour gap after gym before work, but does not show breaks, meals, work intensity, commute from gym, or the user's tolerance for long creative workdays.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Cumulative weekly load",
+          "assumption": "The user can manage Monday gym plus 9 hours of design work, two consecutive 09:30-17:30 workshop days, Thursday gym plus 9 hours of design work, and Friday gym plus 8 hours of design work without excessive fatigue.",
+          "evidence_gap": "The proposal discusses reducing Friday's burden but does not provide direct evidence about recovery needs or the user's capacity across the five-day sequence.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Workshop logistics",
+          "assumption": "The Tuesday and Wednesday workshops require no additional preparation, travel burden, or recovery time beyond the visible 09:30-17:30 blocks.",
+          "evidence_gap": "The workshops are described as fixed and downtown, but commute time, preparation requirements, and post-workshop obligations are not shown.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Work-block flexibility",
+          "assumption": "The Monday, Thursday, and Friday design work blocks may be resized as shown and remain acceptable for the client work target.",
+          "evidence_gap": "The proposal states the blocks appear user-only and flexible, but the original request and any client-side expectations are not visible.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Calendar metadata accuracy",
+          "assumption": "The actual intended work durations are the simulated event times, not the stale descriptions attached to the events.",
+          "evidence_gap": "Monday and Thursday run 9 hours while described as 8 hours, and Friday runs 8 hours while described as 10 hours.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        }
+      ]
+    },
+    {
+      "iteration": 2,
+      "unresolved_assumptions": [
+        {
+          "subject": "Monday 9-hour design-work span",
+          "assumption": "The user can realistically sustain design work from 10:30 to 19:30 after the 08:00-09:30 gym session, including the added 18:30-19:30 client-work hour.",
+          "evidence_gap": "The calendar shows a one-hour gap after gym and a contiguous work span, but does not show breaks, meals, work intensity, commute from gym, or the user's tolerance for long creative workdays.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Friday 9-hour design-work block",
+          "assumption": "The user can manage design work from 10:30 to 19:30 after the 08:00-09:30 gym session and after the preceding workshop and work sequence.",
+          "evidence_gap": "The proposal reduces Friday compared with the original 10-hour block, but does not provide direct evidence about fatigue level, breaks, meal timing, or end-of-week capacity.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Cumulative weekly load",
+          "assumption": "The user can manage Monday gym plus 9 hours of work, two consecutive 09:30-17:30 workshop days, Thursday gym plus 8 hours of work, and Friday gym plus 9 hours of work without excessive fatigue or reduced effectiveness.",
+          "evidence_gap": "The rationale discusses distribution trade-offs, but the visible calendar does not show recovery needs, non-calendar obligations, or the user's capacity across the five-day sequence.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Workshop logistics",
+          "assumption": "The Tuesday and Wednesday downtown workshops require no additional preparation, travel burden, or recovery time beyond the visible 09:30-17:30 blocks.",
+          "evidence_gap": "The workshops are fixed and described as downtown, but commute time, preparation requirements, and post-workshop obligations are not shown.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Client design work flexibility",
+          "assumption": "The Monday added hour and the moved Friday block are acceptable for the client-work target and any client-side timing expectations.",
+          "evidence_gap": "The proposal states that existing work appears user-only and non-fixed, but client-side expectations and the original request are not visible.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Calendar metadata accuracy",
+          "assumption": "The intended work durations are the simulated event times rather than the stale descriptions.",
+          "evidence_gap": "The Friday event runs from 10:30 to 19:30 but still has the description '10 hours work'; the rationale says descriptions may remain stale because the available operations do not edit descriptions.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        }
+      ]
+    }
+  ]
+}

@@ -223,10 +223,13 @@ def _structured_output_diagnostic(text: str, schema: type[T]) -> dict:
 
 def _retry_feedback(diagnostic: dict) -> str:
     category = diagnostic["category"]
-    if category == "incomplete_json":
+    if category in {"incomplete_json", "output_truncated"}:
         return ("A resposta terminou antes de fechar o JSON. Recomeça do início e devolve um "
                 "objeto completo e mais conciso; mantém todos os campos obrigatórios, sem "
                 "repetir detalhes do calendário na justificação.")
+    if category == "stream_protocol_error":
+        return ("A resposta anterior terminou com um erro técnico de streaming. Recomeça do "
+                "início e devolve apenas o objeto JSON completo.")
     if category == "schema_validation":
         fields = ", ".join(diagnostic.get("fields", [])) or "campos desconhecidos"
         return (f"O JSON estava completo, mas falhou o esquema nos campos: {fields}. "
@@ -313,6 +316,7 @@ class IAeduProvider:
         self.last_failed_outputs: list[str] = []
         self.last_structured_output_diagnostics: list[dict] = []
         self.last_rate_limit_attempts: list[dict] = []
+        self.last_stream_diagnostics: dict = {}
 
     def _check_config(self) -> None:
         missing = [name for name, value in (
@@ -358,6 +362,7 @@ class IAeduProvider:
         """Protocolo multipart e linhas JSON do exemplo oficial IAedu."""
         self._check_config()
         self.last_rate_limit_attempts = []
+        self.last_stream_diagnostics = {}
         fixed_thread = thread_id
         for retry_index in range(self.rate_limit_max_retries + 1):
             files = {"channel_id": (None, self.channel_id),
@@ -384,13 +389,24 @@ class IAeduProvider:
                                          "headers": _safe_rate_headers(response.headers)},
                         ) from None
                     parts: list[str] = []
+                    terminal_events: list[dict] = []
+                    event_count = 0
                     for line in response.iter_lines():
                         if not line:
                             continue
+                        event_count += 1
                         try:
                             event = json.loads(line.decode("utf-8"))
                         except (UnicodeDecodeError, json.JSONDecodeError):
-                            continue
+                            diagnostics = {
+                                "classification": "stream_protocol_error",
+                                "event_index": event_count,
+                                "line_bytes": len(line),
+                                "tokens_collected": len(parts),
+                            }
+                            raise LLMError("IAedu devolveu uma linha de streaming inválida",
+                                           failed_outputs=["".join(parts)] if parts else [],
+                                           diagnostics=diagnostics) from None
                         if not isinstance(event, dict):
                             continue
                         if event.get("type") == "error":
@@ -402,9 +418,35 @@ class IAeduProvider:
                             raise LLMError("IAedu devolveu um evento de erro no streaming: " + detail[:300])
                         if event.get("type") == "token" and isinstance(event.get("content"), str):
                             parts.append(event["content"])
+                        elif event.get("type") != "error":
+                            safe = {"type": event.get("type")}
+                            for key in ("finish_reason", "stop_reason", "status"):
+                                if isinstance(event.get(key), (str, int, float, bool)):
+                                    safe[key] = event[key]
+                            usage = event.get("usage")
+                            if isinstance(usage, dict):
+                                safe["usage"] = {key: value for key, value in usage.items()
+                                                 if isinstance(value, (int, float))}
+                            terminal_events.append(safe)
                     if not parts:
                         raise LLMError("IAedu não devolveu tokens de texto")
-                    return "".join(parts)
+                    output = "".join(parts)
+                    finish_reasons = [str(event.get("finish_reason") or event.get("stop_reason") or "").lower()
+                                      for event in terminal_events]
+                    self.last_stream_diagnostics = {
+                        "classification": "complete_stream",
+                        "event_count": event_count,
+                        "token_events": len(parts),
+                        "output_chars": len(output),
+                        "terminal_events": terminal_events,
+                    }
+                    if any(reason in {"length", "max_tokens", "max_output_tokens"}
+                           for reason in finish_reasons):
+                        diagnostics = self.last_stream_diagnostics | {
+                            "classification": "output_truncated"}
+                        raise LLMError("IAedu terminou a resposta por limite de output",
+                                       failed_outputs=[output], diagnostics=diagnostics)
+                    return output
                 finally:
                     response.close()
             except RateLimitError as exc:
@@ -442,7 +484,21 @@ class IAeduProvider:
         self.last_structured_output_diagnostics = []
         for attempt in range(self.max_retries):
             suffix = "" if attempt == 0 else f"\n\n{retry_feedback}"
-            output = self.generate_text(instruction + suffix)
+            try:
+                output = self.generate_text(instruction + suffix)
+            except LLMError as exc:
+                category = exc.diagnostics.get("classification")
+                if category not in {"output_truncated", "stream_protocol_error"}:
+                    raise
+                failed_outputs.extend(exc.failed_outputs)
+                diagnostic = dict(exc.diagnostics) | {"category": category, "attempt": attempt + 1}
+                diagnostics.append(diagnostic)
+                self.last_failed_outputs = list(failed_outputs)
+                self.last_structured_output_diagnostics = list(diagnostics)
+                retry_feedback = _retry_feedback(diagnostic)
+                LOGGER.warning("IAedu structured stream attempt %s/%s failed: %s",
+                               attempt + 1, self.max_retries, category)
+                continue
             try:
                 return _parse_json_object(output, schema)
             except (ValidationError, ValueError):

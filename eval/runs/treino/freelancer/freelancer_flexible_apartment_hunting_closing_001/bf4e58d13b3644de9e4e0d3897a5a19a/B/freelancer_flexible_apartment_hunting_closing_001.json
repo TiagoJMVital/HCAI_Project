@@ -1,0 +1,1893 @@
+{
+  "configuration": "B",
+  "scenario_id": "freelancer_flexible_apartment_hunting_closing_001",
+  "family": "freelancer_schedule_conflict",
+  "category": "v2",
+  "proposer_provider": "iaedu",
+  "proposer_model": "GPT-5.5",
+  "proposer_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_provider": "iaedu",
+  "critic_model": "GPT-5.5",
+  "critic_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_settings": {
+    "threshold": 4.0,
+    "max_refinements": 3,
+    "min_dimension_score": 1
+  },
+  "iterations": [
+    {
+      "index": 0,
+      "proposer_feedback": null,
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [],
+        "rationale": {
+          "constraints": [
+            "Fixed property commitments, protected sleep blocks, and existing morning runs are already accommodated without overlaps.",
+            "The final calendar already contains 1680 minutes of work within the typed weekly window.",
+            "No fixed or protected event has an externally confirmed exception permitting movement or deletion."
+          ],
+          "priorities": [
+            "Preserve sleep and morning runs while meeting the consulting-hours requirement.",
+            "Avoid unnecessary disruption because the current calendar already satisfies the request."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Add extra consulting work in remaining free gaps.",
+              "rejected_because": "Rejected because the weekly work minimum is already met and extra work is not requested."
+            },
+            {
+              "option": "Move existing flexible work blocks around the property appointments.",
+              "rejected_because": "Rejected because there is no conflict to resolve and moving them would add disruption without benefit."
+            }
+          ],
+          "summary": "No schedule changes are proposed because the current calendar already fits the property commitments, preserves sleep and morning runs, and reaches the required 28 consulting hours."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [
+          "no changes proposed; request satisfaction requires Critic and human review"
+        ],
+        "valid": true,
+        "aggregate_checks": [
+          {
+            "id": "weekly_hours",
+            "status": "pass",
+            "minutes": 1680.0,
+            "minimum_minutes": 1680,
+            "category": "work",
+            "evidence": "union of final calendar intervals"
+          }
+        ],
+        "aggregate_validation_version": "duration_total_v1",
+        "no_op": true
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-06-06T23:30:00+01:00",
+            "end": "2027-06-07T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "run_mon",
+            "title": "Morning Run",
+            "start": "2027-06-07T08:00:00+01:00",
+            "end": "2027-06-07T09:00:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Run.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_mon",
+            "title": "Consulting Work Block",
+            "start": "2027-06-07T10:00:00+01:00",
+            "end": "2027-06-07T17:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "7 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-06-07T23:30:00+01:00",
+            "end": "2027-06-08T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "run_tue",
+            "title": "Morning Run",
+            "start": "2027-06-08T08:00:00+01:00",
+            "end": "2027-06-08T09:00:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Run.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_tue",
+            "title": "Consulting Work Block",
+            "start": "2027-06-08T10:00:00+01:00",
+            "end": "2027-06-08T14:30:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "4.5 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "apartment_visit_tue",
+            "title": "Apartment Viewing with Agent",
+            "start": "2027-06-08T15:00:00+01:00",
+            "end": "2027-06-08T17:00:00+01:00",
+            "category": "household",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "agent"
+            ],
+            "description": "Fixed viewing.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-06-08T23:30:00+01:00",
+            "end": "2027-06-09T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "run_wed",
+            "title": "Morning Run",
+            "start": "2027-06-09T08:00:00+01:00",
+            "end": "2027-06-09T09:00:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Run.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_wed",
+            "title": "Consulting Work Block",
+            "start": "2027-06-09T10:00:00+01:00",
+            "end": "2027-06-09T15:30:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "5.5 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "apartment_visit_wed",
+            "title": "Final Apartment Inspection",
+            "start": "2027-06-09T16:00:00+01:00",
+            "end": "2027-06-09T18:00:00+01:00",
+            "category": "household",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "landlord"
+            ],
+            "description": "Fixed inspection.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-06-09T23:30:00+01:00",
+            "end": "2027-06-10T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "run_thu",
+            "title": "Morning Run",
+            "start": "2027-06-10T08:00:00+01:00",
+            "end": "2027-06-10T09:00:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Run.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_thu",
+            "title": "Consulting Work Block",
+            "start": "2027-06-10T10:00:00+01:00",
+            "end": "2027-06-10T17:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "7 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-06-10T23:30:00+01:00",
+            "end": "2027-06-11T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "notary_fri",
+            "title": "Apartment Contract Signing at Notary",
+            "start": "2027-06-11T11:00:00+01:00",
+            "end": "2027-06-11T13:00:00+01:00",
+            "category": "exam",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "notary"
+            ],
+            "description": "Fixed signing.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_fri",
+            "title": "Consulting Work Block",
+            "start": "2027-06-11T14:00:00+01:00",
+            "end": "2027-06-11T18:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "4 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 4,
+          "alternatives": 3,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The rationale appropriately avoids disruption, but it leans heavily on the weekly work total and lack of overlaps. It gives less attention to practical transition needs around the Tuesday 14:30 work end before the 15:00 apartment viewing and the Wednesday 15:30 work end before the 16:00 final inspection.",
+          "Because the original request is not visible and the technical validation explicitly did not check request satisfaction, the claim that the current calendar already satisfies the request cannot be fully verified from the provided material alone.",
+          "The alternatives considered are reasonable for a no-change proposal, but they are narrow: they reject adding work and moving flexible blocks without much discussion of whether the tight property-appointment transitions are acceptable in the user's real context.",
+          "The Friday sequence from the 11:00-13:00 notary signing to 14:00-18:00 work is plausible, but the calendar does not show whether the hour between them is enough for lunch, travel, decompression, or setup. This is an uncertainty rather than a demonstrated flaw."
+        ],
+        "feedback": "The no-change outcome is broadly plausible and human-manageable on the visible calendar. Sleep is protected at 23:30-07:30, morning runs are preserved, and the work total reaches the stated 1680 minutes without overlaps. The week has several demanding but not obviously excessive days: Monday and Thursday each have a run plus 7 hours of work, Tuesday and Wednesday combine work with 2-hour apartment commitments, and Friday combines a 2-hour notary appointment with 4 hours of work. The main quality issue is not workload volume but margin around the property events, especially the 30-minute gaps before the Tuesday 15:00 viewing and Wednesday 16:00 inspection. If those events require travel, preparation, or a reset after work, the current arrangement may feel tight. However, because these are pre-existing preserved events and no change was proposed, this is not enough by itself to require a revision. The Proposer should, if it has fuller context, substantiate that these transition windows are workable or generally reconsider whether preserving every flexible work block exactly as-is remains the most sustainable choice.",
+        "plausibility_review": {
+          "revision_required": false,
+          "severity": "low",
+          "reason": "No concrete human-manageability failure is visible. The schedule protects sleep, keeps morning runs, reaches the stated consulting-hours total, and avoids adding new load or disruption. The tightest points are the 30-minute transitions from work to property appointments on Tuesday and Wednesday, plus the Friday notary-to-work sequence, but the calendar does not show that travel or preparation makes these impractical. These remain relevant uncertainties rather than demonstrated problems requiring a revised proposal.",
+          "suggested_improvement": "If reviewed further with fuller context, the Proposer should specifically justify the practical adequacy of the short transitions before property commitments and after the notary appointment, or consider whether small redistribution of flexible work would reduce dependence on those margins without undermining the 28-hour work goal."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Original request satisfaction",
+            "assumption": "The no-change calendar satisfies the user's actual request beyond the visible 28-hour consulting total and preservation of listed commitments.",
+            "evidence_gap": "The original request is not provided, and the technical validation states that request satisfaction was not checked.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Tuesday transition to apartment viewing",
+            "assumption": "The 30-minute gap between the 10:00-14:30 consulting work block and the 15:00-17:00 apartment viewing is enough for any needed travel, preparation, food, or reset.",
+            "evidence_gap": "Locations, travel requirements, preparation needs, and whether the work can end cleanly at 14:30 are not provided.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Wednesday transition to final apartment inspection",
+            "assumption": "The 30-minute gap between the 10:00-15:30 consulting work block and the 16:00-18:00 final apartment inspection is enough for any needed travel, preparation, food, or reset.",
+            "evidence_gap": "Locations, travel requirements, inspection preparation needs, and whether the work can end cleanly at 15:30 are not provided.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Friday notary-to-work sequence",
+            "assumption": "The 13:00-14:00 gap after the 11:00-13:00 notary signing is enough before the 14:00-18:00 consulting work block.",
+            "evidence_gap": "No information is provided about notary location, travel back to a work location, lunch needs, administrative follow-up, or decompression after the signing.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Work block sustainability",
+            "assumption": "The preserved work blocks, including 7-hour blocks on Monday and Thursday, are structured in a way that allows normal breaks and meals as needed.",
+            "evidence_gap": "The calendar lists continuous work blocks but does not show internal breaks or whether breaks are implicitly allowed.",
+            "potential_impact": "minor",
+            "verification_source": "user_context"
+          }
+        ],
+        "overall": 3.75
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": false,
+        "plausibility_revision_required": false,
+        "accepted": false,
+        "revision_causes": [
+          "numeric_criteria_failed"
+        ]
+      },
+      "operations_changed_from_previous": null,
+      "rationale_changed_from_previous": null,
+      "prior_critic_reviews": [],
+      "unresolved_assumptions": [
+        {
+          "subject": "Original request satisfaction",
+          "assumption": "The no-change calendar satisfies the user's actual request beyond the visible 28-hour consulting total and preservation of listed commitments.",
+          "evidence_gap": "The original request is not provided, and the technical validation states that request satisfaction was not checked.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Tuesday transition to apartment viewing",
+          "assumption": "The 30-minute gap between the 10:00-14:30 consulting work block and the 15:00-17:00 apartment viewing is enough for any needed travel, preparation, food, or reset.",
+          "evidence_gap": "Locations, travel requirements, preparation needs, and whether the work can end cleanly at 14:30 are not provided.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Wednesday transition to final apartment inspection",
+          "assumption": "The 30-minute gap between the 10:00-15:30 consulting work block and the 16:00-18:00 final apartment inspection is enough for any needed travel, preparation, food, or reset.",
+          "evidence_gap": "Locations, travel requirements, inspection preparation needs, and whether the work can end cleanly at 15:30 are not provided.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Friday notary-to-work sequence",
+          "assumption": "The 13:00-14:00 gap after the 11:00-13:00 notary signing is enough before the 14:00-18:00 consulting work block.",
+          "evidence_gap": "No information is provided about notary location, travel back to a work location, lunch needs, administrative follow-up, or decompression after the signing.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Work block sustainability",
+          "assumption": "The preserved work blocks, including 7-hour blocks on Monday and Thursday, are structured in a way that allows normal breaks and meals as needed.",
+          "evidence_gap": "The calendar lists continuous work blocks but does not show internal breaks or whether breaks are implicitly allowed.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "proposer_feedback": "Numeric Critic criteria failed. Scores: {\"reasoning\":4,\"coherence\":4,\"alternatives\":3,\"clarity\":4}. Unverified conditions to reassess: [{'subject': 'Original request satisfaction', 'assumption': \"The no-change calendar satisfies the user's actual request beyond the visible 28-hour consulting total and preservation of listed commitments.\", 'evidence_gap': 'The original request is not provided, and the technical validation states that request satisfaction was not checked.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Tuesday transition to apartment viewing', 'assumption': 'The 30-minute gap between the 10:00-14:30 consulting work block and the 15:00-17:00 apartment viewing is enough for any needed travel, preparation, food, or reset.', 'evidence_gap': 'Locations, travel requirements, preparation needs, and whether the work can end cleanly at 14:30 are not provided.', 'potential_impact': 'material', 'verification_source': 'unknown'}, {'subject': 'Wednesday transition to final apartment inspection', 'assumption': 'The 30-minute gap between the 10:00-15:30 consulting work block and the 16:00-18:00 final apartment inspection is enough for any needed travel, preparation, food, or reset.', 'evidence_gap': 'Locations, travel requirements, inspection preparation needs, and whether the work can end cleanly at 15:30 are not provided.', 'potential_impact': 'material', 'verification_source': 'unknown'}, {'subject': 'Friday notary-to-work sequence', 'assumption': 'The 13:00-14:00 gap after the 11:00-13:00 notary signing is enough before the 14:00-18:00 consulting work block.', 'evidence_gap': 'No information is provided about notary location, travel back to a work location, lunch needs, administrative follow-up, or decompression after the signing.', 'potential_impact': 'material', 'verification_source': 'unknown'}, {'subject': 'Work block sustainability', 'assumption': 'The preserved work blocks, including 7-hour blocks on Monday and Thursday, are structured in a way that allows normal breaks and meals as needed.', 'evidence_gap': 'The calendar lists continuous work blocks but does not show internal breaks or whether breaks are implicitly allowed.', 'potential_impact': 'minor', 'verification_source': 'user_context'}] Weaknesses: ['The rationale appropriately avoids disruption, but it leans heavily on the weekly work total and lack of overlaps. It gives less attention to practical transition needs around the Tuesday 14:30 work end before the 15:00 apartment viewing and the Wednesday 15:30 work end before the 16:00 final inspection.', 'Because the original request is not visible and the technical validation explicitly did not check request satisfaction, the claim that the current calendar already satisfies the request cannot be fully verified from the provided material alone.', \"The alternatives considered are reasonable for a no-change proposal, but they are narrow: they reject adding work and moving flexible blocks without much discussion of whether the tight property-appointment transitions are acceptable in the user's real context.\", 'The Friday sequence from the 11:00-13:00 notary signing to 14:00-18:00 work is plausible, but the calendar does not show whether the hour between them is enough for lunch, travel, decompression, or setup. This is an uncertainty rather than a demonstrated flaw.']. Actionable feedback: The no-change outcome is broadly plausible and human-manageable on the visible calendar. Sleep is protected at 23:30-07:30, morning runs are preserved, and the work total reaches the stated 1680 minutes without overlaps. The week has several demanding but not obviously excessive days: Monday and Thursday each have a run plus 7 hours of work, Tuesday and Wednesday combine work with 2-hour apartment commitments, and Friday combines a 2-hour notary appointment with 4 hours of work. The main quality issue is not workload volume but margin around the property events, especially the 30-minute gaps before the Tuesday 15:00 viewing and Wednesday 16:00 inspection. If those events require travel, preparation, or a reset after work, the current arrangement may feel tight. However, because these are pre-existing preserved events and no change was proposed, this is not enough by itself to require a revision. The Proposer should, if it has fuller context, substantiate that these transition windows are workable or generally reconsider whether preserving every flexible work block exactly as-is remains the most sustainable choice.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "move",
+            "event_id": "work_mon",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-06-07T10:00:00+01:00",
+            "to_end": "2027-06-07T18:00:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "work_tue",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-06-08T10:00:00+01:00",
+            "to_end": "2027-06-08T14:00:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "work_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-06-09T10:00:00+01:00",
+            "to_end": "2027-06-09T15:00:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "work_fri",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-06-11T14:30:00+01:00",
+            "to_end": "2027-06-11T18:30:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "Fixed property commitments and protected sleep blocks are not moved or deleted.",
+            "Morning run events remain in place.",
+            "The final calendar keeps 1680 minutes of work within the typed weekly window.",
+            "Work events are flexible and user-only, so changing them is operationally feasible under the known rules.",
+            "Travel, preparation, lunch, and recovery needs around property commitments are unknown."
+          ],
+          "priorities": [
+            "Increase practical margins around the apartment commitments without reducing weekly consulting time.",
+            "Shift displaced work to a less externally constrained day rather than compressing property days.",
+            "Accept a longer Monday and slightly later Friday work finish to reduce tighter transition risk."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Keep the original calendar unchanged.",
+              "rejected_because": "Rejected because the visible 30-minute buffers before Tuesday and Wednesday property appointments are fragile under unknown travel or preparation needs."
+            },
+            {
+              "option": "Move the displaced work to Tuesday or Wednesday evening.",
+              "rejected_because": "Rejected because it would make already property-heavy days longer without improving cumulative effort."
+            },
+            {
+              "option": "Add extra work instead of redistributing existing blocks.",
+              "rejected_because": "Rejected because the weekly work minimum is already exactly met after redistribution."
+            }
+          ],
+          "summary": "The selected plan preserves sleep, existing runs, and all fixed apartment commitments while keeping 28 consulting hours, trading a longer Monday and later Friday finish for wider buffers around the property appointments."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true,
+        "aggregate_checks": [
+          {
+            "id": "weekly_hours",
+            "status": "pass",
+            "minutes": 1680.0,
+            "minimum_minutes": 1680,
+            "category": "work",
+            "evidence": "union of final calendar intervals"
+          }
+        ],
+        "aggregate_validation_version": "duration_total_v1"
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-06-06T23:30:00+01:00",
+            "end": "2027-06-07T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "run_mon",
+            "title": "Morning Run",
+            "start": "2027-06-07T08:00:00+01:00",
+            "end": "2027-06-07T09:00:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Run.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_mon",
+            "title": "Consulting Work Block",
+            "start": "2027-06-07T10:00:00+01:00",
+            "end": "2027-06-07T18:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "7 hours work.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-06-07T23:30:00+01:00",
+            "end": "2027-06-08T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "run_tue",
+            "title": "Morning Run",
+            "start": "2027-06-08T08:00:00+01:00",
+            "end": "2027-06-08T09:00:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Run.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_tue",
+            "title": "Consulting Work Block",
+            "start": "2027-06-08T10:00:00+01:00",
+            "end": "2027-06-08T14:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "4.5 hours work.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "apartment_visit_tue",
+            "title": "Apartment Viewing with Agent",
+            "start": "2027-06-08T15:00:00+01:00",
+            "end": "2027-06-08T17:00:00+01:00",
+            "category": "household",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "agent"
+            ],
+            "description": "Fixed viewing.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-06-08T23:30:00+01:00",
+            "end": "2027-06-09T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "run_wed",
+            "title": "Morning Run",
+            "start": "2027-06-09T08:00:00+01:00",
+            "end": "2027-06-09T09:00:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Run.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_wed",
+            "title": "Consulting Work Block",
+            "start": "2027-06-09T10:00:00+01:00",
+            "end": "2027-06-09T15:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "5.5 hours work.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "apartment_visit_wed",
+            "title": "Final Apartment Inspection",
+            "start": "2027-06-09T16:00:00+01:00",
+            "end": "2027-06-09T18:00:00+01:00",
+            "category": "household",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "landlord"
+            ],
+            "description": "Fixed inspection.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-06-09T23:30:00+01:00",
+            "end": "2027-06-10T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "run_thu",
+            "title": "Morning Run",
+            "start": "2027-06-10T08:00:00+01:00",
+            "end": "2027-06-10T09:00:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Run.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_thu",
+            "title": "Consulting Work Block",
+            "start": "2027-06-10T10:00:00+01:00",
+            "end": "2027-06-10T17:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "7 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-06-10T23:30:00+01:00",
+            "end": "2027-06-11T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "notary_fri",
+            "title": "Apartment Contract Signing at Notary",
+            "start": "2027-06-11T11:00:00+01:00",
+            "end": "2027-06-11T13:00:00+01:00",
+            "category": "exam",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "notary"
+            ],
+            "description": "Fixed signing.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_fri",
+            "title": "Consulting Work Block",
+            "start": "2027-06-11T14:30:00+01:00",
+            "end": "2027-06-11T18:30:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "4 hours work.",
+            "origin": "existing",
+            "change_status": "moved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 4,
+          "alternatives": 4,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The revised plan directly addresses the prior concern by expanding the Tuesday work-to-viewing gap from 30 minutes to 60 minutes, the Wednesday work-to-inspection gap from 30 minutes to 60 minutes, and the Friday notary-to-work gap from 60 minutes to 90 minutes. This is a grounded improvement, but the adequacy of those margins still depends on unknown travel, preparation, lunch, and reset needs.",
+          "The trade-off is a heavier Monday: the user has Sleep 23:30-07:30, Morning Run 08:00-09:00, then Consulting Work Block 10:00-18:00. This is plausible, but the rationale could more explicitly acknowledge the cumulative effect of placing the extra redistributed work on a day that already includes a morning run and a full workday.",
+          "Friday now ends later, with Apartment Contract Signing at Notary 11:00-13:00 followed by work 14:30-18:30. The longer buffer is more humane than the prior version, but the later finish may still make Friday feel compressed if the notary appointment involves travel, administrative follow-up, or emotional/cognitive load.",
+          "There is a clarity inconsistency between several moved work event descriptions and their actual times: Monday 10:00-18:00 is described as 7 hours though it is 8 hours; Tuesday 10:00-14:00 is described as 4.5 hours though it is 4 hours; Wednesday 10:00-15:00 is described as 5.5 hours though it is 5 hours. The aggregate weekly total still passes at 1680 minutes, but these stale descriptions make the proposal harder to audit.",
+          "The original request remains unavailable, and the technical validation explicitly does not check request satisfaction. The visible rationale supports the goals it states, but full request satisfaction cannot be independently verified from the provided material."
+        ],
+        "feedback": "The revised calendar is more practically manageable than the prior no-change version because it reduces the most fragile visible transitions around the apartment commitments. Tuesday now has work 10:00-14:00 before the 15:00-17:00 viewing, and Wednesday has work 10:00-15:00 before the 16:00-18:00 inspection, giving each a 60-minute margin rather than 30 minutes. Friday also improves from a 60-minute to a 90-minute gap after the 11:00-13:00 notary appointment before work begins at 14:30. These changes are proportionate to the stated goal of increasing practical margins while preserving 28 consulting hours. The main human-quality cost is that Monday becomes a longer day after the 08:00-09:00 run, with work from 10:00-18:00, and Friday work finishes at 18:30 after a notary appointment earlier in the day. That is not objectively unmanageable, especially with protected sleep preserved each night, but it should be recognized as the trade-off rather than treated as free capacity. The proposer has reasonably answered the prior concern; another revision is not required unless fuller context shows that the new 60- to 90-minute buffers are still insufficient or that the longer Monday and Friday are poor fits for the user.",
+        "plausibility_review": {
+          "revision_required": false,
+          "severity": "low",
+          "reason": "The prior concern about fragile 30-minute transitions received a grounded answer: the revised schedule widens Tuesday and Wednesday property-event buffers to 60 minutes and Friday's post-notary buffer to 90 minutes while preserving sleep, runs, fixed commitments, and the 1680-minute weekly work target. The resulting week is busy but plausibly sustainable on the visible calendar. Remaining issues are uncertainties about travel, preparation, meals, and recovery, plus stale duration descriptions, rather than concrete evidence that the proposed organization is significantly unmanageable.",
+          "suggested_improvement": "With fuller context, the Proposer should verify whether the new 60-minute Tuesday and Wednesday buffers and 90-minute Friday buffer are enough for the actual locations and preparation needs, and should clean up the moved work-block descriptions so they match the actual scheduled durations."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Original request satisfaction",
+            "assumption": "The revised calendar satisfies the user's actual request beyond the visible goals of preserving fixed commitments, protected sleep, morning runs, and 28 consulting hours.",
+            "evidence_gap": "The original request is not provided, and the technical validation states that request satisfaction was not checked.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Tuesday transition to apartment viewing",
+            "assumption": "The 60-minute gap between the 10:00-14:00 consulting work block and the 15:00-17:00 apartment viewing is enough for travel, preparation, food, and reset needs.",
+            "evidence_gap": "Locations, travel requirements, viewing preparation needs, and whether work can end cleanly at 14:00 are not provided.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Wednesday transition to final apartment inspection",
+            "assumption": "The 60-minute gap between the 10:00-15:00 consulting work block and the 16:00-18:00 final apartment inspection is enough for travel, preparation, food, and reset needs.",
+            "evidence_gap": "Locations, travel requirements, inspection preparation needs, and whether work can end cleanly at 15:00 are not provided.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Friday notary-to-work sequence",
+            "assumption": "The 90-minute gap after the 11:00-13:00 notary signing is enough before the 14:30-18:30 consulting work block.",
+            "evidence_gap": "No information is provided about notary location, travel back to a work location, lunch needs, administrative follow-up, or decompression after the signing.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Long Monday workload",
+            "assumption": "The user can sustainably handle Morning Run 08:00-09:00 followed by Consulting Work Block 10:00-18:00 on Monday, with normal meals and breaks either implicit or available.",
+            "evidence_gap": "The calendar does not show internal breaks, meal timing, or how demanding the consulting work is.",
+            "potential_impact": "minor",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Work-block duration descriptions",
+            "assumption": "The operative schedule is determined by event start and end times, not by the stale duration text in the descriptions of moved work events.",
+            "evidence_gap": "Several descriptions do not match the visible intervals: Monday 10:00-18:00 is described as 7 hours, Tuesday 10:00-14:00 as 4.5 hours, and Wednesday 10:00-15:00 as 5.5 hours.",
+            "potential_impact": "minor",
+            "verification_source": "unknown"
+          }
+        ],
+        "overall": 4.0
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": true,
+        "plausibility_revision_required": false,
+        "accepted": true,
+        "revision_causes": []
+      },
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": [
+        {
+          "iteration": 0,
+          "proposal": {
+            "changes": [],
+            "rationale": {
+              "constraints": [
+                "Fixed property commitments, protected sleep blocks, and existing morning runs are already accommodated without overlaps.",
+                "The final calendar already contains 1680 minutes of work within the typed weekly window.",
+                "No fixed or protected event has an externally confirmed exception permitting movement or deletion."
+              ],
+              "priorities": [
+                "Preserve sleep and morning runs while meeting the consulting-hours requirement.",
+                "Avoid unnecessary disruption because the current calendar already satisfies the request."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Add extra consulting work in remaining free gaps.",
+                  "rejected_because": "Rejected because the weekly work minimum is already met and extra work is not requested."
+                },
+                {
+                  "option": "Move existing flexible work blocks around the property appointments.",
+                  "rejected_because": "Rejected because there is no conflict to resolve and moving them would add disruption without benefit."
+                }
+              ],
+              "summary": "No schedule changes are proposed because the current calendar already fits the property commitments, preserves sleep and morning runs, and reaches the required 28 consulting hours."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "sleep_mon",
+                "title": "Sleep",
+                "start": "2027-06-06T23:30:00+01:00",
+                "end": "2027-06-07T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "run_mon",
+                "title": "Morning Run",
+                "start": "2027-06-07T08:00:00+01:00",
+                "end": "2027-06-07T09:00:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Run.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_mon",
+                "title": "Consulting Work Block",
+                "start": "2027-06-07T10:00:00+01:00",
+                "end": "2027-06-07T17:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "7 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_tue",
+                "title": "Sleep",
+                "start": "2027-06-07T23:30:00+01:00",
+                "end": "2027-06-08T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "run_tue",
+                "title": "Morning Run",
+                "start": "2027-06-08T08:00:00+01:00",
+                "end": "2027-06-08T09:00:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Run.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_tue",
+                "title": "Consulting Work Block",
+                "start": "2027-06-08T10:00:00+01:00",
+                "end": "2027-06-08T14:30:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "4.5 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "apartment_visit_tue",
+                "title": "Apartment Viewing with Agent",
+                "start": "2027-06-08T15:00:00+01:00",
+                "end": "2027-06-08T17:00:00+01:00",
+                "category": "household",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "agent"
+                ],
+                "description": "Fixed viewing.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_wed",
+                "title": "Sleep",
+                "start": "2027-06-08T23:30:00+01:00",
+                "end": "2027-06-09T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "run_wed",
+                "title": "Morning Run",
+                "start": "2027-06-09T08:00:00+01:00",
+                "end": "2027-06-09T09:00:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Run.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_wed",
+                "title": "Consulting Work Block",
+                "start": "2027-06-09T10:00:00+01:00",
+                "end": "2027-06-09T15:30:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "5.5 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "apartment_visit_wed",
+                "title": "Final Apartment Inspection",
+                "start": "2027-06-09T16:00:00+01:00",
+                "end": "2027-06-09T18:00:00+01:00",
+                "category": "household",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "landlord"
+                ],
+                "description": "Fixed inspection.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2027-06-09T23:30:00+01:00",
+                "end": "2027-06-10T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "run_thu",
+                "title": "Morning Run",
+                "start": "2027-06-10T08:00:00+01:00",
+                "end": "2027-06-10T09:00:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Run.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_thu",
+                "title": "Consulting Work Block",
+                "start": "2027-06-10T10:00:00+01:00",
+                "end": "2027-06-10T17:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "7 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_fri",
+                "title": "Sleep",
+                "start": "2027-06-10T23:30:00+01:00",
+                "end": "2027-06-11T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "notary_fri",
+                "title": "Apartment Contract Signing at Notary",
+                "start": "2027-06-11T11:00:00+01:00",
+                "end": "2027-06-11T13:00:00+01:00",
+                "category": "exam",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "notary"
+                ],
+                "description": "Fixed signing.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_fri",
+                "title": "Consulting Work Block",
+                "start": "2027-06-11T14:00:00+01:00",
+                "end": "2027-06-11T18:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "4 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              }
+            ],
+            "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+          },
+          "plausibility_review": {
+            "revision_required": false,
+            "severity": "low",
+            "reason": "No concrete human-manageability failure is visible. The schedule protects sleep, keeps morning runs, reaches the stated consulting-hours total, and avoids adding new load or disruption. The tightest points are the 30-minute transitions from work to property appointments on Tuesday and Wednesday, plus the Friday notary-to-work sequence, but the calendar does not show that travel or preparation makes these impractical. These remain relevant uncertainties rather than demonstrated problems requiring a revised proposal.",
+            "suggested_improvement": "If reviewed further with fuller context, the Proposer should specifically justify the practical adequacy of the short transitions before property commitments and after the notary appointment, or consider whether small redistribution of flexible work would reduce dependence on those margins without undermining the 28-hour work goal."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Original request satisfaction",
+              "assumption": "The no-change calendar satisfies the user's actual request beyond the visible 28-hour consulting total and preservation of listed commitments.",
+              "evidence_gap": "The original request is not provided, and the technical validation states that request satisfaction was not checked.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Tuesday transition to apartment viewing",
+              "assumption": "The 30-minute gap between the 10:00-14:30 consulting work block and the 15:00-17:00 apartment viewing is enough for any needed travel, preparation, food, or reset.",
+              "evidence_gap": "Locations, travel requirements, preparation needs, and whether the work can end cleanly at 14:30 are not provided.",
+              "potential_impact": "material",
+              "verification_source": "unknown"
+            },
+            {
+              "subject": "Wednesday transition to final apartment inspection",
+              "assumption": "The 30-minute gap between the 10:00-15:30 consulting work block and the 16:00-18:00 final apartment inspection is enough for any needed travel, preparation, food, or reset.",
+              "evidence_gap": "Locations, travel requirements, inspection preparation needs, and whether the work can end cleanly at 15:30 are not provided.",
+              "potential_impact": "material",
+              "verification_source": "unknown"
+            },
+            {
+              "subject": "Friday notary-to-work sequence",
+              "assumption": "The 13:00-14:00 gap after the 11:00-13:00 notary signing is enough before the 14:00-18:00 consulting work block.",
+              "evidence_gap": "No information is provided about notary location, travel back to a work location, lunch needs, administrative follow-up, or decompression after the signing.",
+              "potential_impact": "material",
+              "verification_source": "unknown"
+            },
+            {
+              "subject": "Work block sustainability",
+              "assumption": "The preserved work blocks, including 7-hour blocks on Monday and Thursday, are structured in a way that allows normal breaks and meals as needed.",
+              "evidence_gap": "The calendar lists continuous work blocks but does not show internal breaks or whether breaks are implicitly allowed.",
+              "potential_impact": "minor",
+              "verification_source": "user_context"
+            }
+          ],
+          "weaknesses": [
+            "The rationale appropriately avoids disruption, but it leans heavily on the weekly work total and lack of overlaps. It gives less attention to practical transition needs around the Tuesday 14:30 work end before the 15:00 apartment viewing and the Wednesday 15:30 work end before the 16:00 final inspection.",
+            "Because the original request is not visible and the technical validation explicitly did not check request satisfaction, the claim that the current calendar already satisfies the request cannot be fully verified from the provided material alone.",
+            "The alternatives considered are reasonable for a no-change proposal, but they are narrow: they reject adding work and moving flexible blocks without much discussion of whether the tight property-appointment transitions are acceptable in the user's real context.",
+            "The Friday sequence from the 11:00-13:00 notary signing to 14:00-18:00 work is plausible, but the calendar does not show whether the hour between them is enough for lunch, travel, decompression, or setup. This is an uncertainty rather than a demonstrated flaw."
+          ],
+          "feedback": "The no-change outcome is broadly plausible and human-manageable on the visible calendar. Sleep is protected at 23:30-07:30, morning runs are preserved, and the work total reaches the stated 1680 minutes without overlaps. The week has several demanding but not obviously excessive days: Monday and Thursday each have a run plus 7 hours of work, Tuesday and Wednesday combine work with 2-hour apartment commitments, and Friday combines a 2-hour notary appointment with 4 hours of work. The main quality issue is not workload volume but margin around the property events, especially the 30-minute gaps before the Tuesday 15:00 viewing and Wednesday 16:00 inspection. If those events require travel, preparation, or a reset after work, the current arrangement may feel tight. However, because these are pre-existing preserved events and no change was proposed, this is not enough by itself to require a revision. The Proposer should, if it has fuller context, substantiate that these transition windows are workable or generally reconsider whether preserving every flexible work block exactly as-is remains the most sustainable choice."
+        }
+      ],
+      "unresolved_assumptions": [
+        {
+          "subject": "Original request satisfaction",
+          "assumption": "The revised calendar satisfies the user's actual request beyond the visible goals of preserving fixed commitments, protected sleep, morning runs, and 28 consulting hours.",
+          "evidence_gap": "The original request is not provided, and the technical validation states that request satisfaction was not checked.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Tuesday transition to apartment viewing",
+          "assumption": "The 60-minute gap between the 10:00-14:00 consulting work block and the 15:00-17:00 apartment viewing is enough for travel, preparation, food, and reset needs.",
+          "evidence_gap": "Locations, travel requirements, viewing preparation needs, and whether work can end cleanly at 14:00 are not provided.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Wednesday transition to final apartment inspection",
+          "assumption": "The 60-minute gap between the 10:00-15:00 consulting work block and the 16:00-18:00 final apartment inspection is enough for travel, preparation, food, and reset needs.",
+          "evidence_gap": "Locations, travel requirements, inspection preparation needs, and whether work can end cleanly at 15:00 are not provided.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Friday notary-to-work sequence",
+          "assumption": "The 90-minute gap after the 11:00-13:00 notary signing is enough before the 14:30-18:30 consulting work block.",
+          "evidence_gap": "No information is provided about notary location, travel back to a work location, lunch needs, administrative follow-up, or decompression after the signing.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Long Monday workload",
+          "assumption": "The user can sustainably handle Morning Run 08:00-09:00 followed by Consulting Work Block 10:00-18:00 on Monday, with normal meals and breaks either implicit or available.",
+          "evidence_gap": "The calendar does not show internal breaks, meal timing, or how demanding the consulting work is.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Work-block duration descriptions",
+          "assumption": "The operative schedule is determined by event start and end times, not by the stale duration text in the descriptions of moved work events.",
+          "evidence_gap": "Several descriptions do not match the visible intervals: Monday 10:00-18:00 is described as 7 hours, Tuesday 10:00-14:00 as 4.5 hours, and Wednesday 10:00-15:00 as 5.5 hours.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        }
+      ]
+    }
+  ],
+  "initial_proposal": {
+    "changes": [],
+    "rationale": {
+      "constraints": [
+        "Fixed property commitments, protected sleep blocks, and existing morning runs are already accommodated without overlaps.",
+        "The final calendar already contains 1680 minutes of work within the typed weekly window.",
+        "No fixed or protected event has an externally confirmed exception permitting movement or deletion."
+      ],
+      "priorities": [
+        "Preserve sleep and morning runs while meeting the consulting-hours requirement.",
+        "Avoid unnecessary disruption because the current calendar already satisfies the request."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Add extra consulting work in remaining free gaps.",
+          "rejected_because": "Rejected because the weekly work minimum is already met and extra work is not requested."
+        },
+        {
+          "option": "Move existing flexible work blocks around the property appointments.",
+          "rejected_because": "Rejected because there is no conflict to resolve and moving them would add disruption without benefit."
+        }
+      ],
+      "summary": "No schedule changes are proposed because the current calendar already fits the property commitments, preserves sleep and morning runs, and reaches the required 28 consulting hours."
+    }
+  },
+  "final_proposal": {
+    "changes": [
+      {
+        "type": "move",
+        "event_id": "work_mon",
+        "title": null,
+        "from_start": null,
+        "to_start": "2027-06-07T10:00:00+01:00",
+        "to_end": "2027-06-07T18:00:00+01:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "work_tue",
+        "title": null,
+        "from_start": null,
+        "to_start": "2027-06-08T10:00:00+01:00",
+        "to_end": "2027-06-08T14:00:00+01:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "work_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": "2027-06-09T10:00:00+01:00",
+        "to_end": "2027-06-09T15:00:00+01:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "work_fri",
+        "title": null,
+        "from_start": null,
+        "to_start": "2027-06-11T14:30:00+01:00",
+        "to_end": "2027-06-11T18:30:00+01:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "Fixed property commitments and protected sleep blocks are not moved or deleted.",
+        "Morning run events remain in place.",
+        "The final calendar keeps 1680 minutes of work within the typed weekly window.",
+        "Work events are flexible and user-only, so changing them is operationally feasible under the known rules.",
+        "Travel, preparation, lunch, and recovery needs around property commitments are unknown."
+      ],
+      "priorities": [
+        "Increase practical margins around the apartment commitments without reducing weekly consulting time.",
+        "Shift displaced work to a less externally constrained day rather than compressing property days.",
+        "Accept a longer Monday and slightly later Friday work finish to reduce tighter transition risk."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Keep the original calendar unchanged.",
+          "rejected_because": "Rejected because the visible 30-minute buffers before Tuesday and Wednesday property appointments are fragile under unknown travel or preparation needs."
+        },
+        {
+          "option": "Move the displaced work to Tuesday or Wednesday evening.",
+          "rejected_because": "Rejected because it would make already property-heavy days longer without improving cumulative effort."
+        },
+        {
+          "option": "Add extra work instead of redistributing existing blocks.",
+          "rejected_because": "Rejected because the weekly work minimum is already exactly met after redistribution."
+        }
+      ],
+      "summary": "The selected plan preserves sleep, existing runs, and all fixed apartment commitments while keeping 28 consulting hours, trading a longer Monday and later Friday finish for wider buffers around the property appointments."
+    }
+  },
+  "final_score": 4.0,
+  "refinements": 1,
+  "critic_accepted": true,
+  "decision": "defer",
+  "reasons": [
+    "mais de 2 mudanças",
+    "toca em evento importante (work_mon, importância 4)",
+    "toca em evento importante (work_tue, importância 4)",
+    "toca em evento importante (work_wed, importância 4)",
+    "toca em evento importante (work_fri, importância 4)"
+  ],
+  "status": "proposal_ready",
+  "critic_input_version": "final_calendar_v1",
+  "critic_policy_version": "uncertainty_review_v2",
+  "result_calendar_version": "validated_added_metadata_v2",
+  "final_result_calendar": {
+    "timezone": "Europe/Lisbon",
+    "coverage": "all_events_in_scenario_after_simulation",
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-06-06T23:30:00+01:00",
+        "end": "2027-06-07T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "run_mon",
+        "title": "Morning Run",
+        "start": "2027-06-07T08:00:00+01:00",
+        "end": "2027-06-07T09:00:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Run.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_mon",
+        "title": "Consulting Work Block",
+        "start": "2027-06-07T10:00:00+01:00",
+        "end": "2027-06-07T18:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "7 hours work.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-06-07T23:30:00+01:00",
+        "end": "2027-06-08T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "run_tue",
+        "title": "Morning Run",
+        "start": "2027-06-08T08:00:00+01:00",
+        "end": "2027-06-08T09:00:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Run.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_tue",
+        "title": "Consulting Work Block",
+        "start": "2027-06-08T10:00:00+01:00",
+        "end": "2027-06-08T14:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "4.5 hours work.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "apartment_visit_tue",
+        "title": "Apartment Viewing with Agent",
+        "start": "2027-06-08T15:00:00+01:00",
+        "end": "2027-06-08T17:00:00+01:00",
+        "category": "household",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "agent"
+        ],
+        "description": "Fixed viewing.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-06-08T23:30:00+01:00",
+        "end": "2027-06-09T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "run_wed",
+        "title": "Morning Run",
+        "start": "2027-06-09T08:00:00+01:00",
+        "end": "2027-06-09T09:00:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Run.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_wed",
+        "title": "Consulting Work Block",
+        "start": "2027-06-09T10:00:00+01:00",
+        "end": "2027-06-09T15:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "5.5 hours work.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "apartment_visit_wed",
+        "title": "Final Apartment Inspection",
+        "start": "2027-06-09T16:00:00+01:00",
+        "end": "2027-06-09T18:00:00+01:00",
+        "category": "household",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "landlord"
+        ],
+        "description": "Fixed inspection.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-06-09T23:30:00+01:00",
+        "end": "2027-06-10T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "run_thu",
+        "title": "Morning Run",
+        "start": "2027-06-10T08:00:00+01:00",
+        "end": "2027-06-10T09:00:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Run.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_thu",
+        "title": "Consulting Work Block",
+        "start": "2027-06-10T10:00:00+01:00",
+        "end": "2027-06-10T17:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "7 hours work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-06-10T23:30:00+01:00",
+        "end": "2027-06-11T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "notary_fri",
+        "title": "Apartment Contract Signing at Notary",
+        "start": "2027-06-11T11:00:00+01:00",
+        "end": "2027-06-11T13:00:00+01:00",
+        "category": "exam",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "notary"
+        ],
+        "description": "Fixed signing.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_fri",
+        "title": "Consulting Work Block",
+        "start": "2027-06-11T14:30:00+01:00",
+        "end": "2027-06-11T18:30:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "4 hours work.",
+        "origin": "existing",
+        "change_status": "moved"
+      }
+    ],
+    "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+  },
+  "final_unresolved_assumptions": [
+    {
+      "subject": "Original request satisfaction",
+      "assumption": "The revised calendar satisfies the user's actual request beyond the visible goals of preserving fixed commitments, protected sleep, morning runs, and 28 consulting hours.",
+      "evidence_gap": "The original request is not provided, and the technical validation states that request satisfaction was not checked.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Tuesday transition to apartment viewing",
+      "assumption": "The 60-minute gap between the 10:00-14:00 consulting work block and the 15:00-17:00 apartment viewing is enough for travel, preparation, food, and reset needs.",
+      "evidence_gap": "Locations, travel requirements, viewing preparation needs, and whether work can end cleanly at 14:00 are not provided.",
+      "potential_impact": "material",
+      "verification_source": "unknown"
+    },
+    {
+      "subject": "Wednesday transition to final apartment inspection",
+      "assumption": "The 60-minute gap between the 10:00-15:00 consulting work block and the 16:00-18:00 final apartment inspection is enough for travel, preparation, food, and reset needs.",
+      "evidence_gap": "Locations, travel requirements, inspection preparation needs, and whether work can end cleanly at 15:00 are not provided.",
+      "potential_impact": "material",
+      "verification_source": "unknown"
+    },
+    {
+      "subject": "Friday notary-to-work sequence",
+      "assumption": "The 90-minute gap after the 11:00-13:00 notary signing is enough before the 14:30-18:30 consulting work block.",
+      "evidence_gap": "No information is provided about notary location, travel back to a work location, lunch needs, administrative follow-up, or decompression after the signing.",
+      "potential_impact": "material",
+      "verification_source": "unknown"
+    },
+    {
+      "subject": "Long Monday workload",
+      "assumption": "The user can sustainably handle Morning Run 08:00-09:00 followed by Consulting Work Block 10:00-18:00 on Monday, with normal meals and breaks either implicit or available.",
+      "evidence_gap": "The calendar does not show internal breaks, meal timing, or how demanding the consulting work is.",
+      "potential_impact": "minor",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Work-block duration descriptions",
+      "assumption": "The operative schedule is determined by event start and end times, not by the stale duration text in the descriptions of moved work events.",
+      "evidence_gap": "Several descriptions do not match the visible intervals: Monday 10:00-18:00 is described as 7 hours, Tuesday 10:00-14:00 as 4.5 hours, and Wednesday 10:00-15:00 as 5.5 hours.",
+      "potential_impact": "minor",
+      "verification_source": "unknown"
+    }
+  ],
+  "uncertainty_history": [
+    {
+      "iteration": 0,
+      "unresolved_assumptions": [
+        {
+          "subject": "Original request satisfaction",
+          "assumption": "The no-change calendar satisfies the user's actual request beyond the visible 28-hour consulting total and preservation of listed commitments.",
+          "evidence_gap": "The original request is not provided, and the technical validation states that request satisfaction was not checked.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Tuesday transition to apartment viewing",
+          "assumption": "The 30-minute gap between the 10:00-14:30 consulting work block and the 15:00-17:00 apartment viewing is enough for any needed travel, preparation, food, or reset.",
+          "evidence_gap": "Locations, travel requirements, preparation needs, and whether the work can end cleanly at 14:30 are not provided.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Wednesday transition to final apartment inspection",
+          "assumption": "The 30-minute gap between the 10:00-15:30 consulting work block and the 16:00-18:00 final apartment inspection is enough for any needed travel, preparation, food, or reset.",
+          "evidence_gap": "Locations, travel requirements, inspection preparation needs, and whether the work can end cleanly at 15:30 are not provided.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Friday notary-to-work sequence",
+          "assumption": "The 13:00-14:00 gap after the 11:00-13:00 notary signing is enough before the 14:00-18:00 consulting work block.",
+          "evidence_gap": "No information is provided about notary location, travel back to a work location, lunch needs, administrative follow-up, or decompression after the signing.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Work block sustainability",
+          "assumption": "The preserved work blocks, including 7-hour blocks on Monday and Thursday, are structured in a way that allows normal breaks and meals as needed.",
+          "evidence_gap": "The calendar lists continuous work blocks but does not show internal breaks or whether breaks are implicitly allowed.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        }
+      ]
+    },
+    {
+      "iteration": 1,
+      "unresolved_assumptions": [
+        {
+          "subject": "Original request satisfaction",
+          "assumption": "The revised calendar satisfies the user's actual request beyond the visible goals of preserving fixed commitments, protected sleep, morning runs, and 28 consulting hours.",
+          "evidence_gap": "The original request is not provided, and the technical validation states that request satisfaction was not checked.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Tuesday transition to apartment viewing",
+          "assumption": "The 60-minute gap between the 10:00-14:00 consulting work block and the 15:00-17:00 apartment viewing is enough for travel, preparation, food, and reset needs.",
+          "evidence_gap": "Locations, travel requirements, viewing preparation needs, and whether work can end cleanly at 14:00 are not provided.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Wednesday transition to final apartment inspection",
+          "assumption": "The 60-minute gap between the 10:00-15:00 consulting work block and the 16:00-18:00 final apartment inspection is enough for travel, preparation, food, and reset needs.",
+          "evidence_gap": "Locations, travel requirements, inspection preparation needs, and whether work can end cleanly at 15:00 are not provided.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Friday notary-to-work sequence",
+          "assumption": "The 90-minute gap after the 11:00-13:00 notary signing is enough before the 14:30-18:30 consulting work block.",
+          "evidence_gap": "No information is provided about notary location, travel back to a work location, lunch needs, administrative follow-up, or decompression after the signing.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Long Monday workload",
+          "assumption": "The user can sustainably handle Morning Run 08:00-09:00 followed by Consulting Work Block 10:00-18:00 on Monday, with normal meals and breaks either implicit or available.",
+          "evidence_gap": "The calendar does not show internal breaks, meal timing, or how demanding the consulting work is.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Work-block duration descriptions",
+          "assumption": "The operative schedule is determined by event start and end times, not by the stale duration text in the descriptions of moved work events.",
+          "evidence_gap": "Several descriptions do not match the visible intervals: Monday 10:00-18:00 is described as 7 hours, Tuesday 10:00-14:00 as 4.5 hours, and Wednesday 10:00-15:00 as 5.5 hours.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        }
+      ]
+    }
+  ],
+  "schema_version": "2.0",
+  "profile_id": "freelancer_flexible_01__freelancer_flexible_apartment_hunting_closing_001",
+  "scenario_sha256": "fc2f295302153f9570c58f00ce6efe42b96987ee677cd0ed31014e99d00eb248",
+  "aggregate_requirements_sha256": "a9b97bc5774ff8190fc25c75bf4866a20c4ce737c095ca0c2a8d887e2252ed91",
+  "confirmed_changes_sha256": null,
+  "simulator_version": "calendar_v2_validated_added_metadata_v2",
+  "dataset_manifest_sha256": "28af38846fb8995651d5f63ab63402e36147dc0915a2bfcd5379747ea531ffad",
+  "split": "train",
+  "run_id": "bf4e58d13b3644de9e4e0d3897a5a19a",
+  "experiment_id": null,
+  "repeat_index": 0,
+  "generated_at": "2026-11-24T10:00:25.560153+00:00",
+  "prompt_versions": {
+    "proposer_sha256": "ae6fa59cccb86c31f34f66d07d241660b1feadf852ebf1b594bc85addab86985",
+    "proposer_wire_schema_version": "compact_proposal_v1",
+    "proposer_wire_schema_sha256": "f504fbcd7e939c43e055e2f188feb22097a284bcd9b043227d868e559547b865",
+    "proposer_revision_sha256": "3f0fe7f221013700694a22984560612013e9804072ffde4538e1329b9708ac95",
+    "critic_sha256": "1686688cdd4bc63abb12e6633ef9dbb9b62d69b69aba1c4805a201657cc5bb34"
+  },
+  "seconds": 73.074,
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [],
+    "valid": true,
+    "aggregate_checks": [
+      {
+        "id": "weekly_hours",
+        "status": "pass",
+        "minutes": 1680.0,
+        "minimum_minutes": 1680,
+        "category": "work",
+        "evidence": "union of final calendar intervals"
+      }
+    ],
+    "aggregate_validation_version": "duration_total_v1"
+  }
+}

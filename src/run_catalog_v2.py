@@ -9,6 +9,7 @@ from calendar_v2 import simulate
 from models import Proposal
 from final_dataset_v2 import combined_manifest, scenario_path
 from run_paths_v2 import discover_result_paths, path_identity
+from run_completion_v2 import completed_b_integrity_issues
 from scenario_v2 import load_manifest, load_scenario
 
 PILOT_SCENARIO_IDS = (
@@ -58,6 +59,8 @@ def runs(root: Path, *, scenario_id: str | None = None,
         item["_active_scenario_sha256"] = hashlib.sha256(active_path.read_bytes()).hexdigest()
         item["_scenario_hash_matches"] = (record.get("scenario_sha256") == item["_active_scenario_sha256"]
                                            if record.get("scenario_sha256") else None)
+        if config == "B":
+            item["_completion_integrity_issues"] = completed_b_integrity_issues(record)
         previous = found_by_identity.get(identity)
         if previous is not None:
             previous_item, previous_raw = previous

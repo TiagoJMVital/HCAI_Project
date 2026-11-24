@@ -1,0 +1,2091 @@
+{
+  "proposal_id": "v2p_e0614277952abf95962d1afe",
+  "scenario_id": "content_creator_guest_collab_recording_001",
+  "family_id": "content_creator_schedule_conflict",
+  "profile_id": "content_creator_streamer_01__content_creator_guest_collab_recording_001",
+  "split": "train",
+  "run_id": "72be7a5e584d4a088aa8debac1f76f85",
+  "configuration": "B",
+  "generated_at": "2026-11-23T16:08:39.479364+00:00",
+  "proposer_provider": "iaedu",
+  "proposer_model": "GPT-5.5",
+  "proposer_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_provider": "iaedu",
+  "critic_model": "GPT-5.5",
+  "critic_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "prompt_versions": {
+    "proposer_sha256": "ae6fa59cccb86c31f34f66d07d241660b1feadf852ebf1b594bc85addab86985",
+    "proposer_wire_schema_version": "compact_proposal_v1",
+    "proposer_wire_schema_sha256": "f504fbcd7e939c43e055e2f188feb22097a284bcd9b043227d868e559547b865",
+    "proposer_revision_sha256": "3f0fe7f221013700694a22984560612013e9804072ffde4538e1329b9708ac95",
+    "critic_sha256": "1686688cdd4bc63abb12e6633ef9dbb9b62d69b69aba1c4805a201657cc5bb34"
+  },
+  "critic_settings": {
+    "threshold": 4.0,
+    "max_refinements": 3,
+    "min_dimension_score": 1
+  },
+  "experiment_id": null,
+  "repeat_index": 0,
+  "seconds": 71.134,
+  "critic_score": 4.0,
+  "critic_accepted": true,
+  "iterations": [
+    {
+      "index": 0,
+      "proposer_feedback": null,
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Solo Editing Overflow",
+            "from_start": null,
+            "to_start": "2027-03-01T18:00:00+00:00",
+            "to_end": "2027-03-01T20:00:00+00:00",
+            "category": "video_production",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Solo Editing Overflow",
+            "from_start": null,
+            "to_start": "2027-03-02T18:00:00+00:00",
+            "to_end": "2027-03-02T20:00:00+00:00",
+            "category": "video_production",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "The guest recording is fixed and protected, so it is not moved.",
+            "Daily gym workouts are mandatory health events, so they are not moved.",
+            "The selected slots are free calendar intervals before the existing streams.",
+            "External availability for any extra recording or collaboration is unknown, so only solo editing is added."
+          ],
+          "priorities": [
+            "Preserve weekday video-production momentum before Wednesday afternoon is occupied.",
+            "Use Monday and Tuesday free time without disrupting protected or participant-facing events.",
+            "Avoid moving streams because that would affect chat and add more disruption than needed."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Move Monday or Tuesday livestreams later",
+              "rejected_because": "Rejected because it affects a participant-facing activity while free solo-work gaps already exist."
+            },
+            {
+              "option": "Add late-night editing after streams",
+              "rejected_because": "Rejected because it is less protective of recovery time and not necessary for the requested catch-up."
+            },
+            {
+              "option": "Move the Wednesday guest recording",
+              "rejected_because": "Rejected because the event is explicitly fixed and externally constrained."
+            }
+          ],
+          "summary": "Adds focused solo editing overflow blocks on Monday and Tuesday in existing free gaps, preserving protected health and fixed guest commitments while avoiding disruption to streams."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-03-01T01:30:00+00:00",
+            "end": "2027-03-01T09:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_mon",
+            "title": "Gym Workout",
+            "start": "2027-03-01T10:00:00+00:00",
+            "end": "2027-03-01T11:30:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Mandatory workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "edit_mon",
+            "title": "Video Editing Block",
+            "start": "2027-03-01T12:30:00+00:00",
+            "end": "2027-03-01T18:00:00+00:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Editing.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_0",
+            "title": "Solo Editing Overflow",
+            "start": "2027-03-01T18:00:00+00:00",
+            "end": "2027-03-01T20:00:00+00:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "stream_mon",
+            "title": "Live Stream",
+            "start": "2027-03-01T20:00:00+00:00",
+            "end": "2027-03-01T23:30:00+00:00",
+            "category": "streaming",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "chat"
+            ],
+            "description": "Stream.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-03-02T01:30:00+00:00",
+            "end": "2027-03-02T09:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_tue",
+            "title": "Gym Workout",
+            "start": "2027-03-02T10:00:00+00:00",
+            "end": "2027-03-02T11:30:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Mandatory workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "edit_tue",
+            "title": "Video Editing Block",
+            "start": "2027-03-02T12:30:00+00:00",
+            "end": "2027-03-02T18:00:00+00:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Editing.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_1",
+            "title": "Solo Editing Overflow",
+            "start": "2027-03-02T18:00:00+00:00",
+            "end": "2027-03-02T20:00:00+00:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "stream_tue",
+            "title": "Live Stream",
+            "start": "2027-03-02T20:00:00+00:00",
+            "end": "2027-03-02T23:30:00+00:00",
+            "category": "streaming",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "chat"
+            ],
+            "description": "Stream.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-03-03T01:30:00+00:00",
+            "end": "2027-03-03T09:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_wed",
+            "title": "Gym Workout",
+            "start": "2027-03-03T10:00:00+00:00",
+            "end": "2027-03-03T11:30:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Mandatory workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "guest_collab_wed",
+            "title": "Collab Video Recording with Guest",
+            "start": "2027-03-03T14:00:00+00:00",
+            "end": "2027-03-03T17:00:00+00:00",
+            "category": "video_production",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "guest"
+            ],
+            "description": "Fixed guest recording.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "stream_wed",
+            "title": "Live Stream",
+            "start": "2027-03-03T20:00:00+00:00",
+            "end": "2027-03-03T23:30:00+00:00",
+            "category": "streaming",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "chat"
+            ],
+            "description": "Stream.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-03-04T01:30:00+00:00",
+            "end": "2027-03-04T09:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_thu",
+            "title": "Gym Workout",
+            "start": "2027-03-04T10:00:00+00:00",
+            "end": "2027-03-04T11:30:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Mandatory workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "edit_thu",
+            "title": "Video Editing Block",
+            "start": "2027-03-04T12:30:00+00:00",
+            "end": "2027-03-04T18:00:00+00:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Editing.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "stream_thu",
+            "title": "Live Stream",
+            "start": "2027-03-04T20:00:00+00:00",
+            "end": "2027-03-04T23:30:00+00:00",
+            "category": "streaming",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "chat"
+            ],
+            "description": "Stream.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-03-05T01:30:00+00:00",
+            "end": "2027-03-05T09:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_fri",
+            "title": "Gym Workout",
+            "start": "2027-03-05T10:00:00+00:00",
+            "end": "2027-03-05T11:30:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Mandatory workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "edit_fri",
+            "title": "Video Editing Block",
+            "start": "2027-03-05T12:30:00+00:00",
+            "end": "2027-03-05T18:00:00+00:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Editing.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "stream_fri",
+            "title": "Live Stream",
+            "start": "2027-03-05T20:00:00+00:00",
+            "end": "2027-03-05T23:30:00+00:00",
+            "category": "streaming",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "chat"
+            ],
+            "description": "Stream.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 3,
+          "coherence": 3,
+          "alternatives": 3,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The added Monday and Tuesday Solo Editing Overflow blocks create an uninterrupted visible work/performance stretch from 12:30 to 23:30 on both days: existing Video Editing Block 12:30-18:00, added Solo Editing Overflow 18:00-20:00, and Live Stream 20:00-23:30. The rationale treats the 18:00-20:00 gaps as available capacity but does not address the practical loss of the only visible pre-stream recovery, meal, setup, or transition window on those days.",
+          "The proposal preserves sleep and gym, which is positive, but it underweighs cumulative load across the visible week: daily Gym Workout 10:00-11:30, long editing blocks on Monday, Tuesday, Thursday and Friday, nightly Live Streams 20:00-23:30, and a fixed Wednesday guest recording 14:00-17:00. The added blocks intensify the two already-heavy opening days rather than demonstrating why that concentration is sustainable.",
+          "The rationale rejects late-night editing as less protective of recovery, but it does not compare that recovery concern against the recovery and preparation cost of working directly into the 20:00 streams. Avoiding late-night work is reasonable, yet the chosen placement still compresses evening needs.",
+          "Alternatives are considered at a high level, but they focus mostly on avoiding disruption to streams and fixed events. They do not show whether a lighter distribution, shorter overflow, or use of less compressed visible gaps was considered within the same calendar horizon.",
+          "Request satisfaction cannot be verified from the provided material. The proposal refers to a requested catch-up and Wednesday afternoon being occupied, but the actual amount of needed overflow work and deadline pressure are not visible."
+        ],
+        "feedback": "The plan is technically clean and avoids moving fixed or participant-facing events, but its human manageability is only partly supported. The main concern is not that the added events overlap anything; it is that Monday and Tuesday become dense production days with no visible break from 12:30 to 23:30 before repeating similar obligations later in the week. The Proposer should reconsider whether using both 18:00-20:00 gaps is proportionate to the catch-up need, or provide grounded context showing how meals, stream preparation, cognitive recovery, and breaks are handled within the existing blocks. A revision could still keep the same operations if the fuller context supports them, but the current rationale does not sufficiently justify the sustainability of the added load.",
+        "plausibility_review": {
+          "revision_required": true,
+          "severity": "moderate",
+          "reason": "The proposed additions materially reduce practical recovery and preparation margin on Monday and Tuesday by extending existing 12:30-18:00 editing directly into 20:00-23:30 streams. This could affect stream quality, fatigue, food timing, and the sustainability of the visible week, especially with daily gym sessions and further production/streaming commitments through Friday. The issue is plausible rather than objectively impossible, because breaks may exist within flexible work blocks, but the current rationale does not substantiate that.",
+          "suggested_improvement": "Reconsider the distribution or intensity of the overflow work using the fuller context, or explicitly justify how the user can manage meals, transition, stream preparation, and recovery on Monday and Tuesday despite the continuous 12:30-23:30 visible workload."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Practical breaks during long production blocks",
+            "assumption": "The user can take adequate food, hygiene, rest, and mental reset breaks within or around the 12:30-20:00 editing period on Monday and Tuesday.",
+            "evidence_gap": "The calendar shows continuous editing from 12:30-20:00 on both days after the additions, with no explicit break or explanation that breaks are built into the work blocks.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Stream readiness after overflow editing",
+            "assumption": "The user can transition directly from Solo Editing Overflow ending at 20:00 into Live Stream starting at 20:00 without needing visible setup, decompression, food, or preparation time.",
+            "evidence_gap": "The proposal states the slots are free before streams but does not explain whether the streams require preparation or whether back-to-back transition is normal for this user.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Cumulative weekly workload tolerance",
+            "assumption": "The user can sustainably handle daily gym, multiple long editing blocks, nightly streams, and the Wednesday guest recording within the visible Monday-Friday horizon.",
+            "evidence_gap": "The rationale discusses protecting fixed events and avoiding disruption but does not assess cumulative fatigue across the week.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Amount and urgency of overflow work",
+            "assumption": "Two additional two-hour solo editing blocks before Wednesday are necessary or proportionate for the catch-up goal.",
+            "evidence_gap": "The rationale mentions preserving video-production momentum and requested catch-up, but the original request and required workload volume are not provided.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          }
+        ],
+        "overall": 3.25
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": false,
+        "plausibility_revision_required": true,
+        "accepted": false,
+        "revision_causes": [
+          "numeric_criteria_failed",
+          "plausibility_revision_required"
+        ]
+      },
+      "operations_changed_from_previous": null,
+      "rationale_changed_from_previous": null,
+      "prior_critic_reviews": [],
+      "unresolved_assumptions": [
+        {
+          "subject": "Practical breaks during long production blocks",
+          "assumption": "The user can take adequate food, hygiene, rest, and mental reset breaks within or around the 12:30-20:00 editing period on Monday and Tuesday.",
+          "evidence_gap": "The calendar shows continuous editing from 12:30-20:00 on both days after the additions, with no explicit break or explanation that breaks are built into the work blocks.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Stream readiness after overflow editing",
+          "assumption": "The user can transition directly from Solo Editing Overflow ending at 20:00 into Live Stream starting at 20:00 without needing visible setup, decompression, food, or preparation time.",
+          "evidence_gap": "The proposal states the slots are free before streams but does not explain whether the streams require preparation or whether back-to-back transition is normal for this user.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Cumulative weekly workload tolerance",
+          "assumption": "The user can sustainably handle daily gym, multiple long editing blocks, nightly streams, and the Wednesday guest recording within the visible Monday-Friday horizon.",
+          "evidence_gap": "The rationale discusses protecting fixed events and avoiding disruption but does not assess cumulative fatigue across the week.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Amount and urgency of overflow work",
+          "assumption": "Two additional two-hour solo editing blocks before Wednesday are necessary or proportionate for the catch-up goal.",
+          "evidence_gap": "The rationale mentions preserving video-production momentum and requested catch-up, but the original request and required workload volume are not provided.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "proposer_feedback": "Numeric Critic criteria failed. Scores: {\"reasoning\":3,\"coherence\":3,\"alternatives\":3,\"clarity\":4}. Plausibility revision required (moderate): The proposed additions materially reduce practical recovery and preparation margin on Monday and Tuesday by extending existing 12:30-18:00 editing directly into 20:00-23:30 streams. This could affect stream quality, fatigue, food timing, and the sustainability of the visible week, especially with daily gym sessions and further production/streaming commitments through Friday. The issue is plausible rather than objectively impossible, because breaks may exist within flexible work blocks, but the current rationale does not substantiate that. Suggested direction: Reconsider the distribution or intensity of the overflow work using the fuller context, or explicitly justify how the user can manage meals, transition, stream preparation, and recovery on Monday and Tuesday despite the continuous 12:30-23:30 visible workload. The Critic lacks the full user constraints; explain if no better feasible option exists. Unverified conditions to reassess: [{'subject': 'Practical breaks during long production blocks', 'assumption': 'The user can take adequate food, hygiene, rest, and mental reset breaks within or around the 12:30-20:00 editing period on Monday and Tuesday.', 'evidence_gap': 'The calendar shows continuous editing from 12:30-20:00 on both days after the additions, with no explicit break or explanation that breaks are built into the work blocks.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Stream readiness after overflow editing', 'assumption': 'The user can transition directly from Solo Editing Overflow ending at 20:00 into Live Stream starting at 20:00 without needing visible setup, decompression, food, or preparation time.', 'evidence_gap': 'The proposal states the slots are free before streams but does not explain whether the streams require preparation or whether back-to-back transition is normal for this user.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Cumulative weekly workload tolerance', 'assumption': 'The user can sustainably handle daily gym, multiple long editing blocks, nightly streams, and the Wednesday guest recording within the visible Monday-Friday horizon.', 'evidence_gap': 'The rationale discusses protecting fixed events and avoiding disruption but does not assess cumulative fatigue across the week.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Amount and urgency of overflow work', 'assumption': 'Two additional two-hour solo editing blocks before Wednesday are necessary or proportionate for the catch-up goal.', 'evidence_gap': 'The rationale mentions preserving video-production momentum and requested catch-up, but the original request and required workload volume are not provided.', 'potential_impact': 'material', 'verification_source': 'unknown'}] Weaknesses: ['The added Monday and Tuesday Solo Editing Overflow blocks create an uninterrupted visible work/performance stretch from 12:30 to 23:30 on both days: existing Video Editing Block 12:30-18:00, added Solo Editing Overflow 18:00-20:00, and Live Stream 20:00-23:30. The rationale treats the 18:00-20:00 gaps as available capacity but does not address the practical loss of the only visible pre-stream recovery, meal, setup, or transition window on those days.', 'The proposal preserves sleep and gym, which is positive, but it underweighs cumulative load across the visible week: daily Gym Workout 10:00-11:30, long editing blocks on Monday, Tuesday, Thursday and Friday, nightly Live Streams 20:00-23:30, and a fixed Wednesday guest recording 14:00-17:00. The added blocks intensify the two already-heavy opening days rather than demonstrating why that concentration is sustainable.', 'The rationale rejects late-night editing as less protective of recovery, but it does not compare that recovery concern against the recovery and preparation cost of working directly into the 20:00 streams. Avoiding late-night work is reasonable, yet the chosen placement still compresses evening needs.', 'Alternatives are considered at a high level, but they focus mostly on avoiding disruption to streams and fixed events. They do not show whether a lighter distribution, shorter overflow, or use of less compressed visible gaps was considered within the same calendar horizon.', 'Request satisfaction cannot be verified from the provided material. The proposal refers to a requested catch-up and Wednesday afternoon being occupied, but the actual amount of needed overflow work and deadline pressure are not visible.']. Actionable feedback: The plan is technically clean and avoids moving fixed or participant-facing events, but its human manageability is only partly supported. The main concern is not that the added events overlap anything; it is that Monday and Tuesday become dense production days with no visible break from 12:30 to 23:30 before repeating similar obligations later in the week. The Proposer should reconsider whether using both 18:00-20:00 gaps is proportionate to the catch-up need, or provide grounded context showing how meals, stream preparation, cognitive recovery, and breaks are handled within the existing blocks. A revision could still keep the same operations if the fuller context supports them, but the current rationale does not sufficiently justify the sustainability of the added load.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Solo Editing Overflow",
+            "from_start": null,
+            "to_start": "2027-03-01T18:00:00+00:00",
+            "to_end": "2027-03-01T19:00:00+00:00",
+            "category": "video_production",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Solo Editing Overflow",
+            "from_start": null,
+            "to_start": "2027-03-02T18:00:00+00:00",
+            "to_end": "2027-03-02T19:00:00+00:00",
+            "category": "video_production",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "The guest recording is fixed and protected, so it is not moved.",
+            "Daily gym workouts are mandatory protected health events, so they are not moved.",
+            "The selected additions use free calendar intervals and involve only solo work.",
+            "Streams involve chat participation, so moving them would add an external-facing disruption.",
+            "Required overflow volume, meal timing, stream setup needs and internal breaks are not specified."
+          ],
+          "priorities": [
+            "Preserve extra solo editing capacity before Wednesday without consuming the whole pre-stream gap.",
+            "Keep visible evening buffer for transition and recovery on both days.",
+            "Avoid increasing cumulative load more than needed across an already dense production week."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Use the full evening gaps on Monday and Tuesday",
+              "rejected_because": "Rejected because it would remove the only visible pre-stream buffer on both days."
+            },
+            {
+              "option": "Add editing immediately after gym before the main editing block",
+              "rejected_because": "Rejected because it would compress the post-gym transition without evidence that this is sustainable."
+            },
+            {
+              "option": "Move Monday or Tuesday streams",
+              "rejected_because": "Rejected because it affects a participant-facing commitment while solo-only free time exists."
+            },
+            {
+              "option": "Move the Wednesday guest recording",
+              "rejected_because": "Rejected because it is explicitly fixed and externally constrained."
+            }
+          ],
+          "summary": "Adds lighter solo editing overflow on Monday and Tuesday while preserving a visible buffer before each stream; the trade-off is less extra editing than using every free hour, chosen to reduce fatigue and preparation risk."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-03-01T01:30:00+00:00",
+            "end": "2027-03-01T09:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_mon",
+            "title": "Gym Workout",
+            "start": "2027-03-01T10:00:00+00:00",
+            "end": "2027-03-01T11:30:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Mandatory workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "edit_mon",
+            "title": "Video Editing Block",
+            "start": "2027-03-01T12:30:00+00:00",
+            "end": "2027-03-01T18:00:00+00:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Editing.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_0",
+            "title": "Solo Editing Overflow",
+            "start": "2027-03-01T18:00:00+00:00",
+            "end": "2027-03-01T19:00:00+00:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "stream_mon",
+            "title": "Live Stream",
+            "start": "2027-03-01T20:00:00+00:00",
+            "end": "2027-03-01T23:30:00+00:00",
+            "category": "streaming",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "chat"
+            ],
+            "description": "Stream.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-03-02T01:30:00+00:00",
+            "end": "2027-03-02T09:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_tue",
+            "title": "Gym Workout",
+            "start": "2027-03-02T10:00:00+00:00",
+            "end": "2027-03-02T11:30:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Mandatory workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "edit_tue",
+            "title": "Video Editing Block",
+            "start": "2027-03-02T12:30:00+00:00",
+            "end": "2027-03-02T18:00:00+00:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Editing.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_1",
+            "title": "Solo Editing Overflow",
+            "start": "2027-03-02T18:00:00+00:00",
+            "end": "2027-03-02T19:00:00+00:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "stream_tue",
+            "title": "Live Stream",
+            "start": "2027-03-02T20:00:00+00:00",
+            "end": "2027-03-02T23:30:00+00:00",
+            "category": "streaming",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "chat"
+            ],
+            "description": "Stream.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-03-03T01:30:00+00:00",
+            "end": "2027-03-03T09:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_wed",
+            "title": "Gym Workout",
+            "start": "2027-03-03T10:00:00+00:00",
+            "end": "2027-03-03T11:30:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Mandatory workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "guest_collab_wed",
+            "title": "Collab Video Recording with Guest",
+            "start": "2027-03-03T14:00:00+00:00",
+            "end": "2027-03-03T17:00:00+00:00",
+            "category": "video_production",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "guest"
+            ],
+            "description": "Fixed guest recording.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "stream_wed",
+            "title": "Live Stream",
+            "start": "2027-03-03T20:00:00+00:00",
+            "end": "2027-03-03T23:30:00+00:00",
+            "category": "streaming",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "chat"
+            ],
+            "description": "Stream.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-03-04T01:30:00+00:00",
+            "end": "2027-03-04T09:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_thu",
+            "title": "Gym Workout",
+            "start": "2027-03-04T10:00:00+00:00",
+            "end": "2027-03-04T11:30:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Mandatory workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "edit_thu",
+            "title": "Video Editing Block",
+            "start": "2027-03-04T12:30:00+00:00",
+            "end": "2027-03-04T18:00:00+00:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Editing.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "stream_thu",
+            "title": "Live Stream",
+            "start": "2027-03-04T20:00:00+00:00",
+            "end": "2027-03-04T23:30:00+00:00",
+            "category": "streaming",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "chat"
+            ],
+            "description": "Stream.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-03-05T01:30:00+00:00",
+            "end": "2027-03-05T09:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_fri",
+            "title": "Gym Workout",
+            "start": "2027-03-05T10:00:00+00:00",
+            "end": "2027-03-05T11:30:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Mandatory workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "edit_fri",
+            "title": "Video Editing Block",
+            "start": "2027-03-05T12:30:00+00:00",
+            "end": "2027-03-05T18:00:00+00:00",
+            "category": "video_production",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Editing.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "stream_fri",
+            "title": "Live Stream",
+            "start": "2027-03-05T20:00:00+00:00",
+            "end": "2027-03-05T23:30:00+00:00",
+            "category": "streaming",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "chat"
+            ],
+            "description": "Stream.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 4,
+          "alternatives": 4,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The revision directly addresses the prior back-to-back stream concern by shortening each added Solo Editing Overflow block from 18:00-20:00 to 18:00-19:00 on Monday and Tuesday, leaving a visible 19:00-20:00 pre-stream gap before the 20:00-23:30 Live Streams. This is a meaningful human-quality improvement.",
+          "Monday and Tuesday remain demanding days: Gym Workout 10:00-11:30, Video Editing Block 12:30-18:00, added Solo Editing Overflow 18:00-19:00, then Live Stream 20:00-23:30. The added hour is less severe than the prior two-hour overflow, but it still extends a long cognitive production block after gym and before an evening performance commitment.",
+          "The preserved 19:00-20:00 gap is helpful, but the rationale cannot verify whether one hour is enough for food, hygiene, stream setup, decompression, or unexpected overrun. This is not an objective conflict, but it remains a practical uncertainty relevant to stream quality and recovery.",
+          "The visible week is already dense, with daily Gym Workout 10:00-11:30, long editing blocks on Monday, Tuesday, Thursday, and Friday, nightly Live Streams 20:00-23:30, and a fixed Wednesday guest recording 14:00-17:00. The proposal correctly limits the new burden, but it still adds work to two already-heavy opening days.",
+          "Request satisfaction cannot be verified from the provided material. The proposal refers to required overflow volume and preserving extra editing capacity before Wednesday, but the original requested amount, deadline pressure, and acceptable trade-offs are not visible."
+        ],
+        "feedback": "The revised proposal is substantially more plausible than the prior version. It no longer consumes the entire pre-stream gap, and the rationale explicitly shows awareness of meal timing, stream setup, recovery, cumulative load, and the risk of using every free hour. The resulting schedule is still intense, especially Monday and Tuesday, but the added workload is modest and preserves a visible transition buffer before each stream. The Proposer should retain or further substantiate the assumption that 19:00-20:00 is enough for the user’s pre-stream needs, and should ensure that the 12:30-19:00 production stretch can include realistic breaks. Based on the visible calendar alone, the remaining concerns are material uncertainties rather than a concrete reason to require another revision.",
+        "plausibility_review": {
+          "revision_required": false,
+          "severity": "low",
+          "reason": "The prior concern received a grounded and practical answer: the added overflow was reduced from two hours to one hour on both Monday and Tuesday, preserving a visible 19:00-20:00 buffer before each 20:00 Live Stream. The remaining workload is still heavy, but most of that density is pre-existing, and the proposed additions are proportionate enough that another revision is not clearly necessary from the visible information.",
+          "suggested_improvement": "With fuller context, verify that the preserved pre-stream hour is sufficient for meals, setup, decompression, and recovery, and that breaks can occur within the long editing periods. If that is not true, reconsider the distribution or intensity of the overflow work rather than assuming the visible free hour fully solves the practical load."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Pre-stream transition buffer",
+            "assumption": "The 19:00-20:00 gap after Solo Editing Overflow on Monday and Tuesday is enough for food, hygiene, setup, decompression, and any preparation needed before the 20:00 Live Streams.",
+            "evidence_gap": "The revised calendar preserves a one-hour gap, but the proposal does not provide user-specific evidence about stream setup needs or evening routines.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Breaks during extended editing periods",
+            "assumption": "The user can take adequate breaks during or around the 12:30-19:00 production stretch on Monday and Tuesday.",
+            "evidence_gap": "The calendar shows Video Editing Block 12:30-18:00 followed immediately by Solo Editing Overflow 18:00-19:00, with no explicit break structure or explanation that breaks are embedded in those blocks.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Cumulative weekly workload tolerance",
+            "assumption": "The user can sustainably handle daily gym sessions, long production blocks, nightly streams, and the Wednesday guest recording within the visible Monday-Friday horizon.",
+            "evidence_gap": "The rationale acknowledges cumulative load and limits the added work, but it does not verify the user's actual fatigue tolerance or recovery needs across the full visible week.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Amount and urgency of overflow work",
+            "assumption": "Two total added hours of solo editing before Wednesday are sufficient and proportionate for the visible catch-up or production goal.",
+            "evidence_gap": "The original request and required editing volume are not provided, so it is not possible to verify whether the reduced overflow meets the intended need.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          }
+        ],
+        "overall": 4.0
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": true,
+        "plausibility_revision_required": false,
+        "accepted": true,
+        "revision_causes": []
+      },
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": [
+        {
+          "iteration": 0,
+          "proposal": {
+            "changes": [
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Solo Editing Overflow",
+                "from_start": null,
+                "to_start": "2027-03-01T18:00:00+00:00",
+                "to_end": "2027-03-01T20:00:00+00:00",
+                "category": "video_production",
+                "importance": 4,
+                "participants": [
+                  "user"
+                ]
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Solo Editing Overflow",
+                "from_start": null,
+                "to_start": "2027-03-02T18:00:00+00:00",
+                "to_end": "2027-03-02T20:00:00+00:00",
+                "category": "video_production",
+                "importance": 4,
+                "participants": [
+                  "user"
+                ]
+              }
+            ],
+            "rationale": {
+              "constraints": [
+                "The guest recording is fixed and protected, so it is not moved.",
+                "Daily gym workouts are mandatory health events, so they are not moved.",
+                "The selected slots are free calendar intervals before the existing streams.",
+                "External availability for any extra recording or collaboration is unknown, so only solo editing is added."
+              ],
+              "priorities": [
+                "Preserve weekday video-production momentum before Wednesday afternoon is occupied.",
+                "Use Monday and Tuesday free time without disrupting protected or participant-facing events.",
+                "Avoid moving streams because that would affect chat and add more disruption than needed."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Move Monday or Tuesday livestreams later",
+                  "rejected_because": "Rejected because it affects a participant-facing activity while free solo-work gaps already exist."
+                },
+                {
+                  "option": "Add late-night editing after streams",
+                  "rejected_because": "Rejected because it is less protective of recovery time and not necessary for the requested catch-up."
+                },
+                {
+                  "option": "Move the Wednesday guest recording",
+                  "rejected_because": "Rejected because the event is explicitly fixed and externally constrained."
+                }
+              ],
+              "summary": "Adds focused solo editing overflow blocks on Monday and Tuesday in existing free gaps, preserving protected health and fixed guest commitments while avoiding disruption to streams."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "sleep_mon",
+                "title": "Sleep",
+                "start": "2027-03-01T01:30:00+00:00",
+                "end": "2027-03-01T09:30:00+00:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_mon",
+                "title": "Gym Workout",
+                "start": "2027-03-01T10:00:00+00:00",
+                "end": "2027-03-01T11:30:00+00:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Mandatory workout.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "edit_mon",
+                "title": "Video Editing Block",
+                "start": "2027-03-01T12:30:00+00:00",
+                "end": "2027-03-01T18:00:00+00:00",
+                "category": "video_production",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Editing.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_0",
+                "title": "Solo Editing Overflow",
+                "start": "2027-03-01T18:00:00+00:00",
+                "end": "2027-03-01T20:00:00+00:00",
+                "category": "video_production",
+                "importance": 4,
+                "fixed": null,
+                "participants": [
+                  "user"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "stream_mon",
+                "title": "Live Stream",
+                "start": "2027-03-01T20:00:00+00:00",
+                "end": "2027-03-01T23:30:00+00:00",
+                "category": "streaming",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "chat"
+                ],
+                "description": "Stream.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_tue",
+                "title": "Sleep",
+                "start": "2027-03-02T01:30:00+00:00",
+                "end": "2027-03-02T09:30:00+00:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_tue",
+                "title": "Gym Workout",
+                "start": "2027-03-02T10:00:00+00:00",
+                "end": "2027-03-02T11:30:00+00:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Mandatory workout.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "edit_tue",
+                "title": "Video Editing Block",
+                "start": "2027-03-02T12:30:00+00:00",
+                "end": "2027-03-02T18:00:00+00:00",
+                "category": "video_production",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Editing.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_1",
+                "title": "Solo Editing Overflow",
+                "start": "2027-03-02T18:00:00+00:00",
+                "end": "2027-03-02T20:00:00+00:00",
+                "category": "video_production",
+                "importance": 4,
+                "fixed": null,
+                "participants": [
+                  "user"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "stream_tue",
+                "title": "Live Stream",
+                "start": "2027-03-02T20:00:00+00:00",
+                "end": "2027-03-02T23:30:00+00:00",
+                "category": "streaming",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "chat"
+                ],
+                "description": "Stream.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_wed",
+                "title": "Sleep",
+                "start": "2027-03-03T01:30:00+00:00",
+                "end": "2027-03-03T09:30:00+00:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_wed",
+                "title": "Gym Workout",
+                "start": "2027-03-03T10:00:00+00:00",
+                "end": "2027-03-03T11:30:00+00:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Mandatory workout.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "guest_collab_wed",
+                "title": "Collab Video Recording with Guest",
+                "start": "2027-03-03T14:00:00+00:00",
+                "end": "2027-03-03T17:00:00+00:00",
+                "category": "video_production",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "guest"
+                ],
+                "description": "Fixed guest recording.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "stream_wed",
+                "title": "Live Stream",
+                "start": "2027-03-03T20:00:00+00:00",
+                "end": "2027-03-03T23:30:00+00:00",
+                "category": "streaming",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "chat"
+                ],
+                "description": "Stream.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2027-03-04T01:30:00+00:00",
+                "end": "2027-03-04T09:30:00+00:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_thu",
+                "title": "Gym Workout",
+                "start": "2027-03-04T10:00:00+00:00",
+                "end": "2027-03-04T11:30:00+00:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Mandatory workout.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "edit_thu",
+                "title": "Video Editing Block",
+                "start": "2027-03-04T12:30:00+00:00",
+                "end": "2027-03-04T18:00:00+00:00",
+                "category": "video_production",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Editing.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "stream_thu",
+                "title": "Live Stream",
+                "start": "2027-03-04T20:00:00+00:00",
+                "end": "2027-03-04T23:30:00+00:00",
+                "category": "streaming",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "chat"
+                ],
+                "description": "Stream.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_fri",
+                "title": "Sleep",
+                "start": "2027-03-05T01:30:00+00:00",
+                "end": "2027-03-05T09:30:00+00:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_fri",
+                "title": "Gym Workout",
+                "start": "2027-03-05T10:00:00+00:00",
+                "end": "2027-03-05T11:30:00+00:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Mandatory workout.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "edit_fri",
+                "title": "Video Editing Block",
+                "start": "2027-03-05T12:30:00+00:00",
+                "end": "2027-03-05T18:00:00+00:00",
+                "category": "video_production",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Editing.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "stream_fri",
+                "title": "Live Stream",
+                "start": "2027-03-05T20:00:00+00:00",
+                "end": "2027-03-05T23:30:00+00:00",
+                "category": "streaming",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "chat"
+                ],
+                "description": "Stream.",
+                "origin": "existing",
+                "change_status": "preserved"
+              }
+            ],
+            "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+          },
+          "plausibility_review": {
+            "revision_required": true,
+            "severity": "moderate",
+            "reason": "The proposed additions materially reduce practical recovery and preparation margin on Monday and Tuesday by extending existing 12:30-18:00 editing directly into 20:00-23:30 streams. This could affect stream quality, fatigue, food timing, and the sustainability of the visible week, especially with daily gym sessions and further production/streaming commitments through Friday. The issue is plausible rather than objectively impossible, because breaks may exist within flexible work blocks, but the current rationale does not substantiate that.",
+            "suggested_improvement": "Reconsider the distribution or intensity of the overflow work using the fuller context, or explicitly justify how the user can manage meals, transition, stream preparation, and recovery on Monday and Tuesday despite the continuous 12:30-23:30 visible workload."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Practical breaks during long production blocks",
+              "assumption": "The user can take adequate food, hygiene, rest, and mental reset breaks within or around the 12:30-20:00 editing period on Monday and Tuesday.",
+              "evidence_gap": "The calendar shows continuous editing from 12:30-20:00 on both days after the additions, with no explicit break or explanation that breaks are built into the work blocks.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Stream readiness after overflow editing",
+              "assumption": "The user can transition directly from Solo Editing Overflow ending at 20:00 into Live Stream starting at 20:00 without needing visible setup, decompression, food, or preparation time.",
+              "evidence_gap": "The proposal states the slots are free before streams but does not explain whether the streams require preparation or whether back-to-back transition is normal for this user.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Cumulative weekly workload tolerance",
+              "assumption": "The user can sustainably handle daily gym, multiple long editing blocks, nightly streams, and the Wednesday guest recording within the visible Monday-Friday horizon.",
+              "evidence_gap": "The rationale discusses protecting fixed events and avoiding disruption but does not assess cumulative fatigue across the week.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Amount and urgency of overflow work",
+              "assumption": "Two additional two-hour solo editing blocks before Wednesday are necessary or proportionate for the catch-up goal.",
+              "evidence_gap": "The rationale mentions preserving video-production momentum and requested catch-up, but the original request and required workload volume are not provided.",
+              "potential_impact": "material",
+              "verification_source": "unknown"
+            }
+          ],
+          "weaknesses": [
+            "The added Monday and Tuesday Solo Editing Overflow blocks create an uninterrupted visible work/performance stretch from 12:30 to 23:30 on both days: existing Video Editing Block 12:30-18:00, added Solo Editing Overflow 18:00-20:00, and Live Stream 20:00-23:30. The rationale treats the 18:00-20:00 gaps as available capacity but does not address the practical loss of the only visible pre-stream recovery, meal, setup, or transition window on those days.",
+            "The proposal preserves sleep and gym, which is positive, but it underweighs cumulative load across the visible week: daily Gym Workout 10:00-11:30, long editing blocks on Monday, Tuesday, Thursday and Friday, nightly Live Streams 20:00-23:30, and a fixed Wednesday guest recording 14:00-17:00. The added blocks intensify the two already-heavy opening days rather than demonstrating why that concentration is sustainable.",
+            "The rationale rejects late-night editing as less protective of recovery, but it does not compare that recovery concern against the recovery and preparation cost of working directly into the 20:00 streams. Avoiding late-night work is reasonable, yet the chosen placement still compresses evening needs.",
+            "Alternatives are considered at a high level, but they focus mostly on avoiding disruption to streams and fixed events. They do not show whether a lighter distribution, shorter overflow, or use of less compressed visible gaps was considered within the same calendar horizon.",
+            "Request satisfaction cannot be verified from the provided material. The proposal refers to a requested catch-up and Wednesday afternoon being occupied, but the actual amount of needed overflow work and deadline pressure are not visible."
+          ],
+          "feedback": "The plan is technically clean and avoids moving fixed or participant-facing events, but its human manageability is only partly supported. The main concern is not that the added events overlap anything; it is that Monday and Tuesday become dense production days with no visible break from 12:30 to 23:30 before repeating similar obligations later in the week. The Proposer should reconsider whether using both 18:00-20:00 gaps is proportionate to the catch-up need, or provide grounded context showing how meals, stream preparation, cognitive recovery, and breaks are handled within the existing blocks. A revision could still keep the same operations if the fuller context supports them, but the current rationale does not sufficiently justify the sustainability of the added load."
+        }
+      ],
+      "unresolved_assumptions": [
+        {
+          "subject": "Pre-stream transition buffer",
+          "assumption": "The 19:00-20:00 gap after Solo Editing Overflow on Monday and Tuesday is enough for food, hygiene, setup, decompression, and any preparation needed before the 20:00 Live Streams.",
+          "evidence_gap": "The revised calendar preserves a one-hour gap, but the proposal does not provide user-specific evidence about stream setup needs or evening routines.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Breaks during extended editing periods",
+          "assumption": "The user can take adequate breaks during or around the 12:30-19:00 production stretch on Monday and Tuesday.",
+          "evidence_gap": "The calendar shows Video Editing Block 12:30-18:00 followed immediately by Solo Editing Overflow 18:00-19:00, with no explicit break structure or explanation that breaks are embedded in those blocks.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Cumulative weekly workload tolerance",
+          "assumption": "The user can sustainably handle daily gym sessions, long production blocks, nightly streams, and the Wednesday guest recording within the visible Monday-Friday horizon.",
+          "evidence_gap": "The rationale acknowledges cumulative load and limits the added work, but it does not verify the user's actual fatigue tolerance or recovery needs across the full visible week.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Amount and urgency of overflow work",
+          "assumption": "Two total added hours of solo editing before Wednesday are sufficient and proportionate for the visible catch-up or production goal.",
+          "evidence_gap": "The original request and required editing volume are not provided, so it is not possible to verify whether the reduced overflow meets the intended need.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        }
+      ]
+    }
+  ],
+  "refinements": 1,
+  "source_status": "proposal_ready",
+  "final_proposal": {
+    "changes": [
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Solo Editing Overflow",
+        "from_start": null,
+        "to_start": "2027-03-01T18:00:00+00:00",
+        "to_end": "2027-03-01T19:00:00+00:00",
+        "category": "video_production",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Solo Editing Overflow",
+        "from_start": null,
+        "to_start": "2027-03-02T18:00:00+00:00",
+        "to_end": "2027-03-02T19:00:00+00:00",
+        "category": "video_production",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "The guest recording is fixed and protected, so it is not moved.",
+        "Daily gym workouts are mandatory protected health events, so they are not moved.",
+        "The selected additions use free calendar intervals and involve only solo work.",
+        "Streams involve chat participation, so moving them would add an external-facing disruption.",
+        "Required overflow volume, meal timing, stream setup needs and internal breaks are not specified."
+      ],
+      "priorities": [
+        "Preserve extra solo editing capacity before Wednesday without consuming the whole pre-stream gap.",
+        "Keep visible evening buffer for transition and recovery on both days.",
+        "Avoid increasing cumulative load more than needed across an already dense production week."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Use the full evening gaps on Monday and Tuesday",
+          "rejected_because": "Rejected because it would remove the only visible pre-stream buffer on both days."
+        },
+        {
+          "option": "Add editing immediately after gym before the main editing block",
+          "rejected_because": "Rejected because it would compress the post-gym transition without evidence that this is sustainable."
+        },
+        {
+          "option": "Move Monday or Tuesday streams",
+          "rejected_because": "Rejected because it affects a participant-facing commitment while solo-only free time exists."
+        },
+        {
+          "option": "Move the Wednesday guest recording",
+          "rejected_because": "Rejected because it is explicitly fixed and externally constrained."
+        }
+      ],
+      "summary": "Adds lighter solo editing overflow on Monday and Tuesday while preserving a visible buffer before each stream; the trade-off is less extra editing than using every free hour, chosen to reduce fatigue and preparation risk."
+    }
+  },
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [],
+    "valid": true
+  },
+  "source_result_sha256": "64a17f9385c64c95b720701ca3b4188470616382b7d0499ec8b43d6f24163ae7",
+  "scenario_sha256": "912d708fee1b0767b265d8eaed8415237f388f85a5f7fccae5b92aff2b1866ea",
+  "aggregate_requirements_sha256": null,
+  "confirmed_changes_sha256": null,
+  "critic_input_version": "final_calendar_v1",
+  "critic_policy_version": "uncertainty_review_v2",
+  "result_calendar_version": "validated_added_metadata_v2",
+  "final_result_calendar": {
+    "timezone": "Europe/Lisbon",
+    "coverage": "all_events_in_scenario_after_simulation",
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-03-01T01:30:00+00:00",
+        "end": "2027-03-01T09:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_mon",
+        "title": "Gym Workout",
+        "start": "2027-03-01T10:00:00+00:00",
+        "end": "2027-03-01T11:30:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "edit_mon",
+        "title": "Video Editing Block",
+        "start": "2027-03-01T12:30:00+00:00",
+        "end": "2027-03-01T18:00:00+00:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Editing.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_0",
+        "title": "Solo Editing Overflow",
+        "start": "2027-03-01T18:00:00+00:00",
+        "end": "2027-03-01T19:00:00+00:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "stream_mon",
+        "title": "Live Stream",
+        "start": "2027-03-01T20:00:00+00:00",
+        "end": "2027-03-01T23:30:00+00:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-03-02T01:30:00+00:00",
+        "end": "2027-03-02T09:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_tue",
+        "title": "Gym Workout",
+        "start": "2027-03-02T10:00:00+00:00",
+        "end": "2027-03-02T11:30:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "edit_tue",
+        "title": "Video Editing Block",
+        "start": "2027-03-02T12:30:00+00:00",
+        "end": "2027-03-02T18:00:00+00:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Editing.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_1",
+        "title": "Solo Editing Overflow",
+        "start": "2027-03-02T18:00:00+00:00",
+        "end": "2027-03-02T19:00:00+00:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "stream_tue",
+        "title": "Live Stream",
+        "start": "2027-03-02T20:00:00+00:00",
+        "end": "2027-03-02T23:30:00+00:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-03-03T01:30:00+00:00",
+        "end": "2027-03-03T09:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_wed",
+        "title": "Gym Workout",
+        "start": "2027-03-03T10:00:00+00:00",
+        "end": "2027-03-03T11:30:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "guest_collab_wed",
+        "title": "Collab Video Recording with Guest",
+        "start": "2027-03-03T14:00:00+00:00",
+        "end": "2027-03-03T17:00:00+00:00",
+        "category": "video_production",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "guest"
+        ],
+        "description": "Fixed guest recording.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "stream_wed",
+        "title": "Live Stream",
+        "start": "2027-03-03T20:00:00+00:00",
+        "end": "2027-03-03T23:30:00+00:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-03-04T01:30:00+00:00",
+        "end": "2027-03-04T09:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_thu",
+        "title": "Gym Workout",
+        "start": "2027-03-04T10:00:00+00:00",
+        "end": "2027-03-04T11:30:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "edit_thu",
+        "title": "Video Editing Block",
+        "start": "2027-03-04T12:30:00+00:00",
+        "end": "2027-03-04T18:00:00+00:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Editing.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "stream_thu",
+        "title": "Live Stream",
+        "start": "2027-03-04T20:00:00+00:00",
+        "end": "2027-03-04T23:30:00+00:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-03-05T01:30:00+00:00",
+        "end": "2027-03-05T09:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_fri",
+        "title": "Gym Workout",
+        "start": "2027-03-05T10:00:00+00:00",
+        "end": "2027-03-05T11:30:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "edit_fri",
+        "title": "Video Editing Block",
+        "start": "2027-03-05T12:30:00+00:00",
+        "end": "2027-03-05T18:00:00+00:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Editing.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "stream_fri",
+        "title": "Live Stream",
+        "start": "2027-03-05T20:00:00+00:00",
+        "end": "2027-03-05T23:30:00+00:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream.",
+        "origin": "existing",
+        "change_status": "preserved"
+      }
+    ],
+    "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+  },
+  "final_unresolved_assumptions": [
+    {
+      "subject": "Pre-stream transition buffer",
+      "assumption": "The 19:00-20:00 gap after Solo Editing Overflow on Monday and Tuesday is enough for food, hygiene, setup, decompression, and any preparation needed before the 20:00 Live Streams.",
+      "evidence_gap": "The revised calendar preserves a one-hour gap, but the proposal does not provide user-specific evidence about stream setup needs or evening routines.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Breaks during extended editing periods",
+      "assumption": "The user can take adequate breaks during or around the 12:30-19:00 production stretch on Monday and Tuesday.",
+      "evidence_gap": "The calendar shows Video Editing Block 12:30-18:00 followed immediately by Solo Editing Overflow 18:00-19:00, with no explicit break structure or explanation that breaks are embedded in those blocks.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Cumulative weekly workload tolerance",
+      "assumption": "The user can sustainably handle daily gym sessions, long production blocks, nightly streams, and the Wednesday guest recording within the visible Monday-Friday horizon.",
+      "evidence_gap": "The rationale acknowledges cumulative load and limits the added work, but it does not verify the user's actual fatigue tolerance or recovery needs across the full visible week.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Amount and urgency of overflow work",
+      "assumption": "Two total added hours of solo editing before Wednesday are sufficient and proportionate for the visible catch-up or production goal.",
+      "evidence_gap": "The original request and required editing volume are not provided, so it is not possible to verify whether the reduced overflow meets the intended need.",
+      "potential_impact": "material",
+      "verification_source": "unknown"
+    }
+  ],
+  "uncertainty_history": [
+    {
+      "iteration": 0,
+      "unresolved_assumptions": [
+        {
+          "subject": "Practical breaks during long production blocks",
+          "assumption": "The user can take adequate food, hygiene, rest, and mental reset breaks within or around the 12:30-20:00 editing period on Monday and Tuesday.",
+          "evidence_gap": "The calendar shows continuous editing from 12:30-20:00 on both days after the additions, with no explicit break or explanation that breaks are built into the work blocks.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Stream readiness after overflow editing",
+          "assumption": "The user can transition directly from Solo Editing Overflow ending at 20:00 into Live Stream starting at 20:00 without needing visible setup, decompression, food, or preparation time.",
+          "evidence_gap": "The proposal states the slots are free before streams but does not explain whether the streams require preparation or whether back-to-back transition is normal for this user.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Cumulative weekly workload tolerance",
+          "assumption": "The user can sustainably handle daily gym, multiple long editing blocks, nightly streams, and the Wednesday guest recording within the visible Monday-Friday horizon.",
+          "evidence_gap": "The rationale discusses protecting fixed events and avoiding disruption but does not assess cumulative fatigue across the week.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Amount and urgency of overflow work",
+          "assumption": "Two additional two-hour solo editing blocks before Wednesday are necessary or proportionate for the catch-up goal.",
+          "evidence_gap": "The rationale mentions preserving video-production momentum and requested catch-up, but the original request and required workload volume are not provided.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        }
+      ]
+    },
+    {
+      "iteration": 1,
+      "unresolved_assumptions": [
+        {
+          "subject": "Pre-stream transition buffer",
+          "assumption": "The 19:00-20:00 gap after Solo Editing Overflow on Monday and Tuesday is enough for food, hygiene, setup, decompression, and any preparation needed before the 20:00 Live Streams.",
+          "evidence_gap": "The revised calendar preserves a one-hour gap, but the proposal does not provide user-specific evidence about stream setup needs or evening routines.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Breaks during extended editing periods",
+          "assumption": "The user can take adequate breaks during or around the 12:30-19:00 production stretch on Monday and Tuesday.",
+          "evidence_gap": "The calendar shows Video Editing Block 12:30-18:00 followed immediately by Solo Editing Overflow 18:00-19:00, with no explicit break structure or explanation that breaks are embedded in those blocks.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Cumulative weekly workload tolerance",
+          "assumption": "The user can sustainably handle daily gym sessions, long production blocks, nightly streams, and the Wednesday guest recording within the visible Monday-Friday horizon.",
+          "evidence_gap": "The rationale acknowledges cumulative load and limits the added work, but it does not verify the user's actual fatigue tolerance or recovery needs across the full visible week.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Amount and urgency of overflow work",
+          "assumption": "Two total added hours of solo editing before Wednesday are sufficient and proportionate for the visible catch-up or production goal.",
+          "evidence_gap": "The original request and required editing volume are not provided, so it is not possible to verify whether the reduced overflow meets the intended need.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        }
+      ]
+    }
+  ]
+}

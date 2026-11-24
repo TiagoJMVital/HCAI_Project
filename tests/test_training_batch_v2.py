@@ -16,6 +16,7 @@ from final_dataset_v2 import (BLOCKED_STATE, ELIGIBLE_STATES, FAMILY_FOLDERS,
                               final_manifest, run_prefix)  # noqa: E402
 from llm import LLMError  # noqa: E402
 from run_completion_v2 import (TechnicalRunError, historical_pilot_completed_b,
+                               archive_technical_failure, completed_b_integrity_issues,
                                publish_completed_record)  # noqa: E402
 from run_config_a_v2 import run_one as run_a  # noqa: E402
 from run_config_b_v2 import run_one  # noqa: E402
@@ -137,6 +138,36 @@ def test_dry_run_and_resume_do_not_execute(monkeypatch, tmp_path):
     assert summary["already_completed_compatible"] == 1 and summary["pending_selected"] == 1
 
 
+def test_batch_archives_unrecovered_structured_failure_outside_active_runs(
+        monkeypatch, tmp_path):
+    row = {"scenario_id": "ready", "family_id": "content_creator_schedule_conflict",
+           "profile_id": "p", "split": "train", "state": "ready_for_pilot",
+           "state_reason": "ready", "scenario_path": str(tmp_path / "ready.json"),
+           "scenario_sha256": "hash"}
+    monkeypatch.setattr(batch, "ROOT", tmp_path)
+    monkeypatch.setattr(batch, "final_manifest", lambda *args, **kwargs: [row])
+    monkeypatch.setattr(batch, "get_provider", lambda **kwargs: FakeProvider())
+    monkeypatch.setattr(batch, "historical_pilot_completed_b", lambda root: {})
+    monkeypatch.setattr(batch, "compatible_completed", lambda *args, **kwargs: None)
+    monkeypatch.setattr(batch, "manifest_sha256", lambda root: "manifest-hash")
+    record = {"scenario_id": "ready", "run_id": "attempt-1", "configuration": "B",
+              "status": "proposer_error", "error_stage": "proposer",
+              "error": "structured output exhausted", "iterations": [],
+              "initial_proposal": None,
+              "llm_diagnostics": {"classification": "incomplete_json"},
+              "failed_llm_outputs": ['{"changes":[']}
+    def fail(*args, **kwargs):
+        raise TechnicalRunError("ready", record)
+    args = argparse.Namespace(only=None, family=None, force=False, limit=None,
+                              dry_run=False, delay=0, resume=True)
+    code, summary = batch.execute_batch(args, execute=fail)
+    assert code == 1 and summary["failed"][0]["run_id"] == "attempt-1"
+    archived = tmp_path / summary["failed"][0]["technical_artifact"]
+    assert archived.is_file()
+    assert json.loads(archived.read_text())["failed_llm_outputs"] == ['{"changes":[']
+    assert not (tmp_path / "eval/runs").exists()
+
+
 def test_real_resume_recognizes_ten_manifest_authenticated_pilot_runs(monkeypatch, capsys):
     pilot = historical_pilot_completed_b(ROOT)
     assert len(pilot) == 10
@@ -186,14 +217,10 @@ def test_pilot_manifest_identity_takes_precedence_over_newer_compatible_run(
 
 
 def test_historical_pilot_resume_rejects_hash_mismatch(tmp_path):
-    record = {
-        "schema_version": "2.0", "scenario_id": "scenario", "run_id": "run",
-        "configuration": "B", "status": "proposal_ready", "family": "family",
-        "profile_id": "profile", "split": "train", "generated_at": "2026-01-01T00:00:00Z",
-        "prompt_versions": {}, "iterations": [{}], "initial_proposal": {},
-        "final_proposal": {}, "critic_settings": {},
-    }
-    relative = Path("eval/runs/treino/family/scenario/run/B/scenario.json")
+    source_manifest = json.loads((ROOT / "eval/dataset_layout_migration_manifest.json").read_text())
+    move = next(item for item in source_manifest["moves"] if item["configuration"] == "B")
+    relative = Path(move["destination"])
+    record = json.loads((ROOT / relative).read_text())
     target = tmp_path / relative
     target.parent.mkdir(parents=True)
     target.write_text(json.dumps(record))
@@ -207,7 +234,7 @@ def test_historical_pilot_resume_rejects_hash_mismatch(tmp_path):
     manifest_path = tmp_path / "eval/dataset_layout_migration_manifest.json"
     manifest_path.parent.mkdir(parents=True, exist_ok=True)
     manifest_path.write_text(json.dumps(manifest))
-    assert set(historical_pilot_completed_b(tmp_path)) == {"scenario"}
+    assert set(historical_pilot_completed_b(tmp_path)) == {record["scenario_id"]}
     target.write_text(json.dumps(record | {"status": "critic_error"}))
     with pytest.raises(ValueError, match="hash mismatch"):
         historical_pilot_completed_b(tmp_path)
@@ -218,11 +245,54 @@ class FailingProvider(FakeProvider):
         raise LLMError("invalid JSON", diagnostics={"classification": "structured_output_exhausted"})
 
 
+def test_batch_stop_policy_distinguishes_truncation_from_recoverable_malformed_json():
+    truncated = TechnicalRunError("s", {"scenario_id": "s", "status": "proposer_error",
+        "error": "output ended", "llm_diagnostics": {"classification": "output_truncated"}})
+    incomplete = TechnicalRunError("s", {"scenario_id": "s", "status": "proposer_error",
+        "error": "incomplete JSON", "llm_diagnostics": {"classification": "incomplete_json"}})
+    assert batch.should_stop_batch(truncated)
+    assert not batch.should_stop_batch(incomplete)
+
+
 def test_technical_runner_error_publishes_no_run(tmp_path):
     import_scenario(tmp_path, ROOT / "data/scenarios/working_student_deadline_001.json", "train")
-    with pytest.raises(TechnicalRunError):
+    with pytest.raises(TechnicalRunError) as caught:
         run_one(tmp_path, "working_student_deadline_001", FailingProvider(), FakeProvider())
     assert list((tmp_path / "eval/runs").rglob("*.json")) == []
+    path = archive_technical_failure(tmp_path, caught.value.record)
+    archived = json.loads(path.read_text())
+    assert archived["artifact_type"] == "technical_failure"
+    assert archived["active_run"] is False
+    assert archived["llm_diagnostics"]["classification"] == "structured_output_exhausted"
+    assert list((tmp_path / "eval/runs").rglob("*.json")) == []
+
+
+def test_status_only_cannot_suppress_resume(monkeypatch, tmp_path):
+    row = {"scenario_id": "scenario", "scenario_sha256": "scenario-hash"}
+    provider = FakeProvider()
+    expected = {
+        "schema_version": "2.0", "configuration": "B",
+        "scenario_sha256": row["scenario_sha256"],
+        "dataset_manifest_sha256": "manifest-hash",
+        "simulator_version": batch.SIMULATOR_VERSION,
+        "result_calendar_version": batch.RESULT_CALENDAR_VERSION,
+        "prompt_versions": batch.expected_prompt_versions(),
+        "proposer_provider": provider.name, "proposer_model": provider.model,
+        "critic_provider": provider.name, "critic_model": provider.model,
+        "proposer_generation_config": provider.generation_config(),
+        "critic_generation_config": provider.generation_config(),
+        "critic_settings": batch.CriticSettings().__dict__,
+    }
+    forged = expected | {
+        "scenario_id": "scenario", "run_id": "technical-attempt",
+        "status": "deferred_invalid_proposal", "error_stage": "proposer",
+        "error": "incomplete_json", "iterations": [{"index": 0, "proposal": None}],
+        "initial_proposal": None, "final_proposal": None,
+    }
+    assert completed_b_integrity_issues(forged)
+    monkeypatch.setattr(batch, "runs", lambda *args, **kwargs: [forged])
+    monkeypatch.setattr(batch, "manifest_sha256", lambda root: "manifest-hash")
+    assert batch.compatible_completed(tmp_path, row, provider, provider) is None
 
 
 def test_a_error_and_interruption_publish_no_run(tmp_path):

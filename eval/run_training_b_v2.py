@@ -20,10 +20,12 @@ from final_dataset_v2 import (BLOCKED_STATE, ELIGIBLE_STATES, FAMILY_FOLDERS,
                               final_manifest, manifest_sha256)  # noqa: E402
 from llm import get_provider  # noqa: E402
 from pipeline_b import CriticSettings  # noqa: E402
+from proposal_catalog_v2 import import_result  # noqa: E402
 from proposer_v2 import (PROPOSER_WIRE_SCHEMA_SHA256, PROPOSER_WIRE_SCHEMA_VERSION,
                          REVISION_GUIDANCE, SYSTEM_V2)  # noqa: E402
 from run_catalog_v2 import runs  # noqa: E402
 from run_completion_v2 import (B_COMPLETED_STATUSES, TechnicalRunError,
+                               archive_technical_failure, completed_b_integrity_issues,
                                historical_pilot_completed_b)  # noqa: E402
 from run_config_b_v2 import run_one  # noqa: E402
 
@@ -53,6 +55,8 @@ def compatible_completed(root: Path, row: dict, proposer, critic) -> dict | None
     for record in runs(root, scenario_id=row["scenario_id"], configuration="B"):
         if record.get("status") not in B_COMPLETED_STATUSES:
             continue
+        if completed_b_integrity_issues(record):
+            continue
         if all(record.get(field) == value for field, value in expected.items()):
             return record
     return None
@@ -81,8 +85,10 @@ def should_stop_batch(error: TechnicalRunError) -> bool:
     record = error.record
     diagnostics = record.get("rate_limit_diagnostics") or record.get("llm_diagnostics") or {}
     status = diagnostics.get("http_status")
+    classification = diagnostics.get("classification")
     text = f"{record.get('error', '')} {json.dumps(diagnostics, ensure_ascii=False)}".lower()
     return (bool(record.get("rate_limit_diagnostics")) or status in {401, 403}
+            or classification == "output_truncated"
             or any(term in text for term in ("quota", "rate limit", "token", "autentica",
                                              "configuração iaedu", "api key")))
 
@@ -144,6 +150,7 @@ def execute_batch(args, *, execute=run_one) -> tuple[int, dict]:
                "already_completed_current": len(completed_current),
                "already_completed_pilot": len(completed_pilot),
                "pending_selected": len(pending), "succeeded": [], "failed": [],
+               "imported_proposals": [], "import_failures": [],
                "stopped_early": False}
     if args.dry_run:
         atomic_json(ROOT / "eval" / "training_b_last_summary.json", summary)
@@ -162,10 +169,17 @@ def execute_batch(args, *, execute=run_one) -> tuple[int, dict]:
                 dataset_manifest_sha256=manifest_sha256(ROOT))
         except TechnicalRunError as exc:
             record = exc.record
+            failure_path = archive_technical_failure(ROOT, record)
             failure = {"scenario_id": sid, "status": record.get("status"),
+                       "run_id": record.get("run_id"),
                        "stage": record.get("error_stage"), "message": record.get("error"),
                        "classification": (record.get("rate_limit_diagnostics") or
-                                          record.get("llm_diagnostics") or {}).get("classification")}
+                                          record.get("llm_diagnostics") or {}).get("classification"),
+                       "diagnostics": (record.get("rate_limit_diagnostics") or
+                                       record.get("llm_diagnostics") or {}),
+                       "recoverable_intermediate": bool(
+                           record.get("initial_proposal") and record.get("iterations")),
+                       "technical_artifact": str(failure_path.relative_to(ROOT))}
             summary["failed"].append(failure)
             print(f"FAILED — {sid} — {failure['stage']}: {failure['message']}", flush=True)
             if should_stop_batch(exc):
@@ -173,10 +187,23 @@ def execute_batch(args, *, execute=run_one) -> tuple[int, dict]:
                 print("STOPPED — provider authentication/quota/rate/token failure; resume later", flush=True)
                 break
             continue
-        summary["succeeded"].append({"scenario_id": sid, "path": str(path.relative_to(ROOT))})
+        success = {"scenario_id": sid, "path": str(path.relative_to(ROOT))}
+        summary["succeeded"].append(success)
         print(f"COMPLETED — {sid} — {path}", flush=True)
+        try:
+            proposal_path = import_result(ROOT, path)
+        except (ValueError, OSError) as exc:
+            failure = {"scenario_id": sid, "path": success["path"], "message": str(exc)}
+            summary["import_failures"].append(failure)
+            print(f"IMPORT FAILED — {sid} — {exc}", flush=True)
+        else:
+            imported = str(proposal_path.relative_to(ROOT))
+            summary["imported_proposals"].append(
+                {"scenario_id": sid, "path": imported})
+            print(f"IMPORTED — {sid} — {proposal_path}", flush=True)
     atomic_json(ROOT / "eval" / "training_b_last_summary.json", summary)
-    return (2 if summary["stopped_early"] else 1 if summary["failed"] else 0), summary
+    return (2 if summary["stopped_early"] else
+            1 if summary["failed"] or summary["import_failures"] else 0), summary
 
 
 def parser() -> argparse.ArgumentParser:

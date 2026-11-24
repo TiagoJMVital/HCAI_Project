@@ -1,0 +1,1773 @@
+{
+  "proposal_id": "v2p_e075b1f025b835ff76f3fadd",
+  "scenario_id": "parent_young_children_sick_child_workday_001",
+  "family_id": "parent_young_children_schedule_conflict",
+  "profile_id": "parent_young_children_01__parent_young_children_sick_child_workday_001",
+  "split": "train",
+  "run_id": "97ec38e6a9144349bc463dec154420be",
+  "configuration": "B",
+  "generated_at": "2026-11-24T14:55:09.587406+00:00",
+  "proposer_provider": "iaedu",
+  "proposer_model": "GPT-5.5",
+  "proposer_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_provider": "iaedu",
+  "critic_model": "GPT-5.5",
+  "critic_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "prompt_versions": {
+    "proposer_sha256": "ae6fa59cccb86c31f34f66d07d241660b1feadf852ebf1b594bc85addab86985",
+    "proposer_wire_schema_version": "compact_proposal_v1",
+    "proposer_wire_schema_sha256": "f504fbcd7e939c43e055e2f188feb22097a284bcd9b043227d868e559547b865",
+    "proposer_revision_sha256": "3f0fe7f221013700694a22984560612013e9804072ffde4538e1329b9708ac95",
+    "critic_sha256": "1686688cdd4bc63abb12e6633ef9dbb9b62d69b69aba1c4805a201657cc5bb34"
+  },
+  "critic_settings": {
+    "threshold": 4.0,
+    "max_refinements": 3,
+    "min_dimension_score": 1
+  },
+  "experiment_id": null,
+  "repeat_index": 0,
+  "seconds": 319.847,
+  "critic_score": null,
+  "critic_accepted": false,
+  "iterations": [
+    {
+      "index": 0,
+      "proposer_feedback": null,
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Travel from office to daycare",
+            "from_start": null,
+            "to_start": "2026-12-01T11:00:00+00:00",
+            "to_end": "2026-12-01T11:30:00+00:00",
+            "category": "commute",
+            "importance": 5,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Collect Duarte from daycare",
+            "from_start": null,
+            "to_start": "2026-12-01T11:30:00+00:00",
+            "to_end": "2026-12-01T11:40:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "user",
+              "duarte"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Travel home with Duarte",
+            "from_start": null,
+            "to_start": "2026-12-01T11:40:00+00:00",
+            "to_end": "2026-12-01T11:55:00+00:00",
+            "category": "commute",
+            "importance": 5,
+            "participants": [
+              "user",
+              "duarte"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Duarte sick-child care at home",
+            "from_start": null,
+            "to_start": "2026-12-01T11:55:00+00:00",
+            "to_end": "2026-12-01T14:15:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "user",
+              "duarte"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Duarte care at home with partner",
+            "from_start": null,
+            "to_start": "2026-12-01T14:15:00+00:00",
+            "to_end": "2026-12-01T17:45:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "partner",
+              "duarte"
+            ]
+          },
+          {
+            "type": "move",
+            "event_id": "report_tue",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-12-01T15:00:00+00:00",
+            "to_end": "2026-12-01T17:30:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "focus_pm_tue",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "commute_home_tue",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "pickup_partner_tue",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Pick up Marta from school",
+            "from_start": null,
+            "to_start": "2026-12-01T17:30:00+00:00",
+            "to_end": "2026-12-01T17:45:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "partner",
+              "marta"
+            ]
+          },
+          {
+            "type": "delete",
+            "event_id": "travel_to_school_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "dropoff_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Partner watches Duarte while Marta is dropped off",
+            "from_start": null,
+            "to_start": "2026-12-02T08:00:00+00:00",
+            "to_end": "2026-12-02T08:45:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "partner",
+              "duarte"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Travel to school with Marta",
+            "from_start": null,
+            "to_start": "2026-12-02T08:00:00+00:00",
+            "to_end": "2026-12-02T08:15:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "participants": [
+              "user",
+              "marta"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Drop off Marta at school",
+            "from_start": null,
+            "to_start": "2026-12-02T08:15:00+00:00",
+            "to_end": "2026-12-02T08:30:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "user",
+              "marta"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Travel home after Marta drop-off",
+            "from_start": null,
+            "to_start": "2026-12-02T08:30:00+00:00",
+            "to_end": "2026-12-02T08:45:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "delete",
+            "event_id": "commute_to_work_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "email_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-12-02T08:45:00+00:00",
+            "to_end": "2026-12-02T09:15:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "lunch_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-12-02T12:00:00+00:00",
+            "to_end": "2026-12-02T12:45:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Duarte sick-child care at home",
+            "from_start": null,
+            "to_start": "2026-12-02T12:45:00+00:00",
+            "to_end": "2026-12-02T15:15:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "user",
+              "duarte"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Authorised childcare cover for Duarte during workshop",
+            "from_start": null,
+            "to_start": "2026-12-02T15:15:00+00:00",
+            "to_end": "2026-12-02T16:45:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "duarte",
+              "authorised adult"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Duarte sick-child care with user",
+            "from_start": null,
+            "to_start": "2026-12-02T16:45:00+00:00",
+            "to_end": "2026-12-02T21:30:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "user",
+              "duarte"
+            ]
+          },
+          {
+            "type": "delete",
+            "event_id": "commute_to_school_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "pickup_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Travel to school with Duarte",
+            "from_start": null,
+            "to_start": "2026-12-02T17:15:00+00:00",
+            "to_end": "2026-12-02T17:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "participants": [
+              "user",
+              "duarte"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Pick up Marta from school",
+            "from_start": null,
+            "to_start": "2026-12-02T17:30:00+00:00",
+            "to_end": "2026-12-02T17:45:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ]
+          },
+          {
+            "type": "delete",
+            "event_id": "travel_to_pool_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "swim_marta_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "travel_home_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Travel home with the children",
+            "from_start": null,
+            "to_start": "2026-12-02T17:45:00+00:00",
+            "to_end": "2026-12-02T18:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "Duarte must be collected within one hour of the 10:40 daycare call, so the plan gets him there before 11:40.",
+            "Duarte cannot attend daycare on Wednesday, so Wednesday school logistics are rebuilt around Marta only.",
+            "Sleep blocks and fixed work meetings are left in place.",
+            "The Wednesday workshop remains operationally uncertain because it is in person and partner is on shift.",
+            "The authorised adult childcare cover on Wednesday is a proposed dependency, not a confirmed availability.",
+            "Thursday is left unchanged only if daycare confirms Duarte has been fever-free for 24 hours before return."
+          ],
+          "priorities": [
+            "Protect Duarte's care first, then Marta's school drop-off and pick-up.",
+            "Keep the client review, manager one-to-one, workshop, team sync and parent-teacher meeting as intact as possible.",
+            "Preserve weekly groceries today because partner can cover Duarte after arriving home.",
+            "Skip Marta's swimming this week to avoid taking a sick child to the pool."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Ask finance to allow remote workshop attendance on Wednesday.",
+              "rejected_because": "This avoids finding childcare cover, but the calendar only states an in-person workshop."
+            },
+            {
+              "option": "Ask an authorised adult to cover Duarte during the Wednesday workshop.",
+              "rejected_because": "This keeps the protected workshop intact, but it depends on external availability."
+            },
+            {
+              "option": "If Duarte is not fever-free for 24 hours by Thursday morning, keep him home and work from home.",
+              "rejected_because": "Thursday daycare attendance depends on the fever rule and must be confirmed with daycare."
+            },
+            {
+              "option": "Keep Marta's swimming class on Wednesday.",
+              "rejected_because": "Rejected because Duarte is sick and partner is working late, so supervision at the pool is a poor fit."
+            }
+          ],
+          "summary": "The plan collects Duarte on time today, keeps him covered at home, preserves sleep and key meetings, keeps groceries today, rebuilds Wednesday around Marta-only school logistics, and trades Marta's swimming plus some flexible work for childcare safety; the main unresolved item is confirming Wednesday workshop childcare or remote attendance."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [
+          "change 8: protected event cannot be changed: commute_home_tue",
+          "change 9: protected event cannot be changed: pickup_partner_tue",
+          "change 11: protected event cannot be changed: travel_to_school_wed",
+          "change 12: protected event cannot be changed: dropoff_wed",
+          "change 17: protected event cannot be changed: commute_to_work_wed",
+          "change 23: protected event cannot be changed: commute_to_school_wed",
+          "change 24: protected event cannot be changed: pickup_wed"
+        ],
+        "warnings": [],
+        "valid": false
+      },
+      "result_calendar": null,
+      "critic_evaluation": null,
+      "acceptance_policy": null,
+      "operations_changed_from_previous": null,
+      "rationale_changed_from_previous": null,
+      "prior_critic_reviews": []
+    },
+    {
+      "index": 1,
+      "proposer_feedback": "Deterministic validation found these operational problems: change 8: protected event cannot be changed: commute_home_tue; change 9: protected event cannot be changed: pickup_partner_tue; change 11: protected event cannot be changed: travel_to_school_wed; change 12: protected event cannot be changed: dropoff_wed; change 17: protected event cannot be changed: commute_to_work_wed; change 23: protected event cannot be changed: commute_to_school_wed; change 24: protected event cannot be changed: pickup_wed. Revise the changes before any Critic assessment.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Travel from office to daycare",
+            "from_start": null,
+            "to_start": "2026-12-01T11:00:00+00:00",
+            "to_end": "2026-12-01T11:30:00+00:00",
+            "category": "commute",
+            "importance": 5,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Collect Duarte from daycare",
+            "from_start": null,
+            "to_start": "2026-12-01T11:30:00+00:00",
+            "to_end": "2026-12-01T11:40:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "user",
+              "duarte"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Travel home with Duarte",
+            "from_start": null,
+            "to_start": "2026-12-01T11:40:00+00:00",
+            "to_end": "2026-12-01T11:55:00+00:00",
+            "category": "commute",
+            "importance": 5,
+            "participants": [
+              "user",
+              "duarte"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Duarte sick-child care at home",
+            "from_start": null,
+            "to_start": "2026-12-01T11:55:00+00:00",
+            "to_end": "2026-12-01T14:15:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "user",
+              "duarte"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Duarte care at home with partner",
+            "from_start": null,
+            "to_start": "2026-12-01T14:15:00+00:00",
+            "to_end": "2026-12-01T17:30:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "partner",
+              "duarte"
+            ]
+          },
+          {
+            "type": "move",
+            "event_id": "report_tue",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-12-03T13:15:00+00:00",
+            "to_end": "2026-12-03T15:45:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "focus_pm_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Duarte sick-child care with partner",
+            "from_start": null,
+            "to_start": "2026-12-02T08:00:00+00:00",
+            "to_end": "2026-12-02T12:45:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "partner",
+              "duarte"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Authorised childcare cover for Duarte",
+            "from_start": null,
+            "to_start": "2026-12-02T12:45:00+00:00",
+            "to_end": "2026-12-02T18:00:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "duarte",
+              "authorised adult"
+            ]
+          },
+          {
+            "type": "delete",
+            "event_id": "travel_to_pool_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "swim_marta_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "travel_home_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Travel home with Marta",
+            "from_start": null,
+            "to_start": "2026-12-02T17:45:00+00:00",
+            "to_end": "2026-12-02T18:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "participants": [
+              "user",
+              "marta"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "Duarte must be collected by 11:40, so the plan prioritises the urgent daycare collection over flexible work.",
+            "Duarte cannot attend daycare on Wednesday, so partner cover and authorised cover are used around fixed work and school commitments.",
+            "Protected childcare, work, sleep and fixed commute events are not moved or deleted without an external exception.",
+            "Some protected school-run entries still name Duarte, so the calendar needs manual correction or confirmation for Marta-only logistics.",
+            "The authorised adult cover on Wednesday is an external dependency and must be confirmed.",
+            "Thursday daycare return depends on Duarte being fever-free for 24 hours and must be confirmed with daycare."
+          ],
+          "priorities": [
+            "Keep Duarte supervised first, then preserve Marta's school drop-off and pick-up.",
+            "Keep the client review, manager one-to-one, workshop, team sync and parent-teacher meeting intact as far as possible.",
+            "Preserve protected sleep blocks and avoid adding late-night recovery work.",
+            "Protect groceries today by using partner cover after they arrive home.",
+            "Skip Marta's swimming this week to avoid taking a sick child through an optional activity."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Ask finance to allow remote workshop attendance on Wednesday.",
+              "rejected_because": "This may remove the need for authorised childcare, but the workshop is listed as in person."
+            },
+            {
+              "option": "Ask the manager or team to move the Wednesday workshop.",
+              "rejected_because": "Rejected as the current plan protects the fixed meeting and avoids a third-party schedule change."
+            },
+            {
+              "option": "Keep Marta's swimming class on Wednesday.",
+              "rejected_because": "Rejected because it adds avoidable logistics while Duarte is ill and partner is on late shift."
+            },
+            {
+              "option": "Use Thursday daycare as originally planned.",
+              "rejected_because": "Only feasible if daycare confirms the 24-hour fever-free rule is satisfied."
+            }
+          ],
+          "summary": "The revised plan collects Duarte on time, keeps him covered today and Wednesday, preserves fixed meetings, sleep and groceries, and trades Thursday project time plus Marta's swimming for childcare safety; the main trade-off is reliance on confirmed authorised cover for Wednesday afternoon and daycare clearance for Thursday."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [
+          "new_3: overlaps protected event client_tue",
+          "new_7: overlaps protected event travel_to_school_wed",
+          "new_7: overlaps protected event dropoff_wed",
+          "new_7: overlaps protected event commute_to_work_wed",
+          "new_7: overlaps protected event oneone_wed",
+          "new_8: overlaps protected event workshop_wed",
+          "new_8: overlaps protected event commute_to_school_wed",
+          "new_8: overlaps protected event pickup_wed",
+          "new_4: overlaps protected event client_tue",
+          "new_4: overlaps protected event commute_home_tue"
+        ],
+        "warnings": [
+          "new_3: overlaps contextual event partner_shift_tue for another participant",
+          "new_0: overlaps contextual event partner_shift_tue for another participant",
+          "new_12: overlaps contextual event partner_shift_wed for another participant",
+          "new_12: overlaps contextual event new_8 for another participant",
+          "report_tue: overlaps contextual event partner_shift_thu for another participant",
+          "new_2: overlaps contextual event partner_shift_tue for another participant",
+          "new_8: overlaps contextual event partner_shift_wed for another participant",
+          "new_1: overlaps contextual event partner_shift_tue for another participant",
+          "new temporal overlap (not automatically a hard-rule violation): email_wed x new_7",
+          "new temporal overlap (not automatically a hard-rule violation): focus_am_wed x new_7",
+          "new temporal overlap (not automatically a hard-rule violation): focus_pm_tue x new_4",
+          "new temporal overlap (not automatically a hard-rule violation): focus_pm_wed x new_8",
+          "new temporal overlap (not automatically a hard-rule violation): lunch_tue x new_3",
+          "new temporal overlap (not automatically a hard-rule violation): lunch_wed x new_8",
+          "new temporal overlap (not automatically a hard-rule violation): new_12 x new_8",
+          "new temporal overlap (not automatically a hard-rule violation): new_3 x prep_client_tue",
+          "new temporal overlap (not automatically a hard-rule violation): new_8 x wrap_wed"
+        ],
+        "valid": false
+      },
+      "result_calendar": null,
+      "critic_evaluation": null,
+      "acceptance_policy": null,
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": []
+    },
+    {
+      "index": 2,
+      "proposer_feedback": "Deterministic validation found these operational problems: new_3: overlaps protected event client_tue; new_7: overlaps protected event travel_to_school_wed; new_7: overlaps protected event dropoff_wed; new_7: overlaps protected event commute_to_work_wed; new_7: overlaps protected event oneone_wed; new_8: overlaps protected event workshop_wed; new_8: overlaps protected event commute_to_school_wed; new_8: overlaps protected event pickup_wed; new_4: overlaps protected event client_tue; new_4: overlaps protected event commute_home_tue. Revise the changes before any Critic assessment.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Travel from office to daycare",
+            "from_start": null,
+            "to_start": "2026-12-01T11:00:00+00:00",
+            "to_end": "2026-12-01T11:30:00+00:00",
+            "category": "commute",
+            "importance": 5,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Collect Duarte from daycare",
+            "from_start": null,
+            "to_start": "2026-12-01T11:30:00+00:00",
+            "to_end": "2026-12-01T11:40:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "user",
+              "duarte"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Travel home with Duarte",
+            "from_start": null,
+            "to_start": "2026-12-01T11:40:00+00:00",
+            "to_end": "2026-12-01T11:55:00+00:00",
+            "category": "commute",
+            "importance": 5,
+            "participants": [
+              "user",
+              "duarte"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Duarte sick-child care at home",
+            "from_start": null,
+            "to_start": "2026-12-01T11:55:00+00:00",
+            "to_end": "2026-12-01T14:00:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "user",
+              "duarte"
+            ]
+          },
+          {
+            "type": "move",
+            "event_id": "lunch_tue",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-12-01T12:15:00+00:00",
+            "to_end": "2026-12-01T13:00:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "prep_client_tue",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-12-01T13:00:00+00:00",
+            "to_end": "2026-12-01T13:30:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Duarte care at home with partner",
+            "from_start": null,
+            "to_start": "2026-12-01T15:00:00+00:00",
+            "to_end": "2026-12-01T17:30:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "partner",
+              "duarte"
+            ]
+          },
+          {
+            "type": "move",
+            "event_id": "report_tue",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-12-03T13:15:00+00:00",
+            "to_end": "2026-12-03T15:45:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "focus_pm_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "run_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-12-03T21:15:00+00:00",
+            "to_end": "2026-12-03T22:00:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Duarte sick-child care with partner",
+            "from_start": null,
+            "to_start": "2026-12-02T09:00:00+00:00",
+            "to_end": "2026-12-02T09:30:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "partner",
+              "duarte"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Duarte sick-child care with partner",
+            "from_start": null,
+            "to_start": "2026-12-02T10:30:00+00:00",
+            "to_end": "2026-12-02T12:45:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "partner",
+              "duarte"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Authorised childcare cover for Duarte",
+            "from_start": null,
+            "to_start": "2026-12-02T12:45:00+00:00",
+            "to_end": "2026-12-02T15:30:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "duarte",
+              "authorised adult"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Authorised childcare cover for Duarte",
+            "from_start": null,
+            "to_start": "2026-12-02T16:30:00+00:00",
+            "to_end": "2026-12-02T17:00:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "duarte",
+              "authorised adult"
+            ]
+          },
+          {
+            "type": "delete",
+            "event_id": "travel_to_pool_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "swim_marta_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "travel_home_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Travel home with Marta",
+            "from_start": null,
+            "to_start": "2026-12-02T17:45:00+00:00",
+            "to_end": "2026-12-02T18:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "participants": [
+              "user",
+              "marta"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "Duarte must be collected by 11:40, so flexible report work is displaced before any lower-priority item.",
+            "Protected work, childcare and sleep events are not moved or deleted.",
+            "The partner is unavailable during fixed shifts, so Wednesday afternoon care needs another confirmed adult.",
+            "The original Wednesday and Thursday school-run entries still name Duarte and need manual correction if he is not attending daycare.",
+            "Tuesday 14:00-15:00 and Wednesday protected-event windows still need practical cover arrangements around the fixed meetings.",
+            "Thursday daycare attendance depends on 24 fever-free hours and confirmation from daycare."
+          ],
+          "priorities": [
+            "Keep Duarte supervised first, then preserve Marta's school runs and protected meetings.",
+            "Preserve sleep and avoid adding late-night work beyond the moved run.",
+            "Keep groceries tonight because the fridge is nearly empty and partner cover is available later.",
+            "Skip Marta's swimming this week to reduce exposure and logistics while Duarte is ill.",
+            "Use Thursday afternoon project time for the displaced report because the report is due Friday."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Ask finance to allow remote workshop attendance on Wednesday.",
+              "rejected_because": "This could reduce childcare pressure, but the calendar says the workshop is in person."
+            },
+            {
+              "option": "Ask the client to move Tuesday's review.",
+              "rejected_because": "Rejected because video attendance is possible and the meeting is high importance."
+            },
+            {
+              "option": "Keep Marta's swimming class on Wednesday.",
+              "rejected_because": "Rejected because it adds avoidable logistics while Duarte is ill and partner is on late shift."
+            },
+            {
+              "option": "Use Thursday daycare as originally planned.",
+              "rejected_because": "Only feasible if daycare confirms Duarte has met the 24-hour fever-free rule."
+            }
+          ],
+          "summary": "The plan collects Duarte on time, shifts flexible work into Thursday, preserves protected meetings and sleep, keeps groceries, and skips swimming; the main trade-off is relying on confirmed partner handover, authorised Wednesday cover, and daycare clearance for Thursday."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [
+          "prep_client_tue: overlaps protected event new_3",
+          "new_6: overlaps protected event commute_home_tue",
+          "lunch_tue: overlaps protected event new_3"
+        ],
+        "warnings": [
+          "new_3: overlaps contextual event partner_shift_tue for another participant",
+          "prep_client_tue: overlaps contextual event partner_shift_tue for another participant",
+          "new_0: overlaps contextual event partner_shift_tue for another participant",
+          "report_tue: overlaps contextual event partner_shift_thu for another participant",
+          "lunch_tue: overlaps contextual event partner_shift_tue for another participant",
+          "new_17: overlaps contextual event partner_shift_wed for another participant",
+          "new_2: overlaps contextual event partner_shift_tue for another participant",
+          "new_13: overlaps contextual event partner_shift_wed for another participant",
+          "new_12: overlaps contextual event partner_shift_wed for another participant",
+          "new_1: overlaps contextual event partner_shift_tue for another participant",
+          "new temporal overlap (not automatically a hard-rule violation): email_wed x new_10",
+          "new temporal overlap (not automatically a hard-rule violation): focus_am_wed x new_11",
+          "new temporal overlap (not automatically a hard-rule violation): focus_pm_tue x new_6",
+          "new temporal overlap (not automatically a hard-rule violation): focus_pm_wed x new_12",
+          "new temporal overlap (not automatically a hard-rule violation): lunch_tue x new_3",
+          "new temporal overlap (not automatically a hard-rule violation): lunch_wed x new_12",
+          "new temporal overlap (not automatically a hard-rule violation): new_13 x wrap_wed",
+          "new temporal overlap (not automatically a hard-rule violation): new_3 x prep_client_tue"
+        ],
+        "valid": false
+      },
+      "result_calendar": null,
+      "critic_evaluation": null,
+      "acceptance_policy": null,
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": []
+    },
+    {
+      "index": 3,
+      "proposer_feedback": "Deterministic validation found these operational problems: prep_client_tue: overlaps protected event new_3; new_6: overlaps protected event commute_home_tue; lunch_tue: overlaps protected event new_3. Revise the changes before any Critic assessment.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "move",
+            "event_id": "report_tue",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-12-03T13:15:00+00:00",
+            "to_end": "2026-12-03T15:45:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Travel from office to daycare",
+            "from_start": null,
+            "to_start": "2026-12-01T11:00:00+00:00",
+            "to_end": "2026-12-01T11:30:00+00:00",
+            "category": "commute",
+            "importance": 5,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Collect Duarte from daycare",
+            "from_start": null,
+            "to_start": "2026-12-01T11:30:00+00:00",
+            "to_end": "2026-12-01T11:40:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "user",
+              "duarte"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Travel home with Duarte",
+            "from_start": null,
+            "to_start": "2026-12-01T11:40:00+00:00",
+            "to_end": "2026-12-01T11:55:00+00:00",
+            "category": "commute",
+            "importance": 5,
+            "participants": [
+              "user",
+              "duarte"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Duarte sick-child care at home",
+            "from_start": null,
+            "to_start": "2026-12-01T11:55:00+00:00",
+            "to_end": "2026-12-01T13:15:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "user",
+              "duarte"
+            ]
+          },
+          {
+            "type": "move",
+            "event_id": "prep_client_tue",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-12-01T13:15:00+00:00",
+            "to_end": "2026-12-01T13:45:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Authorised childcare cover for Duarte",
+            "from_start": null,
+            "to_start": "2026-12-01T13:15:00+00:00",
+            "to_end": "2026-12-01T14:15:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "duarte",
+              "authorised adult"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Duarte care with partner",
+            "from_start": null,
+            "to_start": "2026-12-01T14:15:00+00:00",
+            "to_end": "2026-12-01T17:00:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "partner",
+              "duarte"
+            ]
+          },
+          {
+            "type": "move",
+            "event_id": "lunch_tue",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-12-01T15:00:00+00:00",
+            "to_end": "2026-12-01T15:45:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "focus_pm_tue",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Duarte sick-child care with partner",
+            "from_start": null,
+            "to_start": "2026-12-02T08:00:00+00:00",
+            "to_end": "2026-12-02T12:45:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "partner",
+              "duarte"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Authorised childcare cover for Duarte",
+            "from_start": null,
+            "to_start": "2026-12-02T12:45:00+00:00",
+            "to_end": "2026-12-02T18:00:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "duarte",
+              "authorised adult"
+            ]
+          },
+          {
+            "type": "delete",
+            "event_id": "travel_to_pool_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "swim_marta_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "travel_home_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Travel home with Marta",
+            "from_start": null,
+            "to_start": "2026-12-02T17:45:00+00:00",
+            "to_end": "2026-12-02T18:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "participants": [
+              "user",
+              "marta"
+            ]
+          },
+          {
+            "type": "delete",
+            "event_id": "focus_pm_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Check Duarte fever-free status and daycare return",
+            "from_start": null,
+            "to_start": "2026-12-03T07:45:00+00:00",
+            "to_end": "2026-12-03T08:00:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "participants": [
+              "user"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "Duarte must be collected by the daycare deadline, so flexible report work and lower-priority project work are displaced.",
+            "Protected work meetings, childcare events and sleep blocks are not moved or deleted.",
+            "Tuesday cover before the partner gets home needs confirmation with an authorised adult.",
+            "The partner's exact Tuesday handover time needs confirmation because the request says around 14:15.",
+            "Wednesday afternoon care needs a confirmed authorised adult because the partner leaves for work before the protected workshop and pickup period.",
+            "The Wednesday and Thursday school-run entries still name Duarte and need manual correction if he is not attending daycare.",
+            "Thursday daycare return must be confirmed against the 24-hour fever-free rule before drop-off."
+          ],
+          "priorities": [
+            "Keep Duarte supervised first, then preserve Marta's school runs and the important meetings.",
+            "Use home working and third-party cover to protect the client review, manager one-to-one and workshop as much as possible.",
+            "Keep the existing grocery slot because the fridge is nearly empty and partner cover should be available.",
+            "Skip swimming this week to reduce logistics while Duarte is ill.",
+            "Move report work into Thursday because it is due Friday and is higher value than generic project work."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Ask the client to move Tuesday's review.",
+              "rejected_because": "Rejected because video attendance is possible if cover is confirmed for Duarte."
+            },
+            {
+              "option": "Ask finance to allow remote workshop attendance on Wednesday.",
+              "rejected_because": "Worth confirming, but the calendar currently marks the workshop as in-person."
+            },
+            {
+              "option": "Keep Marta's swimming class.",
+              "rejected_because": "Rejected because it adds avoidable logistics while Duarte is excluded from daycare."
+            },
+            {
+              "option": "Use Thursday daycare as normal.",
+              "rejected_because": "Feasible only if daycare confirms Duarte has been fever-free for the required period."
+            }
+          ],
+          "summary": "The plan collects Duarte on time, uses partner and confirmed authorised-adult cover to protect key meetings, skips swimming, keeps groceries, and moves the report into Thursday; the main trade-off is relying on confirmed cover and daycare clearance while sacrificing lower-priority project work."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [
+          "new_6: overlaps protected event client_tue",
+          "new_10: overlaps protected event travel_to_school_wed",
+          "new_10: overlaps protected event dropoff_wed",
+          "new_10: overlaps protected event commute_to_work_wed",
+          "new_10: overlaps protected event oneone_wed",
+          "new_11: overlaps protected event workshop_wed",
+          "new_11: overlaps protected event commute_to_school_wed",
+          "new_11: overlaps protected event pickup_wed",
+          "new_7: overlaps protected event client_tue"
+        ],
+        "warnings": [
+          "prep_client_tue: overlaps contextual event partner_shift_tue for another participant",
+          "prep_client_tue: overlaps contextual event new_6 for another participant",
+          "new_6: overlaps contextual event partner_shift_tue for another participant",
+          "new_11: overlaps contextual event partner_shift_wed for another participant",
+          "report_tue: overlaps contextual event partner_shift_thu for another participant",
+          "lunch_tue: overlaps contextual event new_7 for another participant",
+          "new_17: overlaps contextual event partner_shift_thu for another participant",
+          "new_15: overlaps contextual event partner_shift_wed for another participant",
+          "new_15: overlaps contextual event new_11 for another participant",
+          "new_2: overlaps contextual event partner_shift_tue for another participant",
+          "new_3: overlaps contextual event partner_shift_tue for another participant",
+          "new_4: overlaps contextual event partner_shift_tue for another participant",
+          "new_1: overlaps contextual event partner_shift_tue for another participant",
+          "new temporal overlap (not automatically a hard-rule violation): email_wed x new_10",
+          "new temporal overlap (not automatically a hard-rule violation): focus_am_wed x new_10",
+          "new temporal overlap (not automatically a hard-rule violation): focus_pm_wed x new_11",
+          "new temporal overlap (not automatically a hard-rule violation): lunch_tue x new_7",
+          "new temporal overlap (not automatically a hard-rule violation): lunch_wed x new_11",
+          "new temporal overlap (not automatically a hard-rule violation): new_11 x new_15",
+          "new temporal overlap (not automatically a hard-rule violation): new_11 x wrap_wed",
+          "new temporal overlap (not automatically a hard-rule violation): new_6 x prep_client_tue"
+        ],
+        "valid": false
+      },
+      "result_calendar": null,
+      "critic_evaluation": null,
+      "acceptance_policy": null,
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": []
+    }
+  ],
+  "refinements": 3,
+  "source_status": "deferred_invalid_proposal",
+  "final_proposal": {
+    "changes": [
+      {
+        "type": "move",
+        "event_id": "report_tue",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-12-03T13:15:00+00:00",
+        "to_end": "2026-12-03T15:45:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Travel from office to daycare",
+        "from_start": null,
+        "to_start": "2026-12-01T11:00:00+00:00",
+        "to_end": "2026-12-01T11:30:00+00:00",
+        "category": "commute",
+        "importance": 5,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Collect Duarte from daycare",
+        "from_start": null,
+        "to_start": "2026-12-01T11:30:00+00:00",
+        "to_end": "2026-12-01T11:40:00+00:00",
+        "category": "childcare",
+        "importance": 5,
+        "participants": [
+          "user",
+          "duarte"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Travel home with Duarte",
+        "from_start": null,
+        "to_start": "2026-12-01T11:40:00+00:00",
+        "to_end": "2026-12-01T11:55:00+00:00",
+        "category": "commute",
+        "importance": 5,
+        "participants": [
+          "user",
+          "duarte"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Duarte sick-child care at home",
+        "from_start": null,
+        "to_start": "2026-12-01T11:55:00+00:00",
+        "to_end": "2026-12-01T13:15:00+00:00",
+        "category": "childcare",
+        "importance": 5,
+        "participants": [
+          "user",
+          "duarte"
+        ]
+      },
+      {
+        "type": "move",
+        "event_id": "prep_client_tue",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-12-01T13:15:00+00:00",
+        "to_end": "2026-12-01T13:45:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Authorised childcare cover for Duarte",
+        "from_start": null,
+        "to_start": "2026-12-01T13:15:00+00:00",
+        "to_end": "2026-12-01T14:15:00+00:00",
+        "category": "childcare",
+        "importance": 5,
+        "participants": [
+          "duarte",
+          "authorised adult"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Duarte care with partner",
+        "from_start": null,
+        "to_start": "2026-12-01T14:15:00+00:00",
+        "to_end": "2026-12-01T17:00:00+00:00",
+        "category": "childcare",
+        "importance": 5,
+        "participants": [
+          "partner",
+          "duarte"
+        ]
+      },
+      {
+        "type": "move",
+        "event_id": "lunch_tue",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-12-01T15:00:00+00:00",
+        "to_end": "2026-12-01T15:45:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "focus_pm_tue",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Duarte sick-child care with partner",
+        "from_start": null,
+        "to_start": "2026-12-02T08:00:00+00:00",
+        "to_end": "2026-12-02T12:45:00+00:00",
+        "category": "childcare",
+        "importance": 5,
+        "participants": [
+          "partner",
+          "duarte"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Authorised childcare cover for Duarte",
+        "from_start": null,
+        "to_start": "2026-12-02T12:45:00+00:00",
+        "to_end": "2026-12-02T18:00:00+00:00",
+        "category": "childcare",
+        "importance": 5,
+        "participants": [
+          "duarte",
+          "authorised adult"
+        ]
+      },
+      {
+        "type": "delete",
+        "event_id": "travel_to_pool_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "swim_marta_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "travel_home_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Travel home with Marta",
+        "from_start": null,
+        "to_start": "2026-12-02T17:45:00+00:00",
+        "to_end": "2026-12-02T18:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "participants": [
+          "user",
+          "marta"
+        ]
+      },
+      {
+        "type": "delete",
+        "event_id": "focus_pm_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Check Duarte fever-free status and daycare return",
+        "from_start": null,
+        "to_start": "2026-12-03T07:45:00+00:00",
+        "to_end": "2026-12-03T08:00:00+00:00",
+        "category": "childcare",
+        "importance": 5,
+        "participants": [
+          "user"
+        ]
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "Duarte must be collected by the daycare deadline, so flexible report work and lower-priority project work are displaced.",
+        "Protected work meetings, childcare events and sleep blocks are not moved or deleted.",
+        "Tuesday cover before the partner gets home needs confirmation with an authorised adult.",
+        "The partner's exact Tuesday handover time needs confirmation because the request says around 14:15.",
+        "Wednesday afternoon care needs a confirmed authorised adult because the partner leaves for work before the protected workshop and pickup period.",
+        "The Wednesday and Thursday school-run entries still name Duarte and need manual correction if he is not attending daycare.",
+        "Thursday daycare return must be confirmed against the 24-hour fever-free rule before drop-off."
+      ],
+      "priorities": [
+        "Keep Duarte supervised first, then preserve Marta's school runs and the important meetings.",
+        "Use home working and third-party cover to protect the client review, manager one-to-one and workshop as much as possible.",
+        "Keep the existing grocery slot because the fridge is nearly empty and partner cover should be available.",
+        "Skip swimming this week to reduce logistics while Duarte is ill.",
+        "Move report work into Thursday because it is due Friday and is higher value than generic project work."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Ask the client to move Tuesday's review.",
+          "rejected_because": "Rejected because video attendance is possible if cover is confirmed for Duarte."
+        },
+        {
+          "option": "Ask finance to allow remote workshop attendance on Wednesday.",
+          "rejected_because": "Worth confirming, but the calendar currently marks the workshop as in-person."
+        },
+        {
+          "option": "Keep Marta's swimming class.",
+          "rejected_because": "Rejected because it adds avoidable logistics while Duarte is excluded from daycare."
+        },
+        {
+          "option": "Use Thursday daycare as normal.",
+          "rejected_because": "Feasible only if daycare confirms Duarte has been fever-free for the required period."
+        }
+      ],
+      "summary": "The plan collects Duarte on time, uses partner and confirmed authorised-adult cover to protect key meetings, skips swimming, keeps groceries, and moves the report into Thursday; the main trade-off is relying on confirmed cover and daycare clearance while sacrificing lower-priority project work."
+    }
+  },
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [
+      "new_10: overlaps protected event travel_to_school_wed",
+      "new_10: overlaps protected event dropoff_wed",
+      "new_10: overlaps protected event commute_to_work_wed",
+      "new_10: overlaps protected event oneone_wed",
+      "new_6: overlaps protected event client_tue",
+      "new_11: overlaps protected event workshop_wed",
+      "new_11: overlaps protected event commute_to_school_wed",
+      "new_11: overlaps protected event pickup_wed",
+      "new_7: overlaps protected event client_tue"
+    ],
+    "warnings": [
+      "report_tue: overlaps contextual event partner_shift_thu for another participant",
+      "lunch_tue: overlaps contextual event new_7 for another participant",
+      "new_6: overlaps contextual event partner_shift_tue for another participant",
+      "new_17: overlaps contextual event partner_shift_thu for another participant",
+      "new_3: overlaps contextual event partner_shift_tue for another participant",
+      "prep_client_tue: overlaps contextual event partner_shift_tue for another participant",
+      "prep_client_tue: overlaps contextual event new_6 for another participant",
+      "new_15: overlaps contextual event partner_shift_wed for another participant",
+      "new_15: overlaps contextual event new_11 for another participant",
+      "new_4: overlaps contextual event partner_shift_tue for another participant",
+      "new_1: overlaps contextual event partner_shift_tue for another participant",
+      "new_11: overlaps contextual event partner_shift_wed for another participant",
+      "new_2: overlaps contextual event partner_shift_tue for another participant",
+      "new temporal overlap (not automatically a hard-rule violation): email_wed x new_10",
+      "new temporal overlap (not automatically a hard-rule violation): focus_am_wed x new_10",
+      "new temporal overlap (not automatically a hard-rule violation): focus_pm_wed x new_11",
+      "new temporal overlap (not automatically a hard-rule violation): lunch_tue x new_7",
+      "new temporal overlap (not automatically a hard-rule violation): lunch_wed x new_11",
+      "new temporal overlap (not automatically a hard-rule violation): new_11 x new_15",
+      "new temporal overlap (not automatically a hard-rule violation): new_11 x wrap_wed",
+      "new temporal overlap (not automatically a hard-rule violation): new_6 x prep_client_tue"
+    ],
+    "valid": false
+  },
+  "source_result_sha256": "5e31a08448034e0dedf9ee5f53f188cb1eb0e04d667d1c6e5e64feb3f5af76b1",
+  "scenario_sha256": "36ff1be756bb7483202a9c68403dce7fc09d7e9859be89e22ad9cbd8f37d346e",
+  "aggregate_requirements_sha256": null,
+  "confirmed_changes_sha256": null,
+  "critic_input_version": "final_calendar_v1",
+  "critic_policy_version": "uncertainty_review_v2",
+  "result_calendar_version": "validated_added_metadata_v2",
+  "final_result_calendar": null,
+  "final_unresolved_assumptions": null,
+  "uncertainty_history": []
+}

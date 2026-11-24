@@ -8,7 +8,7 @@ from pathlib import Path
 from annotation_v2 import ProposalConsensus, _consensus_path, pair
 from calendar_v2 import simulate
 from models import Proposal
-from proposal_catalog_v2 import catalog
+from proposal_catalog_v2 import catalog, training_catalog_audit
 from scenario_v2 import load_scenario
 from final_dataset_v2 import combined_manifest, scenario_path
 
@@ -42,7 +42,15 @@ def build_rows(root: Path, *, split: str = "train", unlock_test: bool = False) -
         if family_split[entry["family_id"]] != entry["split"]:
             raise ValueError("family split leakage")
     rows, exclusions = [], []
-    for source in catalog(root):
+    if split == "train":
+        audit = training_catalog_audit(root)
+        sources = audit["active"]
+        exclusions.extend({"proposal_id": item["proposal_id"],
+                           "reason": "source_run_integrity_failed"}
+                          for item in audit["quarantined"])
+    else:
+        sources = catalog(root)
+    for source in sources:
         if source["split"] != split:
             continue
         pid = source["proposal_id"]

@@ -5,6 +5,9 @@ import hashlib
 import json
 from pathlib import Path
 
+from models import (CurrentCriticEvaluation, PlausibilityCriticEvaluation,
+                    Proposal)
+
 
 A_COMPLETED_STATUSES = {"proposal_ready", "invalid_proposal"}
 B_COMPLETED_STATUSES = {
@@ -20,6 +23,146 @@ class TechnicalRunError(RuntimeError):
         status = record.get("status") or "technical_error"
         message = record.get("error") or "technical execution did not complete"
         super().__init__(f"{scenario_id}: {status} at {stage}: {message}")
+
+
+TECHNICAL_ERROR_FIELDS = (
+    "error", "error_stage", "failed_llm_outputs", "llm_diagnostics",
+    "rate_limit_diagnostics",
+)
+
+
+def completed_b_integrity_issues(record: dict) -> list[str]:
+    """Return content-level defects that make a B record non-terminal.
+
+    A top-level scientific status is necessary but not sufficient. This audit
+    deliberately distinguishes recovered structured-output retries stored on an
+    iteration from an unrecovered technical error stored at record level.
+    """
+    issues: list[str] = []
+    if record.get("configuration") != "B":
+        issues.append("configuration is not B")
+    if record.get("status") not in B_COMPLETED_STATUSES:
+        issues.append("status is not a completed scientific B status")
+    for field in TECHNICAL_ERROR_FIELDS:
+        if record.get(field):
+            issues.append(f"terminal record contains technical error field: {field}")
+
+    iterations = record.get("iterations")
+    if not isinstance(iterations, list) or not iterations:
+        return issues + ["completed B record has no iterations"]
+    settings = record.get("critic_settings")
+    max_refinements = settings.get("max_refinements") if isinstance(settings, dict) else None
+    if not isinstance(max_refinements, int) or max_refinements < 0:
+        issues.append("critic max_refinements is missing or invalid")
+    if len(iterations) > (max_refinements + 1 if isinstance(max_refinements, int) else 0):
+        issues.append("iteration count exceeds the Critic revision budget")
+
+    for index, item in enumerate(iterations):
+        if not isinstance(item, dict) or item.get("index") != index:
+            issues.append(f"iteration {index} has an invalid index or shape")
+            continue
+        raw_proposal = item.get("proposal")
+        try:
+            proposal = Proposal.model_validate(raw_proposal)
+        except Exception:
+            issues.append(f"iteration {index} has no complete structured proposal")
+            continue
+        validation = item.get("validation")
+        if not isinstance(validation, dict):
+            issues.append(f"iteration {index} has no deterministic validation report")
+            continue
+        violations = validation.get("violations")
+        valid = validation.get("valid")
+        if not isinstance(violations, list) or not isinstance(valid, bool) or valid != (not violations):
+            issues.append(f"iteration {index} has an inconsistent validation result")
+            continue
+        if valid:
+            if not isinstance(item.get("result_calendar"), dict):
+                issues.append(f"iteration {index} is valid but has no result calendar")
+            raw_evaluation = item.get("critic_evaluation")
+            if not isinstance(raw_evaluation, dict):
+                issues.append(f"iteration {index} is valid but has no Critic evaluation")
+            else:
+                policy_version = record.get("critic_policy_version")
+                contract = (CurrentCriticEvaluation
+                            if policy_version == "uncertainty_review_v2"
+                            else PlausibilityCriticEvaluation)
+                try:
+                    evaluation = contract.model_validate(
+                        {key: value for key, value in raw_evaluation.items()
+                         if key != "overall"})
+                except Exception:
+                    issues.append(f"iteration {index} has an invalid Critic evaluation")
+                else:
+                    if raw_evaluation.get("overall") != evaluation.overall:
+                        issues.append(f"iteration {index} has an inconsistent Critic score")
+            policy = item.get("acceptance_policy")
+            if not isinstance(policy, dict) or not isinstance(policy.get("accepted"), bool):
+                issues.append(f"iteration {index} is valid but has no Critic acceptance policy")
+        else:
+            if item.get("result_calendar") is not None:
+                issues.append(f"iteration {index} is invalid but contains a result calendar")
+            if item.get("critic_evaluation") is not None or item.get("acceptance_policy") is not None:
+                issues.append(f"iteration {index} is invalid but contains a Critic outcome")
+
+    if record.get("initial_proposal") != iterations[0].get("proposal"):
+        issues.append("initial proposal differs from iteration 0")
+    last_proposal = next((item.get("proposal") for item in reversed(iterations)
+                          if isinstance(item, dict) and item.get("proposal") is not None), None)
+    if record.get("final_proposal") != last_proposal:
+        issues.append("final proposal differs from the last completed iteration")
+    try:
+        Proposal.model_validate(record.get("final_proposal"))
+    except Exception:
+        issues.append("final proposal is not a complete structured proposal")
+    if record.get("refinements") != iterations[-1].get("index"):
+        issues.append("refinement count differs from the final iteration index")
+
+    status = record.get("status")
+    last = iterations[-1]
+    validation = last.get("validation") if isinstance(last, dict) else None
+    last_valid = validation.get("valid") if isinstance(validation, dict) else None
+    policy = last.get("acceptance_policy") if isinstance(last, dict) else None
+    if status == "deferred_invalid_proposal":
+        if last_valid is not False or not validation.get("violations"):
+            issues.append("deferred_invalid_proposal lacks final deterministic violations")
+        if isinstance(max_refinements, int) and last.get("index") != max_refinements:
+            issues.append("invalid proposal ended before exhausting the revision budget")
+        if record.get("critic_accepted") is not False:
+            issues.append("invalid proposal is marked Critic-accepted")
+    elif status == "deferred_critic_threshold":
+        if last_valid is not True:
+            issues.append("deferred_critic_threshold lacks a valid final proposal")
+        if not isinstance(policy, dict) or policy.get("accepted") is not False:
+            issues.append("deferred_critic_threshold lacks a rejecting Critic policy")
+        if isinstance(policy, dict) and not policy.get("revision_causes"):
+            issues.append("deferred_critic_threshold has no scientific revision cause")
+        if not isinstance(record.get("final_score"), (int, float)):
+            issues.append("deferred_critic_threshold has no numeric final Critic score")
+        elif isinstance(last.get("critic_evaluation"), dict) and (
+                record.get("final_score") != last["critic_evaluation"].get("overall")):
+            issues.append("final Critic score differs from the final evaluation")
+        if isinstance(max_refinements, int) and last.get("index") != max_refinements:
+            issues.append("Critic threshold result ended before exhausting the revision budget")
+        if record.get("critic_accepted") is not False:
+            issues.append("threshold-deferred proposal is marked Critic-accepted")
+    elif status == "proposal_ready":
+        if last_valid is not True:
+            issues.append("proposal_ready lacks a valid final proposal")
+        if not isinstance(policy, dict) or policy.get("accepted") is not True:
+            issues.append("proposal_ready lacks an accepting Critic policy")
+        if record.get("critic_accepted") is not True:
+            issues.append("proposal_ready is not marked Critic-accepted")
+        if isinstance(last.get("critic_evaluation"), dict) and (
+                record.get("final_score") != last["critic_evaluation"].get("overall")):
+            issues.append("final Critic score differs from the final evaluation")
+    return issues
+
+
+def validate_completed_b_integrity(record: dict) -> None:
+    issues = completed_b_integrity_issues(record)
+    if issues:
+        raise ValueError("incomplete or inconsistent B execution: " + "; ".join(issues))
 
 
 def validate_completed_record(record: dict, configuration: str) -> None:
@@ -41,6 +184,14 @@ def validate_completed_record(record: dict, configuration: str) -> None:
             "status": "serialization_error",
             "error": "completed run missing fields: " + ", ".join(missing),
         })
+    if configuration == "B":
+        try:
+            validate_completed_b_integrity(record)
+        except ValueError as exc:
+            raise TechnicalRunError(record.get("scenario_id", "unknown"), record | {
+                "status": "serialization_error", "error_stage": "completion_validation",
+                "error": str(exc), "safe_action": "no_autonomous_action",
+            }) from None
 
 
 def validate_historical_pilot_b_record(record: dict) -> None:
@@ -61,6 +212,32 @@ def validate_historical_pilot_b_record(record: dict) -> None:
         raise ValueError("historical pilot B artifact is not in the training split")
     if not isinstance(record["iterations"], list) or not record["iterations"]:
         raise ValueError("historical pilot B artifact has no completed iterations")
+    validate_completed_b_integrity(record)
+
+
+def technical_failure_path(root: Path, record: dict) -> Path:
+    """Location outside active runs for an immutable failed-attempt checkpoint."""
+    scenario_id = str(record.get("scenario_id") or "unknown")
+    run_id = str(record.get("run_id") or "unknown")
+    if (Path(scenario_id).name != scenario_id or Path(run_id).name != run_id
+            or scenario_id in {".", ".."} or run_id in {".", ".."}):
+        raise ValueError("unsafe technical failure identity")
+    return (root / "eval" / "technical_failures" / scenario_id / run_id / "B"
+            / f"{scenario_id}.json")
+
+
+def archive_technical_failure(root: Path, record: dict) -> Path:
+    """Persist raw model output and diagnostics without making a discoverable run."""
+    from benchmark_v2 import atomic_json
+    target = technical_failure_path(root, record)
+    payload = dict(record) | {"artifact_type": "technical_failure",
+                              "active_run": False}
+    if target.exists():
+        if json.loads(target.read_text(encoding="utf-8")) != payload:
+            raise ValueError(f"technical failure identity collision: {target}")
+        return target
+    atomic_json(target, payload)
+    return target
 
 
 def historical_pilot_completed_b(root: Path) -> dict[str, dict]:

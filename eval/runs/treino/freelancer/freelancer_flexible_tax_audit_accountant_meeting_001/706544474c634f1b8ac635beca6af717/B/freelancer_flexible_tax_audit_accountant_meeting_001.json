@@ -1,0 +1,1729 @@
+{
+  "configuration": "B",
+  "scenario_id": "freelancer_flexible_tax_audit_accountant_meeting_001",
+  "family": "freelancer_schedule_conflict",
+  "category": "v2",
+  "proposer_provider": "iaedu",
+  "proposer_model": "GPT-5.5",
+  "proposer_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_provider": "iaedu",
+  "critic_model": "GPT-5.5",
+  "critic_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_settings": {
+    "threshold": 4.0,
+    "max_refinements": 3,
+    "min_dimension_score": 1
+  },
+  "iterations": [
+    {
+      "index": 0,
+      "proposer_feedback": null,
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "move",
+            "event_id": "work_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-03-25T11:00:00+00:00",
+            "to_end": "2027-03-25T13:30:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Client Development Make-up Work",
+            "from_start": null,
+            "to_start": "2027-03-22T17:00:00+00:00",
+            "to_end": "2027-03-22T17:30:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "The fixed accountant meeting is protected and not moved.",
+            "Protected sleep blocks are not moved.",
+            "Thursday cycling remains in the morning.",
+            "The final calendar reaches the 32-hour weekly work minimum.",
+            "Only solo work is placed into free calendar intervals.",
+            "Scheduled work time is not proof that the work will be completed."
+          ],
+          "priorities": [
+            "Preserve the morning cycling routine before reshaping Thursday work.",
+            "Keep the tax commitment fixed because it is mandatory.",
+            "Use Monday for the make-up time requested by the user.",
+            "Avoid assuming any external venue, person or resource availability."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Use Wednesday for the make-up work instead of Monday.",
+              "rejected_because": "This also satisfies the request, but Monday restores the deficit earlier in the week."
+            },
+            {
+              "option": "Keep the current Thursday evening work block unchanged.",
+              "rejected_because": "That already meets 32 hours, but it does not meaningfully adjust Thursday around the tax commitment."
+            }
+          ],
+          "summary": "Moves Thursday development work before the protected tax meeting and adds a small Monday make-up block, preserving morning cycling and all fixed events while shifting a little work earlier in the week."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true,
+        "aggregate_checks": [
+          {
+            "id": "weekly_hours",
+            "status": "pass",
+            "minutes": 1920.0,
+            "minimum_minutes": 1920,
+            "category": "work",
+            "evidence": "union of final calendar intervals"
+          }
+        ],
+        "aggregate_validation_version": "duration_total_v1"
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-03-21T23:30:00+00:00",
+            "end": "2027-03-22T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_mon",
+            "title": "Development Work Block",
+            "start": "2027-03-22T09:00:00+00:00",
+            "end": "2027-03-22T17:00:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "8 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_1",
+            "title": "Client Development Make-up Work",
+            "start": "2027-03-22T17:00:00+00:00",
+            "end": "2027-03-22T17:30:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-03-22T23:30:00+00:00",
+            "end": "2027-03-23T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "cycling_tue",
+            "title": "Long Cycling Training",
+            "start": "2027-03-23T08:00:00+00:00",
+            "end": "2027-03-23T11:00:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "3-hour bike ride.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_tue",
+            "title": "Development Work Block",
+            "start": "2027-03-23T12:00:00+00:00",
+            "end": "2027-03-23T18:00:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "6 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-03-23T23:30:00+00:00",
+            "end": "2027-03-24T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_wed",
+            "title": "Development Work Block",
+            "start": "2027-03-24T09:00:00+00:00",
+            "end": "2027-03-24T17:00:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "8 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-03-24T23:30:00+00:00",
+            "end": "2027-03-25T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "cycling_thu",
+            "title": "Cycling Training",
+            "start": "2027-03-25T08:00:00+00:00",
+            "end": "2027-03-25T10:30:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "2.5-hour ride.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_thu",
+            "title": "Development Work Block",
+            "start": "2027-03-25T11:00:00+00:00",
+            "end": "2027-03-25T13:30:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "3 hours work.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "accountant_thu",
+            "title": "Mandatory Accountant Tax Review",
+            "start": "2027-03-25T14:00:00+00:00",
+            "end": "2027-03-25T16:00:00+00:00",
+            "category": "exam",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "accountant"
+            ],
+            "description": "Fixed tax review meeting.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-03-25T23:30:00+00:00",
+            "end": "2027-03-26T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_fri",
+            "title": "Development Work Block",
+            "start": "2027-03-26T09:00:00+00:00",
+            "end": "2027-03-26T16:00:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "7 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 3,
+          "coherence": 3,
+          "alternatives": 2,
+          "clarity": 3
+        },
+        "weaknesses": [
+          "The proposal relies on a compressed Thursday sequence: Cycling Training from 08:00 to 10:30, Development Work Block from 11:00 to 13:30, and Mandatory Accountant Tax Review from 14:00 to 16:00. The two 30-minute gaps may be workable, but the rationale does not address recovery, hygiene, food, preparation, or mental context-switching after a 2.5-hour ride and before a mandatory tax meeting.",
+          "The added Monday make-up block creates continuous scheduled work from 09:00 to 17:30. This is only a 30-minute increase and may be manageable, but the rationale treats the free interval as usable capacity without discussing whether extending an already full workday is preferable to distributing the time elsewhere.",
+          "The rationale says the moved Thursday work is described as preserving cycling and reshaping around the tax commitment, but it gives limited explanation for why moving the work into the narrow post-cycling, pre-accountant window is more sustainable than leaving it later or using another less compressed interval.",
+          "There is an internal clarity issue: the Thursday work event runs from 11:00 to 13:30, which is 2.5 hours, but its description says '3 hours work.' The weekly total still appears to pass because of the added Monday 30-minute block, but the mismatch weakens confidence in the rationale’s precision.",
+          "The alternatives considered are relevant but shallow. The proposal rejects Wednesday because Monday restores the deficit earlier, and rejects keeping Thursday evening because it does not meaningfully adjust Thursday around the tax commitment, but it does not weigh the human cost of compressing Thursday against the benefit of earlier completion."
+        ],
+        "feedback": "The resulting calendar is technically coherent and may be workable, but the proposed Thursday change creates the main human-quality concern. After protected sleep until 07:30, Thursday has cycling from 08:00 to 10:30, then work from 11:00 to 13:30, then the mandatory accountant meeting from 14:00 to 16:00. That is a physically demanding activity followed quickly by cognitively focused work and then a fixed high-importance meeting, with only short transitions. This is not objectively impossible, especially if all activities are nearby and the user is comfortable with tight transitions, but the rationale does not show that this compression is sustainable or preferable to a less dense distribution. The Monday addition is small, but it extends an already 8-hour work block to 8.5 hours, again without much discussion of breaks or end-of-day capacity. A revision should reconsider or better substantiate the Thursday compression using the proposer’s fuller context, especially whether the post-cycling work block is realistically effective and whether the tax meeting preparation/transition needs are protected.",
+        "plausibility_review": {
+          "revision_required": true,
+          "severity": "moderate",
+          "reason": "The proposed organization could significantly affect manageability because it places a moved work block immediately after a 2.5-hour cycling session and immediately before a mandatory accountant meeting on Thursday. The visible calendar leaves only 30-minute gaps on both sides of the work block. This may be feasible, but the rationale does not address recovery, preparation, food, hygiene, travel, or cognitive switching, and the benefit of this compression is not strongly justified beyond reshaping Thursday and completing work earlier.",
+          "suggested_improvement": "Reconsider the Thursday distribution or provide a grounded explanation from the fuller context showing why the 08:00-16:00 sequence is realistic for this user, including whether the short gaps are enough for recovery and meeting preparation. If the same operations are kept, the rationale should explicitly justify why the compression is preferable to a less disruptive or less tightly sequenced arrangement."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Thursday transition after cycling",
+            "assumption": "The user can realistically finish Cycling Training at 10:30 and begin effective development work at 11:00.",
+            "evidence_gap": "The calendar shows only a 30-minute gap after a 2.5-hour ride, with no visible information about showering, food, travel, equipment, fatigue, or recovery needs.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Thursday preparation before tax review",
+            "assumption": "The user can end development work at 13:30 and be ready for the Mandatory Accountant Tax Review at 14:00.",
+            "evidence_gap": "The calendar shows only a 30-minute gap before a fixed, high-importance meeting with an accountant, but no information about preparation, documents, travel, or mental context-switching.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Effectiveness of compressed Thursday work block",
+            "assumption": "The 11:00-13:30 Thursday development block is a useful and realistic work period after cycling and before the tax meeting.",
+            "evidence_gap": "The rationale acknowledges scheduled work is not proof of completion, but does not explain why this specific squeezed work period is likely to be effective.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Monday extended workday",
+            "assumption": "Adding Client Development Make-up Work from 17:00 to 17:30 after the 09:00-17:00 Development Work Block is manageable for the user.",
+            "evidence_gap": "The addition is small, but the calendar does not show breaks, meals, or end-of-day commitments, and the rationale does not discuss capacity after an already full work block.",
+            "potential_impact": "minor",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Thursday work duration metadata",
+            "assumption": "The Thursday Development Work Block is intended to count as 2.5 hours despite the description saying '3 hours work.'",
+            "evidence_gap": "The event time is 11:00-13:30, while the description says 3 hours; the proposal does not explain the mismatch.",
+            "potential_impact": "minor",
+            "verification_source": "unknown"
+          }
+        ],
+        "overall": 2.75
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": false,
+        "plausibility_revision_required": true,
+        "accepted": false,
+        "revision_causes": [
+          "numeric_criteria_failed",
+          "plausibility_revision_required"
+        ]
+      },
+      "operations_changed_from_previous": null,
+      "rationale_changed_from_previous": null,
+      "prior_critic_reviews": [],
+      "unresolved_assumptions": [
+        {
+          "subject": "Thursday transition after cycling",
+          "assumption": "The user can realistically finish Cycling Training at 10:30 and begin effective development work at 11:00.",
+          "evidence_gap": "The calendar shows only a 30-minute gap after a 2.5-hour ride, with no visible information about showering, food, travel, equipment, fatigue, or recovery needs.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Thursday preparation before tax review",
+          "assumption": "The user can end development work at 13:30 and be ready for the Mandatory Accountant Tax Review at 14:00.",
+          "evidence_gap": "The calendar shows only a 30-minute gap before a fixed, high-importance meeting with an accountant, but no information about preparation, documents, travel, or mental context-switching.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Effectiveness of compressed Thursday work block",
+          "assumption": "The 11:00-13:30 Thursday development block is a useful and realistic work period after cycling and before the tax meeting.",
+          "evidence_gap": "The rationale acknowledges scheduled work is not proof of completion, but does not explain why this specific squeezed work period is likely to be effective.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Monday extended workday",
+          "assumption": "Adding Client Development Make-up Work from 17:00 to 17:30 after the 09:00-17:00 Development Work Block is manageable for the user.",
+          "evidence_gap": "The addition is small, but the calendar does not show breaks, meals, or end-of-day commitments, and the rationale does not discuss capacity after an already full work block.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Thursday work duration metadata",
+          "assumption": "The Thursday Development Work Block is intended to count as 2.5 hours despite the description saying '3 hours work.'",
+          "evidence_gap": "The event time is 11:00-13:30, while the description says 3 hours; the proposal does not explain the mismatch.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "proposer_feedback": "Numeric Critic criteria failed. Scores: {\"reasoning\":3,\"coherence\":3,\"alternatives\":2,\"clarity\":3}. Plausibility revision required (moderate): The proposed organization could significantly affect manageability because it places a moved work block immediately after a 2.5-hour cycling session and immediately before a mandatory accountant meeting on Thursday. The visible calendar leaves only 30-minute gaps on both sides of the work block. This may be feasible, but the rationale does not address recovery, preparation, food, hygiene, travel, or cognitive switching, and the benefit of this compression is not strongly justified beyond reshaping Thursday and completing work earlier. Suggested direction: Reconsider the Thursday distribution or provide a grounded explanation from the fuller context showing why the 08:00-16:00 sequence is realistic for this user, including whether the short gaps are enough for recovery and meeting preparation. If the same operations are kept, the rationale should explicitly justify why the compression is preferable to a less disruptive or less tightly sequenced arrangement. The Critic lacks the full user constraints; explain if no better feasible option exists. Unverified conditions to reassess: [{'subject': 'Thursday transition after cycling', 'assumption': 'The user can realistically finish Cycling Training at 10:30 and begin effective development work at 11:00.', 'evidence_gap': 'The calendar shows only a 30-minute gap after a 2.5-hour ride, with no visible information about showering, food, travel, equipment, fatigue, or recovery needs.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Thursday preparation before tax review', 'assumption': 'The user can end development work at 13:30 and be ready for the Mandatory Accountant Tax Review at 14:00.', 'evidence_gap': 'The calendar shows only a 30-minute gap before a fixed, high-importance meeting with an accountant, but no information about preparation, documents, travel, or mental context-switching.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Effectiveness of compressed Thursday work block', 'assumption': 'The 11:00-13:30 Thursday development block is a useful and realistic work period after cycling and before the tax meeting.', 'evidence_gap': 'The rationale acknowledges scheduled work is not proof of completion, but does not explain why this specific squeezed work period is likely to be effective.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Monday extended workday', 'assumption': 'Adding Client Development Make-up Work from 17:00 to 17:30 after the 09:00-17:00 Development Work Block is manageable for the user.', 'evidence_gap': 'The addition is small, but the calendar does not show breaks, meals, or end-of-day commitments, and the rationale does not discuss capacity after an already full work block.', 'potential_impact': 'minor', 'verification_source': 'user_context'}, {'subject': 'Thursday work duration metadata', 'assumption': \"The Thursday Development Work Block is intended to count as 2.5 hours despite the description saying '3 hours work.'\", 'evidence_gap': 'The event time is 11:00-13:30, while the description says 3 hours; the proposal does not explain the mismatch.', 'potential_impact': 'minor', 'verification_source': 'unknown'}] Weaknesses: ['The proposal relies on a compressed Thursday sequence: Cycling Training from 08:00 to 10:30, Development Work Block from 11:00 to 13:30, and Mandatory Accountant Tax Review from 14:00 to 16:00. The two 30-minute gaps may be workable, but the rationale does not address recovery, hygiene, food, preparation, or mental context-switching after a 2.5-hour ride and before a mandatory tax meeting.', 'The added Monday make-up block creates continuous scheduled work from 09:00 to 17:30. This is only a 30-minute increase and may be manageable, but the rationale treats the free interval as usable capacity without discussing whether extending an already full workday is preferable to distributing the time elsewhere.', 'The rationale says the moved Thursday work is described as preserving cycling and reshaping around the tax commitment, but it gives limited explanation for why moving the work into the narrow post-cycling, pre-accountant window is more sustainable than leaving it later or using another less compressed interval.', \"There is an internal clarity issue: the Thursday work event runs from 11:00 to 13:30, which is 2.5 hours, but its description says '3 hours work.' The weekly total still appears to pass because of the added Monday 30-minute block, but the mismatch weakens confidence in the rationale’s precision.\", 'The alternatives considered are relevant but shallow. The proposal rejects Wednesday because Monday restores the deficit earlier, and rejects keeping Thursday evening because it does not meaningfully adjust Thursday around the tax commitment, but it does not weigh the human cost of compressing Thursday against the benefit of earlier completion.']. Actionable feedback: The resulting calendar is technically coherent and may be workable, but the proposed Thursday change creates the main human-quality concern. After protected sleep until 07:30, Thursday has cycling from 08:00 to 10:30, then work from 11:00 to 13:30, then the mandatory accountant meeting from 14:00 to 16:00. That is a physically demanding activity followed quickly by cognitively focused work and then a fixed high-importance meeting, with only short transitions. This is not objectively impossible, especially if all activities are nearby and the user is comfortable with tight transitions, but the rationale does not show that this compression is sustainable or preferable to a less dense distribution. The Monday addition is small, but it extends an already 8-hour work block to 8.5 hours, again without much discussion of breaks or end-of-day capacity. A revision should reconsider or better substantiate the Thursday compression using the proposer’s fuller context, especially whether the post-cycling work block is realistically effective and whether the tax meeting preparation/transition needs are protected.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "move",
+            "event_id": "work_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-03-25T16:30:00+00:00",
+            "to_end": "2027-03-25T19:00:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Client Development Make-up Work",
+            "from_start": null,
+            "to_start": "2027-03-24T17:00:00+00:00",
+            "to_end": "2027-03-24T17:30:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "The fixed accountant meeting is protected and not moved.",
+            "Protected sleep blocks are not moved.",
+            "Thursday morning cycling remains protected and unchanged.",
+            "The final calendar still reaches the 32-hour weekly work minimum.",
+            "Only solo work is changed, so no third-party availability is assumed.",
+            "Scheduled work time is not proof that the work will be completed.",
+            "The calendar does not state recovery, meal, hygiene, preparation or travel needs beyond the events shown."
+          ],
+          "priorities": [
+            "Avoid compressing focused work between cycling and the tax meeting.",
+            "Reduce Thursday’s late-day load after the mandatory tax commitment.",
+            "Use Wednesday for make-up work within the requested Monday-or-Wednesday scope.",
+            "Keep changes limited to flexible work blocks while preserving health routines."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Add the make-up block on Monday instead of Wednesday.",
+              "rejected_because": "This also satisfies the request, but it changes the same day as the reference time and still extends an 8-hour workday."
+            },
+            {
+              "option": "Move Thursday work before the accountant meeting.",
+              "rejected_because": "This preserves the evening, but it creates tight transitions after cycling and before a fixed tax meeting."
+            },
+            {
+              "option": "Leave Thursday work unchanged and make no addition.",
+              "rejected_because": "The calendar already has 32 scheduled work hours, but it does not reflect the requested make-up adjustment."
+            }
+          ],
+          "summary": "Shortens the Thursday post-accountant work block and replaces the lost half-hour on Wednesday, preserving morning cycling and fixed commitments while avoiding a tightly compressed cycling-work-tax sequence."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true,
+        "aggregate_checks": [
+          {
+            "id": "weekly_hours",
+            "status": "pass",
+            "minutes": 1920.0,
+            "minimum_minutes": 1920,
+            "category": "work",
+            "evidence": "union of final calendar intervals"
+          }
+        ],
+        "aggregate_validation_version": "duration_total_v1"
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-03-21T23:30:00+00:00",
+            "end": "2027-03-22T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_mon",
+            "title": "Development Work Block",
+            "start": "2027-03-22T09:00:00+00:00",
+            "end": "2027-03-22T17:00:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "8 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-03-22T23:30:00+00:00",
+            "end": "2027-03-23T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "cycling_tue",
+            "title": "Long Cycling Training",
+            "start": "2027-03-23T08:00:00+00:00",
+            "end": "2027-03-23T11:00:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "3-hour bike ride.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_tue",
+            "title": "Development Work Block",
+            "start": "2027-03-23T12:00:00+00:00",
+            "end": "2027-03-23T18:00:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "6 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-03-23T23:30:00+00:00",
+            "end": "2027-03-24T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_wed",
+            "title": "Development Work Block",
+            "start": "2027-03-24T09:00:00+00:00",
+            "end": "2027-03-24T17:00:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "8 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_1",
+            "title": "Client Development Make-up Work",
+            "start": "2027-03-24T17:00:00+00:00",
+            "end": "2027-03-24T17:30:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-03-24T23:30:00+00:00",
+            "end": "2027-03-25T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "cycling_thu",
+            "title": "Cycling Training",
+            "start": "2027-03-25T08:00:00+00:00",
+            "end": "2027-03-25T10:30:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "2.5-hour ride.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "accountant_thu",
+            "title": "Mandatory Accountant Tax Review",
+            "start": "2027-03-25T14:00:00+00:00",
+            "end": "2027-03-25T16:00:00+00:00",
+            "category": "exam",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "accountant"
+            ],
+            "description": "Fixed tax review meeting.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_thu",
+            "title": "Development Work Block",
+            "start": "2027-03-25T16:30:00+00:00",
+            "end": "2027-03-25T19:00:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "3 hours work.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-03-25T23:30:00+00:00",
+            "end": "2027-03-26T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_fri",
+            "title": "Development Work Block",
+            "start": "2027-03-26T09:00:00+00:00",
+            "end": "2027-03-26T16:00:00+00:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "7 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 4,
+          "alternatives": 4,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The revised proposal substantially addresses the prior Thursday compression by no longer placing Development Work between Cycling Training from 08:00 to 10:30 and the Mandatory Accountant Tax Review from 14:00 to 16:00. However, Thursday still combines a 2.5-hour ride, a fixed high-importance tax meeting, and a moved work block from 16:30 to 19:00, so the day remains demanding even though it is more realistically spaced.",
+          "The moved Thursday work block starts 30 minutes after the accountant meeting ends. This is not objectively impractical, but the rationale does not discuss whether the user is likely to have enough time for decompression, follow-up notes, food, or cognitive switching after a mandatory tax review before starting focused development work.",
+          "The added make-up block on Wednesday creates continuous scheduled work from 09:00 to 17:30. The added time is small and may be preferable to extending Monday, but the rationale still treats the post-17:00 interval as usable work capacity without much discussion of breaks, fatigue, or end-of-day obligations.",
+          "There is still a metadata clarity issue: the Thursday Development Work Block runs from 16:30 to 19:00, which is 2.5 hours, while its description says '3 hours work.' The weekly total passes because the added 30-minute make-up block brings scheduled work to 32 hours, but the mismatch weakens confidence in the stated duration.",
+          "Request satisfaction cannot be independently verified because the original request is not provided. The rationale says Wednesday is within the requested Monday-or-Wednesday scope, but that condition is not checked by the technical validation."
+        ],
+        "feedback": "The revision is materially more sustainable than the prior version. It removes the most concerning sequence where Thursday cycling was followed almost immediately by focused work and then a fixed accountant meeting. The resulting Thursday has more practical space between Cycling Training ending at 10:30 and the Mandatory Accountant Tax Review starting at 14:00, which better protects recovery and preparation. The remaining human-quality concern is that Thursday still ends with work from 16:30 to 19:00 after both physical training and a high-importance tax meeting, with only a 30-minute transition after the meeting. That could be manageable for solo work, but it depends on the user’s tolerance for late focused work and whether any post-meeting follow-up or recovery is needed. The Wednesday 17:00 to 17:30 addition is a modest extension of an already full 09:00 to 17:00 workday, but it is less disruptive than the prior Monday extension in the sense that the proposal explicitly considered Monday and chose Wednesday to avoid changing the same day as the reference time. Overall, the revised calendar is coherent and plausibly manageable over the visible workweek, with remaining uncertainties that should be retained rather than treated as failures.",
+        "plausibility_review": {
+          "revision_required": false,
+          "severity": "low",
+          "reason": "The prior material concern about compressing cycling, development work, and the accountant meeting into a tight Thursday sequence has been reasonably addressed. The new calendar still has a demanding Thursday and a small Wednesday workday extension, but these are plausible rather than clearly problematic: Thursday now has a larger recovery/preparation interval before the tax meeting, and the post-meeting work block is solo work ending at 19:00 rather than a conflict with a protected event. The remaining risks depend on user-specific capacity and context not visible here.",
+          "suggested_improvement": "If the Proposer keeps this plan, it should briefly substantiate why the 16:30-19:00 Thursday work period is expected to be useful after the accountant meeting, and correct or explain the Thursday duration-description mismatch. No further revision is required on the visible information unless fuller context shows that late Thursday work or the Wednesday extension is unsuitable."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Thursday transition after accountant meeting",
+            "assumption": "The user can realistically finish the Mandatory Accountant Tax Review at 16:00 and begin effective development work at 16:30.",
+            "evidence_gap": "The calendar shows a 30-minute gap after a fixed high-importance meeting, but no information about follow-up tasks, documents, travel, emotional or cognitive load, food, or decompression needs.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Thursday late-day work effectiveness",
+            "assumption": "The Development Work Block from 16:30 to 19:00 remains a useful and sustainable work period after Thursday morning cycling and the afternoon tax review.",
+            "evidence_gap": "The rationale explains that it reduces compression before the accountant meeting, but does not provide user-specific evidence that focused work late Thursday is effective after the day’s prior demands.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Wednesday extended workday",
+            "assumption": "Adding Client Development Make-up Work from 17:00 to 17:30 after the 09:00-17:00 Development Work Block is manageable for the user.",
+            "evidence_gap": "The addition is short, but the calendar does not show breaks, meals, end-of-day obligations, or the user’s capacity after an 8-hour work block.",
+            "potential_impact": "minor",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Thursday work duration metadata",
+            "assumption": "The Thursday Development Work Block is intended to count as 2.5 hours despite the description saying '3 hours work.'",
+            "evidence_gap": "The event time is 16:30-19:00, while the description says '3 hours work'; the proposal does not explain the mismatch.",
+            "potential_impact": "minor",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Original request scope",
+            "assumption": "Adding the make-up block on Wednesday satisfies the user's original request or allowed scope.",
+            "evidence_gap": "The rationale refers to a requested Monday-or-Wednesday scope, but the original request is not provided and technical validation explicitly does not check request satisfaction.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          }
+        ],
+        "overall": 4.0
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": true,
+        "plausibility_revision_required": false,
+        "accepted": true,
+        "revision_causes": []
+      },
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": [
+        {
+          "iteration": 0,
+          "proposal": {
+            "changes": [
+              {
+                "type": "move",
+                "event_id": "work_thu",
+                "title": null,
+                "from_start": null,
+                "to_start": "2027-03-25T11:00:00+00:00",
+                "to_end": "2027-03-25T13:30:00+00:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Client Development Make-up Work",
+                "from_start": null,
+                "to_start": "2027-03-22T17:00:00+00:00",
+                "to_end": "2027-03-22T17:30:00+00:00",
+                "category": "work",
+                "importance": 4,
+                "participants": [
+                  "user"
+                ]
+              }
+            ],
+            "rationale": {
+              "constraints": [
+                "The fixed accountant meeting is protected and not moved.",
+                "Protected sleep blocks are not moved.",
+                "Thursday cycling remains in the morning.",
+                "The final calendar reaches the 32-hour weekly work minimum.",
+                "Only solo work is placed into free calendar intervals.",
+                "Scheduled work time is not proof that the work will be completed."
+              ],
+              "priorities": [
+                "Preserve the morning cycling routine before reshaping Thursday work.",
+                "Keep the tax commitment fixed because it is mandatory.",
+                "Use Monday for the make-up time requested by the user.",
+                "Avoid assuming any external venue, person or resource availability."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Use Wednesday for the make-up work instead of Monday.",
+                  "rejected_because": "This also satisfies the request, but Monday restores the deficit earlier in the week."
+                },
+                {
+                  "option": "Keep the current Thursday evening work block unchanged.",
+                  "rejected_because": "That already meets 32 hours, but it does not meaningfully adjust Thursday around the tax commitment."
+                }
+              ],
+              "summary": "Moves Thursday development work before the protected tax meeting and adds a small Monday make-up block, preserving morning cycling and all fixed events while shifting a little work earlier in the week."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "sleep_mon",
+                "title": "Sleep",
+                "start": "2027-03-21T23:30:00+00:00",
+                "end": "2027-03-22T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_mon",
+                "title": "Development Work Block",
+                "start": "2027-03-22T09:00:00+00:00",
+                "end": "2027-03-22T17:00:00+00:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "8 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_1",
+                "title": "Client Development Make-up Work",
+                "start": "2027-03-22T17:00:00+00:00",
+                "end": "2027-03-22T17:30:00+00:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": null,
+                "participants": [
+                  "user"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "sleep_tue",
+                "title": "Sleep",
+                "start": "2027-03-22T23:30:00+00:00",
+                "end": "2027-03-23T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "cycling_tue",
+                "title": "Long Cycling Training",
+                "start": "2027-03-23T08:00:00+00:00",
+                "end": "2027-03-23T11:00:00+00:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "3-hour bike ride.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_tue",
+                "title": "Development Work Block",
+                "start": "2027-03-23T12:00:00+00:00",
+                "end": "2027-03-23T18:00:00+00:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "6 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_wed",
+                "title": "Sleep",
+                "start": "2027-03-23T23:30:00+00:00",
+                "end": "2027-03-24T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_wed",
+                "title": "Development Work Block",
+                "start": "2027-03-24T09:00:00+00:00",
+                "end": "2027-03-24T17:00:00+00:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "8 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2027-03-24T23:30:00+00:00",
+                "end": "2027-03-25T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "cycling_thu",
+                "title": "Cycling Training",
+                "start": "2027-03-25T08:00:00+00:00",
+                "end": "2027-03-25T10:30:00+00:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "2.5-hour ride.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_thu",
+                "title": "Development Work Block",
+                "start": "2027-03-25T11:00:00+00:00",
+                "end": "2027-03-25T13:30:00+00:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "3 hours work.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "accountant_thu",
+                "title": "Mandatory Accountant Tax Review",
+                "start": "2027-03-25T14:00:00+00:00",
+                "end": "2027-03-25T16:00:00+00:00",
+                "category": "exam",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "accountant"
+                ],
+                "description": "Fixed tax review meeting.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_fri",
+                "title": "Sleep",
+                "start": "2027-03-25T23:30:00+00:00",
+                "end": "2027-03-26T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_fri",
+                "title": "Development Work Block",
+                "start": "2027-03-26T09:00:00+00:00",
+                "end": "2027-03-26T16:00:00+00:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "7 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              }
+            ],
+            "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+          },
+          "plausibility_review": {
+            "revision_required": true,
+            "severity": "moderate",
+            "reason": "The proposed organization could significantly affect manageability because it places a moved work block immediately after a 2.5-hour cycling session and immediately before a mandatory accountant meeting on Thursday. The visible calendar leaves only 30-minute gaps on both sides of the work block. This may be feasible, but the rationale does not address recovery, preparation, food, hygiene, travel, or cognitive switching, and the benefit of this compression is not strongly justified beyond reshaping Thursday and completing work earlier.",
+            "suggested_improvement": "Reconsider the Thursday distribution or provide a grounded explanation from the fuller context showing why the 08:00-16:00 sequence is realistic for this user, including whether the short gaps are enough for recovery and meeting preparation. If the same operations are kept, the rationale should explicitly justify why the compression is preferable to a less disruptive or less tightly sequenced arrangement."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Thursday transition after cycling",
+              "assumption": "The user can realistically finish Cycling Training at 10:30 and begin effective development work at 11:00.",
+              "evidence_gap": "The calendar shows only a 30-minute gap after a 2.5-hour ride, with no visible information about showering, food, travel, equipment, fatigue, or recovery needs.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Thursday preparation before tax review",
+              "assumption": "The user can end development work at 13:30 and be ready for the Mandatory Accountant Tax Review at 14:00.",
+              "evidence_gap": "The calendar shows only a 30-minute gap before a fixed, high-importance meeting with an accountant, but no information about preparation, documents, travel, or mental context-switching.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Effectiveness of compressed Thursday work block",
+              "assumption": "The 11:00-13:30 Thursday development block is a useful and realistic work period after cycling and before the tax meeting.",
+              "evidence_gap": "The rationale acknowledges scheduled work is not proof of completion, but does not explain why this specific squeezed work period is likely to be effective.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Monday extended workday",
+              "assumption": "Adding Client Development Make-up Work from 17:00 to 17:30 after the 09:00-17:00 Development Work Block is manageable for the user.",
+              "evidence_gap": "The addition is small, but the calendar does not show breaks, meals, or end-of-day commitments, and the rationale does not discuss capacity after an already full work block.",
+              "potential_impact": "minor",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Thursday work duration metadata",
+              "assumption": "The Thursday Development Work Block is intended to count as 2.5 hours despite the description saying '3 hours work.'",
+              "evidence_gap": "The event time is 11:00-13:30, while the description says 3 hours; the proposal does not explain the mismatch.",
+              "potential_impact": "minor",
+              "verification_source": "unknown"
+            }
+          ],
+          "weaknesses": [
+            "The proposal relies on a compressed Thursday sequence: Cycling Training from 08:00 to 10:30, Development Work Block from 11:00 to 13:30, and Mandatory Accountant Tax Review from 14:00 to 16:00. The two 30-minute gaps may be workable, but the rationale does not address recovery, hygiene, food, preparation, or mental context-switching after a 2.5-hour ride and before a mandatory tax meeting.",
+            "The added Monday make-up block creates continuous scheduled work from 09:00 to 17:30. This is only a 30-minute increase and may be manageable, but the rationale treats the free interval as usable capacity without discussing whether extending an already full workday is preferable to distributing the time elsewhere.",
+            "The rationale says the moved Thursday work is described as preserving cycling and reshaping around the tax commitment, but it gives limited explanation for why moving the work into the narrow post-cycling, pre-accountant window is more sustainable than leaving it later or using another less compressed interval.",
+            "There is an internal clarity issue: the Thursday work event runs from 11:00 to 13:30, which is 2.5 hours, but its description says '3 hours work.' The weekly total still appears to pass because of the added Monday 30-minute block, but the mismatch weakens confidence in the rationale’s precision.",
+            "The alternatives considered are relevant but shallow. The proposal rejects Wednesday because Monday restores the deficit earlier, and rejects keeping Thursday evening because it does not meaningfully adjust Thursday around the tax commitment, but it does not weigh the human cost of compressing Thursday against the benefit of earlier completion."
+          ],
+          "feedback": "The resulting calendar is technically coherent and may be workable, but the proposed Thursday change creates the main human-quality concern. After protected sleep until 07:30, Thursday has cycling from 08:00 to 10:30, then work from 11:00 to 13:30, then the mandatory accountant meeting from 14:00 to 16:00. That is a physically demanding activity followed quickly by cognitively focused work and then a fixed high-importance meeting, with only short transitions. This is not objectively impossible, especially if all activities are nearby and the user is comfortable with tight transitions, but the rationale does not show that this compression is sustainable or preferable to a less dense distribution. The Monday addition is small, but it extends an already 8-hour work block to 8.5 hours, again without much discussion of breaks or end-of-day capacity. A revision should reconsider or better substantiate the Thursday compression using the proposer’s fuller context, especially whether the post-cycling work block is realistically effective and whether the tax meeting preparation/transition needs are protected."
+        }
+      ],
+      "unresolved_assumptions": [
+        {
+          "subject": "Thursday transition after accountant meeting",
+          "assumption": "The user can realistically finish the Mandatory Accountant Tax Review at 16:00 and begin effective development work at 16:30.",
+          "evidence_gap": "The calendar shows a 30-minute gap after a fixed high-importance meeting, but no information about follow-up tasks, documents, travel, emotional or cognitive load, food, or decompression needs.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Thursday late-day work effectiveness",
+          "assumption": "The Development Work Block from 16:30 to 19:00 remains a useful and sustainable work period after Thursday morning cycling and the afternoon tax review.",
+          "evidence_gap": "The rationale explains that it reduces compression before the accountant meeting, but does not provide user-specific evidence that focused work late Thursday is effective after the day’s prior demands.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Wednesday extended workday",
+          "assumption": "Adding Client Development Make-up Work from 17:00 to 17:30 after the 09:00-17:00 Development Work Block is manageable for the user.",
+          "evidence_gap": "The addition is short, but the calendar does not show breaks, meals, end-of-day obligations, or the user’s capacity after an 8-hour work block.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Thursday work duration metadata",
+          "assumption": "The Thursday Development Work Block is intended to count as 2.5 hours despite the description saying '3 hours work.'",
+          "evidence_gap": "The event time is 16:30-19:00, while the description says '3 hours work'; the proposal does not explain the mismatch.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Original request scope",
+          "assumption": "Adding the make-up block on Wednesday satisfies the user's original request or allowed scope.",
+          "evidence_gap": "The rationale refers to a requested Monday-or-Wednesday scope, but the original request is not provided and technical validation explicitly does not check request satisfaction.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    }
+  ],
+  "initial_proposal": {
+    "changes": [
+      {
+        "type": "move",
+        "event_id": "work_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": "2027-03-25T11:00:00+00:00",
+        "to_end": "2027-03-25T13:30:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Client Development Make-up Work",
+        "from_start": null,
+        "to_start": "2027-03-22T17:00:00+00:00",
+        "to_end": "2027-03-22T17:30:00+00:00",
+        "category": "work",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "The fixed accountant meeting is protected and not moved.",
+        "Protected sleep blocks are not moved.",
+        "Thursday cycling remains in the morning.",
+        "The final calendar reaches the 32-hour weekly work minimum.",
+        "Only solo work is placed into free calendar intervals.",
+        "Scheduled work time is not proof that the work will be completed."
+      ],
+      "priorities": [
+        "Preserve the morning cycling routine before reshaping Thursday work.",
+        "Keep the tax commitment fixed because it is mandatory.",
+        "Use Monday for the make-up time requested by the user.",
+        "Avoid assuming any external venue, person or resource availability."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Use Wednesday for the make-up work instead of Monday.",
+          "rejected_because": "This also satisfies the request, but Monday restores the deficit earlier in the week."
+        },
+        {
+          "option": "Keep the current Thursday evening work block unchanged.",
+          "rejected_because": "That already meets 32 hours, but it does not meaningfully adjust Thursday around the tax commitment."
+        }
+      ],
+      "summary": "Moves Thursday development work before the protected tax meeting and adds a small Monday make-up block, preserving morning cycling and all fixed events while shifting a little work earlier in the week."
+    }
+  },
+  "final_proposal": {
+    "changes": [
+      {
+        "type": "move",
+        "event_id": "work_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": "2027-03-25T16:30:00+00:00",
+        "to_end": "2027-03-25T19:00:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Client Development Make-up Work",
+        "from_start": null,
+        "to_start": "2027-03-24T17:00:00+00:00",
+        "to_end": "2027-03-24T17:30:00+00:00",
+        "category": "work",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "The fixed accountant meeting is protected and not moved.",
+        "Protected sleep blocks are not moved.",
+        "Thursday morning cycling remains protected and unchanged.",
+        "The final calendar still reaches the 32-hour weekly work minimum.",
+        "Only solo work is changed, so no third-party availability is assumed.",
+        "Scheduled work time is not proof that the work will be completed.",
+        "The calendar does not state recovery, meal, hygiene, preparation or travel needs beyond the events shown."
+      ],
+      "priorities": [
+        "Avoid compressing focused work between cycling and the tax meeting.",
+        "Reduce Thursday’s late-day load after the mandatory tax commitment.",
+        "Use Wednesday for make-up work within the requested Monday-or-Wednesday scope.",
+        "Keep changes limited to flexible work blocks while preserving health routines."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Add the make-up block on Monday instead of Wednesday.",
+          "rejected_because": "This also satisfies the request, but it changes the same day as the reference time and still extends an 8-hour workday."
+        },
+        {
+          "option": "Move Thursday work before the accountant meeting.",
+          "rejected_because": "This preserves the evening, but it creates tight transitions after cycling and before a fixed tax meeting."
+        },
+        {
+          "option": "Leave Thursday work unchanged and make no addition.",
+          "rejected_because": "The calendar already has 32 scheduled work hours, but it does not reflect the requested make-up adjustment."
+        }
+      ],
+      "summary": "Shortens the Thursday post-accountant work block and replaces the lost half-hour on Wednesday, preserving morning cycling and fixed commitments while avoiding a tightly compressed cycling-work-tax sequence."
+    }
+  },
+  "final_score": 4.0,
+  "refinements": 1,
+  "critic_accepted": true,
+  "decision": "defer",
+  "reasons": [
+    "toca em evento importante (work_thu, importância 4)"
+  ],
+  "status": "proposal_ready",
+  "critic_input_version": "final_calendar_v1",
+  "critic_policy_version": "uncertainty_review_v2",
+  "result_calendar_version": "validated_added_metadata_v2",
+  "final_result_calendar": {
+    "timezone": "Europe/Lisbon",
+    "coverage": "all_events_in_scenario_after_simulation",
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-03-21T23:30:00+00:00",
+        "end": "2027-03-22T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_mon",
+        "title": "Development Work Block",
+        "start": "2027-03-22T09:00:00+00:00",
+        "end": "2027-03-22T17:00:00+00:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "8 hours work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-03-22T23:30:00+00:00",
+        "end": "2027-03-23T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "cycling_tue",
+        "title": "Long Cycling Training",
+        "start": "2027-03-23T08:00:00+00:00",
+        "end": "2027-03-23T11:00:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "3-hour bike ride.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_tue",
+        "title": "Development Work Block",
+        "start": "2027-03-23T12:00:00+00:00",
+        "end": "2027-03-23T18:00:00+00:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "6 hours work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-03-23T23:30:00+00:00",
+        "end": "2027-03-24T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_wed",
+        "title": "Development Work Block",
+        "start": "2027-03-24T09:00:00+00:00",
+        "end": "2027-03-24T17:00:00+00:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "8 hours work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_1",
+        "title": "Client Development Make-up Work",
+        "start": "2027-03-24T17:00:00+00:00",
+        "end": "2027-03-24T17:30:00+00:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-03-24T23:30:00+00:00",
+        "end": "2027-03-25T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "cycling_thu",
+        "title": "Cycling Training",
+        "start": "2027-03-25T08:00:00+00:00",
+        "end": "2027-03-25T10:30:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "2.5-hour ride.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "accountant_thu",
+        "title": "Mandatory Accountant Tax Review",
+        "start": "2027-03-25T14:00:00+00:00",
+        "end": "2027-03-25T16:00:00+00:00",
+        "category": "exam",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "accountant"
+        ],
+        "description": "Fixed tax review meeting.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_thu",
+        "title": "Development Work Block",
+        "start": "2027-03-25T16:30:00+00:00",
+        "end": "2027-03-25T19:00:00+00:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "3 hours work.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-03-25T23:30:00+00:00",
+        "end": "2027-03-26T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_fri",
+        "title": "Development Work Block",
+        "start": "2027-03-26T09:00:00+00:00",
+        "end": "2027-03-26T16:00:00+00:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "7 hours work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      }
+    ],
+    "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+  },
+  "final_unresolved_assumptions": [
+    {
+      "subject": "Thursday transition after accountant meeting",
+      "assumption": "The user can realistically finish the Mandatory Accountant Tax Review at 16:00 and begin effective development work at 16:30.",
+      "evidence_gap": "The calendar shows a 30-minute gap after a fixed high-importance meeting, but no information about follow-up tasks, documents, travel, emotional or cognitive load, food, or decompression needs.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Thursday late-day work effectiveness",
+      "assumption": "The Development Work Block from 16:30 to 19:00 remains a useful and sustainable work period after Thursday morning cycling and the afternoon tax review.",
+      "evidence_gap": "The rationale explains that it reduces compression before the accountant meeting, but does not provide user-specific evidence that focused work late Thursday is effective after the day’s prior demands.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Wednesday extended workday",
+      "assumption": "Adding Client Development Make-up Work from 17:00 to 17:30 after the 09:00-17:00 Development Work Block is manageable for the user.",
+      "evidence_gap": "The addition is short, but the calendar does not show breaks, meals, end-of-day obligations, or the user’s capacity after an 8-hour work block.",
+      "potential_impact": "minor",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Thursday work duration metadata",
+      "assumption": "The Thursday Development Work Block is intended to count as 2.5 hours despite the description saying '3 hours work.'",
+      "evidence_gap": "The event time is 16:30-19:00, while the description says '3 hours work'; the proposal does not explain the mismatch.",
+      "potential_impact": "minor",
+      "verification_source": "unknown"
+    },
+    {
+      "subject": "Original request scope",
+      "assumption": "Adding the make-up block on Wednesday satisfies the user's original request or allowed scope.",
+      "evidence_gap": "The rationale refers to a requested Monday-or-Wednesday scope, but the original request is not provided and technical validation explicitly does not check request satisfaction.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    }
+  ],
+  "uncertainty_history": [
+    {
+      "iteration": 0,
+      "unresolved_assumptions": [
+        {
+          "subject": "Thursday transition after cycling",
+          "assumption": "The user can realistically finish Cycling Training at 10:30 and begin effective development work at 11:00.",
+          "evidence_gap": "The calendar shows only a 30-minute gap after a 2.5-hour ride, with no visible information about showering, food, travel, equipment, fatigue, or recovery needs.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Thursday preparation before tax review",
+          "assumption": "The user can end development work at 13:30 and be ready for the Mandatory Accountant Tax Review at 14:00.",
+          "evidence_gap": "The calendar shows only a 30-minute gap before a fixed, high-importance meeting with an accountant, but no information about preparation, documents, travel, or mental context-switching.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Effectiveness of compressed Thursday work block",
+          "assumption": "The 11:00-13:30 Thursday development block is a useful and realistic work period after cycling and before the tax meeting.",
+          "evidence_gap": "The rationale acknowledges scheduled work is not proof of completion, but does not explain why this specific squeezed work period is likely to be effective.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Monday extended workday",
+          "assumption": "Adding Client Development Make-up Work from 17:00 to 17:30 after the 09:00-17:00 Development Work Block is manageable for the user.",
+          "evidence_gap": "The addition is small, but the calendar does not show breaks, meals, or end-of-day commitments, and the rationale does not discuss capacity after an already full work block.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Thursday work duration metadata",
+          "assumption": "The Thursday Development Work Block is intended to count as 2.5 hours despite the description saying '3 hours work.'",
+          "evidence_gap": "The event time is 11:00-13:30, while the description says 3 hours; the proposal does not explain the mismatch.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        }
+      ]
+    },
+    {
+      "iteration": 1,
+      "unresolved_assumptions": [
+        {
+          "subject": "Thursday transition after accountant meeting",
+          "assumption": "The user can realistically finish the Mandatory Accountant Tax Review at 16:00 and begin effective development work at 16:30.",
+          "evidence_gap": "The calendar shows a 30-minute gap after a fixed high-importance meeting, but no information about follow-up tasks, documents, travel, emotional or cognitive load, food, or decompression needs.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Thursday late-day work effectiveness",
+          "assumption": "The Development Work Block from 16:30 to 19:00 remains a useful and sustainable work period after Thursday morning cycling and the afternoon tax review.",
+          "evidence_gap": "The rationale explains that it reduces compression before the accountant meeting, but does not provide user-specific evidence that focused work late Thursday is effective after the day’s prior demands.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Wednesday extended workday",
+          "assumption": "Adding Client Development Make-up Work from 17:00 to 17:30 after the 09:00-17:00 Development Work Block is manageable for the user.",
+          "evidence_gap": "The addition is short, but the calendar does not show breaks, meals, end-of-day obligations, or the user’s capacity after an 8-hour work block.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Thursday work duration metadata",
+          "assumption": "The Thursday Development Work Block is intended to count as 2.5 hours despite the description saying '3 hours work.'",
+          "evidence_gap": "The event time is 16:30-19:00, while the description says '3 hours work'; the proposal does not explain the mismatch.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Original request scope",
+          "assumption": "Adding the make-up block on Wednesday satisfies the user's original request or allowed scope.",
+          "evidence_gap": "The rationale refers to a requested Monday-or-Wednesday scope, but the original request is not provided and technical validation explicitly does not check request satisfaction.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    }
+  ],
+  "schema_version": "2.0",
+  "profile_id": "freelancer_flexible_01__freelancer_flexible_tax_audit_accountant_meeting_001",
+  "scenario_sha256": "e7d29cf6bab5586803af7423c36a6adf8aecd4cceac30a63b67929856c110321",
+  "aggregate_requirements_sha256": "45dffbb0ec7a7b4c3c596bc1788aad149ad754066537109ba707e52fbcd572db",
+  "confirmed_changes_sha256": null,
+  "simulator_version": "calendar_v2_validated_added_metadata_v2",
+  "dataset_manifest_sha256": "28af38846fb8995651d5f63ab63402e36147dc0915a2bfcd5379747ea531ffad",
+  "split": "train",
+  "run_id": "706544474c634f1b8ac635beca6af717",
+  "experiment_id": null,
+  "repeat_index": 0,
+  "generated_at": "2026-11-24T10:21:36.251160+00:00",
+  "prompt_versions": {
+    "proposer_sha256": "ae6fa59cccb86c31f34f66d07d241660b1feadf852ebf1b594bc85addab86985",
+    "proposer_wire_schema_version": "compact_proposal_v1",
+    "proposer_wire_schema_sha256": "f504fbcd7e939c43e055e2f188feb22097a284bcd9b043227d868e559547b865",
+    "proposer_revision_sha256": "3f0fe7f221013700694a22984560612013e9804072ffde4538e1329b9708ac95",
+    "critic_sha256": "1686688cdd4bc63abb12e6633ef9dbb9b62d69b69aba1c4805a201657cc5bb34"
+  },
+  "seconds": 108.683,
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [],
+    "valid": true,
+    "aggregate_checks": [
+      {
+        "id": "weekly_hours",
+        "status": "pass",
+        "minutes": 1920.0,
+        "minimum_minutes": 1920,
+        "category": "work",
+        "evidence": "union of final calendar intervals"
+      }
+    ],
+    "aggregate_validation_version": "duration_total_v1"
+  }
+}

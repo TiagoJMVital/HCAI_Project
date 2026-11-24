@@ -1,0 +1,3126 @@
+{
+  "proposal_id": "v2p_1d30841e3feb1258980ec15b",
+  "scenario_id": "freelancer_flexible_emergency_dentist_padel_tournament_001",
+  "family_id": "freelancer_schedule_conflict",
+  "profile_id": "freelancer_flexible_01__freelancer_flexible_emergency_dentist_padel_tournament_001",
+  "split": "train",
+  "run_id": "fe207fa6300c4a24a69fb52e7cad4066",
+  "configuration": "B",
+  "generated_at": "2026-11-24T10:03:47.887120+00:00",
+  "proposer_provider": "iaedu",
+  "proposer_model": "GPT-5.5",
+  "proposer_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_provider": "iaedu",
+  "critic_model": "GPT-5.5",
+  "critic_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "prompt_versions": {
+    "proposer_sha256": "ae6fa59cccb86c31f34f66d07d241660b1feadf852ebf1b594bc85addab86985",
+    "proposer_wire_schema_version": "compact_proposal_v1",
+    "proposer_wire_schema_sha256": "f504fbcd7e939c43e055e2f188feb22097a284bcd9b043227d868e559547b865",
+    "proposer_revision_sha256": "3f0fe7f221013700694a22984560612013e9804072ffde4538e1329b9708ac95",
+    "critic_sha256": "1686688cdd4bc63abb12e6633ef9dbb9b62d69b69aba1c4805a201657cc5bb34"
+  },
+  "critic_settings": {
+    "threshold": 4.0,
+    "max_refinements": 3,
+    "min_dimension_score": 1
+  },
+  "experiment_id": null,
+  "repeat_index": 0,
+  "seconds": 142.3,
+  "critic_score": 4.5,
+  "critic_accepted": true,
+  "iterations": [
+    {
+      "index": 0,
+      "proposer_feedback": null,
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [],
+        "rationale": {
+          "constraints": [
+            "Sleep events are fixed and protected, so they are left unchanged.",
+            "The emergency dental appointment and padel tournament are fixed protected commitments already present in the calendar.",
+            "Gym routines are preserved because all existing gym workouts remain in place.",
+            "The final calendar keeps 35 hours of work, exceeding the 30-hour weekly writing requirement."
+          ],
+          "priorities": [
+            "Preserve health commitments and protected sleep before altering flexible work.",
+            "Avoid unnecessary disruption because the current calendar already satisfies the fixed commitments and work target."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Reduce writing time to exactly 30 hours.",
+              "rejected_because": "Rejected because the request sets a minimum, and cutting existing work is unnecessary."
+            },
+            {
+              "option": "Move gym workouts to create different work blocks.",
+              "rejected_because": "Rejected because gym preservation is preferred and no conflict requires moving them."
+            }
+          ],
+          "summary": "No calendar changes are needed: the fixed medical and sports commitments are already scheduled, gym and sleep remain protected, and the existing work blocks exceed the 30-hour writing target."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [
+          "no changes proposed; request satisfaction requires Critic and human review"
+        ],
+        "valid": true,
+        "aggregate_checks": [
+          {
+            "id": "weekly_hours",
+            "status": "pass",
+            "minutes": 2100.0,
+            "minimum_minutes": 1800,
+            "category": "work",
+            "evidence": "union of final calendar intervals"
+          }
+        ],
+        "aggregate_validation_version": "duration_total_v1",
+        "no_op": true
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-06-13T23:30:00+01:00",
+            "end": "2027-06-14T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_mon",
+            "title": "Gym Workout",
+            "start": "2027-06-14T08:00:00+01:00",
+            "end": "2027-06-14T09:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_mon",
+            "title": "Writing Work Block",
+            "start": "2027-06-14T10:30:00+01:00",
+            "end": "2027-06-14T18:30:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "8 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-06-14T23:30:00+01:00",
+            "end": "2027-06-15T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "dentist_tue",
+            "title": "Emergency Dental Appointment",
+            "start": "2027-06-15T11:00:00+01:00",
+            "end": "2027-06-15T12:30:00+01:00",
+            "category": "medical",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "dentist"
+            ],
+            "description": "Fixed dental check.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_tue",
+            "title": "Writing Work Block",
+            "start": "2027-06-15T13:30:00+01:00",
+            "end": "2027-06-15T18:30:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "5 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-06-15T23:30:00+01:00",
+            "end": "2027-06-16T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_wed",
+            "title": "Gym Workout",
+            "start": "2027-06-16T08:00:00+01:00",
+            "end": "2027-06-16T09:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_wed",
+            "title": "Writing Work Block",
+            "start": "2027-06-16T10:30:00+01:00",
+            "end": "2027-06-16T18:30:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "8 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-06-16T23:30:00+01:00",
+            "end": "2027-06-17T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_thu",
+            "title": "Writing Work Block",
+            "start": "2027-06-17T10:30:00+01:00",
+            "end": "2027-06-17T17:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "6.5 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "padel_thu",
+            "title": "Amateur Padel Tournament Match",
+            "start": "2027-06-17T18:00:00+01:00",
+            "end": "2027-06-17T20:00:00+01:00",
+            "category": "social",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "peers"
+            ],
+            "description": "Fixed sports match.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-06-17T23:30:00+01:00",
+            "end": "2027-06-18T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_fri",
+            "title": "Gym Workout",
+            "start": "2027-06-18T08:00:00+01:00",
+            "end": "2027-06-18T09:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_fri",
+            "title": "Writing Work Block",
+            "start": "2027-06-18T10:30:00+01:00",
+            "end": "2027-06-18T18:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "7.5 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 2,
+          "coherence": 3,
+          "alternatives": 2,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The rationale treats exceeding the 30-hour writing minimum as automatically beneficial, but does not consider whether preserving 35 hours is proportionate in a week that also includes an emergency dental appointment on Tuesday 11:00-12:30, three 1.5-hour gym sessions, and a fixed padel match on Thursday 18:00-20:00.",
+          "The calendar contains several demanding sequences that are plausible but not really evaluated: Monday has gym 08:00-09:30 followed by an 8-hour writing block 10:30-18:30; Wednesday repeats the same pattern; Friday has gym 08:00-09:30 followed by 7.5 hours of writing 10:30-18:00.",
+          "Tuesday leaves one hour between the emergency dental appointment ending at 12:30 and the writing block starting at 13:30. This may be workable, but the plan does not address possible post-appointment fatigue, discomfort, eating needs, or travel/preparation uncertainty.",
+          "Thursday has 6.5 hours of writing from 10:30-17:00 followed by only one hour before a fixed two-hour padel tournament match from 18:00-20:00. This may be manageable, but it is a meaningful physical and cognitive load that the rationale does not discuss.",
+          "The alternatives considered are narrow. Rejecting a reduction to exactly 30 hours because the request is a minimum does not address intermediate options, such as preserving most work while creating more recovery or contingency around the dental appointment, tournament, or long gym-plus-writing days.",
+          "Because no original request is available, request satisfaction cannot be verified beyond the visible claim that the final calendar contains 35 hours of work and protects the listed fixed events."
+        ],
+        "feedback": "The no-change proposal is technically coherent and may be workable for some people, especially because sleep is protected each night and there are visible gaps around most commitments. However, the human-quality case is underdeveloped. The plan keeps five hours more writing than the stated 30-hour minimum while also preserving a fairly full week of health, medical, and sports commitments. The main issue is not that any one event is impossible, but that the rationale does not explain why the extra writing load is worth preserving despite the emergency dental appointment, repeated gym-to-long-writing sequences, and Thursday's work-to-padel sequence. A stronger proposal should either substantiate why the existing 35-hour workload remains sustainable in this specific week, or reconsider whether some flexible writing time should be redistributed or reduced to create more recovery and contingency while still meeting the visible minimum.",
+        "plausibility_review": {
+          "revision_required": true,
+          "severity": "moderate",
+          "reason": "The proposed no-op preserves a demanding 35-hour writing schedule despite the visible requirement being only 30 hours and despite several practical stress points: emergency dental care on Tuesday, three gym-plus-long-writing days, and Thursday's writing block followed by a fixed padel match. This is not an objective contradiction, but it could significantly affect manageability, recovery, and the quality of the writing time. The rationale does not provide enough human-centered justification for keeping the surplus workload.",
+          "suggested_improvement": "Reconsider the distribution or necessity of the surplus writing time, especially around the dental appointment, gym-plus-writing days, and the Thursday work-to-padel sequence. If keeping the same calendar, provide a grounded explanation of why the visible workload is sustainable and why the extra five hours above the minimum should be preserved."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Sustainability of 35 hours of writing",
+            "assumption": "The user can sustainably complete 35 hours of writing during this visible week even though only 30 hours are stated as required.",
+            "evidence_gap": "The rationale counts total work hours but does not explain whether the extra five hours are necessary, preferred, or manageable given the rest of the week.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Post-dental capacity",
+            "assumption": "The user can comfortably transition from the emergency dental appointment ending Tuesday at 12:30 to a 5-hour writing block starting at 13:30.",
+            "evidence_gap": "No information is provided about travel, treatment intensity, recovery needs, eating constraints, or likely discomfort after the appointment.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Physical recovery around gym and work",
+            "assumption": "The user can manage gym sessions from 08:00-09:30 followed by long writing blocks starting at 10:30 on Monday, Wednesday, and Friday.",
+            "evidence_gap": "The calendar shows one-hour gaps, but the rationale does not address preparation, hygiene, food, travel, or whether these repeated sequences are sustainable.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Thursday work-to-padel sequence",
+            "assumption": "The user can complete writing from 10:30-17:00 and then participate effectively in the fixed padel tournament from 18:00-20:00.",
+            "evidence_gap": "The rationale preserves both events but does not assess the one-hour transition, food, travel, warm-up, or physical and cognitive fatigue.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Request satisfaction",
+            "assumption": "Leaving the calendar unchanged satisfies the user's original request.",
+            "evidence_gap": "The original request is not available, and the technical validation explicitly does not check request satisfaction or soft preferences.",
+            "potential_impact": "potentially_blocking",
+            "verification_source": "user_context"
+          }
+        ],
+        "overall": 2.75
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": false,
+        "plausibility_revision_required": true,
+        "accepted": false,
+        "revision_causes": [
+          "numeric_criteria_failed",
+          "plausibility_revision_required"
+        ]
+      },
+      "operations_changed_from_previous": null,
+      "rationale_changed_from_previous": null,
+      "prior_critic_reviews": [],
+      "unresolved_assumptions": [
+        {
+          "subject": "Sustainability of 35 hours of writing",
+          "assumption": "The user can sustainably complete 35 hours of writing during this visible week even though only 30 hours are stated as required.",
+          "evidence_gap": "The rationale counts total work hours but does not explain whether the extra five hours are necessary, preferred, or manageable given the rest of the week.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Post-dental capacity",
+          "assumption": "The user can comfortably transition from the emergency dental appointment ending Tuesday at 12:30 to a 5-hour writing block starting at 13:30.",
+          "evidence_gap": "No information is provided about travel, treatment intensity, recovery needs, eating constraints, or likely discomfort after the appointment.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Physical recovery around gym and work",
+          "assumption": "The user can manage gym sessions from 08:00-09:30 followed by long writing blocks starting at 10:30 on Monday, Wednesday, and Friday.",
+          "evidence_gap": "The calendar shows one-hour gaps, but the rationale does not address preparation, hygiene, food, travel, or whether these repeated sequences are sustainable.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Thursday work-to-padel sequence",
+          "assumption": "The user can complete writing from 10:30-17:00 and then participate effectively in the fixed padel tournament from 18:00-20:00.",
+          "evidence_gap": "The rationale preserves both events but does not assess the one-hour transition, food, travel, warm-up, or physical and cognitive fatigue.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Request satisfaction",
+          "assumption": "Leaving the calendar unchanged satisfies the user's original request.",
+          "evidence_gap": "The original request is not available, and the technical validation explicitly does not check request satisfaction or soft preferences.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "user_context"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "proposer_feedback": "Numeric Critic criteria failed. Scores: {\"reasoning\":2,\"coherence\":3,\"alternatives\":2,\"clarity\":4}. Plausibility revision required (moderate): The proposed no-op preserves a demanding 35-hour writing schedule despite the visible requirement being only 30 hours and despite several practical stress points: emergency dental care on Tuesday, three gym-plus-long-writing days, and Thursday's writing block followed by a fixed padel match. This is not an objective contradiction, but it could significantly affect manageability, recovery, and the quality of the writing time. The rationale does not provide enough human-centered justification for keeping the surplus workload. Suggested direction: Reconsider the distribution or necessity of the surplus writing time, especially around the dental appointment, gym-plus-writing days, and the Thursday work-to-padel sequence. If keeping the same calendar, provide a grounded explanation of why the visible workload is sustainable and why the extra five hours above the minimum should be preserved. The Critic lacks the full user constraints; explain if no better feasible option exists. Unverified conditions to reassess: [{'subject': 'Sustainability of 35 hours of writing', 'assumption': 'The user can sustainably complete 35 hours of writing during this visible week even though only 30 hours are stated as required.', 'evidence_gap': 'The rationale counts total work hours but does not explain whether the extra five hours are necessary, preferred, or manageable given the rest of the week.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Post-dental capacity', 'assumption': 'The user can comfortably transition from the emergency dental appointment ending Tuesday at 12:30 to a 5-hour writing block starting at 13:30.', 'evidence_gap': 'No information is provided about travel, treatment intensity, recovery needs, eating constraints, or likely discomfort after the appointment.', 'potential_impact': 'material', 'verification_source': 'unknown'}, {'subject': 'Physical recovery around gym and work', 'assumption': 'The user can manage gym sessions from 08:00-09:30 followed by long writing blocks starting at 10:30 on Monday, Wednesday, and Friday.', 'evidence_gap': 'The calendar shows one-hour gaps, but the rationale does not address preparation, hygiene, food, travel, or whether these repeated sequences are sustainable.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Thursday work-to-padel sequence', 'assumption': 'The user can complete writing from 10:30-17:00 and then participate effectively in the fixed padel tournament from 18:00-20:00.', 'evidence_gap': 'The rationale preserves both events but does not assess the one-hour transition, food, travel, warm-up, or physical and cognitive fatigue.', 'potential_impact': 'material', 'verification_source': 'unknown'}, {'subject': 'Request satisfaction', 'assumption': \"Leaving the calendar unchanged satisfies the user's original request.\", 'evidence_gap': 'The original request is not available, and the technical validation explicitly does not check request satisfaction or soft preferences.', 'potential_impact': 'potentially_blocking', 'verification_source': 'user_context'}] Weaknesses: ['The rationale treats exceeding the 30-hour writing minimum as automatically beneficial, but does not consider whether preserving 35 hours is proportionate in a week that also includes an emergency dental appointment on Tuesday 11:00-12:30, three 1.5-hour gym sessions, and a fixed padel match on Thursday 18:00-20:00.', 'The calendar contains several demanding sequences that are plausible but not really evaluated: Monday has gym 08:00-09:30 followed by an 8-hour writing block 10:30-18:30; Wednesday repeats the same pattern; Friday has gym 08:00-09:30 followed by 7.5 hours of writing 10:30-18:00.', 'Tuesday leaves one hour between the emergency dental appointment ending at 12:30 and the writing block starting at 13:30. This may be workable, but the plan does not address possible post-appointment fatigue, discomfort, eating needs, or travel/preparation uncertainty.', 'Thursday has 6.5 hours of writing from 10:30-17:00 followed by only one hour before a fixed two-hour padel tournament match from 18:00-20:00. This may be manageable, but it is a meaningful physical and cognitive load that the rationale does not discuss.', 'The alternatives considered are narrow. Rejecting a reduction to exactly 30 hours because the request is a minimum does not address intermediate options, such as preserving most work while creating more recovery or contingency around the dental appointment, tournament, or long gym-plus-writing days.', 'Because no original request is available, request satisfaction cannot be verified beyond the visible claim that the final calendar contains 35 hours of work and protects the listed fixed events.']. Actionable feedback: The no-change proposal is technically coherent and may be workable for some people, especially because sleep is protected each night and there are visible gaps around most commitments. However, the human-quality case is underdeveloped. The plan keeps five hours more writing than the stated 30-hour minimum while also preserving a fairly full week of health, medical, and sports commitments. The main issue is not that any one event is impossible, but that the rationale does not explain why the extra writing load is worth preserving despite the emergency dental appointment, repeated gym-to-long-writing sequences, and Thursday's work-to-padel sequence. A stronger proposal should either substantiate why the existing 35-hour workload remains sustainable in this specific week, or reconsider whether some flexible writing time should be redistributed or reduced to create more recovery and contingency while still meeting the visible minimum.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "move",
+            "event_id": "work_tue",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-06-15T14:30:00+01:00",
+            "to_end": "2027-06-15T17:30:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "work_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-06-17T10:30:00+01:00",
+            "to_end": "2027-06-17T16:00:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "work_fri",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-06-18T10:30:00+01:00",
+            "to_end": "2027-06-18T16:30:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "Sleep is fixed and protected, so it is left unchanged.",
+            "The medical and sports commitments are fixed protected events already present in the calendar.",
+            "Gym routines are preserved because all existing workouts remain in place.",
+            "Only flexible solo writing blocks are changed, avoiding third-party or protected-event disruption.",
+            "The final calendar schedules 30 hours of work within the checked weekly window.",
+            "Actual dental recovery, travel, meals, warm-up, and post-gym needs are unknown, so the plan creates free buffer time without assuming details."
+          ],
+          "priorities": [
+            "Meet the writing minimum without preserving unnecessary surplus workload.",
+            "Reduce pressure after the dental appointment and before the tournament.",
+            "Keep the strongest health and sleep protections intact.",
+            "Prefer shortening flexible work over moving protected or externally dependent events."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Keep the original 35 hours of writing.",
+              "rejected_because": "Rejected because the extra workload is not required and adds strain around medical, gym, and tournament commitments."
+            },
+            {
+              "option": "Move gym sessions to open larger writing blocks.",
+              "rejected_because": "Rejected because the request asks to keep gym routines and no conflict requires moving them."
+            },
+            {
+              "option": "Cut Monday or Wednesday writing instead.",
+              "rejected_because": "Rejected because the selected changes target the higher-risk dental, tournament, and end-of-week load points more directly."
+            }
+          ],
+          "summary": "The selected plan keeps sleep, gym, dental, and padel commitments intact while trimming only flexible writing blocks to the required 30 hours, trading surplus writing time for practical buffer around the most demanding parts of the week."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true,
+        "aggregate_checks": [
+          {
+            "id": "weekly_hours",
+            "status": "pass",
+            "minutes": 1830.0,
+            "minimum_minutes": 1800,
+            "category": "work",
+            "evidence": "union of final calendar intervals"
+          }
+        ],
+        "aggregate_validation_version": "duration_total_v1"
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-06-13T23:30:00+01:00",
+            "end": "2027-06-14T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_mon",
+            "title": "Gym Workout",
+            "start": "2027-06-14T08:00:00+01:00",
+            "end": "2027-06-14T09:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_mon",
+            "title": "Writing Work Block",
+            "start": "2027-06-14T10:30:00+01:00",
+            "end": "2027-06-14T18:30:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "8 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-06-14T23:30:00+01:00",
+            "end": "2027-06-15T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "dentist_tue",
+            "title": "Emergency Dental Appointment",
+            "start": "2027-06-15T11:00:00+01:00",
+            "end": "2027-06-15T12:30:00+01:00",
+            "category": "medical",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "dentist"
+            ],
+            "description": "Fixed dental check.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_tue",
+            "title": "Writing Work Block",
+            "start": "2027-06-15T14:30:00+01:00",
+            "end": "2027-06-15T17:30:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "5 hours work.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-06-15T23:30:00+01:00",
+            "end": "2027-06-16T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_wed",
+            "title": "Gym Workout",
+            "start": "2027-06-16T08:00:00+01:00",
+            "end": "2027-06-16T09:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_wed",
+            "title": "Writing Work Block",
+            "start": "2027-06-16T10:30:00+01:00",
+            "end": "2027-06-16T18:30:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "8 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-06-16T23:30:00+01:00",
+            "end": "2027-06-17T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_thu",
+            "title": "Writing Work Block",
+            "start": "2027-06-17T10:30:00+01:00",
+            "end": "2027-06-17T16:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "6.5 hours work.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "padel_thu",
+            "title": "Amateur Padel Tournament Match",
+            "start": "2027-06-17T18:00:00+01:00",
+            "end": "2027-06-17T20:00:00+01:00",
+            "category": "social",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "peers"
+            ],
+            "description": "Fixed sports match.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-06-17T23:30:00+01:00",
+            "end": "2027-06-18T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_fri",
+            "title": "Gym Workout",
+            "start": "2027-06-18T08:00:00+01:00",
+            "end": "2027-06-18T09:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_fri",
+            "title": "Writing Work Block",
+            "start": "2027-06-18T10:30:00+01:00",
+            "end": "2027-06-18T16:30:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "7.5 hours work.",
+            "origin": "existing",
+            "change_status": "moved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 4,
+          "alternatives": 4,
+          "clarity": 3
+        },
+        "weaknesses": [
+          "The revised plan substantially addresses the prior workload concern by reducing actual scheduled writing from 35 hours to 30.5 hours, but the event descriptions no longer match the visible event durations: Tuesday 14:30-17:30 is 3 hours though described as 5 hours, Thursday 10:30-16:00 is 5.5 hours though described as 6.5 hours, and Friday 10:30-16:30 is 6 hours though described as 7.5 hours. This does not make the schedule unworkable, but it weakens clarity and could confuse human review of the workload.",
+          "The calendar still contains demanding gym-plus-writing sequences on Monday and Wednesday: gym 08:00-09:30 followed by writing 10:30-18:30. These may be manageable, especially with protected sleep and one-hour gaps, but the rationale does not deeply assess repeated physical-to-cognitive load across the week.",
+          "Tuesday now gives a two-hour gap after the emergency dental appointment ending at 12:30 before writing 14:30-17:30, which is a meaningful improvement over the prior version. Still, post-dental recovery, travel, food, discomfort, or treatment intensity remain unknown, so the 3-hour writing block is plausible but not guaranteed to be effective.",
+          "Thursday is improved by ending writing at 16:00 before the fixed padel tournament at 18:00, leaving two hours instead of one. That is more humanly robust, but the plan still depends on the user being able to transition from 5.5 hours of writing into a physically demanding evening commitment.",
+          "Because the original request is not available and the technical validation explicitly does not check request satisfaction or soft preferences, satisfaction of the full request cannot be verified beyond the visible goals and the checked 30-hour minimum."
+        ],
+        "feedback": "The revised proposal is a clear practical improvement over the prior no-change plan. It removes the unnecessary surplus writing load, protects sleep and fixed commitments, and creates more recovery or transition space around the highest-risk points: Tuesday after the emergency dental appointment, Thursday before the padel tournament, and Friday after the gym session. The resulting week still has substantial work and repeated gym-to-writing days, but it is more balanced and more plausibly sustainable than the previous 35-hour version. The main issue to fix is documentation accuracy: the visible event descriptions conflict with the actual event times, which could mislead someone about the real workload. From a human-centered scheduling view, the current organization does not require another revision solely for manageability, but the proposer should correct or explain the mismatched duration descriptions and retain awareness that dental recovery and physical transition needs remain uncertain.",
+        "plausibility_review": {
+          "revision_required": false,
+          "severity": "low",
+          "reason": "The prior concern received a grounded and meaningful answer: the proposal reduced actual writing to 30.5 hours, increased Tuesday post-dental buffer from one hour to two hours, increased Thursday work-to-padel transition from one hour to two hours, and shortened Friday after the morning gym session. The remaining concerns are uncertainties about individual recovery and repeated gym-to-writing load rather than a concrete scheduling pattern that appears significantly unsustainable. The duration-description mismatch is an objective clarity problem, but the actual event times and validation show the intended workload clearly enough that it does not by itself require a human-manageability revision.",
+          "suggested_improvement": "Correct the event duration descriptions and, if keeping this distribution, briefly substantiate why the remaining gym-to-writing days and the post-dental writing block are acceptable for the user’s actual recovery and transition needs."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Request satisfaction",
+            "assumption": "The revised calendar satisfies the user's original request and soft preferences, not only the visible 30-hour work minimum and protected fixed events.",
+            "evidence_gap": "The original request is not provided, and the technical validation explicitly does not check request satisfaction or soft preference satisfaction.",
+            "potential_impact": "potentially_blocking",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Post-dental capacity",
+            "assumption": "The user can usefully complete writing from 14:30-17:30 after the emergency dental appointment from 11:00-12:30.",
+            "evidence_gap": "The revised plan creates a two-hour gap, but there is no information about treatment intensity, travel, eating restrictions, discomfort, medication effects, or recovery needs.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Physical recovery around gym and work",
+            "assumption": "The user can sustainably manage gym sessions from 08:00-09:30 followed by writing blocks starting at 10:30 on Monday, Wednesday, and Friday.",
+            "evidence_gap": "The calendar shows one-hour gaps and protected sleep, but does not verify hygiene, meals, travel, fatigue, or whether repeated gym-to-writing sequences are realistic for this user.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Thursday work-to-padel transition",
+            "assumption": "The user can transition from writing 10:30-16:00 to the fixed padel tournament from 18:00-20:00 without the day becoming overly draining.",
+            "evidence_gap": "The revised calendar leaves a two-hour gap, but travel, food, warm-up, and recovery needs are not known.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Calendar duration metadata",
+            "assumption": "The actual event times, not the mismatched descriptions, are the authoritative source for the workload.",
+            "evidence_gap": "Several writing event descriptions conflict with their actual visible durations: Tuesday is described as 5 hours but lasts 3 hours, Thursday is described as 6.5 hours but lasts 5.5 hours, and Friday is described as 7.5 hours but lasts 6 hours.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          }
+        ],
+        "overall": 3.75
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": false,
+        "plausibility_revision_required": false,
+        "accepted": false,
+        "revision_causes": [
+          "numeric_criteria_failed"
+        ]
+      },
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": [
+        {
+          "iteration": 0,
+          "proposal": {
+            "changes": [],
+            "rationale": {
+              "constraints": [
+                "Sleep events are fixed and protected, so they are left unchanged.",
+                "The emergency dental appointment and padel tournament are fixed protected commitments already present in the calendar.",
+                "Gym routines are preserved because all existing gym workouts remain in place.",
+                "The final calendar keeps 35 hours of work, exceeding the 30-hour weekly writing requirement."
+              ],
+              "priorities": [
+                "Preserve health commitments and protected sleep before altering flexible work.",
+                "Avoid unnecessary disruption because the current calendar already satisfies the fixed commitments and work target."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Reduce writing time to exactly 30 hours.",
+                  "rejected_because": "Rejected because the request sets a minimum, and cutting existing work is unnecessary."
+                },
+                {
+                  "option": "Move gym workouts to create different work blocks.",
+                  "rejected_because": "Rejected because gym preservation is preferred and no conflict requires moving them."
+                }
+              ],
+              "summary": "No calendar changes are needed: the fixed medical and sports commitments are already scheduled, gym and sleep remain protected, and the existing work blocks exceed the 30-hour writing target."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "sleep_mon",
+                "title": "Sleep",
+                "start": "2027-06-13T23:30:00+01:00",
+                "end": "2027-06-14T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_mon",
+                "title": "Gym Workout",
+                "start": "2027-06-14T08:00:00+01:00",
+                "end": "2027-06-14T09:30:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Gym.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_mon",
+                "title": "Writing Work Block",
+                "start": "2027-06-14T10:30:00+01:00",
+                "end": "2027-06-14T18:30:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "8 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_tue",
+                "title": "Sleep",
+                "start": "2027-06-14T23:30:00+01:00",
+                "end": "2027-06-15T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "dentist_tue",
+                "title": "Emergency Dental Appointment",
+                "start": "2027-06-15T11:00:00+01:00",
+                "end": "2027-06-15T12:30:00+01:00",
+                "category": "medical",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "dentist"
+                ],
+                "description": "Fixed dental check.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_tue",
+                "title": "Writing Work Block",
+                "start": "2027-06-15T13:30:00+01:00",
+                "end": "2027-06-15T18:30:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "5 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_wed",
+                "title": "Sleep",
+                "start": "2027-06-15T23:30:00+01:00",
+                "end": "2027-06-16T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_wed",
+                "title": "Gym Workout",
+                "start": "2027-06-16T08:00:00+01:00",
+                "end": "2027-06-16T09:30:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Gym.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_wed",
+                "title": "Writing Work Block",
+                "start": "2027-06-16T10:30:00+01:00",
+                "end": "2027-06-16T18:30:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "8 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2027-06-16T23:30:00+01:00",
+                "end": "2027-06-17T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_thu",
+                "title": "Writing Work Block",
+                "start": "2027-06-17T10:30:00+01:00",
+                "end": "2027-06-17T17:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "6.5 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "padel_thu",
+                "title": "Amateur Padel Tournament Match",
+                "start": "2027-06-17T18:00:00+01:00",
+                "end": "2027-06-17T20:00:00+01:00",
+                "category": "social",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "peers"
+                ],
+                "description": "Fixed sports match.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_fri",
+                "title": "Sleep",
+                "start": "2027-06-17T23:30:00+01:00",
+                "end": "2027-06-18T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_fri",
+                "title": "Gym Workout",
+                "start": "2027-06-18T08:00:00+01:00",
+                "end": "2027-06-18T09:30:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Gym.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_fri",
+                "title": "Writing Work Block",
+                "start": "2027-06-18T10:30:00+01:00",
+                "end": "2027-06-18T18:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "7.5 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              }
+            ],
+            "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+          },
+          "plausibility_review": {
+            "revision_required": true,
+            "severity": "moderate",
+            "reason": "The proposed no-op preserves a demanding 35-hour writing schedule despite the visible requirement being only 30 hours and despite several practical stress points: emergency dental care on Tuesday, three gym-plus-long-writing days, and Thursday's writing block followed by a fixed padel match. This is not an objective contradiction, but it could significantly affect manageability, recovery, and the quality of the writing time. The rationale does not provide enough human-centered justification for keeping the surplus workload.",
+            "suggested_improvement": "Reconsider the distribution or necessity of the surplus writing time, especially around the dental appointment, gym-plus-writing days, and the Thursday work-to-padel sequence. If keeping the same calendar, provide a grounded explanation of why the visible workload is sustainable and why the extra five hours above the minimum should be preserved."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Sustainability of 35 hours of writing",
+              "assumption": "The user can sustainably complete 35 hours of writing during this visible week even though only 30 hours are stated as required.",
+              "evidence_gap": "The rationale counts total work hours but does not explain whether the extra five hours are necessary, preferred, or manageable given the rest of the week.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Post-dental capacity",
+              "assumption": "The user can comfortably transition from the emergency dental appointment ending Tuesday at 12:30 to a 5-hour writing block starting at 13:30.",
+              "evidence_gap": "No information is provided about travel, treatment intensity, recovery needs, eating constraints, or likely discomfort after the appointment.",
+              "potential_impact": "material",
+              "verification_source": "unknown"
+            },
+            {
+              "subject": "Physical recovery around gym and work",
+              "assumption": "The user can manage gym sessions from 08:00-09:30 followed by long writing blocks starting at 10:30 on Monday, Wednesday, and Friday.",
+              "evidence_gap": "The calendar shows one-hour gaps, but the rationale does not address preparation, hygiene, food, travel, or whether these repeated sequences are sustainable.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Thursday work-to-padel sequence",
+              "assumption": "The user can complete writing from 10:30-17:00 and then participate effectively in the fixed padel tournament from 18:00-20:00.",
+              "evidence_gap": "The rationale preserves both events but does not assess the one-hour transition, food, travel, warm-up, or physical and cognitive fatigue.",
+              "potential_impact": "material",
+              "verification_source": "unknown"
+            },
+            {
+              "subject": "Request satisfaction",
+              "assumption": "Leaving the calendar unchanged satisfies the user's original request.",
+              "evidence_gap": "The original request is not available, and the technical validation explicitly does not check request satisfaction or soft preferences.",
+              "potential_impact": "potentially_blocking",
+              "verification_source": "user_context"
+            }
+          ],
+          "weaknesses": [
+            "The rationale treats exceeding the 30-hour writing minimum as automatically beneficial, but does not consider whether preserving 35 hours is proportionate in a week that also includes an emergency dental appointment on Tuesday 11:00-12:30, three 1.5-hour gym sessions, and a fixed padel match on Thursday 18:00-20:00.",
+            "The calendar contains several demanding sequences that are plausible but not really evaluated: Monday has gym 08:00-09:30 followed by an 8-hour writing block 10:30-18:30; Wednesday repeats the same pattern; Friday has gym 08:00-09:30 followed by 7.5 hours of writing 10:30-18:00.",
+            "Tuesday leaves one hour between the emergency dental appointment ending at 12:30 and the writing block starting at 13:30. This may be workable, but the plan does not address possible post-appointment fatigue, discomfort, eating needs, or travel/preparation uncertainty.",
+            "Thursday has 6.5 hours of writing from 10:30-17:00 followed by only one hour before a fixed two-hour padel tournament match from 18:00-20:00. This may be manageable, but it is a meaningful physical and cognitive load that the rationale does not discuss.",
+            "The alternatives considered are narrow. Rejecting a reduction to exactly 30 hours because the request is a minimum does not address intermediate options, such as preserving most work while creating more recovery or contingency around the dental appointment, tournament, or long gym-plus-writing days.",
+            "Because no original request is available, request satisfaction cannot be verified beyond the visible claim that the final calendar contains 35 hours of work and protects the listed fixed events."
+          ],
+          "feedback": "The no-change proposal is technically coherent and may be workable for some people, especially because sleep is protected each night and there are visible gaps around most commitments. However, the human-quality case is underdeveloped. The plan keeps five hours more writing than the stated 30-hour minimum while also preserving a fairly full week of health, medical, and sports commitments. The main issue is not that any one event is impossible, but that the rationale does not explain why the extra writing load is worth preserving despite the emergency dental appointment, repeated gym-to-long-writing sequences, and Thursday's work-to-padel sequence. A stronger proposal should either substantiate why the existing 35-hour workload remains sustainable in this specific week, or reconsider whether some flexible writing time should be redistributed or reduced to create more recovery and contingency while still meeting the visible minimum."
+        }
+      ],
+      "unresolved_assumptions": [
+        {
+          "subject": "Request satisfaction",
+          "assumption": "The revised calendar satisfies the user's original request and soft preferences, not only the visible 30-hour work minimum and protected fixed events.",
+          "evidence_gap": "The original request is not provided, and the technical validation explicitly does not check request satisfaction or soft preference satisfaction.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Post-dental capacity",
+          "assumption": "The user can usefully complete writing from 14:30-17:30 after the emergency dental appointment from 11:00-12:30.",
+          "evidence_gap": "The revised plan creates a two-hour gap, but there is no information about treatment intensity, travel, eating restrictions, discomfort, medication effects, or recovery needs.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Physical recovery around gym and work",
+          "assumption": "The user can sustainably manage gym sessions from 08:00-09:30 followed by writing blocks starting at 10:30 on Monday, Wednesday, and Friday.",
+          "evidence_gap": "The calendar shows one-hour gaps and protected sleep, but does not verify hygiene, meals, travel, fatigue, or whether repeated gym-to-writing sequences are realistic for this user.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Thursday work-to-padel transition",
+          "assumption": "The user can transition from writing 10:30-16:00 to the fixed padel tournament from 18:00-20:00 without the day becoming overly draining.",
+          "evidence_gap": "The revised calendar leaves a two-hour gap, but travel, food, warm-up, and recovery needs are not known.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Calendar duration metadata",
+          "assumption": "The actual event times, not the mismatched descriptions, are the authoritative source for the workload.",
+          "evidence_gap": "Several writing event descriptions conflict with their actual visible durations: Tuesday is described as 5 hours but lasts 3 hours, Thursday is described as 6.5 hours but lasts 5.5 hours, and Friday is described as 7.5 hours but lasts 6 hours.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "proposer_feedback": "Numeric Critic criteria failed. Scores: {\"reasoning\":4,\"coherence\":4,\"alternatives\":4,\"clarity\":3}. Unverified conditions to reassess: [{'subject': 'Request satisfaction', 'assumption': \"The revised calendar satisfies the user's original request and soft preferences, not only the visible 30-hour work minimum and protected fixed events.\", 'evidence_gap': 'The original request is not provided, and the technical validation explicitly does not check request satisfaction or soft preference satisfaction.', 'potential_impact': 'potentially_blocking', 'verification_source': 'user_context'}, {'subject': 'Post-dental capacity', 'assumption': 'The user can usefully complete writing from 14:30-17:30 after the emergency dental appointment from 11:00-12:30.', 'evidence_gap': 'The revised plan creates a two-hour gap, but there is no information about treatment intensity, travel, eating restrictions, discomfort, medication effects, or recovery needs.', 'potential_impact': 'material', 'verification_source': 'unknown'}, {'subject': 'Physical recovery around gym and work', 'assumption': 'The user can sustainably manage gym sessions from 08:00-09:30 followed by writing blocks starting at 10:30 on Monday, Wednesday, and Friday.', 'evidence_gap': 'The calendar shows one-hour gaps and protected sleep, but does not verify hygiene, meals, travel, fatigue, or whether repeated gym-to-writing sequences are realistic for this user.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Thursday work-to-padel transition', 'assumption': 'The user can transition from writing 10:30-16:00 to the fixed padel tournament from 18:00-20:00 without the day becoming overly draining.', 'evidence_gap': 'The revised calendar leaves a two-hour gap, but travel, food, warm-up, and recovery needs are not known.', 'potential_impact': 'material', 'verification_source': 'unknown'}, {'subject': 'Calendar duration metadata', 'assumption': 'The actual event times, not the mismatched descriptions, are the authoritative source for the workload.', 'evidence_gap': 'Several writing event descriptions conflict with their actual visible durations: Tuesday is described as 5 hours but lasts 3 hours, Thursday is described as 6.5 hours but lasts 5.5 hours, and Friday is described as 7.5 hours but lasts 6 hours.', 'potential_impact': 'material', 'verification_source': 'unknown'}] Weaknesses: ['The revised plan substantially addresses the prior workload concern by reducing actual scheduled writing from 35 hours to 30.5 hours, but the event descriptions no longer match the visible event durations: Tuesday 14:30-17:30 is 3 hours though described as 5 hours, Thursday 10:30-16:00 is 5.5 hours though described as 6.5 hours, and Friday 10:30-16:30 is 6 hours though described as 7.5 hours. This does not make the schedule unworkable, but it weakens clarity and could confuse human review of the workload.', 'The calendar still contains demanding gym-plus-writing sequences on Monday and Wednesday: gym 08:00-09:30 followed by writing 10:30-18:30. These may be manageable, especially with protected sleep and one-hour gaps, but the rationale does not deeply assess repeated physical-to-cognitive load across the week.', 'Tuesday now gives a two-hour gap after the emergency dental appointment ending at 12:30 before writing 14:30-17:30, which is a meaningful improvement over the prior version. Still, post-dental recovery, travel, food, discomfort, or treatment intensity remain unknown, so the 3-hour writing block is plausible but not guaranteed to be effective.', 'Thursday is improved by ending writing at 16:00 before the fixed padel tournament at 18:00, leaving two hours instead of one. That is more humanly robust, but the plan still depends on the user being able to transition from 5.5 hours of writing into a physically demanding evening commitment.', 'Because the original request is not available and the technical validation explicitly does not check request satisfaction or soft preferences, satisfaction of the full request cannot be verified beyond the visible goals and the checked 30-hour minimum.']. Actionable feedback: The revised proposal is a clear practical improvement over the prior no-change plan. It removes the unnecessary surplus writing load, protects sleep and fixed commitments, and creates more recovery or transition space around the highest-risk points: Tuesday after the emergency dental appointment, Thursday before the padel tournament, and Friday after the gym session. The resulting week still has substantial work and repeated gym-to-writing days, but it is more balanced and more plausibly sustainable than the previous 35-hour version. The main issue to fix is documentation accuracy: the visible event descriptions conflict with the actual event times, which could mislead someone about the real workload. From a human-centered scheduling view, the current organization does not require another revision solely for manageability, but the proposer should correct or explain the mismatched duration descriptions and retain awareness that dental recovery and physical transition needs remain uncertain.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "delete",
+            "event_id": "work_mon",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "work_tue",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "work_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "work_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "work_fri",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Writing Work Block",
+            "from_start": null,
+            "to_start": "2027-06-14T10:30:00+01:00",
+            "to_end": "2027-06-14T18:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Writing Work Block",
+            "from_start": null,
+            "to_start": "2027-06-15T08:30:00+01:00",
+            "to_end": "2027-06-15T10:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Writing Work Block",
+            "from_start": null,
+            "to_start": "2027-06-15T14:30:00+01:00",
+            "to_end": "2027-06-15T16:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Writing Work Block",
+            "from_start": null,
+            "to_start": "2027-06-16T10:30:00+01:00",
+            "to_end": "2027-06-16T18:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Writing Work Block",
+            "from_start": null,
+            "to_start": "2027-06-17T10:30:00+01:00",
+            "to_end": "2027-06-17T16:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Writing Work Block",
+            "from_start": null,
+            "to_start": "2027-06-18T10:30:00+01:00",
+            "to_end": "2027-06-18T17:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "Sleep is fixed and protected, so it is left unchanged.",
+            "The emergency dental appointment and padel match are fixed protected commitments and remain unchanged.",
+            "Gym routines are kept in their existing slots.",
+            "Only flexible solo writing events are replaced, avoiding protected or third-party calendar disruption.",
+            "The final work total is exactly 30 hours within the checked weekly window.",
+            "Deleting and re-adding writing blocks avoids relying on stale duration descriptions in the original events.",
+            "Free gaps are not proof that travel, food, dental recovery, warm-up, or fatigue needs will fit."
+          ],
+          "priorities": [
+            "Meet the writing requirement without keeping unnecessary surplus workload.",
+            "Reduce same-day load after the dental appointment by splitting Tuesday writing around it.",
+            "Leave transition space before the Thursday padel match.",
+            "Lighten repeated gym-to-writing days compared with the original full-day writing blocks.",
+            "Prefer changing flexible writing over moving health, sleep, medical, or sports commitments."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Keep the previous proposal unchanged.",
+              "rejected_because": "Rejected because an exact 30-hour plan can better address dental recovery and stale duration metadata."
+            },
+            {
+              "option": "Keep the original 35-hour writing week.",
+              "rejected_because": "Rejected because it exceeds the stated need and adds avoidable strain around fixed health and sports events."
+            },
+            {
+              "option": "Move gym sessions to create larger writing blocks.",
+              "rejected_because": "Rejected because the user asked to keep gym routines and no conflict requires moving them."
+            },
+            {
+              "option": "Put all Tuesday writing after the dental appointment.",
+              "rejected_because": "Rejected because treatment intensity and recovery are unknown, so splitting the load is less risky."
+            }
+          ],
+          "summary": "This plan preserves sleep, gym, dental, and padel commitments while rebuilding only flexible writing blocks into exactly 30 scheduled hours; the main trade-off is adding more work-block edits to reduce post-dental pressure and remove misleading duration metadata."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true,
+        "aggregate_checks": [
+          {
+            "id": "weekly_hours",
+            "status": "pass",
+            "minutes": 1800.0,
+            "minimum_minutes": 1800,
+            "category": "work",
+            "evidence": "union of final calendar intervals"
+          }
+        ],
+        "aggregate_validation_version": "duration_total_v1"
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-06-13T23:30:00+01:00",
+            "end": "2027-06-14T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_mon",
+            "title": "Gym Workout",
+            "start": "2027-06-14T08:00:00+01:00",
+            "end": "2027-06-14T09:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_5",
+            "title": "Writing Work Block",
+            "start": "2027-06-14T10:30:00+01:00",
+            "end": "2027-06-14T18:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-06-14T23:30:00+01:00",
+            "end": "2027-06-15T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_6",
+            "title": "Writing Work Block",
+            "start": "2027-06-15T08:30:00+01:00",
+            "end": "2027-06-15T10:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "dentist_tue",
+            "title": "Emergency Dental Appointment",
+            "start": "2027-06-15T11:00:00+01:00",
+            "end": "2027-06-15T12:30:00+01:00",
+            "category": "medical",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "dentist"
+            ],
+            "description": "Fixed dental check.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_7",
+            "title": "Writing Work Block",
+            "start": "2027-06-15T14:30:00+01:00",
+            "end": "2027-06-15T16:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-06-15T23:30:00+01:00",
+            "end": "2027-06-16T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_wed",
+            "title": "Gym Workout",
+            "start": "2027-06-16T08:00:00+01:00",
+            "end": "2027-06-16T09:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_8",
+            "title": "Writing Work Block",
+            "start": "2027-06-16T10:30:00+01:00",
+            "end": "2027-06-16T18:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-06-16T23:30:00+01:00",
+            "end": "2027-06-17T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_9",
+            "title": "Writing Work Block",
+            "start": "2027-06-17T10:30:00+01:00",
+            "end": "2027-06-17T16:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "padel_thu",
+            "title": "Amateur Padel Tournament Match",
+            "start": "2027-06-17T18:00:00+01:00",
+            "end": "2027-06-17T20:00:00+01:00",
+            "category": "social",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "peers"
+            ],
+            "description": "Fixed sports match.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-06-17T23:30:00+01:00",
+            "end": "2027-06-18T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_fri",
+            "title": "Gym Workout",
+            "start": "2027-06-18T08:00:00+01:00",
+            "end": "2027-06-18T09:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_10",
+            "title": "Writing Work Block",
+            "start": "2027-06-18T10:30:00+01:00",
+            "end": "2027-06-18T17:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 5,
+          "coherence": 4,
+          "alternatives": 4,
+          "clarity": 5
+        },
+        "weaknesses": [
+          "The revised plan is more human-centered than the prior versions, but Monday and Wednesday still combine gym from 08:00-09:30 with long writing blocks from 10:30-18:00. This is plausible, especially with protected sleep and a one-hour gap, but it remains a demanding physical-to-cognitive sequence.",
+          "Friday repeats the gym-to-writing pattern with gym from 08:00-09:30 followed by writing from 10:30-17:00. This is shorter than the earlier version, but still depends on the user having enough recovery, food, hygiene, and transition capacity within the visible one-hour gap.",
+          "Tuesday is substantially lighter than the earlier proposals and avoids concentrating all writing after the emergency dental appointment, but it still assumes the user can complete writing from 14:30-16:00 after dental care from 11:00-12:30. The two-hour gap is helpful, yet treatment intensity, travel, eating restrictions, discomfort, or medication effects remain unknown.",
+          "Thursday leaves a two-hour gap between writing ending at 16:00 and the fixed padel match from 18:00-20:00, which is a meaningful improvement. Still, the day combines 5.5 hours of writing with a physically demanding evening commitment, so the plan depends on that transition being realistic for this user.",
+          "The proposal deletes and re-adds all writing blocks rather than adjusting existing ones. The rationale gives a reasonable metadata-related reason, and the affected events appear to be flexible solo work, but this is still a relatively broad edit pattern compared with simply resizing selected work blocks.",
+          "Because the original request is not available and the technical validation explicitly does not check request satisfaction or soft preferences, full request satisfaction cannot be verified beyond the visible 30-hour work total and preservation of fixed commitments."
+        ],
+        "feedback": "This proposal gives a grounded answer to the prior concerns. It reduces the workload to exactly 30 scheduled writing hours, fixes the earlier duration-metadata issue by rebuilding the work blocks, preserves protected sleep and fixed medical/sports commitments, and distributes Tuesday more cautiously around the emergency dental appointment. The calendar still has several demanding sequences, especially gym followed by long writing on Monday, Wednesday, and Friday, but these are not clearly unsustainable from the visible evidence. The rationale appropriately avoids assuming that free gaps automatically solve food, travel, recovery, or fatigue needs. A useful next improvement would be to substantiate, using the proposer’s fuller context, whether the repeated gym-to-writing days and the post-dental writing block are realistic for this specific user, but the current organization is plausibly manageable and does not require another revision on human-quality grounds.",
+        "plausibility_review": {
+          "revision_required": false,
+          "severity": "low",
+          "reason": "The main prior concern has been meaningfully addressed: the plan now schedules exactly 30 hours of writing instead of preserving surplus work, creates a lighter Tuesday around the emergency dental appointment, leaves two hours before the Thursday padel match, and removes the previous mismatch between actual event durations and descriptions. Remaining risks are real but mostly conditional: dental recovery, gym-to-writing recovery, meals, hygiene, and travel are not verified, yet the visible calendar includes protected sleep, meaningful gaps, and no obvious overload pattern severe enough to require another revision. If any of those assumptions are false, the schedule could become less effective, but the current proposal is a reasonable and more balanced distribution based on the visible information.",
+          "suggested_improvement": "Keep the current structure unless the proposer’s fuller context shows that dental recovery, gym transitions, or meal/hygiene needs require more margin. If the same operations are retained, briefly document why the repeated gym-to-writing blocks and Tuesday post-dental work are acceptable for this user."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Request satisfaction",
+            "assumption": "The rebuilt 30-hour writing schedule satisfies the user's original request and any soft preferences, not only the visible weekly work total and fixed-event protection.",
+            "evidence_gap": "The original request is not provided, and the technical validation explicitly does not check request satisfaction or soft preference satisfaction.",
+            "potential_impact": "potentially_blocking",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Post-dental writing capacity",
+            "assumption": "The user can usefully complete the writing block from 14:30-16:00 after the emergency dental appointment from 11:00-12:30.",
+            "evidence_gap": "The proposal leaves a two-hour gap after the appointment, but there is no information about treatment intensity, travel, eating restrictions, discomfort, medication effects, or recovery needs.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Pre-dental timing",
+            "assumption": "The user can productively write from 08:30-10:00 before the emergency dental appointment at 11:00 without the appointment preparation or travel making that block impractical.",
+            "evidence_gap": "The calendar shows one hour between the writing block and the dental appointment, but location, travel, check-in expectations, and preparation needs are unknown.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Gym-to-writing transitions",
+            "assumption": "The user can sustainably manage gym sessions from 08:00-09:30 followed by writing blocks starting at 10:30 on Monday, Wednesday, and Friday.",
+            "evidence_gap": "The calendar shows one-hour gaps, but does not verify hygiene, food, travel, physical recovery, or whether repeated physical-to-cognitive transitions are realistic for this user.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Long writing block sustainability",
+            "assumption": "The long writing blocks on Monday 10:30-18:00 and Wednesday 10:30-18:00 can include adequate breaks, food, and recovery without undermining the intended work.",
+            "evidence_gap": "The calendar reserves 7.5-hour work blocks but does not show whether breaks or meals are built into those blocks or expected outside them.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Thursday work-to-padel transition",
+            "assumption": "The user can transition from writing 10:30-16:00 to the fixed padel tournament from 18:00-20:00 without the day becoming overly draining.",
+            "evidence_gap": "The revised calendar leaves a two-hour gap, but travel, food, warm-up, and recovery needs are not known.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          }
+        ],
+        "overall": 4.5
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": true,
+        "plausibility_revision_required": false,
+        "accepted": true,
+        "revision_causes": []
+      },
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": [
+        {
+          "iteration": 0,
+          "proposal": {
+            "changes": [],
+            "rationale": {
+              "constraints": [
+                "Sleep events are fixed and protected, so they are left unchanged.",
+                "The emergency dental appointment and padel tournament are fixed protected commitments already present in the calendar.",
+                "Gym routines are preserved because all existing gym workouts remain in place.",
+                "The final calendar keeps 35 hours of work, exceeding the 30-hour weekly writing requirement."
+              ],
+              "priorities": [
+                "Preserve health commitments and protected sleep before altering flexible work.",
+                "Avoid unnecessary disruption because the current calendar already satisfies the fixed commitments and work target."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Reduce writing time to exactly 30 hours.",
+                  "rejected_because": "Rejected because the request sets a minimum, and cutting existing work is unnecessary."
+                },
+                {
+                  "option": "Move gym workouts to create different work blocks.",
+                  "rejected_because": "Rejected because gym preservation is preferred and no conflict requires moving them."
+                }
+              ],
+              "summary": "No calendar changes are needed: the fixed medical and sports commitments are already scheduled, gym and sleep remain protected, and the existing work blocks exceed the 30-hour writing target."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "sleep_mon",
+                "title": "Sleep",
+                "start": "2027-06-13T23:30:00+01:00",
+                "end": "2027-06-14T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_mon",
+                "title": "Gym Workout",
+                "start": "2027-06-14T08:00:00+01:00",
+                "end": "2027-06-14T09:30:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Gym.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_mon",
+                "title": "Writing Work Block",
+                "start": "2027-06-14T10:30:00+01:00",
+                "end": "2027-06-14T18:30:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "8 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_tue",
+                "title": "Sleep",
+                "start": "2027-06-14T23:30:00+01:00",
+                "end": "2027-06-15T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "dentist_tue",
+                "title": "Emergency Dental Appointment",
+                "start": "2027-06-15T11:00:00+01:00",
+                "end": "2027-06-15T12:30:00+01:00",
+                "category": "medical",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "dentist"
+                ],
+                "description": "Fixed dental check.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_tue",
+                "title": "Writing Work Block",
+                "start": "2027-06-15T13:30:00+01:00",
+                "end": "2027-06-15T18:30:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "5 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_wed",
+                "title": "Sleep",
+                "start": "2027-06-15T23:30:00+01:00",
+                "end": "2027-06-16T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_wed",
+                "title": "Gym Workout",
+                "start": "2027-06-16T08:00:00+01:00",
+                "end": "2027-06-16T09:30:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Gym.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_wed",
+                "title": "Writing Work Block",
+                "start": "2027-06-16T10:30:00+01:00",
+                "end": "2027-06-16T18:30:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "8 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2027-06-16T23:30:00+01:00",
+                "end": "2027-06-17T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_thu",
+                "title": "Writing Work Block",
+                "start": "2027-06-17T10:30:00+01:00",
+                "end": "2027-06-17T17:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "6.5 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "padel_thu",
+                "title": "Amateur Padel Tournament Match",
+                "start": "2027-06-17T18:00:00+01:00",
+                "end": "2027-06-17T20:00:00+01:00",
+                "category": "social",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "peers"
+                ],
+                "description": "Fixed sports match.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_fri",
+                "title": "Sleep",
+                "start": "2027-06-17T23:30:00+01:00",
+                "end": "2027-06-18T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_fri",
+                "title": "Gym Workout",
+                "start": "2027-06-18T08:00:00+01:00",
+                "end": "2027-06-18T09:30:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Gym.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_fri",
+                "title": "Writing Work Block",
+                "start": "2027-06-18T10:30:00+01:00",
+                "end": "2027-06-18T18:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "7.5 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              }
+            ],
+            "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+          },
+          "plausibility_review": {
+            "revision_required": true,
+            "severity": "moderate",
+            "reason": "The proposed no-op preserves a demanding 35-hour writing schedule despite the visible requirement being only 30 hours and despite several practical stress points: emergency dental care on Tuesday, three gym-plus-long-writing days, and Thursday's writing block followed by a fixed padel match. This is not an objective contradiction, but it could significantly affect manageability, recovery, and the quality of the writing time. The rationale does not provide enough human-centered justification for keeping the surplus workload.",
+            "suggested_improvement": "Reconsider the distribution or necessity of the surplus writing time, especially around the dental appointment, gym-plus-writing days, and the Thursday work-to-padel sequence. If keeping the same calendar, provide a grounded explanation of why the visible workload is sustainable and why the extra five hours above the minimum should be preserved."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Sustainability of 35 hours of writing",
+              "assumption": "The user can sustainably complete 35 hours of writing during this visible week even though only 30 hours are stated as required.",
+              "evidence_gap": "The rationale counts total work hours but does not explain whether the extra five hours are necessary, preferred, or manageable given the rest of the week.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Post-dental capacity",
+              "assumption": "The user can comfortably transition from the emergency dental appointment ending Tuesday at 12:30 to a 5-hour writing block starting at 13:30.",
+              "evidence_gap": "No information is provided about travel, treatment intensity, recovery needs, eating constraints, or likely discomfort after the appointment.",
+              "potential_impact": "material",
+              "verification_source": "unknown"
+            },
+            {
+              "subject": "Physical recovery around gym and work",
+              "assumption": "The user can manage gym sessions from 08:00-09:30 followed by long writing blocks starting at 10:30 on Monday, Wednesday, and Friday.",
+              "evidence_gap": "The calendar shows one-hour gaps, but the rationale does not address preparation, hygiene, food, travel, or whether these repeated sequences are sustainable.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Thursday work-to-padel sequence",
+              "assumption": "The user can complete writing from 10:30-17:00 and then participate effectively in the fixed padel tournament from 18:00-20:00.",
+              "evidence_gap": "The rationale preserves both events but does not assess the one-hour transition, food, travel, warm-up, or physical and cognitive fatigue.",
+              "potential_impact": "material",
+              "verification_source": "unknown"
+            },
+            {
+              "subject": "Request satisfaction",
+              "assumption": "Leaving the calendar unchanged satisfies the user's original request.",
+              "evidence_gap": "The original request is not available, and the technical validation explicitly does not check request satisfaction or soft preferences.",
+              "potential_impact": "potentially_blocking",
+              "verification_source": "user_context"
+            }
+          ],
+          "weaknesses": [
+            "The rationale treats exceeding the 30-hour writing minimum as automatically beneficial, but does not consider whether preserving 35 hours is proportionate in a week that also includes an emergency dental appointment on Tuesday 11:00-12:30, three 1.5-hour gym sessions, and a fixed padel match on Thursday 18:00-20:00.",
+            "The calendar contains several demanding sequences that are plausible but not really evaluated: Monday has gym 08:00-09:30 followed by an 8-hour writing block 10:30-18:30; Wednesday repeats the same pattern; Friday has gym 08:00-09:30 followed by 7.5 hours of writing 10:30-18:00.",
+            "Tuesday leaves one hour between the emergency dental appointment ending at 12:30 and the writing block starting at 13:30. This may be workable, but the plan does not address possible post-appointment fatigue, discomfort, eating needs, or travel/preparation uncertainty.",
+            "Thursday has 6.5 hours of writing from 10:30-17:00 followed by only one hour before a fixed two-hour padel tournament match from 18:00-20:00. This may be manageable, but it is a meaningful physical and cognitive load that the rationale does not discuss.",
+            "The alternatives considered are narrow. Rejecting a reduction to exactly 30 hours because the request is a minimum does not address intermediate options, such as preserving most work while creating more recovery or contingency around the dental appointment, tournament, or long gym-plus-writing days.",
+            "Because no original request is available, request satisfaction cannot be verified beyond the visible claim that the final calendar contains 35 hours of work and protects the listed fixed events."
+          ],
+          "feedback": "The no-change proposal is technically coherent and may be workable for some people, especially because sleep is protected each night and there are visible gaps around most commitments. However, the human-quality case is underdeveloped. The plan keeps five hours more writing than the stated 30-hour minimum while also preserving a fairly full week of health, medical, and sports commitments. The main issue is not that any one event is impossible, but that the rationale does not explain why the extra writing load is worth preserving despite the emergency dental appointment, repeated gym-to-long-writing sequences, and Thursday's work-to-padel sequence. A stronger proposal should either substantiate why the existing 35-hour workload remains sustainable in this specific week, or reconsider whether some flexible writing time should be redistributed or reduced to create more recovery and contingency while still meeting the visible minimum."
+        },
+        {
+          "iteration": 1,
+          "proposal": {
+            "changes": [
+              {
+                "type": "move",
+                "event_id": "work_tue",
+                "title": null,
+                "from_start": null,
+                "to_start": "2027-06-15T14:30:00+01:00",
+                "to_end": "2027-06-15T17:30:00+01:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "move",
+                "event_id": "work_thu",
+                "title": null,
+                "from_start": null,
+                "to_start": "2027-06-17T10:30:00+01:00",
+                "to_end": "2027-06-17T16:00:00+01:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "move",
+                "event_id": "work_fri",
+                "title": null,
+                "from_start": null,
+                "to_start": "2027-06-18T10:30:00+01:00",
+                "to_end": "2027-06-18T16:30:00+01:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              }
+            ],
+            "rationale": {
+              "constraints": [
+                "Sleep is fixed and protected, so it is left unchanged.",
+                "The medical and sports commitments are fixed protected events already present in the calendar.",
+                "Gym routines are preserved because all existing workouts remain in place.",
+                "Only flexible solo writing blocks are changed, avoiding third-party or protected-event disruption.",
+                "The final calendar schedules 30 hours of work within the checked weekly window.",
+                "Actual dental recovery, travel, meals, warm-up, and post-gym needs are unknown, so the plan creates free buffer time without assuming details."
+              ],
+              "priorities": [
+                "Meet the writing minimum without preserving unnecessary surplus workload.",
+                "Reduce pressure after the dental appointment and before the tournament.",
+                "Keep the strongest health and sleep protections intact.",
+                "Prefer shortening flexible work over moving protected or externally dependent events."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Keep the original 35 hours of writing.",
+                  "rejected_because": "Rejected because the extra workload is not required and adds strain around medical, gym, and tournament commitments."
+                },
+                {
+                  "option": "Move gym sessions to open larger writing blocks.",
+                  "rejected_because": "Rejected because the request asks to keep gym routines and no conflict requires moving them."
+                },
+                {
+                  "option": "Cut Monday or Wednesday writing instead.",
+                  "rejected_because": "Rejected because the selected changes target the higher-risk dental, tournament, and end-of-week load points more directly."
+                }
+              ],
+              "summary": "The selected plan keeps sleep, gym, dental, and padel commitments intact while trimming only flexible writing blocks to the required 30 hours, trading surplus writing time for practical buffer around the most demanding parts of the week."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "sleep_mon",
+                "title": "Sleep",
+                "start": "2027-06-13T23:30:00+01:00",
+                "end": "2027-06-14T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_mon",
+                "title": "Gym Workout",
+                "start": "2027-06-14T08:00:00+01:00",
+                "end": "2027-06-14T09:30:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Gym.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_mon",
+                "title": "Writing Work Block",
+                "start": "2027-06-14T10:30:00+01:00",
+                "end": "2027-06-14T18:30:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "8 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_tue",
+                "title": "Sleep",
+                "start": "2027-06-14T23:30:00+01:00",
+                "end": "2027-06-15T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "dentist_tue",
+                "title": "Emergency Dental Appointment",
+                "start": "2027-06-15T11:00:00+01:00",
+                "end": "2027-06-15T12:30:00+01:00",
+                "category": "medical",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "dentist"
+                ],
+                "description": "Fixed dental check.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_tue",
+                "title": "Writing Work Block",
+                "start": "2027-06-15T14:30:00+01:00",
+                "end": "2027-06-15T17:30:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "5 hours work.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "sleep_wed",
+                "title": "Sleep",
+                "start": "2027-06-15T23:30:00+01:00",
+                "end": "2027-06-16T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_wed",
+                "title": "Gym Workout",
+                "start": "2027-06-16T08:00:00+01:00",
+                "end": "2027-06-16T09:30:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Gym.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_wed",
+                "title": "Writing Work Block",
+                "start": "2027-06-16T10:30:00+01:00",
+                "end": "2027-06-16T18:30:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "8 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2027-06-16T23:30:00+01:00",
+                "end": "2027-06-17T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_thu",
+                "title": "Writing Work Block",
+                "start": "2027-06-17T10:30:00+01:00",
+                "end": "2027-06-17T16:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "6.5 hours work.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "padel_thu",
+                "title": "Amateur Padel Tournament Match",
+                "start": "2027-06-17T18:00:00+01:00",
+                "end": "2027-06-17T20:00:00+01:00",
+                "category": "social",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "peers"
+                ],
+                "description": "Fixed sports match.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_fri",
+                "title": "Sleep",
+                "start": "2027-06-17T23:30:00+01:00",
+                "end": "2027-06-18T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_fri",
+                "title": "Gym Workout",
+                "start": "2027-06-18T08:00:00+01:00",
+                "end": "2027-06-18T09:30:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Gym.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_fri",
+                "title": "Writing Work Block",
+                "start": "2027-06-18T10:30:00+01:00",
+                "end": "2027-06-18T16:30:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "7.5 hours work.",
+                "origin": "existing",
+                "change_status": "moved"
+              }
+            ],
+            "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+          },
+          "plausibility_review": {
+            "revision_required": false,
+            "severity": "low",
+            "reason": "The prior concern received a grounded and meaningful answer: the proposal reduced actual writing to 30.5 hours, increased Tuesday post-dental buffer from one hour to two hours, increased Thursday work-to-padel transition from one hour to two hours, and shortened Friday after the morning gym session. The remaining concerns are uncertainties about individual recovery and repeated gym-to-writing load rather than a concrete scheduling pattern that appears significantly unsustainable. The duration-description mismatch is an objective clarity problem, but the actual event times and validation show the intended workload clearly enough that it does not by itself require a human-manageability revision.",
+            "suggested_improvement": "Correct the event duration descriptions and, if keeping this distribution, briefly substantiate why the remaining gym-to-writing days and the post-dental writing block are acceptable for the user’s actual recovery and transition needs."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Request satisfaction",
+              "assumption": "The revised calendar satisfies the user's original request and soft preferences, not only the visible 30-hour work minimum and protected fixed events.",
+              "evidence_gap": "The original request is not provided, and the technical validation explicitly does not check request satisfaction or soft preference satisfaction.",
+              "potential_impact": "potentially_blocking",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Post-dental capacity",
+              "assumption": "The user can usefully complete writing from 14:30-17:30 after the emergency dental appointment from 11:00-12:30.",
+              "evidence_gap": "The revised plan creates a two-hour gap, but there is no information about treatment intensity, travel, eating restrictions, discomfort, medication effects, or recovery needs.",
+              "potential_impact": "material",
+              "verification_source": "unknown"
+            },
+            {
+              "subject": "Physical recovery around gym and work",
+              "assumption": "The user can sustainably manage gym sessions from 08:00-09:30 followed by writing blocks starting at 10:30 on Monday, Wednesday, and Friday.",
+              "evidence_gap": "The calendar shows one-hour gaps and protected sleep, but does not verify hygiene, meals, travel, fatigue, or whether repeated gym-to-writing sequences are realistic for this user.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Thursday work-to-padel transition",
+              "assumption": "The user can transition from writing 10:30-16:00 to the fixed padel tournament from 18:00-20:00 without the day becoming overly draining.",
+              "evidence_gap": "The revised calendar leaves a two-hour gap, but travel, food, warm-up, and recovery needs are not known.",
+              "potential_impact": "material",
+              "verification_source": "unknown"
+            },
+            {
+              "subject": "Calendar duration metadata",
+              "assumption": "The actual event times, not the mismatched descriptions, are the authoritative source for the workload.",
+              "evidence_gap": "Several writing event descriptions conflict with their actual visible durations: Tuesday is described as 5 hours but lasts 3 hours, Thursday is described as 6.5 hours but lasts 5.5 hours, and Friday is described as 7.5 hours but lasts 6 hours.",
+              "potential_impact": "material",
+              "verification_source": "unknown"
+            }
+          ],
+          "weaknesses": [
+            "The revised plan substantially addresses the prior workload concern by reducing actual scheduled writing from 35 hours to 30.5 hours, but the event descriptions no longer match the visible event durations: Tuesday 14:30-17:30 is 3 hours though described as 5 hours, Thursday 10:30-16:00 is 5.5 hours though described as 6.5 hours, and Friday 10:30-16:30 is 6 hours though described as 7.5 hours. This does not make the schedule unworkable, but it weakens clarity and could confuse human review of the workload.",
+            "The calendar still contains demanding gym-plus-writing sequences on Monday and Wednesday: gym 08:00-09:30 followed by writing 10:30-18:30. These may be manageable, especially with protected sleep and one-hour gaps, but the rationale does not deeply assess repeated physical-to-cognitive load across the week.",
+            "Tuesday now gives a two-hour gap after the emergency dental appointment ending at 12:30 before writing 14:30-17:30, which is a meaningful improvement over the prior version. Still, post-dental recovery, travel, food, discomfort, or treatment intensity remain unknown, so the 3-hour writing block is plausible but not guaranteed to be effective.",
+            "Thursday is improved by ending writing at 16:00 before the fixed padel tournament at 18:00, leaving two hours instead of one. That is more humanly robust, but the plan still depends on the user being able to transition from 5.5 hours of writing into a physically demanding evening commitment.",
+            "Because the original request is not available and the technical validation explicitly does not check request satisfaction or soft preferences, satisfaction of the full request cannot be verified beyond the visible goals and the checked 30-hour minimum."
+          ],
+          "feedback": "The revised proposal is a clear practical improvement over the prior no-change plan. It removes the unnecessary surplus writing load, protects sleep and fixed commitments, and creates more recovery or transition space around the highest-risk points: Tuesday after the emergency dental appointment, Thursday before the padel tournament, and Friday after the gym session. The resulting week still has substantial work and repeated gym-to-writing days, but it is more balanced and more plausibly sustainable than the previous 35-hour version. The main issue to fix is documentation accuracy: the visible event descriptions conflict with the actual event times, which could mislead someone about the real workload. From a human-centered scheduling view, the current organization does not require another revision solely for manageability, but the proposer should correct or explain the mismatched duration descriptions and retain awareness that dental recovery and physical transition needs remain uncertain."
+        }
+      ],
+      "unresolved_assumptions": [
+        {
+          "subject": "Request satisfaction",
+          "assumption": "The rebuilt 30-hour writing schedule satisfies the user's original request and any soft preferences, not only the visible weekly work total and fixed-event protection.",
+          "evidence_gap": "The original request is not provided, and the technical validation explicitly does not check request satisfaction or soft preference satisfaction.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Post-dental writing capacity",
+          "assumption": "The user can usefully complete the writing block from 14:30-16:00 after the emergency dental appointment from 11:00-12:30.",
+          "evidence_gap": "The proposal leaves a two-hour gap after the appointment, but there is no information about treatment intensity, travel, eating restrictions, discomfort, medication effects, or recovery needs.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Pre-dental timing",
+          "assumption": "The user can productively write from 08:30-10:00 before the emergency dental appointment at 11:00 without the appointment preparation or travel making that block impractical.",
+          "evidence_gap": "The calendar shows one hour between the writing block and the dental appointment, but location, travel, check-in expectations, and preparation needs are unknown.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Gym-to-writing transitions",
+          "assumption": "The user can sustainably manage gym sessions from 08:00-09:30 followed by writing blocks starting at 10:30 on Monday, Wednesday, and Friday.",
+          "evidence_gap": "The calendar shows one-hour gaps, but does not verify hygiene, food, travel, physical recovery, or whether repeated physical-to-cognitive transitions are realistic for this user.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Long writing block sustainability",
+          "assumption": "The long writing blocks on Monday 10:30-18:00 and Wednesday 10:30-18:00 can include adequate breaks, food, and recovery without undermining the intended work.",
+          "evidence_gap": "The calendar reserves 7.5-hour work blocks but does not show whether breaks or meals are built into those blocks or expected outside them.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Thursday work-to-padel transition",
+          "assumption": "The user can transition from writing 10:30-16:00 to the fixed padel tournament from 18:00-20:00 without the day becoming overly draining.",
+          "evidence_gap": "The revised calendar leaves a two-hour gap, but travel, food, warm-up, and recovery needs are not known.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        }
+      ]
+    }
+  ],
+  "refinements": 2,
+  "source_status": "proposal_ready",
+  "final_proposal": {
+    "changes": [
+      {
+        "type": "delete",
+        "event_id": "work_mon",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "work_tue",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "work_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "work_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "work_fri",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Writing Work Block",
+        "from_start": null,
+        "to_start": "2027-06-14T10:30:00+01:00",
+        "to_end": "2027-06-14T18:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Writing Work Block",
+        "from_start": null,
+        "to_start": "2027-06-15T08:30:00+01:00",
+        "to_end": "2027-06-15T10:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Writing Work Block",
+        "from_start": null,
+        "to_start": "2027-06-15T14:30:00+01:00",
+        "to_end": "2027-06-15T16:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Writing Work Block",
+        "from_start": null,
+        "to_start": "2027-06-16T10:30:00+01:00",
+        "to_end": "2027-06-16T18:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Writing Work Block",
+        "from_start": null,
+        "to_start": "2027-06-17T10:30:00+01:00",
+        "to_end": "2027-06-17T16:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Writing Work Block",
+        "from_start": null,
+        "to_start": "2027-06-18T10:30:00+01:00",
+        "to_end": "2027-06-18T17:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "Sleep is fixed and protected, so it is left unchanged.",
+        "The emergency dental appointment and padel match are fixed protected commitments and remain unchanged.",
+        "Gym routines are kept in their existing slots.",
+        "Only flexible solo writing events are replaced, avoiding protected or third-party calendar disruption.",
+        "The final work total is exactly 30 hours within the checked weekly window.",
+        "Deleting and re-adding writing blocks avoids relying on stale duration descriptions in the original events.",
+        "Free gaps are not proof that travel, food, dental recovery, warm-up, or fatigue needs will fit."
+      ],
+      "priorities": [
+        "Meet the writing requirement without keeping unnecessary surplus workload.",
+        "Reduce same-day load after the dental appointment by splitting Tuesday writing around it.",
+        "Leave transition space before the Thursday padel match.",
+        "Lighten repeated gym-to-writing days compared with the original full-day writing blocks.",
+        "Prefer changing flexible writing over moving health, sleep, medical, or sports commitments."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Keep the previous proposal unchanged.",
+          "rejected_because": "Rejected because an exact 30-hour plan can better address dental recovery and stale duration metadata."
+        },
+        {
+          "option": "Keep the original 35-hour writing week.",
+          "rejected_because": "Rejected because it exceeds the stated need and adds avoidable strain around fixed health and sports events."
+        },
+        {
+          "option": "Move gym sessions to create larger writing blocks.",
+          "rejected_because": "Rejected because the user asked to keep gym routines and no conflict requires moving them."
+        },
+        {
+          "option": "Put all Tuesday writing after the dental appointment.",
+          "rejected_because": "Rejected because treatment intensity and recovery are unknown, so splitting the load is less risky."
+        }
+      ],
+      "summary": "This plan preserves sleep, gym, dental, and padel commitments while rebuilding only flexible writing blocks into exactly 30 scheduled hours; the main trade-off is adding more work-block edits to reduce post-dental pressure and remove misleading duration metadata."
+    }
+  },
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [],
+    "valid": true,
+    "aggregate_checks": [
+      {
+        "id": "weekly_hours",
+        "status": "pass",
+        "minutes": 1800.0,
+        "minimum_minutes": 1800,
+        "category": "work",
+        "evidence": "union of final calendar intervals"
+      }
+    ],
+    "aggregate_validation_version": "duration_total_v1"
+  },
+  "source_result_sha256": "62eb09c1311588e5916bca294875c877b628b288ad77a0655d5f92bf29f2ab0c",
+  "scenario_sha256": "5cc4d291f0ddc38b8d935df522d2bca4afc54fd52a4efbeaf45d273937e7b968",
+  "aggregate_requirements_sha256": "fa45e716352c477cb11ea57a8272bd98a7733e8654064daa8436a22548415296",
+  "confirmed_changes_sha256": null,
+  "critic_input_version": "final_calendar_v1",
+  "critic_policy_version": "uncertainty_review_v2",
+  "result_calendar_version": "validated_added_metadata_v2",
+  "final_result_calendar": {
+    "timezone": "Europe/Lisbon",
+    "coverage": "all_events_in_scenario_after_simulation",
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-06-13T23:30:00+01:00",
+        "end": "2027-06-14T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_mon",
+        "title": "Gym Workout",
+        "start": "2027-06-14T08:00:00+01:00",
+        "end": "2027-06-14T09:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_5",
+        "title": "Writing Work Block",
+        "start": "2027-06-14T10:30:00+01:00",
+        "end": "2027-06-14T18:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-06-14T23:30:00+01:00",
+        "end": "2027-06-15T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_6",
+        "title": "Writing Work Block",
+        "start": "2027-06-15T08:30:00+01:00",
+        "end": "2027-06-15T10:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "dentist_tue",
+        "title": "Emergency Dental Appointment",
+        "start": "2027-06-15T11:00:00+01:00",
+        "end": "2027-06-15T12:30:00+01:00",
+        "category": "medical",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "dentist"
+        ],
+        "description": "Fixed dental check.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_7",
+        "title": "Writing Work Block",
+        "start": "2027-06-15T14:30:00+01:00",
+        "end": "2027-06-15T16:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-06-15T23:30:00+01:00",
+        "end": "2027-06-16T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_wed",
+        "title": "Gym Workout",
+        "start": "2027-06-16T08:00:00+01:00",
+        "end": "2027-06-16T09:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_8",
+        "title": "Writing Work Block",
+        "start": "2027-06-16T10:30:00+01:00",
+        "end": "2027-06-16T18:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-06-16T23:30:00+01:00",
+        "end": "2027-06-17T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_9",
+        "title": "Writing Work Block",
+        "start": "2027-06-17T10:30:00+01:00",
+        "end": "2027-06-17T16:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "padel_thu",
+        "title": "Amateur Padel Tournament Match",
+        "start": "2027-06-17T18:00:00+01:00",
+        "end": "2027-06-17T20:00:00+01:00",
+        "category": "social",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "peers"
+        ],
+        "description": "Fixed sports match.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-06-17T23:30:00+01:00",
+        "end": "2027-06-18T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_fri",
+        "title": "Gym Workout",
+        "start": "2027-06-18T08:00:00+01:00",
+        "end": "2027-06-18T09:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_10",
+        "title": "Writing Work Block",
+        "start": "2027-06-18T10:30:00+01:00",
+        "end": "2027-06-18T17:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      }
+    ],
+    "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+  },
+  "final_unresolved_assumptions": [
+    {
+      "subject": "Request satisfaction",
+      "assumption": "The rebuilt 30-hour writing schedule satisfies the user's original request and any soft preferences, not only the visible weekly work total and fixed-event protection.",
+      "evidence_gap": "The original request is not provided, and the technical validation explicitly does not check request satisfaction or soft preference satisfaction.",
+      "potential_impact": "potentially_blocking",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Post-dental writing capacity",
+      "assumption": "The user can usefully complete the writing block from 14:30-16:00 after the emergency dental appointment from 11:00-12:30.",
+      "evidence_gap": "The proposal leaves a two-hour gap after the appointment, but there is no information about treatment intensity, travel, eating restrictions, discomfort, medication effects, or recovery needs.",
+      "potential_impact": "material",
+      "verification_source": "unknown"
+    },
+    {
+      "subject": "Pre-dental timing",
+      "assumption": "The user can productively write from 08:30-10:00 before the emergency dental appointment at 11:00 without the appointment preparation or travel making that block impractical.",
+      "evidence_gap": "The calendar shows one hour between the writing block and the dental appointment, but location, travel, check-in expectations, and preparation needs are unknown.",
+      "potential_impact": "material",
+      "verification_source": "unknown"
+    },
+    {
+      "subject": "Gym-to-writing transitions",
+      "assumption": "The user can sustainably manage gym sessions from 08:00-09:30 followed by writing blocks starting at 10:30 on Monday, Wednesday, and Friday.",
+      "evidence_gap": "The calendar shows one-hour gaps, but does not verify hygiene, food, travel, physical recovery, or whether repeated physical-to-cognitive transitions are realistic for this user.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Long writing block sustainability",
+      "assumption": "The long writing blocks on Monday 10:30-18:00 and Wednesday 10:30-18:00 can include adequate breaks, food, and recovery without undermining the intended work.",
+      "evidence_gap": "The calendar reserves 7.5-hour work blocks but does not show whether breaks or meals are built into those blocks or expected outside them.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Thursday work-to-padel transition",
+      "assumption": "The user can transition from writing 10:30-16:00 to the fixed padel tournament from 18:00-20:00 without the day becoming overly draining.",
+      "evidence_gap": "The revised calendar leaves a two-hour gap, but travel, food, warm-up, and recovery needs are not known.",
+      "potential_impact": "material",
+      "verification_source": "unknown"
+    }
+  ],
+  "uncertainty_history": [
+    {
+      "iteration": 0,
+      "unresolved_assumptions": [
+        {
+          "subject": "Sustainability of 35 hours of writing",
+          "assumption": "The user can sustainably complete 35 hours of writing during this visible week even though only 30 hours are stated as required.",
+          "evidence_gap": "The rationale counts total work hours but does not explain whether the extra five hours are necessary, preferred, or manageable given the rest of the week.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Post-dental capacity",
+          "assumption": "The user can comfortably transition from the emergency dental appointment ending Tuesday at 12:30 to a 5-hour writing block starting at 13:30.",
+          "evidence_gap": "No information is provided about travel, treatment intensity, recovery needs, eating constraints, or likely discomfort after the appointment.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Physical recovery around gym and work",
+          "assumption": "The user can manage gym sessions from 08:00-09:30 followed by long writing blocks starting at 10:30 on Monday, Wednesday, and Friday.",
+          "evidence_gap": "The calendar shows one-hour gaps, but the rationale does not address preparation, hygiene, food, travel, or whether these repeated sequences are sustainable.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Thursday work-to-padel sequence",
+          "assumption": "The user can complete writing from 10:30-17:00 and then participate effectively in the fixed padel tournament from 18:00-20:00.",
+          "evidence_gap": "The rationale preserves both events but does not assess the one-hour transition, food, travel, warm-up, or physical and cognitive fatigue.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Request satisfaction",
+          "assumption": "Leaving the calendar unchanged satisfies the user's original request.",
+          "evidence_gap": "The original request is not available, and the technical validation explicitly does not check request satisfaction or soft preferences.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "user_context"
+        }
+      ]
+    },
+    {
+      "iteration": 1,
+      "unresolved_assumptions": [
+        {
+          "subject": "Request satisfaction",
+          "assumption": "The revised calendar satisfies the user's original request and soft preferences, not only the visible 30-hour work minimum and protected fixed events.",
+          "evidence_gap": "The original request is not provided, and the technical validation explicitly does not check request satisfaction or soft preference satisfaction.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Post-dental capacity",
+          "assumption": "The user can usefully complete writing from 14:30-17:30 after the emergency dental appointment from 11:00-12:30.",
+          "evidence_gap": "The revised plan creates a two-hour gap, but there is no information about treatment intensity, travel, eating restrictions, discomfort, medication effects, or recovery needs.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Physical recovery around gym and work",
+          "assumption": "The user can sustainably manage gym sessions from 08:00-09:30 followed by writing blocks starting at 10:30 on Monday, Wednesday, and Friday.",
+          "evidence_gap": "The calendar shows one-hour gaps and protected sleep, but does not verify hygiene, meals, travel, fatigue, or whether repeated gym-to-writing sequences are realistic for this user.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Thursday work-to-padel transition",
+          "assumption": "The user can transition from writing 10:30-16:00 to the fixed padel tournament from 18:00-20:00 without the day becoming overly draining.",
+          "evidence_gap": "The revised calendar leaves a two-hour gap, but travel, food, warm-up, and recovery needs are not known.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Calendar duration metadata",
+          "assumption": "The actual event times, not the mismatched descriptions, are the authoritative source for the workload.",
+          "evidence_gap": "Several writing event descriptions conflict with their actual visible durations: Tuesday is described as 5 hours but lasts 3 hours, Thursday is described as 6.5 hours but lasts 5.5 hours, and Friday is described as 7.5 hours but lasts 6 hours.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        }
+      ]
+    },
+    {
+      "iteration": 2,
+      "unresolved_assumptions": [
+        {
+          "subject": "Request satisfaction",
+          "assumption": "The rebuilt 30-hour writing schedule satisfies the user's original request and any soft preferences, not only the visible weekly work total and fixed-event protection.",
+          "evidence_gap": "The original request is not provided, and the technical validation explicitly does not check request satisfaction or soft preference satisfaction.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Post-dental writing capacity",
+          "assumption": "The user can usefully complete the writing block from 14:30-16:00 after the emergency dental appointment from 11:00-12:30.",
+          "evidence_gap": "The proposal leaves a two-hour gap after the appointment, but there is no information about treatment intensity, travel, eating restrictions, discomfort, medication effects, or recovery needs.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Pre-dental timing",
+          "assumption": "The user can productively write from 08:30-10:00 before the emergency dental appointment at 11:00 without the appointment preparation or travel making that block impractical.",
+          "evidence_gap": "The calendar shows one hour between the writing block and the dental appointment, but location, travel, check-in expectations, and preparation needs are unknown.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Gym-to-writing transitions",
+          "assumption": "The user can sustainably manage gym sessions from 08:00-09:30 followed by writing blocks starting at 10:30 on Monday, Wednesday, and Friday.",
+          "evidence_gap": "The calendar shows one-hour gaps, but does not verify hygiene, food, travel, physical recovery, or whether repeated physical-to-cognitive transitions are realistic for this user.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Long writing block sustainability",
+          "assumption": "The long writing blocks on Monday 10:30-18:00 and Wednesday 10:30-18:00 can include adequate breaks, food, and recovery without undermining the intended work.",
+          "evidence_gap": "The calendar reserves 7.5-hour work blocks but does not show whether breaks or meals are built into those blocks or expected outside them.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Thursday work-to-padel transition",
+          "assumption": "The user can transition from writing 10:30-16:00 to the fixed padel tournament from 18:00-20:00 without the day becoming overly draining.",
+          "evidence_gap": "The revised calendar leaves a two-hour gap, but travel, food, warm-up, and recovery needs are not known.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        }
+      ]
+    }
+  ]
+}

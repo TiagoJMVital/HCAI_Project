@@ -40,6 +40,17 @@ def rate_response(*, status=429, detail="Rate limit reached", headers=None, stre
     return response
 
 
+def event_stream(*events):
+    response = Mock()
+    response.status_code = 200
+    response.headers = {}
+    response.text = ""
+    response.iter_lines.return_value = [
+        event if isinstance(event, bytes) else json.dumps(event).encode() for event in events]
+    response.raise_for_status.return_value = None
+    return response
+
+
 def test_iaedu_multipart_stream_and_fresh_threads(monkeypatch):
     calls = []
 
@@ -112,6 +123,46 @@ def test_iaedu_incomplete_json_has_targeted_retry_and_safe_diagnostics(monkeypat
     assert "A resposta terminou antes de fechar o JSON" in calls[1]["files"]["message"][1]
     assert "key" not in json.dumps(diagnostics)
     assert "pedido" not in json.dumps(diagnostics)
+
+
+def test_iaedu_detects_output_truncation_from_terminal_stream_event(monkeypatch):
+    calls = []
+    responses = iter([
+        event_stream({"type": "token", "content": '{"ok":'},
+                     {"type": "done", "finish_reason": "length",
+                      "usage": {"output_tokens": 100}}),
+        event_stream({"type": "token", "content": '{"ok": tru'},
+                     {"type": "done", "finish_reason": "max_tokens"}),
+    ])
+
+    def post(*args, **kwargs):
+        calls.append(kwargs)
+        return next(responses)
+
+    monkeypatch.setattr(requests, "post", post)
+    client = IAeduProvider(api_key="key", endpoint="https://example.invalid/api",
+                          channel_id="channel", max_retries=2)
+    with pytest.raises(LLMError, match="última causa: output_truncated") as error:
+        client.generate_structured("pedido", Answer)
+    attempts = error.value.diagnostics["attempts"]
+    assert [item["category"] for item in attempts] == ["output_truncated", "output_truncated"]
+    assert attempts[0]["terminal_events"][0]["usage"] == {"output_tokens": 100}
+    assert "objeto completo e mais conciso" in calls[1]["files"]["message"][1]
+    assert "key" not in json.dumps(attempts)
+
+
+def test_iaedu_retries_malformed_stream_line_without_silent_chunk_loss(monkeypatch):
+    responses = iter([
+        event_stream({"type": "token", "content": '{"ok":'}, b'not-json'),
+        stream('{"ok": true}'),
+    ])
+    monkeypatch.setattr(requests, "post", lambda *args, **kwargs: next(responses))
+    client = IAeduProvider(api_key="key", endpoint="https://example.invalid/api",
+                          channel_id="channel", max_retries=2)
+    assert client.generate_structured("pedido", Answer).ok
+    diagnostic = client.last_structured_output_diagnostics[0]
+    assert diagnostic["category"] == "stream_protocol_error"
+    assert diagnostic["line_bytes"] == len(b'not-json')
 
 
 def test_iaedu_schema_validation_retry_names_only_invalid_fields(monkeypatch):

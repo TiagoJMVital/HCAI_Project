@@ -23,7 +23,8 @@ from proposer_v2 import (PROPOSER_WIRE_SCHEMA_SHA256, PROPOSER_WIRE_SCHEMA_VERSI
                          REVISION_GUIDANCE, SYSTEM_V2, V2RuntimeScenario,
                          propose_v2)  # noqa: E402
 from run_paths_v2 import resolve_run_reference, run_result_path  # noqa: E402
-from run_completion_v2 import (TechnicalRunError, publish_completed_record,
+from run_completion_v2 import (TechnicalRunError, archive_technical_failure,
+                               publish_completed_record,
                                validate_completed_record)  # noqa: E402
 from scenario_v2 import V2Scenario, confirmed_changes_fingerprint, load_manifest, load_scenario  # noqa: E402
 from final_dataset_v2 import (combined_manifest, manifest_sha256,
@@ -191,7 +192,8 @@ def main() -> None:
                            resolve_scenario_path(ROOT, args.only)),
                        dataset_manifest_sha256=final_manifest_hash)
     except TechnicalRunError as exc:
-        print(f"NOT PUBLISHED — {exc}", file=sys.stderr)
+        failure_path = archive_technical_failure(ROOT, exc.record)
+        print(f"NOT PUBLISHED — {exc}; technical evidence: {failure_path}", file=sys.stderr)
         raise SystemExit(2) from None
     record = json.loads(path.read_text(encoding="utf-8"))
     print(f"{path}: {record['status']}; import separately with src/proposal_catalog_v2.py")

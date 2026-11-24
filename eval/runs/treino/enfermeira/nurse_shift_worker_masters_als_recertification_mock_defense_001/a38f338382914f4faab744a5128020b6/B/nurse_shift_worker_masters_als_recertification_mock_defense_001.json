@@ -1,0 +1,2497 @@
+{
+  "configuration": "B",
+  "scenario_id": "nurse_shift_worker_masters_als_recertification_mock_defense_001",
+  "family": "nurse_shift_worker_masters_schedule_conflict",
+  "category": "v2",
+  "proposer_provider": "iaedu",
+  "proposer_model": "GPT-5.5",
+  "proposer_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_provider": "iaedu",
+  "critic_model": "GPT-5.5",
+  "critic_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_settings": {
+    "threshold": 4.0,
+    "max_refinements": 3,
+    "min_dimension_score": 1
+  },
+  "iterations": [
+    {
+      "index": 0,
+      "proposer_feedback": null,
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Commute to ALS recertification",
+            "from_start": null,
+            "to_start": "2027-01-13T07:50:00+00:00",
+            "to_end": "2027-01-13T08:20:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "ALS recertification arrival buffer",
+            "from_start": null,
+            "to_start": "2027-01-13T08:20:00+00:00",
+            "to_end": "2027-01-13T08:30:00+00:00",
+            "category": "work",
+            "importance": 5,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Advanced Life Support recertification",
+            "from_start": null,
+            "to_start": "2027-01-13T08:30:00+00:00",
+            "to_end": "2027-01-13T13:00:00+00:00",
+            "category": "work",
+            "importance": 5,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Commute home from hospital area",
+            "from_start": null,
+            "to_start": "2027-01-13T14:30:00+00:00",
+            "to_end": "2027-01-13T15:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "move",
+            "event_id": "thesis_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-01-13T15:00:00+00:00",
+            "to_end": "2027-01-13T17:00:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "gym_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-01-13T17:30:00+00:00",
+            "to_end": "2027-01-13T19:00:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "gym_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-01-14T08:00:00+00:00",
+            "to_end": "2027-01-14T09:30:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "thesis_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-01-14T10:00:00+00:00",
+            "to_end": "2027-01-14T10:30:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Mandatory mock defense",
+            "from_start": null,
+            "to_start": "2027-01-14T10:30:00+00:00",
+            "to_end": "2027-01-14T12:00:00+00:00",
+            "category": "thesis",
+            "importance": 5,
+            "participants": [
+              "user",
+              "thesis supervisor",
+              "research group"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "All proposed times use the Europe/Lisbon January offset of +00:00.",
+            "Protected sleep blocks and the Thursday hospital shift are left unchanged.",
+            "The ALS recertification is treated as fixed mandatory hospital training, with arrival by 08:20 and the stated 30-minute commute.",
+            "The Wednesday colleague lunch is fixed and third-party, so it is kept rather than moved without an external exception.",
+            "The mock defense is a mandatory group commitment and supplies 90 minutes toward Thursday thesis time.",
+            "Thursday dinner cannot be guaranteed separately without information about meal breaks during the hospital shift.",
+            "The final calendar schedules 120 minutes of thesis-category time on both Wednesday and Thursday."
+          ],
+          "priorities": [
+            "Mandatory hospital and thesis commitments take priority over flexible gym sessions.",
+            "Both gym sessions are moved, not deleted, because gym availability is provided for 06:00 to 23:00.",
+            "Wednesday thesis prep is placed after the hospital-area return commute.",
+            "Thursday solo prep is reduced to the requested 30 minutes because the mock defense supplies the remaining thesis time.",
+            "The Wednesday social lunch should be confirmed with the colleague because ALS ends exactly when lunch begins."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Move the Wednesday lunch with the colleague",
+              "rejected_because": "Rejected because it is fixed, third-party, and no externally confirmed exception was supplied."
+            },
+            {
+              "option": "Skip the Wednesday gym session",
+              "rejected_because": "Rejected because an evening slot preserves gym without interfering with dinner or sleep."
+            },
+            {
+              "option": "Place Thursday gym between mock defense and lunch",
+              "rejected_because": "Rejected because it would compress the pre-shift meal window and add avoidable pressure before work."
+            }
+          ],
+          "summary": "Adds ALS recertification with arrival buffer and travel, adds the mandatory mock defense, and moves both gym sessions plus thesis prep to preserve protected sleep and daily thesis targets; the main trade-off is keeping the fixed Wednesday colleague lunch despite a tight handoff from ALS."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true,
+        "aggregate_checks": [
+          {
+            "id": "thesis_daily_time_2027-01-13",
+            "status": "pass",
+            "minutes": 120.0,
+            "minimum_minutes": 120,
+            "category": "thesis",
+            "evidence": "union of final calendar intervals"
+          },
+          {
+            "id": "thesis_daily_time_2027-01-14",
+            "status": "pass",
+            "minutes": 120.0,
+            "minimum_minutes": 120,
+            "category": "thesis",
+            "evidence": "union of final calendar intervals"
+          }
+        ],
+        "aggregate_validation_version": "duration_total_v1"
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "dinner_tue",
+            "title": "Dinner",
+            "start": "2027-01-12T20:00:00+00:00",
+            "end": "2027-01-12T21:00:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Dinner at home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-01-12T23:30:00+00:00",
+            "end": "2027-01-13T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected eight-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_0",
+            "title": "Commute to ALS recertification",
+            "start": "2027-01-13T07:50:00+00:00",
+            "end": "2027-01-13T08:20:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "new_1",
+            "title": "ALS recertification arrival buffer",
+            "start": "2027-01-13T08:20:00+00:00",
+            "end": "2027-01-13T08:30:00+00:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "new_2",
+            "title": "Advanced Life Support recertification",
+            "start": "2027-01-13T08:30:00+00:00",
+            "end": "2027-01-13T13:00:00+00:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "lunch_colleague_wed",
+            "title": "Lunch with nursing colleague",
+            "start": "2027-01-13T13:00:00+00:00",
+            "end": "2027-01-13T14:30:00+00:00",
+            "category": "social",
+            "importance": 3,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleague"
+            ],
+            "description": "Lunch at a café near the hospital (30 minutes from home).",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_3",
+            "title": "Commute home from hospital area",
+            "start": "2027-01-13T14:30:00+00:00",
+            "end": "2027-01-13T15:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "thesis_wed",
+            "title": "Master's thesis: Slide deck preparation",
+            "start": "2027-01-13T15:00:00+00:00",
+            "end": "2027-01-13T17:00:00+00:00",
+            "category": "thesis",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Two-hour focused thesis work on Wednesday (user's day off from ward shifts).",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "gym_wed",
+            "title": "Gym session",
+            "start": "2027-01-13T17:30:00+00:00",
+            "end": "2027-01-13T19:00:00+00:00",
+            "category": "gym",
+            "importance": 2,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym session next to home.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "dinner_wed",
+            "title": "Dinner",
+            "start": "2027-01-13T20:00:00+00:00",
+            "end": "2027-01-13T21:00:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Dinner at home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-01-13T23:30:00+00:00",
+            "end": "2027-01-14T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected eight-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_thu",
+            "title": "Gym session",
+            "start": "2027-01-14T08:00:00+00:00",
+            "end": "2027-01-14T09:30:00+00:00",
+            "category": "gym",
+            "importance": 2,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym session next to home.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "thesis_thu",
+            "title": "Master's thesis: Defense rehearsal",
+            "start": "2027-01-14T10:00:00+00:00",
+            "end": "2027-01-14T10:30:00+00:00",
+            "category": "thesis",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Two-hour focused thesis work.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "new_8",
+            "title": "Mandatory mock defense",
+            "start": "2027-01-14T10:30:00+00:00",
+            "end": "2027-01-14T12:00:00+00:00",
+            "category": "thesis",
+            "importance": 5,
+            "fixed": null,
+            "participants": [
+              "user",
+              "thesis supervisor",
+              "research group"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "lunch_thu",
+            "title": "Lunch",
+            "start": "2027-01-14T13:00:00+00:00",
+            "end": "2027-01-14T14:00:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch before afternoon shift.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_to_work_thu",
+            "title": "Commute to hospital",
+            "start": "2027-01-14T14:30:00+00:00",
+            "end": "2027-01-14T15:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute journey to hospital.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_thu",
+            "title": "Hospital shift",
+            "start": "2027-01-14T15:00:00+00:00",
+            "end": "2027-01-14T23:00:00+00:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Fixed nursing shift at the hospital.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_home_thu",
+            "title": "Commute home",
+            "start": "2027-01-14T23:00:00+00:00",
+            "end": "2027-01-14T23:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute journey home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-01-14T23:30:00+00:00",
+            "end": "2027-01-15T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected eight-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 3,
+          "coherence": 3,
+          "alternatives": 2,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The proposal preserves both gym sessions despite adding two high-importance mandatory commitments, but it does not adequately weigh the cumulative load this creates, especially on Thursday: gym from 08:00-09:30, thesis/mock defense from 10:00-12:00, lunch from 13:00-14:00, commute from 14:30-15:00, hospital shift from 15:00-23:00, commute home from 23:00-23:30, then immediate sleep.",
+          "Thursday relies on a low-importance, flexible gym session before a cognitively/socially demanding thesis block and an 8-hour nursing shift. This may be workable for some people, but the rationale does not explain why preserving that gym session is proportionate to the likely fatigue cost.",
+          "Wednesday is also tightly sequenced: sleep ends at 07:30, commute begins at 07:50, ALS recertification runs 08:30-13:00, lunch starts exactly at 13:00, commute home runs 14:30-15:00, then thesis work begins immediately at 15:00. The lunch location near the hospital reduces concern, but the exact ALS-to-lunch handoff and immediate commute-to-thesis handoff leave little practical margin.",
+          "The rationale states that the mock defense supplies 90 minutes toward Thursday thesis time, but the existing Thursday thesis event was described as focused defense rehearsal. A group mock defense may be valuable thesis work, but the proposal does not substantiate that it functionally replaces the same kind of preparation.",
+          "Alternatives considered are too narrow. The proposal rejects skipping Wednesday gym and rejects a midday Thursday gym placement, but it does not appear to consider reducing, moving, or dropping the Thursday gym session to protect capacity before the hospital shift."
+        ],
+        "feedback": "The calendar is technically coherent and preserves sleep, meals before shifts, fixed events, and the daily thesis-duration target. The main human-quality issue is not a direct conflict but a sustainability risk from stacking a flexible gym session, thesis obligations, and a long hospital shift on Thursday. The proposer should reconsider whether preserving both gym sessions is worth the added load, especially the Thursday 08:00-09:30 gym before mandatory thesis activity and a 15:00-23:00 hospital shift. If the same arrangement is kept, the rationale should ground why this is manageable for the user and why the gym session is important enough to retain in that position. The Wednesday ALS-to-lunch transition should also be treated as a practical dependency rather than merely a free-slot fit, since ALS ends exactly when lunch begins.",
+        "plausibility_review": {
+          "revision_required": true,
+          "severity": "moderate",
+          "reason": "A concrete manageability concern remains: the proposed organization uses visible flexibility to preserve a low-importance Thursday gym session before a demanding chain of thesis commitments and an 8-hour hospital shift. This could materially affect fatigue, preparation quality, and work readiness even though the calendar is conflict-free. The concern is uncertain because the user may tolerate morning exercise well and may have adequate recovery habits, but the rationale does not provide that grounding.",
+          "suggested_improvement": "Reconsider the Thursday distribution with the fuller context, particularly whether the flexible gym session should be reduced, moved, or deprioritized relative to hospital-shift readiness and thesis preparation. If retained, explain why that placement is sustainable for this user and how practical recovery, food, and preparation needs are expected to be covered."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Thursday gym before hospital shift",
+            "assumption": "The user can sustainably complete a 90-minute gym session from 08:00-09:30 before thesis/mock defense activity and a 15:00-23:00 nursing shift.",
+            "evidence_gap": "The calendar shows the sequence but provides no user-specific evidence about recovery needs, exercise intensity, or tolerance for exercising before a long clinical shift.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Mock defense as thesis-duration substitute",
+            "assumption": "The 10:30-12:00 mandatory mock defense can appropriately count toward the same Thursday thesis-preparation need as the moved focused rehearsal block.",
+            "evidence_gap": "The technical validator counts category duration, but the proposal does not show whether group mock defense replaces the intended solo focused preparation content.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "ALS-to-lunch handoff",
+            "assumption": "The user can realistically transition from ALS recertification ending at 13:00 to lunch with the colleague also starting at 13:00.",
+            "evidence_gap": "Lunch is described as near the hospital, but there is no evidence about exact location, ALS overrun risk, check-out requirements, or whether the colleague can tolerate a slightly delayed arrival.",
+            "potential_impact": "minor",
+            "verification_source": "third_party"
+          },
+          {
+            "subject": "Thursday evening food during hospital shift",
+            "assumption": "The user can meet dinner or evening food needs during or around the 15:00-23:00 hospital shift despite no explicit dinner event on Thursday.",
+            "evidence_gap": "The rationale explicitly says Thursday dinner cannot be guaranteed separately without information about meal breaks during the hospital shift.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Commute durations around hospital-area commitments",
+            "assumption": "The 30-minute commute estimates remain reliable for the ALS trip, return home, and Thursday hospital commute.",
+            "evidence_gap": "The schedule depends on exact commute windows, but no traffic, route, or transport reliability evidence is provided beyond the stated 30-minute commute.",
+            "potential_impact": "material",
+            "verification_source": "external_source"
+          }
+        ],
+        "overall": 3.0
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": false,
+        "plausibility_revision_required": true,
+        "accepted": false,
+        "revision_causes": [
+          "numeric_criteria_failed",
+          "plausibility_revision_required"
+        ]
+      },
+      "operations_changed_from_previous": null,
+      "rationale_changed_from_previous": null,
+      "prior_critic_reviews": [],
+      "unresolved_assumptions": [
+        {
+          "subject": "Thursday gym before hospital shift",
+          "assumption": "The user can sustainably complete a 90-minute gym session from 08:00-09:30 before thesis/mock defense activity and a 15:00-23:00 nursing shift.",
+          "evidence_gap": "The calendar shows the sequence but provides no user-specific evidence about recovery needs, exercise intensity, or tolerance for exercising before a long clinical shift.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Mock defense as thesis-duration substitute",
+          "assumption": "The 10:30-12:00 mandatory mock defense can appropriately count toward the same Thursday thesis-preparation need as the moved focused rehearsal block.",
+          "evidence_gap": "The technical validator counts category duration, but the proposal does not show whether group mock defense replaces the intended solo focused preparation content.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "ALS-to-lunch handoff",
+          "assumption": "The user can realistically transition from ALS recertification ending at 13:00 to lunch with the colleague also starting at 13:00.",
+          "evidence_gap": "Lunch is described as near the hospital, but there is no evidence about exact location, ALS overrun risk, check-out requirements, or whether the colleague can tolerate a slightly delayed arrival.",
+          "potential_impact": "minor",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Thursday evening food during hospital shift",
+          "assumption": "The user can meet dinner or evening food needs during or around the 15:00-23:00 hospital shift despite no explicit dinner event on Thursday.",
+          "evidence_gap": "The rationale explicitly says Thursday dinner cannot be guaranteed separately without information about meal breaks during the hospital shift.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Commute durations around hospital-area commitments",
+          "assumption": "The 30-minute commute estimates remain reliable for the ALS trip, return home, and Thursday hospital commute.",
+          "evidence_gap": "The schedule depends on exact commute windows, but no traffic, route, or transport reliability evidence is provided beyond the stated 30-minute commute.",
+          "potential_impact": "material",
+          "verification_source": "external_source"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "proposer_feedback": "Numeric Critic criteria failed. Scores: {\"reasoning\":3,\"coherence\":3,\"alternatives\":2,\"clarity\":4}. Plausibility revision required (moderate): A concrete manageability concern remains: the proposed organization uses visible flexibility to preserve a low-importance Thursday gym session before a demanding chain of thesis commitments and an 8-hour hospital shift. This could materially affect fatigue, preparation quality, and work readiness even though the calendar is conflict-free. The concern is uncertain because the user may tolerate morning exercise well and may have adequate recovery habits, but the rationale does not provide that grounding. Suggested direction: Reconsider the Thursday distribution with the fuller context, particularly whether the flexible gym session should be reduced, moved, or deprioritized relative to hospital-shift readiness and thesis preparation. If retained, explain why that placement is sustainable for this user and how practical recovery, food, and preparation needs are expected to be covered. The Critic lacks the full user constraints; explain if no better feasible option exists. Unverified conditions to reassess: [{'subject': 'Thursday gym before hospital shift', 'assumption': 'The user can sustainably complete a 90-minute gym session from 08:00-09:30 before thesis/mock defense activity and a 15:00-23:00 nursing shift.', 'evidence_gap': 'The calendar shows the sequence but provides no user-specific evidence about recovery needs, exercise intensity, or tolerance for exercising before a long clinical shift.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Mock defense as thesis-duration substitute', 'assumption': 'The 10:30-12:00 mandatory mock defense can appropriately count toward the same Thursday thesis-preparation need as the moved focused rehearsal block.', 'evidence_gap': 'The technical validator counts category duration, but the proposal does not show whether group mock defense replaces the intended solo focused preparation content.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'ALS-to-lunch handoff', 'assumption': 'The user can realistically transition from ALS recertification ending at 13:00 to lunch with the colleague also starting at 13:00.', 'evidence_gap': 'Lunch is described as near the hospital, but there is no evidence about exact location, ALS overrun risk, check-out requirements, or whether the colleague can tolerate a slightly delayed arrival.', 'potential_impact': 'minor', 'verification_source': 'third_party'}, {'subject': 'Thursday evening food during hospital shift', 'assumption': 'The user can meet dinner or evening food needs during or around the 15:00-23:00 hospital shift despite no explicit dinner event on Thursday.', 'evidence_gap': 'The rationale explicitly says Thursday dinner cannot be guaranteed separately without information about meal breaks during the hospital shift.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Commute durations around hospital-area commitments', 'assumption': 'The 30-minute commute estimates remain reliable for the ALS trip, return home, and Thursday hospital commute.', 'evidence_gap': 'The schedule depends on exact commute windows, but no traffic, route, or transport reliability evidence is provided beyond the stated 30-minute commute.', 'potential_impact': 'material', 'verification_source': 'external_source'}] Weaknesses: ['The proposal preserves both gym sessions despite adding two high-importance mandatory commitments, but it does not adequately weigh the cumulative load this creates, especially on Thursday: gym from 08:00-09:30, thesis/mock defense from 10:00-12:00, lunch from 13:00-14:00, commute from 14:30-15:00, hospital shift from 15:00-23:00, commute home from 23:00-23:30, then immediate sleep.', 'Thursday relies on a low-importance, flexible gym session before a cognitively/socially demanding thesis block and an 8-hour nursing shift. This may be workable for some people, but the rationale does not explain why preserving that gym session is proportionate to the likely fatigue cost.', 'Wednesday is also tightly sequenced: sleep ends at 07:30, commute begins at 07:50, ALS recertification runs 08:30-13:00, lunch starts exactly at 13:00, commute home runs 14:30-15:00, then thesis work begins immediately at 15:00. The lunch location near the hospital reduces concern, but the exact ALS-to-lunch handoff and immediate commute-to-thesis handoff leave little practical margin.', 'The rationale states that the mock defense supplies 90 minutes toward Thursday thesis time, but the existing Thursday thesis event was described as focused defense rehearsal. A group mock defense may be valuable thesis work, but the proposal does not substantiate that it functionally replaces the same kind of preparation.', 'Alternatives considered are too narrow. The proposal rejects skipping Wednesday gym and rejects a midday Thursday gym placement, but it does not appear to consider reducing, moving, or dropping the Thursday gym session to protect capacity before the hospital shift.']. Actionable feedback: The calendar is technically coherent and preserves sleep, meals before shifts, fixed events, and the daily thesis-duration target. The main human-quality issue is not a direct conflict but a sustainability risk from stacking a flexible gym session, thesis obligations, and a long hospital shift on Thursday. The proposer should reconsider whether preserving both gym sessions is worth the added load, especially the Thursday 08:00-09:30 gym before mandatory thesis activity and a 15:00-23:00 hospital shift. If the same arrangement is kept, the rationale should ground why this is manageable for the user and why the gym session is important enough to retain in that position. The Wednesday ALS-to-lunch transition should also be treated as a practical dependency rather than merely a free-slot fit, since ALS ends exactly when lunch begins.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Commute to ALS recertification",
+            "from_start": null,
+            "to_start": "2027-01-13T07:50:00+00:00",
+            "to_end": "2027-01-13T08:20:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "ALS recertification arrival buffer",
+            "from_start": null,
+            "to_start": "2027-01-13T08:20:00+00:00",
+            "to_end": "2027-01-13T08:30:00+00:00",
+            "category": "work",
+            "importance": 5,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Advanced Life Support recertification",
+            "from_start": null,
+            "to_start": "2027-01-13T08:30:00+00:00",
+            "to_end": "2027-01-13T13:00:00+00:00",
+            "category": "work",
+            "importance": 5,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Commute home from hospital area",
+            "from_start": null,
+            "to_start": "2027-01-13T14:30:00+00:00",
+            "to_end": "2027-01-13T15:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "move",
+            "event_id": "thesis_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-01-13T15:30:00+00:00",
+            "to_end": "2027-01-13T17:30:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "gym_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-01-13T18:00:00+00:00",
+            "to_end": "2027-01-13T19:30:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "gym_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "thesis_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-01-14T10:00:00+00:00",
+            "to_end": "2027-01-14T10:30:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Mandatory mock defense",
+            "from_start": null,
+            "to_start": "2027-01-14T10:30:00+00:00",
+            "to_end": "2027-01-14T12:00:00+00:00",
+            "category": "thesis",
+            "importance": 5,
+            "participants": [
+              "user",
+              "thesis supervisor",
+              "research group"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "All proposed times use the Europe/Lisbon January offset of +00:00.",
+            "Protected sleep blocks and fixed hospital shift events are left unchanged.",
+            "The ALS commitment is treated as fixed mandatory work with the requested arrival and commute assumptions.",
+            "The colleague lunch is fixed and third-party, so it is kept but should be confirmed because ALS may overrun or require checkout time.",
+            "The mock defense is mandatory group thesis work and counts toward Thursday's thesis-duration requirement as requested.",
+            "Thursday still needs a dinner plan during the fixed shift because no break timing or hospital meal availability was supplied.",
+            "Commute feasibility relies only on the stated 30-minute durations, with traffic and route reliability unknown."
+          ],
+          "priorities": [
+            "Mandatory hospital training, the mock defense, protected sleep, and thesis time take priority over gym.",
+            "Thursday gym is removed because it is flexible and low-importance before a demanding thesis-to-shift sequence.",
+            "Wednesday gym is moved later because that preserves exercise without disrupting dinner or sleep.",
+            "Wednesday thesis prep is placed after a short recovery margin following the hospital-area return.",
+            "Thursday solo prep is limited to the requested focused add-on before the group session."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Keep the Thursday gym before the mock defense",
+              "rejected_because": "Rejected because the fatigue risk is not justified before mandatory thesis activity and an evening hospital shift."
+            },
+            {
+              "option": "Move the Thursday gym between mock defense and the shift",
+              "rejected_because": "Rejected because it would crowd lunch, commute readiness, and pre-shift recovery."
+            },
+            {
+              "option": "Move the Wednesday colleague lunch",
+              "rejected_because": "Rejected because it is fixed, third-party, and no externally confirmed exception was supplied."
+            },
+            {
+              "option": "Skip the Wednesday gym too",
+              "rejected_because": "Rejected because an evening slot remains feasible within stated gym availability and does not threaten protected priorities."
+            }
+          ],
+          "summary": "Adds the ALS training with travel and the mandatory mock defense, preserves both protected sleep blocks and daily thesis time, moves only the Wednesday gym, and drops the Thursday gym to reduce fatigue risk before the mock defense and hospital shift; the main unresolved issue is confirming the tight Wednesday lunch handoff and arranging Thursday food during the shift."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true,
+        "aggregate_checks": [
+          {
+            "id": "thesis_daily_time_2027-01-13",
+            "status": "pass",
+            "minutes": 120.0,
+            "minimum_minutes": 120,
+            "category": "thesis",
+            "evidence": "union of final calendar intervals"
+          },
+          {
+            "id": "thesis_daily_time_2027-01-14",
+            "status": "pass",
+            "minutes": 120.0,
+            "minimum_minutes": 120,
+            "category": "thesis",
+            "evidence": "union of final calendar intervals"
+          }
+        ],
+        "aggregate_validation_version": "duration_total_v1"
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "dinner_tue",
+            "title": "Dinner",
+            "start": "2027-01-12T20:00:00+00:00",
+            "end": "2027-01-12T21:00:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Dinner at home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-01-12T23:30:00+00:00",
+            "end": "2027-01-13T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected eight-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_0",
+            "title": "Commute to ALS recertification",
+            "start": "2027-01-13T07:50:00+00:00",
+            "end": "2027-01-13T08:20:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "new_1",
+            "title": "ALS recertification arrival buffer",
+            "start": "2027-01-13T08:20:00+00:00",
+            "end": "2027-01-13T08:30:00+00:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "new_2",
+            "title": "Advanced Life Support recertification",
+            "start": "2027-01-13T08:30:00+00:00",
+            "end": "2027-01-13T13:00:00+00:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "lunch_colleague_wed",
+            "title": "Lunch with nursing colleague",
+            "start": "2027-01-13T13:00:00+00:00",
+            "end": "2027-01-13T14:30:00+00:00",
+            "category": "social",
+            "importance": 3,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleague"
+            ],
+            "description": "Lunch at a café near the hospital (30 minutes from home).",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_3",
+            "title": "Commute home from hospital area",
+            "start": "2027-01-13T14:30:00+00:00",
+            "end": "2027-01-13T15:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "thesis_wed",
+            "title": "Master's thesis: Slide deck preparation",
+            "start": "2027-01-13T15:30:00+00:00",
+            "end": "2027-01-13T17:30:00+00:00",
+            "category": "thesis",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Two-hour focused thesis work on Wednesday (user's day off from ward shifts).",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "gym_wed",
+            "title": "Gym session",
+            "start": "2027-01-13T18:00:00+00:00",
+            "end": "2027-01-13T19:30:00+00:00",
+            "category": "gym",
+            "importance": 2,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym session next to home.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "dinner_wed",
+            "title": "Dinner",
+            "start": "2027-01-13T20:00:00+00:00",
+            "end": "2027-01-13T21:00:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Dinner at home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-01-13T23:30:00+00:00",
+            "end": "2027-01-14T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected eight-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "thesis_thu",
+            "title": "Master's thesis: Defense rehearsal",
+            "start": "2027-01-14T10:00:00+00:00",
+            "end": "2027-01-14T10:30:00+00:00",
+            "category": "thesis",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Two-hour focused thesis work.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "new_8",
+            "title": "Mandatory mock defense",
+            "start": "2027-01-14T10:30:00+00:00",
+            "end": "2027-01-14T12:00:00+00:00",
+            "category": "thesis",
+            "importance": 5,
+            "fixed": null,
+            "participants": [
+              "user",
+              "thesis supervisor",
+              "research group"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "lunch_thu",
+            "title": "Lunch",
+            "start": "2027-01-14T13:00:00+00:00",
+            "end": "2027-01-14T14:00:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch before afternoon shift.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_to_work_thu",
+            "title": "Commute to hospital",
+            "start": "2027-01-14T14:30:00+00:00",
+            "end": "2027-01-14T15:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute journey to hospital.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_thu",
+            "title": "Hospital shift",
+            "start": "2027-01-14T15:00:00+00:00",
+            "end": "2027-01-14T23:00:00+00:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Fixed nursing shift at the hospital.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_home_thu",
+            "title": "Commute home",
+            "start": "2027-01-14T23:00:00+00:00",
+            "end": "2027-01-14T23:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute journey home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-01-14T23:30:00+00:00",
+            "end": "2027-01-15T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected eight-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 4,
+          "alternatives": 4,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The prior major concern about preserving a Thursday 08:00-09:30 gym session before thesis work and a 15:00-23:00 hospital shift has been substantively addressed by deleting the Thursday gym. This improves sustainability and makes the Thursday routine more proportionate to the visible priorities.",
+          "Wednesday remains a dense day: sleep ends at 07:30, the ALS commute starts at 07:50, ALS recertification runs 08:30-13:00, lunch starts exactly at 13:00, the return commute is 14:30-15:00, thesis work is 15:30-17:30, gym is 18:00-19:30, and dinner is 20:00-21:00. This is not objectively unworkable, but it leaves limited margin if ALS overruns, if the lunch handoff is delayed, or if the training is unusually draining.",
+          "The ALS-to-lunch transition is still exact: ALS ends at 13:00 and lunch with the colleague begins at 13:00. The calendar says the café is near the hospital, which reduces the concern, but the proposal still depends on checkout, overrun, and location details that are not verified.",
+          "Thursday still has no explicit dinner or evening food event during the 15:00-23:00 hospital shift, followed by a 23:00-23:30 commute and immediate protected sleep. The rationale correctly acknowledges this, but the resulting calendar itself does not show how that basic need is handled.",
+          "The Thursday thesis event is scheduled for 10:00-10:30 while its description still says 'Two-hour focused thesis work.' The aggregate thesis total passes because the 10:30-12:00 mock defense is also counted, but the description could mislead the user about what kind of thesis work is actually preserved."
+        ],
+        "feedback": "The revised proposal is substantially more manageable than the prior version. Removing the Thursday gym directly addresses the earlier fatigue concern and leaves a more humane sequence: sleep until 07:30, thesis/mock defense from 10:00-12:00, lunch from 13:00-14:00, commute from 14:30-15:00, then the fixed 15:00-23:00 hospital shift. Wednesday is still busy, but the revised 15:30 thesis start creates a better recovery margin after returning home at 15:00, and the later gym does not visibly threaten dinner or protected sleep. The remaining concerns are mostly operational uncertainties rather than clear schedule-design failures: confirm the ALS-to-lunch handoff, clarify how Thursday evening food is handled during the shift, and ensure the Thursday thesis-description mismatch does not obscure the actual plan. Request satisfaction cannot be independently verified because the original request and full user context are not available.",
+        "plausibility_review": {
+          "revision_required": false,
+          "severity": "low",
+          "reason": "The concrete prior manageability problem was reasonably addressed: the low-importance Thursday gym was removed, reducing load before the mock defense and long hospital shift. The remaining risks are real but not enough on their own to require another revision because the most concerning sequence has been improved, sleep and main meals before work are preserved, and the proposal explicitly flags the ALS-lunch handoff and Thursday food issue as dependencies. If those assumptions fail, the schedule may need adjustment, but the current organization is plausibly sustainable within the visible horizon.",
+          "suggested_improvement": "Before final use, verify the practical ALS-to-lunch transition and the Thursday evening food plan. Also clean up the Thursday thesis event description so it accurately reflects the 30-minute solo rehearsal plus the 90-minute mock defense."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "ALS-to-lunch handoff",
+            "assumption": "The user can realistically transition from ALS recertification ending at 13:00 to lunch with the colleague beginning at 13:00.",
+            "evidence_gap": "The calendar says lunch is near the hospital, but there is no evidence about exact locations, checkout requirements, ALS overrun risk, or whether the colleague can tolerate a delayed arrival.",
+            "potential_impact": "minor",
+            "verification_source": "third_party"
+          },
+          {
+            "subject": "Thursday evening food during hospital shift",
+            "assumption": "The user can meet dinner or evening food needs during or around the 15:00-23:00 hospital shift despite no explicit dinner event on Thursday.",
+            "evidence_gap": "The rationale acknowledges that no break timing or hospital meal availability was supplied, and the calendar proceeds directly from the shift to commute home to sleep.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Mock defense as thesis-duration substitute",
+            "assumption": "The 10:30-12:00 mandatory mock defense appropriately counts toward the same Thursday thesis-duration need as the shortened 10:00-10:30 solo rehearsal.",
+            "evidence_gap": "The technical validator counts category duration, and the rationale says this was requested, but the original request is unavailable and the existing event description still refers to two hours of focused thesis work.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Commute durations around hospital-area commitments",
+            "assumption": "The 30-minute commute estimates remain reliable for the ALS trip, the Wednesday return home, and the Thursday hospital commute.",
+            "evidence_gap": "The proposal relies on stated commute durations but provides no traffic, route, transport-mode, or reliability evidence beyond those assumptions.",
+            "potential_impact": "material",
+            "verification_source": "external_source"
+          },
+          {
+            "subject": "Wednesday post-ALS capacity",
+            "assumption": "After ALS recertification, lunch, and the return commute, the user can still complete two hours of useful thesis preparation from 15:30-17:30 and a gym session from 18:00-19:30 without undermining recovery before Thursday.",
+            "evidence_gap": "The calendar provides a 30-minute recovery margin after returning home and preserves dinner and sleep, but there is no user-specific evidence about fatigue after ALS training or the intensity of the gym session.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          }
+        ],
+        "overall": 4.0
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": true,
+        "plausibility_revision_required": false,
+        "accepted": true,
+        "revision_causes": []
+      },
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": [
+        {
+          "iteration": 0,
+          "proposal": {
+            "changes": [
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Commute to ALS recertification",
+                "from_start": null,
+                "to_start": "2027-01-13T07:50:00+00:00",
+                "to_end": "2027-01-13T08:20:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "participants": [
+                  "user"
+                ]
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "ALS recertification arrival buffer",
+                "from_start": null,
+                "to_start": "2027-01-13T08:20:00+00:00",
+                "to_end": "2027-01-13T08:30:00+00:00",
+                "category": "work",
+                "importance": 5,
+                "participants": [
+                  "user"
+                ]
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Advanced Life Support recertification",
+                "from_start": null,
+                "to_start": "2027-01-13T08:30:00+00:00",
+                "to_end": "2027-01-13T13:00:00+00:00",
+                "category": "work",
+                "importance": 5,
+                "participants": [
+                  "user"
+                ]
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Commute home from hospital area",
+                "from_start": null,
+                "to_start": "2027-01-13T14:30:00+00:00",
+                "to_end": "2027-01-13T15:00:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "participants": [
+                  "user"
+                ]
+              },
+              {
+                "type": "move",
+                "event_id": "thesis_wed",
+                "title": null,
+                "from_start": null,
+                "to_start": "2027-01-13T15:00:00+00:00",
+                "to_end": "2027-01-13T17:00:00+00:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "move",
+                "event_id": "gym_wed",
+                "title": null,
+                "from_start": null,
+                "to_start": "2027-01-13T17:30:00+00:00",
+                "to_end": "2027-01-13T19:00:00+00:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "move",
+                "event_id": "gym_thu",
+                "title": null,
+                "from_start": null,
+                "to_start": "2027-01-14T08:00:00+00:00",
+                "to_end": "2027-01-14T09:30:00+00:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "move",
+                "event_id": "thesis_thu",
+                "title": null,
+                "from_start": null,
+                "to_start": "2027-01-14T10:00:00+00:00",
+                "to_end": "2027-01-14T10:30:00+00:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Mandatory mock defense",
+                "from_start": null,
+                "to_start": "2027-01-14T10:30:00+00:00",
+                "to_end": "2027-01-14T12:00:00+00:00",
+                "category": "thesis",
+                "importance": 5,
+                "participants": [
+                  "user",
+                  "thesis supervisor",
+                  "research group"
+                ]
+              }
+            ],
+            "rationale": {
+              "constraints": [
+                "All proposed times use the Europe/Lisbon January offset of +00:00.",
+                "Protected sleep blocks and the Thursday hospital shift are left unchanged.",
+                "The ALS recertification is treated as fixed mandatory hospital training, with arrival by 08:20 and the stated 30-minute commute.",
+                "The Wednesday colleague lunch is fixed and third-party, so it is kept rather than moved without an external exception.",
+                "The mock defense is a mandatory group commitment and supplies 90 minutes toward Thursday thesis time.",
+                "Thursday dinner cannot be guaranteed separately without information about meal breaks during the hospital shift.",
+                "The final calendar schedules 120 minutes of thesis-category time on both Wednesday and Thursday."
+              ],
+              "priorities": [
+                "Mandatory hospital and thesis commitments take priority over flexible gym sessions.",
+                "Both gym sessions are moved, not deleted, because gym availability is provided for 06:00 to 23:00.",
+                "Wednesday thesis prep is placed after the hospital-area return commute.",
+                "Thursday solo prep is reduced to the requested 30 minutes because the mock defense supplies the remaining thesis time.",
+                "The Wednesday social lunch should be confirmed with the colleague because ALS ends exactly when lunch begins."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Move the Wednesday lunch with the colleague",
+                  "rejected_because": "Rejected because it is fixed, third-party, and no externally confirmed exception was supplied."
+                },
+                {
+                  "option": "Skip the Wednesday gym session",
+                  "rejected_because": "Rejected because an evening slot preserves gym without interfering with dinner or sleep."
+                },
+                {
+                  "option": "Place Thursday gym between mock defense and lunch",
+                  "rejected_because": "Rejected because it would compress the pre-shift meal window and add avoidable pressure before work."
+                }
+              ],
+              "summary": "Adds ALS recertification with arrival buffer and travel, adds the mandatory mock defense, and moves both gym sessions plus thesis prep to preserve protected sleep and daily thesis targets; the main trade-off is keeping the fixed Wednesday colleague lunch despite a tight handoff from ALS."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "dinner_tue",
+                "title": "Dinner",
+                "start": "2027-01-12T20:00:00+00:00",
+                "end": "2027-01-12T21:00:00+00:00",
+                "category": "meal",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Dinner at home.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_wed",
+                "title": "Sleep",
+                "start": "2027-01-12T23:30:00+00:00",
+                "end": "2027-01-13T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected eight-hour sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_0",
+                "title": "Commute to ALS recertification",
+                "start": "2027-01-13T07:50:00+00:00",
+                "end": "2027-01-13T08:20:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": null,
+                "participants": [
+                  "user"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "new_1",
+                "title": "ALS recertification arrival buffer",
+                "start": "2027-01-13T08:20:00+00:00",
+                "end": "2027-01-13T08:30:00+00:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": null,
+                "participants": [
+                  "user"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "new_2",
+                "title": "Advanced Life Support recertification",
+                "start": "2027-01-13T08:30:00+00:00",
+                "end": "2027-01-13T13:00:00+00:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": null,
+                "participants": [
+                  "user"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "lunch_colleague_wed",
+                "title": "Lunch with nursing colleague",
+                "start": "2027-01-13T13:00:00+00:00",
+                "end": "2027-01-13T14:30:00+00:00",
+                "category": "social",
+                "importance": 3,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "colleague"
+                ],
+                "description": "Lunch at a café near the hospital (30 minutes from home).",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_3",
+                "title": "Commute home from hospital area",
+                "start": "2027-01-13T14:30:00+00:00",
+                "end": "2027-01-13T15:00:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": null,
+                "participants": [
+                  "user"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "thesis_wed",
+                "title": "Master's thesis: Slide deck preparation",
+                "start": "2027-01-13T15:00:00+00:00",
+                "end": "2027-01-13T17:00:00+00:00",
+                "category": "thesis",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Two-hour focused thesis work on Wednesday (user's day off from ward shifts).",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "gym_wed",
+                "title": "Gym session",
+                "start": "2027-01-13T17:30:00+00:00",
+                "end": "2027-01-13T19:00:00+00:00",
+                "category": "gym",
+                "importance": 2,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Gym session next to home.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "dinner_wed",
+                "title": "Dinner",
+                "start": "2027-01-13T20:00:00+00:00",
+                "end": "2027-01-13T21:00:00+00:00",
+                "category": "meal",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Dinner at home.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2027-01-13T23:30:00+00:00",
+                "end": "2027-01-14T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected eight-hour sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_thu",
+                "title": "Gym session",
+                "start": "2027-01-14T08:00:00+00:00",
+                "end": "2027-01-14T09:30:00+00:00",
+                "category": "gym",
+                "importance": 2,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Gym session next to home.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "thesis_thu",
+                "title": "Master's thesis: Defense rehearsal",
+                "start": "2027-01-14T10:00:00+00:00",
+                "end": "2027-01-14T10:30:00+00:00",
+                "category": "thesis",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Two-hour focused thesis work.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "new_8",
+                "title": "Mandatory mock defense",
+                "start": "2027-01-14T10:30:00+00:00",
+                "end": "2027-01-14T12:00:00+00:00",
+                "category": "thesis",
+                "importance": 5,
+                "fixed": null,
+                "participants": [
+                  "user",
+                  "thesis supervisor",
+                  "research group"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "lunch_thu",
+                "title": "Lunch",
+                "start": "2027-01-14T13:00:00+00:00",
+                "end": "2027-01-14T14:00:00+00:00",
+                "category": "meal",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Lunch before afternoon shift.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "commute_to_work_thu",
+                "title": "Commute to hospital",
+                "start": "2027-01-14T14:30:00+00:00",
+                "end": "2027-01-14T15:00:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute journey to hospital.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_thu",
+                "title": "Hospital shift",
+                "start": "2027-01-14T15:00:00+00:00",
+                "end": "2027-01-14T23:00:00+00:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Fixed nursing shift at the hospital.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "commute_home_thu",
+                "title": "Commute home",
+                "start": "2027-01-14T23:00:00+00:00",
+                "end": "2027-01-14T23:30:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute journey home.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_fri",
+                "title": "Sleep",
+                "start": "2027-01-14T23:30:00+00:00",
+                "end": "2027-01-15T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected eight-hour sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              }
+            ],
+            "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+          },
+          "plausibility_review": {
+            "revision_required": true,
+            "severity": "moderate",
+            "reason": "A concrete manageability concern remains: the proposed organization uses visible flexibility to preserve a low-importance Thursday gym session before a demanding chain of thesis commitments and an 8-hour hospital shift. This could materially affect fatigue, preparation quality, and work readiness even though the calendar is conflict-free. The concern is uncertain because the user may tolerate morning exercise well and may have adequate recovery habits, but the rationale does not provide that grounding.",
+            "suggested_improvement": "Reconsider the Thursday distribution with the fuller context, particularly whether the flexible gym session should be reduced, moved, or deprioritized relative to hospital-shift readiness and thesis preparation. If retained, explain why that placement is sustainable for this user and how practical recovery, food, and preparation needs are expected to be covered."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Thursday gym before hospital shift",
+              "assumption": "The user can sustainably complete a 90-minute gym session from 08:00-09:30 before thesis/mock defense activity and a 15:00-23:00 nursing shift.",
+              "evidence_gap": "The calendar shows the sequence but provides no user-specific evidence about recovery needs, exercise intensity, or tolerance for exercising before a long clinical shift.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Mock defense as thesis-duration substitute",
+              "assumption": "The 10:30-12:00 mandatory mock defense can appropriately count toward the same Thursday thesis-preparation need as the moved focused rehearsal block.",
+              "evidence_gap": "The technical validator counts category duration, but the proposal does not show whether group mock defense replaces the intended solo focused preparation content.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "ALS-to-lunch handoff",
+              "assumption": "The user can realistically transition from ALS recertification ending at 13:00 to lunch with the colleague also starting at 13:00.",
+              "evidence_gap": "Lunch is described as near the hospital, but there is no evidence about exact location, ALS overrun risk, check-out requirements, or whether the colleague can tolerate a slightly delayed arrival.",
+              "potential_impact": "minor",
+              "verification_source": "third_party"
+            },
+            {
+              "subject": "Thursday evening food during hospital shift",
+              "assumption": "The user can meet dinner or evening food needs during or around the 15:00-23:00 hospital shift despite no explicit dinner event on Thursday.",
+              "evidence_gap": "The rationale explicitly says Thursday dinner cannot be guaranteed separately without information about meal breaks during the hospital shift.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Commute durations around hospital-area commitments",
+              "assumption": "The 30-minute commute estimates remain reliable for the ALS trip, return home, and Thursday hospital commute.",
+              "evidence_gap": "The schedule depends on exact commute windows, but no traffic, route, or transport reliability evidence is provided beyond the stated 30-minute commute.",
+              "potential_impact": "material",
+              "verification_source": "external_source"
+            }
+          ],
+          "weaknesses": [
+            "The proposal preserves both gym sessions despite adding two high-importance mandatory commitments, but it does not adequately weigh the cumulative load this creates, especially on Thursday: gym from 08:00-09:30, thesis/mock defense from 10:00-12:00, lunch from 13:00-14:00, commute from 14:30-15:00, hospital shift from 15:00-23:00, commute home from 23:00-23:30, then immediate sleep.",
+            "Thursday relies on a low-importance, flexible gym session before a cognitively/socially demanding thesis block and an 8-hour nursing shift. This may be workable for some people, but the rationale does not explain why preserving that gym session is proportionate to the likely fatigue cost.",
+            "Wednesday is also tightly sequenced: sleep ends at 07:30, commute begins at 07:50, ALS recertification runs 08:30-13:00, lunch starts exactly at 13:00, commute home runs 14:30-15:00, then thesis work begins immediately at 15:00. The lunch location near the hospital reduces concern, but the exact ALS-to-lunch handoff and immediate commute-to-thesis handoff leave little practical margin.",
+            "The rationale states that the mock defense supplies 90 minutes toward Thursday thesis time, but the existing Thursday thesis event was described as focused defense rehearsal. A group mock defense may be valuable thesis work, but the proposal does not substantiate that it functionally replaces the same kind of preparation.",
+            "Alternatives considered are too narrow. The proposal rejects skipping Wednesday gym and rejects a midday Thursday gym placement, but it does not appear to consider reducing, moving, or dropping the Thursday gym session to protect capacity before the hospital shift."
+          ],
+          "feedback": "The calendar is technically coherent and preserves sleep, meals before shifts, fixed events, and the daily thesis-duration target. The main human-quality issue is not a direct conflict but a sustainability risk from stacking a flexible gym session, thesis obligations, and a long hospital shift on Thursday. The proposer should reconsider whether preserving both gym sessions is worth the added load, especially the Thursday 08:00-09:30 gym before mandatory thesis activity and a 15:00-23:00 hospital shift. If the same arrangement is kept, the rationale should ground why this is manageable for the user and why the gym session is important enough to retain in that position. The Wednesday ALS-to-lunch transition should also be treated as a practical dependency rather than merely a free-slot fit, since ALS ends exactly when lunch begins."
+        }
+      ],
+      "unresolved_assumptions": [
+        {
+          "subject": "ALS-to-lunch handoff",
+          "assumption": "The user can realistically transition from ALS recertification ending at 13:00 to lunch with the colleague beginning at 13:00.",
+          "evidence_gap": "The calendar says lunch is near the hospital, but there is no evidence about exact locations, checkout requirements, ALS overrun risk, or whether the colleague can tolerate a delayed arrival.",
+          "potential_impact": "minor",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Thursday evening food during hospital shift",
+          "assumption": "The user can meet dinner or evening food needs during or around the 15:00-23:00 hospital shift despite no explicit dinner event on Thursday.",
+          "evidence_gap": "The rationale acknowledges that no break timing or hospital meal availability was supplied, and the calendar proceeds directly from the shift to commute home to sleep.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Mock defense as thesis-duration substitute",
+          "assumption": "The 10:30-12:00 mandatory mock defense appropriately counts toward the same Thursday thesis-duration need as the shortened 10:00-10:30 solo rehearsal.",
+          "evidence_gap": "The technical validator counts category duration, and the rationale says this was requested, but the original request is unavailable and the existing event description still refers to two hours of focused thesis work.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Commute durations around hospital-area commitments",
+          "assumption": "The 30-minute commute estimates remain reliable for the ALS trip, the Wednesday return home, and the Thursday hospital commute.",
+          "evidence_gap": "The proposal relies on stated commute durations but provides no traffic, route, transport-mode, or reliability evidence beyond those assumptions.",
+          "potential_impact": "material",
+          "verification_source": "external_source"
+        },
+        {
+          "subject": "Wednesday post-ALS capacity",
+          "assumption": "After ALS recertification, lunch, and the return commute, the user can still complete two hours of useful thesis preparation from 15:30-17:30 and a gym session from 18:00-19:30 without undermining recovery before Thursday.",
+          "evidence_gap": "The calendar provides a 30-minute recovery margin after returning home and preserves dinner and sleep, but there is no user-specific evidence about fatigue after ALS training or the intensity of the gym session.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    }
+  ],
+  "initial_proposal": {
+    "changes": [
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Commute to ALS recertification",
+        "from_start": null,
+        "to_start": "2027-01-13T07:50:00+00:00",
+        "to_end": "2027-01-13T08:20:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "ALS recertification arrival buffer",
+        "from_start": null,
+        "to_start": "2027-01-13T08:20:00+00:00",
+        "to_end": "2027-01-13T08:30:00+00:00",
+        "category": "work",
+        "importance": 5,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Advanced Life Support recertification",
+        "from_start": null,
+        "to_start": "2027-01-13T08:30:00+00:00",
+        "to_end": "2027-01-13T13:00:00+00:00",
+        "category": "work",
+        "importance": 5,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Commute home from hospital area",
+        "from_start": null,
+        "to_start": "2027-01-13T14:30:00+00:00",
+        "to_end": "2027-01-13T15:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "move",
+        "event_id": "thesis_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": "2027-01-13T15:00:00+00:00",
+        "to_end": "2027-01-13T17:00:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "gym_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": "2027-01-13T17:30:00+00:00",
+        "to_end": "2027-01-13T19:00:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "gym_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": "2027-01-14T08:00:00+00:00",
+        "to_end": "2027-01-14T09:30:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "thesis_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": "2027-01-14T10:00:00+00:00",
+        "to_end": "2027-01-14T10:30:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Mandatory mock defense",
+        "from_start": null,
+        "to_start": "2027-01-14T10:30:00+00:00",
+        "to_end": "2027-01-14T12:00:00+00:00",
+        "category": "thesis",
+        "importance": 5,
+        "participants": [
+          "user",
+          "thesis supervisor",
+          "research group"
+        ]
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "All proposed times use the Europe/Lisbon January offset of +00:00.",
+        "Protected sleep blocks and the Thursday hospital shift are left unchanged.",
+        "The ALS recertification is treated as fixed mandatory hospital training, with arrival by 08:20 and the stated 30-minute commute.",
+        "The Wednesday colleague lunch is fixed and third-party, so it is kept rather than moved without an external exception.",
+        "The mock defense is a mandatory group commitment and supplies 90 minutes toward Thursday thesis time.",
+        "Thursday dinner cannot be guaranteed separately without information about meal breaks during the hospital shift.",
+        "The final calendar schedules 120 minutes of thesis-category time on both Wednesday and Thursday."
+      ],
+      "priorities": [
+        "Mandatory hospital and thesis commitments take priority over flexible gym sessions.",
+        "Both gym sessions are moved, not deleted, because gym availability is provided for 06:00 to 23:00.",
+        "Wednesday thesis prep is placed after the hospital-area return commute.",
+        "Thursday solo prep is reduced to the requested 30 minutes because the mock defense supplies the remaining thesis time.",
+        "The Wednesday social lunch should be confirmed with the colleague because ALS ends exactly when lunch begins."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Move the Wednesday lunch with the colleague",
+          "rejected_because": "Rejected because it is fixed, third-party, and no externally confirmed exception was supplied."
+        },
+        {
+          "option": "Skip the Wednesday gym session",
+          "rejected_because": "Rejected because an evening slot preserves gym without interfering with dinner or sleep."
+        },
+        {
+          "option": "Place Thursday gym between mock defense and lunch",
+          "rejected_because": "Rejected because it would compress the pre-shift meal window and add avoidable pressure before work."
+        }
+      ],
+      "summary": "Adds ALS recertification with arrival buffer and travel, adds the mandatory mock defense, and moves both gym sessions plus thesis prep to preserve protected sleep and daily thesis targets; the main trade-off is keeping the fixed Wednesday colleague lunch despite a tight handoff from ALS."
+    }
+  },
+  "final_proposal": {
+    "changes": [
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Commute to ALS recertification",
+        "from_start": null,
+        "to_start": "2027-01-13T07:50:00+00:00",
+        "to_end": "2027-01-13T08:20:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "ALS recertification arrival buffer",
+        "from_start": null,
+        "to_start": "2027-01-13T08:20:00+00:00",
+        "to_end": "2027-01-13T08:30:00+00:00",
+        "category": "work",
+        "importance": 5,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Advanced Life Support recertification",
+        "from_start": null,
+        "to_start": "2027-01-13T08:30:00+00:00",
+        "to_end": "2027-01-13T13:00:00+00:00",
+        "category": "work",
+        "importance": 5,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Commute home from hospital area",
+        "from_start": null,
+        "to_start": "2027-01-13T14:30:00+00:00",
+        "to_end": "2027-01-13T15:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "move",
+        "event_id": "thesis_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": "2027-01-13T15:30:00+00:00",
+        "to_end": "2027-01-13T17:30:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "gym_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": "2027-01-13T18:00:00+00:00",
+        "to_end": "2027-01-13T19:30:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "gym_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "thesis_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": "2027-01-14T10:00:00+00:00",
+        "to_end": "2027-01-14T10:30:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Mandatory mock defense",
+        "from_start": null,
+        "to_start": "2027-01-14T10:30:00+00:00",
+        "to_end": "2027-01-14T12:00:00+00:00",
+        "category": "thesis",
+        "importance": 5,
+        "participants": [
+          "user",
+          "thesis supervisor",
+          "research group"
+        ]
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "All proposed times use the Europe/Lisbon January offset of +00:00.",
+        "Protected sleep blocks and fixed hospital shift events are left unchanged.",
+        "The ALS commitment is treated as fixed mandatory work with the requested arrival and commute assumptions.",
+        "The colleague lunch is fixed and third-party, so it is kept but should be confirmed because ALS may overrun or require checkout time.",
+        "The mock defense is mandatory group thesis work and counts toward Thursday's thesis-duration requirement as requested.",
+        "Thursday still needs a dinner plan during the fixed shift because no break timing or hospital meal availability was supplied.",
+        "Commute feasibility relies only on the stated 30-minute durations, with traffic and route reliability unknown."
+      ],
+      "priorities": [
+        "Mandatory hospital training, the mock defense, protected sleep, and thesis time take priority over gym.",
+        "Thursday gym is removed because it is flexible and low-importance before a demanding thesis-to-shift sequence.",
+        "Wednesday gym is moved later because that preserves exercise without disrupting dinner or sleep.",
+        "Wednesday thesis prep is placed after a short recovery margin following the hospital-area return.",
+        "Thursday solo prep is limited to the requested focused add-on before the group session."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Keep the Thursday gym before the mock defense",
+          "rejected_because": "Rejected because the fatigue risk is not justified before mandatory thesis activity and an evening hospital shift."
+        },
+        {
+          "option": "Move the Thursday gym between mock defense and the shift",
+          "rejected_because": "Rejected because it would crowd lunch, commute readiness, and pre-shift recovery."
+        },
+        {
+          "option": "Move the Wednesday colleague lunch",
+          "rejected_because": "Rejected because it is fixed, third-party, and no externally confirmed exception was supplied."
+        },
+        {
+          "option": "Skip the Wednesday gym too",
+          "rejected_because": "Rejected because an evening slot remains feasible within stated gym availability and does not threaten protected priorities."
+        }
+      ],
+      "summary": "Adds the ALS training with travel and the mandatory mock defense, preserves both protected sleep blocks and daily thesis time, moves only the Wednesday gym, and drops the Thursday gym to reduce fatigue risk before the mock defense and hospital shift; the main unresolved issue is confirming the tight Wednesday lunch handoff and arranging Thursday food during the shift."
+    }
+  },
+  "final_score": 4.0,
+  "refinements": 1,
+  "critic_accepted": true,
+  "decision": "defer",
+  "reasons": [
+    "mais de 2 mudanças",
+    "toca em evento importante (thesis_wed, importância 5)",
+    "apaga evento (gym_thu)",
+    "toca em evento importante (thesis_thu, importância 5)"
+  ],
+  "status": "proposal_ready",
+  "critic_input_version": "final_calendar_v1",
+  "critic_policy_version": "uncertainty_review_v2",
+  "result_calendar_version": "validated_added_metadata_v2",
+  "final_result_calendar": {
+    "timezone": "Europe/Lisbon",
+    "coverage": "all_events_in_scenario_after_simulation",
+    "events": [
+      {
+        "id": "dinner_tue",
+        "title": "Dinner",
+        "start": "2027-01-12T20:00:00+00:00",
+        "end": "2027-01-12T21:00:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Dinner at home.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-01-12T23:30:00+00:00",
+        "end": "2027-01-13T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected eight-hour sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_0",
+        "title": "Commute to ALS recertification",
+        "start": "2027-01-13T07:50:00+00:00",
+        "end": "2027-01-13T08:20:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "new_1",
+        "title": "ALS recertification arrival buffer",
+        "start": "2027-01-13T08:20:00+00:00",
+        "end": "2027-01-13T08:30:00+00:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "new_2",
+        "title": "Advanced Life Support recertification",
+        "start": "2027-01-13T08:30:00+00:00",
+        "end": "2027-01-13T13:00:00+00:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "lunch_colleague_wed",
+        "title": "Lunch with nursing colleague",
+        "start": "2027-01-13T13:00:00+00:00",
+        "end": "2027-01-13T14:30:00+00:00",
+        "category": "social",
+        "importance": 3,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleague"
+        ],
+        "description": "Lunch at a café near the hospital (30 minutes from home).",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_3",
+        "title": "Commute home from hospital area",
+        "start": "2027-01-13T14:30:00+00:00",
+        "end": "2027-01-13T15:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "thesis_wed",
+        "title": "Master's thesis: Slide deck preparation",
+        "start": "2027-01-13T15:30:00+00:00",
+        "end": "2027-01-13T17:30:00+00:00",
+        "category": "thesis",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Two-hour focused thesis work on Wednesday (user's day off from ward shifts).",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "gym_wed",
+        "title": "Gym session",
+        "start": "2027-01-13T18:00:00+00:00",
+        "end": "2027-01-13T19:30:00+00:00",
+        "category": "gym",
+        "importance": 2,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym session next to home.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "dinner_wed",
+        "title": "Dinner",
+        "start": "2027-01-13T20:00:00+00:00",
+        "end": "2027-01-13T21:00:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Dinner at home.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-01-13T23:30:00+00:00",
+        "end": "2027-01-14T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected eight-hour sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "thesis_thu",
+        "title": "Master's thesis: Defense rehearsal",
+        "start": "2027-01-14T10:00:00+00:00",
+        "end": "2027-01-14T10:30:00+00:00",
+        "category": "thesis",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Two-hour focused thesis work.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "new_8",
+        "title": "Mandatory mock defense",
+        "start": "2027-01-14T10:30:00+00:00",
+        "end": "2027-01-14T12:00:00+00:00",
+        "category": "thesis",
+        "importance": 5,
+        "fixed": null,
+        "participants": [
+          "user",
+          "thesis supervisor",
+          "research group"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "lunch_thu",
+        "title": "Lunch",
+        "start": "2027-01-14T13:00:00+00:00",
+        "end": "2027-01-14T14:00:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch before afternoon shift.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "commute_to_work_thu",
+        "title": "Commute to hospital",
+        "start": "2027-01-14T14:30:00+00:00",
+        "end": "2027-01-14T15:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute journey to hospital.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_thu",
+        "title": "Hospital shift",
+        "start": "2027-01-14T15:00:00+00:00",
+        "end": "2027-01-14T23:00:00+00:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Fixed nursing shift at the hospital.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "commute_home_thu",
+        "title": "Commute home",
+        "start": "2027-01-14T23:00:00+00:00",
+        "end": "2027-01-14T23:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute journey home.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-01-14T23:30:00+00:00",
+        "end": "2027-01-15T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected eight-hour sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      }
+    ],
+    "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+  },
+  "final_unresolved_assumptions": [
+    {
+      "subject": "ALS-to-lunch handoff",
+      "assumption": "The user can realistically transition from ALS recertification ending at 13:00 to lunch with the colleague beginning at 13:00.",
+      "evidence_gap": "The calendar says lunch is near the hospital, but there is no evidence about exact locations, checkout requirements, ALS overrun risk, or whether the colleague can tolerate a delayed arrival.",
+      "potential_impact": "minor",
+      "verification_source": "third_party"
+    },
+    {
+      "subject": "Thursday evening food during hospital shift",
+      "assumption": "The user can meet dinner or evening food needs during or around the 15:00-23:00 hospital shift despite no explicit dinner event on Thursday.",
+      "evidence_gap": "The rationale acknowledges that no break timing or hospital meal availability was supplied, and the calendar proceeds directly from the shift to commute home to sleep.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Mock defense as thesis-duration substitute",
+      "assumption": "The 10:30-12:00 mandatory mock defense appropriately counts toward the same Thursday thesis-duration need as the shortened 10:00-10:30 solo rehearsal.",
+      "evidence_gap": "The technical validator counts category duration, and the rationale says this was requested, but the original request is unavailable and the existing event description still refers to two hours of focused thesis work.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Commute durations around hospital-area commitments",
+      "assumption": "The 30-minute commute estimates remain reliable for the ALS trip, the Wednesday return home, and the Thursday hospital commute.",
+      "evidence_gap": "The proposal relies on stated commute durations but provides no traffic, route, transport-mode, or reliability evidence beyond those assumptions.",
+      "potential_impact": "material",
+      "verification_source": "external_source"
+    },
+    {
+      "subject": "Wednesday post-ALS capacity",
+      "assumption": "After ALS recertification, lunch, and the return commute, the user can still complete two hours of useful thesis preparation from 15:30-17:30 and a gym session from 18:00-19:30 without undermining recovery before Thursday.",
+      "evidence_gap": "The calendar provides a 30-minute recovery margin after returning home and preserves dinner and sleep, but there is no user-specific evidence about fatigue after ALS training or the intensity of the gym session.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    }
+  ],
+  "uncertainty_history": [
+    {
+      "iteration": 0,
+      "unresolved_assumptions": [
+        {
+          "subject": "Thursday gym before hospital shift",
+          "assumption": "The user can sustainably complete a 90-minute gym session from 08:00-09:30 before thesis/mock defense activity and a 15:00-23:00 nursing shift.",
+          "evidence_gap": "The calendar shows the sequence but provides no user-specific evidence about recovery needs, exercise intensity, or tolerance for exercising before a long clinical shift.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Mock defense as thesis-duration substitute",
+          "assumption": "The 10:30-12:00 mandatory mock defense can appropriately count toward the same Thursday thesis-preparation need as the moved focused rehearsal block.",
+          "evidence_gap": "The technical validator counts category duration, but the proposal does not show whether group mock defense replaces the intended solo focused preparation content.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "ALS-to-lunch handoff",
+          "assumption": "The user can realistically transition from ALS recertification ending at 13:00 to lunch with the colleague also starting at 13:00.",
+          "evidence_gap": "Lunch is described as near the hospital, but there is no evidence about exact location, ALS overrun risk, check-out requirements, or whether the colleague can tolerate a slightly delayed arrival.",
+          "potential_impact": "minor",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Thursday evening food during hospital shift",
+          "assumption": "The user can meet dinner or evening food needs during or around the 15:00-23:00 hospital shift despite no explicit dinner event on Thursday.",
+          "evidence_gap": "The rationale explicitly says Thursday dinner cannot be guaranteed separately without information about meal breaks during the hospital shift.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Commute durations around hospital-area commitments",
+          "assumption": "The 30-minute commute estimates remain reliable for the ALS trip, return home, and Thursday hospital commute.",
+          "evidence_gap": "The schedule depends on exact commute windows, but no traffic, route, or transport reliability evidence is provided beyond the stated 30-minute commute.",
+          "potential_impact": "material",
+          "verification_source": "external_source"
+        }
+      ]
+    },
+    {
+      "iteration": 1,
+      "unresolved_assumptions": [
+        {
+          "subject": "ALS-to-lunch handoff",
+          "assumption": "The user can realistically transition from ALS recertification ending at 13:00 to lunch with the colleague beginning at 13:00.",
+          "evidence_gap": "The calendar says lunch is near the hospital, but there is no evidence about exact locations, checkout requirements, ALS overrun risk, or whether the colleague can tolerate a delayed arrival.",
+          "potential_impact": "minor",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Thursday evening food during hospital shift",
+          "assumption": "The user can meet dinner or evening food needs during or around the 15:00-23:00 hospital shift despite no explicit dinner event on Thursday.",
+          "evidence_gap": "The rationale acknowledges that no break timing or hospital meal availability was supplied, and the calendar proceeds directly from the shift to commute home to sleep.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Mock defense as thesis-duration substitute",
+          "assumption": "The 10:30-12:00 mandatory mock defense appropriately counts toward the same Thursday thesis-duration need as the shortened 10:00-10:30 solo rehearsal.",
+          "evidence_gap": "The technical validator counts category duration, and the rationale says this was requested, but the original request is unavailable and the existing event description still refers to two hours of focused thesis work.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Commute durations around hospital-area commitments",
+          "assumption": "The 30-minute commute estimates remain reliable for the ALS trip, the Wednesday return home, and the Thursday hospital commute.",
+          "evidence_gap": "The proposal relies on stated commute durations but provides no traffic, route, transport-mode, or reliability evidence beyond those assumptions.",
+          "potential_impact": "material",
+          "verification_source": "external_source"
+        },
+        {
+          "subject": "Wednesday post-ALS capacity",
+          "assumption": "After ALS recertification, lunch, and the return commute, the user can still complete two hours of useful thesis preparation from 15:30-17:30 and a gym session from 18:00-19:30 without undermining recovery before Thursday.",
+          "evidence_gap": "The calendar provides a 30-minute recovery margin after returning home and preserves dinner and sleep, but there is no user-specific evidence about fatigue after ALS training or the intensity of the gym session.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    }
+  ],
+  "schema_version": "2.0",
+  "profile_id": "nurse_masters_02__nurse_shift_worker_masters_als_recertification_mock_defense_001",
+  "scenario_sha256": "211114e25a260def4a86f65716557ff53e7ec1fd0d1e7a382ba0180f298611ee",
+  "aggregate_requirements_sha256": "18b0b92e7a861162bdf68e9231c43b964b29d3c1fd95ecab0406c503fefb83f9",
+  "confirmed_changes_sha256": null,
+  "simulator_version": "calendar_v2_validated_added_metadata_v2",
+  "dataset_manifest_sha256": "28af38846fb8995651d5f63ab63402e36147dc0915a2bfcd5379747ea531ffad",
+  "split": "train",
+  "run_id": "a38f338382914f4faab744a5128020b6",
+  "experiment_id": null,
+  "repeat_index": 0,
+  "generated_at": "2026-11-24T10:32:49.990053+00:00",
+  "prompt_versions": {
+    "proposer_sha256": "ae6fa59cccb86c31f34f66d07d241660b1feadf852ebf1b594bc85addab86985",
+    "proposer_wire_schema_version": "compact_proposal_v1",
+    "proposer_wire_schema_sha256": "f504fbcd7e939c43e055e2f188feb22097a284bcd9b043227d868e559547b865",
+    "proposer_revision_sha256": "3f0fe7f221013700694a22984560612013e9804072ffde4538e1329b9708ac95",
+    "critic_sha256": "1686688cdd4bc63abb12e6633ef9dbb9b62d69b69aba1c4805a201657cc5bb34"
+  },
+  "seconds": 148.508,
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [],
+    "valid": true,
+    "aggregate_checks": [
+      {
+        "id": "thesis_daily_time_2027-01-13",
+        "status": "pass",
+        "minutes": 120.0,
+        "minimum_minutes": 120,
+        "category": "thesis",
+        "evidence": "union of final calendar intervals"
+      },
+      {
+        "id": "thesis_daily_time_2027-01-14",
+        "status": "pass",
+        "minutes": 120.0,
+        "minimum_minutes": 120,
+        "category": "thesis",
+        "evidence": "union of final calendar intervals"
+      }
+    ],
+    "aggregate_validation_version": "duration_total_v1"
+  }
+}

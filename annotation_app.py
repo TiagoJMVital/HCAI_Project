@@ -17,13 +17,14 @@ from annotation_v2 import (
     load_review as load_review_v2, pair as pair_v2,
     save_consensus as save_consensus_v2, save_review as save_review_v2,
 )
-from annotation_v2_ui import (local_packet, preview as preview_v2, records as records_v2,
-                              temporal_overlaps)
+from annotation_v2_ui import (FAMILY_DISPLAY_NAMES, active_proposed_events, local_packet,
+                              preview as preview_v2, proposal_change_rows,
+                              records as records_v2, reviewer_progress, temporal_overlaps)
 from calendar_view import (
     identify_requested_interval, initial_week, overlap_summary,
     render_week_html, view_events, week_after,
 )
-from proposal_catalog_v2 import catalog as catalog_v2
+from proposal_catalog_v2 import catalog as catalog_v2, training_catalog
 from run_catalog_v2 import PILOT_SCENARIO_IDS, runs as runs_v2, status_matrix
 from scenario_v2 import load_scenario as load_scenario_v2
 from final_dataset_v2 import scenario_path as scenario_path_v2
@@ -67,6 +68,36 @@ def _weekly_calendar(packet: dict, events: list, *, mode: str) -> None:
         st.write(f"**Sobreposição temporal:** {summary['total']} evento(s): "
                  f"{summary['fixed']} fixo(s) e {summary['flexible']} flexível(eis). "
                  "Sobreposição não é, por si só, uma violação de restrições rígidas.")
+
+
+def _side_by_side_calendars(packet: dict, original: list, proposed: list,
+                            *, proposal_id: str) -> None:
+    interval = identify_requested_interval(packet)
+    base_week = initial_week(packet, interval)
+    offset_key = f"v2:comparison-week:{proposal_id}"
+    st.session_state.setdefault(offset_key, 0)
+    nav_left, nav_middle, nav_right = st.columns([1, 2, 1])
+    if nav_left.button("← Semana anterior", key=offset_key + ":previous"):
+        st.session_state[offset_key] -= 1
+    week = week_after(base_week, st.session_state[offset_key])
+    if nav_middle.button(
+            f"{week:%d/%m/%Y} – {(week + timedelta(days=6)):%d/%m/%Y} · semana inicial",
+            key=offset_key + ":reset"):
+        st.session_state[offset_key] = 0
+        week = base_week
+    if nav_right.button("Semana seguinte →", key=offset_key + ":next"):
+        st.session_state[offset_key] += 1
+        week = week_after(base_week, st.session_state[offset_key])
+    left, right = st.columns(2)
+    with left:
+        st.markdown("#### Calendário original")
+        st.html(render_week_html(original, week, interval, comparison_palette=True))
+    with right:
+        st.markdown("#### Calendário proposto")
+        st.html(render_week_html(proposed, week, interval, comparison_palette=True))
+    st.caption("Legenda: ⬜ cinzento — inalterado · 🟩 verde — adicionado · "
+               "🟦 azul — movido/modificado · 🟥 vermelho — eliminado (apenas no resumo abaixo). "
+               "Passe o cursor ou use Tab sobre um evento para ver título, horário e duração completos.")
 
 
 def _select_neighbor(key: str, available: list[str], step: int) -> None:
@@ -270,10 +301,14 @@ def _v2_review_inputs(form: dict, prefix: str) -> dict:
                               key=prefix + ":acceptable")
     decision = None
     if acceptable == "yes":
-        decision = st.selectbox("Autonomia da proposta", [None, "act", "defer"],
+        decision = st.selectbox(
+                                "Can this concrete proposal be applied autonomously without prior human approval?",
+                                [None, "act", "defer"],
                                 index=[None, "act", "defer"].index(form.get("autonomy_decision")
                                                                      if form.get("autonomy_decision") in (None, "act", "defer") else None),
-                                format_func=lambda x: "Por decidir" if x is None else x.upper(),
+                                format_func=lambda x: ("Por decidir" if x is None else
+                                    "ACT — pode ser aplicada autonomamente" if x == "act" else
+                                    "DEFER — requer aprovação, clarificação ou intervenção humana"),
                                 key=prefix + ":decision")
     if decision == "defer":
         primary = st.selectbox("Motivo principal", [""] + list(V2_DEFER_REASONS),
@@ -297,186 +332,130 @@ def _v2_review_inputs(form: dict, prefix: str) -> dict:
 
 def _v2_scenario_and_proposal(source: dict) -> None:
     scenario = load_scenario_v2(scenario_path_v2(ROOT, source["scenario_id"]))
-    st.subheader(f"Cenário {scenario.scenario_id}")
+    st.markdown("### Pedido original do utilizador")
     st.info(scenario.user_request)
     profile = scenario.profile
-    st.caption(f"Perfil: {profile.profile_id} · {profile.description} · fuso: {profile.timezone} · referência: {scenario.now.isoformat()}")
-    packet, original, proposed, validation = preview_v2(ROOT, source)
-    mode = st.radio("Calendário", ("Original", "Proposto"), horizontal=True,
-                    key=f"v2:calendar:{source['proposal_id']}") if proposed is not None else "Original"
+    packet, original, proposed, _validation = preview_v2(ROOT, source)
     if proposed is None:
-        st.error("A simulação segura não conseguiu aplicar a proposta. O calendário original permanece intacto.")
-    active_events = proposed if mode == "Proposto" and proposed is not None else original
-    _weekly_calendar(packet, active_events,
-                     mode="proposed" if mode == "Proposto" else "original")
-    overlap_pairs = temporal_overlaps(active_events)
+        st.error("A proposta não produz um calendário aplicável segundo a validação determinística. "
+                 "Avalie-a como solução de scheduling concreta; nenhuma alteração é mostrada como aplicada.")
+        proposed_calendar = []
+    else:
+        proposed_calendar = active_proposed_events(proposed)
+    _side_by_side_calendars(packet, original, proposed_calendar,
+                            proposal_id=source["proposal_id"])
+    overlap_pairs = temporal_overlaps(proposed_calendar)
     if overlap_pairs:
-        st.caption(f"Sobreposições temporais nesta vista ({len(overlap_pairs)} pares): "
+        st.caption(f"Sobreposições temporais no calendário proposto ({len(overlap_pairs)} pares): "
                    + "; ".join(f"{a} / {b}" for a, b in overlap_pairs)
                    + ". Uma sobreposição não demonstra, por si só, violação de uma restrição.")
-    st.caption("Calendário proposto: blocos com traço grosso = criados/movidos; blocos esbatidos = removidos/posição anterior. "
-               "Eventos adicionados usam valores neutros para categoria, importância ou participantes quando esses metadados não forem fornecidos.")
-    with st.expander("Eventos originais em tabela"):
-        st.dataframe(sorted(packet["calendar"], key=lambda e: e["start"]), hide_index=True)
-    left, right = st.columns(2)
-    with left:
-        st.markdown("#### Restrições e preferências")
-        for rule in profile.hard_constraints:
-            st.write(f"• {rule.id} ({rule.rule_type}): {rule.description}")
-        for pref in profile.soft_preferences:
-            st.write(f"• {pref.id} ({pref.weight}/5): {pref.description}")
-    with right:
-        st.markdown("#### Prioridades e autonomia declarada")
-        st.write(profile.priorities)
-        st.write(profile.autonomy_preferences.model_dump())
-    st.markdown("#### Proposta final")
+
+    st.markdown("### Alterações propostas")
     proposal = source["final_proposal"]
     if not proposal["changes"]:
-        st.info("Proposta sem alterações: a validação estrutural não demonstra que o pedido esteja satisfeito. Avalie a justificação e o calendário.")
-    for i, change in enumerate(proposal["changes"], 1):
-        st.write(f"{i}. {change['type'].upper()} · {change.get('event_id') or change.get('title')} · "
-                 f"{change.get('to_start') or ''} {change.get('to_end') or ''}")
+        st.info("0 alterações. Um calendário inalterado não prova, por si só, satisfação do pedido.")
+    rows = proposal_change_rows(ROOT, source)
+    counts = Counter(row["operation"] for row in rows)
+    st.caption(f"{len(rows)} alterações — {counts['ADD']} adicionadas · "
+               f"{counts['MOVE']} movidas/modificadas · {counts['DELETE']} eliminadas")
+    if rows:
+        display_rows = [{
+            "Operação": ("🟢 ADD" if row["operation"] == "ADD" else
+                         "🔵 MOVE" if row["operation"] == "MOVE" else "🔴 DELETE"),
+            "Evento": row["event"],
+            "Horário original": row["original_schedule"],
+            "Horário proposto": row["proposed_schedule"],
+            "Descrição": row["description"],
+        } for row in rows]
+        st.dataframe(display_rows, hide_index=True, width="stretch",
+                     column_config={"Evento": st.column_config.TextColumn(width="large"),
+                                    "Descrição": st.column_config.TextColumn(width="large")})
     rationale = proposal["rationale"]
-    st.write("**Justificação:**", rationale["summary"])
-    st.write("**Restrições mencionadas:**", rationale["constraints"])
-    st.write("**Prioridades mencionadas:**", rationale["priorities"])
-    st.write("**Alternativas:**", rationale["alternatives_considered"])
-    st.markdown("#### Avaliação técnica e Critic")
-    st.write("**Validação técnica:**", validation)
-    st.caption("Validação parcial: não prova satisfação do pedido nem validade das descrições em linguagem natural.")
-    st.write(f"**Score final do Critic:** {source['critic_score']} · **Revisões:** {source['refinements']} · "
-             f"**Estado B:** {source['source_status']}")
-    st.caption("proposal_ready indica aceitação da qualidade pelo Critic; não garante viabilidade externa "
-               "nem constitui autorização para executar alterações.")
-    st.caption(f"Política do Critic: {source.get('critic_policy_version') or 'histórica; revisão de plausibilidade não disponível'}")
-    if "final_unresolved_assumptions" in source:
-        pending = source["final_unresolved_assumptions"]
-        if pending is None:
-            st.caption("Condições externas finais: não avaliadas nesta proposta final.")
-        elif pending:
-            st.write("**Condições não verificadas na avaliação final:**")
-            for entry in pending:
-                st.write(f"{entry['subject']}: {entry['assumption']} · impacto potencial: "
-                         f"{entry['potential_impact']} · fonte de verificação: {entry['verification_source']}")
-                st.caption(f"Evidência em falta: {entry['evidence_gap']}")
-        else:
-            st.caption("O Critic não identificou condições externas por verificar na avaliação final; "
-                       "isto não certifica viabilidade operacional.")
-    else:
-        st.caption("Condições externas estruturadas: não disponíveis nesta execução histórica.")
-    with st.expander("Ver avaliações e iterações do Critic"):
-        st.caption("As alternativas na justificação são opções ponderadas pelo Proposer; "
-                   "apenas uma nova iteração após feedback do Critic conta como revisão. "
-                   "Os problemas por iteração são observações do Critic, não provas de resolução automática.")
-        for step in source["iterations"]:
-            st.write(f"**Iteração {step['index']}**")
-            if step.get("proposer_feedback"):
-                st.write("Feedback recebido antes desta revisão:", step["proposer_feedback"])
-                if step.get("operations_changed_from_previous") is not None:
-                    st.write("Operações alteradas:", step["operations_changed_from_previous"],
-                             "· Justificação alterada:", step["rationale_changed_from_previous"])
-                if step.get("prior_critic_reviews"):
-                    st.write("Dúvida anterior submetida de novo ao Critic:",
-                             step["prior_critic_reviews"][-1]["plausibility_review"]["reason"])
-            st.write("Proposta:", step.get("proposal"))
-            st.write("Validação antes do Critic:", step.get("validation"))
-            if step.get("result_calendar"):
-                st.write("Calendário final simulado nesta iteração:",
-                         step["result_calendar"]["events"])
-            assessment = step.get("critic_evaluation")
-            st.write("Avaliação do Critic:", assessment or "sem avaliação")
-            if assessment:
-                if "unresolved_assumptions" in assessment and assessment["unresolved_assumptions"] is not None:
-                    st.write("Condições não verificadas nesta iteração:",
-                             assessment["unresolved_assumptions"] or "nenhuma identificada")
-                else:
-                    st.caption("Condições estruturadas: não disponíveis nesta iteração histórica.")
-                review = assessment.get("plausibility_review")
-                policy = step.get("acceptance_policy")
-                if review is None:
-                    st.caption("Revisão estruturada de plausibilidade: não disponível nesta execução histórica.")
-                else:
-                    st.write("**Plausibilidade:** severidade", review["severity"],
-                             "· revisão necessária:", review["revision_required"])
-                    st.write("Fundamentação:", review["reason"] or "nenhuma observação relevante")
-                    if step.get("prior_critic_reviews"):
-                        st.caption("Reavaliação da dúvida anterior: "
-                                   + ("continua a exigir revisão" if review["revision_required"]
-                                      else "não exige nova revisão")
-                                   + ". Consulte a fundamentação atual; isto não prova melhoria objetiva.")
-                    if review["suggested_improvement"]:
-                        st.write("Sugestão:", review["suggested_improvement"])
-                    if policy:
-                        st.write("Critérios numéricos cumpridos:", policy["numeric_criteria_passed"])
-                        st.write("Política de aceitação aprovada:", policy["accepted"])
-                        st.write("Motivos de revisão:", policy["revision_causes"] or "nenhum")
-        history = source.get("uncertainty_history") or []
-        if len(history) > 1 and any(item["unresolved_assumptions"] for item in history[:-1]):
-            st.write("**Condições de iterações anteriores:**")
-            final_list = source.get("final_unresolved_assumptions") or []
-            for previous in history[:-1]:
-                for entry in previous["unresolved_assumptions"]:
-                    state = ("também indicada na avaliação final" if entry in final_list
-                             else "resolução não confirmada")
-                    st.write(f"Iteração {previous['iteration']} · {entry['subject']}: "
-                             f"{entry['assumption']} · {state}")
-            st.caption("O desaparecimento de uma condição da avaliação seguinte não prova que foi resolvida.")
-        if source.get("unresolved_critic_weaknesses"):
-            st.write("Problemas assinalados na última avaliação sem aceitação:",
-                     source["unresolved_critic_weaknesses"])
-        if source.get("unresolved_plausibility_review"):
-            st.write("Revisão de plausibilidade ainda não resolvida:",
-                     source["unresolved_plausibility_review"])
+    with st.expander("Justificação e alternativas apresentadas pelo Proposer"):
+        st.write(rationale["summary"])
+        st.write("**Restrições consideradas:**", rationale["constraints"])
+        st.write("**Prioridades consideradas:**", rationale["priorities"])
+        st.write("**Alternativas consideradas:**", rationale["alternatives_considered"])
+
+    st.markdown("### Restrições e preferências completas")
+    st.markdown("#### Restrições rígidas")
+    for rule in profile.hard_constraints:
+        st.write(f"**{rule.id}** · `{rule.rule_type}` — {rule.description}")
+    if scenario.aggregate_requirements:
+        st.markdown("#### Requisitos agregados tipados")
+        for rule in scenario.aggregate_requirements:
+            st.write(rule.model_dump(mode="json"))
+    if scenario.confirmed_changes:
+        st.markdown("#### Alterações externas confirmadas")
+        for change in scenario.confirmed_changes:
+            st.write(change.model_dump(mode="json"))
+    st.markdown("#### Preferências suaves")
+    for pref in profile.soft_preferences:
+        st.write(f"**{pref.id}** · peso {pref.weight}/5 — {pref.description}")
+    st.markdown("#### Preferências de autonomia declaradas")
+    st.write(profile.autonomy_preferences.model_dump(mode="json"))
+    st.markdown("#### Contexto do cenário")
+    st.write(profile.description)
+    st.write("**Prioridades declaradas:**", profile.priorities)
+    st.caption(f"Fuso horário: {profile.timezone} · referência temporal: {scenario.now.isoformat()}")
 
 
 def _v2_review_page(author: str) -> None:
-    st.header("Avaliação direta das propostas · schema v2")
-    st.caption("Cada autor vê apenas a sua avaliação. Guardar rascunho não exige campos completos.")
+    st.header("Anotação independente de propostas B de treino")
+    st.caption("Cada avaliador vê apenas a sua própria anotação. IDs técnicos permanecem ocultos nesta área.")
     try:
-        all_records = records_v2(ROOT, author)
-        sources = {row["proposal_id"]: row for row in catalog_v2(ROOT)}
+        all_records = records_v2(ROOT, author, training_only=True)
+        sources = {row["scenario_id"]: row for row in training_catalog(ROOT)}
     except (ValueError, OSError) as exc:
         st.error(str(exc))
         return
     if not all_records:
-        st.info("Ainda não existem propostas v2 importadas. A geração B é uma ação CLI explícita.")
+        st.info("Ainda não existem propostas B de treino elegíveis e importadas.")
         return
-    profiles = sorted({row["profile_id"] for row in all_records})
     families = sorted({row["family_id"] for row in all_records})
-    scenarios = sorted({row["scenario_id"] for row in all_records})
-    a, b, c, d = st.columns(4)
-    profile_filter = a.selectbox("Perfil", ["Todos"] + profiles, key="v2:profile")
-    family_filter = b.selectbox("Família", ["Todas"] + families, key="v2:family")
-    scenario_filter = c.selectbox("Cenário", ["Todos"] + scenarios, key="v2:scenario")
-    state_filter = d.selectbox("Estado", list(STATES), format_func=lambda x: STATES[x], key="v2:state")
-    filtered = [row for row in all_records if (profile_filter == "Todos" or row["profile_id"] == profile_filter)
-                and (family_filter == "Todas" or row["family_id"] == family_filter)
-                and (scenario_filter == "Todos" or row["scenario_id"] == scenario_filter)
-                and (state_filter == "all" or row["state"] == state_filter)]
-    counts = Counter(row["state"] for row in all_records)
-    st.caption(f"Progresso individual: {counts['complete']} concluídas, {counts['draft']} rascunhos, "
-               f"{counts['not_started']} por iniciar, {counts['needs_correction']} com correções.")
-    if not filtered:
-        st.info("Nenhuma proposta neste filtro.")
-        return
-    available = [row["id"] for row in filtered]
-    key = f"v2:{author}:selected"
-    if st.session_state.get(key) not in available:
-        st.session_state[key] = available[0]
-    selected = st.selectbox("Proposta", available, key=key,
-                            format_func=lambda pid: f"{sources[pid]['scenario_id']} · {pid}")
-    idx = available.index(selected)
-    prev, nxt = st.columns(2)
-    prev.button("← Anterior", disabled=idx == 0, on_click=_select_neighbor,
-                args=(key, available, -1), key=key + ":prev")
-    nxt.button("Seguinte →", disabled=idx == len(available)-1, on_click=_select_neighbor,
-               args=(key, available, 1), key=key + ":next")
+    selector_left, selector_right = st.columns(2)
+    family_key = f"v2:{author}:family"
+    scenario_key = f"v2:{author}:scenario"
+    family_id = selector_left.selectbox(
+        "Profile family", families, key=family_key,
+        format_func=lambda value: FAMILY_DISPLAY_NAMES.get(value, value))
+    family_rows = sorted(
+        (row for row in all_records if row["family_id"] == family_id),
+        key=lambda row: row["scenario_id"])
+    available = [row["scenario_id"] for row in family_rows]
+    if st.session_state.get(scenario_key) not in available:
+        st.session_state[scenario_key] = available[0]
+    scenario_id = selector_right.selectbox(
+        "Scenario", available, key=scenario_key, format_func=lambda value: value)
+    selected = sources[scenario_id]["proposal_id"]
+
+    progress = reviewer_progress(all_records, family_id)
+    family_name = FAMILY_DISPLAY_NAMES.get(family_id, family_id)
+    st.progress(progress["overall_complete"] / progress["overall_total"])
+    st.caption(
+        f"{family_name} — {progress['family_complete']}/{progress['family_total']} anotados · "
+        f"{progress['family_remaining']} restantes. Progresso global: "
+        f"{progress['overall_complete']}/{progress['overall_total']} anotados · "
+        f"{progress['overall_remaining']} restantes.")
+    next_unannotated = next((row["scenario_id"] for row in family_rows
+                             if row["state"] != "complete" and row["scenario_id"] != scenario_id), None)
+    if next_unannotated is not None:
+        st.button("Ir para o próximo cenário não anotado", key=f"v2:{author}:next-unannotated",
+                  on_click=lambda: st.session_state.update({scenario_key: next_unannotated}))
+
     try:
         form, revision = load_review_v2(ROOT, author, selected)
-        _v2_scenario_and_proposal(sources[selected])
+        _v2_scenario_and_proposal(sources[scenario_id])
     except (ValueError, OSError) as exc:
         st.error(f"O item precisa de correção: {exc}")
         return
+
+    st.markdown("### Anotação humana")
+    st.info("Avalie a proposta concreta, não apenas se gosta do horário. Uma solução de scheduling "
+            "de alta qualidade não é automaticamente elegível para execução autónoma. Considere "
+            "incerteza, consequências, compromissos, permissões e preferências do utilizador. Uma "
+            "proposta pode exigir aprovação humana mesmo quando satisfaz restrições; invalidade de "
+            "scheduling ou consequências inaceitáveis também não devem ser ignoradas.")
     prefix = f"v2:{author}:{selected}"
     values = _v2_review_inputs(form.model_dump(), prefix)
     confirm = st.checkbox("Confirmo a substituição da minha avaliação concluída",
@@ -491,8 +470,10 @@ def _v2_review_page(author: str) -> None:
         except (ValueError, OSError) as exc:
             st.error(f"Não foi guardado: {exc}")
         else:
-            st.success("Avaliação guardada.")
+            st.session_state[f"v2:{author}:saved"] = scenario_id
             st.rerun()
+    if st.session_state.get(f"v2:{author}:saved") == scenario_id:
+        st.success("Anotação guardada. Pode rever este cenário ou avançar para o próximo não anotado.")
 
 
 def _v2_consensus_page() -> None:

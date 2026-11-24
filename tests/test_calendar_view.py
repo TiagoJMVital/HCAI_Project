@@ -8,7 +8,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 
-from annotation_v2_ui import local_packet, preview
+from annotation_v2_ui import (active_proposed_events, local_packet, preview,
+                              proposal_change_rows, reviewer_progress)
 from calendar_view import (HOUR_PX, Interval, identify_requested_interval, initial_week,
                            interval_segments, overlap_summary, render_week_html,
                            view_events, week_after, week_segments)
@@ -138,7 +139,7 @@ def test_rendering_escapes_text_and_shows_fixed_state():
                            "category": "class", "importance": 5, "fixed": True}])
     html = render_week_html(events, date(2026, 11, 9), None)
     assert "<script>" not in html and "&lt;script&gt;" in html
-    assert "Fixo" in html and "09:00–10:00" in html
+    assert "Fixo" in html and "09:00–10:00" in html and "duração 60 min" in html
 
 
 def test_added_and_removed_events_have_explicit_status():
@@ -153,3 +154,46 @@ def test_added_and_removed_events_have_explicit_status():
     assert next(x for x in proposed if x.id == "gym_mon").change_status == "removed"
     html = render_week_html(proposed, initial_week(case, None), None)
     assert "Adicionado" in html and "Removido (referência)" in html
+    actual = active_proposed_events(proposed)
+    assert {event.id for event in actual} == ({event.id for event in proposed} - {"gym_mon"})
+
+
+def test_change_overview_resolves_titles_schedules_and_every_operation():
+    source = {"scenario_id": "working_student_deadline_001", "final_proposal": Proposal(
+        changes=[Change(type="move", event_id="gym_mon",
+                        to_start="2026-11-09T20:00:00+00:00",
+                        to_end="2026-11-09T21:30:00+00:00"),
+                 Change(type="delete", event_id="work_tue"),
+                 Change(type="add", title="Short check-in",
+                        to_start="2026-11-10T18:05:00+00:00",
+                        to_end="2026-11-10T18:15:00+00:00")],
+        rationale=rationale()).model_dump(mode="json")}
+    rows = proposal_change_rows(ROOT, source)
+    assert [row["sequence"] for row in rows] == [1, 2, 3]
+    assert [row["operation"] for row in rows] == ["MOVE", "DELETE", "ADD"]
+    assert rows[0]["event"] == "Gym"
+    assert "18:30" in rows[0]["original_schedule"] and "20:00" in rows[0]["proposed_schedule"]
+    assert rows[1]["event"] == "Work" and rows[1]["proposed_schedule"] == "—"
+    assert rows[2]["event"] == "Short check-in" and "10 min" in rows[2]["proposed_schedule"]
+
+
+def test_short_events_keep_actual_timeline_height_and_accessible_details():
+    events = view_events([{"id": "short", "title": "Ten minute event with a full title",
+                           "start": "2026-11-12T09:00", "end": "2026-11-12T09:10",
+                           "category": "meeting", "importance": 3, "fixed": False}])
+    segment = week_segments(events, date(2026, 11, 9))[0]
+    assert segment.height_px == 10
+    html = render_week_html(events, date(2026, 11, 9), None, comparison_palette=True)
+    assert "Ten minute event with a full title" in html
+    assert "duração 10 min" in html and "hcai-comparison" in html
+
+
+def test_reviewer_progress_is_independent_and_family_scoped():
+    rows = [
+        {"family_id": "family_a", "state": "complete"},
+        {"family_id": "family_a", "state": "draft"},
+        {"family_id": "family_b", "state": "complete"},
+    ]
+    assert reviewer_progress(rows, "family_a") == {
+        "family_total": 2, "family_complete": 1, "family_remaining": 1,
+        "overall_total": 3, "overall_complete": 2, "overall_remaining": 1}

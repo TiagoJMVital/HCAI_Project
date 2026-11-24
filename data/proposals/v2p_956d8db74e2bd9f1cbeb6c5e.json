@@ -1,0 +1,1978 @@
+{
+  "proposal_id": "v2p_956d8db74e2bd9f1cbeb6c5e",
+  "scenario_id": "working_student_evening_group_project_doctor_004",
+  "family_id": "working_student_schedule_conflict",
+  "profile_id": "working_student_01__working_student_evening_group_project_doctor_004",
+  "split": "train",
+  "run_id": "e985fe28fd7d4dccad2cf326b7007e3a",
+  "configuration": "B",
+  "generated_at": "2026-11-24T15:02:49.815518+00:00",
+  "proposer_provider": "iaedu",
+  "proposer_model": "GPT-5.5",
+  "proposer_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_provider": "iaedu",
+  "critic_model": "GPT-5.5",
+  "critic_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "prompt_versions": {
+    "proposer_sha256": "ae6fa59cccb86c31f34f66d07d241660b1feadf852ebf1b594bc85addab86985",
+    "proposer_wire_schema_version": "compact_proposal_v1",
+    "proposer_wire_schema_sha256": "f504fbcd7e939c43e055e2f188feb22097a284bcd9b043227d868e559547b865",
+    "proposer_revision_sha256": "3f0fe7f221013700694a22984560612013e9804072ffde4538e1329b9708ac95",
+    "critic_sha256": "1686688cdd4bc63abb12e6633ef9dbb9b62d69b69aba1c4805a201657cc5bb34"
+  },
+  "critic_settings": {
+    "threshold": 4.0,
+    "max_refinements": 3,
+    "min_dimension_score": 1
+  },
+  "experiment_id": null,
+  "repeat_index": 0,
+  "seconds": 74.444,
+  "critic_score": 4.0,
+  "critic_accepted": true,
+  "iterations": [
+    {
+      "index": 0,
+      "proposer_feedback": null,
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Dinner Break",
+            "from_start": null,
+            "to_start": "2027-04-22T18:30:00+01:00",
+            "to_end": "2027-04-22T19:00:00+01:00",
+            "category": "personal",
+            "importance": 3,
+            "participants": [
+              "user"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "The Thursday group sprint is protected and remains fixed from 19:00 to 21:30.",
+            "The Wednesday doctor appointment is protected and remains unchanged.",
+            "The existing Thursday workout is kept immediately after work and before the sprint.",
+            "The dinner break uses the only free interval between workout and sprint, so it is short.",
+            "No opening hours, travel time, food availability, or venue availability is assumed."
+          ],
+          "priorities": [
+            "Preserve mandatory education and health commitments.",
+            "Satisfy the requested post-work workout before group work.",
+            "Add dinner before the sprint without moving existing events."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Move or shorten the Thursday workout to create a longer dinner break.",
+              "rejected_because": "Rejected because the user specifically asked to keep the short post-work workout and the current slot already fits that preference."
+            },
+            {
+              "option": "Place dinner after the sprint.",
+              "rejected_because": "Rejected because the request requires dinner before the group sprint."
+            }
+          ],
+          "summary": "Add a 30-minute dinner break between the kept Thursday workout and the protected group sprint; the trade-off is that dinner is brief because the sprint and workout are both preserved."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-04-18T23:45:00+01:00",
+            "end": "2027-04-19T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_mon",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-04-19T09:00:00+01:00",
+            "end": "2027-04-19T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Daytime work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_mon",
+            "title": "Gym Workout",
+            "start": "2027-04-19T18:00:00+01:00",
+            "end": "2027-04-19T19:00:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_mon",
+            "title": "Evening Study: Project Research",
+            "start": "2027-04-19T19:30:00+01:00",
+            "end": "2027-04-19T21:45:00+01:00",
+            "category": "education",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Research for group project.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-04-19T23:45:00+01:00",
+            "end": "2027-04-20T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_tue",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-04-20T09:00:00+01:00",
+            "end": "2027-04-20T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Daytime work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "class_tue",
+            "title": "Evening Lecture: Marketing Analytics",
+            "start": "2027-04-20T18:30:00+01:00",
+            "end": "2027-04-20T21:30:00+01:00",
+            "category": "education",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "professor",
+              "classmates"
+            ],
+            "description": "Mandatory evening class.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-04-20T23:45:00+01:00",
+            "end": "2027-04-21T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_wed",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-04-21T09:00:00+01:00",
+            "end": "2027-04-21T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Daytime work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "doctor_wed",
+            "title": "Routine Health Check-up Appointment",
+            "start": "2027-04-21T18:00:00+01:00",
+            "end": "2027-04-21T19:15:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "doctor"
+            ],
+            "description": "Scheduled medical appointment.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "dinner_personal_wed",
+            "title": "Dinner & Personal Admin",
+            "start": "2027-04-21T19:45:00+01:00",
+            "end": "2027-04-21T21:45:00+01:00",
+            "category": "personal",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Dinner and bills/admin.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-04-21T23:45:00+01:00",
+            "end": "2027-04-22T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_thu",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-04-22T09:00:00+01:00",
+            "end": "2027-04-22T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Daytime work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_thu",
+            "title": "Gym: Quick Cardio & Strength",
+            "start": "2027-04-22T17:45:00+01:00",
+            "end": "2027-04-22T18:30:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Short workout before group work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_0",
+            "title": "Dinner Break",
+            "start": "2027-04-22T18:30:00+01:00",
+            "end": "2027-04-22T19:00:00+01:00",
+            "category": "personal",
+            "importance": 3,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "group_project_thu",
+            "title": "Evening Group Project Sprint (Online/Library)",
+            "start": "2027-04-22T19:00:00+01:00",
+            "end": "2027-04-22T21:30:00+01:00",
+            "category": "education",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "classmates"
+            ],
+            "description": "Mandatory group session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-04-22T23:45:00+01:00",
+            "end": "2027-04-23T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_fri",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-04-23T09:00:00+01:00",
+            "end": "2027-04-23T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Friday work shift.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_fri",
+            "title": "Gym: Full Body Workout",
+            "start": "2027-04-23T18:00:00+01:00",
+            "end": "2027-04-23T19:15:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "social_fri",
+            "title": "Casual Dinner with Friends",
+            "start": "2027-04-23T20:00:00+01:00",
+            "end": "2027-04-23T23:00:00+01:00",
+            "category": "personal",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user",
+              "friends"
+            ],
+            "description": "Friday night hangout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 3,
+          "coherence": 3,
+          "alternatives": 3,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The added Dinner Break from 18:30 to 19:00 on Thursday is placed immediately after Gym: Quick Cardio & Strength from 17:45 to 18:30 and immediately before the mandatory Evening Group Project Sprint from 19:00 to 21:30. This leaves no visible margin for cooldown, hygiene, changing clothes, food pickup/preparation, setup for the sprint, or mental transition.",
+          "The rationale correctly acknowledges the dinner is short, but it treats the only free interval as usable dinner time without substantiating the practical conditions that would make that realistic after a workout and before a protected group session.",
+          "Thursday becomes a dense sequence after a full workday: work from 09:00 to 17:30, workout from 17:45 to 18:30, dinner from 18:30 to 19:00, and group project work from 19:00 to 21:30. This may be manageable for some people, but it is fragile and depends heavily on unknown logistics.",
+          "The proposal considers moving or shortening the workout and dinner after the sprint, but it does not show whether a less brittle version within the same visible goals was considered, such as reducing transition dependence or clarifying whether dinner is intended to be prepared in advance, portable, or eaten at the sprint location."
+        ],
+        "feedback": "The proposal is directionally sensible because it protects the fixed Thursday sprint, preserves the requested workout, and adds dinner in the only visible gap. However, from a human-manageability perspective, the resulting Thursday evening is very tight. The main issue is not a technical overlap but whether the 18:30-19:00 interval can realistically function as dinner after exercise and before a mandatory 2.5-hour group session. The Proposer should reconsider or substantiate the practical conditions around this block: whether the workout, dinner, and sprint setup can occur without hidden travel, hygiene, preparation, or recovery needs. If the same operation is kept, the rationale should explain why this exact 30-minute dinner is realistically usable rather than merely available on the calendar.",
+        "plausibility_review": {
+          "revision_required": true,
+          "severity": "moderate",
+          "reason": "The proposed addition relies on a narrow 30-minute interval directly between a workout and a mandatory group sprint on an already demanding workday. This could significantly affect manageability if the user needs any realistic transition, hygiene, food access, or setup time. The concern is not an objective conflict and may be resolved by context, but the current rationale does not substantiate that the dinner block is practically usable.",
+          "suggested_improvement": "Reassess the Thursday evening with attention to real transition needs around the workout, dinner, and sprint. Either adjust the organization using the Proposer’s fuller context or keep the same placement with a grounded explanation of why the 18:30-19:00 dinner is feasible in practice."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Thursday post-work logistics",
+            "assumption": "The user can move from work to the gym by 17:45 and complete the workout by 18:30 without creating downstream pressure.",
+            "evidence_gap": "The calendar shows only a 15-minute gap between work ending at 17:30 and the gym starting at 17:45, but no location, commute, changing, or setup information is provided.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Dinner feasibility",
+            "assumption": "A 30-minute dinner from 18:30 to 19:00 is enough after the workout and before the group sprint.",
+            "evidence_gap": "No information confirms food is prepared, nearby, portable, or available immediately after the workout, and no hygiene or recovery needs are represented.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Sprint readiness",
+            "assumption": "The user can start the mandatory group project sprint at 19:00 immediately after dinner without needing setup, travel, or decompression.",
+            "evidence_gap": "The sprint is described as Online/Library, but the actual setting and setup requirements are not specified.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Workout and sprint locations",
+            "assumption": "The gym, dinner location, and sprint location or device setup are close enough that no transition time is needed between 18:30 and 19:00.",
+            "evidence_gap": "The proposal explicitly states that no travel time or venue availability is assumed, leaving the practical location relationship unverified.",
+            "potential_impact": "potentially_blocking",
+            "verification_source": "unknown"
+          }
+        ],
+        "overall": 3.25
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": false,
+        "plausibility_revision_required": true,
+        "accepted": false,
+        "revision_causes": [
+          "numeric_criteria_failed",
+          "plausibility_revision_required"
+        ]
+      },
+      "operations_changed_from_previous": null,
+      "rationale_changed_from_previous": null,
+      "prior_critic_reviews": [],
+      "unresolved_assumptions": [
+        {
+          "subject": "Thursday post-work logistics",
+          "assumption": "The user can move from work to the gym by 17:45 and complete the workout by 18:30 without creating downstream pressure.",
+          "evidence_gap": "The calendar shows only a 15-minute gap between work ending at 17:30 and the gym starting at 17:45, but no location, commute, changing, or setup information is provided.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Dinner feasibility",
+          "assumption": "A 30-minute dinner from 18:30 to 19:00 is enough after the workout and before the group sprint.",
+          "evidence_gap": "No information confirms food is prepared, nearby, portable, or available immediately after the workout, and no hygiene or recovery needs are represented.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Sprint readiness",
+          "assumption": "The user can start the mandatory group project sprint at 19:00 immediately after dinner without needing setup, travel, or decompression.",
+          "evidence_gap": "The sprint is described as Online/Library, but the actual setting and setup requirements are not specified.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Workout and sprint locations",
+          "assumption": "The gym, dinner location, and sprint location or device setup are close enough that no transition time is needed between 18:30 and 19:00.",
+          "evidence_gap": "The proposal explicitly states that no travel time or venue availability is assumed, leaving the practical location relationship unverified.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "unknown"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "proposer_feedback": "Numeric Critic criteria failed. Scores: {\"reasoning\":3,\"coherence\":3,\"alternatives\":3,\"clarity\":4}. Plausibility revision required (moderate): The proposed addition relies on a narrow 30-minute interval directly between a workout and a mandatory group sprint on an already demanding workday. This could significantly affect manageability if the user needs any realistic transition, hygiene, food access, or setup time. The concern is not an objective conflict and may be resolved by context, but the current rationale does not substantiate that the dinner block is practically usable. Suggested direction: Reassess the Thursday evening with attention to real transition needs around the workout, dinner, and sprint. Either adjust the organization using the Proposer’s fuller context or keep the same placement with a grounded explanation of why the 18:30-19:00 dinner is feasible in practice. The Critic lacks the full user constraints; explain if no better feasible option exists. Unverified conditions to reassess: [{'subject': 'Thursday post-work logistics', 'assumption': 'The user can move from work to the gym by 17:45 and complete the workout by 18:30 without creating downstream pressure.', 'evidence_gap': 'The calendar shows only a 15-minute gap between work ending at 17:30 and the gym starting at 17:45, but no location, commute, changing, or setup information is provided.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Dinner feasibility', 'assumption': 'A 30-minute dinner from 18:30 to 19:00 is enough after the workout and before the group sprint.', 'evidence_gap': 'No information confirms food is prepared, nearby, portable, or available immediately after the workout, and no hygiene or recovery needs are represented.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Sprint readiness', 'assumption': 'The user can start the mandatory group project sprint at 19:00 immediately after dinner without needing setup, travel, or decompression.', 'evidence_gap': 'The sprint is described as Online/Library, but the actual setting and setup requirements are not specified.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Workout and sprint locations', 'assumption': 'The gym, dinner location, and sprint location or device setup are close enough that no transition time is needed between 18:30 and 19:00.', 'evidence_gap': 'The proposal explicitly states that no travel time or venue availability is assumed, leaving the practical location relationship unverified.', 'potential_impact': 'potentially_blocking', 'verification_source': 'unknown'}] Weaknesses: ['The added Dinner Break from 18:30 to 19:00 on Thursday is placed immediately after Gym: Quick Cardio & Strength from 17:45 to 18:30 and immediately before the mandatory Evening Group Project Sprint from 19:00 to 21:30. This leaves no visible margin for cooldown, hygiene, changing clothes, food pickup/preparation, setup for the sprint, or mental transition.', 'The rationale correctly acknowledges the dinner is short, but it treats the only free interval as usable dinner time without substantiating the practical conditions that would make that realistic after a workout and before a protected group session.', 'Thursday becomes a dense sequence after a full workday: work from 09:00 to 17:30, workout from 17:45 to 18:30, dinner from 18:30 to 19:00, and group project work from 19:00 to 21:30. This may be manageable for some people, but it is fragile and depends heavily on unknown logistics.', 'The proposal considers moving or shortening the workout and dinner after the sprint, but it does not show whether a less brittle version within the same visible goals was considered, such as reducing transition dependence or clarifying whether dinner is intended to be prepared in advance, portable, or eaten at the sprint location.']. Actionable feedback: The proposal is directionally sensible because it protects the fixed Thursday sprint, preserves the requested workout, and adds dinner in the only visible gap. However, from a human-manageability perspective, the resulting Thursday evening is very tight. The main issue is not a technical overlap but whether the 18:30-19:00 interval can realistically function as dinner after exercise and before a mandatory 2.5-hour group session. The Proposer should reconsider or substantiate the practical conditions around this block: whether the workout, dinner, and sprint setup can occur without hidden travel, hygiene, preparation, or recovery needs. If the same operation is kept, the rationale should explain why this exact 30-minute dinner is realistically usable rather than merely available on the calendar.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "move",
+            "event_id": "gym_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-04-22T17:45:00+01:00",
+            "to_end": "2027-04-22T18:15:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Dinner Break",
+            "from_start": null,
+            "to_start": "2027-04-22T18:15:00+01:00",
+            "to_end": "2027-04-22T18:45:00+01:00",
+            "category": "personal",
+            "importance": 3,
+            "participants": [
+              "user"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "The Thursday group sprint is protected, mandatory, and left unchanged.",
+            "The Wednesday doctor appointment is protected and left unchanged.",
+            "The Thursday workout is user-only, flexible, and not protected, so shortening it is operationally feasible.",
+            "The remaining feasibility of transitions is uncertain because locations, hygiene needs, meal access, and sprint setup are not supplied.",
+            "No opening hours, travel time, food preparation, or venue availability is assumed."
+          ],
+          "priorities": [
+            "Preserve mandatory education and health commitments.",
+            "Keep a short post-work workout before the group sprint.",
+            "Provide dinner before the sprint while adding visible margin before the protected start.",
+            "Accept a shorter workout to reduce the fragility of the evening sequence."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Keep the workout at its original length and add dinner in the only later free slot.",
+              "rejected_because": "Rejected because it leaves no visible margin before the mandatory sprint and depends more heavily on unknown logistics."
+            },
+            {
+              "option": "Move or shorten the protected group sprint.",
+              "rejected_because": "Rejected because the sprint is mandatory and protected by the profile."
+            },
+            {
+              "option": "Place dinner after the sprint.",
+              "rejected_because": "Rejected because the request requires dinner before the group sprint."
+            },
+            {
+              "option": "Move the doctor appointment to create more flexibility elsewhere.",
+              "rejected_because": "Rejected because the appointment is protected and unrelated to the Thursday scheduling pressure."
+            }
+          ],
+          "summary": "Shorten the flexible Thursday workout and add dinner before the protected sprint, creating a small visible buffer before group work; the trade-off is reduced workout duration rather than relying on a zero-margin transition."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-04-18T23:45:00+01:00",
+            "end": "2027-04-19T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_mon",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-04-19T09:00:00+01:00",
+            "end": "2027-04-19T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Daytime work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_mon",
+            "title": "Gym Workout",
+            "start": "2027-04-19T18:00:00+01:00",
+            "end": "2027-04-19T19:00:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_mon",
+            "title": "Evening Study: Project Research",
+            "start": "2027-04-19T19:30:00+01:00",
+            "end": "2027-04-19T21:45:00+01:00",
+            "category": "education",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Research for group project.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-04-19T23:45:00+01:00",
+            "end": "2027-04-20T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_tue",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-04-20T09:00:00+01:00",
+            "end": "2027-04-20T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Daytime work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "class_tue",
+            "title": "Evening Lecture: Marketing Analytics",
+            "start": "2027-04-20T18:30:00+01:00",
+            "end": "2027-04-20T21:30:00+01:00",
+            "category": "education",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "professor",
+              "classmates"
+            ],
+            "description": "Mandatory evening class.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-04-20T23:45:00+01:00",
+            "end": "2027-04-21T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_wed",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-04-21T09:00:00+01:00",
+            "end": "2027-04-21T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Daytime work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "doctor_wed",
+            "title": "Routine Health Check-up Appointment",
+            "start": "2027-04-21T18:00:00+01:00",
+            "end": "2027-04-21T19:15:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "doctor"
+            ],
+            "description": "Scheduled medical appointment.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "dinner_personal_wed",
+            "title": "Dinner & Personal Admin",
+            "start": "2027-04-21T19:45:00+01:00",
+            "end": "2027-04-21T21:45:00+01:00",
+            "category": "personal",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Dinner and bills/admin.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-04-21T23:45:00+01:00",
+            "end": "2027-04-22T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_thu",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-04-22T09:00:00+01:00",
+            "end": "2027-04-22T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Daytime work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_thu",
+            "title": "Gym: Quick Cardio & Strength",
+            "start": "2027-04-22T17:45:00+01:00",
+            "end": "2027-04-22T18:15:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Short workout before group work.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "new_1",
+            "title": "Dinner Break",
+            "start": "2027-04-22T18:15:00+01:00",
+            "end": "2027-04-22T18:45:00+01:00",
+            "category": "personal",
+            "importance": 3,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "group_project_thu",
+            "title": "Evening Group Project Sprint (Online/Library)",
+            "start": "2027-04-22T19:00:00+01:00",
+            "end": "2027-04-22T21:30:00+01:00",
+            "category": "education",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "classmates"
+            ],
+            "description": "Mandatory group session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-04-22T23:45:00+01:00",
+            "end": "2027-04-23T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_fri",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-04-23T09:00:00+01:00",
+            "end": "2027-04-23T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Friday work shift.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_fri",
+            "title": "Gym: Full Body Workout",
+            "start": "2027-04-23T18:00:00+01:00",
+            "end": "2027-04-23T19:15:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "social_fri",
+            "title": "Casual Dinner with Friends",
+            "start": "2027-04-23T20:00:00+01:00",
+            "end": "2027-04-23T23:00:00+01:00",
+            "category": "personal",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user",
+              "friends"
+            ],
+            "description": "Friday night hangout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 4,
+          "alternatives": 4,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The revised Thursday sequence is more workable than the prior version, but it remains logistically tight: work ends at 17:30, Gym: Quick Cardio & Strength starts at 17:45, Dinner Break runs immediately from 18:15 to 18:45, and the mandatory Evening Group Project Sprint starts at 19:00. The 15-minute margin before the sprint helps, but there is still no visible time between workout and dinner for cooldown, hygiene, changing, or food access.",
+          "The rationale acknowledges that transitions, hygiene needs, meal access, and sprint setup are uncertain, but it does not verify them. This is not a technical violation, and the calendar may be feasible if the locations and food setup are convenient, but the human practicality still depends on conditions not shown in the calendar.",
+          "The visible week is consistently demanding, with full workdays followed by substantial evening commitments on Monday, Tuesday, Wednesday, Thursday, and Friday. The proposed change does not create this broader load, but Thursday adds another dense post-work sequence within an already busy week.",
+          "The proposal improves on the previous zero-margin dinner-to-sprint arrangement by shortening the workout and adding a 15-minute buffer before the sprint. However, it still relies on the assumption that a 30-minute workout plus immediate dinner is a satisfactory and realistic pre-sprint routine for this user."
+        ],
+        "feedback": "The revision meaningfully addresses the prior concern by shortening the Thursday workout from 45 minutes to 30 minutes and moving dinner earlier, creating a visible 15-minute margin before the protected 19:00 group sprint. That makes the plan less brittle than the earlier version where dinner ended exactly as the sprint began. The proposal also gives a clearer trade-off: preserve the mandatory sprint and a short workout, while accepting a reduced workout duration to make dinner before the sprint more plausible. The remaining concern is practical rather than objective: the Thursday evening still depends on very efficient post-work logistics, immediate food access after exercise, and minimal setup needs before the sprint. Because the rationale openly recognizes those uncertainties and the revised operations reduce the most fragile part of the earlier plan, a further revision is not clearly required from the visible information alone. If the proposer has fuller context showing that work, gym, dinner, and sprint setup are colocated or otherwise easy, the current plan can be reasonable; if not, the Thursday sequence may still feel rushed.",
+        "plausibility_review": {
+          "revision_required": false,
+          "severity": "low",
+          "reason": "The prior zero-margin issue has been materially improved: dinner now ends at 18:45 rather than 19:00, leaving 15 minutes before the mandatory group sprint, and the workout has been shortened to reduce evening pressure. Remaining risks are real but depend on unverified personal logistics rather than a demonstrable flaw in the organization. If the assumptions about quick transition, hygiene, meal access, and sprint setup are false, the likely consequence is a rushed or compromised dinner and reduced readiness for the sprint, but the visible calendar no longer shows the same level of brittleness as the previous proposal.",
+          "suggested_improvement": "Keep the current organization only if the proposer’s fuller context supports the practical logistics around the 17:45 workout, immediate 18:15 dinner, and 19:00 sprint. Otherwise, reconsider the Thursday evening distribution with attention to reducing dependence on hidden transition, hygiene, food-preparation, or setup time."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Work-to-gym transition on Thursday",
+            "assumption": "The user can finish work at 17:30 and begin the gym workout at 17:45 without undue rush.",
+            "evidence_gap": "The calendar shows only a 15-minute gap between Daytime Job: Core Shift and Gym: Quick Cardio & Strength, with no location, commute, changing, or preparation information.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Post-workout dinner practicality",
+            "assumption": "The user can eat dinner from 18:15 to 18:45 immediately after the gym workout in a way that is adequate and realistic.",
+            "evidence_gap": "No information confirms whether food is prepared, portable, nearby, or available immediately after exercise, and no hygiene, cooldown, or changing needs are represented.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Sprint readiness",
+            "assumption": "The 15-minute gap from 18:45 to 19:00 is enough for the user to be ready for the mandatory group project sprint.",
+            "evidence_gap": "The sprint is described as Online/Library, but the actual setting, setup requirements, travel needs, and materials needed are not specified.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Thursday location chain",
+            "assumption": "The work location, gym, dinner access, and sprint location or device setup are close enough or simple enough for the proposed sequence to work.",
+            "evidence_gap": "The proposal explicitly states that locations, travel time, hygiene needs, meal access, and sprint setup are not supplied.",
+            "potential_impact": "potentially_blocking",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Cumulative weekday load",
+            "assumption": "The user can sustainably handle full workdays followed by evening commitments across Monday through Friday, including the revised dense Thursday sequence.",
+            "evidence_gap": "The visible calendar shows repeated evening obligations after work, but does not include the user's recovery needs, energy limits, commute burden, or weekend context.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          }
+        ],
+        "overall": 4.0
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": true,
+        "plausibility_revision_required": false,
+        "accepted": true,
+        "revision_causes": []
+      },
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": [
+        {
+          "iteration": 0,
+          "proposal": {
+            "changes": [
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Dinner Break",
+                "from_start": null,
+                "to_start": "2027-04-22T18:30:00+01:00",
+                "to_end": "2027-04-22T19:00:00+01:00",
+                "category": "personal",
+                "importance": 3,
+                "participants": [
+                  "user"
+                ]
+              }
+            ],
+            "rationale": {
+              "constraints": [
+                "The Thursday group sprint is protected and remains fixed from 19:00 to 21:30.",
+                "The Wednesday doctor appointment is protected and remains unchanged.",
+                "The existing Thursday workout is kept immediately after work and before the sprint.",
+                "The dinner break uses the only free interval between workout and sprint, so it is short.",
+                "No opening hours, travel time, food availability, or venue availability is assumed."
+              ],
+              "priorities": [
+                "Preserve mandatory education and health commitments.",
+                "Satisfy the requested post-work workout before group work.",
+                "Add dinner before the sprint without moving existing events."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Move or shorten the Thursday workout to create a longer dinner break.",
+                  "rejected_because": "Rejected because the user specifically asked to keep the short post-work workout and the current slot already fits that preference."
+                },
+                {
+                  "option": "Place dinner after the sprint.",
+                  "rejected_because": "Rejected because the request requires dinner before the group sprint."
+                }
+              ],
+              "summary": "Add a 30-minute dinner break between the kept Thursday workout and the protected group sprint; the trade-off is that dinner is brief because the sprint and workout are both preserved."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "sleep_mon",
+                "title": "Sleep",
+                "start": "2027-04-18T23:45:00+01:00",
+                "end": "2027-04-19T07:15:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Night sleep.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_mon",
+                "title": "Daytime Job: Core Shift",
+                "start": "2027-04-19T09:00:00+01:00",
+                "end": "2027-04-19T17:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "colleagues"
+                ],
+                "description": "Daytime work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_mon",
+                "title": "Gym Workout",
+                "start": "2027-04-19T18:00:00+01:00",
+                "end": "2027-04-19T19:00:00+01:00",
+                "category": "health",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Workout.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "study_mon",
+                "title": "Evening Study: Project Research",
+                "start": "2027-04-19T19:30:00+01:00",
+                "end": "2027-04-19T21:45:00+01:00",
+                "category": "education",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Research for group project.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_tue",
+                "title": "Sleep",
+                "start": "2027-04-19T23:45:00+01:00",
+                "end": "2027-04-20T07:15:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Night sleep.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_tue",
+                "title": "Daytime Job: Core Shift",
+                "start": "2027-04-20T09:00:00+01:00",
+                "end": "2027-04-20T17:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "colleagues"
+                ],
+                "description": "Daytime work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "class_tue",
+                "title": "Evening Lecture: Marketing Analytics",
+                "start": "2027-04-20T18:30:00+01:00",
+                "end": "2027-04-20T21:30:00+01:00",
+                "category": "education",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "professor",
+                  "classmates"
+                ],
+                "description": "Mandatory evening class.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_wed",
+                "title": "Sleep",
+                "start": "2027-04-20T23:45:00+01:00",
+                "end": "2027-04-21T07:15:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Night sleep.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_wed",
+                "title": "Daytime Job: Core Shift",
+                "start": "2027-04-21T09:00:00+01:00",
+                "end": "2027-04-21T17:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "colleagues"
+                ],
+                "description": "Daytime work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "doctor_wed",
+                "title": "Routine Health Check-up Appointment",
+                "start": "2027-04-21T18:00:00+01:00",
+                "end": "2027-04-21T19:15:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "doctor"
+                ],
+                "description": "Scheduled medical appointment.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "dinner_personal_wed",
+                "title": "Dinner & Personal Admin",
+                "start": "2027-04-21T19:45:00+01:00",
+                "end": "2027-04-21T21:45:00+01:00",
+                "category": "personal",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Dinner and bills/admin.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2027-04-21T23:45:00+01:00",
+                "end": "2027-04-22T07:15:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Night sleep.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_thu",
+                "title": "Daytime Job: Core Shift",
+                "start": "2027-04-22T09:00:00+01:00",
+                "end": "2027-04-22T17:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "colleagues"
+                ],
+                "description": "Daytime work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_thu",
+                "title": "Gym: Quick Cardio & Strength",
+                "start": "2027-04-22T17:45:00+01:00",
+                "end": "2027-04-22T18:30:00+01:00",
+                "category": "health",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Short workout before group work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_0",
+                "title": "Dinner Break",
+                "start": "2027-04-22T18:30:00+01:00",
+                "end": "2027-04-22T19:00:00+01:00",
+                "category": "personal",
+                "importance": 3,
+                "fixed": null,
+                "participants": [
+                  "user"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "group_project_thu",
+                "title": "Evening Group Project Sprint (Online/Library)",
+                "start": "2027-04-22T19:00:00+01:00",
+                "end": "2027-04-22T21:30:00+01:00",
+                "category": "education",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "classmates"
+                ],
+                "description": "Mandatory group session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_fri",
+                "title": "Sleep",
+                "start": "2027-04-22T23:45:00+01:00",
+                "end": "2027-04-23T07:15:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Night sleep.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_fri",
+                "title": "Daytime Job: Core Shift",
+                "start": "2027-04-23T09:00:00+01:00",
+                "end": "2027-04-23T17:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "colleagues"
+                ],
+                "description": "Friday work shift.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_fri",
+                "title": "Gym: Full Body Workout",
+                "start": "2027-04-23T18:00:00+01:00",
+                "end": "2027-04-23T19:15:00+01:00",
+                "category": "health",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Workout.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "social_fri",
+                "title": "Casual Dinner with Friends",
+                "start": "2027-04-23T20:00:00+01:00",
+                "end": "2027-04-23T23:00:00+01:00",
+                "category": "personal",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "friends"
+                ],
+                "description": "Friday night hangout.",
+                "origin": "existing",
+                "change_status": "preserved"
+              }
+            ],
+            "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+          },
+          "plausibility_review": {
+            "revision_required": true,
+            "severity": "moderate",
+            "reason": "The proposed addition relies on a narrow 30-minute interval directly between a workout and a mandatory group sprint on an already demanding workday. This could significantly affect manageability if the user needs any realistic transition, hygiene, food access, or setup time. The concern is not an objective conflict and may be resolved by context, but the current rationale does not substantiate that the dinner block is practically usable.",
+            "suggested_improvement": "Reassess the Thursday evening with attention to real transition needs around the workout, dinner, and sprint. Either adjust the organization using the Proposer’s fuller context or keep the same placement with a grounded explanation of why the 18:30-19:00 dinner is feasible in practice."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Thursday post-work logistics",
+              "assumption": "The user can move from work to the gym by 17:45 and complete the workout by 18:30 without creating downstream pressure.",
+              "evidence_gap": "The calendar shows only a 15-minute gap between work ending at 17:30 and the gym starting at 17:45, but no location, commute, changing, or setup information is provided.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Dinner feasibility",
+              "assumption": "A 30-minute dinner from 18:30 to 19:00 is enough after the workout and before the group sprint.",
+              "evidence_gap": "No information confirms food is prepared, nearby, portable, or available immediately after the workout, and no hygiene or recovery needs are represented.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Sprint readiness",
+              "assumption": "The user can start the mandatory group project sprint at 19:00 immediately after dinner without needing setup, travel, or decompression.",
+              "evidence_gap": "The sprint is described as Online/Library, but the actual setting and setup requirements are not specified.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Workout and sprint locations",
+              "assumption": "The gym, dinner location, and sprint location or device setup are close enough that no transition time is needed between 18:30 and 19:00.",
+              "evidence_gap": "The proposal explicitly states that no travel time or venue availability is assumed, leaving the practical location relationship unverified.",
+              "potential_impact": "potentially_blocking",
+              "verification_source": "unknown"
+            }
+          ],
+          "weaknesses": [
+            "The added Dinner Break from 18:30 to 19:00 on Thursday is placed immediately after Gym: Quick Cardio & Strength from 17:45 to 18:30 and immediately before the mandatory Evening Group Project Sprint from 19:00 to 21:30. This leaves no visible margin for cooldown, hygiene, changing clothes, food pickup/preparation, setup for the sprint, or mental transition.",
+            "The rationale correctly acknowledges the dinner is short, but it treats the only free interval as usable dinner time without substantiating the practical conditions that would make that realistic after a workout and before a protected group session.",
+            "Thursday becomes a dense sequence after a full workday: work from 09:00 to 17:30, workout from 17:45 to 18:30, dinner from 18:30 to 19:00, and group project work from 19:00 to 21:30. This may be manageable for some people, but it is fragile and depends heavily on unknown logistics.",
+            "The proposal considers moving or shortening the workout and dinner after the sprint, but it does not show whether a less brittle version within the same visible goals was considered, such as reducing transition dependence or clarifying whether dinner is intended to be prepared in advance, portable, or eaten at the sprint location."
+          ],
+          "feedback": "The proposal is directionally sensible because it protects the fixed Thursday sprint, preserves the requested workout, and adds dinner in the only visible gap. However, from a human-manageability perspective, the resulting Thursday evening is very tight. The main issue is not a technical overlap but whether the 18:30-19:00 interval can realistically function as dinner after exercise and before a mandatory 2.5-hour group session. The Proposer should reconsider or substantiate the practical conditions around this block: whether the workout, dinner, and sprint setup can occur without hidden travel, hygiene, preparation, or recovery needs. If the same operation is kept, the rationale should explain why this exact 30-minute dinner is realistically usable rather than merely available on the calendar."
+        }
+      ],
+      "unresolved_assumptions": [
+        {
+          "subject": "Work-to-gym transition on Thursday",
+          "assumption": "The user can finish work at 17:30 and begin the gym workout at 17:45 without undue rush.",
+          "evidence_gap": "The calendar shows only a 15-minute gap between Daytime Job: Core Shift and Gym: Quick Cardio & Strength, with no location, commute, changing, or preparation information.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Post-workout dinner practicality",
+          "assumption": "The user can eat dinner from 18:15 to 18:45 immediately after the gym workout in a way that is adequate and realistic.",
+          "evidence_gap": "No information confirms whether food is prepared, portable, nearby, or available immediately after exercise, and no hygiene, cooldown, or changing needs are represented.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Sprint readiness",
+          "assumption": "The 15-minute gap from 18:45 to 19:00 is enough for the user to be ready for the mandatory group project sprint.",
+          "evidence_gap": "The sprint is described as Online/Library, but the actual setting, setup requirements, travel needs, and materials needed are not specified.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Thursday location chain",
+          "assumption": "The work location, gym, dinner access, and sprint location or device setup are close enough or simple enough for the proposed sequence to work.",
+          "evidence_gap": "The proposal explicitly states that locations, travel time, hygiene needs, meal access, and sprint setup are not supplied.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Cumulative weekday load",
+          "assumption": "The user can sustainably handle full workdays followed by evening commitments across Monday through Friday, including the revised dense Thursday sequence.",
+          "evidence_gap": "The visible calendar shows repeated evening obligations after work, but does not include the user's recovery needs, energy limits, commute burden, or weekend context.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    }
+  ],
+  "refinements": 1,
+  "source_status": "proposal_ready",
+  "final_proposal": {
+    "changes": [
+      {
+        "type": "move",
+        "event_id": "gym_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": "2027-04-22T17:45:00+01:00",
+        "to_end": "2027-04-22T18:15:00+01:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Dinner Break",
+        "from_start": null,
+        "to_start": "2027-04-22T18:15:00+01:00",
+        "to_end": "2027-04-22T18:45:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "participants": [
+          "user"
+        ]
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "The Thursday group sprint is protected, mandatory, and left unchanged.",
+        "The Wednesday doctor appointment is protected and left unchanged.",
+        "The Thursday workout is user-only, flexible, and not protected, so shortening it is operationally feasible.",
+        "The remaining feasibility of transitions is uncertain because locations, hygiene needs, meal access, and sprint setup are not supplied.",
+        "No opening hours, travel time, food preparation, or venue availability is assumed."
+      ],
+      "priorities": [
+        "Preserve mandatory education and health commitments.",
+        "Keep a short post-work workout before the group sprint.",
+        "Provide dinner before the sprint while adding visible margin before the protected start.",
+        "Accept a shorter workout to reduce the fragility of the evening sequence."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Keep the workout at its original length and add dinner in the only later free slot.",
+          "rejected_because": "Rejected because it leaves no visible margin before the mandatory sprint and depends more heavily on unknown logistics."
+        },
+        {
+          "option": "Move or shorten the protected group sprint.",
+          "rejected_because": "Rejected because the sprint is mandatory and protected by the profile."
+        },
+        {
+          "option": "Place dinner after the sprint.",
+          "rejected_because": "Rejected because the request requires dinner before the group sprint."
+        },
+        {
+          "option": "Move the doctor appointment to create more flexibility elsewhere.",
+          "rejected_because": "Rejected because the appointment is protected and unrelated to the Thursday scheduling pressure."
+        }
+      ],
+      "summary": "Shorten the flexible Thursday workout and add dinner before the protected sprint, creating a small visible buffer before group work; the trade-off is reduced workout duration rather than relying on a zero-margin transition."
+    }
+  },
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [],
+    "valid": true
+  },
+  "source_result_sha256": "79dd5e74df7071731871ca7e02d22053c7b580d517815a221aee260d6aeb9d22",
+  "scenario_sha256": "5b11ab7254e1019b20fe277699ff1957f272835e88a5ff1439b8e09b783f689c",
+  "aggregate_requirements_sha256": null,
+  "confirmed_changes_sha256": null,
+  "critic_input_version": "final_calendar_v1",
+  "critic_policy_version": "uncertainty_review_v2",
+  "result_calendar_version": "validated_added_metadata_v2",
+  "final_result_calendar": {
+    "timezone": "Europe/Lisbon",
+    "coverage": "all_events_in_scenario_after_simulation",
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-04-18T23:45:00+01:00",
+        "end": "2027-04-19T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_mon",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-04-19T09:00:00+01:00",
+        "end": "2027-04-19T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Daytime work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_mon",
+        "title": "Gym Workout",
+        "start": "2027-04-19T18:00:00+01:00",
+        "end": "2027-04-19T19:00:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "study_mon",
+        "title": "Evening Study: Project Research",
+        "start": "2027-04-19T19:30:00+01:00",
+        "end": "2027-04-19T21:45:00+01:00",
+        "category": "education",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Research for group project.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-04-19T23:45:00+01:00",
+        "end": "2027-04-20T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_tue",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-04-20T09:00:00+01:00",
+        "end": "2027-04-20T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Daytime work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "class_tue",
+        "title": "Evening Lecture: Marketing Analytics",
+        "start": "2027-04-20T18:30:00+01:00",
+        "end": "2027-04-20T21:30:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "professor",
+          "classmates"
+        ],
+        "description": "Mandatory evening class.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-04-20T23:45:00+01:00",
+        "end": "2027-04-21T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_wed",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-04-21T09:00:00+01:00",
+        "end": "2027-04-21T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Daytime work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "doctor_wed",
+        "title": "Routine Health Check-up Appointment",
+        "start": "2027-04-21T18:00:00+01:00",
+        "end": "2027-04-21T19:15:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "doctor"
+        ],
+        "description": "Scheduled medical appointment.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "dinner_personal_wed",
+        "title": "Dinner & Personal Admin",
+        "start": "2027-04-21T19:45:00+01:00",
+        "end": "2027-04-21T21:45:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Dinner and bills/admin.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-04-21T23:45:00+01:00",
+        "end": "2027-04-22T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_thu",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-04-22T09:00:00+01:00",
+        "end": "2027-04-22T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Daytime work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_thu",
+        "title": "Gym: Quick Cardio & Strength",
+        "start": "2027-04-22T17:45:00+01:00",
+        "end": "2027-04-22T18:15:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Short workout before group work.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "new_1",
+        "title": "Dinner Break",
+        "start": "2027-04-22T18:15:00+01:00",
+        "end": "2027-04-22T18:45:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "group_project_thu",
+        "title": "Evening Group Project Sprint (Online/Library)",
+        "start": "2027-04-22T19:00:00+01:00",
+        "end": "2027-04-22T21:30:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "classmates"
+        ],
+        "description": "Mandatory group session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-04-22T23:45:00+01:00",
+        "end": "2027-04-23T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_fri",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-04-23T09:00:00+01:00",
+        "end": "2027-04-23T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Friday work shift.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_fri",
+        "title": "Gym: Full Body Workout",
+        "start": "2027-04-23T18:00:00+01:00",
+        "end": "2027-04-23T19:15:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "social_fri",
+        "title": "Casual Dinner with Friends",
+        "start": "2027-04-23T20:00:00+01:00",
+        "end": "2027-04-23T23:00:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "friends"
+        ],
+        "description": "Friday night hangout.",
+        "origin": "existing",
+        "change_status": "preserved"
+      }
+    ],
+    "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+  },
+  "final_unresolved_assumptions": [
+    {
+      "subject": "Work-to-gym transition on Thursday",
+      "assumption": "The user can finish work at 17:30 and begin the gym workout at 17:45 without undue rush.",
+      "evidence_gap": "The calendar shows only a 15-minute gap between Daytime Job: Core Shift and Gym: Quick Cardio & Strength, with no location, commute, changing, or preparation information.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Post-workout dinner practicality",
+      "assumption": "The user can eat dinner from 18:15 to 18:45 immediately after the gym workout in a way that is adequate and realistic.",
+      "evidence_gap": "No information confirms whether food is prepared, portable, nearby, or available immediately after exercise, and no hygiene, cooldown, or changing needs are represented.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Sprint readiness",
+      "assumption": "The 15-minute gap from 18:45 to 19:00 is enough for the user to be ready for the mandatory group project sprint.",
+      "evidence_gap": "The sprint is described as Online/Library, but the actual setting, setup requirements, travel needs, and materials needed are not specified.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Thursday location chain",
+      "assumption": "The work location, gym, dinner access, and sprint location or device setup are close enough or simple enough for the proposed sequence to work.",
+      "evidence_gap": "The proposal explicitly states that locations, travel time, hygiene needs, meal access, and sprint setup are not supplied.",
+      "potential_impact": "potentially_blocking",
+      "verification_source": "unknown"
+    },
+    {
+      "subject": "Cumulative weekday load",
+      "assumption": "The user can sustainably handle full workdays followed by evening commitments across Monday through Friday, including the revised dense Thursday sequence.",
+      "evidence_gap": "The visible calendar shows repeated evening obligations after work, but does not include the user's recovery needs, energy limits, commute burden, or weekend context.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    }
+  ],
+  "uncertainty_history": [
+    {
+      "iteration": 0,
+      "unresolved_assumptions": [
+        {
+          "subject": "Thursday post-work logistics",
+          "assumption": "The user can move from work to the gym by 17:45 and complete the workout by 18:30 without creating downstream pressure.",
+          "evidence_gap": "The calendar shows only a 15-minute gap between work ending at 17:30 and the gym starting at 17:45, but no location, commute, changing, or setup information is provided.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Dinner feasibility",
+          "assumption": "A 30-minute dinner from 18:30 to 19:00 is enough after the workout and before the group sprint.",
+          "evidence_gap": "No information confirms food is prepared, nearby, portable, or available immediately after the workout, and no hygiene or recovery needs are represented.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Sprint readiness",
+          "assumption": "The user can start the mandatory group project sprint at 19:00 immediately after dinner without needing setup, travel, or decompression.",
+          "evidence_gap": "The sprint is described as Online/Library, but the actual setting and setup requirements are not specified.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Workout and sprint locations",
+          "assumption": "The gym, dinner location, and sprint location or device setup are close enough that no transition time is needed between 18:30 and 19:00.",
+          "evidence_gap": "The proposal explicitly states that no travel time or venue availability is assumed, leaving the practical location relationship unverified.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "unknown"
+        }
+      ]
+    },
+    {
+      "iteration": 1,
+      "unresolved_assumptions": [
+        {
+          "subject": "Work-to-gym transition on Thursday",
+          "assumption": "The user can finish work at 17:30 and begin the gym workout at 17:45 without undue rush.",
+          "evidence_gap": "The calendar shows only a 15-minute gap between Daytime Job: Core Shift and Gym: Quick Cardio & Strength, with no location, commute, changing, or preparation information.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Post-workout dinner practicality",
+          "assumption": "The user can eat dinner from 18:15 to 18:45 immediately after the gym workout in a way that is adequate and realistic.",
+          "evidence_gap": "No information confirms whether food is prepared, portable, nearby, or available immediately after exercise, and no hygiene, cooldown, or changing needs are represented.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Sprint readiness",
+          "assumption": "The 15-minute gap from 18:45 to 19:00 is enough for the user to be ready for the mandatory group project sprint.",
+          "evidence_gap": "The sprint is described as Online/Library, but the actual setting, setup requirements, travel needs, and materials needed are not specified.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Thursday location chain",
+          "assumption": "The work location, gym, dinner access, and sprint location or device setup are close enough or simple enough for the proposed sequence to work.",
+          "evidence_gap": "The proposal explicitly states that locations, travel time, hygiene needs, meal access, and sprint setup are not supplied.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Cumulative weekday load",
+          "assumption": "The user can sustainably handle full workdays followed by evening commitments across Monday through Friday, including the revised dense Thursday sequence.",
+          "evidence_gap": "The visible calendar shows repeated evening obligations after work, but does not include the user's recovery needs, energy limits, commute burden, or weekend context.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    }
+  ]
+}

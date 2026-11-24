@@ -11,7 +11,7 @@ from dataclasses import dataclass
 from datetime import date, datetime, time, timedelta
 from typing import Iterable
 
-HOUR_PX = 48
+HOUR_PX = 60
 DAY_PX = 24 * HOUR_PX
 DAYS_PT = ("Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom")
 WEEKDAYS_EN = ("monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday")
@@ -244,7 +244,7 @@ def _daily_segments(events: list[ViewEvent], day: date,
             top = start_min / 60 * HOUR_PX
             out.append(Segment(event, day, start_min, end_min,
                                min(top, DAY_PX - 12) if milestone else top,
-                               max((end_min - start_min) / 60 * HOUR_PX, 12),
+                               max((end_min - start_min) / 60 * HOUR_PX, 8),
                                lane, count,
                                bool(interval and overlaps(event, interval)),
                                milestone))
@@ -277,7 +277,7 @@ def _clock(minute: int) -> str:
 
 
 def render_week_html(events: list[ViewEvent], week_start: date,
-                     interval: Interval | None) -> str:
+                     interval: Interval | None, *, comparison_palette: bool = False) -> str:
     """Escaped, read-only HTML/CSS; no scripts or event mutation controls."""
     segments = week_segments(events, week_start, interval)
     highlights = interval_segments(interval, week_start)
@@ -315,7 +315,8 @@ def render_week_html(events: list[ViewEvent], week_start: date,
                 label += " · Marco pontual"
             title = html.escape(event.title)
             full_times = f"{event.start:%d/%m %H:%M}–{event.end:%d/%m %H:%M}"
-            detail = html.escape(f"{event.title}; {full_times}; categoria {event.category}; "
+            duration_minutes = int((event.end - event.start).total_seconds() // 60)
+            detail = html.escape(f"{event.title}; {full_times}; duração {duration_minutes} min; categoria {event.category}; "
                                  f"importância {event.importance}/5; {label}", quote=True)
             left = segment.lane / segment.lane_count * 100
             width = 100 / segment.lane_count
@@ -332,7 +333,7 @@ def render_week_html(events: list[ViewEvent], week_start: date,
         cells.append(f"<div class='hcai-day-track' role='group' aria-label='{DAYS_PT[index]} {day:%d/%m/%Y}'>"
                      + "".join(parts) + "</div>")
     return ("<style>"
-            ".hcai-wrap{overflow:auto;max-height:680px;border:1px solid #cbd5e1;border-radius:10px;"
+            ".hcai-wrap{overflow:auto;max-height:760px;border:1px solid #cbd5e1;border-radius:10px;"
             "font-family:system-ui,sans-serif;background:#fff;color:#172033}"
             ".hcai-calendar{min-width:760px}"
             ".hcai-header{display:grid;grid-template-columns:58px repeat(7,minmax(100px,1fr));"
@@ -340,14 +341,14 @@ def render_week_html(events: list[ViewEvent], week_start: date,
             ".hcai-day-heading{text-align:center;padding:6px 2px;font-size:13px;border-left:1px solid #e2e8f0}"
             ".hcai-body{display:grid;grid-template-columns:58px repeat(7,minmax(100px,1fr))}"
             f".hcai-hours,.hcai-day-track{{height:{DAY_PX}px;position:relative;"
-            "background:repeating-linear-gradient(to bottom,#fff 0,#fff 47px,#e5e7eb 47px,#e5e7eb 48px)}}"
+            f"background:repeating-linear-gradient(to bottom,#fff 0,#fff {HOUR_PX - 1}px,#e5e7eb {HOUR_PX - 1}px,#e5e7eb {HOUR_PX}px)}}"
             ".hcai-hours{border-right:1px solid #cbd5e1;color:#475569}"
             ".hcai-hours span{position:absolute;right:5px;transform:translateY(-7px);font-size:11px}"
             ".hcai-day-track{border-right:1px solid #e2e8f0}"
             ".hcai-target{position:absolute;left:0;right:0;background:rgba(245,158,11,.18);"
             "outline:2px dashed #9a5700;outline-offset:-2px;z-index:1;pointer-events:none}"
             ".hcai-event{position:absolute;z-index:2;box-sizing:border-box;border-radius:5px;padding:2px 4px;"
-            "overflow:hidden;font-size:11px;line-height:1.2;border:1px solid #64748b;"
+            "overflow:hidden;font-size:11px;line-height:1.25;border:1px solid #64748b;"
             "background:#e2e8f0;color:#172033}"
             ".hcai-event strong,.hcai-event small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}"
             ".hcai-event:hover,.hcai-event:focus{z-index:5;outline:2px solid #172033;overflow:visible}"
@@ -362,8 +363,12 @@ def render_week_html(events: list[ViewEvent], week_start: date,
             ".hcai-added{border-style:dashed;border-width:3px}"
             ".hcai-moved{border-width:3px}"
             ".hcai-removed,.hcai-previous_position{opacity:.55;border-style:dashed;background:#f1f5f9}"
+            ".hcai-comparison .hcai-unchanged,.hcai-comparison .hcai-preserved{background:#e5e7eb;border-color:#64748b}"
+            ".hcai-comparison .hcai-added{background:#bbf7d0;border-color:#15803d;color:#14532d}"
+            ".hcai-comparison .hcai-moved{background:#bfdbfe;border-color:#1d4ed8;color:#1e3a8a}"
+            ".hcai-comparison .hcai-removed,.hcai-comparison .hcai-previous_position{background:#fecaca;border-color:#b91c1c;color:#7f1d1d}"
             "</style>"
-            "<div class='hcai-wrap'><div class='hcai-calendar'>"
+            f"<div class='hcai-wrap{' hcai-comparison' if comparison_palette else ''}'><div class='hcai-calendar'>"
             "<div class='hcai-header'><div></div>" + head + "</div>"
             "<div class='hcai-body'><div class='hcai-hours'>" + hours + "</div>"
             + "".join(cells) + "</div></div></div>")

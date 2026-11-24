@@ -1,0 +1,2368 @@
+{
+  "proposal_id": "v2p_1d7c4c6b0ff97c6daa453f86",
+  "scenario_id": "freelancer_flexible_hackathon_prep_daily_syncs_001",
+  "family_id": "freelancer_schedule_conflict",
+  "profile_id": "freelancer_flexible_01__freelancer_flexible_hackathon_prep_daily_syncs_001",
+  "split": "train",
+  "run_id": "ee8e6ae654b3456db4e2d7db46be4f91",
+  "configuration": "B",
+  "generated_at": "2026-11-24T10:14:51.995915+00:00",
+  "proposer_provider": "iaedu",
+  "proposer_model": "GPT-5.5",
+  "proposer_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_provider": "iaedu",
+  "critic_model": "GPT-5.5",
+  "critic_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "prompt_versions": {
+    "proposer_sha256": "ae6fa59cccb86c31f34f66d07d241660b1feadf852ebf1b594bc85addab86985",
+    "proposer_wire_schema_version": "compact_proposal_v1",
+    "proposer_wire_schema_sha256": "f504fbcd7e939c43e055e2f188feb22097a284bcd9b043227d868e559547b865",
+    "proposer_revision_sha256": "3f0fe7f221013700694a22984560612013e9804072ffde4538e1329b9708ac95",
+    "critic_sha256": "1686688cdd4bc63abb12e6633ef9dbb9b62d69b69aba1c4805a201657cc5bb34"
+  },
+  "critic_settings": {
+    "threshold": 4.0,
+    "max_refinements": 3,
+    "min_dimension_score": 1
+  },
+  "experiment_id": null,
+  "repeat_index": 0,
+  "seconds": 90.36,
+  "critic_score": 4.0,
+  "critic_accepted": true,
+  "iterations": [
+    {
+      "index": 0,
+      "proposer_feedback": null,
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Client Development Work Block",
+            "from_start": null,
+            "to_start": "2027-05-10T18:00:00+01:00",
+            "to_end": "2027-05-10T21:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Client Development Work Block",
+            "from_start": null,
+            "to_start": "2027-05-11T18:00:00+01:00",
+            "to_end": "2027-05-11T21:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Client Development Work Block",
+            "from_start": null,
+            "to_start": "2027-05-12T18:00:00+01:00",
+            "to_end": "2027-05-12T21:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "Fixed weekday client stand-ups are protected and unchanged.",
+            "Fixed hackathon prep blocks remain reserved for the team sessions.",
+            "Morning gym sessions are preserved as requested.",
+            "The final calendar contains 30 scheduled hours of work-category time within the required week.",
+            "Scheduled time is not proof that the client development work is completed."
+          ],
+          "priorities": [
+            "Frontload the missing client development time into the first three weekdays.",
+            "Avoid moving health or fixed third-party commitments.",
+            "Use free evening space rather than creating conflicts with protected events."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Use Thursday and Friday late-morning work blocks.",
+              "rejected_because": "This would be feasible in free calendar time, but it would frontload less of the target into Monday through Wednesday."
+            },
+            {
+              "option": "Move morning gym sessions earlier or later to create larger daytime work blocks.",
+              "rejected_because": "This would add disruption to a high-priority health routine without being necessary to meet the weekly work target."
+            }
+          ],
+          "summary": "Add three evening client development blocks on Monday through Wednesday, reaching the 30-hour weekly work target while preserving gym, stand-ups, sleep, and hackathon prep; the trade-off is three longer early-week workdays."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true,
+        "aggregate_checks": [
+          {
+            "id": "weekly_hours",
+            "status": "pass",
+            "minutes": 1800.0,
+            "minimum_minutes": 1800,
+            "category": "work",
+            "evidence": "union of final calendar intervals"
+          }
+        ],
+        "aggregate_validation_version": "duration_total_v1"
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-05-09T23:30:00+01:00",
+            "end": "2027-05-10T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_mon",
+            "title": "Gym Workout",
+            "start": "2027-05-10T08:00:00+01:00",
+            "end": "2027-05-10T09:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "standup_mon",
+            "title": "Daily Client Stand-up",
+            "start": "2027-05-10T10:00:00+01:00",
+            "end": "2027-05-10T10:30:00+01:00",
+            "category": "meeting",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "client"
+            ],
+            "description": "Fixed sync.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_mon",
+            "title": "Development Work Block",
+            "start": "2027-05-10T11:00:00+01:00",
+            "end": "2027-05-10T18:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "7 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_0",
+            "title": "Client Development Work Block",
+            "start": "2027-05-10T18:00:00+01:00",
+            "end": "2027-05-10T21:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-05-10T23:30:00+01:00",
+            "end": "2027-05-11T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_tue",
+            "title": "Gym Workout",
+            "start": "2027-05-11T08:00:00+01:00",
+            "end": "2027-05-11T09:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "standup_tue",
+            "title": "Daily Client Stand-up",
+            "start": "2027-05-11T10:00:00+01:00",
+            "end": "2027-05-11T10:30:00+01:00",
+            "category": "meeting",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "client"
+            ],
+            "description": "Fixed sync.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_tue",
+            "title": "Development Work Block",
+            "start": "2027-05-11T11:00:00+01:00",
+            "end": "2027-05-11T18:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "7 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_1",
+            "title": "Client Development Work Block",
+            "start": "2027-05-11T18:00:00+01:00",
+            "end": "2027-05-11T21:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-05-11T23:30:00+01:00",
+            "end": "2027-05-12T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_wed",
+            "title": "Gym Workout",
+            "start": "2027-05-12T08:00:00+01:00",
+            "end": "2027-05-12T09:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "standup_wed",
+            "title": "Daily Client Stand-up",
+            "start": "2027-05-12T10:00:00+01:00",
+            "end": "2027-05-12T10:30:00+01:00",
+            "category": "meeting",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "client"
+            ],
+            "description": "Fixed sync.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_wed",
+            "title": "Development Work Block",
+            "start": "2027-05-12T11:00:00+01:00",
+            "end": "2027-05-12T18:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "7 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_2",
+            "title": "Client Development Work Block",
+            "start": "2027-05-12T18:00:00+01:00",
+            "end": "2027-05-12T21:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-05-12T23:30:00+01:00",
+            "end": "2027-05-13T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_thu",
+            "title": "Gym Workout",
+            "start": "2027-05-13T08:00:00+01:00",
+            "end": "2027-05-13T09:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "standup_thu",
+            "title": "Daily Client Stand-up",
+            "start": "2027-05-13T10:00:00+01:00",
+            "end": "2027-05-13T10:30:00+01:00",
+            "category": "meeting",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "client"
+            ],
+            "description": "Fixed sync.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "hackathon_prep_thu",
+            "title": "Hackathon Team Brainstorming",
+            "start": "2027-05-13T14:00:00+01:00",
+            "end": "2027-05-13T19:00:00+01:00",
+            "category": "social",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "team"
+            ],
+            "description": "Fixed team prep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-05-13T23:30:00+01:00",
+            "end": "2027-05-14T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_fri",
+            "title": "Gym Workout",
+            "start": "2027-05-14T08:00:00+01:00",
+            "end": "2027-05-14T09:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "standup_fri",
+            "title": "Daily Client Stand-up",
+            "start": "2027-05-14T10:00:00+01:00",
+            "end": "2027-05-14T10:30:00+01:00",
+            "category": "meeting",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "client"
+            ],
+            "description": "Fixed sync.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "hackathon_prep_fri",
+            "title": "Hackathon Architecture Setup",
+            "start": "2027-05-14T14:00:00+01:00",
+            "end": "2027-05-14T19:00:00+01:00",
+            "category": "social",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "team"
+            ],
+            "description": "Fixed team setup.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 3,
+          "coherence": 3,
+          "alternatives": 2,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The added blocks create three consecutive 10-hour development stretches from 11:00 to 21:00 on Monday, Tuesday and Wednesday, immediately following morning gym, stand-up, and short transition windows. This is conflict-free but may be demanding in practice.",
+          "The rationale prioritizes frontloading into Monday through Wednesday, but does not explain why frontloading is important enough to justify three long early-week workdays when Thursday and Friday have visible late-morning free space before 14:00 hackathon prep.",
+          "The Monday to Wednesday work blocks run continuously from 11:00 to 21:00 because the new 18:00 to 21:00 blocks are adjacent to existing 11:00 to 18:00 blocks. The calendar does not show meal or recovery pauses inside those long blocks, and the rationale does not discuss how the person would preserve usable focus across them.",
+          "The proposal says sleep is preserved, which is true in the visible calendar, but preserving 23:30 to 07:30 sleep alone does not address the cumulative load of gym, stand-up, and long development work on three consecutive days.",
+          "The rejected Thursday/Friday option is dismissed mainly because it frontloads less, not because it is less sustainable, less aligned with a deadline, or operationally impossible."
+        ],
+        "feedback": "The proposal is technically coherent and protects fixed events, gym, sleep, stand-ups and hackathon prep. However, from a human-manageability perspective, the plan relies heavily on three consecutive high-load days: Monday through Wednesday each include gym from 08:00 to 09:30, stand-up from 10:00 to 10:30, and work from 11:00 to 21:00. That leaves some evening decompression after 21:00 and sleep is protected, but the calendar does not visibly reserve meaningful breaks inside the 10-hour development stretches. The rationale acknowledges the trade-off as 'three longer early-week workdays' but does not really evaluate whether this is sustainable or why visible Thursday/Friday capacity before the 14:00 hackathon sessions should remain unused. Because request satisfaction and hidden preferences are not available, it cannot be verified whether frontloading is truly required. The proposer should reconsider whether some of the added work could be distributed more evenly, or provide a grounded reason from its fuller context for why the early-week concentration is necessary despite the fatigue and focus risks.",
+        "plausibility_review": {
+          "revision_required": true,
+          "severity": "moderate",
+          "reason": "The main concern is not a technical conflict but the concentration of added work into three consecutive 18:00 to 21:00 blocks that extend already long 11:00 to 18:00 development days into continuous 10-hour work periods. Combined with 08:00 to 09:30 gym and 10:00 to 10:30 stand-ups on each of those days, this could materially affect focus, recovery, meal timing and sustainability. The rationale does not substantiate why frontloading is important enough to outweigh those human costs, especially when Thursday and Friday visibly contain late-morning space before fixed 14:00 to 19:00 hackathon prep.",
+          "suggested_improvement": "Reconsider the distribution of the added work using the fuller context: either justify why Monday-to-Wednesday frontloading is necessary and manageable, including how breaks and recovery are expected to work, or explore a less concentrated spread that reduces repeated 10-hour development days without disrupting protected commitments."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Need for early-week frontloading",
+            "assumption": "The client development work benefits enough from being completed or reserved by Wednesday to justify concentrating the added hours on Monday, Tuesday and Wednesday evenings.",
+            "evidence_gap": "The rationale states a priority to frontload but does not provide a deadline, dependency, client expectation or other visible reason why Thursday/Friday late-morning capacity is inferior beyond being less frontloaded.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Sustainability of three consecutive long workdays",
+            "assumption": "The user can realistically maintain useful development focus across three consecutive days with gym from 08:00 to 09:30, stand-up from 10:00 to 10:30, and work from 11:00 to 21:00.",
+            "evidence_gap": "The calendar shows the sequence but provides no information about the user's tolerance for long cognitive workdays, evening work, or recovery needs.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Meals and breaks during 11:00 to 21:00 work stretches",
+            "assumption": "The 11:00 to 21:00 work periods on Monday through Wednesday can include adequate food, hygiene, short breaks and task switching without undermining the intended 30 scheduled work hours.",
+            "evidence_gap": "The added blocks are adjacent to existing work blocks and no break structure is visible; scheduled time is explicitly not proof that the client development work is completed.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Evening work suitability",
+            "assumption": "The 18:00 to 21:00 client development blocks are suitable for the type of work required and do not depend on unavailable client or team interaction.",
+            "evidence_gap": "The event title suggests client development work, but the calendar and rationale do not clarify whether the work is fully independent or requires responsiveness from others in the evening.",
+            "potential_impact": "minor",
+            "verification_source": "third_party"
+          }
+        ],
+        "overall": 3.0
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": false,
+        "plausibility_revision_required": true,
+        "accepted": false,
+        "revision_causes": [
+          "numeric_criteria_failed",
+          "plausibility_revision_required"
+        ]
+      },
+      "operations_changed_from_previous": null,
+      "rationale_changed_from_previous": null,
+      "prior_critic_reviews": [],
+      "unresolved_assumptions": [
+        {
+          "subject": "Need for early-week frontloading",
+          "assumption": "The client development work benefits enough from being completed or reserved by Wednesday to justify concentrating the added hours on Monday, Tuesday and Wednesday evenings.",
+          "evidence_gap": "The rationale states a priority to frontload but does not provide a deadline, dependency, client expectation or other visible reason why Thursday/Friday late-morning capacity is inferior beyond being less frontloaded.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Sustainability of three consecutive long workdays",
+          "assumption": "The user can realistically maintain useful development focus across three consecutive days with gym from 08:00 to 09:30, stand-up from 10:00 to 10:30, and work from 11:00 to 21:00.",
+          "evidence_gap": "The calendar shows the sequence but provides no information about the user's tolerance for long cognitive workdays, evening work, or recovery needs.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Meals and breaks during 11:00 to 21:00 work stretches",
+          "assumption": "The 11:00 to 21:00 work periods on Monday through Wednesday can include adequate food, hygiene, short breaks and task switching without undermining the intended 30 scheduled work hours.",
+          "evidence_gap": "The added blocks are adjacent to existing work blocks and no break structure is visible; scheduled time is explicitly not proof that the client development work is completed.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Evening work suitability",
+          "assumption": "The 18:00 to 21:00 client development blocks are suitable for the type of work required and do not depend on unavailable client or team interaction.",
+          "evidence_gap": "The event title suggests client development work, but the calendar and rationale do not clarify whether the work is fully independent or requires responsiveness from others in the evening.",
+          "potential_impact": "minor",
+          "verification_source": "third_party"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "proposer_feedback": "Numeric Critic criteria failed. Scores: {\"reasoning\":3,\"coherence\":3,\"alternatives\":2,\"clarity\":4}. Plausibility revision required (moderate): The main concern is not a technical conflict but the concentration of added work into three consecutive 18:00 to 21:00 blocks that extend already long 11:00 to 18:00 development days into continuous 10-hour work periods. Combined with 08:00 to 09:30 gym and 10:00 to 10:30 stand-ups on each of those days, this could materially affect focus, recovery, meal timing and sustainability. The rationale does not substantiate why frontloading is important enough to outweigh those human costs, especially when Thursday and Friday visibly contain late-morning space before fixed 14:00 to 19:00 hackathon prep. Suggested direction: Reconsider the distribution of the added work using the fuller context: either justify why Monday-to-Wednesday frontloading is necessary and manageable, including how breaks and recovery are expected to work, or explore a less concentrated spread that reduces repeated 10-hour development days without disrupting protected commitments. The Critic lacks the full user constraints; explain if no better feasible option exists. Unverified conditions to reassess: [{'subject': 'Need for early-week frontloading', 'assumption': 'The client development work benefits enough from being completed or reserved by Wednesday to justify concentrating the added hours on Monday, Tuesday and Wednesday evenings.', 'evidence_gap': 'The rationale states a priority to frontload but does not provide a deadline, dependency, client expectation or other visible reason why Thursday/Friday late-morning capacity is inferior beyond being less frontloaded.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Sustainability of three consecutive long workdays', 'assumption': 'The user can realistically maintain useful development focus across three consecutive days with gym from 08:00 to 09:30, stand-up from 10:00 to 10:30, and work from 11:00 to 21:00.', 'evidence_gap': \"The calendar shows the sequence but provides no information about the user's tolerance for long cognitive workdays, evening work, or recovery needs.\", 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Meals and breaks during 11:00 to 21:00 work stretches', 'assumption': 'The 11:00 to 21:00 work periods on Monday through Wednesday can include adequate food, hygiene, short breaks and task switching without undermining the intended 30 scheduled work hours.', 'evidence_gap': 'The added blocks are adjacent to existing work blocks and no break structure is visible; scheduled time is explicitly not proof that the client development work is completed.', 'potential_impact': 'material', 'verification_source': 'unknown'}, {'subject': 'Evening work suitability', 'assumption': 'The 18:00 to 21:00 client development blocks are suitable for the type of work required and do not depend on unavailable client or team interaction.', 'evidence_gap': 'The event title suggests client development work, but the calendar and rationale do not clarify whether the work is fully independent or requires responsiveness from others in the evening.', 'potential_impact': 'minor', 'verification_source': 'third_party'}] Weaknesses: ['The added blocks create three consecutive 10-hour development stretches from 11:00 to 21:00 on Monday, Tuesday and Wednesday, immediately following morning gym, stand-up, and short transition windows. This is conflict-free but may be demanding in practice.', 'The rationale prioritizes frontloading into Monday through Wednesday, but does not explain why frontloading is important enough to justify three long early-week workdays when Thursday and Friday have visible late-morning free space before 14:00 hackathon prep.', 'The Monday to Wednesday work blocks run continuously from 11:00 to 21:00 because the new 18:00 to 21:00 blocks are adjacent to existing 11:00 to 18:00 blocks. The calendar does not show meal or recovery pauses inside those long blocks, and the rationale does not discuss how the person would preserve usable focus across them.', 'The proposal says sleep is preserved, which is true in the visible calendar, but preserving 23:30 to 07:30 sleep alone does not address the cumulative load of gym, stand-up, and long development work on three consecutive days.', 'The rejected Thursday/Friday option is dismissed mainly because it frontloads less, not because it is less sustainable, less aligned with a deadline, or operationally impossible.']. Actionable feedback: The proposal is technically coherent and protects fixed events, gym, sleep, stand-ups and hackathon prep. However, from a human-manageability perspective, the plan relies heavily on three consecutive high-load days: Monday through Wednesday each include gym from 08:00 to 09:30, stand-up from 10:00 to 10:30, and work from 11:00 to 21:00. That leaves some evening decompression after 21:00 and sleep is protected, but the calendar does not visibly reserve meaningful breaks inside the 10-hour development stretches. The rationale acknowledges the trade-off as 'three longer early-week workdays' but does not really evaluate whether this is sustainable or why visible Thursday/Friday capacity before the 14:00 hackathon sessions should remain unused. Because request satisfaction and hidden preferences are not available, it cannot be verified whether frontloading is truly required. The proposer should reconsider whether some of the added work could be distributed more evenly, or provide a grounded reason from its fuller context for why the early-week concentration is necessary despite the fatigue and focus risks.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Client Development Work Block",
+            "from_start": null,
+            "to_start": "2027-05-10T18:00:00+01:00",
+            "to_end": "2027-05-10T20:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Client Development Work Block",
+            "from_start": null,
+            "to_start": "2027-05-11T18:00:00+01:00",
+            "to_end": "2027-05-11T20:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Client Development Work Block",
+            "from_start": null,
+            "to_start": "2027-05-12T18:00:00+01:00",
+            "to_end": "2027-05-12T20:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Client Development Work Block",
+            "from_start": null,
+            "to_start": "2027-05-13T10:30:00+01:00",
+            "to_end": "2027-05-13T12:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Client Development Work Block",
+            "from_start": null,
+            "to_start": "2027-05-14T10:30:00+01:00",
+            "to_end": "2027-05-14T12:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "Protected client stand-ups are unchanged.",
+            "Fixed hackathon preparation sessions are unchanged.",
+            "Morning gym sessions are preserved.",
+            "The final calendar reaches the required work-category duration for the checked week.",
+            "Scheduled time is not proof that the client development work is completed.",
+            "No client responsiveness is assumed for these solo development blocks."
+          ],
+          "priorities": [
+            "Keep most added work earlier in the week while reducing three consecutive maximal-load days.",
+            "Use free late-morning capacity before hackathon preparation to improve sustainability.",
+            "Avoid moving health, sleep, fixed, or third-party commitments."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Add all missing work on Monday through Wednesday evenings.",
+              "rejected_because": "This follows the strictest reading of frontloading but creates three consecutive very long development days."
+            },
+            {
+              "option": "Move gym sessions to create larger daytime work blocks.",
+              "rejected_because": "This disrupts a high-priority health preference and is unnecessary to meet the target."
+            },
+            {
+              "option": "Use only Thursday and Friday late-morning capacity for new work.",
+              "rejected_because": "This would reduce early-week load more, but it would not materially frontload the client work as requested."
+            }
+          ],
+          "summary": "Add shorter early-week client development extensions and use available late-morning space before the hackathon days; the trade-off is slightly less strict frontloading in exchange for a more manageable workload."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true,
+        "aggregate_checks": [
+          {
+            "id": "weekly_hours",
+            "status": "pass",
+            "minutes": 1800.0,
+            "minimum_minutes": 1800,
+            "category": "work",
+            "evidence": "union of final calendar intervals"
+          }
+        ],
+        "aggregate_validation_version": "duration_total_v1"
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-05-09T23:30:00+01:00",
+            "end": "2027-05-10T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_mon",
+            "title": "Gym Workout",
+            "start": "2027-05-10T08:00:00+01:00",
+            "end": "2027-05-10T09:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "standup_mon",
+            "title": "Daily Client Stand-up",
+            "start": "2027-05-10T10:00:00+01:00",
+            "end": "2027-05-10T10:30:00+01:00",
+            "category": "meeting",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "client"
+            ],
+            "description": "Fixed sync.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_mon",
+            "title": "Development Work Block",
+            "start": "2027-05-10T11:00:00+01:00",
+            "end": "2027-05-10T18:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "7 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_0",
+            "title": "Client Development Work Block",
+            "start": "2027-05-10T18:00:00+01:00",
+            "end": "2027-05-10T20:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-05-10T23:30:00+01:00",
+            "end": "2027-05-11T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_tue",
+            "title": "Gym Workout",
+            "start": "2027-05-11T08:00:00+01:00",
+            "end": "2027-05-11T09:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "standup_tue",
+            "title": "Daily Client Stand-up",
+            "start": "2027-05-11T10:00:00+01:00",
+            "end": "2027-05-11T10:30:00+01:00",
+            "category": "meeting",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "client"
+            ],
+            "description": "Fixed sync.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_tue",
+            "title": "Development Work Block",
+            "start": "2027-05-11T11:00:00+01:00",
+            "end": "2027-05-11T18:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "7 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_1",
+            "title": "Client Development Work Block",
+            "start": "2027-05-11T18:00:00+01:00",
+            "end": "2027-05-11T20:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-05-11T23:30:00+01:00",
+            "end": "2027-05-12T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_wed",
+            "title": "Gym Workout",
+            "start": "2027-05-12T08:00:00+01:00",
+            "end": "2027-05-12T09:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "standup_wed",
+            "title": "Daily Client Stand-up",
+            "start": "2027-05-12T10:00:00+01:00",
+            "end": "2027-05-12T10:30:00+01:00",
+            "category": "meeting",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "client"
+            ],
+            "description": "Fixed sync.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_wed",
+            "title": "Development Work Block",
+            "start": "2027-05-12T11:00:00+01:00",
+            "end": "2027-05-12T18:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "7 hours work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_2",
+            "title": "Client Development Work Block",
+            "start": "2027-05-12T18:00:00+01:00",
+            "end": "2027-05-12T20:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-05-12T23:30:00+01:00",
+            "end": "2027-05-13T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_thu",
+            "title": "Gym Workout",
+            "start": "2027-05-13T08:00:00+01:00",
+            "end": "2027-05-13T09:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "standup_thu",
+            "title": "Daily Client Stand-up",
+            "start": "2027-05-13T10:00:00+01:00",
+            "end": "2027-05-13T10:30:00+01:00",
+            "category": "meeting",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "client"
+            ],
+            "description": "Fixed sync.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_3",
+            "title": "Client Development Work Block",
+            "start": "2027-05-13T10:30:00+01:00",
+            "end": "2027-05-13T12:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "hackathon_prep_thu",
+            "title": "Hackathon Team Brainstorming",
+            "start": "2027-05-13T14:00:00+01:00",
+            "end": "2027-05-13T19:00:00+01:00",
+            "category": "social",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "team"
+            ],
+            "description": "Fixed team prep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-05-13T23:30:00+01:00",
+            "end": "2027-05-14T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_fri",
+            "title": "Gym Workout",
+            "start": "2027-05-14T08:00:00+01:00",
+            "end": "2027-05-14T09:30:00+01:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Gym.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "standup_fri",
+            "title": "Daily Client Stand-up",
+            "start": "2027-05-14T10:00:00+01:00",
+            "end": "2027-05-14T10:30:00+01:00",
+            "category": "meeting",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "client"
+            ],
+            "description": "Fixed sync.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_4",
+            "title": "Client Development Work Block",
+            "start": "2027-05-14T10:30:00+01:00",
+            "end": "2027-05-14T12:00:00+01:00",
+            "category": "work",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "hackathon_prep_fri",
+            "title": "Hackathon Architecture Setup",
+            "start": "2027-05-14T14:00:00+01:00",
+            "end": "2027-05-14T19:00:00+01:00",
+            "category": "social",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "team"
+            ],
+            "description": "Fixed team setup.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 4,
+          "alternatives": 4,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The revision substantially reduces the prior concentration problem, but Monday through Wednesday still each contain gym from 08:00 to 09:30, stand-up from 10:00 to 10:30, and a continuous work stretch from 11:00 to 20:00. That is more manageable than the prior 11:00 to 21:00 pattern, but it remains a demanding three-day sequence.",
+          "The added 18:00 to 20:00 blocks on Monday through Wednesday are directly adjacent to existing 11:00 to 18:00 work blocks. The calendar does not show whether meals, breaks, task switching or decompression are expected inside those work periods.",
+          "Thursday and Friday improve the distribution by using 10:30 to 12:00 late-morning capacity, but those days also contain fixed hackathon preparation from 14:00 to 19:00. The proposal treats this as sustainable, but does not discuss the cumulative cognitive and social load of combining client work, gym, stand-up and five-hour team prep on both days.",
+          "The rationale says the final calendar reaches the required work-category duration, and the validator confirms 1800 minutes of work, but scheduled time alone does not establish that the client development work will be effective or completed.",
+          "Without the original request or hidden context, request satisfaction cannot be verified, especially the strength of the frontloading priority versus the sustainability benefit of shifting more work away from Monday through Wednesday."
+        ],
+        "feedback": "The revised proposal gives a grounded response to the prior concern: it reduces the Monday-to-Wednesday evening additions from 3 hours to 2 hours and uses the visible Thursday and Friday 10:30 to 12:00 windows before hackathon prep. That makes the resulting routine more balanced than the earlier version and shows a real trade-off between frontloading and sustainability. The remaining concern is practical rather than technical: Monday through Wednesday are still long development days from 11:00 to 20:00 after morning gym and stand-up, while Thursday and Friday pair client work with 14:00 to 19:00 fixed team hackathon sessions. This could be manageable for some users, especially with protected 23:30 to 07:30 sleep and evening downtime after 20:00 or 19:00, but the plan still depends on implicit breaks and the user's tolerance for repeated high-focus days. On the visible evidence, the revision is coherent enough not to require another revision, but the Proposer should retain awareness that the calendar's apparent free gaps do not by themselves prove sufficient recovery or effective work capacity.",
+        "plausibility_review": {
+          "revision_required": false,
+          "severity": "low",
+          "reason": "The prior moderate concern has been materially addressed: the proposal no longer concentrates all added work into three 18:00 to 21:00 blocks, and it now uses Thursday and Friday late-morning capacity while preserving fixed stand-ups, gym, sleep and hackathon preparation. Residual risks remain around three consecutive 11:00 to 20:00 work stretches and the cumulative load of gym, work and hackathon prep across the week, but these are plausible manageability concerns rather than a concrete defect that clearly requires another revision on the visible information.",
+          "suggested_improvement": "If the fuller context allows, the Proposer should briefly substantiate how breaks and recovery are expected to fit within the Monday-to-Wednesday 11:00 to 20:00 work stretches and the Thursday/Friday work-plus-hackathon days, or consider whether any further spreading would preserve the visible goals without weakening necessary frontloading."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Need for partial early-week frontloading",
+            "assumption": "Keeping 2-hour added client development blocks on Monday, Tuesday and Wednesday evenings is meaningfully better for the visible work goal than shifting more of that work later in the week.",
+            "evidence_gap": "The rationale identifies frontloading as a priority but does not provide the original request, deadline, dependency or client expectation that explains how strong that priority is.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Sustainability of Monday-to-Wednesday workdays",
+            "assumption": "The user can maintain useful focus across three consecutive days with gym from 08:00 to 09:30, stand-up from 10:00 to 10:30, and work from 11:00 to 20:00.",
+            "evidence_gap": "The calendar shows the sequence, but provides no information about the user's tolerance for long development days, evening work, or preferred recovery pattern.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Breaks and meals inside long work blocks",
+            "assumption": "The 11:00 to 20:00 work periods on Monday through Wednesday can include adequate food, short breaks and task switching without undermining the intended work-category duration.",
+            "evidence_gap": "The added blocks are adjacent to existing 11:00 to 18:00 work blocks, and no break structure is visible in the calendar.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Thursday and Friday cumulative load",
+            "assumption": "The user can handle gym, stand-up, 10:30 to 12:00 client development work, and fixed 14:00 to 19:00 hackathon preparation on both Thursday and Friday without excessive fatigue.",
+            "evidence_gap": "The proposal notes sustainability gains from using late-morning space, but does not evaluate the combined cognitive and social load of the later fixed team sessions.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Independence of client development blocks",
+            "assumption": "The added client development blocks can be completed without client responsiveness or other third-party interaction during those times.",
+            "evidence_gap": "The rationale states that no client responsiveness is assumed for the solo development blocks, but the actual work dependency is not independently evidenced in the visible calendar.",
+            "potential_impact": "minor",
+            "verification_source": "third_party"
+          }
+        ],
+        "overall": 4.0
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": true,
+        "plausibility_revision_required": false,
+        "accepted": true,
+        "revision_causes": []
+      },
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": [
+        {
+          "iteration": 0,
+          "proposal": {
+            "changes": [
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Client Development Work Block",
+                "from_start": null,
+                "to_start": "2027-05-10T18:00:00+01:00",
+                "to_end": "2027-05-10T21:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "participants": [
+                  "user"
+                ]
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Client Development Work Block",
+                "from_start": null,
+                "to_start": "2027-05-11T18:00:00+01:00",
+                "to_end": "2027-05-11T21:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "participants": [
+                  "user"
+                ]
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Client Development Work Block",
+                "from_start": null,
+                "to_start": "2027-05-12T18:00:00+01:00",
+                "to_end": "2027-05-12T21:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "participants": [
+                  "user"
+                ]
+              }
+            ],
+            "rationale": {
+              "constraints": [
+                "Fixed weekday client stand-ups are protected and unchanged.",
+                "Fixed hackathon prep blocks remain reserved for the team sessions.",
+                "Morning gym sessions are preserved as requested.",
+                "The final calendar contains 30 scheduled hours of work-category time within the required week.",
+                "Scheduled time is not proof that the client development work is completed."
+              ],
+              "priorities": [
+                "Frontload the missing client development time into the first three weekdays.",
+                "Avoid moving health or fixed third-party commitments.",
+                "Use free evening space rather than creating conflicts with protected events."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Use Thursday and Friday late-morning work blocks.",
+                  "rejected_because": "This would be feasible in free calendar time, but it would frontload less of the target into Monday through Wednesday."
+                },
+                {
+                  "option": "Move morning gym sessions earlier or later to create larger daytime work blocks.",
+                  "rejected_because": "This would add disruption to a high-priority health routine without being necessary to meet the weekly work target."
+                }
+              ],
+              "summary": "Add three evening client development blocks on Monday through Wednesday, reaching the 30-hour weekly work target while preserving gym, stand-ups, sleep, and hackathon prep; the trade-off is three longer early-week workdays."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "sleep_mon",
+                "title": "Sleep",
+                "start": "2027-05-09T23:30:00+01:00",
+                "end": "2027-05-10T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_mon",
+                "title": "Gym Workout",
+                "start": "2027-05-10T08:00:00+01:00",
+                "end": "2027-05-10T09:30:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Gym.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "standup_mon",
+                "title": "Daily Client Stand-up",
+                "start": "2027-05-10T10:00:00+01:00",
+                "end": "2027-05-10T10:30:00+01:00",
+                "category": "meeting",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "client"
+                ],
+                "description": "Fixed sync.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_mon",
+                "title": "Development Work Block",
+                "start": "2027-05-10T11:00:00+01:00",
+                "end": "2027-05-10T18:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "7 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_0",
+                "title": "Client Development Work Block",
+                "start": "2027-05-10T18:00:00+01:00",
+                "end": "2027-05-10T21:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": null,
+                "participants": [
+                  "user"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "sleep_tue",
+                "title": "Sleep",
+                "start": "2027-05-10T23:30:00+01:00",
+                "end": "2027-05-11T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_tue",
+                "title": "Gym Workout",
+                "start": "2027-05-11T08:00:00+01:00",
+                "end": "2027-05-11T09:30:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Gym.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "standup_tue",
+                "title": "Daily Client Stand-up",
+                "start": "2027-05-11T10:00:00+01:00",
+                "end": "2027-05-11T10:30:00+01:00",
+                "category": "meeting",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "client"
+                ],
+                "description": "Fixed sync.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_tue",
+                "title": "Development Work Block",
+                "start": "2027-05-11T11:00:00+01:00",
+                "end": "2027-05-11T18:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "7 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_1",
+                "title": "Client Development Work Block",
+                "start": "2027-05-11T18:00:00+01:00",
+                "end": "2027-05-11T21:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": null,
+                "participants": [
+                  "user"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "sleep_wed",
+                "title": "Sleep",
+                "start": "2027-05-11T23:30:00+01:00",
+                "end": "2027-05-12T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_wed",
+                "title": "Gym Workout",
+                "start": "2027-05-12T08:00:00+01:00",
+                "end": "2027-05-12T09:30:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Gym.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "standup_wed",
+                "title": "Daily Client Stand-up",
+                "start": "2027-05-12T10:00:00+01:00",
+                "end": "2027-05-12T10:30:00+01:00",
+                "category": "meeting",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "client"
+                ],
+                "description": "Fixed sync.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_wed",
+                "title": "Development Work Block",
+                "start": "2027-05-12T11:00:00+01:00",
+                "end": "2027-05-12T18:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "7 hours work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_2",
+                "title": "Client Development Work Block",
+                "start": "2027-05-12T18:00:00+01:00",
+                "end": "2027-05-12T21:00:00+01:00",
+                "category": "work",
+                "importance": 4,
+                "fixed": null,
+                "participants": [
+                  "user"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2027-05-12T23:30:00+01:00",
+                "end": "2027-05-13T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_thu",
+                "title": "Gym Workout",
+                "start": "2027-05-13T08:00:00+01:00",
+                "end": "2027-05-13T09:30:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Gym.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "standup_thu",
+                "title": "Daily Client Stand-up",
+                "start": "2027-05-13T10:00:00+01:00",
+                "end": "2027-05-13T10:30:00+01:00",
+                "category": "meeting",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "client"
+                ],
+                "description": "Fixed sync.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "hackathon_prep_thu",
+                "title": "Hackathon Team Brainstorming",
+                "start": "2027-05-13T14:00:00+01:00",
+                "end": "2027-05-13T19:00:00+01:00",
+                "category": "social",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "team"
+                ],
+                "description": "Fixed team prep.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_fri",
+                "title": "Sleep",
+                "start": "2027-05-13T23:30:00+01:00",
+                "end": "2027-05-14T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_fri",
+                "title": "Gym Workout",
+                "start": "2027-05-14T08:00:00+01:00",
+                "end": "2027-05-14T09:30:00+01:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Gym.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "standup_fri",
+                "title": "Daily Client Stand-up",
+                "start": "2027-05-14T10:00:00+01:00",
+                "end": "2027-05-14T10:30:00+01:00",
+                "category": "meeting",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "client"
+                ],
+                "description": "Fixed sync.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "hackathon_prep_fri",
+                "title": "Hackathon Architecture Setup",
+                "start": "2027-05-14T14:00:00+01:00",
+                "end": "2027-05-14T19:00:00+01:00",
+                "category": "social",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "team"
+                ],
+                "description": "Fixed team setup.",
+                "origin": "existing",
+                "change_status": "preserved"
+              }
+            ],
+            "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+          },
+          "plausibility_review": {
+            "revision_required": true,
+            "severity": "moderate",
+            "reason": "The main concern is not a technical conflict but the concentration of added work into three consecutive 18:00 to 21:00 blocks that extend already long 11:00 to 18:00 development days into continuous 10-hour work periods. Combined with 08:00 to 09:30 gym and 10:00 to 10:30 stand-ups on each of those days, this could materially affect focus, recovery, meal timing and sustainability. The rationale does not substantiate why frontloading is important enough to outweigh those human costs, especially when Thursday and Friday visibly contain late-morning space before fixed 14:00 to 19:00 hackathon prep.",
+            "suggested_improvement": "Reconsider the distribution of the added work using the fuller context: either justify why Monday-to-Wednesday frontloading is necessary and manageable, including how breaks and recovery are expected to work, or explore a less concentrated spread that reduces repeated 10-hour development days without disrupting protected commitments."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Need for early-week frontloading",
+              "assumption": "The client development work benefits enough from being completed or reserved by Wednesday to justify concentrating the added hours on Monday, Tuesday and Wednesday evenings.",
+              "evidence_gap": "The rationale states a priority to frontload but does not provide a deadline, dependency, client expectation or other visible reason why Thursday/Friday late-morning capacity is inferior beyond being less frontloaded.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Sustainability of three consecutive long workdays",
+              "assumption": "The user can realistically maintain useful development focus across three consecutive days with gym from 08:00 to 09:30, stand-up from 10:00 to 10:30, and work from 11:00 to 21:00.",
+              "evidence_gap": "The calendar shows the sequence but provides no information about the user's tolerance for long cognitive workdays, evening work, or recovery needs.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Meals and breaks during 11:00 to 21:00 work stretches",
+              "assumption": "The 11:00 to 21:00 work periods on Monday through Wednesday can include adequate food, hygiene, short breaks and task switching without undermining the intended 30 scheduled work hours.",
+              "evidence_gap": "The added blocks are adjacent to existing work blocks and no break structure is visible; scheduled time is explicitly not proof that the client development work is completed.",
+              "potential_impact": "material",
+              "verification_source": "unknown"
+            },
+            {
+              "subject": "Evening work suitability",
+              "assumption": "The 18:00 to 21:00 client development blocks are suitable for the type of work required and do not depend on unavailable client or team interaction.",
+              "evidence_gap": "The event title suggests client development work, but the calendar and rationale do not clarify whether the work is fully independent or requires responsiveness from others in the evening.",
+              "potential_impact": "minor",
+              "verification_source": "third_party"
+            }
+          ],
+          "weaknesses": [
+            "The added blocks create three consecutive 10-hour development stretches from 11:00 to 21:00 on Monday, Tuesday and Wednesday, immediately following morning gym, stand-up, and short transition windows. This is conflict-free but may be demanding in practice.",
+            "The rationale prioritizes frontloading into Monday through Wednesday, but does not explain why frontloading is important enough to justify three long early-week workdays when Thursday and Friday have visible late-morning free space before 14:00 hackathon prep.",
+            "The Monday to Wednesday work blocks run continuously from 11:00 to 21:00 because the new 18:00 to 21:00 blocks are adjacent to existing 11:00 to 18:00 blocks. The calendar does not show meal or recovery pauses inside those long blocks, and the rationale does not discuss how the person would preserve usable focus across them.",
+            "The proposal says sleep is preserved, which is true in the visible calendar, but preserving 23:30 to 07:30 sleep alone does not address the cumulative load of gym, stand-up, and long development work on three consecutive days.",
+            "The rejected Thursday/Friday option is dismissed mainly because it frontloads less, not because it is less sustainable, less aligned with a deadline, or operationally impossible."
+          ],
+          "feedback": "The proposal is technically coherent and protects fixed events, gym, sleep, stand-ups and hackathon prep. However, from a human-manageability perspective, the plan relies heavily on three consecutive high-load days: Monday through Wednesday each include gym from 08:00 to 09:30, stand-up from 10:00 to 10:30, and work from 11:00 to 21:00. That leaves some evening decompression after 21:00 and sleep is protected, but the calendar does not visibly reserve meaningful breaks inside the 10-hour development stretches. The rationale acknowledges the trade-off as 'three longer early-week workdays' but does not really evaluate whether this is sustainable or why visible Thursday/Friday capacity before the 14:00 hackathon sessions should remain unused. Because request satisfaction and hidden preferences are not available, it cannot be verified whether frontloading is truly required. The proposer should reconsider whether some of the added work could be distributed more evenly, or provide a grounded reason from its fuller context for why the early-week concentration is necessary despite the fatigue and focus risks."
+        }
+      ],
+      "unresolved_assumptions": [
+        {
+          "subject": "Need for partial early-week frontloading",
+          "assumption": "Keeping 2-hour added client development blocks on Monday, Tuesday and Wednesday evenings is meaningfully better for the visible work goal than shifting more of that work later in the week.",
+          "evidence_gap": "The rationale identifies frontloading as a priority but does not provide the original request, deadline, dependency or client expectation that explains how strong that priority is.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Sustainability of Monday-to-Wednesday workdays",
+          "assumption": "The user can maintain useful focus across three consecutive days with gym from 08:00 to 09:30, stand-up from 10:00 to 10:30, and work from 11:00 to 20:00.",
+          "evidence_gap": "The calendar shows the sequence, but provides no information about the user's tolerance for long development days, evening work, or preferred recovery pattern.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Breaks and meals inside long work blocks",
+          "assumption": "The 11:00 to 20:00 work periods on Monday through Wednesday can include adequate food, short breaks and task switching without undermining the intended work-category duration.",
+          "evidence_gap": "The added blocks are adjacent to existing 11:00 to 18:00 work blocks, and no break structure is visible in the calendar.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Thursday and Friday cumulative load",
+          "assumption": "The user can handle gym, stand-up, 10:30 to 12:00 client development work, and fixed 14:00 to 19:00 hackathon preparation on both Thursday and Friday without excessive fatigue.",
+          "evidence_gap": "The proposal notes sustainability gains from using late-morning space, but does not evaluate the combined cognitive and social load of the later fixed team sessions.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Independence of client development blocks",
+          "assumption": "The added client development blocks can be completed without client responsiveness or other third-party interaction during those times.",
+          "evidence_gap": "The rationale states that no client responsiveness is assumed for the solo development blocks, but the actual work dependency is not independently evidenced in the visible calendar.",
+          "potential_impact": "minor",
+          "verification_source": "third_party"
+        }
+      ]
+    }
+  ],
+  "refinements": 1,
+  "source_status": "proposal_ready",
+  "final_proposal": {
+    "changes": [
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Client Development Work Block",
+        "from_start": null,
+        "to_start": "2027-05-10T18:00:00+01:00",
+        "to_end": "2027-05-10T20:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Client Development Work Block",
+        "from_start": null,
+        "to_start": "2027-05-11T18:00:00+01:00",
+        "to_end": "2027-05-11T20:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Client Development Work Block",
+        "from_start": null,
+        "to_start": "2027-05-12T18:00:00+01:00",
+        "to_end": "2027-05-12T20:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Client Development Work Block",
+        "from_start": null,
+        "to_start": "2027-05-13T10:30:00+01:00",
+        "to_end": "2027-05-13T12:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Client Development Work Block",
+        "from_start": null,
+        "to_start": "2027-05-14T10:30:00+01:00",
+        "to_end": "2027-05-14T12:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "Protected client stand-ups are unchanged.",
+        "Fixed hackathon preparation sessions are unchanged.",
+        "Morning gym sessions are preserved.",
+        "The final calendar reaches the required work-category duration for the checked week.",
+        "Scheduled time is not proof that the client development work is completed.",
+        "No client responsiveness is assumed for these solo development blocks."
+      ],
+      "priorities": [
+        "Keep most added work earlier in the week while reducing three consecutive maximal-load days.",
+        "Use free late-morning capacity before hackathon preparation to improve sustainability.",
+        "Avoid moving health, sleep, fixed, or third-party commitments."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Add all missing work on Monday through Wednesday evenings.",
+          "rejected_because": "This follows the strictest reading of frontloading but creates three consecutive very long development days."
+        },
+        {
+          "option": "Move gym sessions to create larger daytime work blocks.",
+          "rejected_because": "This disrupts a high-priority health preference and is unnecessary to meet the target."
+        },
+        {
+          "option": "Use only Thursday and Friday late-morning capacity for new work.",
+          "rejected_because": "This would reduce early-week load more, but it would not materially frontload the client work as requested."
+        }
+      ],
+      "summary": "Add shorter early-week client development extensions and use available late-morning space before the hackathon days; the trade-off is slightly less strict frontloading in exchange for a more manageable workload."
+    }
+  },
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [],
+    "valid": true,
+    "aggregate_checks": [
+      {
+        "id": "weekly_hours",
+        "status": "pass",
+        "minutes": 1800.0,
+        "minimum_minutes": 1800,
+        "category": "work",
+        "evidence": "union of final calendar intervals"
+      }
+    ],
+    "aggregate_validation_version": "duration_total_v1"
+  },
+  "source_result_sha256": "17a55361db68df3d3fbbb6eca690791fd8162a76db3b8dfc4e183a1353261abc",
+  "scenario_sha256": "a09ab79bd50cb96f8a5e3dc5592d3f80c3cdfca0c8b12143dc7778c628011de5",
+  "aggregate_requirements_sha256": "fc0f7e5e1d41569a15e3f88e56852b9418a8322adabf4fb6c26aa0ac5b035abb",
+  "confirmed_changes_sha256": null,
+  "critic_input_version": "final_calendar_v1",
+  "critic_policy_version": "uncertainty_review_v2",
+  "result_calendar_version": "validated_added_metadata_v2",
+  "final_result_calendar": {
+    "timezone": "Europe/Lisbon",
+    "coverage": "all_events_in_scenario_after_simulation",
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-05-09T23:30:00+01:00",
+        "end": "2027-05-10T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_mon",
+        "title": "Gym Workout",
+        "start": "2027-05-10T08:00:00+01:00",
+        "end": "2027-05-10T09:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "standup_mon",
+        "title": "Daily Client Stand-up",
+        "start": "2027-05-10T10:00:00+01:00",
+        "end": "2027-05-10T10:30:00+01:00",
+        "category": "meeting",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "client"
+        ],
+        "description": "Fixed sync.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_mon",
+        "title": "Development Work Block",
+        "start": "2027-05-10T11:00:00+01:00",
+        "end": "2027-05-10T18:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "7 hours work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_0",
+        "title": "Client Development Work Block",
+        "start": "2027-05-10T18:00:00+01:00",
+        "end": "2027-05-10T20:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-05-10T23:30:00+01:00",
+        "end": "2027-05-11T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_tue",
+        "title": "Gym Workout",
+        "start": "2027-05-11T08:00:00+01:00",
+        "end": "2027-05-11T09:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "standup_tue",
+        "title": "Daily Client Stand-up",
+        "start": "2027-05-11T10:00:00+01:00",
+        "end": "2027-05-11T10:30:00+01:00",
+        "category": "meeting",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "client"
+        ],
+        "description": "Fixed sync.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_tue",
+        "title": "Development Work Block",
+        "start": "2027-05-11T11:00:00+01:00",
+        "end": "2027-05-11T18:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "7 hours work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_1",
+        "title": "Client Development Work Block",
+        "start": "2027-05-11T18:00:00+01:00",
+        "end": "2027-05-11T20:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-05-11T23:30:00+01:00",
+        "end": "2027-05-12T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_wed",
+        "title": "Gym Workout",
+        "start": "2027-05-12T08:00:00+01:00",
+        "end": "2027-05-12T09:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "standup_wed",
+        "title": "Daily Client Stand-up",
+        "start": "2027-05-12T10:00:00+01:00",
+        "end": "2027-05-12T10:30:00+01:00",
+        "category": "meeting",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "client"
+        ],
+        "description": "Fixed sync.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_wed",
+        "title": "Development Work Block",
+        "start": "2027-05-12T11:00:00+01:00",
+        "end": "2027-05-12T18:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "7 hours work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_2",
+        "title": "Client Development Work Block",
+        "start": "2027-05-12T18:00:00+01:00",
+        "end": "2027-05-12T20:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-05-12T23:30:00+01:00",
+        "end": "2027-05-13T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_thu",
+        "title": "Gym Workout",
+        "start": "2027-05-13T08:00:00+01:00",
+        "end": "2027-05-13T09:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "standup_thu",
+        "title": "Daily Client Stand-up",
+        "start": "2027-05-13T10:00:00+01:00",
+        "end": "2027-05-13T10:30:00+01:00",
+        "category": "meeting",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "client"
+        ],
+        "description": "Fixed sync.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_3",
+        "title": "Client Development Work Block",
+        "start": "2027-05-13T10:30:00+01:00",
+        "end": "2027-05-13T12:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "hackathon_prep_thu",
+        "title": "Hackathon Team Brainstorming",
+        "start": "2027-05-13T14:00:00+01:00",
+        "end": "2027-05-13T19:00:00+01:00",
+        "category": "social",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "team"
+        ],
+        "description": "Fixed team prep.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-05-13T23:30:00+01:00",
+        "end": "2027-05-14T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_fri",
+        "title": "Gym Workout",
+        "start": "2027-05-14T08:00:00+01:00",
+        "end": "2027-05-14T09:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "standup_fri",
+        "title": "Daily Client Stand-up",
+        "start": "2027-05-14T10:00:00+01:00",
+        "end": "2027-05-14T10:30:00+01:00",
+        "category": "meeting",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "client"
+        ],
+        "description": "Fixed sync.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_4",
+        "title": "Client Development Work Block",
+        "start": "2027-05-14T10:30:00+01:00",
+        "end": "2027-05-14T12:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "hackathon_prep_fri",
+        "title": "Hackathon Architecture Setup",
+        "start": "2027-05-14T14:00:00+01:00",
+        "end": "2027-05-14T19:00:00+01:00",
+        "category": "social",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "team"
+        ],
+        "description": "Fixed team setup.",
+        "origin": "existing",
+        "change_status": "preserved"
+      }
+    ],
+    "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+  },
+  "final_unresolved_assumptions": [
+    {
+      "subject": "Need for partial early-week frontloading",
+      "assumption": "Keeping 2-hour added client development blocks on Monday, Tuesday and Wednesday evenings is meaningfully better for the visible work goal than shifting more of that work later in the week.",
+      "evidence_gap": "The rationale identifies frontloading as a priority but does not provide the original request, deadline, dependency or client expectation that explains how strong that priority is.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Sustainability of Monday-to-Wednesday workdays",
+      "assumption": "The user can maintain useful focus across three consecutive days with gym from 08:00 to 09:30, stand-up from 10:00 to 10:30, and work from 11:00 to 20:00.",
+      "evidence_gap": "The calendar shows the sequence, but provides no information about the user's tolerance for long development days, evening work, or preferred recovery pattern.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Breaks and meals inside long work blocks",
+      "assumption": "The 11:00 to 20:00 work periods on Monday through Wednesday can include adequate food, short breaks and task switching without undermining the intended work-category duration.",
+      "evidence_gap": "The added blocks are adjacent to existing 11:00 to 18:00 work blocks, and no break structure is visible in the calendar.",
+      "potential_impact": "material",
+      "verification_source": "unknown"
+    },
+    {
+      "subject": "Thursday and Friday cumulative load",
+      "assumption": "The user can handle gym, stand-up, 10:30 to 12:00 client development work, and fixed 14:00 to 19:00 hackathon preparation on both Thursday and Friday without excessive fatigue.",
+      "evidence_gap": "The proposal notes sustainability gains from using late-morning space, but does not evaluate the combined cognitive and social load of the later fixed team sessions.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Independence of client development blocks",
+      "assumption": "The added client development blocks can be completed without client responsiveness or other third-party interaction during those times.",
+      "evidence_gap": "The rationale states that no client responsiveness is assumed for the solo development blocks, but the actual work dependency is not independently evidenced in the visible calendar.",
+      "potential_impact": "minor",
+      "verification_source": "third_party"
+    }
+  ],
+  "uncertainty_history": [
+    {
+      "iteration": 0,
+      "unresolved_assumptions": [
+        {
+          "subject": "Need for early-week frontloading",
+          "assumption": "The client development work benefits enough from being completed or reserved by Wednesday to justify concentrating the added hours on Monday, Tuesday and Wednesday evenings.",
+          "evidence_gap": "The rationale states a priority to frontload but does not provide a deadline, dependency, client expectation or other visible reason why Thursday/Friday late-morning capacity is inferior beyond being less frontloaded.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Sustainability of three consecutive long workdays",
+          "assumption": "The user can realistically maintain useful development focus across three consecutive days with gym from 08:00 to 09:30, stand-up from 10:00 to 10:30, and work from 11:00 to 21:00.",
+          "evidence_gap": "The calendar shows the sequence but provides no information about the user's tolerance for long cognitive workdays, evening work, or recovery needs.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Meals and breaks during 11:00 to 21:00 work stretches",
+          "assumption": "The 11:00 to 21:00 work periods on Monday through Wednesday can include adequate food, hygiene, short breaks and task switching without undermining the intended 30 scheduled work hours.",
+          "evidence_gap": "The added blocks are adjacent to existing work blocks and no break structure is visible; scheduled time is explicitly not proof that the client development work is completed.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Evening work suitability",
+          "assumption": "The 18:00 to 21:00 client development blocks are suitable for the type of work required and do not depend on unavailable client or team interaction.",
+          "evidence_gap": "The event title suggests client development work, but the calendar and rationale do not clarify whether the work is fully independent or requires responsiveness from others in the evening.",
+          "potential_impact": "minor",
+          "verification_source": "third_party"
+        }
+      ]
+    },
+    {
+      "iteration": 1,
+      "unresolved_assumptions": [
+        {
+          "subject": "Need for partial early-week frontloading",
+          "assumption": "Keeping 2-hour added client development blocks on Monday, Tuesday and Wednesday evenings is meaningfully better for the visible work goal than shifting more of that work later in the week.",
+          "evidence_gap": "The rationale identifies frontloading as a priority but does not provide the original request, deadline, dependency or client expectation that explains how strong that priority is.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Sustainability of Monday-to-Wednesday workdays",
+          "assumption": "The user can maintain useful focus across three consecutive days with gym from 08:00 to 09:30, stand-up from 10:00 to 10:30, and work from 11:00 to 20:00.",
+          "evidence_gap": "The calendar shows the sequence, but provides no information about the user's tolerance for long development days, evening work, or preferred recovery pattern.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Breaks and meals inside long work blocks",
+          "assumption": "The 11:00 to 20:00 work periods on Monday through Wednesday can include adequate food, short breaks and task switching without undermining the intended work-category duration.",
+          "evidence_gap": "The added blocks are adjacent to existing 11:00 to 18:00 work blocks, and no break structure is visible in the calendar.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Thursday and Friday cumulative load",
+          "assumption": "The user can handle gym, stand-up, 10:30 to 12:00 client development work, and fixed 14:00 to 19:00 hackathon preparation on both Thursday and Friday without excessive fatigue.",
+          "evidence_gap": "The proposal notes sustainability gains from using late-morning space, but does not evaluate the combined cognitive and social load of the later fixed team sessions.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Independence of client development blocks",
+          "assumption": "The added client development blocks can be completed without client responsiveness or other third-party interaction during those times.",
+          "evidence_gap": "The rationale states that no client responsiveness is assumed for the solo development blocks, but the actual work dependency is not independently evidenced in the visible calendar.",
+          "potential_impact": "minor",
+          "verification_source": "third_party"
+        }
+      ]
+    }
+  ]
+}

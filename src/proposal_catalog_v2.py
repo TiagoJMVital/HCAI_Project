@@ -10,8 +10,11 @@ from benchmark_v2 import atomic_json
 from calendar_v2 import simulate
 from critic import LEGACY_RESULT_CALENDAR_VERSION, final_calendar_view
 from models import CurrentCriticEvaluation, PlausibilityCriticEvaluation, Proposal
+from run_catalog_v2 import runs
+from run_completion_v2 import (B_COMPLETED_STATUSES, completed_b_integrity_issues,
+                               validate_completed_b_integrity)
 from scenario_v2 import confirmed_changes_fingerprint, load_manifest, load_scenario
-from final_dataset_v2 import combined_manifest, scenario_path
+from final_dataset_v2 import combined_manifest, final_manifest, manifest_path, scenario_path
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -45,10 +48,112 @@ def catalog(root: Path) -> list[dict]:
     return rows
 
 
+def training_catalog_audit(root: Path) -> dict:
+    """Separate active training proposals from preserved but ineligible imports."""
+    manifest_rows = (final_manifest(root) if manifest_path(root).is_file()
+                     else combined_manifest(root))
+    training_ids = {row["scenario_id"] for row in manifest_rows if row["split"] == "train"}
+    source_runs = {(record["scenario_id"], record["run_id"]): record
+                   for record in runs(root, configuration="B")}
+    selected = []
+    quarantined = []
+    for artifact in catalog(root):
+        if artifact["scenario_id"] not in training_ids:
+            continue
+        source = source_runs.get((artifact["scenario_id"], artifact["run_id"]))
+        reasons = []
+        if source is None:
+            reasons.append("source run is not discoverable")
+        else:
+            reasons.extend(completed_b_integrity_issues(source))
+            source_path = root / source["_path"]
+            if hashlib.sha256(source_path.read_bytes()).hexdigest() != artifact.get("source_result_sha256"):
+                reasons.append("source run hash differs from imported proposal provenance")
+        if reasons:
+            quarantined.append({"proposal_id": artifact["proposal_id"],
+                                "scenario_id": artifact["scenario_id"],
+                                "run_id": artifact["run_id"], "reasons": reasons})
+        else:
+            selected.append(artifact)
+    duplicates = {scenario_id for scenario_id in training_ids
+                  if sum(row["scenario_id"] == scenario_id for row in selected) > 1}
+    if duplicates:
+        raise ValueError("multiple imported canonical training proposals: "
+                         + ", ".join(sorted(duplicates)))
+    return {"active": sorted(selected, key=lambda row: (row["family_id"], row["scenario_id"])),
+            "quarantined": sorted(quarantined, key=lambda row: (row["scenario_id"], row["run_id"]))}
+
+
+def training_catalog(root: Path) -> list[dict]:
+    """One integrity-verified canonical proposal per authoritative training scenario."""
+    return training_catalog_audit(root)["active"]
+
+
+def canonical_training_results(root: Path) -> dict[str, dict]:
+    """Select canonical B results without using Critic score or autonomy outcome.
+
+    An already imported proposal is immutable and remains canonical. For a scenario
+    not yet imported, choose the earliest technically terminal B run by generation
+    time and run ID. Scientific terminal outcomes remain eligible for scheduling-
+    acceptability review when their final proposal is structurally complete.
+    """
+    manifest_rows = (final_manifest(root) if manifest_path(root).is_file()
+                     else combined_manifest(root))
+    training = {row["scenario_id"]: row for row in manifest_rows if row["split"] == "train"}
+    imported = {row["scenario_id"]: row for row in training_catalog(root)}
+    candidates: dict[str, list[dict]] = {scenario_id: [] for scenario_id in training}
+    for record in runs(root, configuration="B"):
+        if (record["scenario_id"] in training
+                and record.get("status") in B_COMPLETED_STATUSES
+                and record.get("final_proposal") is not None
+                and not completed_b_integrity_issues(record)):
+            candidates[record["scenario_id"]].append(record)
+    selected = {}
+    for scenario_id, records in candidates.items():
+        if not records:
+            continue
+        if scenario_id in imported:
+            run_id = imported[scenario_id]["run_id"]
+            match = next((record for record in records if record["run_id"] == run_id), None)
+            if match is None:
+                raise ValueError(f"imported canonical proposal has no source run: {scenario_id}")
+            selected[scenario_id] = match
+            continue
+        selected[scenario_id] = min(
+            records, key=lambda record: (record.get("generated_at") or "", record["run_id"]))
+    return selected
+
+
+def import_training_results(root: Path) -> dict:
+    """Idempotently import every currently eligible canonical training B result."""
+    initial_audit = training_catalog_audit(root)
+    before = {row["scenario_id"]: row for row in initial_audit["active"]}
+    selected = canonical_training_results(root)
+    imported_paths = []
+    preserved = []
+    for scenario_id in sorted(selected):
+        if scenario_id in before:
+            preserved.append(before[scenario_id]["proposal_id"])
+            continue
+        record = selected[scenario_id]
+        imported_paths.append(str(import_result(root, root / record["_path"])))
+    final_audit = training_catalog_audit(root)
+    return {
+        "eligible_results": len(selected),
+        "previously_imported": len(preserved),
+        "newly_imported": len(imported_paths),
+        "total_training_proposals": len(final_audit["active"]),
+        "quarantined_proposals": final_audit["quarantined"],
+        "preserved_proposal_ids": preserved,
+        "imported_paths": imported_paths,
+    }
+
+
 def import_result(root: Path, result_path: Path) -> Path:
     record = json.loads(result_path.read_text(encoding="utf-8"))
     if record.get("schema_version") != "2.0" or record.get("configuration") != "B":
         raise ValueError("a v2 B run is required")
+    validate_completed_b_integrity(record)
     if not isinstance(record.get("iterations"), list) or not record["iterations"]:
         raise ValueError("missing B refinement history")
     proposal = Proposal.model_validate(record.get("final_proposal"))
@@ -165,9 +270,18 @@ def import_result(root: Path, result_path: Path) -> Path:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Import an existing B v2 result; no LLM call")
-    parser.add_argument("result", type=Path)
+    parser.add_argument("result", type=Path, nargs="?")
+    parser.add_argument("--training", action="store_true",
+                        help="idempotently import all canonical final training B results")
     args = parser.parse_args()
-    print(import_result(ROOT, args.result))
+    if args.training:
+        if args.result is not None:
+            parser.error("result and --training are mutually exclusive")
+        print(json.dumps(import_training_results(ROOT), indent=2, ensure_ascii=False))
+    elif args.result is None:
+        parser.error("result is required unless --training is used")
+    else:
+        print(import_result(ROOT, args.result))
 
 
 if __name__ == "__main__":
