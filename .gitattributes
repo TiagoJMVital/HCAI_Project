@@ -1,3 +1,4 @@
-# Scenario integrity uses SHA-256 of the exact stored bytes.  Disable checkout-time
-# line-ending conversion so hashes remain stable on Linux, WSL and Windows clones.
-scenarios/** -text
+# Dataset, run, proposal and annotation integrity uses SHA-256 of the exact stored
+# JSON bytes. Disable checkout-time line-ending conversion so provenance remains
+# stable on Linux, WSL and Windows clones, including core.autocrlf=true setups.
+*.json -text
