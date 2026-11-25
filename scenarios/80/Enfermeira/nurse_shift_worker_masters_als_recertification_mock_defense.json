@@ -1,0 +1,250 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "nurse_shift_worker_masters_als_recertification_mock_defense_001",
+  "family_id": "nurse_shift_worker_masters_schedule_conflict",
+  "profile": {
+    "profile_id": "nurse_masters_02__nurse_shift_worker_masters_als_recertification_mock_defense_001",
+    "description": "Nurse working rotating hospital shifts while completing a master's thesis, with regular gym training.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "work": 5,
+      "exams": 3,
+      "academic_deadlines": 5,
+      "health": 5,
+      "gym": 2,
+      "social": 3
+    },
+    "hard_constraints": [
+      {
+        "id": "work_hours",
+        "description": "Hospital shifts and mandatory hospital certifications are fixed and must not be moved, shortened or cancelled by the assistant.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "work"
+        ]
+      },
+      {
+        "id": "sleep_protection",
+        "description": "The user must sleep at least eight hours every day; scheduled sleep blocks must be protected.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "sleep"
+        ]
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "gym_routine",
+        "description": "Prefer gym sessions once a day, but it is not mandatory. Gym training is available daily from 06:00 to 23:00.",
+        "weight": 2
+      },
+      {
+        "id": "meal_times",
+        "description": "Prefer lunch between 12:00 and 14:00 and dinner between 19:00 and 21:00. Lunch and dinner each take one hour when the user is not at the hospital.",
+        "weight": 3
+      },
+      {
+        "id": "thesis_outside_work",
+        "description": "Prefer thesis work outside hospital shifts, with two focused hours reserved each day.",
+        "weight": 4
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Gym sessions and individual thesis preparation blocks can be moved or skipped. The mock defense with the research group and the lunch with a colleague involve other people and require confirmation. These are user preferences, not ground-truth ACT/DEFER labels."
+    }
+  },
+  "now": "2027-01-12T19:00:00+00:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "dinner_tue",
+        "title": "Dinner",
+        "start": "2027-01-12T20:00:00+00:00",
+        "end": "2027-01-12T21:00:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Dinner at home."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-01-12T23:30:00+00:00",
+        "end": "2027-01-13T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected eight-hour sleep block."
+      },
+      {
+        "id": "thesis_wed",
+        "title": "Master's thesis: Slide deck preparation",
+        "start": "2027-01-13T09:00:00+00:00",
+        "end": "2027-01-13T11:00:00+00:00",
+        "category": "thesis",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Two-hour focused thesis work on Wednesday (user's day off from ward shifts)."
+      },
+      {
+        "id": "gym_wed",
+        "title": "Gym session",
+        "start": "2027-01-13T11:00:00+00:00",
+        "end": "2027-01-13T12:30:00+00:00",
+        "category": "gym",
+        "importance": 2,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym session next to home."
+      },
+      {
+        "id": "lunch_colleague_wed",
+        "title": "Lunch with nursing colleague",
+        "start": "2027-01-13T13:00:00+00:00",
+        "end": "2027-01-13T14:30:00+00:00",
+        "category": "social",
+        "importance": 3,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleague"
+        ],
+        "description": "Lunch at a café near the hospital (30 minutes from home)."
+      },
+      {
+        "id": "dinner_wed",
+        "title": "Dinner",
+        "start": "2027-01-13T20:00:00+00:00",
+        "end": "2027-01-13T21:00:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Dinner at home."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-01-13T23:30:00+00:00",
+        "end": "2027-01-14T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected eight-hour sleep block."
+      },
+      {
+        "id": "thesis_thu",
+        "title": "Master's thesis: Defense rehearsal",
+        "start": "2027-01-14T09:00:00+00:00",
+        "end": "2027-01-14T11:00:00+00:00",
+        "category": "thesis",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Two-hour focused thesis work."
+      },
+      {
+        "id": "gym_thu",
+        "title": "Gym session",
+        "start": "2027-01-14T11:00:00+00:00",
+        "end": "2027-01-14T12:30:00+00:00",
+        "category": "gym",
+        "importance": 2,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym session next to home."
+      },
+      {
+        "id": "lunch_thu",
+        "title": "Lunch",
+        "start": "2027-01-14T13:00:00+00:00",
+        "end": "2027-01-14T14:00:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch before afternoon shift."
+      },
+      {
+        "id": "commute_to_work_thu",
+        "title": "Commute to hospital",
+        "start": "2027-01-14T14:30:00+00:00",
+        "end": "2027-01-14T15:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute journey to hospital."
+      },
+      {
+        "id": "work_thu",
+        "title": "Hospital shift",
+        "start": "2027-01-14T15:00:00+00:00",
+        "end": "2027-01-14T23:00:00+00:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Fixed nursing shift at the hospital."
+      },
+      {
+        "id": "commute_home_thu",
+        "title": "Commute home",
+        "start": "2027-01-14T23:00:00+00:00",
+        "end": "2027-01-14T23:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute journey home."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-01-14T23:30:00+00:00",
+        "end": "2027-01-15T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected eight-hour sleep block."
+      }
+    ]
+  },
+  "user_request": "I just received two urgent emails (19:00): first, the hospital training department scheduled my mandatory Advanced Life Support (ALS) recertification for tomorrow (Wednesday) from 08:30 to 13:00 at the hospital simulation centre (30-minute commute each way, and I must arrive by 08:20). Second, my thesis supervisor and research group scheduled my mandatory 90-minute mock defense on Thursday from 10:30 to 12:00 via video call before my afternoon shift. Please add both events and their travel times, rearrange Wednesday and Thursday so I still get my 8 hours of sleep, normal meals, and 2 hours of thesis prep per day (counting the mock defense toward Thursday's thesis time, plus 30 minutes of solo prep), and tell me which gym sessions or social plans need to be moved or confirmed with others."
+}

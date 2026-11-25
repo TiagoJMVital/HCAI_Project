@@ -13,7 +13,7 @@ import run_training_b_v2 as batch  # noqa: E402
 import migrate_runs_dataset_layout as layout_migration  # noqa: E402
 from benchmark_v2 import import_scenario  # noqa: E402
 from final_dataset_v2 import (BLOCKED_STATE, ELIGIBLE_STATES, FAMILY_FOLDERS,
-                              final_manifest, run_prefix)  # noqa: E402
+                              dataset_root, final_manifest, run_prefix)  # noqa: E402
 from llm import LLMError  # noqa: E402
 from run_completion_v2 import (TechnicalRunError, historical_pilot_completed_b,
                                archive_technical_failure, completed_b_integrity_issues,
@@ -34,6 +34,10 @@ class FakeProvider:
 
 def test_final_manifest_distribution_and_paths():
     rows = final_manifest(ROOT, validate_scenarios=True)
+    local_dataset = (ROOT / "scenarios").resolve()
+    assert dataset_root(ROOT) == local_dataset
+    assert all(Path(row["scenario_path"]).resolve().is_relative_to(local_dataset)
+               for row in rows)
     assert len(batch.select_rows(rows)) == 60
     assert len({row["scenario_id"] for row in rows}) == 100
     assert {run_prefix(row) for row in rows if row["split"] == "train"} == {
@@ -42,6 +46,17 @@ def test_final_manifest_distribution_and_paths():
     assert {run_prefix(row) for row in rows if row["split"] == "dev"} == {
         ("avaliacao", "desenvolvimento", "secundario")}
     assert len({run_prefix(row) for row in rows if row["split"] == "test"}) == 3
+
+
+def test_dataset_root_prefers_clone_local_scenarios_with_legacy_fallback(tmp_path):
+    repository = tmp_path / "project"
+    legacy = tmp_path / "scenarios"
+    repository.mkdir()
+    legacy.mkdir()
+    assert dataset_root(repository) == legacy
+    local = repository / "scenarios"
+    local.mkdir()
+    assert dataset_root(repository) == local
 
 
 def test_all_training_scenarios_are_eligible_and_unblocked():

@@ -1,0 +1,293 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "working_student_makeup_class_friday_family_dinner_008",
+  "family_id": "working_student_schedule_conflict",
+  "profile": {
+    "profile_id": "working_student_01__working_student_makeup_class_friday_family_dinner_008",
+    "description": "Working student handling a Friday evening make-up lecture while balancing family commitments and workouts.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "work": 5,
+      "education": 5,
+      "sleep": 4,
+      "health": 4,
+      "personal": 3
+    },
+    "hard_constraints": [
+      {
+        "description": "Make-up lecture on Friday from 18:30 to 21:00 is mandatory.",
+        "event_ids": [
+          "class_tue",
+          "makeup_class_fri"
+        ],
+        "id": "makeup_class_friday",
+        "rule_type": "protect_events_by_id"
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "family_dinner_after_class",
+        "description": "Join family after the make-up lecture if finished by 21:00, or shift family dinner to Thursday.",
+        "weight": 3
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Friday evening class overlaps with typical Friday dinner plans."
+    }
+  },
+  "now": "2027-05-17T07:30:00+01:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-05-16T23:45:00+01:00",
+        "end": "2027-05-17T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "work_mon",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-05-17T09:00:00+01:00",
+        "end": "2027-05-17T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Daytime work."
+      },
+      {
+        "id": "gym_mon",
+        "title": "Gym Workout",
+        "start": "2027-05-17T18:00:00+01:00",
+        "end": "2027-05-17T19:15:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout."
+      },
+      {
+        "id": "study_mon",
+        "title": "Evening Study: Course Material",
+        "start": "2027-05-17T19:45:00+01:00",
+        "end": "2027-05-17T21:45:00+01:00",
+        "category": "education",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Study."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-05-17T23:45:00+01:00",
+        "end": "2027-05-18T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "work_tue",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-05-18T09:00:00+01:00",
+        "end": "2027-05-18T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Daytime work."
+      },
+      {
+        "id": "class_tue",
+        "title": "Evening Lecture: Organizational Behavior",
+        "start": "2027-05-18T18:30:00+01:00",
+        "end": "2027-05-18T21:30:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "professor",
+          "classmates"
+        ],
+        "description": "Mandatory evening class."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-05-18T23:45:00+01:00",
+        "end": "2027-05-19T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "work_wed",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-05-19T09:00:00+01:00",
+        "end": "2027-05-19T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Daytime work."
+      },
+      {
+        "id": "gym_wed",
+        "title": "Gym: Strength & Conditioning",
+        "start": "2027-05-19T18:00:00+01:00",
+        "end": "2027-05-19T19:15:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout."
+      },
+      {
+        "id": "study_wed",
+        "title": "Evening Study: Organizational Behavior Case",
+        "start": "2027-05-19T19:45:00+01:00",
+        "end": "2027-05-19T21:45:00+01:00",
+        "category": "education",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Case study."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-05-19T23:45:00+01:00",
+        "end": "2027-05-20T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "work_thu",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-05-20T09:00:00+01:00",
+        "end": "2027-05-20T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Daytime work."
+      },
+      {
+        "id": "gym_thu",
+        "title": "Gym Workout",
+        "start": "2027-05-20T17:45:00+01:00",
+        "end": "2027-05-20T18:45:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout."
+      },
+      {
+        "id": "family_dinner_fri",
+        "title": "Usual Friday Family Dinner",
+        "start": "2027-05-21T19:30:00+01:00",
+        "end": "2027-05-21T21:30:00+01:00",
+        "category": "personal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "family"
+        ],
+        "description": "Original Friday family dinner; overlaps newly confirmed make-up lecture, motivating a proposed move to Thursday."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-05-20T23:45:00+01:00",
+        "end": "2027-05-21T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "work_fri",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-05-21T09:00:00+01:00",
+        "end": "2027-05-21T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Friday work shift."
+      },
+      {
+        "id": "makeup_class_fri",
+        "title": "Evening Make-up Lecture: Econometrics",
+        "start": "2027-05-21T18:30:00+01:00",
+        "end": "2027-05-21T21:00:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "professor",
+          "classmates"
+        ],
+        "description": "Mandatory Friday evening make-up class."
+      }
+    ]
+  },
+  "user_request": "My professor scheduled a mandatory make-up lecture on Friday from 18:30 to 21:00. Please move my usual Friday family dinner to Thursday evening after my workout and keep my Friday evening clear for the class."
+}

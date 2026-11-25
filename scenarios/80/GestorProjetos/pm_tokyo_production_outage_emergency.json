@@ -1,0 +1,341 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "pm_tokyo_production_outage_emergency_002",
+  "family_id": "international_project_manager_schedule_conflict",
+  "profile": {
+    "profile_id": "international_project_manager_01__pm_tokyo_production_outage_emergency_002",
+    "description": "International Project Manager handling emergency cross-timezone incidents while preserving health and sleep.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "client_meetings": 5,
+      "travel": 5,
+      "deep_work": 4,
+      "health": 4,
+      "sleep": 4,
+      "personal": 3
+    },
+    "hard_constraints": [
+      {
+        "id": "tokyo_war_room",
+        "description": "Emergency war-room call with Tokyo client at 06:30 on Tuesday is mandatory.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "client_meetings"
+        ]
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "recovery_nap_or_early_sleep",
+        "description": "Compensate early wake-up by shifting non-urgent Tuesday afternoon tasks and protecting workout.",
+        "weight": 4
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Early morning APAC emergencies require shifting midday schedules to prevent burnout."
+    }
+  },
+  "now": "2027-03-01T07:00:00+00:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-02-28T23:00:00+00:00",
+        "end": "2027-03-01T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "deep_work_mon",
+        "title": "Deep Work: Sprint Planning",
+        "start": "2027-03-01T08:30:00+00:00",
+        "end": "2027-03-01T12:00:00+00:00",
+        "category": "deep_work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Planning."
+      },
+      {
+        "id": "gym_mon",
+        "title": "Gym Workout",
+        "start": "2027-03-01T13:30:00+00:00",
+        "end": "2027-03-01T14:45:00+00:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout."
+      },
+      {
+        "id": "us_call_mon",
+        "title": "US Stakeholder Alignment",
+        "start": "2027-03-01T16:30:00+00:00",
+        "end": "2027-03-01T18:00:00+00:00",
+        "category": "client_meetings",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "us_team"
+        ],
+        "description": "Client call."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Shortened Sleep",
+        "start": "2027-03-01T23:00:00+00:00",
+        "end": "2027-03-02T06:00:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Early wake-up."
+      },
+      {
+        "id": "tokyo_crisis_tue",
+        "title": "Emergency War Room: Tokyo Deployment Outage",
+        "start": "2027-03-02T06:30:00+00:00",
+        "end": "2027-03-02T08:30:00+00:00",
+        "category": "client_meetings",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "tokyo_client"
+        ],
+        "description": "Critical incident call."
+      },
+      {
+        "id": "deep_work_tue",
+        "title": "Deep Work: Incident Post-Mortem & Client Update",
+        "start": "2027-03-02T09:00:00+00:00",
+        "end": "2027-03-02T11:30:00+00:00",
+        "category": "deep_work",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Incident report."
+      },
+      {
+        "id": "rest_tue",
+        "title": "Power Nap & Lunch Recovery",
+        "start": "2027-03-02T12:00:00+00:00",
+        "end": "2027-03-02T14:00:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Midday recovery."
+      },
+      {
+        "id": "gym_tue",
+        "title": "Gym: Light Cardio & Mobility",
+        "start": "2027-03-02T14:30:00+00:00",
+        "end": "2027-03-02T15:30:00+00:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout."
+      },
+      {
+        "id": "us_sync_tue",
+        "title": "US Engineering Handover Call",
+        "start": "2027-03-02T16:30:00+00:00",
+        "end": "2027-03-02T17:30:00+00:00",
+        "category": "client_meetings",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "us_devs"
+        ],
+        "description": "Handover call."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-03-02T22:30:00+00:00",
+        "end": "2027-03-03T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Full 8h sleep."
+      },
+      {
+        "id": "deep_work_wed",
+        "title": "Deep Work: Budget Forecast",
+        "start": "2027-03-03T08:30:00+00:00",
+        "end": "2027-03-03T12:00:00+00:00",
+        "category": "deep_work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Financial review."
+      },
+      {
+        "id": "gym_wed",
+        "title": "Gym: Strength Training",
+        "start": "2027-03-03T13:30:00+00:00",
+        "end": "2027-03-03T14:45:00+00:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout."
+      },
+      {
+        "id": "emea_call_wed",
+        "title": "EMEA Partners Review (London/Berlin)",
+        "start": "2027-03-03T15:30:00+00:00",
+        "end": "2027-03-03T17:00:00+00:00",
+        "category": "client_meetings",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user",
+          "emea_partners"
+        ],
+        "description": "Partner sync."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-03-03T23:00:00+00:00",
+        "end": "2027-03-04T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "train_thu",
+        "title": "High-Speed Train to Porto (Client Visit)",
+        "start": "2027-03-04T08:00:00+00:00",
+        "end": "2027-03-04T11:00:00+00:00",
+        "category": "travel",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Train travel."
+      },
+      {
+        "id": "client_porto_thu",
+        "title": "On-Site Client Governance Review (Porto)",
+        "start": "2027-03-04T11:30:00+00:00",
+        "end": "2027-03-04T15:30:00+00:00",
+        "category": "client_meetings",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "porto_client"
+        ],
+        "description": "On-site meeting."
+      },
+      {
+        "id": "train_back_thu",
+        "title": "Return Train Porto -> Lisbon",
+        "start": "2027-03-04T17:00:00+00:00",
+        "end": "2027-03-04T20:00:00+00:00",
+        "category": "travel",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Return train."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-03-04T23:00:00+00:00",
+        "end": "2027-03-05T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "deep_work_fri",
+        "title": "Deep Work: Weekly Wrap-up & KPIs",
+        "start": "2027-03-05T08:30:00+00:00",
+        "end": "2027-03-05T12:00:00+00:00",
+        "category": "deep_work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Weekly reporting."
+      },
+      {
+        "id": "gym_fri",
+        "title": "Gym Workout",
+        "start": "2027-03-05T13:30:00+00:00",
+        "end": "2027-03-05T14:45:00+00:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout."
+      },
+      {
+        "id": "personal_fri",
+        "title": "Personal Errands & Family Dinner",
+        "start": "2027-03-05T18:30:00+00:00",
+        "end": "2027-03-05T21:30:00+00:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "family"
+        ],
+        "description": "Family evening."
+      }
+    ]
+  },
+  "user_request": "A critical production outage in Tokyo requires me to join an emergency war-room call on Tuesday at 06:30. Please adjust my Tuesday schedule to include a midday recovery nap, shift my workout to the afternoon, and protect my 16:30 handover call with the US engineering team."
+}

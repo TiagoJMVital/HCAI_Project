@@ -1,0 +1,338 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "high_school_student_rescheduled_tutoring_friday_008",
+  "family_id": "high_school_student_schedule_conflict",
+  "profile": {
+    "profile_id": "high_school_student_01__high_school_student_rescheduled_tutoring_friday_008",
+    "description": "High school student adjusting to a tutor's schedule change on Friday afternoon.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "education": 5,
+      "health": 4,
+      "social": 4,
+      "sleep": 4,
+      "household": 2
+    },
+    "hard_constraints": [
+      {
+        "description": "Rescheduled tutoring session on Friday from 15:00 to 16:30 is mandatory.",
+        "event_ids": [
+          "classes_mon",
+          "classes_tue_am",
+          "classes_wed",
+          "classes_thu_am",
+          "classes_fri_am",
+          "tutoring_fri"
+        ],
+        "id": "tutoring_fixed",
+        "rule_type": "protect_events_by_id"
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "gym_and_social",
+        "description": "Keep Friday gym and friend hangout intact.",
+        "weight": 4
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Tutor moved session to Friday afternoon; dad provides ride from school to tutoring."
+    }
+  },
+  "now": "2027-05-10T07:30:00+01:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-05-09T23:30:00+01:00",
+        "end": "2027-05-10T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "classes_mon",
+        "title": "High School Classes (8h)",
+        "start": "2027-05-10T08:30:00+01:00",
+        "end": "2027-05-10T17:30:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "classmates"
+        ],
+        "description": "Classes."
+      },
+      {
+        "id": "gym_mon",
+        "title": "Gym Session",
+        "start": "2027-05-10T18:00:00+01:00",
+        "end": "2027-05-10T19:15:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout."
+      },
+      {
+        "id": "hw_mon",
+        "title": "Dinner & Homework",
+        "start": "2027-05-10T19:45:00+01:00",
+        "end": "2027-05-10T22:00:00+01:00",
+        "category": "education",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "family"
+        ],
+        "description": "Dinner and study."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-05-10T23:30:00+01:00",
+        "end": "2027-05-11T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "classes_tue_am",
+        "title": "High School Morning Classes",
+        "start": "2027-05-11T08:30:00+01:00",
+        "end": "2027-05-11T13:30:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "classmates"
+        ],
+        "description": "Morning classes."
+      },
+      {
+        "id": "gym_tue",
+        "title": "Gym Session",
+        "start": "2027-05-11T14:30:00+01:00",
+        "end": "2027-05-11T16:00:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Afternoon workout."
+      },
+      {
+        "id": "skate_tue",
+        "title": "Skate with Friends",
+        "start": "2027-05-11T16:30:00+01:00",
+        "end": "2027-05-11T18:30:00+01:00",
+        "category": "social",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "friends"
+        ],
+        "description": "Skate session."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-05-11T23:30:00+01:00",
+        "end": "2027-05-12T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "classes_wed",
+        "title": "High School Classes (8h)",
+        "start": "2027-05-12T08:30:00+01:00",
+        "end": "2027-05-12T17:30:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "classmates"
+        ],
+        "description": "Classes."
+      },
+      {
+        "id": "catechesis_wed",
+        "title": "Catechesis Class",
+        "start": "2027-05-12T18:00:00+01:00",
+        "end": "2027-05-12T19:30:00+01:00",
+        "category": "social",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user",
+          "catechist"
+        ],
+        "description": "Fixed catechesis."
+      },
+      {
+        "id": "hw_wed",
+        "title": "Dinner & Homework",
+        "start": "2027-05-12T20:00:00+01:00",
+        "end": "2027-05-12T22:00:00+01:00",
+        "category": "education",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "family"
+        ],
+        "description": "Dinner and study."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-05-12T23:30:00+01:00",
+        "end": "2027-05-13T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "classes_thu_am",
+        "title": "High School Morning Classes",
+        "start": "2027-05-13T08:30:00+01:00",
+        "end": "2027-05-13T13:30:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "classmates"
+        ],
+        "description": "Morning classes."
+      },
+      {
+        "id": "gym_thu",
+        "title": "Gym Session",
+        "start": "2027-05-13T14:30:00+01:00",
+        "end": "2027-05-13T16:00:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Afternoon workout."
+      },
+      {
+        "id": "friends_thu",
+        "title": "Hangout with Friends",
+        "start": "2027-05-13T16:30:00+01:00",
+        "end": "2027-05-13T19:30:00+01:00",
+        "category": "social",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "friends"
+        ],
+        "description": "Afternoon with friends."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-05-13T23:30:00+01:00",
+        "end": "2027-05-14T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "classes_fri_am",
+        "title": "High School Morning Classes",
+        "start": "2027-05-14T08:30:00+01:00",
+        "end": "2027-05-14T13:30:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "classmates"
+        ],
+        "description": "Morning classes."
+      },
+      {
+        "id": "tutoring_fri",
+        "title": "Rescheduled Math Tutoring",
+        "start": "2027-05-14T15:00:00+01:00",
+        "end": "2027-05-14T16:30:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "tutor"
+        ],
+        "description": "Rescheduled tutoring."
+      },
+      {
+        "id": "gym_fri",
+        "title": "Gym Session",
+        "start": "2027-05-14T17:30:00+01:00",
+        "end": "2027-05-14T18:45:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Friday workout."
+      },
+      {
+        "id": "social_fri",
+        "title": "Hangout with Friends",
+        "start": "2027-05-14T20:00:00+01:00",
+        "end": "2027-05-14T23:00:00+01:00",
+        "category": "social",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "friends"
+        ],
+        "description": "Social night."
+      }
+    ]
+  },
+  "user_request": "My math tutor moved this week's session to Friday afternoon from 15:00 to 16:30, and my dad is driving me there after lunch. Please update Friday afternoon so I can do the tutoring, still hit the gym, and meet friends in the evening."
+}

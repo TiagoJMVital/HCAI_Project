@@ -1,0 +1,440 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "elite_athlete_student_injury_rehab_001",
+  "family_id": "elite_athlete_student_schedule_conflict",
+  "profile": {
+    "profile_id": "elite_athlete_student_01__elite_athlete_student_injury_rehab_001",
+    "description": "High-performance student-athlete competing at national/international level while pursuing an undergraduate degree, balancing twice-daily training sessions, strict sleep hygiene, university classes, and social life.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "training": 5,
+      "sleep": 5,
+      "exams": 4,
+      "classes": 3,
+      "physio": 4,
+      "social": 2
+    },
+    "hard_constraints": [
+      {
+        "id": "rehab_sessions",
+        "description": "Prescribed physiotherapy sessions are mandatory to recover before next week's qualifiers.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "physio"
+        ]
+      },
+      {
+        "id": "training_sessions",
+        "description": "Twice-daily training count must be maintained via low-impact adapted sessions.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "training"
+        ]
+      },
+      {
+        "id": "sleep_protection",
+        "description": "The athlete must sleep at least eight hours every night.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "sleep"
+        ]
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "study_balance",
+        "description": "Maintain at least 6 hours of study across the week despite extra medical rehab slots.",
+        "weight": 3
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Regular classes can be skipped to fit daily 1-hour physiotherapy slots at the clinic. Clinic slots and adapted coach sessions require confirmation."
+    }
+  },
+  "now": "2027-05-17T09:15:00+01:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-05-16T22:30:00+01:00",
+        "end": "2027-05-17T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block."
+      },
+      {
+        "id": "training_am_mon",
+        "title": "Morning Track Sprints (Aborted due to calf strain)",
+        "start": "2027-05-17T07:00:00+01:00",
+        "end": "2027-05-17T09:00:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Morning session."
+      },
+      {
+        "id": "class_marketing_mon",
+        "title": "Marketing Strategy Lecture",
+        "start": "2027-05-17T10:00:00+01:00",
+        "end": "2027-05-17T12:00:00+01:00",
+        "category": "classes",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Morning lecture."
+      },
+      {
+        "id": "lunch_mon",
+        "title": "Lunch",
+        "start": "2027-05-17T12:30:00+01:00",
+        "end": "2027-05-17T13:30:00+01:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break."
+      },
+      {
+        "id": "study_mon",
+        "title": "Independent Study",
+        "start": "2027-05-17T14:00:00+01:00",
+        "end": "2027-05-17T16:00:00+01:00",
+        "category": "study",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Study block."
+      },
+      {
+        "id": "training_pm_mon",
+        "title": "Afternoon Technical Session",
+        "start": "2027-05-17T16:30:00+01:00",
+        "end": "2027-05-17T18:30:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "To be converted to upper-body/pool rehab."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-05-17T22:30:00+01:00",
+        "end": "2027-05-18T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block."
+      },
+      {
+        "id": "training_am_tue",
+        "title": "Morning Adapted Cycling & Core",
+        "start": "2027-05-18T07:00:00+01:00",
+        "end": "2027-05-18T09:00:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Low-impact session."
+      },
+      {
+        "id": "class_finance_tue",
+        "title": "Corporate Finance Lecture",
+        "start": "2027-05-18T10:00:00+01:00",
+        "end": "2027-05-18T12:00:00+01:00",
+        "category": "classes",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Morning lecture."
+      },
+      {
+        "id": "lunch_tue",
+        "title": "Lunch",
+        "start": "2027-05-18T12:30:00+01:00",
+        "end": "2027-05-18T13:30:00+01:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break."
+      },
+      {
+        "id": "study_tue",
+        "title": "Independent Study",
+        "start": "2027-05-18T14:00:00+01:00",
+        "end": "2027-05-18T16:00:00+01:00",
+        "category": "study",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Study block."
+      },
+      {
+        "id": "training_pm_tue",
+        "title": "Afternoon Pool Running",
+        "start": "2027-05-18T16:30:00+01:00",
+        "end": "2027-05-18T18:30:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Zero-gravity water training."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-05-18T22:30:00+01:00",
+        "end": "2027-05-19T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block."
+      },
+      {
+        "id": "training_am_wed",
+        "title": "Morning Adapted Gym",
+        "start": "2027-05-19T07:00:00+01:00",
+        "end": "2027-05-19T09:00:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Morning session."
+      },
+      {
+        "id": "class_marketing_wed",
+        "title": "Marketing Seminar",
+        "start": "2027-05-19T10:00:00+01:00",
+        "end": "2027-05-19T12:00:00+01:00",
+        "category": "classes",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Morning class."
+      },
+      {
+        "id": "lunch_wed",
+        "title": "Lunch",
+        "start": "2027-05-19T12:30:00+01:00",
+        "end": "2027-05-19T13:30:00+01:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break."
+      },
+      {
+        "id": "coffee_wed",
+        "title": "Coffee with Classmates",
+        "start": "2027-05-19T14:30:00+01:00",
+        "end": "2027-05-19T15:30:00+01:00",
+        "category": "social",
+        "importance": 2,
+        "fixed": false,
+        "participants": [
+          "user",
+          "peers"
+        ],
+        "description": "Social break."
+      },
+      {
+        "id": "training_pm_wed",
+        "title": "Afternoon Swim Conditioning",
+        "start": "2027-05-19T16:30:00+01:00",
+        "end": "2027-05-19T18:30:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-05-19T22:30:00+01:00",
+        "end": "2027-05-20T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block."
+      },
+      {
+        "id": "training_am_thu",
+        "title": "Morning Mobility & Cycling",
+        "start": "2027-05-20T07:00:00+01:00",
+        "end": "2027-05-20T09:00:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Morning session."
+      },
+      {
+        "id": "class_finance_thu",
+        "title": "Corporate Finance Practical",
+        "start": "2027-05-20T10:00:00+01:00",
+        "end": "2027-05-20T12:00:00+01:00",
+        "category": "classes",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Morning class."
+      },
+      {
+        "id": "lunch_thu",
+        "title": "Lunch",
+        "start": "2027-05-20T12:30:00+01:00",
+        "end": "2027-05-20T13:30:00+01:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break."
+      },
+      {
+        "id": "study_thu",
+        "title": "Independent Study",
+        "start": "2027-05-20T14:00:00+01:00",
+        "end": "2027-05-20T16:00:00+01:00",
+        "category": "study",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Study block."
+      },
+      {
+        "id": "training_pm_thu",
+        "title": "Afternoon Light Track Progression",
+        "start": "2027-05-20T16:30:00+01:00",
+        "end": "2027-05-20T18:30:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-05-20T22:30:00+01:00",
+        "end": "2027-05-21T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block."
+      },
+      {
+        "id": "training_am_fri",
+        "title": "Morning Gym & Functional Test",
+        "start": "2027-05-21T07:00:00+01:00",
+        "end": "2027-05-21T09:00:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Morning session."
+      },
+      {
+        "id": "study_fri",
+        "title": "Weekly Exam Prep",
+        "start": "2027-05-21T10:00:00+01:00",
+        "end": "2027-05-21T12:00:00+01:00",
+        "category": "study",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Study block."
+      },
+      {
+        "id": "training_pm_fri",
+        "title": "Afternoon Team Session",
+        "start": "2027-05-21T16:30:00+01:00",
+        "end": "2027-05-21T18:30:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session."
+      }
+    ]
+  },
+  "user_request": "The sports doctor just diagnosed a Grade 1 calf strain after this morning's session (Monday 09:15). I must keep my twice-daily training schedule using low-impact adapted workouts, AND I must attend daily 1-hour intensive physiotherapy sessions at the High-Performance Center clinic from Monday to Friday. The physio clinic only has slots at 10:30–11:30 or 14:00–15:00 each day. Please fit the 5 daily physio sessions into my week (skipping morning classes where needed), keep at least 6 hours of independent study across the week, protect my 8 hours of sleep every night, and tell me which clinic slots and class absences need confirmation."
+}

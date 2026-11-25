@@ -1,0 +1,272 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "freelancer_flexible_apartment_hunting_closing_001",
+  "family_id": "freelancer_schedule_conflict",
+  "profile": {
+    "profile_id": "freelancer_flexible_01__freelancer_flexible_apartment_hunting_closing_001",
+    "description": "Freelance consultant with flexible hours, dealing with urgent apartment hunting and contract signing during the week.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "health": 5,
+      "social": 4,
+      "work": 4,
+      "sleep": 4,
+      "household": 5
+    },
+    "hard_constraints": [
+      {
+        "id": "apartment_signing",
+        "description": "Mandatory real estate contract signing at the notary on Friday at 11:00.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "exam"
+        ]
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "sports",
+        "description": "Maintain morning runs.",
+        "weight": 4
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Notary appointment on Friday is fixed. Apartment visits on Tuesday and Wednesday afternoons are fixed."
+    }
+  },
+  "now": "2027-06-07T08:30:00+01:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-06-06T23:30:00+01:00",
+        "end": "2027-06-07T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "run_mon",
+        "title": "Morning Run",
+        "start": "2027-06-07T08:00:00+01:00",
+        "end": "2027-06-07T09:00:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Run."
+      },
+      {
+        "id": "work_mon",
+        "title": "Consulting Work Block",
+        "start": "2027-06-07T10:00:00+01:00",
+        "end": "2027-06-07T17:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "7 hours work."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-06-07T23:30:00+01:00",
+        "end": "2027-06-08T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "run_tue",
+        "title": "Morning Run",
+        "start": "2027-06-08T08:00:00+01:00",
+        "end": "2027-06-08T09:00:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Run."
+      },
+      {
+        "id": "apartment_visit_tue",
+        "title": "Apartment Viewing with Agent",
+        "start": "2027-06-08T15:00:00+01:00",
+        "end": "2027-06-08T17:00:00+01:00",
+        "category": "household",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "agent"
+        ],
+        "description": "Fixed viewing."
+      },
+      {
+        "id": "work_tue",
+        "title": "Consulting Work Block",
+        "start": "2027-06-08T10:00:00+01:00",
+        "end": "2027-06-08T14:30:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "4.5 hours work."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-06-08T23:30:00+01:00",
+        "end": "2027-06-09T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "run_wed",
+        "title": "Morning Run",
+        "start": "2027-06-09T08:00:00+01:00",
+        "end": "2027-06-09T09:00:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Run."
+      },
+      {
+        "id": "apartment_visit_wed",
+        "title": "Final Apartment Inspection",
+        "start": "2027-06-09T16:00:00+01:00",
+        "end": "2027-06-09T18:00:00+01:00",
+        "category": "household",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "landlord"
+        ],
+        "description": "Fixed inspection."
+      },
+      {
+        "id": "work_wed",
+        "title": "Consulting Work Block",
+        "start": "2027-06-09T10:00:00+01:00",
+        "end": "2027-06-09T15:30:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "5.5 hours work."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-06-09T23:30:00+01:00",
+        "end": "2027-06-10T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "run_thu",
+        "title": "Morning Run",
+        "start": "2027-06-10T08:00:00+01:00",
+        "end": "2027-06-10T09:00:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Run."
+      },
+      {
+        "id": "work_thu",
+        "title": "Consulting Work Block",
+        "start": "2027-06-10T10:00:00+01:00",
+        "end": "2027-06-10T17:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "7 hours work."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-06-10T23:30:00+01:00",
+        "end": "2027-06-11T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "notary_fri",
+        "title": "Apartment Contract Signing at Notary",
+        "start": "2027-06-11T11:00:00+01:00",
+        "end": "2027-06-11T13:00:00+01:00",
+        "category": "exam",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "notary"
+        ],
+        "description": "Fixed signing."
+      },
+      {
+        "id": "work_fri",
+        "title": "Consulting Work Block",
+        "start": "2027-06-11T14:00:00+01:00",
+        "end": "2027-06-11T18:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "4 hours work."
+      }
+    ]
+  },
+  "user_request": "I am in the middle of renting a new apartment, which adds fixed real estate appointments: an apartment viewing on Tuesday from 15:00 to 17:00, a final inspection on Wednesday from 16:00 to 18:00, and the official notary contract signing on Friday from 11:00 to 13:00. I need to complete 28 hours of consulting work across the week. Please reorganize my schedule to accommodate these property commitments without missing my morning runs or sleep."
+}

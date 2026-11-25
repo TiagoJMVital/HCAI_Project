@@ -1,0 +1,430 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "pm_flight_delay_us_meetings_cascade_001",
+  "family_id": "international_project_manager_schedule_conflict",
+  "profile": {
+    "profile_id": "international_project_manager_01__pm_flight_delay_us_meetings_cascade_001",
+    "description": "International Project Manager coordinating distributed teams across APAC, EMEA, and US time zones, balancing frequent business travel, deep work blocks, physical exercise, and personal commitments.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "client_meetings": 5,
+      "travel": 5,
+      "deep_work": 4,
+      "health": 4,
+      "sleep": 4,
+      "personal": 3
+    },
+    "hard_constraints": [
+      {
+        "id": "executive_steering_committee",
+        "description": "Steering committee meeting with US client executives is mandatory.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "client_meetings"
+        ]
+      },
+      {
+        "id": "sleep_protection",
+        "description": "Protect at least 7.5 hours of sleep per night.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "sleep"
+        ]
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "exercise_consistency",
+        "description": "Maintain at least 4 workout sessions per week, including hotel gym sessions during travel.",
+        "weight": 4
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Internal syncs and deep work blocks can be compressed or shifted; client executive calls and flight windows are rigid."
+    }
+  },
+  "now": "2027-02-15T07:00:00+00:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-02-14T23:00:00+00:00",
+        "end": "2027-02-15T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "apac_sync_mon",
+        "title": "APAC Engineering Standup (Singapore Team)",
+        "start": "2027-02-15T07:30:00+00:00",
+        "end": "2027-02-15T08:30:00+00:00",
+        "category": "client_meetings",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user",
+          "apac_team"
+        ],
+        "description": "Early morning sync with Singapore."
+      },
+      {
+        "id": "deep_work_mon",
+        "title": "Deep Work: Q1 Roadmap & Risk Matrix",
+        "start": "2027-02-15T09:00:00+00:00",
+        "end": "2027-02-15T12:00:00+00:00",
+        "category": "deep_work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Uninterrupted planning block."
+      },
+      {
+        "id": "lunch_mon",
+        "title": "Lunch & Walk",
+        "start": "2027-02-15T12:30:00+00:00",
+        "end": "2027-02-15T13:30:00+00:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Midday break."
+      },
+      {
+        "id": "gym_mon",
+        "title": "Gym: Strength & Cardio",
+        "start": "2027-02-15T14:00:00+00:00",
+        "end": "2027-02-15T15:15:00+00:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Afternoon workout before US calls."
+      },
+      {
+        "id": "us_sync_mon",
+        "title": "US East Coast Product Sync (New York)",
+        "start": "2027-02-15T16:00:00+00:00",
+        "end": "2027-02-15T17:30:00+00:00",
+        "category": "client_meetings",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "us_team"
+        ],
+        "description": "Cross-Atlantic alignment."
+      },
+      {
+        "id": "dinner_mon",
+        "title": "Dinner & Packing for Frankfurt Trip",
+        "start": "2027-02-15T19:00:00+00:00",
+        "end": "2027-02-15T21:30:00+00:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Dinner and luggage prep."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-02-15T23:00:00+00:00",
+        "end": "2027-02-16T06:00:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Early wake-up for flight."
+      },
+      {
+        "id": "flight_tue",
+        "title": "Flight LIS -> FRA (Frankfurt Business Trip)",
+        "start": "2027-02-16T07:30:00+00:00",
+        "end": "2027-02-16T11:30:00+00:00",
+        "category": "travel",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Flight plus airport transit."
+      },
+      {
+        "id": "client_workshop_tue",
+        "title": "On-Site Client Workshop (Frankfurt)",
+        "start": "2027-02-16T13:00:00+00:00",
+        "end": "2027-02-16T16:30:00+00:00",
+        "category": "client_meetings",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "german_client"
+        ],
+        "description": "In-person workshop."
+      },
+      {
+        "id": "hotel_gym_tue",
+        "title": "Hotel Gym Session",
+        "start": "2027-02-16T17:30:00+00:00",
+        "end": "2027-02-16T18:30:00+00:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Hotel workout."
+      },
+      {
+        "id": "client_dinner_tue",
+        "title": "Client Networking Dinner",
+        "start": "2027-02-16T19:30:00+00:00",
+        "end": "2027-02-16T22:00:00+00:00",
+        "category": "client_meetings",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user",
+          "german_client"
+        ],
+        "description": "Business dinner."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-02-16T23:00:00+00:00",
+        "end": "2027-02-17T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Hotel sleep."
+      },
+      {
+        "id": "apac_call_wed",
+        "title": "APAC Release Review",
+        "start": "2027-02-17T07:30:00+00:00",
+        "end": "2027-02-17T08:30:00+00:00",
+        "category": "client_meetings",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user",
+          "apac_team"
+        ],
+        "description": "Morning remote call from hotel."
+      },
+      {
+        "id": "flight_back_wed",
+        "title": "Return Flight FRA -> LIS",
+        "start": "2027-02-17T10:30:00+00:00",
+        "end": "2027-02-17T14:30:00+00:00",
+        "category": "travel",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Return flight to Lisbon."
+      },
+      {
+        "id": "deep_work_wed",
+        "title": "Deep Work: Workshop Follow-up & Budget",
+        "start": "2027-02-17T15:00:00+00:00",
+        "end": "2027-02-17T16:30:00+00:00",
+        "category": "deep_work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Post-trip action items."
+      },
+      {
+        "id": "us_steering_wed",
+        "title": "US Executive Steering Committee (San Francisco)",
+        "start": "2027-02-17T17:00:00+00:00",
+        "end": "2027-02-17T18:30:00+00:00",
+        "category": "client_meetings",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "us_execs"
+        ],
+        "description": "Critical executive review."
+      },
+      {
+        "id": "gym_wed",
+        "title": "Evening Run & Stretching",
+        "start": "2027-02-17T19:00:00+00:00",
+        "end": "2027-02-17T20:00:00+00:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Decompression run."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-02-17T23:00:00+00:00",
+        "end": "2027-02-18T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "deep_work_thu",
+        "title": "Deep Work: Architecture Sign-off Docs",
+        "start": "2027-02-18T08:30:00+00:00",
+        "end": "2027-02-18T12:00:00+00:00",
+        "category": "deep_work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Documentation."
+      },
+      {
+        "id": "lunch_thu",
+        "title": "Lunch & Groceries",
+        "start": "2027-02-18T12:30:00+00:00",
+        "end": "2027-02-18T14:00:00+00:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch and errands."
+      },
+      {
+        "id": "gym_thu",
+        "title": "Gym: Full Body Workout",
+        "start": "2027-02-18T14:30:00+00:00",
+        "end": "2027-02-18T15:45:00+00:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout."
+      },
+      {
+        "id": "us_dev_thu",
+        "title": "US Engineering Sync (Austin Team)",
+        "start": "2027-02-18T16:30:00+00:00",
+        "end": "2027-02-18T18:00:00+00:00",
+        "category": "client_meetings",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user",
+          "austin_devs"
+        ],
+        "description": "Sprint review."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-02-18T23:00:00+00:00",
+        "end": "2027-02-19T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "apac_retro_fri",
+        "title": "APAC Sprint Retrospective",
+        "start": "2027-02-19T08:00:00+00:00",
+        "end": "2027-02-19T09:00:00+00:00",
+        "category": "client_meetings",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user",
+          "apac_team"
+        ],
+        "description": "Weekly retro."
+      },
+      {
+        "id": "deep_work_fri",
+        "title": "Deep Work: Weekly Executive Report",
+        "start": "2027-02-19T09:30:00+00:00",
+        "end": "2027-02-19T12:30:00+00:00",
+        "category": "deep_work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Weekly status report."
+      },
+      {
+        "id": "gym_fri",
+        "title": "Gym: Cardio & Mobility",
+        "start": "2027-02-19T14:00:00+00:00",
+        "end": "2027-02-19T15:15:00+00:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Friday workout."
+      },
+      {
+        "id": "social_fri",
+        "title": "Dinner with Friends",
+        "start": "2027-02-19T20:00:00+00:00",
+        "end": "2027-02-19T23:00:00+00:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "friends"
+        ],
+        "description": "End of week social dinner."
+      }
+    ]
+  },
+  "user_request": "My return flight from Frankfurt on Wednesday was delayed by 2 hours, so I will only arrive home at 16:30 instead of 14:30. This overlaps with my Wednesday afternoon deep work block and leaves almost no buffer before the 17:00 US Executive Steering Committee. Please reorganize Wednesday afternoon by shifting the deep work block to Thursday morning and moving Wednesday's evening run so I can join the US executive call calm and prepared."
+}

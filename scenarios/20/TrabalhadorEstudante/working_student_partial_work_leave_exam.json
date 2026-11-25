@@ -1,0 +1,308 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "working_student_partial_work_leave_exam_003",
+  "family_id": "working_student_schedule_conflict",
+  "profile": {
+    "profile_id": "working_student_01__working_student_partial_work_leave_exam_003",
+    "description": "Working student using statutory worker-student leave for an afternoon academic assessment while catching up on work and exercise.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "work": 5,
+      "education": 5,
+      "sleep": 4,
+      "health": 4,
+      "personal": 3
+    },
+    "hard_constraints": [
+      {
+        "description": "University midterm test on Tuesday from 15:00 to 17:00 is mandatory.",
+        "event_ids": [
+          "midterm_tue",
+          "class_tue",
+          "class_thu"
+        ],
+        "id": "midterm_assessment",
+        "rule_type": "protect_events_by_id"
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "makeup_work_and_gym",
+        "description": "Complete missed afternoon work tasks on Wednesday and keep Tuesday evening workout.",
+        "weight": 4
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Worker-student leave applies to Tuesday 14:30–17:30 for the exam and transit."
+    }
+  },
+  "now": "2027-04-05T07:30:00+01:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-04-04T23:45:00+01:00",
+        "end": "2027-04-05T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "work_mon",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-04-05T09:00:00+01:00",
+        "end": "2027-04-05T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Daytime work."
+      },
+      {
+        "id": "study_mon",
+        "title": "Evening Study: Database Systems Midterm Prep",
+        "start": "2027-04-05T18:15:00+01:00",
+        "end": "2027-04-05T21:30:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Exam preparation."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-04-05T23:45:00+01:00",
+        "end": "2027-04-06T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "work_tue_am",
+        "title": "Daytime Job: Morning Shift (Leave at 14:30)",
+        "start": "2027-04-06T09:00:00+01:00",
+        "end": "2027-04-06T14:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Morning work before worker-student leave."
+      },
+      {
+        "id": "midterm_tue",
+        "title": "University Midterm Test: Database Systems",
+        "start": "2027-04-06T15:00:00+01:00",
+        "end": "2027-04-06T17:00:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "professor"
+        ],
+        "description": "Mandatory assessment."
+      },
+      {
+        "id": "gym_tue",
+        "title": "Gym: Cardio & Stretching",
+        "start": "2027-04-06T17:45:00+01:00",
+        "end": "2027-04-06T18:45:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Post-exam workout."
+      },
+      {
+        "id": "class_tue",
+        "title": "Evening Lecture: Software Engineering",
+        "start": "2027-04-06T19:00:00+01:00",
+        "end": "2027-04-06T22:00:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "professor",
+          "classmates"
+        ],
+        "description": "Mandatory evening class."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-04-06T23:45:00+01:00",
+        "end": "2027-04-07T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "work_wed",
+        "title": "Daytime Job: Core Shift + Catch-up Tasks",
+        "start": "2027-04-07T09:00:00+01:00",
+        "end": "2027-04-07T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "team"
+        ],
+        "description": "Work shift including Tuesday catch-up items."
+      },
+      {
+        "id": "gym_wed",
+        "title": "Gym: Strength Training",
+        "start": "2027-04-07T18:00:00+01:00",
+        "end": "2027-04-07T19:15:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Strength workout."
+      },
+      {
+        "id": "dinner_personal_wed",
+        "title": "Dinner & Household Chores",
+        "start": "2027-04-07T19:45:00+01:00",
+        "end": "2027-04-07T22:00:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Dinner and light chores."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-04-07T23:45:00+01:00",
+        "end": "2027-04-08T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "work_thu",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-04-08T09:00:00+01:00",
+        "end": "2027-04-08T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Daytime job."
+      },
+      {
+        "id": "class_thu",
+        "title": "Evening Lecture: Software Engineering Lab",
+        "start": "2027-04-08T18:30:00+01:00",
+        "end": "2027-04-08T21:30:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "professor",
+          "classmates"
+        ],
+        "description": "Mandatory evening lab."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-04-08T23:45:00+01:00",
+        "end": "2027-04-09T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "work_fri",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-04-09T09:00:00+01:00",
+        "end": "2027-04-09T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Friday work shift."
+      },
+      {
+        "id": "gym_fri",
+        "title": "Gym: Full Body Workout",
+        "start": "2027-04-09T18:00:00+01:00",
+        "end": "2027-04-09T19:15:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Friday workout."
+      },
+      {
+        "id": "social_fri",
+        "title": "Dinner with Family",
+        "start": "2027-04-09T20:00:00+01:00",
+        "end": "2027-04-09T22:30:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "family"
+        ],
+        "description": "Family dinner."
+      }
+    ]
+  },
+  "user_request": "I am leaving work at 14:30 on Tuesday for a Database Systems midterm from 15:00 to 17:00, followed by my 19:00 lecture. Please organize Tuesday afternoon with a short decompression workout before class and schedule catch-up work tasks on Wednesday."
+}

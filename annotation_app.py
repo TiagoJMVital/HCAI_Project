@@ -35,6 +35,12 @@ STATES = {"all": "Todos", "not_started": "Não iniciados", "draft": "Rascunhos",
           "complete": "Concluídos", "needs_correction": "Precisam de correção"}
 
 
+@st.cache_data(ttl=30, show_spinner=False)
+def _training_sources_cached(root_label: str) -> list[dict]:
+    """Avoid revalidating the full dataset/run catalogue on every widget rerun."""
+    return training_catalog(Path(root_label))
+
+
 def _weekly_calendar(packet: dict, events: list, *, mode: str) -> None:
     interval = identify_requested_interval(packet)
     base_week = initial_week(packet, interval)
@@ -403,9 +409,14 @@ def _v2_scenario_and_proposal(source: dict) -> None:
 def _v2_review_page(author: str) -> None:
     st.header("Anotação independente de propostas B de treino")
     st.caption("Cada avaliador vê apenas a sua própria anotação. IDs técnicos permanecem ocultos nesta área.")
+    if st.button("Atualizar catálogo", key="v2:refresh-catalog",
+                 help="Use após concluir ou importar novas runs B."):
+        _training_sources_cached.clear()
+        st.rerun()
     try:
-        all_records = records_v2(ROOT, author, training_only=True)
-        sources = {row["scenario_id"]: row for row in training_catalog(ROOT)}
+        source_rows = _training_sources_cached(str(ROOT.resolve()))
+        all_records = records_v2(ROOT, author, training_only=True, sources=source_rows)
+        sources = {row["scenario_id"]: row for row in source_rows}
     except (ValueError, OSError) as exc:
         st.error(str(exc))
         return
@@ -444,7 +455,7 @@ def _v2_review_page(author: str) -> None:
                   on_click=lambda: st.session_state.update({scenario_key: next_unannotated}))
 
     try:
-        form, revision = load_review_v2(ROOT, author, selected)
+        form, revision = load_review_v2(ROOT, author, selected, source=sources[scenario_id])
         _v2_scenario_and_proposal(sources[scenario_id])
     except (ValueError, OSError) as exc:
         st.error(f"O item precisa de correção: {exc}")
@@ -466,7 +477,7 @@ def _v2_review_page(author: str) -> None:
     if action:
         try:
             save_review_v2(ROOT, author, selected, {**form.model_dump(), **values, "status": action},
-                           revision, confirm_completed=confirm)
+                           revision, confirm_completed=confirm, source=sources[scenario_id])
         except (ValueError, OSError) as exc:
             st.error(f"Não foi guardado: {exc}")
         else:

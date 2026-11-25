@@ -1,0 +1,403 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "elite_athlete_student_doping_control_oral_presentation_001",
+  "family_id": "elite_athlete_student_schedule_conflict",
+  "profile": {
+    "profile_id": "elite_athlete_student_01__elite_athlete_student_doping_control_oral_presentation_001",
+    "description": "High-performance student-athlete competing at national/international level while pursuing an undergraduate degree, balancing twice-daily training sessions, strict sleep hygiene, university classes, and social life.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "training": 5,
+      "sleep": 5,
+      "exams": 4,
+      "classes": 3,
+      "physio": 3,
+      "social": 2
+    },
+    "hard_constraints": [
+      {
+        "id": "training_sessions",
+        "description": "Main training blocks are fixed by the coaching staff.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "training"
+        ]
+      },
+      {
+        "id": "sleep_protection",
+        "description": "The athlete must sleep at least eight hours every night.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "sleep"
+        ]
+      },
+      {
+        "id": "graded_presentations",
+        "description": "Graded university oral presentations count toward exam/evaluation grades and cannot be skipped.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "exam"
+        ]
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "commute_buffer",
+        "description": "Always include 30-minute transit times between training center and campus.",
+        "weight": 4
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Order swaps for graded oral presentations require confirmation with the professor and group teammates."
+    }
+  },
+  "now": "2027-02-16T09:05:00+00:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-02-14T22:30:00+00:00",
+        "end": "2027-02-15T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block."
+      },
+      {
+        "id": "training_am_mon",
+        "title": "Morning Strength Session",
+        "start": "2027-02-15T07:00:00+00:00",
+        "end": "2027-02-15T09:00:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Completed Monday morning session."
+      },
+      {
+        "id": "training_pm_mon",
+        "title": "Afternoon Technical Session",
+        "start": "2027-02-15T16:30:00+00:00",
+        "end": "2027-02-15T18:30:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Completed Monday afternoon session."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-02-15T22:30:00+00:00",
+        "end": "2027-02-16T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block."
+      },
+      {
+        "id": "training_am_tue",
+        "title": "Morning Endurance Session",
+        "start": "2027-02-16T07:00:00+00:00",
+        "end": "2027-02-16T09:00:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Just finished; random anti-doping test called at 09:05."
+      },
+      {
+        "id": "commute_uni_tue",
+        "title": "Commute to University Campus",
+        "start": "2027-02-16T09:00:00+00:00",
+        "end": "2027-02-16T09:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute transit."
+      },
+      {
+        "id": "oral_pres_tue",
+        "title": "Graded Group Presentation: Strategic Management",
+        "start": "2027-02-16T10:00:00+00:00",
+        "end": "2027-02-16T12:00:00+00:00",
+        "category": "exam",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "professor",
+          "peers"
+        ],
+        "description": "User's group is scheduled first at 10:00, but professor can move them to last slot (11:30–12:00) or Thursday 10:00."
+      },
+      {
+        "id": "lunch_tue",
+        "title": "Lunch",
+        "start": "2027-02-16T12:30:00+00:00",
+        "end": "2027-02-16T13:30:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break."
+      },
+      {
+        "id": "study_tue",
+        "title": "Independent Study",
+        "start": "2027-02-16T14:00:00+00:00",
+        "end": "2027-02-16T16:00:00+00:00",
+        "category": "study",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Study block."
+      },
+      {
+        "id": "training_pm_tue",
+        "title": "Afternoon Tactical Training",
+        "start": "2027-02-16T16:30:00+00:00",
+        "end": "2027-02-16T18:30:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-02-16T22:30:00+00:00",
+        "end": "2027-02-17T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block."
+      },
+      {
+        "id": "training_am_wed",
+        "title": "Morning Pool Recovery",
+        "start": "2027-02-17T07:00:00+00:00",
+        "end": "2027-02-17T09:00:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Morning session."
+      },
+      {
+        "id": "class_econ_wed",
+        "title": "Econometrics Lecture",
+        "start": "2027-02-17T10:00:00+00:00",
+        "end": "2027-02-17T12:00:00+00:00",
+        "category": "classes",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Morning lecture."
+      },
+      {
+        "id": "lunch_wed",
+        "title": "Lunch",
+        "start": "2027-02-17T12:30:00+00:00",
+        "end": "2027-02-17T13:30:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break."
+      },
+      {
+        "id": "training_pm_wed",
+        "title": "Afternoon Technical Training",
+        "start": "2027-02-17T16:30:00+00:00",
+        "end": "2027-02-17T18:30:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-02-17T22:30:00+00:00",
+        "end": "2027-02-18T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block."
+      },
+      {
+        "id": "training_am_thu",
+        "title": "Morning Gym Conditioning",
+        "start": "2027-02-18T07:00:00+00:00",
+        "end": "2027-02-18T09:00:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Morning session."
+      },
+      {
+        "id": "class_mgmt_thu",
+        "title": "Strategic Management Seminar",
+        "start": "2027-02-18T10:00:00+00:00",
+        "end": "2027-02-18T12:00:00+00:00",
+        "category": "classes",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Seminar slot."
+      },
+      {
+        "id": "lunch_thu",
+        "title": "Lunch",
+        "start": "2027-02-18T12:30:00+00:00",
+        "end": "2027-02-18T13:30:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break."
+      },
+      {
+        "id": "training_pm_thu",
+        "title": "Afternoon Tactical Session",
+        "start": "2027-02-18T16:30:00+00:00",
+        "end": "2027-02-18T18:30:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-02-18T22:30:00+00:00",
+        "end": "2027-02-19T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block."
+      },
+      {
+        "id": "training_am_fri",
+        "title": "Morning Speed Session",
+        "start": "2027-02-19T07:00:00+00:00",
+        "end": "2027-02-19T09:00:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Morning session."
+      },
+      {
+        "id": "study_fri",
+        "title": "Weekly Review Study",
+        "start": "2027-02-19T10:00:00+00:00",
+        "end": "2027-02-19T12:00:00+00:00",
+        "category": "study",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Study block."
+      },
+      {
+        "id": "training_pm_fri",
+        "title": "Afternoon Pre-Match Practice",
+        "start": "2027-02-19T16:30:00+00:00",
+        "end": "2027-02-19T18:30:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session."
+      },
+      {
+        "id": "coffee_fri",
+        "title": "Coffee with Teammates",
+        "start": "2027-02-19T19:00:00+00:00",
+        "end": "2027-02-19T20:30:00+00:00",
+        "category": "social",
+        "importance": 2,
+        "fixed": false,
+        "participants": [
+          "user",
+          "peers"
+        ],
+        "description": "Casual Friday social."
+      }
+    ]
+  },
+  "user_request": "Anti-doping control officers just arrived at the High-Performance Center (Tuesday 09:05) for a mandatory out-of-competition test! These procedures typically take about 90 minutes, meaning I won't leave the training center until 10:35 and won't reach campus until 11:05. My group is scheduled to present first at 10:00 in our graded Strategic Management presentation, which lasts until 12:00. Please rearrange today and the rest of the week so my group swaps to the final presentation slot at 11:30 today (or moves to Thursday at 10:00 if 11:05 is too tight), keep all my training sessions and 8 hours of sleep intact, and tell me what needs urgent confirmation with my professor and teammates."
+}

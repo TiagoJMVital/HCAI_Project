@@ -1,0 +1,315 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "pm_london_trip_family_birthday_friday_005",
+  "family_id": "international_project_manager_schedule_conflict",
+  "profile": {
+    "profile_id": "international_project_manager_01__pm_london_trip_family_birthday_friday_005",
+    "description": "International Project Manager returning from a London business trip in time for a family celebration.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "client_meetings": 5,
+      "travel": 5,
+      "deep_work": 4,
+      "health": 4,
+      "sleep": 4,
+      "personal": 4
+    },
+    "hard_constraints": [
+      {
+        "id": "family_birthday_friday",
+        "description": "Spouse's birthday dinner on Friday at 20:00 is strictly protected.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "personal"
+        ]
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "finish_work_early_friday",
+        "description": "Complete all work calls by 17:30 on Friday.",
+        "weight": 4
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Friday evening family birthday dinner cannot be delayed by late US calls."
+    }
+  },
+  "now": "2027-05-17T07:00:00+01:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-05-16T23:00:00+01:00",
+        "end": "2027-05-17T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "deep_work_mon",
+        "title": "Deep Work: London QBR Deck",
+        "start": "2027-05-17T08:30:00+01:00",
+        "end": "2027-05-17T12:30:00+01:00",
+        "category": "deep_work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "QBR prep."
+      },
+      {
+        "id": "gym_mon",
+        "title": "Gym Workout",
+        "start": "2027-05-17T13:30:00+01:00",
+        "end": "2027-05-17T14:45:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout."
+      },
+      {
+        "id": "us_mon",
+        "title": "US Partner Alignment",
+        "start": "2027-05-17T16:00:00+01:00",
+        "end": "2027-05-17T17:30:00+01:00",
+        "category": "client_meetings",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user",
+          "us_partner"
+        ],
+        "description": "Sync."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-05-17T23:00:00+01:00",
+        "end": "2027-05-18T06:00:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "flight_lhr_tue",
+        "title": "Flight LIS -> LHR (London Trip)",
+        "start": "2027-05-18T07:30:00+01:00",
+        "end": "2027-05-18T10:30:00+01:00",
+        "category": "travel",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Flight to London."
+      },
+      {
+        "id": "qbr_london_tue",
+        "title": "Quarterly Business Review (London HQ)",
+        "start": "2027-05-18T12:00:00+01:00",
+        "end": "2027-05-18T17:00:00+01:00",
+        "category": "client_meetings",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "uk_execs"
+        ],
+        "description": "QBR meeting."
+      },
+      {
+        "id": "hotel_run_tue",
+        "title": "Hyde Park Morning/Evening Run",
+        "start": "2027-05-18T18:00:00+01:00",
+        "end": "2027-05-18T19:00:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Outdoor run."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-05-18T23:00:00+01:00",
+        "end": "2027-05-19T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "uk_workshop_wed",
+        "title": "Product Roadmap Workshop (London)",
+        "start": "2027-05-19T09:00:00+01:00",
+        "end": "2027-05-19T13:00:00+01:00",
+        "category": "client_meetings",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "uk_product"
+        ],
+        "description": "Workshop."
+      },
+      {
+        "id": "flight_back_wed",
+        "title": "Flight LHR -> LIS",
+        "start": "2027-05-19T15:30:00+01:00",
+        "end": "2027-05-19T18:30:00+01:00",
+        "category": "travel",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Return flight."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-05-19T23:00:00+01:00",
+        "end": "2027-05-20T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "deep_work_thu",
+        "title": "Deep Work: London QBR Action Plan",
+        "start": "2027-05-20T08:30:00+01:00",
+        "end": "2027-05-20T12:30:00+01:00",
+        "category": "deep_work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Follow-up."
+      },
+      {
+        "id": "gym_thu",
+        "title": "Gym: Full Body Strength",
+        "start": "2027-05-20T13:30:00+01:00",
+        "end": "2027-05-20T14:45:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout."
+      },
+      {
+        "id": "us_thu",
+        "title": "US East Coast Sync",
+        "start": "2027-05-20T16:00:00+01:00",
+        "end": "2027-05-20T17:30:00+01:00",
+        "category": "client_meetings",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "us_team"
+        ],
+        "description": "Sync."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-05-20T23:00:00+01:00",
+        "end": "2027-05-21T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "deep_work_fri",
+        "title": "Deep Work: Weekly Status & Sign-offs",
+        "start": "2027-05-21T08:30:00+01:00",
+        "end": "2027-05-21T12:00:00+01:00",
+        "category": "deep_work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Wrap-up."
+      },
+      {
+        "id": "gym_fri",
+        "title": "Gym Workout",
+        "start": "2027-05-21T13:30:00+01:00",
+        "end": "2027-05-21T14:45:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout."
+      },
+      {
+        "id": "us_fri_early",
+        "title": "Early US Handover Call",
+        "start": "2027-05-21T15:30:00+01:00",
+        "end": "2027-05-21T16:30:00+01:00",
+        "category": "client_meetings",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "us_lead"
+        ],
+        "description": "Moved earlier for family dinner."
+      },
+      {
+        "id": "birthday_dinner_fri",
+        "title": "Spouse's Birthday Dinner Celebration",
+        "start": "2027-05-21T20:00:00+01:00",
+        "end": "2027-05-21T23:00:00+01:00",
+        "category": "personal",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "spouse"
+        ],
+        "description": "Protected family dinner."
+      }
+    ]
+  },
+  "user_request": "Friday night is my spouse's birthday dinner at 20:00, and the US team wants to schedule a handover call at 18:30 on Friday. Please decline the 18:30 slot, propose moving the US call to 15:30 on Friday afternoon, and ensure my workout and evening celebration are completely protected."
+}

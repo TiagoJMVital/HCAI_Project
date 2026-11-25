@@ -1,0 +1,297 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "working_student_transit_strike_commute_delay_006",
+  "family_id": "working_student_schedule_conflict",
+  "profile": {
+    "profile_id": "working_student_01__working_student_transit_strike_commute_delay_006",
+    "description": "Working student adjusting to public transit disruptions affecting office and evening university commutes.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "work": 5,
+      "education": 5,
+      "sleep": 4,
+      "health": 4,
+      "personal": 3
+    },
+    "hard_constraints": [
+      {
+        "id": "work_and_class_punctuality",
+        "description": "Arrive on time for 09:00 work and 18:30 evening lecture despite transit delays.",
+        "rule_type": "protect_events_by_id",
+        "event_ids": [
+          "work_mon",
+          "class_mon",
+          "work_tue",
+          "work_wed",
+          "class_wed",
+          "work_thu",
+          "work_fri"
+        ]
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "home_workout_alternative",
+        "description": "Prefer a short home bodyweight or mobility session on Monday when the transit delay makes an external gym trip impractical.",
+        "weight": 4
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Transit disruptions add 30 minutes to trips."
+    }
+  },
+  "now": "2027-05-03T07:00:00+01:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-05-02T23:30:00+01:00",
+        "end": "2027-05-03T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Earlier wake-up for transit disruption."
+      },
+      {
+        "id": "commute_mon_am",
+        "title": "Regular Commute: Home to Office",
+        "start": "2027-05-03T08:15:00+01:00",
+        "end": "2027-05-03T09:00:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Normal 45-minute commute before the confirmed strike adds 30 minutes."
+      },
+      {
+        "id": "work_mon",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-05-03T09:00:00+01:00",
+        "end": "2027-05-03T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Daytime work."
+      },
+      {
+        "id": "class_mon",
+        "title": "Evening Lecture: Data Warehousing",
+        "start": "2027-05-03T18:30:00+01:00",
+        "end": "2027-05-03T21:30:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "professor",
+          "classmates"
+        ],
+        "description": "Mandatory evening class."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-05-03T23:30:00+01:00",
+        "end": "2027-05-04T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "work_tue",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-05-04T09:00:00+01:00",
+        "end": "2027-05-04T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Daytime work."
+      },
+      {
+        "id": "gym_tue",
+        "title": "Gym: Strength Workout",
+        "start": "2027-05-04T18:00:00+01:00",
+        "end": "2027-05-04T19:15:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout."
+      },
+      {
+        "id": "study_tue",
+        "title": "Evening Study: Data Warehousing Labs",
+        "start": "2027-05-04T19:45:00+01:00",
+        "end": "2027-05-04T21:45:00+01:00",
+        "category": "education",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lab practice."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-05-04T23:45:00+01:00",
+        "end": "2027-05-05T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "work_wed",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-05-05T09:00:00+01:00",
+        "end": "2027-05-05T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Daytime work."
+      },
+      {
+        "id": "class_wed",
+        "title": "Evening Lecture: Project Management",
+        "start": "2027-05-05T18:30:00+01:00",
+        "end": "2027-05-05T21:30:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "professor",
+          "classmates"
+        ],
+        "description": "Mandatory evening class."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-05-05T23:45:00+01:00",
+        "end": "2027-05-06T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "work_thu",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-05-06T09:00:00+01:00",
+        "end": "2027-05-06T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Daytime work."
+      },
+      {
+        "id": "gym_thu",
+        "title": "Gym: Cardio & Conditioning",
+        "start": "2027-05-06T18:00:00+01:00",
+        "end": "2027-05-06T19:15:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout."
+      },
+      {
+        "id": "study_thu",
+        "title": "Evening Study: Project Management Cases",
+        "start": "2027-05-06T19:45:00+01:00",
+        "end": "2027-05-06T21:45:00+01:00",
+        "category": "education",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Case study."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-05-06T23:45:00+01:00",
+        "end": "2027-05-07T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "work_fri",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-05-07T09:00:00+01:00",
+        "end": "2027-05-07T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Friday work shift."
+      },
+      {
+        "id": "personal_fri",
+        "title": "Dinner & Rest",
+        "start": "2027-05-07T18:30:00+01:00",
+        "end": "2027-05-07T21:30:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Friday evening rest."
+      }
+    ]
+  },
+  "user_request": "There is a public transit strike on Monday that adds 30 minutes to my morning commute. Please adjust Monday morning's wake-up and commute so I still reach my 09:00 work shift on time, keep my 18:30 evening lecture intact, and fit a short home workout into the one-hour gap after work ends at 17:30."
+}

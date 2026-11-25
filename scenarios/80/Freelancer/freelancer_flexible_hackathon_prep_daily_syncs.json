@@ -1,0 +1,319 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "freelancer_flexible_hackathon_prep_daily_syncs_001",
+  "family_id": "freelancer_schedule_conflict",
+  "profile": {
+    "profile_id": "freelancer_flexible_01__freelancer_flexible_hackathon_prep_daily_syncs_001",
+    "description": "Freelance full-stack developer with flexible hours, preparing for a weekend hackathon while maintaining client work and sports.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "health": 5,
+      "social": 4,
+      "work": 4,
+      "sleep": 4,
+      "household": 3
+    },
+    "hard_constraints": [
+      {
+        "id": "daily_client_syncs",
+        "description": "Fixed daily client stand-up meeting at 10:00 every weekday (30 minutes).",
+        "rule_type": "protect_events_by_id",
+        "event_ids": [
+          "standup_mon",
+          "standup_tue",
+          "standup_wed",
+          "standup_thu",
+          "standup_fri"
+        ]
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "morning_gym",
+        "description": "Maintain morning gym sessions.",
+        "weight": 4
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Daily stand-up meetings at 10:00 are fixed. Hackathon prep requires dedicating Thursday and Friday afternoons entirely to team brainstorming."
+    }
+  },
+  "now": "2027-05-10T08:00:00+01:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-05-09T23:30:00+01:00",
+        "end": "2027-05-10T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_mon",
+        "title": "Gym Workout",
+        "start": "2027-05-10T08:00:00+01:00",
+        "end": "2027-05-10T09:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym."
+      },
+      {
+        "id": "standup_mon",
+        "title": "Daily Client Stand-up",
+        "start": "2027-05-10T10:00:00+01:00",
+        "end": "2027-05-10T10:30:00+01:00",
+        "category": "meeting",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "client"
+        ],
+        "description": "Fixed sync."
+      },
+      {
+        "id": "work_mon",
+        "title": "Development Work Block",
+        "start": "2027-05-10T11:00:00+01:00",
+        "end": "2027-05-10T18:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "7 hours work."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-05-10T23:30:00+01:00",
+        "end": "2027-05-11T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_tue",
+        "title": "Gym Workout",
+        "start": "2027-05-11T08:00:00+01:00",
+        "end": "2027-05-11T09:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym."
+      },
+      {
+        "id": "standup_tue",
+        "title": "Daily Client Stand-up",
+        "start": "2027-05-11T10:00:00+01:00",
+        "end": "2027-05-11T10:30:00+01:00",
+        "category": "meeting",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "client"
+        ],
+        "description": "Fixed sync."
+      },
+      {
+        "id": "work_tue",
+        "title": "Development Work Block",
+        "start": "2027-05-11T11:00:00+01:00",
+        "end": "2027-05-11T18:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "7 hours work."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-05-11T23:30:00+01:00",
+        "end": "2027-05-12T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_wed",
+        "title": "Gym Workout",
+        "start": "2027-05-12T08:00:00+01:00",
+        "end": "2027-05-12T09:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym."
+      },
+      {
+        "id": "standup_wed",
+        "title": "Daily Client Stand-up",
+        "start": "2027-05-12T10:00:00+01:00",
+        "end": "2027-05-12T10:30:00+01:00",
+        "category": "meeting",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "client"
+        ],
+        "description": "Fixed sync."
+      },
+      {
+        "id": "work_wed",
+        "title": "Development Work Block",
+        "start": "2027-05-12T11:00:00+01:00",
+        "end": "2027-05-12T18:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "7 hours work."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-05-12T23:30:00+01:00",
+        "end": "2027-05-13T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_thu",
+        "title": "Gym Workout",
+        "start": "2027-05-13T08:00:00+01:00",
+        "end": "2027-05-13T09:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym."
+      },
+      {
+        "id": "standup_thu",
+        "title": "Daily Client Stand-up",
+        "start": "2027-05-13T10:00:00+01:00",
+        "end": "2027-05-13T10:30:00+01:00",
+        "category": "meeting",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "client"
+        ],
+        "description": "Fixed sync."
+      },
+      {
+        "id": "hackathon_prep_thu",
+        "title": "Hackathon Team Brainstorming",
+        "start": "2027-05-13T14:00:00+01:00",
+        "end": "2027-05-13T19:00:00+01:00",
+        "category": "social",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "team"
+        ],
+        "description": "Fixed team prep."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-05-13T23:30:00+01:00",
+        "end": "2027-05-14T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_fri",
+        "title": "Gym Workout",
+        "start": "2027-05-14T08:00:00+01:00",
+        "end": "2027-05-14T09:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym."
+      },
+      {
+        "id": "standup_fri",
+        "title": "Daily Client Stand-up",
+        "start": "2027-05-14T10:00:00+01:00",
+        "end": "2027-05-14T10:30:00+01:00",
+        "category": "meeting",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "client"
+        ],
+        "description": "Fixed sync."
+      },
+      {
+        "id": "hackathon_prep_fri",
+        "title": "Hackathon Architecture Setup",
+        "start": "2027-05-14T14:00:00+01:00",
+        "end": "2027-05-14T19:00:00+01:00",
+        "category": "social",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "team"
+        ],
+        "description": "Fixed team setup."
+      }
+    ]
+  },
+  "user_request": "I am participating in a major weekend hackathon, and my team scheduled mandatory brainstorming and architecture setup sessions for Thursday and Friday afternoons (14:00 to 19:00 both days). I also have fixed daily client stand-ups at 10:00 every morning. Since I need 30 hours of regular client development work across the week, Thursday and Friday afternoons are now blocked for hackathon prep. Please frontload my client development work into Monday, Tuesday, and Wednesday so I meet my weekly target without skipping my morning gym workouts."
+}

@@ -1,0 +1,488 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "university_professor_national_conference_friday_007",
+  "family_id": "university_professor_schedule_conflict",
+  "profile": {
+    "profile_id": "university_professor_01__university_professor_national_conference_friday_007",
+    "description": "University professor hosting/attending a national academic conference on Friday while preparing next week's classes and research.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "teaching_and_exams": 5,
+      "research_and_talks": 5,
+      "health_and_fitness": 4,
+      "sleep": 4,
+      "personal": 3
+    },
+    "hard_constraints": [
+      {
+        "description": "National conference keynote and session chairing on Friday are mandatory.",
+        "event_ids": [
+          "national_conf_fri"
+        ],
+        "id": "national_conference_friday",
+        "rule_type": "protect_events_by_id"
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "prep_classes_before_friday",
+        "description": "Finish preparing next week's lectures and exams by Thursday afternoon.",
+        "weight": 4
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Friday is dedicated to the national conference; class prep is scheduled Monday–Thursday."
+    }
+  },
+  "now": "2027-05-10T07:00:00+01:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-05-09T23:00:00+01:00",
+        "end": "2027-05-10T06:45:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "breakfast_commute_mon",
+        "title": "Breakfast & Commute to University (25m drive)",
+        "start": "2027-05-10T07:15:00+01:00",
+        "end": "2027-05-10T08:15:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Breakfast and 25m drive."
+      },
+      {
+        "id": "lecture_mon",
+        "title": "University Lecture: Machine Learning",
+        "start": "2027-05-10T08:30:00+01:00",
+        "end": "2027-05-10T10:30:00+01:00",
+        "category": "teaching_and_exams",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "students"
+        ],
+        "description": "Morning lecture."
+      },
+      {
+        "id": "research_mon",
+        "title": "Research Project: Lab Experiments & Grant Work",
+        "start": "2027-05-10T10:45:00+01:00",
+        "end": "2027-05-10T12:30:00+01:00",
+        "category": "research_and_talks",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user",
+          "research_team"
+        ],
+        "description": "Research project work."
+      },
+      {
+        "id": "lunch_mon",
+        "title": "Lunch Break (45m)",
+        "start": "2027-05-10T12:30:00+01:00",
+        "end": "2027-05-10T13:15:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch."
+      },
+      {
+        "id": "prep_class_mon",
+        "title": "Prepare Lecture Slides & Exam Questions",
+        "start": "2027-05-10T13:30:00+01:00",
+        "end": "2027-05-10T15:30:00+01:00",
+        "category": "teaching_and_exams",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Preparing teaching and exam content."
+      },
+      {
+        "id": "commute_gym_mon",
+        "title": "Commute: University to Gym (20m drive)",
+        "start": "2027-05-10T15:45:00+01:00",
+        "end": "2027-05-10T16:05:00+01:00",
+        "category": "health_and_fitness",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "20m drive to gym."
+      },
+      {
+        "id": "gym_mon",
+        "title": "Gym Workout: Strength Training",
+        "start": "2027-05-10T16:05:00+01:00",
+        "end": "2027-05-10T17:15:00+01:00",
+        "category": "health_and_fitness",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "70m workout."
+      },
+      {
+        "id": "commute_home_dinner_mon",
+        "title": "Commute Home (15m) & Dinner",
+        "start": "2027-05-10T17:25:00+01:00",
+        "end": "2027-05-10T19:00:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "family"
+        ],
+        "description": "15m drive home and dinner."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-05-10T23:00:00+01:00",
+        "end": "2027-05-11T06:45:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "breakfast_commute_tue",
+        "title": "Breakfast & Commute to University (25m drive)",
+        "start": "2027-05-11T07:15:00+01:00",
+        "end": "2027-05-11T08:15:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Breakfast and 25m commute."
+      },
+      {
+        "id": "research_tue",
+        "title": "Research Project: Conference Talk Deck & Demo",
+        "start": "2027-05-11T08:30:00+01:00",
+        "end": "2027-05-11T12:15:00+01:00",
+        "category": "research_and_talks",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user",
+          "research_team"
+        ],
+        "description": "Preparing conference presentation."
+      },
+      {
+        "id": "lunch_tue",
+        "title": "Lunch Break (45m)",
+        "start": "2027-05-11T12:30:00+01:00",
+        "end": "2027-05-11T13:15:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch."
+      },
+      {
+        "id": "grading_tue",
+        "title": "Grade Student Quizzes & Lab Reports",
+        "start": "2027-05-11T13:30:00+01:00",
+        "end": "2027-05-11T15:30:00+01:00",
+        "category": "teaching_and_exams",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Grading student work."
+      },
+      {
+        "id": "commute_run_tue",
+        "title": "Commute to Park (15m drive) & Outdoor Run (45m)",
+        "start": "2027-05-11T15:45:00+01:00",
+        "end": "2027-05-11T16:45:00+01:00",
+        "category": "health_and_fitness",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "15m drive and 45m outdoor run."
+      },
+      {
+        "id": "commute_home_dinner_tue",
+        "title": "Commute Home (20m) & Dinner",
+        "start": "2027-05-11T17:00:00+01:00",
+        "end": "2027-05-11T19:00:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "family"
+        ],
+        "description": "20m drive home and dinner."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-05-11T23:00:00+01:00",
+        "end": "2027-05-12T06:45:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "breakfast_commute_wed",
+        "title": "Breakfast & Commute to University (25m drive)",
+        "start": "2027-05-12T07:15:00+01:00",
+        "end": "2027-05-12T08:15:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Breakfast and 25m commute."
+      },
+      {
+        "id": "lecture_wed",
+        "title": "University Lecture: Machine Learning",
+        "start": "2027-05-12T08:30:00+01:00",
+        "end": "2027-05-12T10:30:00+01:00",
+        "category": "teaching_and_exams",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "students"
+        ],
+        "description": "Morning lecture."
+      },
+      {
+        "id": "research_wed",
+        "title": "Research Project: Lab Team Meeting",
+        "start": "2027-05-12T10:45:00+01:00",
+        "end": "2027-05-12T12:30:00+01:00",
+        "category": "research_and_talks",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user",
+          "research_team"
+        ],
+        "description": "Research meeting."
+      },
+      {
+        "id": "lunch_wed",
+        "title": "Lunch Break (45m)",
+        "start": "2027-05-12T12:30:00+01:00",
+        "end": "2027-05-12T13:15:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch."
+      },
+      {
+        "id": "commute_gym_wed",
+        "title": "Commute: University to Gym (20m drive)",
+        "start": "2027-05-12T13:30:00+01:00",
+        "end": "2027-05-12T13:50:00+01:00",
+        "category": "health_and_fitness",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "20m drive to gym."
+      },
+      {
+        "id": "gym_wed",
+        "title": "Gym Workout: Strength & Mobility",
+        "start": "2027-05-12T13:50:00+01:00",
+        "end": "2027-05-12T15:00:00+01:00",
+        "category": "health_and_fitness",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "70m workout."
+      },
+      {
+        "id": "commute_home_dinner_wed",
+        "title": "Commute Home (15m) & Dinner",
+        "start": "2027-05-12T15:15:00+01:00",
+        "end": "2027-05-12T19:15:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "family"
+        ],
+        "description": "15m drive home and dinner."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-05-12T23:00:00+01:00",
+        "end": "2027-05-13T06:45:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "breakfast_commute_thu",
+        "title": "Breakfast & Commute to University (25m drive)",
+        "start": "2027-05-13T07:15:00+01:00",
+        "end": "2027-05-13T08:15:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Breakfast and 25m commute."
+      },
+      {
+        "id": "lunch_thu",
+        "title": "Lunch Break (45m)",
+        "start": "2027-05-13T12:30:00+01:00",
+        "end": "2027-05-13T13:15:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch."
+      },
+      {
+        "id": "research_thu",
+        "title": "Research Project: Rehearse Conference Keynote",
+        "start": "2027-05-13T13:30:00+01:00",
+        "end": "2027-05-13T15:30:00+01:00",
+        "category": "research_and_talks",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Keynote rehearsal."
+      },
+      {
+        "id": "commute_home_dinner_thu",
+        "title": "Commute Home (25m), Dinner & Personal Time",
+        "start": "2027-05-13T15:45:00+01:00",
+        "end": "2027-05-13T21:30:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "family"
+        ],
+        "description": "25m drive home, dinner, and personal time."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-05-13T23:00:00+01:00",
+        "end": "2027-05-14T06:45:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "breakfast_commute_fri",
+        "title": "Breakfast & Commute to University (25m drive)",
+        "start": "2027-05-14T07:15:00+01:00",
+        "end": "2027-05-14T08:15:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Breakfast and 25m commute."
+      },
+      {
+        "id": "national_conf_fri",
+        "title": "National Academic Conference: Keynote & Session Chair",
+        "start": "2027-05-14T08:30:00+01:00",
+        "end": "2027-05-14T16:30:00+01:00",
+        "category": "research_and_talks",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "conference_speakers"
+        ],
+        "description": "Full-day national conference at university."
+      },
+      {
+        "id": "commute_home_dinner_fri",
+        "title": "Commute Home (25m), Dinner & Social Evening",
+        "start": "2027-05-14T16:45:00+01:00",
+        "end": "2027-05-14T22:30:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "friends"
+        ],
+        "description": "25m drive home, dinner, and social evening."
+      }
+    ]
+  },
+  "user_request": "I am speaking and chairing a session at the national conference on Friday. Please organize my week so all class preparation and exam drafting happen by Thursday, keep my Monday–Wednesday workouts with commute times, and leave Friday evening free for dinner with friends."
+}

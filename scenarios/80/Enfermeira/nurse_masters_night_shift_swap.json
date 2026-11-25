@@ -1,0 +1,537 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "nurse_shift_worker_masters_night_shift_swap_001",
+  "family_id": "nurse_shift_worker_masters_schedule_conflict",
+  "profile": {
+    "profile_id": "nurse_masters_02__nurse_shift_worker_masters_night_shift_swap_001",
+    "description": "Nurse working rotating hospital shifts while completing a master's thesis, with regular gym training.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "work": 5,
+      "exams": 3,
+      "academic_deadlines": 5,
+      "health": 5,
+      "gym": 2,
+      "social": 3
+    },
+    "hard_constraints": [
+      {
+        "id": "work_hours",
+        "description": "Hospital shifts are fixed and must not be moved, shortened or cancelled by the assistant. Unless the user ask for it.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "work"
+        ]
+      },
+      {
+        "id": "sleep_protection",
+        "description": "The user must sleep at least eight hours every day; scheduled sleep blocks must be protected.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "sleep"
+        ]
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "gym_routine",
+        "description": "Prefer gym sessions once a day, but its not mandatory. Gym training is available daily from 06:00 to 23:00",
+        "weight": 2
+      },
+      {
+        "id": "meal_times",
+        "description": "Prefer lunch between 12:00 and 14:00 and dinner between 19:00 and 21:00. Lunch and dinner each take one hour when the user is not at the hospital.",
+        "weight": 3
+      },
+      {
+        "id": "thesis_outside_work",
+        "description": "Prefer thesis work outside hospital shifts, with two focused hours reserved each day.",
+        "weight": 4
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Gym and thesis sessions can be reorganized where necessary. The dinner with a friend and the thesis supervision meeting involve other people, so changing them requires confirmation. These are user preferences, not ground-truth ACT/DEFER labels."
+    }
+  },
+  "now": "2026-11-23T06:00:00+00:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "work_mon",
+        "title": "Hospital shift",
+        "start": "2026-11-23T07:00:00+00:00",
+        "end": "2026-11-23T15:00:00+00:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Fixed nursing shift at the hospital."
+      },
+      {
+        "id": "commute_to_work_mon",
+        "title": "Commute to hospital",
+        "start": "2026-11-23T06:30:00+00:00",
+        "end": "2026-11-23T07:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute journey from home to the hospital."
+      },
+      {
+        "id": "commute_home_mon",
+        "title": "Commute home",
+        "start": "2026-11-23T15:00:00+00:00",
+        "end": "2026-11-23T15:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute journey from the hospital to home."
+      },
+      {
+        "id": "work_tue",
+        "title": "Hospital shift",
+        "start": "2026-11-24T07:00:00+00:00",
+        "end": "2026-11-24T15:00:00+00:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Fixed nursing shift at the hospital."
+      },
+      {
+        "id": "commute_to_work_tue",
+        "title": "Commute to hospital",
+        "start": "2026-11-24T06:30:00+00:00",
+        "end": "2026-11-24T07:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute journey from home to the hospital."
+      },
+      {
+        "id": "commute_home_tue",
+        "title": "Commute home",
+        "start": "2026-11-24T15:00:00+00:00",
+        "end": "2026-11-24T15:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute journey from the hospital to home."
+      },
+      {
+        "id": "work_wed",
+        "title": "Hospital shift",
+        "start": "2026-11-25T07:00:00+00:00",
+        "end": "2026-11-25T15:00:00+00:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Fixed nursing shift at the hospital."
+      },
+      {
+        "id": "commute_to_work_wed",
+        "title": "Commute to hospital",
+        "start": "2026-11-25T06:30:00+00:00",
+        "end": "2026-11-25T07:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute journey from home to the hospital."
+      },
+      {
+        "id": "commute_home_wed",
+        "title": "Commute home",
+        "start": "2026-11-25T15:00:00+00:00",
+        "end": "2026-11-25T15:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute journey from the hospital to home."
+      },
+      {
+        "id": "work_thu",
+        "title": "Hospital shift",
+        "start": "2026-11-26T15:00:00+00:00",
+        "end": "2026-11-26T23:00:00+00:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Fixed nursing shift at the hospital."
+      },
+      {
+        "id": "commute_to_work_thu",
+        "title": "Commute to hospital",
+        "start": "2026-11-26T14:30:00+00:00",
+        "end": "2026-11-26T15:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute journey from home to the hospital."
+      },
+      {
+        "id": "commute_home_thu",
+        "title": "Commute home",
+        "start": "2026-11-26T23:00:00+00:00",
+        "end": "2026-11-26T23:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute journey from the hospital to home."
+      },
+      {
+        "id": "work_fri",
+        "title": "Hospital shift",
+        "start": "2026-11-27T15:00:00+00:00",
+        "end": "2026-11-27T23:00:00+00:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Fixed nursing shift at the hospital."
+      },
+      {
+        "id": "commute_to_work_fri",
+        "title": "Commute to hospital",
+        "start": "2026-11-27T14:30:00+00:00",
+        "end": "2026-11-27T15:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute journey from home to the hospital."
+      },
+      {
+        "id": "commute_home_fri",
+        "title": "Commute home",
+        "start": "2026-11-27T23:00:00+00:00",
+        "end": "2026-11-27T23:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute journey from the hospital to home."
+      },
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2026-11-22T22:00:00+00:00",
+        "end": "2026-11-23T06:00:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block; the user requires at least eight hours of sleep per day."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2026-11-23T22:00:00+00:00",
+        "end": "2026-11-24T06:00:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block; the user requires at least eight hours of sleep per day."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2026-11-24T22:00:00+00:00",
+        "end": "2026-11-25T06:00:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block; the user requires at least eight hours of sleep per day."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2026-11-25T23:00:00+00:00",
+        "end": "2026-11-26T07:00:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block; the user requires at least eight hours of sleep per day."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2026-11-26T23:30:00+00:00",
+        "end": "2026-11-27T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block; the user requires at least eight hours of sleep per day."
+      },
+      {
+        "id": "thesis_mon",
+        "title": "Master's thesis",
+        "start": "2026-11-23T16:00:00+00:00",
+        "end": "2026-11-23T18:00:00+00:00",
+        "category": "thesis",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Two-hour focused work block dedicated to the master's thesis."
+      },
+      {
+        "id": "thesis_tue",
+        "title": "Master's thesis",
+        "start": "2026-11-24T16:00:00+00:00",
+        "end": "2026-11-24T18:00:00+00:00",
+        "category": "thesis",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Two-hour focused work block dedicated to the master's thesis."
+      },
+      {
+        "id": "thesis_wed",
+        "title": "Master's thesis",
+        "start": "2026-11-25T16:00:00+00:00",
+        "end": "2026-11-25T18:00:00+00:00",
+        "category": "thesis",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Two-hour focused work block dedicated to the master's thesis."
+      },
+      {
+        "id": "thesis_thu",
+        "title": "Master's thesis",
+        "start": "2026-11-26T08:00:00+00:00",
+        "end": "2026-11-26T10:00:00+00:00",
+        "category": "thesis",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Two-hour focused work block dedicated to the master's thesis."
+      },
+      {
+        "id": "thesis_fri",
+        "title": "Master's thesis",
+        "start": "2026-11-27T08:00:00+00:00",
+        "end": "2026-11-27T10:00:00+00:00",
+        "category": "thesis",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Two-hour focused work block dedicated to the master's thesis."
+      },
+      {
+        "id": "gym_mon",
+        "title": "Gym session",
+        "start": "2026-11-23T18:00:00+00:00",
+        "end": "2026-11-23T20:00:00+00:00",
+        "category": "gym",
+        "importance": 2,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym session; the gym is next to home."
+      },
+      {
+        "id": "gym_tue",
+        "title": "Gym session",
+        "start": "2026-11-24T18:00:00+00:00",
+        "end": "2026-11-24T20:00:00+00:00",
+        "category": "gym",
+        "importance": 2,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym session; the gym is next to home."
+      },
+      {
+        "id": "gym_thu",
+        "title": "Gym session",
+        "start": "2026-11-26T10:00:00+00:00",
+        "end": "2026-11-26T12:00:00+00:00",
+        "category": "gym",
+        "importance": 2,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym session; the gym is next to home."
+      },
+      {
+        "id": "gym_fri",
+        "title": "Gym session",
+        "start": "2026-11-27T10:00:00+00:00",
+        "end": "2026-11-27T12:00:00+00:00",
+        "category": "gym",
+        "importance": 2,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym session; the gym is next to home."
+      },
+      {
+        "id": "dinner_mon",
+        "title": "Dinner",
+        "start": "2026-11-23T20:00:00+00:00",
+        "end": "2026-11-23T21:00:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "One-hour dinner at home."
+      },
+      {
+        "id": "dinner_tue",
+        "title": "Dinner",
+        "start": "2026-11-24T20:00:00+00:00",
+        "end": "2026-11-24T21:00:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "One-hour dinner at home."
+      },
+      {
+        "id": "dinner_wed",
+        "title": "Dinner with friend",
+        "start": "2026-11-25T18:30:00+00:00",
+        "end": "2026-11-25T19:30:00+00:00",
+        "category": "social",
+        "importance": 3,
+        "fixed": true,
+        "participants": [
+          "user",
+          "friend"
+        ],
+        "description": "Pre-arranged early dinner with a friend; the restaurant is next to home."
+      },
+      {
+        "id": "supervisor_thu",
+        "title": "Thesis supervision meeting",
+        "start": "2026-11-26T12:00:00+00:00",
+        "end": "2026-11-26T12:45:00+00:00",
+        "category": "academic",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "supervisor"
+        ],
+        "description": "Video call with the thesis supervisor to review the methodology chapter; the supervisor has no other free slot this week."
+      },
+      {
+        "id": "lunch_thu",
+        "title": "Lunch",
+        "start": "2026-11-26T13:00:00+00:00",
+        "end": "2026-11-26T14:00:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "One-hour lunch before the afternoon shift."
+      },
+      {
+        "id": "lunch_fri",
+        "title": "Lunch",
+        "start": "2026-11-27T13:00:00+00:00",
+        "end": "2026-11-27T14:00:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "One-hour lunch before the afternoon shift."
+      },
+      {
+        "id": "sleep_after_fri",
+        "title": "Sleep",
+        "start": "2026-11-27T23:30:00+00:00",
+        "end": "2026-11-28T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected eight-hour sleep block after the Friday evening shift."
+      }
+    ]
+  },
+  "user_request": "The hospital has asked me to swap my Wednesday morning shift for a night shift from Wednesday 20:00 to Thursday 08:00, and in exchange my Thursday afternoon shift (15:00 to 23:00) has been removed. Please reorganize my week around this change, keeping my eight hours of sleep every day, my daily thesis time and my commitments with other people as much as possible. Friday's shift stays the same."
+}

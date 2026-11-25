@@ -1,0 +1,323 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "parent_young_children_earache_birthday_party_001",
+  "family_id": "parent_young_children_schedule_conflict",
+  "profile": {
+    "profile_id": "parent_young_children_01__parent_young_children_earache_birthday_party_001",
+    "description": "Parent of two young children (Marta, 7, and Duarte, 3) working full-time in an office with a hybrid arrangement, sharing childcare, school runs, household errands and the children's activities with a partner who works rotating shifts.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "work": 4,
+      "children": 5,
+      "health": 5,
+      "household": 3,
+      "social": 2,
+      "exercise": 2,
+      "kids_activities": 3
+    },
+    "hard_constraints": [
+      {
+        "id": "children_dropoff_pickup",
+        "description": "Both children must always be dropped off and picked up on time by the user, the partner or an authorised adult; school and daycare opening and closing times are fixed.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "childcare"
+        ]
+      },
+      {
+        "id": "work_commitments",
+        "description": "Meetings, deadlines and appointments with colleagues, managers or clients must not be moved, shortened or cancelled by the assistant unless the user asks for it.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "work"
+        ]
+      },
+      {
+        "id": "sleep_protection",
+        "description": "The user must sleep at least seven hours every night; scheduled sleep blocks must be protected.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "sleep"
+        ]
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "family_dinner",
+        "description": "Prefer dinner with the children between 19:00 and 21:00, followed by a 45-minute bedtime routine that finishes by 21:30.",
+        "weight": 4
+      },
+      {
+        "id": "lunch_times",
+        "description": "Prefer a 45-minute lunch between 12:00 and 14:00.",
+        "weight": 2
+      },
+      {
+        "id": "exercise_routine",
+        "description": "Prefer two short runs of 45 minutes per week, either in the morning from 06:30 or in the evening after the children are asleep.",
+        "weight": 2
+      },
+      {
+        "id": "groceries",
+        "description": "Prefer to complete the weekly grocery shopping by Thursday; an online delivery is acceptable if someone is at home.",
+        "weight": 2
+      },
+      {
+        "id": "kids_activities",
+        "description": "Prefer to keep the children's sports and activities, but they can be skipped in exceptional circumstances.",
+        "weight": 3
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Flexible work blocks, groceries and runs can be moved. Pediatrician bookings, work meetings, school late-arrival notices, and RSVP updates to the birthday party host require confirmation. These are user preferences, not ground-truth ACT/DEFER labels."
+    }
+  },
+  "now": "2027-06-03T07:10:00+01:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-06-02T23:00:00+01:00",
+        "end": "2027-06-03T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "morning_thu",
+        "title": "Morning routine with the children",
+        "start": "2027-06-03T06:45:00+01:00",
+        "end": "2027-06-03T07:45:00+01:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Breakfast and getting ready."
+      },
+      {
+        "id": "travel_to_school_thu",
+        "title": "Travel to school and daycare",
+        "start": "2027-06-03T08:00:00+01:00",
+        "end": "2027-06-03T08:15:00+01:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "15-minute car journey to school and daycare."
+      },
+      {
+        "id": "dropoff_thu",
+        "title": "Drop-off at school and daycare",
+        "start": "2027-06-03T08:15:00+01:00",
+        "end": "2027-06-03T08:30:00+01:00",
+        "category": "childcare",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Drop-off for Marta (school accepts late arrival with a medical note) and Duarte (daycare arrival until 09:00)."
+      },
+      {
+        "id": "commute_to_work_thu",
+        "title": "Commute to office",
+        "start": "2027-06-03T08:30:00+01:00",
+        "end": "2027-06-03T09:00:00+01:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute car journey from school to office."
+      },
+      {
+        "id": "focus_am_thu",
+        "title": "Prepare board presentation deck",
+        "start": "2027-06-03T09:00:00+01:00",
+        "end": "2027-06-03T11:30:00+01:00",
+        "category": "work_focus",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Flexible individual work; needs 2.5 hours completed today."
+      },
+      {
+        "id": "sync_thu",
+        "title": "Weekly department sync",
+        "start": "2027-06-03T11:30:00+01:00",
+        "end": "2027-06-03T12:30:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user",
+          "team",
+          "director"
+        ],
+        "description": "Important meeting; user can join remotely by video."
+      },
+      {
+        "id": "lunch_thu",
+        "title": "Lunch",
+        "start": "2027-06-03T12:30:00+01:00",
+        "end": "2027-06-03T13:15:00+01:00",
+        "category": "meal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break."
+      },
+      {
+        "id": "partner_shift_thu",
+        "title": "Partner's work shift",
+        "start": "2027-06-03T13:30:00+01:00",
+        "end": "2027-06-03T21:30:00+01:00",
+        "category": "partner_work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "partner"
+        ],
+        "description": "Late shift; partner leaves home at 12:45."
+      },
+      {
+        "id": "focus_pm_thu",
+        "title": "Review team OKRs",
+        "start": "2027-06-03T13:15:00+01:00",
+        "end": "2027-06-03T16:30:00+01:00",
+        "category": "work_focus",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Flexible individual work."
+      },
+      {
+        "id": "commute_to_school_thu",
+        "title": "Commute to school",
+        "start": "2027-06-03T16:30:00+01:00",
+        "end": "2027-06-03T17:00:00+01:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute journey from office to school (15 minutes from home)."
+      },
+      {
+        "id": "pickup_thu",
+        "title": "Pick up children",
+        "start": "2027-06-03T17:00:00+01:00",
+        "end": "2027-06-03T17:15:00+01:00",
+        "category": "childcare",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Pick-up from school and daycare."
+      },
+      {
+        "id": "birthday_party_thu",
+        "title": "Classmate's birthday party (Marta)",
+        "start": "2027-06-03T17:30:00+01:00",
+        "end": "2027-06-03T19:30:00+01:00",
+        "category": "kids_activity",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Party at a play centre 15 minutes from school; parents stay with younger siblings."
+      },
+      {
+        "id": "groceries_thu",
+        "title": "Weekly groceries",
+        "start": "2027-06-03T19:45:00+01:00",
+        "end": "2027-06-03T20:30:00+01:00",
+        "category": "household",
+        "importance": 2,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Supermarket 10 minutes from home (open until 21:00); can also be moved to Friday."
+      },
+      {
+        "id": "dinner_thu",
+        "title": "Family dinner",
+        "start": "2027-06-03T20:30:00+01:00",
+        "end": "2027-06-03T21:15:00+01:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Dinner at home."
+      },
+      {
+        "id": "bedtime_thu",
+        "title": "Children's bedtime routine",
+        "start": "2027-06-03T21:15:00+01:00",
+        "end": "2027-06-03T22:00:00+01:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Bath, story and bedtime."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-06-03T23:00:00+01:00",
+        "end": "2027-06-04T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      }
+    ]
+  },
+  "user_request": "Marta just woke up complaining of a sharp earache (07:10), though she has no fever. I called the pediatric clinic and they only have an urgent appointment today at 09:45 (takes 30 minutes, clinic is 20 minutes from home and 15 minutes from her school). Duarte can still go to daycare at 08:15 as usual, and if the doctor clears Marta, I can take her to school right after the appointment with a medical note—or keep her home with me while I work remotely if she needs antibiotics and rest. My partner is home until 12:45, then works the afternoon shift. Please rearrange my Thursday so I can take Duarte to daycare, get Marta to the 09:45 doctor appointment, attend my 11:30 department sync, get my board presentation deck done, and decide what happens with the afternoon birthday party and groceries. Tell me what needs to be confirmed with others."
+}

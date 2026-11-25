@@ -1,0 +1,1822 @@
+{
+  "proposal_id": "v2p_10fc097e11840c70cc5d0d4c",
+  "scenario_id": "working_student_wfh_wednesday_optimization_009",
+  "family_id": "working_student_schedule_conflict",
+  "profile_id": "working_student_01__working_student_wfh_wednesday_optimization_009",
+  "split": "train",
+  "run_id": "3b7d780725284da58f1aec4f2902d82e",
+  "configuration": "B",
+  "generated_at": "2026-11-25T10:06:28.194441+00:00",
+  "proposer_provider": "iaedu",
+  "proposer_model": "GPT-5.5",
+  "proposer_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_provider": "iaedu",
+  "critic_model": "GPT-5.5",
+  "critic_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "prompt_versions": {
+    "proposer_sha256": "ae6fa59cccb86c31f34f66d07d241660b1feadf852ebf1b594bc85addab86985",
+    "proposer_wire_schema_version": "compact_proposal_v1",
+    "proposer_wire_schema_sha256": "f504fbcd7e939c43e055e2f188feb22097a284bcd9b043227d868e559547b865",
+    "proposer_revision_sha256": "3f0fe7f221013700694a22984560612013e9804072ffde4538e1329b9708ac95",
+    "critic_sha256": "1686688cdd4bc63abb12e6633ef9dbb9b62d69b69aba1c4805a201657cc5bb34"
+  },
+  "critic_settings": {
+    "threshold": 4.0,
+    "max_refinements": 3,
+    "min_dimension_score": 1
+  },
+  "experiment_id": null,
+  "repeat_index": 0,
+  "seconds": 60.113,
+  "critic_score": 4.0,
+  "critic_accepted": true,
+  "iterations": [
+    {
+      "index": 0,
+      "proposer_feedback": null,
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [],
+        "rationale": {
+          "constraints": [
+            "Protected WFH work hours remain unchanged.",
+            "Fixed sleep remains untouched, so the sleep schedule stays intact.",
+            "There is no Wednesday evening class event to move or delete.",
+            "The existing Wednesday gym and term-paper study events already satisfy the request."
+          ],
+          "priorities": [
+            "Avoid creating duplicate events when the calendar already contains the requested plan.",
+            "Keep the existing free interval between gym and study rather than compressing it without an explicit need."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Move the study block to start immediately after gym",
+              "rejected_because": "This would be more literal, but it would alter an already suitable flexible study block without clear benefit."
+            },
+            {
+              "option": "Add a new gym and study sequence",
+              "rejected_because": "Rejected because it would duplicate events already present on Wednesday evening."
+            }
+          ],
+          "summary": "No changes are proposed because Wednesday already has the requested one-hour gym session after work and a focused term-paper study block later that evening, with protected work and fixed sleep preserved; the main trade-off is retaining the existing free gap between them."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [
+          "no changes proposed; request satisfaction requires Critic and human review"
+        ],
+        "valid": true,
+        "no_op": true
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-05-23T23:45:00+01:00",
+            "end": "2027-05-24T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_mon",
+            "title": "Daytime Job: Office Shift",
+            "start": "2027-05-24T09:00:00+01:00",
+            "end": "2027-05-24T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Office work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "class_mon",
+            "title": "Evening Lecture: Corporate Strategy",
+            "start": "2027-05-24T18:30:00+01:00",
+            "end": "2027-05-24T21:30:00+01:00",
+            "category": "education",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "professor",
+              "classmates"
+            ],
+            "description": "Mandatory evening class.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-05-24T23:45:00+01:00",
+            "end": "2027-05-25T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_tue",
+            "title": "Daytime Job: Office Shift",
+            "start": "2027-05-25T09:00:00+01:00",
+            "end": "2027-05-25T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Office work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_tue",
+            "title": "Gym Workout",
+            "start": "2027-05-25T18:00:00+01:00",
+            "end": "2027-05-25T19:15:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_tue",
+            "title": "Evening Study: Corporate Strategy Readings",
+            "start": "2027-05-25T19:45:00+01:00",
+            "end": "2027-05-25T21:45:00+01:00",
+            "category": "education",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Reading.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-05-25T23:45:00+01:00",
+            "end": "2027-05-26T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Extra 15m sleep on WFH day.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_wed_wfh",
+            "title": "Daytime Job: Work From Home Shift",
+            "start": "2027-05-26T09:00:00+01:00",
+            "end": "2027-05-26T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Remote work day.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_wed",
+            "title": "Gym: Strength & Cardio Session",
+            "start": "2027-05-26T17:45:00+01:00",
+            "end": "2027-05-26T18:45:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Workout right after WFH.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_wed",
+            "title": "Evening Study: Thesis / Term Paper Draft",
+            "start": "2027-05-26T19:15:00+01:00",
+            "end": "2027-05-26T21:30:00+01:00",
+            "category": "education",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Focused writing block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-05-26T23:45:00+01:00",
+            "end": "2027-05-27T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_thu",
+            "title": "Daytime Job: Office Shift",
+            "start": "2027-05-27T09:00:00+01:00",
+            "end": "2027-05-27T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Office work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "class_thu",
+            "title": "Evening Lecture: Financial Markets",
+            "start": "2027-05-27T18:30:00+01:00",
+            "end": "2027-05-27T21:30:00+01:00",
+            "category": "education",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "professor",
+              "classmates"
+            ],
+            "description": "Mandatory evening class.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-05-27T23:45:00+01:00",
+            "end": "2027-05-28T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_fri",
+            "title": "Daytime Job: Office Shift",
+            "start": "2027-05-28T09:00:00+01:00",
+            "end": "2027-05-28T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Friday office shift.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_fri",
+            "title": "Gym Workout",
+            "start": "2027-05-28T18:00:00+01:00",
+            "end": "2027-05-28T19:15:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Friday workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "social_fri",
+            "title": "Dinner with Friends",
+            "start": "2027-05-28T20:00:00+01:00",
+            "end": "2027-05-28T23:00:00+01:00",
+            "category": "personal",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user",
+              "friends"
+            ],
+            "description": "Friday hangout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 3,
+          "coherence": 3,
+          "alternatives": 3,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The rationale supports the no-change outcome mainly by pointing to available Wednesday events, but it does not sufficiently assess whether the existing Wednesday sequence is human-manageable: WFH ends at 17:30, gym starts at 17:45, gym ends at 18:45, and focused term-paper study starts at 19:15.",
+          "The calendar shows a demanding weekday pattern: Monday work 09:00-17:30 plus class 18:30-21:30; Tuesday work, gym 18:00-19:15, study 19:45-21:45; Wednesday work, gym, study; Thursday work plus class 18:30-21:30; Friday work, gym, and dinner until 23:00. The proposal does not weigh cumulative evening load, recovery, meals, hygiene, or cognitive fatigue.",
+          "The no-change rationale says the existing Wednesday gym and study events already satisfy the request, but the original request is not visible here. Request satisfaction cannot be independently verified from the provided materials.",
+          "The alternatives considered are relevant but narrow. They reject compressing the gym-study gap and duplicating events, but do not discuss whether the existing flexible Wednesday study block should be kept as-is in light of the heavy surrounding week, or whether the current 15-minute post-work transition is realistic."
+        ],
+        "feedback": "The no-change proposal may be reasonable if the user specifically wanted Wednesday evening gym followed by term-paper study and if the gym is close enough, the user can recover/eat, and the study block remains effective after work and exercise. However, the rationale should not treat technical fit as enough. The visible week is already evening-heavy across all five weekdays, and Wednesday has tight practical margins: only 15 minutes from WFH to gym and 30 minutes from gym to a cognitively demanding writing block. A stronger proposal would either substantiate why this existing Wednesday arrangement is manageable in the user's context or reconsider whether the flexible Wednesday events should be distributed or protected differently, without assuming unseen availability outside the visible calendar.",
+        "plausibility_review": {
+          "revision_required": true,
+          "severity": "moderate",
+          "reason": "The proposed no-change outcome relies on the claim that the existing Wednesday plan is already suitable, but the visible routine raises concrete manageability concerns: a tight transition from WFH at 17:30 to gym at 17:45, a short 30-minute gap before focused writing at 19:15, and a broader weekday pattern with work plus evening commitments every day. These are not objective conflicts, and they may be acceptable with fuller context, but they could significantly affect whether the schedule is sustainable and whether the study block is actually useful.",
+          "suggested_improvement": "Reconsider or better substantiate the no-change decision using the fuller context: explain whether the Wednesday transitions, meal/recovery needs, and cumulative evening workload are realistically accommodated, or consider a less strained distribution if the flexible events allow it."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Original request satisfaction",
+            "assumption": "The existing Wednesday gym and term-paper study events match what the user requested closely enough that no change is needed.",
+            "evidence_gap": "The original request is not included, and the technical validation explicitly says request satisfaction was not checked.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "WFH-to-gym transition",
+            "assumption": "The user can realistically finish WFH at 17:30 and begin the gym session at 17:45.",
+            "evidence_gap": "The calendar does not show gym location, preparation needs, equipment setup, commute, or whether a home/nearby gym is involved.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Gym-to-study transition",
+            "assumption": "The 18:45-19:15 gap is enough for post-workout recovery, hygiene, food, and setup for focused writing.",
+            "evidence_gap": "No information is provided about the user's routines, travel, meal timing, or whether the study location is immediately available.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Effectiveness of Wednesday study",
+            "assumption": "The user can complete a focused term-paper writing block from 19:15 to 21:30 after a full WFH day and a one-hour workout.",
+            "evidence_gap": "The proposal does not discuss energy level, deadline urgency, prior fatigue, or whether evening writing after exercise is effective for this user.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Cumulative weekday recovery",
+            "assumption": "The user has enough recovery and personal maintenance capacity across a week with evening commitments every visible weekday.",
+            "evidence_gap": "The calendar shows repeated work-plus-evening sequences but does not show meals, household tasks, decompression, commute details, or recovery needs.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          }
+        ],
+        "overall": 3.25
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": false,
+        "plausibility_revision_required": true,
+        "accepted": false,
+        "revision_causes": [
+          "numeric_criteria_failed",
+          "plausibility_revision_required"
+        ]
+      },
+      "operations_changed_from_previous": null,
+      "rationale_changed_from_previous": null,
+      "prior_critic_reviews": [],
+      "unresolved_assumptions": [
+        {
+          "subject": "Original request satisfaction",
+          "assumption": "The existing Wednesday gym and term-paper study events match what the user requested closely enough that no change is needed.",
+          "evidence_gap": "The original request is not included, and the technical validation explicitly says request satisfaction was not checked.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "WFH-to-gym transition",
+          "assumption": "The user can realistically finish WFH at 17:30 and begin the gym session at 17:45.",
+          "evidence_gap": "The calendar does not show gym location, preparation needs, equipment setup, commute, or whether a home/nearby gym is involved.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Gym-to-study transition",
+          "assumption": "The 18:45-19:15 gap is enough for post-workout recovery, hygiene, food, and setup for focused writing.",
+          "evidence_gap": "No information is provided about the user's routines, travel, meal timing, or whether the study location is immediately available.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Effectiveness of Wednesday study",
+          "assumption": "The user can complete a focused term-paper writing block from 19:15 to 21:30 after a full WFH day and a one-hour workout.",
+          "evidence_gap": "The proposal does not discuss energy level, deadline urgency, prior fatigue, or whether evening writing after exercise is effective for this user.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Cumulative weekday recovery",
+          "assumption": "The user has enough recovery and personal maintenance capacity across a week with evening commitments every visible weekday.",
+          "evidence_gap": "The calendar shows repeated work-plus-evening sequences but does not show meals, household tasks, decompression, commute details, or recovery needs.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "proposer_feedback": "Numeric Critic criteria failed. Scores: {\"reasoning\":3,\"coherence\":3,\"alternatives\":3,\"clarity\":4}. Plausibility revision required (moderate): The proposed no-change outcome relies on the claim that the existing Wednesday plan is already suitable, but the visible routine raises concrete manageability concerns: a tight transition from WFH at 17:30 to gym at 17:45, a short 30-minute gap before focused writing at 19:15, and a broader weekday pattern with work plus evening commitments every day. These are not objective conflicts, and they may be acceptable with fuller context, but they could significantly affect whether the schedule is sustainable and whether the study block is actually useful. Suggested direction: Reconsider or better substantiate the no-change decision using the fuller context: explain whether the Wednesday transitions, meal/recovery needs, and cumulative evening workload are realistically accommodated, or consider a less strained distribution if the flexible events allow it. The Critic lacks the full user constraints; explain if no better feasible option exists. Unverified conditions to reassess: [{'subject': 'Original request satisfaction', 'assumption': 'The existing Wednesday gym and term-paper study events match what the user requested closely enough that no change is needed.', 'evidence_gap': 'The original request is not included, and the technical validation explicitly says request satisfaction was not checked.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'WFH-to-gym transition', 'assumption': 'The user can realistically finish WFH at 17:30 and begin the gym session at 17:45.', 'evidence_gap': 'The calendar does not show gym location, preparation needs, equipment setup, commute, or whether a home/nearby gym is involved.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Gym-to-study transition', 'assumption': 'The 18:45-19:15 gap is enough for post-workout recovery, hygiene, food, and setup for focused writing.', 'evidence_gap': \"No information is provided about the user's routines, travel, meal timing, or whether the study location is immediately available.\", 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Effectiveness of Wednesday study', 'assumption': 'The user can complete a focused term-paper writing block from 19:15 to 21:30 after a full WFH day and a one-hour workout.', 'evidence_gap': 'The proposal does not discuss energy level, deadline urgency, prior fatigue, or whether evening writing after exercise is effective for this user.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Cumulative weekday recovery', 'assumption': 'The user has enough recovery and personal maintenance capacity across a week with evening commitments every visible weekday.', 'evidence_gap': 'The calendar shows repeated work-plus-evening sequences but does not show meals, household tasks, decompression, commute details, or recovery needs.', 'potential_impact': 'material', 'verification_source': 'user_context'}] Weaknesses: ['The rationale supports the no-change outcome mainly by pointing to available Wednesday events, but it does not sufficiently assess whether the existing Wednesday sequence is human-manageable: WFH ends at 17:30, gym starts at 17:45, gym ends at 18:45, and focused term-paper study starts at 19:15.', 'The calendar shows a demanding weekday pattern: Monday work 09:00-17:30 plus class 18:30-21:30; Tuesday work, gym 18:00-19:15, study 19:45-21:45; Wednesday work, gym, study; Thursday work plus class 18:30-21:30; Friday work, gym, and dinner until 23:00. The proposal does not weigh cumulative evening load, recovery, meals, hygiene, or cognitive fatigue.', 'The no-change rationale says the existing Wednesday gym and study events already satisfy the request, but the original request is not visible here. Request satisfaction cannot be independently verified from the provided materials.', 'The alternatives considered are relevant but narrow. They reject compressing the gym-study gap and duplicating events, but do not discuss whether the existing flexible Wednesday study block should be kept as-is in light of the heavy surrounding week, or whether the current 15-minute post-work transition is realistic.']. Actionable feedback: The no-change proposal may be reasonable if the user specifically wanted Wednesday evening gym followed by term-paper study and if the gym is close enough, the user can recover/eat, and the study block remains effective after work and exercise. However, the rationale should not treat technical fit as enough. The visible week is already evening-heavy across all five weekdays, and Wednesday has tight practical margins: only 15 minutes from WFH to gym and 30 minutes from gym to a cognitively demanding writing block. A stronger proposal would either substantiate why this existing Wednesday arrangement is manageable in the user's context or reconsider whether the flexible Wednesday events should be distributed or protected differently, without assuming unseen availability outside the visible calendar.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "move",
+            "event_id": "study_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-05-26T19:45:00+01:00",
+            "to_end": "2027-05-26T22:00:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "Protected WFH work hours and fixed sleep remain unchanged.",
+            "The existing Wednesday gym already matches the requested one-hour session at 17:45.",
+            "The 15-minute work-to-gym transition is kept because the requested gym start is exact.",
+            "The gym location, preparation needs, meal timing, hygiene needs and study setup time are unknown.",
+            "No Wednesday evening class event exists in the calendar."
+          ],
+          "priorities": [
+            "Keep the requested gym timing while making the later focused writing block more practically manageable.",
+            "Use the WFH evening for health and education without moving fixed work or sleep.",
+            "Preserve a clear post-study buffer before sleep despite the heavy weekday evening pattern."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Keep the current study start",
+              "rejected_because": "Rejected because the short gym-to-study gap leaves little margin for recovery, food, hygiene or setup."
+            },
+            {
+              "option": "Move the gym later",
+              "rejected_because": "Rejected because the user specifically requested the gym session at 17:45."
+            },
+            {
+              "option": "Move the study block to another weekday",
+              "rejected_because": "Rejected because nearby weekdays already contain fixed classes or evening commitments and the request targets Wednesday."
+            }
+          ],
+          "summary": "Move only the flexible Wednesday study block later, keeping the exact 17:45 gym session and fixed sleep intact; the trade-off is a later study finish in exchange for a more realistic recovery and setup gap after exercise."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-05-23T23:45:00+01:00",
+            "end": "2027-05-24T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_mon",
+            "title": "Daytime Job: Office Shift",
+            "start": "2027-05-24T09:00:00+01:00",
+            "end": "2027-05-24T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Office work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "class_mon",
+            "title": "Evening Lecture: Corporate Strategy",
+            "start": "2027-05-24T18:30:00+01:00",
+            "end": "2027-05-24T21:30:00+01:00",
+            "category": "education",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "professor",
+              "classmates"
+            ],
+            "description": "Mandatory evening class.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-05-24T23:45:00+01:00",
+            "end": "2027-05-25T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_tue",
+            "title": "Daytime Job: Office Shift",
+            "start": "2027-05-25T09:00:00+01:00",
+            "end": "2027-05-25T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Office work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_tue",
+            "title": "Gym Workout",
+            "start": "2027-05-25T18:00:00+01:00",
+            "end": "2027-05-25T19:15:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_tue",
+            "title": "Evening Study: Corporate Strategy Readings",
+            "start": "2027-05-25T19:45:00+01:00",
+            "end": "2027-05-25T21:45:00+01:00",
+            "category": "education",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Reading.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-05-25T23:45:00+01:00",
+            "end": "2027-05-26T07:30:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Extra 15m sleep on WFH day.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_wed_wfh",
+            "title": "Daytime Job: Work From Home Shift",
+            "start": "2027-05-26T09:00:00+01:00",
+            "end": "2027-05-26T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Remote work day.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_wed",
+            "title": "Gym: Strength & Cardio Session",
+            "start": "2027-05-26T17:45:00+01:00",
+            "end": "2027-05-26T18:45:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Workout right after WFH.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_wed",
+            "title": "Evening Study: Thesis / Term Paper Draft",
+            "start": "2027-05-26T19:45:00+01:00",
+            "end": "2027-05-26T22:00:00+01:00",
+            "category": "education",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Focused writing block.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-05-26T23:45:00+01:00",
+            "end": "2027-05-27T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_thu",
+            "title": "Daytime Job: Office Shift",
+            "start": "2027-05-27T09:00:00+01:00",
+            "end": "2027-05-27T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Office work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "class_thu",
+            "title": "Evening Lecture: Financial Markets",
+            "start": "2027-05-27T18:30:00+01:00",
+            "end": "2027-05-27T21:30:00+01:00",
+            "category": "education",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "professor",
+              "classmates"
+            ],
+            "description": "Mandatory evening class.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-05-27T23:45:00+01:00",
+            "end": "2027-05-28T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_fri",
+            "title": "Daytime Job: Office Shift",
+            "start": "2027-05-28T09:00:00+01:00",
+            "end": "2027-05-28T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Friday office shift.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_fri",
+            "title": "Gym Workout",
+            "start": "2027-05-28T18:00:00+01:00",
+            "end": "2027-05-28T19:15:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Friday workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "social_fri",
+            "title": "Dinner with Friends",
+            "start": "2027-05-28T20:00:00+01:00",
+            "end": "2027-05-28T23:00:00+01:00",
+            "category": "personal",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user",
+              "friends"
+            ],
+            "description": "Friday hangout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 4,
+          "alternatives": 4,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The revision improves the prior Wednesday gym-to-study concern by moving the focused writing block from 19:15-21:30 to 19:45-22:00, creating a 60-minute gap after gym ends at 18:45. That is more plausible for recovery, food, hygiene and setup, but the proposal still cannot verify that this is enough for this user.",
+          "The WFH-to-gym transition remains tight: WFH ends at 17:30 and the gym starts at 17:45. The rationale acknowledges this and ties it to the requested exact 17:45 gym start, but the practical feasibility still depends on unknown location, preparation needs and whether the user can reliably stop work on time.",
+          "The resulting Wednesday remains demanding: WFH 09:00-17:30, gym 17:45-18:45, and focused thesis or term-paper writing 19:45-22:00. The later start is a reasonable trade-off, but the study block now ends later after an already full day, which could affect cognitive quality for some users.",
+          "The visible week remains evening-heavy: Monday work plus class until 21:30, Tuesday work plus gym and study until 21:45, Wednesday work plus gym and study until 22:00, Thursday work plus class until 21:30, and Friday work plus gym and dinner until 23:00. Most of this appears pre-existing rather than caused by the proposal, but it remains relevant to sustainability.",
+          "Request satisfaction still cannot be independently verified because the original request is not provided and technical validation explicitly did not check request satisfaction."
+        ],
+        "feedback": "The revised proposal gives a grounded answer to the prior main concern about the very short gym-to-study gap. Moving the Wednesday study block to 19:45-22:00 makes the sequence more human-manageable than the prior 19:15 start, while preserving the fixed work and sleep events and keeping a meaningful buffer before sleep at 23:45. The remaining concerns are mostly conditional rather than clear reasons to reject the plan: the 17:30-to-17:45 WFH-to-gym transition may be fine if the gym is at home or nearby, and the later writing block may be workable if the user tolerates evening cognitive work after exercise. The Proposer should retain the caveats rather than treating free time as guaranteed capacity, and should rely on fuller user context for whether the exact gym timing and late focused-writing quality are realistic.",
+        "plausibility_review": {
+          "revision_required": false,
+          "severity": "low",
+          "reason": "The prior concern was materially addressed: the most strained gym-to-study transition changed from 30 minutes to 60 minutes, which is a plausible improvement for recovery, food, hygiene and setup. The study now ends at 22:00, but fixed sleep remains at 23:45, leaving a post-study buffer. The remaining risks around the tight WFH-to-gym transition, cumulative weekday load and late cognitive work are real but depend on user-specific context and are not clearly introduced or worsened enough by this proposal to require another revision.",
+          "suggested_improvement": "If the Proposer has fuller context, it should briefly substantiate whether the 17:45 gym start is practically reachable after WFH and whether a 19:45-22:00 writing block is effective for this user after exercise. If not, it should keep these as unresolved assumptions rather than making stronger claims."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Original request satisfaction",
+            "assumption": "The exact 17:45 Wednesday gym session and the moved Wednesday thesis or term-paper writing block match the user's request and priorities.",
+            "evidence_gap": "The original request is not included, and the technical validation explicitly says request satisfaction was not checked.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "WFH-to-gym transition",
+            "assumption": "The user can realistically finish WFH at 17:30 and begin the gym session at 17:45.",
+            "evidence_gap": "The calendar does not show gym location, travel time, clothing or equipment preparation, or whether the user can reliably stop work exactly at 17:30.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Gym-to-study recovery and setup",
+            "assumption": "The 18:45-19:45 gap is enough for post-workout recovery, hygiene, food and setup for focused writing.",
+            "evidence_gap": "The proposal acknowledges unknown preparation, meal, hygiene and study setup needs; the calendar does not show these routines.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Effectiveness of late Wednesday writing",
+            "assumption": "The user can produce useful focused thesis or term-paper writing from 19:45 to 22:00 after WFH and a one-hour gym session.",
+            "evidence_gap": "No information is provided about the user's energy pattern, deadline pressure, exercise intensity, or ability to do cognitively demanding work late in the evening.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Cumulative weekday recovery",
+            "assumption": "The user has sufficient recovery and personal maintenance capacity across a week with work plus evening commitments on every visible weekday.",
+            "evidence_gap": "The calendar shows repeated evening obligations but does not show meals, household tasks, decompression, commute details, or recovery needs.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          }
+        ],
+        "overall": 4.0
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": true,
+        "plausibility_revision_required": false,
+        "accepted": true,
+        "revision_causes": []
+      },
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": [
+        {
+          "iteration": 0,
+          "proposal": {
+            "changes": [],
+            "rationale": {
+              "constraints": [
+                "Protected WFH work hours remain unchanged.",
+                "Fixed sleep remains untouched, so the sleep schedule stays intact.",
+                "There is no Wednesday evening class event to move or delete.",
+                "The existing Wednesday gym and term-paper study events already satisfy the request."
+              ],
+              "priorities": [
+                "Avoid creating duplicate events when the calendar already contains the requested plan.",
+                "Keep the existing free interval between gym and study rather than compressing it without an explicit need."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Move the study block to start immediately after gym",
+                  "rejected_because": "This would be more literal, but it would alter an already suitable flexible study block without clear benefit."
+                },
+                {
+                  "option": "Add a new gym and study sequence",
+                  "rejected_because": "Rejected because it would duplicate events already present on Wednesday evening."
+                }
+              ],
+              "summary": "No changes are proposed because Wednesday already has the requested one-hour gym session after work and a focused term-paper study block later that evening, with protected work and fixed sleep preserved; the main trade-off is retaining the existing free gap between them."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "sleep_mon",
+                "title": "Sleep",
+                "start": "2027-05-23T23:45:00+01:00",
+                "end": "2027-05-24T07:15:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Night sleep.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_mon",
+                "title": "Daytime Job: Office Shift",
+                "start": "2027-05-24T09:00:00+01:00",
+                "end": "2027-05-24T17:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "colleagues"
+                ],
+                "description": "Office work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "class_mon",
+                "title": "Evening Lecture: Corporate Strategy",
+                "start": "2027-05-24T18:30:00+01:00",
+                "end": "2027-05-24T21:30:00+01:00",
+                "category": "education",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "professor",
+                  "classmates"
+                ],
+                "description": "Mandatory evening class.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_tue",
+                "title": "Sleep",
+                "start": "2027-05-24T23:45:00+01:00",
+                "end": "2027-05-25T07:15:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Night sleep.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_tue",
+                "title": "Daytime Job: Office Shift",
+                "start": "2027-05-25T09:00:00+01:00",
+                "end": "2027-05-25T17:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "colleagues"
+                ],
+                "description": "Office work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_tue",
+                "title": "Gym Workout",
+                "start": "2027-05-25T18:00:00+01:00",
+                "end": "2027-05-25T19:15:00+01:00",
+                "category": "health",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Workout.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "study_tue",
+                "title": "Evening Study: Corporate Strategy Readings",
+                "start": "2027-05-25T19:45:00+01:00",
+                "end": "2027-05-25T21:45:00+01:00",
+                "category": "education",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Reading.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_wed",
+                "title": "Sleep",
+                "start": "2027-05-25T23:45:00+01:00",
+                "end": "2027-05-26T07:30:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Extra 15m sleep on WFH day.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_wed_wfh",
+                "title": "Daytime Job: Work From Home Shift",
+                "start": "2027-05-26T09:00:00+01:00",
+                "end": "2027-05-26T17:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "colleagues"
+                ],
+                "description": "Remote work day.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_wed",
+                "title": "Gym: Strength & Cardio Session",
+                "start": "2027-05-26T17:45:00+01:00",
+                "end": "2027-05-26T18:45:00+01:00",
+                "category": "health",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Workout right after WFH.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "study_wed",
+                "title": "Evening Study: Thesis / Term Paper Draft",
+                "start": "2027-05-26T19:15:00+01:00",
+                "end": "2027-05-26T21:30:00+01:00",
+                "category": "education",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Focused writing block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2027-05-26T23:45:00+01:00",
+                "end": "2027-05-27T07:15:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Night sleep.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_thu",
+                "title": "Daytime Job: Office Shift",
+                "start": "2027-05-27T09:00:00+01:00",
+                "end": "2027-05-27T17:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "colleagues"
+                ],
+                "description": "Office work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "class_thu",
+                "title": "Evening Lecture: Financial Markets",
+                "start": "2027-05-27T18:30:00+01:00",
+                "end": "2027-05-27T21:30:00+01:00",
+                "category": "education",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "professor",
+                  "classmates"
+                ],
+                "description": "Mandatory evening class.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_fri",
+                "title": "Sleep",
+                "start": "2027-05-27T23:45:00+01:00",
+                "end": "2027-05-28T07:15:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Night sleep.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_fri",
+                "title": "Daytime Job: Office Shift",
+                "start": "2027-05-28T09:00:00+01:00",
+                "end": "2027-05-28T17:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "colleagues"
+                ],
+                "description": "Friday office shift.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_fri",
+                "title": "Gym Workout",
+                "start": "2027-05-28T18:00:00+01:00",
+                "end": "2027-05-28T19:15:00+01:00",
+                "category": "health",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Friday workout.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "social_fri",
+                "title": "Dinner with Friends",
+                "start": "2027-05-28T20:00:00+01:00",
+                "end": "2027-05-28T23:00:00+01:00",
+                "category": "personal",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "friends"
+                ],
+                "description": "Friday hangout.",
+                "origin": "existing",
+                "change_status": "preserved"
+              }
+            ],
+            "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+          },
+          "plausibility_review": {
+            "revision_required": true,
+            "severity": "moderate",
+            "reason": "The proposed no-change outcome relies on the claim that the existing Wednesday plan is already suitable, but the visible routine raises concrete manageability concerns: a tight transition from WFH at 17:30 to gym at 17:45, a short 30-minute gap before focused writing at 19:15, and a broader weekday pattern with work plus evening commitments every day. These are not objective conflicts, and they may be acceptable with fuller context, but they could significantly affect whether the schedule is sustainable and whether the study block is actually useful.",
+            "suggested_improvement": "Reconsider or better substantiate the no-change decision using the fuller context: explain whether the Wednesday transitions, meal/recovery needs, and cumulative evening workload are realistically accommodated, or consider a less strained distribution if the flexible events allow it."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Original request satisfaction",
+              "assumption": "The existing Wednesday gym and term-paper study events match what the user requested closely enough that no change is needed.",
+              "evidence_gap": "The original request is not included, and the technical validation explicitly says request satisfaction was not checked.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "WFH-to-gym transition",
+              "assumption": "The user can realistically finish WFH at 17:30 and begin the gym session at 17:45.",
+              "evidence_gap": "The calendar does not show gym location, preparation needs, equipment setup, commute, or whether a home/nearby gym is involved.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Gym-to-study transition",
+              "assumption": "The 18:45-19:15 gap is enough for post-workout recovery, hygiene, food, and setup for focused writing.",
+              "evidence_gap": "No information is provided about the user's routines, travel, meal timing, or whether the study location is immediately available.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Effectiveness of Wednesday study",
+              "assumption": "The user can complete a focused term-paper writing block from 19:15 to 21:30 after a full WFH day and a one-hour workout.",
+              "evidence_gap": "The proposal does not discuss energy level, deadline urgency, prior fatigue, or whether evening writing after exercise is effective for this user.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Cumulative weekday recovery",
+              "assumption": "The user has enough recovery and personal maintenance capacity across a week with evening commitments every visible weekday.",
+              "evidence_gap": "The calendar shows repeated work-plus-evening sequences but does not show meals, household tasks, decompression, commute details, or recovery needs.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            }
+          ],
+          "weaknesses": [
+            "The rationale supports the no-change outcome mainly by pointing to available Wednesday events, but it does not sufficiently assess whether the existing Wednesday sequence is human-manageable: WFH ends at 17:30, gym starts at 17:45, gym ends at 18:45, and focused term-paper study starts at 19:15.",
+            "The calendar shows a demanding weekday pattern: Monday work 09:00-17:30 plus class 18:30-21:30; Tuesday work, gym 18:00-19:15, study 19:45-21:45; Wednesday work, gym, study; Thursday work plus class 18:30-21:30; Friday work, gym, and dinner until 23:00. The proposal does not weigh cumulative evening load, recovery, meals, hygiene, or cognitive fatigue.",
+            "The no-change rationale says the existing Wednesday gym and study events already satisfy the request, but the original request is not visible here. Request satisfaction cannot be independently verified from the provided materials.",
+            "The alternatives considered are relevant but narrow. They reject compressing the gym-study gap and duplicating events, but do not discuss whether the existing flexible Wednesday study block should be kept as-is in light of the heavy surrounding week, or whether the current 15-minute post-work transition is realistic."
+          ],
+          "feedback": "The no-change proposal may be reasonable if the user specifically wanted Wednesday evening gym followed by term-paper study and if the gym is close enough, the user can recover/eat, and the study block remains effective after work and exercise. However, the rationale should not treat technical fit as enough. The visible week is already evening-heavy across all five weekdays, and Wednesday has tight practical margins: only 15 minutes from WFH to gym and 30 minutes from gym to a cognitively demanding writing block. A stronger proposal would either substantiate why this existing Wednesday arrangement is manageable in the user's context or reconsider whether the flexible Wednesday events should be distributed or protected differently, without assuming unseen availability outside the visible calendar."
+        }
+      ],
+      "unresolved_assumptions": [
+        {
+          "subject": "Original request satisfaction",
+          "assumption": "The exact 17:45 Wednesday gym session and the moved Wednesday thesis or term-paper writing block match the user's request and priorities.",
+          "evidence_gap": "The original request is not included, and the technical validation explicitly says request satisfaction was not checked.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "WFH-to-gym transition",
+          "assumption": "The user can realistically finish WFH at 17:30 and begin the gym session at 17:45.",
+          "evidence_gap": "The calendar does not show gym location, travel time, clothing or equipment preparation, or whether the user can reliably stop work exactly at 17:30.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Gym-to-study recovery and setup",
+          "assumption": "The 18:45-19:45 gap is enough for post-workout recovery, hygiene, food and setup for focused writing.",
+          "evidence_gap": "The proposal acknowledges unknown preparation, meal, hygiene and study setup needs; the calendar does not show these routines.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Effectiveness of late Wednesday writing",
+          "assumption": "The user can produce useful focused thesis or term-paper writing from 19:45 to 22:00 after WFH and a one-hour gym session.",
+          "evidence_gap": "No information is provided about the user's energy pattern, deadline pressure, exercise intensity, or ability to do cognitively demanding work late in the evening.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Cumulative weekday recovery",
+          "assumption": "The user has sufficient recovery and personal maintenance capacity across a week with work plus evening commitments on every visible weekday.",
+          "evidence_gap": "The calendar shows repeated evening obligations but does not show meals, household tasks, decompression, commute details, or recovery needs.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    }
+  ],
+  "refinements": 1,
+  "source_status": "proposal_ready",
+  "final_proposal": {
+    "changes": [
+      {
+        "type": "move",
+        "event_id": "study_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": "2027-05-26T19:45:00+01:00",
+        "to_end": "2027-05-26T22:00:00+01:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "Protected WFH work hours and fixed sleep remain unchanged.",
+        "The existing Wednesday gym already matches the requested one-hour session at 17:45.",
+        "The 15-minute work-to-gym transition is kept because the requested gym start is exact.",
+        "The gym location, preparation needs, meal timing, hygiene needs and study setup time are unknown.",
+        "No Wednesday evening class event exists in the calendar."
+      ],
+      "priorities": [
+        "Keep the requested gym timing while making the later focused writing block more practically manageable.",
+        "Use the WFH evening for health and education without moving fixed work or sleep.",
+        "Preserve a clear post-study buffer before sleep despite the heavy weekday evening pattern."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Keep the current study start",
+          "rejected_because": "Rejected because the short gym-to-study gap leaves little margin for recovery, food, hygiene or setup."
+        },
+        {
+          "option": "Move the gym later",
+          "rejected_because": "Rejected because the user specifically requested the gym session at 17:45."
+        },
+        {
+          "option": "Move the study block to another weekday",
+          "rejected_because": "Rejected because nearby weekdays already contain fixed classes or evening commitments and the request targets Wednesday."
+        }
+      ],
+      "summary": "Move only the flexible Wednesday study block later, keeping the exact 17:45 gym session and fixed sleep intact; the trade-off is a later study finish in exchange for a more realistic recovery and setup gap after exercise."
+    }
+  },
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [],
+    "valid": true
+  },
+  "source_result_sha256": "c3f25725d99e0e3c55ab2633da0bf0dd3726aa0ab798fd1379b1966f44cb3dc9",
+  "scenario_sha256": "b0563ef97ae9a3523e5abf7bf82733356b2f4d472530d89a5a34c56f8e800fc2",
+  "aggregate_requirements_sha256": null,
+  "confirmed_changes_sha256": null,
+  "critic_input_version": "final_calendar_v1",
+  "critic_policy_version": "uncertainty_review_v2",
+  "result_calendar_version": "validated_added_metadata_v2",
+  "final_result_calendar": {
+    "timezone": "Europe/Lisbon",
+    "coverage": "all_events_in_scenario_after_simulation",
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-05-23T23:45:00+01:00",
+        "end": "2027-05-24T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_mon",
+        "title": "Daytime Job: Office Shift",
+        "start": "2027-05-24T09:00:00+01:00",
+        "end": "2027-05-24T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Office work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "class_mon",
+        "title": "Evening Lecture: Corporate Strategy",
+        "start": "2027-05-24T18:30:00+01:00",
+        "end": "2027-05-24T21:30:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "professor",
+          "classmates"
+        ],
+        "description": "Mandatory evening class.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-05-24T23:45:00+01:00",
+        "end": "2027-05-25T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_tue",
+        "title": "Daytime Job: Office Shift",
+        "start": "2027-05-25T09:00:00+01:00",
+        "end": "2027-05-25T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Office work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_tue",
+        "title": "Gym Workout",
+        "start": "2027-05-25T18:00:00+01:00",
+        "end": "2027-05-25T19:15:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "study_tue",
+        "title": "Evening Study: Corporate Strategy Readings",
+        "start": "2027-05-25T19:45:00+01:00",
+        "end": "2027-05-25T21:45:00+01:00",
+        "category": "education",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Reading.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-05-25T23:45:00+01:00",
+        "end": "2027-05-26T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Extra 15m sleep on WFH day.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_wed_wfh",
+        "title": "Daytime Job: Work From Home Shift",
+        "start": "2027-05-26T09:00:00+01:00",
+        "end": "2027-05-26T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Remote work day.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_wed",
+        "title": "Gym: Strength & Cardio Session",
+        "start": "2027-05-26T17:45:00+01:00",
+        "end": "2027-05-26T18:45:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout right after WFH.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "study_wed",
+        "title": "Evening Study: Thesis / Term Paper Draft",
+        "start": "2027-05-26T19:45:00+01:00",
+        "end": "2027-05-26T22:00:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Focused writing block.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-05-26T23:45:00+01:00",
+        "end": "2027-05-27T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_thu",
+        "title": "Daytime Job: Office Shift",
+        "start": "2027-05-27T09:00:00+01:00",
+        "end": "2027-05-27T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Office work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "class_thu",
+        "title": "Evening Lecture: Financial Markets",
+        "start": "2027-05-27T18:30:00+01:00",
+        "end": "2027-05-27T21:30:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "professor",
+          "classmates"
+        ],
+        "description": "Mandatory evening class.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-05-27T23:45:00+01:00",
+        "end": "2027-05-28T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_fri",
+        "title": "Daytime Job: Office Shift",
+        "start": "2027-05-28T09:00:00+01:00",
+        "end": "2027-05-28T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Friday office shift.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_fri",
+        "title": "Gym Workout",
+        "start": "2027-05-28T18:00:00+01:00",
+        "end": "2027-05-28T19:15:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Friday workout.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "social_fri",
+        "title": "Dinner with Friends",
+        "start": "2027-05-28T20:00:00+01:00",
+        "end": "2027-05-28T23:00:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "friends"
+        ],
+        "description": "Friday hangout.",
+        "origin": "existing",
+        "change_status": "preserved"
+      }
+    ],
+    "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+  },
+  "final_unresolved_assumptions": [
+    {
+      "subject": "Original request satisfaction",
+      "assumption": "The exact 17:45 Wednesday gym session and the moved Wednesday thesis or term-paper writing block match the user's request and priorities.",
+      "evidence_gap": "The original request is not included, and the technical validation explicitly says request satisfaction was not checked.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "WFH-to-gym transition",
+      "assumption": "The user can realistically finish WFH at 17:30 and begin the gym session at 17:45.",
+      "evidence_gap": "The calendar does not show gym location, travel time, clothing or equipment preparation, or whether the user can reliably stop work exactly at 17:30.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Gym-to-study recovery and setup",
+      "assumption": "The 18:45-19:45 gap is enough for post-workout recovery, hygiene, food and setup for focused writing.",
+      "evidence_gap": "The proposal acknowledges unknown preparation, meal, hygiene and study setup needs; the calendar does not show these routines.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Effectiveness of late Wednesday writing",
+      "assumption": "The user can produce useful focused thesis or term-paper writing from 19:45 to 22:00 after WFH and a one-hour gym session.",
+      "evidence_gap": "No information is provided about the user's energy pattern, deadline pressure, exercise intensity, or ability to do cognitively demanding work late in the evening.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Cumulative weekday recovery",
+      "assumption": "The user has sufficient recovery and personal maintenance capacity across a week with work plus evening commitments on every visible weekday.",
+      "evidence_gap": "The calendar shows repeated evening obligations but does not show meals, household tasks, decompression, commute details, or recovery needs.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    }
+  ],
+  "uncertainty_history": [
+    {
+      "iteration": 0,
+      "unresolved_assumptions": [
+        {
+          "subject": "Original request satisfaction",
+          "assumption": "The existing Wednesday gym and term-paper study events match what the user requested closely enough that no change is needed.",
+          "evidence_gap": "The original request is not included, and the technical validation explicitly says request satisfaction was not checked.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "WFH-to-gym transition",
+          "assumption": "The user can realistically finish WFH at 17:30 and begin the gym session at 17:45.",
+          "evidence_gap": "The calendar does not show gym location, preparation needs, equipment setup, commute, or whether a home/nearby gym is involved.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Gym-to-study transition",
+          "assumption": "The 18:45-19:15 gap is enough for post-workout recovery, hygiene, food, and setup for focused writing.",
+          "evidence_gap": "No information is provided about the user's routines, travel, meal timing, or whether the study location is immediately available.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Effectiveness of Wednesday study",
+          "assumption": "The user can complete a focused term-paper writing block from 19:15 to 21:30 after a full WFH day and a one-hour workout.",
+          "evidence_gap": "The proposal does not discuss energy level, deadline urgency, prior fatigue, or whether evening writing after exercise is effective for this user.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Cumulative weekday recovery",
+          "assumption": "The user has enough recovery and personal maintenance capacity across a week with evening commitments every visible weekday.",
+          "evidence_gap": "The calendar shows repeated work-plus-evening sequences but does not show meals, household tasks, decompression, commute details, or recovery needs.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    },
+    {
+      "iteration": 1,
+      "unresolved_assumptions": [
+        {
+          "subject": "Original request satisfaction",
+          "assumption": "The exact 17:45 Wednesday gym session and the moved Wednesday thesis or term-paper writing block match the user's request and priorities.",
+          "evidence_gap": "The original request is not included, and the technical validation explicitly says request satisfaction was not checked.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "WFH-to-gym transition",
+          "assumption": "The user can realistically finish WFH at 17:30 and begin the gym session at 17:45.",
+          "evidence_gap": "The calendar does not show gym location, travel time, clothing or equipment preparation, or whether the user can reliably stop work exactly at 17:30.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Gym-to-study recovery and setup",
+          "assumption": "The 18:45-19:45 gap is enough for post-workout recovery, hygiene, food and setup for focused writing.",
+          "evidence_gap": "The proposal acknowledges unknown preparation, meal, hygiene and study setup needs; the calendar does not show these routines.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Effectiveness of late Wednesday writing",
+          "assumption": "The user can produce useful focused thesis or term-paper writing from 19:45 to 22:00 after WFH and a one-hour gym session.",
+          "evidence_gap": "No information is provided about the user's energy pattern, deadline pressure, exercise intensity, or ability to do cognitively demanding work late in the evening.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Cumulative weekday recovery",
+          "assumption": "The user has sufficient recovery and personal maintenance capacity across a week with work plus evening commitments on every visible weekday.",
+          "evidence_gap": "The calendar shows repeated evening obligations but does not show meals, household tasks, decompression, commute details, or recovery needs.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    }
+  ]
+}

@@ -29,7 +29,7 @@ def catalog(root: Path) -> list[dict]:
         row = manifest[artifact["scenario_id"]]
         if any(artifact[key] != row[key] for key in ("family_id", "profile_id", "split")):
             raise ValueError(f"manifest provenance mismatch: {path.name}")
-        scenario = load_scenario(scenario_path(root, artifact["scenario_id"]))
+        scenario = load_scenario(Path(row["scenario_path"]))
         if scenario.confirmed_changes and artifact.get("confirmed_changes_sha256") != confirmed_changes_fingerprint(scenario):
             raise ValueError(f"confirmed-change provenance mismatch: {path.name}")
         if scenario.aggregate_requirements:

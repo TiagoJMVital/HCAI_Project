@@ -1,0 +1,3540 @@
+{
+  "configuration": "B",
+  "scenario_id": "working_student_transit_strike_commute_delay_006",
+  "family": "working_student_schedule_conflict",
+  "category": "v2",
+  "proposer_provider": "iaedu",
+  "proposer_model": "GPT-5.5",
+  "proposer_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_provider": "iaedu",
+  "critic_model": "GPT-5.5",
+  "critic_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_settings": {
+    "threshold": 4.0,
+    "max_refinements": 3,
+    "min_dimension_score": 1
+  },
+  "iterations": [
+    {
+      "index": 0,
+      "proposer_feedback": null,
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "move",
+            "event_id": "sleep_mon",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-05-02T23:00:00+01:00",
+            "to_end": "2027-05-03T06:45:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "commute_mon_am",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-05-03T07:45:00+01:00",
+            "to_end": "2027-05-03T09:00:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Short Home Workout",
+            "from_start": null,
+            "to_start": "2027-05-03T17:30:00+01:00",
+            "to_end": "2027-05-03T18:00:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "The protected work shift and evening lecture remain unchanged for punctuality.",
+            "The fixed sleep and commute changes match the only externally confirmed exceptions exactly.",
+            "The post-work calendar interval is free, but home location and onward travel feasibility are not confirmed.",
+            "No external gym availability or travel time is assumed."
+          ],
+          "priorities": [
+            "Work and education punctuality take precedence over convenience.",
+            "Sleep is preserved by shifting the sleep block earlier rather than only shortening it.",
+            "Health is supported with a short home workout that avoids adding an external venue dependency."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Place the workout later after the lecture.",
+              "rejected_because": "This avoids the tight post-work gap but does not satisfy the requested one-hour window."
+            },
+            {
+              "option": "Use an external gym session in the gap.",
+              "rejected_because": "The request and profile prefer a home workout because strike delays make an external trip impractical."
+            }
+          ],
+          "summary": "This plan uses the confirmed earlier wake-up and longer commute to protect the work start, keeps the evening lecture intact, and adds a short home workout in the free post-work gap despite uncertainty about actual home and lecture travel logistics."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true,
+        "confirmed_change_authorizations": [
+          {
+            "event_id": "commute_mon_am",
+            "type": "move",
+            "to_start": "2027-05-03T07:45:00+01:00",
+            "to_end": "2027-05-03T09:00:00+01:00"
+          },
+          {
+            "event_id": "sleep_mon",
+            "type": "move",
+            "to_start": "2027-05-02T23:00:00+01:00",
+            "to_end": "2027-05-03T06:45:00+01:00"
+          }
+        ]
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-05-02T23:00:00+01:00",
+            "end": "2027-05-03T06:45:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Earlier wake-up for transit disruption.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "commute_mon_am",
+            "title": "Regular Commute: Home to Office",
+            "start": "2027-05-03T07:45:00+01:00",
+            "end": "2027-05-03T09:00:00+01:00",
+            "category": "personal",
+            "importance": 3,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Normal 45-minute commute before the confirmed strike adds 30 minutes.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "work_mon",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-05-03T09:00:00+01:00",
+            "end": "2027-05-03T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Daytime work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_2",
+            "title": "Short Home Workout",
+            "start": "2027-05-03T17:30:00+01:00",
+            "end": "2027-05-03T18:00:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "class_mon",
+            "title": "Evening Lecture: Data Warehousing",
+            "start": "2027-05-03T18:30:00+01:00",
+            "end": "2027-05-03T21:30:00+01:00",
+            "category": "education",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "professor",
+              "classmates"
+            ],
+            "description": "Mandatory evening class.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-05-03T23:30:00+01:00",
+            "end": "2027-05-04T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_tue",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-05-04T09:00:00+01:00",
+            "end": "2027-05-04T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Daytime work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_tue",
+            "title": "Gym: Strength Workout",
+            "start": "2027-05-04T18:00:00+01:00",
+            "end": "2027-05-04T19:15:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_tue",
+            "title": "Evening Study: Data Warehousing Labs",
+            "start": "2027-05-04T19:45:00+01:00",
+            "end": "2027-05-04T21:45:00+01:00",
+            "category": "education",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lab practice.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-05-04T23:45:00+01:00",
+            "end": "2027-05-05T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_wed",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-05-05T09:00:00+01:00",
+            "end": "2027-05-05T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Daytime work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "class_wed",
+            "title": "Evening Lecture: Project Management",
+            "start": "2027-05-05T18:30:00+01:00",
+            "end": "2027-05-05T21:30:00+01:00",
+            "category": "education",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "professor",
+              "classmates"
+            ],
+            "description": "Mandatory evening class.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-05-05T23:45:00+01:00",
+            "end": "2027-05-06T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_thu",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-05-06T09:00:00+01:00",
+            "end": "2027-05-06T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Daytime work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_thu",
+            "title": "Gym: Cardio & Conditioning",
+            "start": "2027-05-06T18:00:00+01:00",
+            "end": "2027-05-06T19:15:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_thu",
+            "title": "Evening Study: Project Management Cases",
+            "start": "2027-05-06T19:45:00+01:00",
+            "end": "2027-05-06T21:45:00+01:00",
+            "category": "education",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Case study.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-05-06T23:45:00+01:00",
+            "end": "2027-05-07T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_fri",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-05-07T09:00:00+01:00",
+            "end": "2027-05-07T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Friday work shift.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "personal_fri",
+            "title": "Dinner & Rest",
+            "start": "2027-05-07T18:30:00+01:00",
+            "end": "2027-05-07T21:30:00+01:00",
+            "category": "personal",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Friday evening rest.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 3,
+          "coherence": 2,
+          "alternatives": 3,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The added Short Home Workout is scheduled at 2027-05-03 17:30-18:00 immediately after Daytime Job: Core Shift at 09:00-17:30, while the rationale itself says home location and onward travel feasibility are not confirmed. Because the event is specifically a home workout, the calendar does not show how the user gets from work to home in time.",
+          "The workout ends at 18:00 and the mandatory Evening Lecture: Data Warehousing starts at 18:30. That 30-minute interval may need to cover hygiene, food, setup or travel to the lecture, but the proposal does not substantiate that this is realistic.",
+          "Monday becomes a tightly packed day: sleep ends at 06:45, commute runs 07:45-09:00, work runs 09:00-17:30, workout runs 17:30-18:00, and lecture runs 18:30-21:30 before sleep at 23:30. This may be manageable for some people, but the rationale does not meaningfully weigh the cumulative physical and cognitive load.",
+          "Across the visible week there are already substantial evening commitments: Tuesday gym plus study from 18:00-21:45, Wednesday lecture from 18:30-21:30, Thursday gym plus study from 18:00-21:45. Adding a Monday workout is not automatically excessive, but the rationale treats the free slot as capacity without discussing recovery across the week.",
+          "The rationale cites a 'requested one-hour window', but the original request is not available here, so request satisfaction cannot be independently verified."
+        ],
+        "feedback": "The proposal has a sensible aim: preserve work and lecture, keep sleep from being shortened, and avoid dependence on an external gym during disrupted transit. However, the main practical weakness is that the added home workout is placed in a very constrained gap whose real feasibility depends on facts not visible in the calendar. A home workout at 17:30 immediately after an office shift, followed by a mandatory lecture at 18:30, may work only if the user is already home, works from home, has negligible travel, or the lecture is also accessible without travel. The Proposer should reconsider whether the Monday gap genuinely supports a home workout once location, travel, food, hygiene and lecture preparation are accounted for, or provide grounded context showing that these needs are already covered. The same operations might be acceptable if those conditions are true, but the current rationale does not sufficiently support them.",
+        "plausibility_review": {
+          "revision_required": true,
+          "severity": "moderate",
+          "reason": "A material manageability risk remains because the proposed home workout is scheduled from 17:30-18:00 directly after an office work shift ending at 17:30 and only 30 minutes before a mandatory lecture starting at 18:30. The rationale acknowledges that home location and onward travel feasibility are not confirmed, yet still relies on that gap. If the assumption is false, the workout may be impractical, may compromise punctuality for the lecture, or may eliminate basic recovery, hygiene or meal time on an already demanding Monday.",
+          "suggested_improvement": "Reconsider the added workout using the fuller context: verify whether the user can realistically be at home and ready for the lecture within this interval, and if not, adjust the plan or justify why the existing placement remains manageable despite the tight sequence."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Feasibility of home workout location",
+            "assumption": "The user can perform a home workout at 17:30 immediately after the 09:00-17:30 office shift.",
+            "evidence_gap": "The calendar shows a commute from home to office in the morning but no post-work travel home before the home workout. The rationale explicitly states that home location feasibility is not confirmed.",
+            "potential_impact": "potentially_blocking",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Feasibility of reaching or attending the evening lecture",
+            "assumption": "After finishing the home workout at 18:00, the user can be ready for the 18:30 mandatory lecture without compromising punctuality.",
+            "evidence_gap": "The calendar does not show whether the lecture is remote, nearby, or requires travel, nor whether preparation or setup time is needed.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Basic recovery and personal needs on Monday evening",
+            "assumption": "The user can fit food, hygiene, transition and recovery needs around the 17:30-18:00 workout and 18:30-21:30 lecture.",
+            "evidence_gap": "The visible Monday schedule leaves only 30 minutes between the workout and lecture and does not identify when dinner, cleanup or transition happens.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Requested workout timing constraint",
+            "assumption": "The added workout needed to occur within the specific post-work one-hour window referenced by the rationale.",
+            "evidence_gap": "The original request is not provided, and the technical validation explicitly does not check request satisfaction or soft preference satisfaction.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Cumulative weekly workload tolerance",
+            "assumption": "Adding a Monday workout remains sustainable alongside Tuesday gym plus study, Wednesday lecture, and Thursday gym plus study.",
+            "evidence_gap": "The rationale does not discuss cumulative fatigue across the visible week or the user's recovery tolerance.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          }
+        ],
+        "overall": 3.0
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": false,
+        "plausibility_revision_required": true,
+        "accepted": false,
+        "revision_causes": [
+          "numeric_criteria_failed",
+          "plausibility_revision_required"
+        ]
+      },
+      "operations_changed_from_previous": null,
+      "rationale_changed_from_previous": null,
+      "prior_critic_reviews": [],
+      "unresolved_assumptions": [
+        {
+          "subject": "Feasibility of home workout location",
+          "assumption": "The user can perform a home workout at 17:30 immediately after the 09:00-17:30 office shift.",
+          "evidence_gap": "The calendar shows a commute from home to office in the morning but no post-work travel home before the home workout. The rationale explicitly states that home location feasibility is not confirmed.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Feasibility of reaching or attending the evening lecture",
+          "assumption": "After finishing the home workout at 18:00, the user can be ready for the 18:30 mandatory lecture without compromising punctuality.",
+          "evidence_gap": "The calendar does not show whether the lecture is remote, nearby, or requires travel, nor whether preparation or setup time is needed.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Basic recovery and personal needs on Monday evening",
+          "assumption": "The user can fit food, hygiene, transition and recovery needs around the 17:30-18:00 workout and 18:30-21:30 lecture.",
+          "evidence_gap": "The visible Monday schedule leaves only 30 minutes between the workout and lecture and does not identify when dinner, cleanup or transition happens.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Requested workout timing constraint",
+          "assumption": "The added workout needed to occur within the specific post-work one-hour window referenced by the rationale.",
+          "evidence_gap": "The original request is not provided, and the technical validation explicitly does not check request satisfaction or soft preference satisfaction.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Cumulative weekly workload tolerance",
+          "assumption": "Adding a Monday workout remains sustainable alongside Tuesday gym plus study, Wednesday lecture, and Thursday gym plus study.",
+          "evidence_gap": "The rationale does not discuss cumulative fatigue across the visible week or the user's recovery tolerance.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "proposer_feedback": "Numeric Critic criteria failed. Scores: {\"reasoning\":3,\"coherence\":2,\"alternatives\":3,\"clarity\":4}. Plausibility revision required (moderate): A material manageability risk remains because the proposed home workout is scheduled from 17:30-18:00 directly after an office work shift ending at 17:30 and only 30 minutes before a mandatory lecture starting at 18:30. The rationale acknowledges that home location and onward travel feasibility are not confirmed, yet still relies on that gap. If the assumption is false, the workout may be impractical, may compromise punctuality for the lecture, or may eliminate basic recovery, hygiene or meal time on an already demanding Monday. Suggested direction: Reconsider the added workout using the fuller context: verify whether the user can realistically be at home and ready for the lecture within this interval, and if not, adjust the plan or justify why the existing placement remains manageable despite the tight sequence. The Critic lacks the full user constraints; explain if no better feasible option exists. Unverified conditions to reassess: [{'subject': 'Feasibility of home workout location', 'assumption': 'The user can perform a home workout at 17:30 immediately after the 09:00-17:30 office shift.', 'evidence_gap': 'The calendar shows a commute from home to office in the morning but no post-work travel home before the home workout. The rationale explicitly states that home location feasibility is not confirmed.', 'potential_impact': 'potentially_blocking', 'verification_source': 'user_context'}, {'subject': 'Feasibility of reaching or attending the evening lecture', 'assumption': 'After finishing the home workout at 18:00, the user can be ready for the 18:30 mandatory lecture without compromising punctuality.', 'evidence_gap': 'The calendar does not show whether the lecture is remote, nearby, or requires travel, nor whether preparation or setup time is needed.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Basic recovery and personal needs on Monday evening', 'assumption': 'The user can fit food, hygiene, transition and recovery needs around the 17:30-18:00 workout and 18:30-21:30 lecture.', 'evidence_gap': 'The visible Monday schedule leaves only 30 minutes between the workout and lecture and does not identify when dinner, cleanup or transition happens.', 'potential_impact': 'material', 'verification_source': 'unknown'}, {'subject': 'Requested workout timing constraint', 'assumption': 'The added workout needed to occur within the specific post-work one-hour window referenced by the rationale.', 'evidence_gap': 'The original request is not provided, and the technical validation explicitly does not check request satisfaction or soft preference satisfaction.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Cumulative weekly workload tolerance', 'assumption': 'Adding a Monday workout remains sustainable alongside Tuesday gym plus study, Wednesday lecture, and Thursday gym plus study.', 'evidence_gap': \"The rationale does not discuss cumulative fatigue across the visible week or the user's recovery tolerance.\", 'potential_impact': 'material', 'verification_source': 'user_context'}] Weaknesses: ['The added Short Home Workout is scheduled at 2027-05-03 17:30-18:00 immediately after Daytime Job: Core Shift at 09:00-17:30, while the rationale itself says home location and onward travel feasibility are not confirmed. Because the event is specifically a home workout, the calendar does not show how the user gets from work to home in time.', 'The workout ends at 18:00 and the mandatory Evening Lecture: Data Warehousing starts at 18:30. That 30-minute interval may need to cover hygiene, food, setup or travel to the lecture, but the proposal does not substantiate that this is realistic.', 'Monday becomes a tightly packed day: sleep ends at 06:45, commute runs 07:45-09:00, work runs 09:00-17:30, workout runs 17:30-18:00, and lecture runs 18:30-21:30 before sleep at 23:30. This may be manageable for some people, but the rationale does not meaningfully weigh the cumulative physical and cognitive load.', 'Across the visible week there are already substantial evening commitments: Tuesday gym plus study from 18:00-21:45, Wednesday lecture from 18:30-21:30, Thursday gym plus study from 18:00-21:45. Adding a Monday workout is not automatically excessive, but the rationale treats the free slot as capacity without discussing recovery across the week.', \"The rationale cites a 'requested one-hour window', but the original request is not available here, so request satisfaction cannot be independently verified.\"]. Actionable feedback: The proposal has a sensible aim: preserve work and lecture, keep sleep from being shortened, and avoid dependence on an external gym during disrupted transit. However, the main practical weakness is that the added home workout is placed in a very constrained gap whose real feasibility depends on facts not visible in the calendar. A home workout at 17:30 immediately after an office shift, followed by a mandatory lecture at 18:30, may work only if the user is already home, works from home, has negligible travel, or the lecture is also accessible without travel. The Proposer should reconsider whether the Monday gap genuinely supports a home workout once location, travel, food, hygiene and lecture preparation are accounted for, or provide grounded context showing that these needs are already covered. The same operations might be acceptable if those conditions are true, but the current rationale does not sufficiently support them.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "move",
+            "event_id": "sleep_mon",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-05-02T23:00:00+01:00",
+            "to_end": "2027-05-03T06:45:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "commute_mon_am",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-05-03T07:45:00+01:00",
+            "to_end": "2027-05-03T09:00:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Short Home Mobility Workout",
+            "from_start": null,
+            "to_start": "2027-05-03T17:45:00+01:00",
+            "to_end": "2027-05-03T18:00:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "Protected work and lecture events are not moved.",
+            "The fixed sleep and commute moves match the externally confirmed exceptions exactly.",
+            "The post-work interval is calendar-free, but actual home access, lecture location and transit time are unknown.",
+            "A short session leaves buffer for transition needs, but food, hygiene and recovery needs are not confirmed.",
+            "No external gym, venue availability or extra travel is assumed."
+          ],
+          "priorities": [
+            "Work and education punctuality remain the highest priorities.",
+            "Sleep is preserved by moving the sleep block earlier rather than reducing its duration.",
+            "Health is supported with the least external dependency and a lower-load mobility format.",
+            "The workout is kept brief because Monday already has work, disrupted commuting and an evening lecture."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Keep a 30-minute workout immediately after work.",
+              "rejected_because": "Rejected because it leaves less margin for travel, hygiene, food or lecture preparation."
+            },
+            {
+              "option": "Skip the Monday workout and rely on later-week gym sessions.",
+              "rejected_because": "Rejected because it would not satisfy the requested workout in the post-work gap."
+            },
+            {
+              "option": "Use an external gym during the gap.",
+              "rejected_because": "Rejected because the profile prefers a home session during the transit disruption."
+            },
+            {
+              "option": "Place the workout after the lecture.",
+              "rejected_because": "Rejected because it misses the requested post-work gap and further compresses evening recovery."
+            }
+          ],
+          "summary": "This plan protects punctuality by using the confirmed earlier sleep and commute changes, then adds only a brief home mobility workout in the post-work gap to reduce pressure on an already tight Monday; feasibility still depends on the user actually being able to do a home session and reach the lecture on time."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true,
+        "confirmed_change_authorizations": [
+          {
+            "event_id": "commute_mon_am",
+            "type": "move",
+            "to_start": "2027-05-03T07:45:00+01:00",
+            "to_end": "2027-05-03T09:00:00+01:00"
+          },
+          {
+            "event_id": "sleep_mon",
+            "type": "move",
+            "to_start": "2027-05-02T23:00:00+01:00",
+            "to_end": "2027-05-03T06:45:00+01:00"
+          }
+        ]
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-05-02T23:00:00+01:00",
+            "end": "2027-05-03T06:45:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Earlier wake-up for transit disruption.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "commute_mon_am",
+            "title": "Regular Commute: Home to Office",
+            "start": "2027-05-03T07:45:00+01:00",
+            "end": "2027-05-03T09:00:00+01:00",
+            "category": "personal",
+            "importance": 3,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Normal 45-minute commute before the confirmed strike adds 30 minutes.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "work_mon",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-05-03T09:00:00+01:00",
+            "end": "2027-05-03T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Daytime work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_2",
+            "title": "Short Home Mobility Workout",
+            "start": "2027-05-03T17:45:00+01:00",
+            "end": "2027-05-03T18:00:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "class_mon",
+            "title": "Evening Lecture: Data Warehousing",
+            "start": "2027-05-03T18:30:00+01:00",
+            "end": "2027-05-03T21:30:00+01:00",
+            "category": "education",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "professor",
+              "classmates"
+            ],
+            "description": "Mandatory evening class.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-05-03T23:30:00+01:00",
+            "end": "2027-05-04T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_tue",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-05-04T09:00:00+01:00",
+            "end": "2027-05-04T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Daytime work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_tue",
+            "title": "Gym: Strength Workout",
+            "start": "2027-05-04T18:00:00+01:00",
+            "end": "2027-05-04T19:15:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_tue",
+            "title": "Evening Study: Data Warehousing Labs",
+            "start": "2027-05-04T19:45:00+01:00",
+            "end": "2027-05-04T21:45:00+01:00",
+            "category": "education",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lab practice.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-05-04T23:45:00+01:00",
+            "end": "2027-05-05T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_wed",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-05-05T09:00:00+01:00",
+            "end": "2027-05-05T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Daytime work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "class_wed",
+            "title": "Evening Lecture: Project Management",
+            "start": "2027-05-05T18:30:00+01:00",
+            "end": "2027-05-05T21:30:00+01:00",
+            "category": "education",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "professor",
+              "classmates"
+            ],
+            "description": "Mandatory evening class.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-05-05T23:45:00+01:00",
+            "end": "2027-05-06T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_thu",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-05-06T09:00:00+01:00",
+            "end": "2027-05-06T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Daytime work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_thu",
+            "title": "Gym: Cardio & Conditioning",
+            "start": "2027-05-06T18:00:00+01:00",
+            "end": "2027-05-06T19:15:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_thu",
+            "title": "Evening Study: Project Management Cases",
+            "start": "2027-05-06T19:45:00+01:00",
+            "end": "2027-05-06T21:45:00+01:00",
+            "category": "education",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Case study.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-05-06T23:45:00+01:00",
+            "end": "2027-05-07T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_fri",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-05-07T09:00:00+01:00",
+            "end": "2027-05-07T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Friday work shift.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "personal_fri",
+            "title": "Dinner & Rest",
+            "start": "2027-05-07T18:30:00+01:00",
+            "end": "2027-05-07T21:30:00+01:00",
+            "category": "personal",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Friday evening rest.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 3,
+          "alternatives": 4,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The revision reduces the workout from 30 minutes to 15 minutes and changes it to a lower-load mobility session, which directly addresses part of the prior fatigue and margin concern. However, the event is still specifically a Home Mobility Workout at 17:45-18:00 after an office work shift ending at 17:30, and the calendar still does not show how the user can be at home by 17:45.",
+          "The Monday evening sequence remains tight: work runs 09:00-17:30, the added home workout runs 17:45-18:00, and the mandatory Evening Lecture: Data Warehousing runs 18:30-21:30. The 30 minutes after the workout may need to cover hygiene, food, preparation, setup, or travel, depending on whether the lecture is remote or in person.",
+          "The rationale is appropriately cautious about unknown home access, lecture location, transit time, food, hygiene, and recovery, but the actual operation still depends on those same unknowns being favorable. Acknowledging the uncertainty does not by itself make the home placement practically supported.",
+          "Across the visible week, Monday through Thursday remain demanding: Monday has disrupted commuting, full work, added workout, and lecture; Tuesday has work, gym, and study until 21:45; Wednesday has work and lecture until 21:30; Thursday has work, gym, and study until 21:45. The added Monday session is brief, so it is not clearly excessive, but the plan still has limited demonstrated recovery margin early in the week.",
+          "The rationale refers to satisfying a requested workout in the post-work gap, but the original request is not available here and the technical validation explicitly does not verify request satisfaction, so that priority cannot be independently confirmed from the provided materials."
+        ],
+        "feedback": "The revised proposal is materially better than the prior version: it no longer schedules exercise immediately at 17:30, it cuts the session to 15 minutes, and it lowers intensity to mobility rather than a fuller workout. That makes the human load more proportionate to an already compressed Monday. The remaining issue is not the exercise duration itself; it is the location and transition dependency. A home workout at 17:45 still appears to require the user to be home or able to access a suitable home-like setting within 15 minutes of leaving a 09:00-17:30 office shift, while also being ready for an 18:30 mandatory lecture. If the user works from home, lives very close to work, or the lecture is remote and preparation needs are minimal, this could be manageable. If not, the plan may fail in practice or squeeze out basic transition, hygiene, food, or lecture-readiness time. The Proposer should either ground the home-access and lecture-readiness assumptions using its fuller context, or reconsider the workout format/location/distribution so the plan does not rely on an unsupported same-evening logistics chain.",
+        "plausibility_review": {
+          "revision_required": true,
+          "severity": "moderate",
+          "reason": "The prior concern was only partially resolved. The new 17:45-18:00 low-load mobility session improves duration and recovery margin, but it remains a Home Mobility Workout placed 15 minutes after an office work shift ending at 17:30 and 30 minutes before a mandatory 18:30 lecture. The proposal itself states that actual home access, lecture location, transit time, food, hygiene, and recovery needs are not confirmed. If those assumptions are false, the added event may be impractical or may compromise lecture punctuality and basic evening needs.",
+          "suggested_improvement": "Reconsider the added workout with the fuller context focused on location and transition feasibility: verify whether the user can realistically access the home workout setting and be ready for the 18:30 lecture, or adjust the plan’s format or distribution so it does not depend on unsupported home-and-lecture logistics."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Home access after work",
+            "assumption": "The user can be at home or in a suitable home setting by 17:45 after the 09:00-17:30 office work shift.",
+            "evidence_gap": "The calendar shows a morning commute from Home to Office at 07:45-09:00 and work at 09:00-17:30, but no return commute or indication that the user is already at home before the 17:45 Home Mobility Workout.",
+            "potential_impact": "potentially_blocking",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Lecture readiness after workout",
+            "assumption": "After the 17:45-18:00 home mobility workout, the user can be ready for the mandatory Evening Lecture: Data Warehousing at 18:30.",
+            "evidence_gap": "The calendar does not show whether the lecture is remote, nearby, or requires travel, nor whether setup, materials, food, or hygiene are needed between 18:00 and 18:30.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Basic Monday evening needs",
+            "assumption": "Food, hygiene, transition, and recovery needs can fit around the 17:45-18:00 workout and the 18:30-21:30 lecture.",
+            "evidence_gap": "The visible Monday schedule has work until 17:30, workout until 18:00, lecture from 18:30 to 21:30, and sleep at 23:30, but no explicit dinner, cleanup, commute, or decompression time.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Requested post-work workout requirement",
+            "assumption": "The added workout needs to occur in the Monday post-work gap rather than being deferred, omitted, or handled elsewhere in the visible week.",
+            "evidence_gap": "The rationale references a requested workout in the post-work gap, but the original request is not provided and technical validation does not check request satisfaction.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Cumulative early-week workload tolerance",
+            "assumption": "Adding a Monday mobility session remains sustainable alongside Tuesday gym plus study, Wednesday lecture, and Thursday gym plus study.",
+            "evidence_gap": "The rationale notes Monday is already tight and makes the session brief, but it does not substantiate the user's recovery tolerance across the visible Monday-to-Thursday sequence.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          }
+        ],
+        "overall": 3.75
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": false,
+        "plausibility_revision_required": true,
+        "accepted": false,
+        "revision_causes": [
+          "numeric_criteria_failed",
+          "plausibility_revision_required"
+        ]
+      },
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": [
+        {
+          "iteration": 0,
+          "proposal": {
+            "changes": [
+              {
+                "type": "move",
+                "event_id": "sleep_mon",
+                "title": null,
+                "from_start": null,
+                "to_start": "2027-05-02T23:00:00+01:00",
+                "to_end": "2027-05-03T06:45:00+01:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "move",
+                "event_id": "commute_mon_am",
+                "title": null,
+                "from_start": null,
+                "to_start": "2027-05-03T07:45:00+01:00",
+                "to_end": "2027-05-03T09:00:00+01:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Short Home Workout",
+                "from_start": null,
+                "to_start": "2027-05-03T17:30:00+01:00",
+                "to_end": "2027-05-03T18:00:00+01:00",
+                "category": "health",
+                "importance": 4,
+                "participants": [
+                  "user"
+                ]
+              }
+            ],
+            "rationale": {
+              "constraints": [
+                "The protected work shift and evening lecture remain unchanged for punctuality.",
+                "The fixed sleep and commute changes match the only externally confirmed exceptions exactly.",
+                "The post-work calendar interval is free, but home location and onward travel feasibility are not confirmed.",
+                "No external gym availability or travel time is assumed."
+              ],
+              "priorities": [
+                "Work and education punctuality take precedence over convenience.",
+                "Sleep is preserved by shifting the sleep block earlier rather than only shortening it.",
+                "Health is supported with a short home workout that avoids adding an external venue dependency."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Place the workout later after the lecture.",
+                  "rejected_because": "This avoids the tight post-work gap but does not satisfy the requested one-hour window."
+                },
+                {
+                  "option": "Use an external gym session in the gap.",
+                  "rejected_because": "The request and profile prefer a home workout because strike delays make an external trip impractical."
+                }
+              ],
+              "summary": "This plan uses the confirmed earlier wake-up and longer commute to protect the work start, keeps the evening lecture intact, and adds a short home workout in the free post-work gap despite uncertainty about actual home and lecture travel logistics."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "sleep_mon",
+                "title": "Sleep",
+                "start": "2027-05-02T23:00:00+01:00",
+                "end": "2027-05-03T06:45:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Earlier wake-up for transit disruption.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "commute_mon_am",
+                "title": "Regular Commute: Home to Office",
+                "start": "2027-05-03T07:45:00+01:00",
+                "end": "2027-05-03T09:00:00+01:00",
+                "category": "personal",
+                "importance": 3,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Normal 45-minute commute before the confirmed strike adds 30 minutes.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "work_mon",
+                "title": "Daytime Job: Core Shift",
+                "start": "2027-05-03T09:00:00+01:00",
+                "end": "2027-05-03T17:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "colleagues"
+                ],
+                "description": "Daytime work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_2",
+                "title": "Short Home Workout",
+                "start": "2027-05-03T17:30:00+01:00",
+                "end": "2027-05-03T18:00:00+01:00",
+                "category": "health",
+                "importance": 4,
+                "fixed": null,
+                "participants": [
+                  "user"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "class_mon",
+                "title": "Evening Lecture: Data Warehousing",
+                "start": "2027-05-03T18:30:00+01:00",
+                "end": "2027-05-03T21:30:00+01:00",
+                "category": "education",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "professor",
+                  "classmates"
+                ],
+                "description": "Mandatory evening class.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_tue",
+                "title": "Sleep",
+                "start": "2027-05-03T23:30:00+01:00",
+                "end": "2027-05-04T07:15:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Night sleep.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_tue",
+                "title": "Daytime Job: Core Shift",
+                "start": "2027-05-04T09:00:00+01:00",
+                "end": "2027-05-04T17:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "colleagues"
+                ],
+                "description": "Daytime work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_tue",
+                "title": "Gym: Strength Workout",
+                "start": "2027-05-04T18:00:00+01:00",
+                "end": "2027-05-04T19:15:00+01:00",
+                "category": "health",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Workout.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "study_tue",
+                "title": "Evening Study: Data Warehousing Labs",
+                "start": "2027-05-04T19:45:00+01:00",
+                "end": "2027-05-04T21:45:00+01:00",
+                "category": "education",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Lab practice.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_wed",
+                "title": "Sleep",
+                "start": "2027-05-04T23:45:00+01:00",
+                "end": "2027-05-05T07:15:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Night sleep.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_wed",
+                "title": "Daytime Job: Core Shift",
+                "start": "2027-05-05T09:00:00+01:00",
+                "end": "2027-05-05T17:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "colleagues"
+                ],
+                "description": "Daytime work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "class_wed",
+                "title": "Evening Lecture: Project Management",
+                "start": "2027-05-05T18:30:00+01:00",
+                "end": "2027-05-05T21:30:00+01:00",
+                "category": "education",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "professor",
+                  "classmates"
+                ],
+                "description": "Mandatory evening class.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2027-05-05T23:45:00+01:00",
+                "end": "2027-05-06T07:15:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Night sleep.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_thu",
+                "title": "Daytime Job: Core Shift",
+                "start": "2027-05-06T09:00:00+01:00",
+                "end": "2027-05-06T17:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "colleagues"
+                ],
+                "description": "Daytime work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_thu",
+                "title": "Gym: Cardio & Conditioning",
+                "start": "2027-05-06T18:00:00+01:00",
+                "end": "2027-05-06T19:15:00+01:00",
+                "category": "health",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Workout.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "study_thu",
+                "title": "Evening Study: Project Management Cases",
+                "start": "2027-05-06T19:45:00+01:00",
+                "end": "2027-05-06T21:45:00+01:00",
+                "category": "education",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Case study.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_fri",
+                "title": "Sleep",
+                "start": "2027-05-06T23:45:00+01:00",
+                "end": "2027-05-07T07:15:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Night sleep.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_fri",
+                "title": "Daytime Job: Core Shift",
+                "start": "2027-05-07T09:00:00+01:00",
+                "end": "2027-05-07T17:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "colleagues"
+                ],
+                "description": "Friday work shift.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "personal_fri",
+                "title": "Dinner & Rest",
+                "start": "2027-05-07T18:30:00+01:00",
+                "end": "2027-05-07T21:30:00+01:00",
+                "category": "personal",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Friday evening rest.",
+                "origin": "existing",
+                "change_status": "preserved"
+              }
+            ],
+            "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+          },
+          "plausibility_review": {
+            "revision_required": true,
+            "severity": "moderate",
+            "reason": "A material manageability risk remains because the proposed home workout is scheduled from 17:30-18:00 directly after an office work shift ending at 17:30 and only 30 minutes before a mandatory lecture starting at 18:30. The rationale acknowledges that home location and onward travel feasibility are not confirmed, yet still relies on that gap. If the assumption is false, the workout may be impractical, may compromise punctuality for the lecture, or may eliminate basic recovery, hygiene or meal time on an already demanding Monday.",
+            "suggested_improvement": "Reconsider the added workout using the fuller context: verify whether the user can realistically be at home and ready for the lecture within this interval, and if not, adjust the plan or justify why the existing placement remains manageable despite the tight sequence."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Feasibility of home workout location",
+              "assumption": "The user can perform a home workout at 17:30 immediately after the 09:00-17:30 office shift.",
+              "evidence_gap": "The calendar shows a commute from home to office in the morning but no post-work travel home before the home workout. The rationale explicitly states that home location feasibility is not confirmed.",
+              "potential_impact": "potentially_blocking",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Feasibility of reaching or attending the evening lecture",
+              "assumption": "After finishing the home workout at 18:00, the user can be ready for the 18:30 mandatory lecture without compromising punctuality.",
+              "evidence_gap": "The calendar does not show whether the lecture is remote, nearby, or requires travel, nor whether preparation or setup time is needed.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Basic recovery and personal needs on Monday evening",
+              "assumption": "The user can fit food, hygiene, transition and recovery needs around the 17:30-18:00 workout and 18:30-21:30 lecture.",
+              "evidence_gap": "The visible Monday schedule leaves only 30 minutes between the workout and lecture and does not identify when dinner, cleanup or transition happens.",
+              "potential_impact": "material",
+              "verification_source": "unknown"
+            },
+            {
+              "subject": "Requested workout timing constraint",
+              "assumption": "The added workout needed to occur within the specific post-work one-hour window referenced by the rationale.",
+              "evidence_gap": "The original request is not provided, and the technical validation explicitly does not check request satisfaction or soft preference satisfaction.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Cumulative weekly workload tolerance",
+              "assumption": "Adding a Monday workout remains sustainable alongside Tuesday gym plus study, Wednesday lecture, and Thursday gym plus study.",
+              "evidence_gap": "The rationale does not discuss cumulative fatigue across the visible week or the user's recovery tolerance.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            }
+          ],
+          "weaknesses": [
+            "The added Short Home Workout is scheduled at 2027-05-03 17:30-18:00 immediately after Daytime Job: Core Shift at 09:00-17:30, while the rationale itself says home location and onward travel feasibility are not confirmed. Because the event is specifically a home workout, the calendar does not show how the user gets from work to home in time.",
+            "The workout ends at 18:00 and the mandatory Evening Lecture: Data Warehousing starts at 18:30. That 30-minute interval may need to cover hygiene, food, setup or travel to the lecture, but the proposal does not substantiate that this is realistic.",
+            "Monday becomes a tightly packed day: sleep ends at 06:45, commute runs 07:45-09:00, work runs 09:00-17:30, workout runs 17:30-18:00, and lecture runs 18:30-21:30 before sleep at 23:30. This may be manageable for some people, but the rationale does not meaningfully weigh the cumulative physical and cognitive load.",
+            "Across the visible week there are already substantial evening commitments: Tuesday gym plus study from 18:00-21:45, Wednesday lecture from 18:30-21:30, Thursday gym plus study from 18:00-21:45. Adding a Monday workout is not automatically excessive, but the rationale treats the free slot as capacity without discussing recovery across the week.",
+            "The rationale cites a 'requested one-hour window', but the original request is not available here, so request satisfaction cannot be independently verified."
+          ],
+          "feedback": "The proposal has a sensible aim: preserve work and lecture, keep sleep from being shortened, and avoid dependence on an external gym during disrupted transit. However, the main practical weakness is that the added home workout is placed in a very constrained gap whose real feasibility depends on facts not visible in the calendar. A home workout at 17:30 immediately after an office shift, followed by a mandatory lecture at 18:30, may work only if the user is already home, works from home, has negligible travel, or the lecture is also accessible without travel. The Proposer should reconsider whether the Monday gap genuinely supports a home workout once location, travel, food, hygiene and lecture preparation are accounted for, or provide grounded context showing that these needs are already covered. The same operations might be acceptable if those conditions are true, but the current rationale does not sufficiently support them."
+        }
+      ],
+      "unresolved_assumptions": [
+        {
+          "subject": "Home access after work",
+          "assumption": "The user can be at home or in a suitable home setting by 17:45 after the 09:00-17:30 office work shift.",
+          "evidence_gap": "The calendar shows a morning commute from Home to Office at 07:45-09:00 and work at 09:00-17:30, but no return commute or indication that the user is already at home before the 17:45 Home Mobility Workout.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Lecture readiness after workout",
+          "assumption": "After the 17:45-18:00 home mobility workout, the user can be ready for the mandatory Evening Lecture: Data Warehousing at 18:30.",
+          "evidence_gap": "The calendar does not show whether the lecture is remote, nearby, or requires travel, nor whether setup, materials, food, or hygiene are needed between 18:00 and 18:30.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Basic Monday evening needs",
+          "assumption": "Food, hygiene, transition, and recovery needs can fit around the 17:45-18:00 workout and the 18:30-21:30 lecture.",
+          "evidence_gap": "The visible Monday schedule has work until 17:30, workout until 18:00, lecture from 18:30 to 21:30, and sleep at 23:30, but no explicit dinner, cleanup, commute, or decompression time.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Requested post-work workout requirement",
+          "assumption": "The added workout needs to occur in the Monday post-work gap rather than being deferred, omitted, or handled elsewhere in the visible week.",
+          "evidence_gap": "The rationale references a requested workout in the post-work gap, but the original request is not provided and technical validation does not check request satisfaction.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Cumulative early-week workload tolerance",
+          "assumption": "Adding a Monday mobility session remains sustainable alongside Tuesday gym plus study, Wednesday lecture, and Thursday gym plus study.",
+          "evidence_gap": "The rationale notes Monday is already tight and makes the session brief, but it does not substantiate the user's recovery tolerance across the visible Monday-to-Thursday sequence.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "proposer_feedback": "Numeric Critic criteria failed. Scores: {\"reasoning\":4,\"coherence\":3,\"alternatives\":4,\"clarity\":4}. Plausibility revision required (moderate): The prior concern was only partially resolved. The new 17:45-18:00 low-load mobility session improves duration and recovery margin, but it remains a Home Mobility Workout placed 15 minutes after an office work shift ending at 17:30 and 30 minutes before a mandatory 18:30 lecture. The proposal itself states that actual home access, lecture location, transit time, food, hygiene, and recovery needs are not confirmed. If those assumptions are false, the added event may be impractical or may compromise lecture punctuality and basic evening needs. Suggested direction: Reconsider the added workout with the fuller context focused on location and transition feasibility: verify whether the user can realistically access the home workout setting and be ready for the 18:30 lecture, or adjust the plan’s format or distribution so it does not depend on unsupported home-and-lecture logistics. The Critic lacks the full user constraints; explain if no better feasible option exists. Unverified conditions to reassess: [{'subject': 'Home access after work', 'assumption': 'The user can be at home or in a suitable home setting by 17:45 after the 09:00-17:30 office work shift.', 'evidence_gap': 'The calendar shows a morning commute from Home to Office at 07:45-09:00 and work at 09:00-17:30, but no return commute or indication that the user is already at home before the 17:45 Home Mobility Workout.', 'potential_impact': 'potentially_blocking', 'verification_source': 'user_context'}, {'subject': 'Lecture readiness after workout', 'assumption': 'After the 17:45-18:00 home mobility workout, the user can be ready for the mandatory Evening Lecture: Data Warehousing at 18:30.', 'evidence_gap': 'The calendar does not show whether the lecture is remote, nearby, or requires travel, nor whether setup, materials, food, or hygiene are needed between 18:00 and 18:30.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Basic Monday evening needs', 'assumption': 'Food, hygiene, transition, and recovery needs can fit around the 17:45-18:00 workout and the 18:30-21:30 lecture.', 'evidence_gap': 'The visible Monday schedule has work until 17:30, workout until 18:00, lecture from 18:30 to 21:30, and sleep at 23:30, but no explicit dinner, cleanup, commute, or decompression time.', 'potential_impact': 'material', 'verification_source': 'unknown'}, {'subject': 'Requested post-work workout requirement', 'assumption': 'The added workout needs to occur in the Monday post-work gap rather than being deferred, omitted, or handled elsewhere in the visible week.', 'evidence_gap': 'The rationale references a requested workout in the post-work gap, but the original request is not provided and technical validation does not check request satisfaction.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Cumulative early-week workload tolerance', 'assumption': 'Adding a Monday mobility session remains sustainable alongside Tuesday gym plus study, Wednesday lecture, and Thursday gym plus study.', 'evidence_gap': \"The rationale notes Monday is already tight and makes the session brief, but it does not substantiate the user's recovery tolerance across the visible Monday-to-Thursday sequence.\", 'potential_impact': 'material', 'verification_source': 'user_context'}] Weaknesses: ['The revision reduces the workout from 30 minutes to 15 minutes and changes it to a lower-load mobility session, which directly addresses part of the prior fatigue and margin concern. However, the event is still specifically a Home Mobility Workout at 17:45-18:00 after an office work shift ending at 17:30, and the calendar still does not show how the user can be at home by 17:45.', 'The Monday evening sequence remains tight: work runs 09:00-17:30, the added home workout runs 17:45-18:00, and the mandatory Evening Lecture: Data Warehousing runs 18:30-21:30. The 30 minutes after the workout may need to cover hygiene, food, preparation, setup, or travel, depending on whether the lecture is remote or in person.', 'The rationale is appropriately cautious about unknown home access, lecture location, transit time, food, hygiene, and recovery, but the actual operation still depends on those same unknowns being favorable. Acknowledging the uncertainty does not by itself make the home placement practically supported.', 'Across the visible week, Monday through Thursday remain demanding: Monday has disrupted commuting, full work, added workout, and lecture; Tuesday has work, gym, and study until 21:45; Wednesday has work and lecture until 21:30; Thursday has work, gym, and study until 21:45. The added Monday session is brief, so it is not clearly excessive, but the plan still has limited demonstrated recovery margin early in the week.', 'The rationale refers to satisfying a requested workout in the post-work gap, but the original request is not available here and the technical validation explicitly does not verify request satisfaction, so that priority cannot be independently confirmed from the provided materials.']. Actionable feedback: The revised proposal is materially better than the prior version: it no longer schedules exercise immediately at 17:30, it cuts the session to 15 minutes, and it lowers intensity to mobility rather than a fuller workout. That makes the human load more proportionate to an already compressed Monday. The remaining issue is not the exercise duration itself; it is the location and transition dependency. A home workout at 17:45 still appears to require the user to be home or able to access a suitable home-like setting within 15 minutes of leaving a 09:00-17:30 office shift, while also being ready for an 18:30 mandatory lecture. If the user works from home, lives very close to work, or the lecture is remote and preparation needs are minimal, this could be manageable. If not, the plan may fail in practice or squeeze out basic transition, hygiene, food, or lecture-readiness time. The Proposer should either ground the home-access and lecture-readiness assumptions using its fuller context, or reconsider the workout format/location/distribution so the plan does not rely on an unsupported same-evening logistics chain.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "move",
+            "event_id": "sleep_mon",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-05-02T23:00:00+01:00",
+            "to_end": "2027-05-03T06:45:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "commute_mon_am",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-05-03T07:45:00+01:00",
+            "to_end": "2027-05-03T09:00:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Short No-Equipment Mobility Workout",
+            "from_start": null,
+            "to_start": "2027-05-03T17:35:00+01:00",
+            "to_end": "2027-05-03T17:45:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "Protected work and lecture events remain unchanged.",
+            "The fixed sleep and commute moves match the externally confirmed exceptions exactly.",
+            "The post-work gap is calendar-free, but home access, lecture location and transition time are unknown.",
+            "Food, hygiene and lecture preparation needs are not shown in the calendar.",
+            "No external gym, venue availability or extra travel is assumed."
+          ],
+          "priorities": [
+            "Work and education punctuality remain the highest priorities.",
+            "Sleep duration is preserved by moving the sleep block earlier.",
+            "Health is supported with a very short no-equipment session to reduce location and recovery demands.",
+            "The workout is placed early in the gap to leave the largest remaining buffer before the lecture."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Keep a home-specific workout later in the gap.",
+              "rejected_because": "Rejected because the calendar does not show that the user can get home after the office shift."
+            },
+            {
+              "option": "Schedule a longer 30-minute workout.",
+              "rejected_because": "Rejected because it would leave too little margin for transition, preparation and basic evening needs."
+            },
+            {
+              "option": "Use an external gym during the gap.",
+              "rejected_because": "Rejected because it adds venue and travel dependencies during a transit disruption."
+            },
+            {
+              "option": "Skip the Monday workout.",
+              "rejected_because": "Rejected because it would not satisfy the requested post-work exercise."
+            },
+            {
+              "option": "Move the workout after the lecture.",
+              "rejected_because": "Rejected because it misses the requested gap and further compresses late-evening recovery."
+            }
+          ],
+          "summary": "This plan keeps the confirmed earlier sleep and commute changes, protects the fixed work shift and lecture, and replaces the unsupported home-specific workout with a brief no-equipment mobility session in the free gap; the main trade-off is that practical feasibility still depends on having a suitable nearby space and enough transition margin."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true,
+        "confirmed_change_authorizations": [
+          {
+            "event_id": "commute_mon_am",
+            "type": "move",
+            "to_start": "2027-05-03T07:45:00+01:00",
+            "to_end": "2027-05-03T09:00:00+01:00"
+          },
+          {
+            "event_id": "sleep_mon",
+            "type": "move",
+            "to_start": "2027-05-02T23:00:00+01:00",
+            "to_end": "2027-05-03T06:45:00+01:00"
+          }
+        ]
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-05-02T23:00:00+01:00",
+            "end": "2027-05-03T06:45:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Earlier wake-up for transit disruption.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "commute_mon_am",
+            "title": "Regular Commute: Home to Office",
+            "start": "2027-05-03T07:45:00+01:00",
+            "end": "2027-05-03T09:00:00+01:00",
+            "category": "personal",
+            "importance": 3,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Normal 45-minute commute before the confirmed strike adds 30 minutes.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "work_mon",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-05-03T09:00:00+01:00",
+            "end": "2027-05-03T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Daytime work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_2",
+            "title": "Short No-Equipment Mobility Workout",
+            "start": "2027-05-03T17:35:00+01:00",
+            "end": "2027-05-03T17:45:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "class_mon",
+            "title": "Evening Lecture: Data Warehousing",
+            "start": "2027-05-03T18:30:00+01:00",
+            "end": "2027-05-03T21:30:00+01:00",
+            "category": "education",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "professor",
+              "classmates"
+            ],
+            "description": "Mandatory evening class.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-05-03T23:30:00+01:00",
+            "end": "2027-05-04T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_tue",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-05-04T09:00:00+01:00",
+            "end": "2027-05-04T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Daytime work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_tue",
+            "title": "Gym: Strength Workout",
+            "start": "2027-05-04T18:00:00+01:00",
+            "end": "2027-05-04T19:15:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_tue",
+            "title": "Evening Study: Data Warehousing Labs",
+            "start": "2027-05-04T19:45:00+01:00",
+            "end": "2027-05-04T21:45:00+01:00",
+            "category": "education",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lab practice.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-05-04T23:45:00+01:00",
+            "end": "2027-05-05T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_wed",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-05-05T09:00:00+01:00",
+            "end": "2027-05-05T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Daytime work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "class_wed",
+            "title": "Evening Lecture: Project Management",
+            "start": "2027-05-05T18:30:00+01:00",
+            "end": "2027-05-05T21:30:00+01:00",
+            "category": "education",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "professor",
+              "classmates"
+            ],
+            "description": "Mandatory evening class.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-05-05T23:45:00+01:00",
+            "end": "2027-05-06T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_thu",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-05-06T09:00:00+01:00",
+            "end": "2027-05-06T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Daytime work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_thu",
+            "title": "Gym: Cardio & Conditioning",
+            "start": "2027-05-06T18:00:00+01:00",
+            "end": "2027-05-06T19:15:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_thu",
+            "title": "Evening Study: Project Management Cases",
+            "start": "2027-05-06T19:45:00+01:00",
+            "end": "2027-05-06T21:45:00+01:00",
+            "category": "education",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Case study.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-05-06T23:45:00+01:00",
+            "end": "2027-05-07T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_fri",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-05-07T09:00:00+01:00",
+            "end": "2027-05-07T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Friday work shift.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "personal_fri",
+            "title": "Dinner & Rest",
+            "start": "2027-05-07T18:30:00+01:00",
+            "end": "2027-05-07T21:30:00+01:00",
+            "category": "personal",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Friday evening rest.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 4,
+          "alternatives": 4,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The revision substantially improves the prior location problem by replacing the home-specific workout with a 10-minute no-equipment mobility session at 17:35-17:45, but it still assumes there is some suitable nearby place to do it only 5 minutes after the 09:00-17:30 office shift.",
+          "Monday remains compressed: sleep ends at 06:45, commute runs 07:45-09:00, work runs 09:00-17:30, the added workout runs 17:35-17:45, and the mandatory lecture runs 18:30-21:30 before sleep at 23:30. The added event is short and low-load, but food, hygiene, preparation and transition needs are still not explicitly accommodated.",
+          "The 45-minute interval between the workout ending at 17:45 and the lecture starting at 18:30 may be adequate if the lecture is nearby or remote and preparation needs are light, but the calendar does not show lecture location, travel needs, or setup needs.",
+          "The visible week is already demanding from Monday through Thursday, with work each day, lectures on Monday and Wednesday, gym plus study on Tuesday and Thursday, and limited visible evening recovery until Friday. The added Monday session is probably proportionate, but the rationale could more explicitly connect this brief addition to the cumulative weekly load.",
+          "The rationale continues to refer to satisfying a requested post-work exercise, but the original request is not available and technical validation does not verify request satisfaction, so that priority cannot be independently confirmed."
+        ],
+        "feedback": "This revision meaningfully addresses the previous concern. Removing the home-specific requirement and reducing the added exercise to a 10-minute no-equipment mobility session makes the plan much less dependent on unsupported home access and much more proportionate to a heavy Monday. The workout no longer consumes most of the post-work gap, and it leaves a larger remaining interval before the 18:30 mandatory lecture. The remaining concerns are practical rather than decisive: the user still needs a suitable place to do the mobility session near wherever they are after work, and the 17:45-18:30 interval still has to absorb lecture readiness, possible travel, food, hygiene or decompression. Because the added event is brief, low-intensity, and explicitly designed to avoid venue and travel dependencies, these uncertainties do not by themselves justify another revision. The Proposer should still keep the plan contingent on nearby space and lecture-readiness logistics, and with fuller context could either keep the same operation or document why those conditions are safe.",
+        "plausibility_review": {
+          "revision_required": false,
+          "severity": "low",
+          "reason": "The prior material concern has been substantially answered. The proposal no longer depends on the user being at home after the 09:00-17:30 office shift; it uses a 10-minute no-equipment mobility workout at 17:35-17:45 and leaves 45 minutes before the 18:30 mandatory lecture. This does not prove the logistics are ideal, since suitable space, lecture location, and basic evening needs remain unverified, but the practical burden added by the proposal is now small and the rationale acknowledges the relevant uncertainty. If the nearby-space or lecture-readiness assumptions are false, the workout may need to be skipped or adapted, but the current evidence does not show a concrete enough manageability problem to require another revision.",
+          "suggested_improvement": "Keep the plan conditional on practical same-location feasibility: with fuller context, confirm that a nearby low-disruption space exists and that the user can still prepare for the 18:30 lecture and basic evening needs after the 10-minute session."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Suitable nearby workout space",
+            "assumption": "The user can perform a 10-minute no-equipment mobility session near the post-work location without needing travel, special facilities, privacy, or equipment.",
+            "evidence_gap": "The calendar shows work ending at 17:30 and the workout starting at 17:35, but it does not identify the user's exact location, available space, workplace norms, or any nearby suitable setting.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Lecture readiness after workout",
+            "assumption": "After the 17:35-17:45 mobility workout, the user can be ready for the mandatory Evening Lecture: Data Warehousing at 18:30.",
+            "evidence_gap": "The calendar does not show whether the lecture is remote, in the same area, or requires travel, nor whether setup, materials, food, hygiene, or other preparation are needed before 18:30.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Basic Monday evening needs",
+            "assumption": "Food, hygiene, transition, and brief recovery can fit around the work shift, the 17:35-17:45 workout, and the 18:30-21:30 lecture.",
+            "evidence_gap": "The visible Monday schedule contains no explicit dinner, cleanup, commute to lecture, preparation, or decompression time between work, workout, lecture, and sleep.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Requested post-work exercise requirement",
+            "assumption": "The added exercise needed to occur in the Monday post-work gap rather than being omitted, deferred, or handled elsewhere in the visible week.",
+            "evidence_gap": "The rationale refers to a requested post-work exercise, but the original request is not provided and the technical validation explicitly does not check request satisfaction or soft preferences.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Cumulative weekly workload tolerance",
+            "assumption": "Adding a short Monday mobility session remains sustainable alongside Tuesday gym plus study, Wednesday lecture, and Thursday gym plus study.",
+            "evidence_gap": "The rationale reduces the Monday exercise burden, but the user's recovery tolerance across the visible Monday-to-Thursday sequence is not verified.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          }
+        ],
+        "overall": 4.0
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": true,
+        "plausibility_revision_required": false,
+        "accepted": true,
+        "revision_causes": []
+      },
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": [
+        {
+          "iteration": 0,
+          "proposal": {
+            "changes": [
+              {
+                "type": "move",
+                "event_id": "sleep_mon",
+                "title": null,
+                "from_start": null,
+                "to_start": "2027-05-02T23:00:00+01:00",
+                "to_end": "2027-05-03T06:45:00+01:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "move",
+                "event_id": "commute_mon_am",
+                "title": null,
+                "from_start": null,
+                "to_start": "2027-05-03T07:45:00+01:00",
+                "to_end": "2027-05-03T09:00:00+01:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Short Home Workout",
+                "from_start": null,
+                "to_start": "2027-05-03T17:30:00+01:00",
+                "to_end": "2027-05-03T18:00:00+01:00",
+                "category": "health",
+                "importance": 4,
+                "participants": [
+                  "user"
+                ]
+              }
+            ],
+            "rationale": {
+              "constraints": [
+                "The protected work shift and evening lecture remain unchanged for punctuality.",
+                "The fixed sleep and commute changes match the only externally confirmed exceptions exactly.",
+                "The post-work calendar interval is free, but home location and onward travel feasibility are not confirmed.",
+                "No external gym availability or travel time is assumed."
+              ],
+              "priorities": [
+                "Work and education punctuality take precedence over convenience.",
+                "Sleep is preserved by shifting the sleep block earlier rather than only shortening it.",
+                "Health is supported with a short home workout that avoids adding an external venue dependency."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Place the workout later after the lecture.",
+                  "rejected_because": "This avoids the tight post-work gap but does not satisfy the requested one-hour window."
+                },
+                {
+                  "option": "Use an external gym session in the gap.",
+                  "rejected_because": "The request and profile prefer a home workout because strike delays make an external trip impractical."
+                }
+              ],
+              "summary": "This plan uses the confirmed earlier wake-up and longer commute to protect the work start, keeps the evening lecture intact, and adds a short home workout in the free post-work gap despite uncertainty about actual home and lecture travel logistics."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "sleep_mon",
+                "title": "Sleep",
+                "start": "2027-05-02T23:00:00+01:00",
+                "end": "2027-05-03T06:45:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Earlier wake-up for transit disruption.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "commute_mon_am",
+                "title": "Regular Commute: Home to Office",
+                "start": "2027-05-03T07:45:00+01:00",
+                "end": "2027-05-03T09:00:00+01:00",
+                "category": "personal",
+                "importance": 3,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Normal 45-minute commute before the confirmed strike adds 30 minutes.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "work_mon",
+                "title": "Daytime Job: Core Shift",
+                "start": "2027-05-03T09:00:00+01:00",
+                "end": "2027-05-03T17:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "colleagues"
+                ],
+                "description": "Daytime work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_2",
+                "title": "Short Home Workout",
+                "start": "2027-05-03T17:30:00+01:00",
+                "end": "2027-05-03T18:00:00+01:00",
+                "category": "health",
+                "importance": 4,
+                "fixed": null,
+                "participants": [
+                  "user"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "class_mon",
+                "title": "Evening Lecture: Data Warehousing",
+                "start": "2027-05-03T18:30:00+01:00",
+                "end": "2027-05-03T21:30:00+01:00",
+                "category": "education",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "professor",
+                  "classmates"
+                ],
+                "description": "Mandatory evening class.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_tue",
+                "title": "Sleep",
+                "start": "2027-05-03T23:30:00+01:00",
+                "end": "2027-05-04T07:15:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Night sleep.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_tue",
+                "title": "Daytime Job: Core Shift",
+                "start": "2027-05-04T09:00:00+01:00",
+                "end": "2027-05-04T17:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "colleagues"
+                ],
+                "description": "Daytime work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_tue",
+                "title": "Gym: Strength Workout",
+                "start": "2027-05-04T18:00:00+01:00",
+                "end": "2027-05-04T19:15:00+01:00",
+                "category": "health",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Workout.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "study_tue",
+                "title": "Evening Study: Data Warehousing Labs",
+                "start": "2027-05-04T19:45:00+01:00",
+                "end": "2027-05-04T21:45:00+01:00",
+                "category": "education",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Lab practice.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_wed",
+                "title": "Sleep",
+                "start": "2027-05-04T23:45:00+01:00",
+                "end": "2027-05-05T07:15:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Night sleep.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_wed",
+                "title": "Daytime Job: Core Shift",
+                "start": "2027-05-05T09:00:00+01:00",
+                "end": "2027-05-05T17:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "colleagues"
+                ],
+                "description": "Daytime work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "class_wed",
+                "title": "Evening Lecture: Project Management",
+                "start": "2027-05-05T18:30:00+01:00",
+                "end": "2027-05-05T21:30:00+01:00",
+                "category": "education",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "professor",
+                  "classmates"
+                ],
+                "description": "Mandatory evening class.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2027-05-05T23:45:00+01:00",
+                "end": "2027-05-06T07:15:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Night sleep.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_thu",
+                "title": "Daytime Job: Core Shift",
+                "start": "2027-05-06T09:00:00+01:00",
+                "end": "2027-05-06T17:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "colleagues"
+                ],
+                "description": "Daytime work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_thu",
+                "title": "Gym: Cardio & Conditioning",
+                "start": "2027-05-06T18:00:00+01:00",
+                "end": "2027-05-06T19:15:00+01:00",
+                "category": "health",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Workout.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "study_thu",
+                "title": "Evening Study: Project Management Cases",
+                "start": "2027-05-06T19:45:00+01:00",
+                "end": "2027-05-06T21:45:00+01:00",
+                "category": "education",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Case study.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_fri",
+                "title": "Sleep",
+                "start": "2027-05-06T23:45:00+01:00",
+                "end": "2027-05-07T07:15:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Night sleep.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_fri",
+                "title": "Daytime Job: Core Shift",
+                "start": "2027-05-07T09:00:00+01:00",
+                "end": "2027-05-07T17:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "colleagues"
+                ],
+                "description": "Friday work shift.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "personal_fri",
+                "title": "Dinner & Rest",
+                "start": "2027-05-07T18:30:00+01:00",
+                "end": "2027-05-07T21:30:00+01:00",
+                "category": "personal",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Friday evening rest.",
+                "origin": "existing",
+                "change_status": "preserved"
+              }
+            ],
+            "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+          },
+          "plausibility_review": {
+            "revision_required": true,
+            "severity": "moderate",
+            "reason": "A material manageability risk remains because the proposed home workout is scheduled from 17:30-18:00 directly after an office work shift ending at 17:30 and only 30 minutes before a mandatory lecture starting at 18:30. The rationale acknowledges that home location and onward travel feasibility are not confirmed, yet still relies on that gap. If the assumption is false, the workout may be impractical, may compromise punctuality for the lecture, or may eliminate basic recovery, hygiene or meal time on an already demanding Monday.",
+            "suggested_improvement": "Reconsider the added workout using the fuller context: verify whether the user can realistically be at home and ready for the lecture within this interval, and if not, adjust the plan or justify why the existing placement remains manageable despite the tight sequence."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Feasibility of home workout location",
+              "assumption": "The user can perform a home workout at 17:30 immediately after the 09:00-17:30 office shift.",
+              "evidence_gap": "The calendar shows a commute from home to office in the morning but no post-work travel home before the home workout. The rationale explicitly states that home location feasibility is not confirmed.",
+              "potential_impact": "potentially_blocking",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Feasibility of reaching or attending the evening lecture",
+              "assumption": "After finishing the home workout at 18:00, the user can be ready for the 18:30 mandatory lecture without compromising punctuality.",
+              "evidence_gap": "The calendar does not show whether the lecture is remote, nearby, or requires travel, nor whether preparation or setup time is needed.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Basic recovery and personal needs on Monday evening",
+              "assumption": "The user can fit food, hygiene, transition and recovery needs around the 17:30-18:00 workout and 18:30-21:30 lecture.",
+              "evidence_gap": "The visible Monday schedule leaves only 30 minutes between the workout and lecture and does not identify when dinner, cleanup or transition happens.",
+              "potential_impact": "material",
+              "verification_source": "unknown"
+            },
+            {
+              "subject": "Requested workout timing constraint",
+              "assumption": "The added workout needed to occur within the specific post-work one-hour window referenced by the rationale.",
+              "evidence_gap": "The original request is not provided, and the technical validation explicitly does not check request satisfaction or soft preference satisfaction.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Cumulative weekly workload tolerance",
+              "assumption": "Adding a Monday workout remains sustainable alongside Tuesday gym plus study, Wednesday lecture, and Thursday gym plus study.",
+              "evidence_gap": "The rationale does not discuss cumulative fatigue across the visible week or the user's recovery tolerance.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            }
+          ],
+          "weaknesses": [
+            "The added Short Home Workout is scheduled at 2027-05-03 17:30-18:00 immediately after Daytime Job: Core Shift at 09:00-17:30, while the rationale itself says home location and onward travel feasibility are not confirmed. Because the event is specifically a home workout, the calendar does not show how the user gets from work to home in time.",
+            "The workout ends at 18:00 and the mandatory Evening Lecture: Data Warehousing starts at 18:30. That 30-minute interval may need to cover hygiene, food, setup or travel to the lecture, but the proposal does not substantiate that this is realistic.",
+            "Monday becomes a tightly packed day: sleep ends at 06:45, commute runs 07:45-09:00, work runs 09:00-17:30, workout runs 17:30-18:00, and lecture runs 18:30-21:30 before sleep at 23:30. This may be manageable for some people, but the rationale does not meaningfully weigh the cumulative physical and cognitive load.",
+            "Across the visible week there are already substantial evening commitments: Tuesday gym plus study from 18:00-21:45, Wednesday lecture from 18:30-21:30, Thursday gym plus study from 18:00-21:45. Adding a Monday workout is not automatically excessive, but the rationale treats the free slot as capacity without discussing recovery across the week.",
+            "The rationale cites a 'requested one-hour window', but the original request is not available here, so request satisfaction cannot be independently verified."
+          ],
+          "feedback": "The proposal has a sensible aim: preserve work and lecture, keep sleep from being shortened, and avoid dependence on an external gym during disrupted transit. However, the main practical weakness is that the added home workout is placed in a very constrained gap whose real feasibility depends on facts not visible in the calendar. A home workout at 17:30 immediately after an office shift, followed by a mandatory lecture at 18:30, may work only if the user is already home, works from home, has negligible travel, or the lecture is also accessible without travel. The Proposer should reconsider whether the Monday gap genuinely supports a home workout once location, travel, food, hygiene and lecture preparation are accounted for, or provide grounded context showing that these needs are already covered. The same operations might be acceptable if those conditions are true, but the current rationale does not sufficiently support them."
+        },
+        {
+          "iteration": 1,
+          "proposal": {
+            "changes": [
+              {
+                "type": "move",
+                "event_id": "sleep_mon",
+                "title": null,
+                "from_start": null,
+                "to_start": "2027-05-02T23:00:00+01:00",
+                "to_end": "2027-05-03T06:45:00+01:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "move",
+                "event_id": "commute_mon_am",
+                "title": null,
+                "from_start": null,
+                "to_start": "2027-05-03T07:45:00+01:00",
+                "to_end": "2027-05-03T09:00:00+01:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Short Home Mobility Workout",
+                "from_start": null,
+                "to_start": "2027-05-03T17:45:00+01:00",
+                "to_end": "2027-05-03T18:00:00+01:00",
+                "category": "health",
+                "importance": 4,
+                "participants": [
+                  "user"
+                ]
+              }
+            ],
+            "rationale": {
+              "constraints": [
+                "Protected work and lecture events are not moved.",
+                "The fixed sleep and commute moves match the externally confirmed exceptions exactly.",
+                "The post-work interval is calendar-free, but actual home access, lecture location and transit time are unknown.",
+                "A short session leaves buffer for transition needs, but food, hygiene and recovery needs are not confirmed.",
+                "No external gym, venue availability or extra travel is assumed."
+              ],
+              "priorities": [
+                "Work and education punctuality remain the highest priorities.",
+                "Sleep is preserved by moving the sleep block earlier rather than reducing its duration.",
+                "Health is supported with the least external dependency and a lower-load mobility format.",
+                "The workout is kept brief because Monday already has work, disrupted commuting and an evening lecture."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Keep a 30-minute workout immediately after work.",
+                  "rejected_because": "Rejected because it leaves less margin for travel, hygiene, food or lecture preparation."
+                },
+                {
+                  "option": "Skip the Monday workout and rely on later-week gym sessions.",
+                  "rejected_because": "Rejected because it would not satisfy the requested workout in the post-work gap."
+                },
+                {
+                  "option": "Use an external gym during the gap.",
+                  "rejected_because": "Rejected because the profile prefers a home session during the transit disruption."
+                },
+                {
+                  "option": "Place the workout after the lecture.",
+                  "rejected_because": "Rejected because it misses the requested post-work gap and further compresses evening recovery."
+                }
+              ],
+              "summary": "This plan protects punctuality by using the confirmed earlier sleep and commute changes, then adds only a brief home mobility workout in the post-work gap to reduce pressure on an already tight Monday; feasibility still depends on the user actually being able to do a home session and reach the lecture on time."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "sleep_mon",
+                "title": "Sleep",
+                "start": "2027-05-02T23:00:00+01:00",
+                "end": "2027-05-03T06:45:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Earlier wake-up for transit disruption.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "commute_mon_am",
+                "title": "Regular Commute: Home to Office",
+                "start": "2027-05-03T07:45:00+01:00",
+                "end": "2027-05-03T09:00:00+01:00",
+                "category": "personal",
+                "importance": 3,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Normal 45-minute commute before the confirmed strike adds 30 minutes.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "work_mon",
+                "title": "Daytime Job: Core Shift",
+                "start": "2027-05-03T09:00:00+01:00",
+                "end": "2027-05-03T17:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "colleagues"
+                ],
+                "description": "Daytime work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_2",
+                "title": "Short Home Mobility Workout",
+                "start": "2027-05-03T17:45:00+01:00",
+                "end": "2027-05-03T18:00:00+01:00",
+                "category": "health",
+                "importance": 4,
+                "fixed": null,
+                "participants": [
+                  "user"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "class_mon",
+                "title": "Evening Lecture: Data Warehousing",
+                "start": "2027-05-03T18:30:00+01:00",
+                "end": "2027-05-03T21:30:00+01:00",
+                "category": "education",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "professor",
+                  "classmates"
+                ],
+                "description": "Mandatory evening class.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_tue",
+                "title": "Sleep",
+                "start": "2027-05-03T23:30:00+01:00",
+                "end": "2027-05-04T07:15:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Night sleep.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_tue",
+                "title": "Daytime Job: Core Shift",
+                "start": "2027-05-04T09:00:00+01:00",
+                "end": "2027-05-04T17:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "colleagues"
+                ],
+                "description": "Daytime work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_tue",
+                "title": "Gym: Strength Workout",
+                "start": "2027-05-04T18:00:00+01:00",
+                "end": "2027-05-04T19:15:00+01:00",
+                "category": "health",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Workout.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "study_tue",
+                "title": "Evening Study: Data Warehousing Labs",
+                "start": "2027-05-04T19:45:00+01:00",
+                "end": "2027-05-04T21:45:00+01:00",
+                "category": "education",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Lab practice.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_wed",
+                "title": "Sleep",
+                "start": "2027-05-04T23:45:00+01:00",
+                "end": "2027-05-05T07:15:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Night sleep.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_wed",
+                "title": "Daytime Job: Core Shift",
+                "start": "2027-05-05T09:00:00+01:00",
+                "end": "2027-05-05T17:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "colleagues"
+                ],
+                "description": "Daytime work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "class_wed",
+                "title": "Evening Lecture: Project Management",
+                "start": "2027-05-05T18:30:00+01:00",
+                "end": "2027-05-05T21:30:00+01:00",
+                "category": "education",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "professor",
+                  "classmates"
+                ],
+                "description": "Mandatory evening class.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2027-05-05T23:45:00+01:00",
+                "end": "2027-05-06T07:15:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Night sleep.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_thu",
+                "title": "Daytime Job: Core Shift",
+                "start": "2027-05-06T09:00:00+01:00",
+                "end": "2027-05-06T17:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "colleagues"
+                ],
+                "description": "Daytime work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_thu",
+                "title": "Gym: Cardio & Conditioning",
+                "start": "2027-05-06T18:00:00+01:00",
+                "end": "2027-05-06T19:15:00+01:00",
+                "category": "health",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Workout.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "study_thu",
+                "title": "Evening Study: Project Management Cases",
+                "start": "2027-05-06T19:45:00+01:00",
+                "end": "2027-05-06T21:45:00+01:00",
+                "category": "education",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Case study.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_fri",
+                "title": "Sleep",
+                "start": "2027-05-06T23:45:00+01:00",
+                "end": "2027-05-07T07:15:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Night sleep.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_fri",
+                "title": "Daytime Job: Core Shift",
+                "start": "2027-05-07T09:00:00+01:00",
+                "end": "2027-05-07T17:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "colleagues"
+                ],
+                "description": "Friday work shift.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "personal_fri",
+                "title": "Dinner & Rest",
+                "start": "2027-05-07T18:30:00+01:00",
+                "end": "2027-05-07T21:30:00+01:00",
+                "category": "personal",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Friday evening rest.",
+                "origin": "existing",
+                "change_status": "preserved"
+              }
+            ],
+            "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+          },
+          "plausibility_review": {
+            "revision_required": true,
+            "severity": "moderate",
+            "reason": "The prior concern was only partially resolved. The new 17:45-18:00 low-load mobility session improves duration and recovery margin, but it remains a Home Mobility Workout placed 15 minutes after an office work shift ending at 17:30 and 30 minutes before a mandatory 18:30 lecture. The proposal itself states that actual home access, lecture location, transit time, food, hygiene, and recovery needs are not confirmed. If those assumptions are false, the added event may be impractical or may compromise lecture punctuality and basic evening needs.",
+            "suggested_improvement": "Reconsider the added workout with the fuller context focused on location and transition feasibility: verify whether the user can realistically access the home workout setting and be ready for the 18:30 lecture, or adjust the plan’s format or distribution so it does not depend on unsupported home-and-lecture logistics."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Home access after work",
+              "assumption": "The user can be at home or in a suitable home setting by 17:45 after the 09:00-17:30 office work shift.",
+              "evidence_gap": "The calendar shows a morning commute from Home to Office at 07:45-09:00 and work at 09:00-17:30, but no return commute or indication that the user is already at home before the 17:45 Home Mobility Workout.",
+              "potential_impact": "potentially_blocking",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Lecture readiness after workout",
+              "assumption": "After the 17:45-18:00 home mobility workout, the user can be ready for the mandatory Evening Lecture: Data Warehousing at 18:30.",
+              "evidence_gap": "The calendar does not show whether the lecture is remote, nearby, or requires travel, nor whether setup, materials, food, or hygiene are needed between 18:00 and 18:30.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Basic Monday evening needs",
+              "assumption": "Food, hygiene, transition, and recovery needs can fit around the 17:45-18:00 workout and the 18:30-21:30 lecture.",
+              "evidence_gap": "The visible Monday schedule has work until 17:30, workout until 18:00, lecture from 18:30 to 21:30, and sleep at 23:30, but no explicit dinner, cleanup, commute, or decompression time.",
+              "potential_impact": "material",
+              "verification_source": "unknown"
+            },
+            {
+              "subject": "Requested post-work workout requirement",
+              "assumption": "The added workout needs to occur in the Monday post-work gap rather than being deferred, omitted, or handled elsewhere in the visible week.",
+              "evidence_gap": "The rationale references a requested workout in the post-work gap, but the original request is not provided and technical validation does not check request satisfaction.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Cumulative early-week workload tolerance",
+              "assumption": "Adding a Monday mobility session remains sustainable alongside Tuesday gym plus study, Wednesday lecture, and Thursday gym plus study.",
+              "evidence_gap": "The rationale notes Monday is already tight and makes the session brief, but it does not substantiate the user's recovery tolerance across the visible Monday-to-Thursday sequence.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            }
+          ],
+          "weaknesses": [
+            "The revision reduces the workout from 30 minutes to 15 minutes and changes it to a lower-load mobility session, which directly addresses part of the prior fatigue and margin concern. However, the event is still specifically a Home Mobility Workout at 17:45-18:00 after an office work shift ending at 17:30, and the calendar still does not show how the user can be at home by 17:45.",
+            "The Monday evening sequence remains tight: work runs 09:00-17:30, the added home workout runs 17:45-18:00, and the mandatory Evening Lecture: Data Warehousing runs 18:30-21:30. The 30 minutes after the workout may need to cover hygiene, food, preparation, setup, or travel, depending on whether the lecture is remote or in person.",
+            "The rationale is appropriately cautious about unknown home access, lecture location, transit time, food, hygiene, and recovery, but the actual operation still depends on those same unknowns being favorable. Acknowledging the uncertainty does not by itself make the home placement practically supported.",
+            "Across the visible week, Monday through Thursday remain demanding: Monday has disrupted commuting, full work, added workout, and lecture; Tuesday has work, gym, and study until 21:45; Wednesday has work and lecture until 21:30; Thursday has work, gym, and study until 21:45. The added Monday session is brief, so it is not clearly excessive, but the plan still has limited demonstrated recovery margin early in the week.",
+            "The rationale refers to satisfying a requested workout in the post-work gap, but the original request is not available here and the technical validation explicitly does not verify request satisfaction, so that priority cannot be independently confirmed from the provided materials."
+          ],
+          "feedback": "The revised proposal is materially better than the prior version: it no longer schedules exercise immediately at 17:30, it cuts the session to 15 minutes, and it lowers intensity to mobility rather than a fuller workout. That makes the human load more proportionate to an already compressed Monday. The remaining issue is not the exercise duration itself; it is the location and transition dependency. A home workout at 17:45 still appears to require the user to be home or able to access a suitable home-like setting within 15 minutes of leaving a 09:00-17:30 office shift, while also being ready for an 18:30 mandatory lecture. If the user works from home, lives very close to work, or the lecture is remote and preparation needs are minimal, this could be manageable. If not, the plan may fail in practice or squeeze out basic transition, hygiene, food, or lecture-readiness time. The Proposer should either ground the home-access and lecture-readiness assumptions using its fuller context, or reconsider the workout format/location/distribution so the plan does not rely on an unsupported same-evening logistics chain."
+        }
+      ],
+      "unresolved_assumptions": [
+        {
+          "subject": "Suitable nearby workout space",
+          "assumption": "The user can perform a 10-minute no-equipment mobility session near the post-work location without needing travel, special facilities, privacy, or equipment.",
+          "evidence_gap": "The calendar shows work ending at 17:30 and the workout starting at 17:35, but it does not identify the user's exact location, available space, workplace norms, or any nearby suitable setting.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Lecture readiness after workout",
+          "assumption": "After the 17:35-17:45 mobility workout, the user can be ready for the mandatory Evening Lecture: Data Warehousing at 18:30.",
+          "evidence_gap": "The calendar does not show whether the lecture is remote, in the same area, or requires travel, nor whether setup, materials, food, hygiene, or other preparation are needed before 18:30.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Basic Monday evening needs",
+          "assumption": "Food, hygiene, transition, and brief recovery can fit around the work shift, the 17:35-17:45 workout, and the 18:30-21:30 lecture.",
+          "evidence_gap": "The visible Monday schedule contains no explicit dinner, cleanup, commute to lecture, preparation, or decompression time between work, workout, lecture, and sleep.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Requested post-work exercise requirement",
+          "assumption": "The added exercise needed to occur in the Monday post-work gap rather than being omitted, deferred, or handled elsewhere in the visible week.",
+          "evidence_gap": "The rationale refers to a requested post-work exercise, but the original request is not provided and the technical validation explicitly does not check request satisfaction or soft preferences.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Cumulative weekly workload tolerance",
+          "assumption": "Adding a short Monday mobility session remains sustainable alongside Tuesday gym plus study, Wednesday lecture, and Thursday gym plus study.",
+          "evidence_gap": "The rationale reduces the Monday exercise burden, but the user's recovery tolerance across the visible Monday-to-Thursday sequence is not verified.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    }
+  ],
+  "initial_proposal": {
+    "changes": [
+      {
+        "type": "move",
+        "event_id": "sleep_mon",
+        "title": null,
+        "from_start": null,
+        "to_start": "2027-05-02T23:00:00+01:00",
+        "to_end": "2027-05-03T06:45:00+01:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "commute_mon_am",
+        "title": null,
+        "from_start": null,
+        "to_start": "2027-05-03T07:45:00+01:00",
+        "to_end": "2027-05-03T09:00:00+01:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Short Home Workout",
+        "from_start": null,
+        "to_start": "2027-05-03T17:30:00+01:00",
+        "to_end": "2027-05-03T18:00:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "The protected work shift and evening lecture remain unchanged for punctuality.",
+        "The fixed sleep and commute changes match the only externally confirmed exceptions exactly.",
+        "The post-work calendar interval is free, but home location and onward travel feasibility are not confirmed.",
+        "No external gym availability or travel time is assumed."
+      ],
+      "priorities": [
+        "Work and education punctuality take precedence over convenience.",
+        "Sleep is preserved by shifting the sleep block earlier rather than only shortening it.",
+        "Health is supported with a short home workout that avoids adding an external venue dependency."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Place the workout later after the lecture.",
+          "rejected_because": "This avoids the tight post-work gap but does not satisfy the requested one-hour window."
+        },
+        {
+          "option": "Use an external gym session in the gap.",
+          "rejected_because": "The request and profile prefer a home workout because strike delays make an external trip impractical."
+        }
+      ],
+      "summary": "This plan uses the confirmed earlier wake-up and longer commute to protect the work start, keeps the evening lecture intact, and adds a short home workout in the free post-work gap despite uncertainty about actual home and lecture travel logistics."
+    }
+  },
+  "final_proposal": {
+    "changes": [
+      {
+        "type": "move",
+        "event_id": "sleep_mon",
+        "title": null,
+        "from_start": null,
+        "to_start": "2027-05-02T23:00:00+01:00",
+        "to_end": "2027-05-03T06:45:00+01:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "commute_mon_am",
+        "title": null,
+        "from_start": null,
+        "to_start": "2027-05-03T07:45:00+01:00",
+        "to_end": "2027-05-03T09:00:00+01:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Short No-Equipment Mobility Workout",
+        "from_start": null,
+        "to_start": "2027-05-03T17:35:00+01:00",
+        "to_end": "2027-05-03T17:45:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "Protected work and lecture events remain unchanged.",
+        "The fixed sleep and commute moves match the externally confirmed exceptions exactly.",
+        "The post-work gap is calendar-free, but home access, lecture location and transition time are unknown.",
+        "Food, hygiene and lecture preparation needs are not shown in the calendar.",
+        "No external gym, venue availability or extra travel is assumed."
+      ],
+      "priorities": [
+        "Work and education punctuality remain the highest priorities.",
+        "Sleep duration is preserved by moving the sleep block earlier.",
+        "Health is supported with a very short no-equipment session to reduce location and recovery demands.",
+        "The workout is placed early in the gap to leave the largest remaining buffer before the lecture."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Keep a home-specific workout later in the gap.",
+          "rejected_because": "Rejected because the calendar does not show that the user can get home after the office shift."
+        },
+        {
+          "option": "Schedule a longer 30-minute workout.",
+          "rejected_because": "Rejected because it would leave too little margin for transition, preparation and basic evening needs."
+        },
+        {
+          "option": "Use an external gym during the gap.",
+          "rejected_because": "Rejected because it adds venue and travel dependencies during a transit disruption."
+        },
+        {
+          "option": "Skip the Monday workout.",
+          "rejected_because": "Rejected because it would not satisfy the requested post-work exercise."
+        },
+        {
+          "option": "Move the workout after the lecture.",
+          "rejected_because": "Rejected because it misses the requested gap and further compresses late-evening recovery."
+        }
+      ],
+      "summary": "This plan keeps the confirmed earlier sleep and commute changes, protects the fixed work shift and lecture, and replaces the unsupported home-specific workout with a brief no-equipment mobility session in the free gap; the main trade-off is that practical feasibility still depends on having a suitable nearby space and enough transition margin."
+    }
+  },
+  "final_score": 4.0,
+  "refinements": 2,
+  "critic_accepted": true,
+  "decision": "defer",
+  "reasons": [
+    "mais de 2 mudanças",
+    "toca em evento importante (sleep_mon, importância 4)"
+  ],
+  "status": "proposal_ready",
+  "critic_input_version": "final_calendar_v1",
+  "critic_policy_version": "uncertainty_review_v2",
+  "result_calendar_version": "validated_added_metadata_v2",
+  "final_result_calendar": {
+    "timezone": "Europe/Lisbon",
+    "coverage": "all_events_in_scenario_after_simulation",
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-05-02T23:00:00+01:00",
+        "end": "2027-05-03T06:45:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Earlier wake-up for transit disruption.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "commute_mon_am",
+        "title": "Regular Commute: Home to Office",
+        "start": "2027-05-03T07:45:00+01:00",
+        "end": "2027-05-03T09:00:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Normal 45-minute commute before the confirmed strike adds 30 minutes.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "work_mon",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-05-03T09:00:00+01:00",
+        "end": "2027-05-03T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Daytime work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_2",
+        "title": "Short No-Equipment Mobility Workout",
+        "start": "2027-05-03T17:35:00+01:00",
+        "end": "2027-05-03T17:45:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "class_mon",
+        "title": "Evening Lecture: Data Warehousing",
+        "start": "2027-05-03T18:30:00+01:00",
+        "end": "2027-05-03T21:30:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "professor",
+          "classmates"
+        ],
+        "description": "Mandatory evening class.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-05-03T23:30:00+01:00",
+        "end": "2027-05-04T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_tue",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-05-04T09:00:00+01:00",
+        "end": "2027-05-04T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Daytime work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_tue",
+        "title": "Gym: Strength Workout",
+        "start": "2027-05-04T18:00:00+01:00",
+        "end": "2027-05-04T19:15:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "study_tue",
+        "title": "Evening Study: Data Warehousing Labs",
+        "start": "2027-05-04T19:45:00+01:00",
+        "end": "2027-05-04T21:45:00+01:00",
+        "category": "education",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lab practice.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-05-04T23:45:00+01:00",
+        "end": "2027-05-05T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_wed",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-05-05T09:00:00+01:00",
+        "end": "2027-05-05T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Daytime work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "class_wed",
+        "title": "Evening Lecture: Project Management",
+        "start": "2027-05-05T18:30:00+01:00",
+        "end": "2027-05-05T21:30:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "professor",
+          "classmates"
+        ],
+        "description": "Mandatory evening class.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-05-05T23:45:00+01:00",
+        "end": "2027-05-06T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_thu",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-05-06T09:00:00+01:00",
+        "end": "2027-05-06T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Daytime work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_thu",
+        "title": "Gym: Cardio & Conditioning",
+        "start": "2027-05-06T18:00:00+01:00",
+        "end": "2027-05-06T19:15:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "study_thu",
+        "title": "Evening Study: Project Management Cases",
+        "start": "2027-05-06T19:45:00+01:00",
+        "end": "2027-05-06T21:45:00+01:00",
+        "category": "education",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Case study.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-05-06T23:45:00+01:00",
+        "end": "2027-05-07T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_fri",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-05-07T09:00:00+01:00",
+        "end": "2027-05-07T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Friday work shift.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "personal_fri",
+        "title": "Dinner & Rest",
+        "start": "2027-05-07T18:30:00+01:00",
+        "end": "2027-05-07T21:30:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Friday evening rest.",
+        "origin": "existing",
+        "change_status": "preserved"
+      }
+    ],
+    "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+  },
+  "final_unresolved_assumptions": [
+    {
+      "subject": "Suitable nearby workout space",
+      "assumption": "The user can perform a 10-minute no-equipment mobility session near the post-work location without needing travel, special facilities, privacy, or equipment.",
+      "evidence_gap": "The calendar shows work ending at 17:30 and the workout starting at 17:35, but it does not identify the user's exact location, available space, workplace norms, or any nearby suitable setting.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Lecture readiness after workout",
+      "assumption": "After the 17:35-17:45 mobility workout, the user can be ready for the mandatory Evening Lecture: Data Warehousing at 18:30.",
+      "evidence_gap": "The calendar does not show whether the lecture is remote, in the same area, or requires travel, nor whether setup, materials, food, hygiene, or other preparation are needed before 18:30.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Basic Monday evening needs",
+      "assumption": "Food, hygiene, transition, and brief recovery can fit around the work shift, the 17:35-17:45 workout, and the 18:30-21:30 lecture.",
+      "evidence_gap": "The visible Monday schedule contains no explicit dinner, cleanup, commute to lecture, preparation, or decompression time between work, workout, lecture, and sleep.",
+      "potential_impact": "material",
+      "verification_source": "unknown"
+    },
+    {
+      "subject": "Requested post-work exercise requirement",
+      "assumption": "The added exercise needed to occur in the Monday post-work gap rather than being omitted, deferred, or handled elsewhere in the visible week.",
+      "evidence_gap": "The rationale refers to a requested post-work exercise, but the original request is not provided and the technical validation explicitly does not check request satisfaction or soft preferences.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Cumulative weekly workload tolerance",
+      "assumption": "Adding a short Monday mobility session remains sustainable alongside Tuesday gym plus study, Wednesday lecture, and Thursday gym plus study.",
+      "evidence_gap": "The rationale reduces the Monday exercise burden, but the user's recovery tolerance across the visible Monday-to-Thursday sequence is not verified.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    }
+  ],
+  "uncertainty_history": [
+    {
+      "iteration": 0,
+      "unresolved_assumptions": [
+        {
+          "subject": "Feasibility of home workout location",
+          "assumption": "The user can perform a home workout at 17:30 immediately after the 09:00-17:30 office shift.",
+          "evidence_gap": "The calendar shows a commute from home to office in the morning but no post-work travel home before the home workout. The rationale explicitly states that home location feasibility is not confirmed.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Feasibility of reaching or attending the evening lecture",
+          "assumption": "After finishing the home workout at 18:00, the user can be ready for the 18:30 mandatory lecture without compromising punctuality.",
+          "evidence_gap": "The calendar does not show whether the lecture is remote, nearby, or requires travel, nor whether preparation or setup time is needed.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Basic recovery and personal needs on Monday evening",
+          "assumption": "The user can fit food, hygiene, transition and recovery needs around the 17:30-18:00 workout and 18:30-21:30 lecture.",
+          "evidence_gap": "The visible Monday schedule leaves only 30 minutes between the workout and lecture and does not identify when dinner, cleanup or transition happens.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Requested workout timing constraint",
+          "assumption": "The added workout needed to occur within the specific post-work one-hour window referenced by the rationale.",
+          "evidence_gap": "The original request is not provided, and the technical validation explicitly does not check request satisfaction or soft preference satisfaction.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Cumulative weekly workload tolerance",
+          "assumption": "Adding a Monday workout remains sustainable alongside Tuesday gym plus study, Wednesday lecture, and Thursday gym plus study.",
+          "evidence_gap": "The rationale does not discuss cumulative fatigue across the visible week or the user's recovery tolerance.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    },
+    {
+      "iteration": 1,
+      "unresolved_assumptions": [
+        {
+          "subject": "Home access after work",
+          "assumption": "The user can be at home or in a suitable home setting by 17:45 after the 09:00-17:30 office work shift.",
+          "evidence_gap": "The calendar shows a morning commute from Home to Office at 07:45-09:00 and work at 09:00-17:30, but no return commute or indication that the user is already at home before the 17:45 Home Mobility Workout.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Lecture readiness after workout",
+          "assumption": "After the 17:45-18:00 home mobility workout, the user can be ready for the mandatory Evening Lecture: Data Warehousing at 18:30.",
+          "evidence_gap": "The calendar does not show whether the lecture is remote, nearby, or requires travel, nor whether setup, materials, food, or hygiene are needed between 18:00 and 18:30.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Basic Monday evening needs",
+          "assumption": "Food, hygiene, transition, and recovery needs can fit around the 17:45-18:00 workout and the 18:30-21:30 lecture.",
+          "evidence_gap": "The visible Monday schedule has work until 17:30, workout until 18:00, lecture from 18:30 to 21:30, and sleep at 23:30, but no explicit dinner, cleanup, commute, or decompression time.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Requested post-work workout requirement",
+          "assumption": "The added workout needs to occur in the Monday post-work gap rather than being deferred, omitted, or handled elsewhere in the visible week.",
+          "evidence_gap": "The rationale references a requested workout in the post-work gap, but the original request is not provided and technical validation does not check request satisfaction.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Cumulative early-week workload tolerance",
+          "assumption": "Adding a Monday mobility session remains sustainable alongside Tuesday gym plus study, Wednesday lecture, and Thursday gym plus study.",
+          "evidence_gap": "The rationale notes Monday is already tight and makes the session brief, but it does not substantiate the user's recovery tolerance across the visible Monday-to-Thursday sequence.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    },
+    {
+      "iteration": 2,
+      "unresolved_assumptions": [
+        {
+          "subject": "Suitable nearby workout space",
+          "assumption": "The user can perform a 10-minute no-equipment mobility session near the post-work location without needing travel, special facilities, privacy, or equipment.",
+          "evidence_gap": "The calendar shows work ending at 17:30 and the workout starting at 17:35, but it does not identify the user's exact location, available space, workplace norms, or any nearby suitable setting.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Lecture readiness after workout",
+          "assumption": "After the 17:35-17:45 mobility workout, the user can be ready for the mandatory Evening Lecture: Data Warehousing at 18:30.",
+          "evidence_gap": "The calendar does not show whether the lecture is remote, in the same area, or requires travel, nor whether setup, materials, food, hygiene, or other preparation are needed before 18:30.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Basic Monday evening needs",
+          "assumption": "Food, hygiene, transition, and brief recovery can fit around the work shift, the 17:35-17:45 workout, and the 18:30-21:30 lecture.",
+          "evidence_gap": "The visible Monday schedule contains no explicit dinner, cleanup, commute to lecture, preparation, or decompression time between work, workout, lecture, and sleep.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Requested post-work exercise requirement",
+          "assumption": "The added exercise needed to occur in the Monday post-work gap rather than being omitted, deferred, or handled elsewhere in the visible week.",
+          "evidence_gap": "The rationale refers to a requested post-work exercise, but the original request is not provided and the technical validation explicitly does not check request satisfaction or soft preferences.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Cumulative weekly workload tolerance",
+          "assumption": "Adding a short Monday mobility session remains sustainable alongside Tuesday gym plus study, Wednesday lecture, and Thursday gym plus study.",
+          "evidence_gap": "The rationale reduces the Monday exercise burden, but the user's recovery tolerance across the visible Monday-to-Thursday sequence is not verified.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    }
+  ],
+  "schema_version": "2.0",
+  "profile_id": "working_student_01__working_student_transit_strike_commute_delay_006",
+  "scenario_sha256": "da1ccb8347ded01e5da7d946403eed3eaeff0207433ee8618248d2484e69892f",
+  "aggregate_requirements_sha256": null,
+  "confirmed_changes_sha256": "469365332ce8bb5ff77a89b02b2cefde01d9aaa2aa10bddbcc695b57e172f4d2",
+  "simulator_version": "calendar_v2_validated_added_metadata_v2",
+  "dataset_manifest_sha256": "28af38846fb8995651d5f63ab63402e36147dc0915a2bfcd5379747ea531ffad",
+  "split": "train",
+  "run_id": "1ec7592383e348ae97780055d47b71f4",
+  "experiment_id": null,
+  "repeat_index": 0,
+  "generated_at": "2026-11-25T09:53:55.047895+00:00",
+  "prompt_versions": {
+    "proposer_sha256": "ae6fa59cccb86c31f34f66d07d241660b1feadf852ebf1b594bc85addab86985",
+    "proposer_wire_schema_version": "compact_proposal_v1",
+    "proposer_wire_schema_sha256": "f504fbcd7e939c43e055e2f188feb22097a284bcd9b043227d868e559547b865",
+    "proposer_revision_sha256": "3f0fe7f221013700694a22984560612013e9804072ffde4538e1329b9708ac95",
+    "critic_sha256": "1686688cdd4bc63abb12e6633ef9dbb9b62d69b69aba1c4805a201657cc5bb34"
+  },
+  "seconds": 105.687,
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [],
+    "valid": true,
+    "confirmed_change_authorizations": [
+      {
+        "event_id": "commute_mon_am",
+        "type": "move",
+        "to_start": "2027-05-03T07:45:00+01:00",
+        "to_end": "2027-05-03T09:00:00+01:00"
+      },
+      {
+        "event_id": "sleep_mon",
+        "type": "move",
+        "to_start": "2027-05-02T23:00:00+01:00",
+        "to_end": "2027-05-03T06:45:00+01:00"
+      }
+    ]
+  }
+}

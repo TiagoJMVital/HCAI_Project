@@ -1,0 +1,297 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "working_student_exam_week_work_meeting_002",
+  "family_id": "working_student_schedule_conflict",
+  "profile": {
+    "profile_id": "working_student_01__working_student_exam_week_work_meeting_002",
+    "description": "Working student during exam period balancing daytime employment, intensive evening exam prep, workouts, and sleep.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "work": 5,
+      "education": 5,
+      "sleep": 4,
+      "health": 4,
+      "personal": 3
+    },
+    "hard_constraints": [
+      {
+        "id": "work_meeting_mandatory",
+        "description": "Mandatory Q1 client alignment meeting at work on Thursday from 16:00 to 17:30.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "work"
+        ]
+      },
+      {
+        "description": "Protect scheduled evening exams and lectures.",
+        "event_ids": [
+          "exam_wed"
+        ],
+        "id": "exam_and_evening_classes",
+        "rule_type": "protect_events_by_id"
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "stress_relief_exercise",
+        "description": "Keep at least 3 exercise blocks during exam week to manage stress.",
+        "weight": 4
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Personal social events are paused during exam week to prioritize work and exam preparation."
+    }
+  },
+  "now": "2027-03-08T07:30:00+00:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-03-07T23:30:00+00:00",
+        "end": "2027-03-08T07:15:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "work_mon",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-03-08T09:00:00+00:00",
+        "end": "2027-03-08T17:30:00+00:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Daytime job."
+      },
+      {
+        "id": "study_mon",
+        "title": "Exam Prep: Corporate Finance Past Papers",
+        "start": "2027-03-08T18:15:00+00:00",
+        "end": "2027-03-08T21:30:00+00:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Intensive exam study."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-03-08T23:30:00+00:00",
+        "end": "2027-03-09T07:15:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "work_tue",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-03-09T09:00:00+00:00",
+        "end": "2027-03-09T17:30:00+00:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Daytime job."
+      },
+      {
+        "id": "gym_tue",
+        "title": "Gym: Cardio & Decompression",
+        "start": "2027-03-09T18:00:00+00:00",
+        "end": "2027-03-09T19:00:00+00:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Stress-relief workout."
+      },
+      {
+        "id": "study_tue",
+        "title": "Exam Prep: Corporate Finance Summary & Drills",
+        "start": "2027-03-09T19:30:00+00:00",
+        "end": "2027-03-09T22:00:00+00:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Evening exam study."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-03-09T23:30:00+00:00",
+        "end": "2027-03-10T07:15:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "work_wed",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-03-10T09:00:00+00:00",
+        "end": "2027-03-10T17:30:00+00:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Daytime job."
+      },
+      {
+        "id": "exam_wed",
+        "title": "Evening University Exam: Corporate Finance",
+        "start": "2027-03-10T18:30:00+00:00",
+        "end": "2027-03-10T21:00:00+00:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "professor"
+        ],
+        "description": "Official evening exam."
+      },
+      {
+        "id": "dinner_rest_wed",
+        "title": "Post-Exam Dinner & Recovery",
+        "start": "2027-03-10T21:15:00+00:00",
+        "end": "2027-03-10T22:30:00+00:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Dinner and mental rest."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-03-10T23:30:00+00:00",
+        "end": "2027-03-11T07:15:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "work_thu",
+        "title": "Daytime Job: Core Shift & Q1 Client Meeting",
+        "start": "2027-03-11T09:00:00+00:00",
+        "end": "2027-03-11T17:30:00+00:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "client",
+          "manager"
+        ],
+        "description": "Work shift with mandatory afternoon meeting."
+      },
+      {
+        "id": "gym_thu",
+        "title": "Evening Strength & Mobility Session",
+        "start": "2027-03-11T19:45:00+00:00",
+        "end": "2027-03-11T20:45:00+00:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-03-11T23:30:00+00:00",
+        "end": "2027-03-12T07:15:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "work_fri",
+        "title": "Daytime Job: Core Shift & Weekly Handover",
+        "start": "2027-03-12T09:00:00+00:00",
+        "end": "2027-03-12T17:30:00+00:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "team"
+        ],
+        "description": "Friday work shift."
+      },
+      {
+        "id": "study_fri",
+        "title": "Exam Prep: Strategic Management Final Review",
+        "start": "2027-03-12T18:15:00+00:00",
+        "end": "2027-03-12T20:45:00+00:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Final review before weekend."
+      },
+      {
+        "id": "gym_fri",
+        "title": "Gym: Full Body Workout",
+        "start": "2027-03-12T21:00:00+00:00",
+        "end": "2027-03-12T22:00:00+00:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Late workout."
+      }
+    ]
+  },
+  "user_request": "I am in exam week and have a mandatory Q1 client meeting at work on Thursday from 16:00 to 17:30, which delays my return home. Please organize Thursday evening with two study blocks for Strategic Management, keep my workout, and ensure I still get enough sleep before Friday's workday."
+}

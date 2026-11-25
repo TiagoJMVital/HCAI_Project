@@ -1,0 +1,218 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "freelancer_flexible_tax_audit_accountant_meeting_001",
+  "family_id": "freelancer_schedule_conflict",
+  "profile": {
+    "profile_id": "freelancer_flexible_01__freelancer_flexible_tax_audit_accountant_meeting_001",
+    "description": "Freelance web developer with flexible hours, balancing intense client coding with cycling and a mandatory accountant meeting.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "health": 5,
+      "social": 4,
+      "work": 4,
+      "sleep": 4,
+      "household": 3
+    },
+    "hard_constraints": [
+      {
+        "id": "accountant_meeting",
+        "description": "Mandatory tax review and quarterly declaration meeting with accountant on Thursday at 14:00.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "exam"
+        ]
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "cycling_routine",
+        "description": "Prefer long morning cycling sessions on Tuesdays and Thursdays.",
+        "weight": 4
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Accountant meeting on Thursday is fixed. Cycling sessions can be adjusted around work blocks."
+    }
+  },
+  "now": "2027-03-22T08:00:00+00:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-03-21T23:30:00+00:00",
+        "end": "2027-03-22T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "work_mon",
+        "title": "Development Work Block",
+        "start": "2027-03-22T09:00:00+00:00",
+        "end": "2027-03-22T17:00:00+00:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "8 hours work."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-03-22T23:30:00+00:00",
+        "end": "2027-03-23T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "cycling_tue",
+        "title": "Long Cycling Training",
+        "start": "2027-03-23T08:00:00+00:00",
+        "end": "2027-03-23T11:00:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "3-hour bike ride."
+      },
+      {
+        "id": "work_tue",
+        "title": "Development Work Block",
+        "start": "2027-03-23T12:00:00+00:00",
+        "end": "2027-03-23T18:00:00+00:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "6 hours work."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-03-23T23:30:00+00:00",
+        "end": "2027-03-24T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "work_wed",
+        "title": "Development Work Block",
+        "start": "2027-03-24T09:00:00+00:00",
+        "end": "2027-03-24T17:00:00+00:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "8 hours work."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-03-24T23:30:00+00:00",
+        "end": "2027-03-25T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "cycling_thu",
+        "title": "Cycling Training",
+        "start": "2027-03-25T08:00:00+00:00",
+        "end": "2027-03-25T10:30:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "2.5-hour ride."
+      },
+      {
+        "id": "accountant_thu",
+        "title": "Mandatory Accountant Tax Review",
+        "start": "2027-03-25T14:00:00+00:00",
+        "end": "2027-03-25T16:00:00+00:00",
+        "category": "exam",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "accountant"
+        ],
+        "description": "Fixed tax review meeting."
+      },
+      {
+        "id": "work_thu",
+        "title": "Development Work Block",
+        "start": "2027-03-25T16:30:00+00:00",
+        "end": "2027-03-25T19:30:00+00:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "3 hours work."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-03-25T23:30:00+00:00",
+        "end": "2027-03-26T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "work_fri",
+        "title": "Development Work Block",
+        "start": "2027-03-26T09:00:00+00:00",
+        "end": "2027-03-26T16:00:00+00:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "7 hours work."
+      }
+    ]
+  },
+  "user_request": "My accountant just scheduled our mandatory quarterly tax review and declaration meeting for Thursday from 14:00 to 16:00 (including travel). This cuts into my Thursday afternoon work block. Since I need 32 hours of client development work across the week, please adjust my Thursday work hours and make up the difference on Monday or Wednesday while protecting my morning cycling workouts."
+}

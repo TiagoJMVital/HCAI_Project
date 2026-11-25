@@ -1,0 +1,430 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "cleaning_lady_last_minute_construction_cleanup_001",
+  "family_id": "cleaning_lady_schedule_conflict",
+  "profile": {
+    "profile_id": "cleaning_lady_flexible_01__cleaning_lady_last_minute_construction_cleanup_001",
+    "description": "Independent cleaning professional balancing regular clients with high-paying last-minute post-construction cleanups.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "family": 5,
+      "work": 4,
+      "health": 4,
+      "household": 3,
+      "social": 2
+    },
+    "hard_constraints": [
+      {
+        "id": "post_construction_job",
+        "description": "High-paying post-construction cleaning contract on Thursday from 09:00 to 15:00.",
+        "rule_type": "protect_events_by_id",
+        "event_ids": [
+          "construction_clean_thu"
+        ]
+      },
+      {
+        "id": "school_pickup",
+        "description": "Must pick up child at 16:30.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "family"
+        ]
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "reschedule",
+        "weight": 3,
+        "description": "Reschedule conflicting Thursday morning clients to Tuesday afternoon."
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Thursday post-construction job is fixed and takes priority."
+    }
+  },
+  "now": "2027-04-19T08:00:00+01:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-04-18T23:00:00+01:00",
+        "end": "2027-04-19T07:00:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "school_drop_mon",
+        "title": "School Drop-off",
+        "start": "2027-04-19T08:00:00+01:00",
+        "end": "2027-04-19T08:30:00+01:00",
+        "category": "family",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "child"
+        ],
+        "description": "School drop-off."
+      },
+      {
+        "id": "clean_mon",
+        "title": "Cleaning: Client A",
+        "start": "2027-04-19T09:00:00+01:00",
+        "end": "2027-04-19T13:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Morning cleaning."
+      },
+      {
+        "id": "lunch_mon",
+        "title": "Lunch",
+        "start": "2027-04-19T13:00:00+01:00",
+        "end": "2027-04-19T14:00:00+01:00",
+        "category": "household",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break."
+      },
+      {
+        "id": "clean_mon_pm",
+        "title": "Cleaning: Client B",
+        "start": "2027-04-19T14:30:00+01:00",
+        "end": "2027-04-19T16:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Afternoon cleaning."
+      },
+      {
+        "id": "school_pick_mon",
+        "title": "School Pick-up",
+        "start": "2027-04-19T16:30:00+01:00",
+        "end": "2027-04-19T17:00:00+01:00",
+        "category": "family",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "child"
+        ],
+        "description": "School pickup."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-04-19T23:00:00+01:00",
+        "end": "2027-04-20T07:00:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "school_drop_tue",
+        "title": "School Drop-off",
+        "start": "2027-04-20T08:00:00+01:00",
+        "end": "2027-04-20T08:30:00+01:00",
+        "category": "family",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "child"
+        ],
+        "description": "School drop-off."
+      },
+      {
+        "id": "clean_tue",
+        "title": "Cleaning: Client C",
+        "start": "2027-04-20T09:00:00+01:00",
+        "end": "2027-04-20T13:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Morning cleaning."
+      },
+      {
+        "id": "lunch_tue",
+        "title": "Lunch",
+        "start": "2027-04-20T13:00:00+01:00",
+        "end": "2027-04-20T14:00:00+01:00",
+        "category": "household",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break."
+      },
+      {
+        "id": "clean_tue_pm",
+        "title": "Rescheduled Cleaning: Client X (Thu Job)",
+        "start": "2027-04-20T14:30:00+01:00",
+        "end": "2027-04-20T16:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Moved cleaning."
+      },
+      {
+        "id": "school_pick_tue",
+        "title": "School Pick-up",
+        "start": "2027-04-20T16:30:00+01:00",
+        "end": "2027-04-20T17:00:00+01:00",
+        "category": "family",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "child"
+        ],
+        "description": "School pickup."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-04-20T23:00:00+01:00",
+        "end": "2027-04-21T07:00:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "school_drop_wed",
+        "title": "School Drop-off",
+        "start": "2027-04-21T08:00:00+01:00",
+        "end": "2027-04-21T08:30:00+01:00",
+        "category": "family",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "child"
+        ],
+        "description": "School drop-off."
+      },
+      {
+        "id": "clean_wed",
+        "title": "Cleaning: Client E",
+        "start": "2027-04-21T09:00:00+01:00",
+        "end": "2027-04-21T13:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Morning cleaning."
+      },
+      {
+        "id": "lunch_wed",
+        "title": "Lunch",
+        "start": "2027-04-21T13:00:00+01:00",
+        "end": "2027-04-21T14:00:00+01:00",
+        "category": "household",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break."
+      },
+      {
+        "id": "clean_wed_pm",
+        "title": "Cleaning: Client F",
+        "start": "2027-04-21T14:30:00+01:00",
+        "end": "2027-04-21T16:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Afternoon cleaning."
+      },
+      {
+        "id": "school_pick_wed",
+        "title": "School Pick-up",
+        "start": "2027-04-21T16:30:00+01:00",
+        "end": "2027-04-21T17:00:00+01:00",
+        "category": "family",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "child"
+        ],
+        "description": "School pickup."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-04-21T23:00:00+01:00",
+        "end": "2027-04-22T07:00:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "school_drop_thu",
+        "title": "School Drop-off",
+        "start": "2027-04-22T08:00:00+01:00",
+        "end": "2027-04-22T08:30:00+01:00",
+        "category": "family",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "child"
+        ],
+        "description": "School drop-off."
+      },
+      {
+        "id": "construction_clean_thu",
+        "title": "Post-Construction Deep Cleaning",
+        "start": "2027-04-22T09:00:00+01:00",
+        "end": "2027-04-22T15:00:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "High-paying special job."
+      },
+      {
+        "id": "school_pick_thu",
+        "title": "School Pick-up",
+        "start": "2027-04-22T16:30:00+01:00",
+        "end": "2027-04-22T17:00:00+01:00",
+        "category": "family",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "child"
+        ],
+        "description": "School pickup."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-04-22T23:00:00+01:00",
+        "end": "2027-04-23T07:00:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "school_drop_fri",
+        "title": "School Drop-off",
+        "start": "2027-04-23T08:00:00+01:00",
+        "end": "2027-04-23T08:30:00+01:00",
+        "category": "family",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "child"
+        ],
+        "description": "School drop-off."
+      },
+      {
+        "id": "clean_fri",
+        "title": "Cleaning: Client I",
+        "start": "2027-04-23T09:00:00+01:00",
+        "end": "2027-04-23T13:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Morning cleaning."
+      },
+      {
+        "id": "lunch_fri",
+        "title": "Lunch",
+        "start": "2027-04-23T13:00:00+01:00",
+        "end": "2027-04-23T14:00:00+01:00",
+        "category": "household",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break."
+      },
+      {
+        "id": "clean_fri_pm",
+        "title": "Cleaning: Client J",
+        "start": "2027-04-23T14:30:00+01:00",
+        "end": "2027-04-23T16:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Afternoon cleaning."
+      },
+      {
+        "id": "school_pick_fri",
+        "title": "School Pick-up",
+        "start": "2027-04-23T16:30:00+01:00",
+        "end": "2027-04-23T17:00:00+01:00",
+        "category": "family",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "child"
+        ],
+        "description": "School pickup."
+      }
+    ]
+  },
+  "user_request": "I just booked a lucrative post-construction deep cleaning job for Thursday from 09:00 to 15:00. This requires me to cancel my regular Thursday morning cleaning slot. Please clear Thursday morning, move the affected cleaning task to Tuesday afternoon, and ensure my school pickup remains protected."
+}

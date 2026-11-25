@@ -1,0 +1,389 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "high_school_student_test_skate_conflict_001",
+  "family_id": "high_school_student_schedule_conflict",
+  "profile": {
+    "profile_id": "high_school_student_01__high_school_student_test_skate_conflict_001",
+    "description": "High school student with fixed classes, tutoring, and catechesis, balancing gym workouts, skateboarding with friends, homework, and parental rides.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "education": 5,
+      "health": 4,
+      "social": 4,
+      "sleep": 4,
+      "household": 2
+    },
+    "hard_constraints": [
+      {
+        "id": "classes_mandatory",
+        "description": "All scheduled high school classes and tutoring sessions are mandatory.",
+        "rule_type": "protect_events_by_id",
+        "event_ids": [
+          "classes_mon",
+          "classes_tue_am",
+          "tutoring_tue",
+          "classes_wed",
+          "classes_thu_am",
+          "classes_fri"
+        ]
+      },
+      {
+        "id": "catechesis_mandatory",
+        "description": "Weekly catechesis session on Wednesday evening is fixed.",
+        "rule_type": "protect_events_by_id",
+        "event_ids": [
+          "catechesis_wed"
+        ]
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "gym_and_skate",
+        "description": "Maintain gym workouts and skateboarding sessions with friends whenever study goals allow.",
+        "weight": 4
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Skateboarding and casual hangouts are flexible and can shift around study needs or parental ride availability."
+    }
+  },
+  "now": "2027-02-15T07:30:00+00:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-02-14T23:30:00+00:00",
+        "end": "2027-02-15T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "School night sleep."
+      },
+      {
+        "id": "ride_school_mon",
+        "title": "Dad's Ride to High School",
+        "start": "2027-02-15T08:00:00+00:00",
+        "end": "2027-02-15T08:30:00+00:00",
+        "category": "household",
+        "importance": 3,
+        "fixed": true,
+        "participants": [
+          "user",
+          "father"
+        ],
+        "description": "Morning ride with dad."
+      },
+      {
+        "id": "classes_mon",
+        "title": "High School Classes (8h)",
+        "start": "2027-02-15T08:30:00+00:00",
+        "end": "2027-02-15T17:30:00+00:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "classmates"
+        ],
+        "description": "Full day of classes with lunch break."
+      },
+      {
+        "id": "gym_mon",
+        "title": "Gym Session",
+        "start": "2027-02-15T18:00:00+00:00",
+        "end": "2027-02-15T19:15:00+00:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Afternoon workout."
+      },
+      {
+        "id": "dinner_hw_mon",
+        "title": "Dinner & Homework",
+        "start": "2027-02-15T19:45:00+00:00",
+        "end": "2027-02-15T22:00:00+00:00",
+        "category": "education",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "family"
+        ],
+        "description": "Family dinner and daily assignments."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-02-15T23:30:00+00:00",
+        "end": "2027-02-16T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "School night sleep."
+      },
+      {
+        "id": "classes_tue_am",
+        "title": "High School Morning Classes",
+        "start": "2027-02-16T08:30:00+00:00",
+        "end": "2027-02-16T13:30:00+00:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "classmates"
+        ],
+        "description": "Morning classes."
+      },
+      {
+        "id": "tutoring_tue",
+        "title": "Math Tutoring Session",
+        "start": "2027-02-16T14:30:00+00:00",
+        "end": "2027-02-16T16:00:00+00:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "tutor"
+        ],
+        "description": "Fixed math tutoring."
+      },
+      {
+        "id": "skate_tue",
+        "title": "Skateboarding with Friends at Park",
+        "start": "2027-02-16T16:30:00+00:00",
+        "end": "2027-02-16T18:30:00+00:00",
+        "category": "social",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "friends"
+        ],
+        "description": "Free afternoon skate session."
+      },
+      {
+        "id": "gym_tue",
+        "title": "Gym Session",
+        "start": "2027-02-16T18:45:00+00:00",
+        "end": "2027-02-16T20:00:00+00:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Evening workout."
+      },
+      {
+        "id": "dinner_tue",
+        "title": "Dinner & Study",
+        "start": "2027-02-16T20:30:00+00:00",
+        "end": "2027-02-16T22:30:00+00:00",
+        "category": "education",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "family"
+        ],
+        "description": "Dinner and review."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-02-16T23:30:00+00:00",
+        "end": "2027-02-17T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "School night sleep."
+      },
+      {
+        "id": "classes_wed",
+        "title": "High School Classes (8h)",
+        "start": "2027-02-17T08:30:00+00:00",
+        "end": "2027-02-17T17:30:00+00:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "classmates"
+        ],
+        "description": "Full school day."
+      },
+      {
+        "id": "catechesis_wed",
+        "title": "Catechesis Class",
+        "start": "2027-02-17T18:00:00+00:00",
+        "end": "2027-02-17T19:30:00+00:00",
+        "category": "social",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user",
+          "catechist",
+          "group"
+        ],
+        "description": "Fixed weekly catechesis."
+      },
+      {
+        "id": "dinner_wed",
+        "title": "Dinner & Room Cleanup",
+        "start": "2027-02-17T20:00:00+00:00",
+        "end": "2027-02-17T22:00:00+00:00",
+        "category": "household",
+        "importance": 2,
+        "fixed": false,
+        "participants": [
+          "user",
+          "family"
+        ],
+        "description": "Dinner and chores."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-02-17T23:30:00+00:00",
+        "end": "2027-02-18T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "School night sleep."
+      },
+      {
+        "id": "classes_thu_am",
+        "title": "High School Morning Classes",
+        "start": "2027-02-18T08:30:00+00:00",
+        "end": "2027-02-18T13:30:00+00:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "classmates"
+        ],
+        "description": "Morning classes."
+      },
+      {
+        "id": "gym_thu",
+        "title": "Gym Session",
+        "start": "2027-02-18T14:30:00+00:00",
+        "end": "2027-02-18T16:00:00+00:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Free afternoon workout."
+      },
+      {
+        "id": "hangout_thu",
+        "title": "Skate & Hangout with Friends",
+        "start": "2027-02-18T16:30:00+00:00",
+        "end": "2027-02-18T19:30:00+00:00",
+        "category": "social",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "friends"
+        ],
+        "description": "Afternoon with friends."
+      },
+      {
+        "id": "dinner_thu",
+        "title": "Dinner & Homework",
+        "start": "2027-02-18T20:00:00+00:00",
+        "end": "2027-02-18T22:00:00+00:00",
+        "category": "education",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "family"
+        ],
+        "description": "Dinner and homework."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-02-18T23:30:00+00:00",
+        "end": "2027-02-19T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "School night sleep."
+      },
+      {
+        "id": "classes_fri",
+        "title": "High School Classes (8h)",
+        "start": "2027-02-19T08:30:00+00:00",
+        "end": "2027-02-19T17:30:00+00:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "classmates"
+        ],
+        "description": "Friday classes."
+      },
+      {
+        "id": "gym_fri",
+        "title": "Gym Session",
+        "start": "2027-02-19T18:00:00+00:00",
+        "end": "2027-02-19T19:15:00+00:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "End of week gym."
+      },
+      {
+        "id": "social_fri",
+        "title": "Pizza & Gaming Night with Friends",
+        "start": "2027-02-19T20:00:00+00:00",
+        "end": "2027-02-19T23:00:00+00:00",
+        "category": "social",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "friends"
+        ],
+        "description": "Friday social hangout."
+      }
+    ]
+  },
+  "user_request": "My physics teacher just announced a major test for Thursday morning, and my friends invited me to go skateboarding on Thursday afternoon (16:30 to 19:30). Please help me carve out dedicated physics study time before the Thursday morning test, especially on Wednesday night; use Thursday afternoon only for follow-up if useful while keeping my gym workout and respecting my catechesis."
+}

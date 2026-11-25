@@ -1,0 +1,257 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "freelancer_flexible_industry_networking_dinner_001",
+  "family_id": "freelancer_schedule_conflict",
+  "profile": {
+    "profile_id": "freelancer_flexible_01__freelancer_flexible_industry_networking_dinner_001",
+    "description": "Freelance product manager working remotely, balancing client commitments with industry networking events.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "health": 5,
+      "social": 4,
+      "work": 4,
+      "sleep": 4,
+      "household": 3
+    },
+    "hard_constraints": [
+      {
+        "id": "networking_dinner",
+        "description": "Mandatory industry networking dinner on Wednesday at 19:30.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "social"
+        ]
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "morning_running",
+        "description": "Maintain morning runs.",
+        "weight": 4
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Wednesday networking dinner is fixed. Work blocks are flexible."
+    }
+  },
+  "now": "2027-05-17T08:30:00+01:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-05-16T23:30:00+01:00",
+        "end": "2027-05-17T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "run_mon",
+        "title": "Morning Run",
+        "start": "2027-05-17T08:00:00+01:00",
+        "end": "2027-05-17T09:00:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Run."
+      },
+      {
+        "id": "work_mon",
+        "title": "Consulting Work Block",
+        "start": "2027-05-17T10:00:00+01:00",
+        "end": "2027-05-17T18:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "8 hours work."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-05-17T23:30:00+01:00",
+        "end": "2027-05-18T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "run_tue",
+        "title": "Morning Run",
+        "start": "2027-05-18T08:00:00+01:00",
+        "end": "2027-05-18T09:00:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Run."
+      },
+      {
+        "id": "work_tue",
+        "title": "Consulting Work Block",
+        "start": "2027-05-18T10:00:00+01:00",
+        "end": "2027-05-18T18:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "8 hours work."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-05-18T23:30:00+01:00",
+        "end": "2027-05-19T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "run_wed",
+        "title": "Morning Run",
+        "start": "2027-05-19T08:00:00+01:00",
+        "end": "2027-05-19T09:00:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Run."
+      },
+      {
+        "id": "work_wed",
+        "title": "Consulting Work Block",
+        "start": "2027-05-19T10:00:00+01:00",
+        "end": "2027-05-19T17:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "7 hours work."
+      },
+      {
+        "id": "networking_wed",
+        "title": "Industry Networking Dinner",
+        "start": "2027-05-19T19:30:00+01:00",
+        "end": "2027-05-19T23:00:00+01:00",
+        "category": "social",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "professionals"
+        ],
+        "description": "Fixed dinner event."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-05-19T23:30:00+01:00",
+        "end": "2027-05-20T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "run_thu",
+        "title": "Morning Run",
+        "start": "2027-05-20T08:00:00+01:00",
+        "end": "2027-05-20T09:00:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Run."
+      },
+      {
+        "id": "work_thu",
+        "title": "Consulting Work Block",
+        "start": "2027-05-20T10:00:00+01:00",
+        "end": "2027-05-20T17:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "7 hours work."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-05-20T23:30:00+01:00",
+        "end": "2027-05-21T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "run_fri",
+        "title": "Morning Run",
+        "start": "2027-05-21T08:00:00+01:00",
+        "end": "2027-05-21T09:00:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Run."
+      },
+      {
+        "id": "work_fri",
+        "title": "Consulting Work Block",
+        "start": "2027-05-21T10:00:00+01:00",
+        "end": "2027-05-21T12:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "2 hours work."
+      }
+    ]
+  },
+  "user_request": "I have an industry networking dinner on Wednesday night from 19:30 to 23:00. Since I need 32 hours of work across the week, Wednesday's work block is slightly reduced. Please adjust Wednesday's schedule and distribute the remaining hours across Monday, Tuesday, Thursday, and Friday."
+}

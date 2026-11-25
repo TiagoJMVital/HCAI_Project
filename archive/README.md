@@ -8,4 +8,4 @@ The old data and source files also remain recoverable from the repository's Git 
 
 ## Scenario source archive (2026-11-20)
 
-`dataset_sources/` contains the original and intermediate ZIPs removed from the project root after byte-for-byte verification of their former working directories. It is ignored by Git to avoid duplicate dataset files in commits. The current usable candidate is `../../scenarios/` with `../../Cenarios_v2_100_final.zip`; historical ZIPs here are retained only for provenance/recovery, not as active benchmark inputs. Hashes and phase-specific decisions are documented in `../docs/scenario_audit.md`.
+`dataset_sources/` contains the original and intermediate ZIPs removed from the project root after byte-for-byte verification of their former working directories. It is ignored by Git to avoid duplicate dataset files in commits. The active dataset is the repository-owned `../scenarios/`; `../../Cenarios_v2_100_final.zip`, when present, is its archival package. Historical ZIPs here are retained only for provenance/recovery, not as active benchmark inputs. Hashes and phase-specific decisions are documented in `../docs/scenario_audit.md`.

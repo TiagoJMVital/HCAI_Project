@@ -1,0 +1,367 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "elite_athlete_student_national_championship_taper_001",
+  "family_id": "elite_athlete_student_schedule_conflict",
+  "profile": {
+    "profile_id": "elite_athlete_student_01__elite_athlete_student_national_championship_taper_001",
+    "description": "High-performance student-athlete competing at national/international level while pursuing an undergraduate degree, balancing twice-daily training sessions, strict sleep hygiene, university classes, and social life.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "training": 5,
+      "sleep": 5,
+      "exams": 4,
+      "classes": 3,
+      "physio": 3,
+      "social": 2
+    },
+    "hard_constraints": [
+      {
+        "id": "training_sessions",
+        "description": "Championship simulation training slots (10:00–12:00 and 15:00–17:00) are strictly fixed.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "training"
+        ]
+      },
+      {
+        "id": "sleep_protection",
+        "description": "The athlete must sleep at least eight hours every night.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "sleep"
+        ]
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "study_continuity",
+        "description": "Maintain at least 6 hours of self-study during early mornings or evenings so academic progress does not stall during championship week.",
+        "weight": 3
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Morning classes overlapping with 10:00 championship simulation trainings can be skipped. Mid-term test date requires professor confirmation."
+    }
+  },
+  "now": "2027-04-05T07:00:00+01:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-04-04T23:00:00+01:00",
+        "end": "2027-04-05T07:00:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block."
+      },
+      {
+        "id": "training_am_mon",
+        "title": "Morning Training",
+        "start": "2027-04-05T07:30:00+01:00",
+        "end": "2027-04-05T09:00:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Old schedule (moving to 10:00–12:00)."
+      },
+      {
+        "id": "class_algo_mon",
+        "title": "Algorithms & Data Structures Lecture",
+        "start": "2027-04-05T10:00:00+01:00",
+        "end": "2027-04-05T12:00:00+01:00",
+        "category": "classes",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Morning lecture."
+      },
+      {
+        "id": "lunch_mon",
+        "title": "Lunch",
+        "start": "2027-04-05T12:30:00+01:00",
+        "end": "2027-04-05T13:30:00+01:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break."
+      },
+      {
+        "id": "training_pm_mon",
+        "title": "Afternoon Training",
+        "start": "2027-04-05T16:30:00+01:00",
+        "end": "2027-04-05T18:30:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Old schedule (moving to 15:00–17:00)."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-04-05T23:00:00+01:00",
+        "end": "2027-04-06T07:00:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block."
+      },
+      {
+        "id": "training_am_tue",
+        "title": "Morning Training",
+        "start": "2027-04-06T07:30:00+01:00",
+        "end": "2027-04-06T09:00:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Moving to 10:00–12:00."
+      },
+      {
+        "id": "class_db_tue",
+        "title": "Database Systems Lecture",
+        "start": "2027-04-06T10:00:00+01:00",
+        "end": "2027-04-06T12:00:00+01:00",
+        "category": "classes",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Morning lecture."
+      },
+      {
+        "id": "lunch_tue",
+        "title": "Lunch",
+        "start": "2027-04-06T12:30:00+01:00",
+        "end": "2027-04-06T13:30:00+01:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break."
+      },
+      {
+        "id": "training_pm_tue",
+        "title": "Afternoon Training",
+        "start": "2027-04-06T16:30:00+01:00",
+        "end": "2027-04-06T18:30:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Moving to 15:00–17:00."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-04-06T23:00:00+01:00",
+        "end": "2027-04-07T07:00:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block."
+      },
+      {
+        "id": "training_am_wed",
+        "title": "Morning Training",
+        "start": "2027-04-07T07:30:00+01:00",
+        "end": "2027-04-07T09:00:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Moving to 10:00–12:00."
+      },
+      {
+        "id": "midterm_algo_wed",
+        "title": "Algorithms Mid-Term Quiz",
+        "start": "2027-04-07T10:30:00+01:00",
+        "end": "2027-04-07T11:30:00+01:00",
+        "category": "exam",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "professor"
+        ],
+        "description": "Graded quiz; professor offers an alternative athlete make-up slot on Thursday at 18:00."
+      },
+      {
+        "id": "lunch_wed",
+        "title": "Lunch",
+        "start": "2027-04-07T12:30:00+01:00",
+        "end": "2027-04-07T13:30:00+01:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break."
+      },
+      {
+        "id": "training_pm_wed",
+        "title": "Afternoon Training",
+        "start": "2027-04-07T16:30:00+01:00",
+        "end": "2027-04-07T18:30:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Moving to 15:00–17:00."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-04-07T23:00:00+01:00",
+        "end": "2027-04-08T07:00:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block."
+      },
+      {
+        "id": "training_am_thu",
+        "title": "Morning Training",
+        "start": "2027-04-08T07:30:00+01:00",
+        "end": "2027-04-08T09:00:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Moving to 10:00–12:00."
+      },
+      {
+        "id": "class_db_thu",
+        "title": "Database Systems Lab",
+        "start": "2027-04-08T10:00:00+01:00",
+        "end": "2027-04-08T12:00:00+01:00",
+        "category": "classes",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Morning lab."
+      },
+      {
+        "id": "lunch_thu",
+        "title": "Lunch",
+        "start": "2027-04-08T12:30:00+01:00",
+        "end": "2027-04-08T13:30:00+01:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break."
+      },
+      {
+        "id": "training_pm_thu",
+        "title": "Afternoon Training",
+        "start": "2027-04-08T16:30:00+01:00",
+        "end": "2027-04-08T18:30:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Moving to 15:00–17:00."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-04-08T23:00:00+01:00",
+        "end": "2027-04-09T07:00:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block."
+      },
+      {
+        "id": "training_am_fri",
+        "title": "Morning Taper Session",
+        "start": "2027-04-09T07:30:00+01:00",
+        "end": "2027-04-09T09:00:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Moving to 10:00–11:30."
+      },
+      {
+        "id": "coffee_fri",
+        "title": "Pre-Championship Coffee with Friends",
+        "start": "2027-04-09T18:30:00+01:00",
+        "end": "2027-04-09T20:00:00+01:00",
+        "category": "social",
+        "importance": 2,
+        "fixed": false,
+        "participants": [
+          "user",
+          "peers"
+        ],
+        "description": "Relaxed social gathering."
+      }
+    ]
+  },
+  "user_request": "For National Championship simulation week (starting today, Monday 07:00), our head coach shifted all twice-daily training times to match competition heat and final hours: 10:00–12:00 and 15:00–17:00 from Monday to Thursday, and 10:00–11:30 on Friday morning (no Friday afternoon session). This clashes with all my 10:00 morning lectures and my Wednesday 10:30 Algorithms Mid-Term Quiz. Please shift all training blocks and commutes accordingly, cancel the overlapping lectures, schedule 6 hours of self-study in the newly freed 07:30–09:30 morning windows, move my Algorithms quiz to the professor's Thursday 18:00 athlete make-up slot, and tell me what needs confirmation."
+}

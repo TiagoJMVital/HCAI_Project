@@ -142,10 +142,12 @@ def reviewer_progress(rows: list[dict], family_id: str) -> dict:
     }
 
 
-def records(root: Path, author: str, *, training_only: bool = False) -> list[dict]:
+def records(root: Path, author: str, *, training_only: bool = False,
+            sources: list[dict] | None = None) -> list[dict]:
     if author not in AUTHORS:
         raise ValueError("unknown author")
-    sources = training_catalog(root) if training_only else catalog(root)
+    if sources is None:
+        sources = training_catalog(root) if training_only else catalog(root)
     rows = []
     for source in sources:
         review_path = (root / "data" / "annotations" / author
@@ -156,7 +158,7 @@ def records(root: Path, author: str, *, training_only: bool = False) -> list[dic
                          "state": "not_started"})
             continue
         try:
-            form, _ = load_review(root, author, source["proposal_id"])
+            form, _ = load_review(root, author, source["proposal_id"], source=source)
             state = "complete" if form.status == "complete" else (
                 "draft" if any([form.scheduling_acceptable, form.autonomy_decision,
                                 form.primary_reason, form.justification]) else "not_started")

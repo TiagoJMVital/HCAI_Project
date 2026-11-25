@@ -1,0 +1,350 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "content_creator_studio_maintenance_anniversary_001",
+  "family_id": "content_creator_schedule_conflict",
+  "profile": {
+    "profile_id": "content_creator_streamer_01__content_creator_studio_maintenance_anniversary_001",
+    "description": "Full-time content creator balancing studio maintenance, household chores, and a special anniversary live stream.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "health": 5,
+      "sponsorships": 5,
+      "streaming": 4,
+      "video_production": 4,
+      "social": 3,
+      "household": 4
+    },
+    "hard_constraints": [
+      {
+        "id": "studio_maintenance",
+        "description": "Technician visit to upgrade audio gear and deep clean studio on Tuesday from 11:00 to 14:00.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "household"
+        ]
+      },
+      {
+        "id": "anniversary_stream",
+        "description": "Channel anniversary special live stream on Friday from 19:00 to 00:00.",
+        "rule_type": "protect_events_by_id",
+        "event_ids": [
+          "anniversary_stream_fri"
+        ]
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "health_routine",
+        "description": "Maintain morning gym workouts.",
+        "weight": 4
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Tuesday technician visit and Friday anniversary stream are fixed immovable events."
+    }
+  },
+  "now": "2027-06-07T10:00:00+01:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-06-07T01:30:00+01:00",
+        "end": "2027-06-07T09:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_mon",
+        "title": "Gym Workout",
+        "start": "2027-06-07T10:00:00+01:00",
+        "end": "2027-06-07T11:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout."
+      },
+      {
+        "id": "edit_mon",
+        "title": "Video Editing",
+        "start": "2027-06-07T12:30:00+01:00",
+        "end": "2027-06-07T18:00:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Editing."
+      },
+      {
+        "id": "stream_mon",
+        "title": "Live Stream",
+        "start": "2027-06-07T20:00:00+01:00",
+        "end": "2027-06-07T23:30:00+01:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-06-08T01:30:00+01:00",
+        "end": "2027-06-08T09:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_tue",
+        "title": "Gym Workout",
+        "start": "2027-06-08T10:00:00+01:00",
+        "end": "2027-06-08T11:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout."
+      },
+      {
+        "id": "tech_tue",
+        "title": "Studio Gear Upgrade & Deep Clean",
+        "start": "2027-06-08T11:00:00+01:00",
+        "end": "2027-06-08T14:00:00+01:00",
+        "category": "household",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user",
+          "technician"
+        ],
+        "description": "Studio maintenance."
+      },
+      {
+        "id": "edit_tue",
+        "title": "Video Editing",
+        "start": "2027-06-08T12:30:00+01:00",
+        "end": "2027-06-08T18:00:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Editing."
+      },
+      {
+        "id": "stream_tue",
+        "title": "Live Stream",
+        "start": "2027-06-08T20:00:00+01:00",
+        "end": "2027-06-08T23:30:00+01:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-06-09T01:30:00+01:00",
+        "end": "2027-06-09T09:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_wed",
+        "title": "Gym Workout",
+        "start": "2027-06-09T10:00:00+01:00",
+        "end": "2027-06-09T11:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout."
+      },
+      {
+        "id": "edit_wed",
+        "title": "Video Editing",
+        "start": "2027-06-09T12:30:00+01:00",
+        "end": "2027-06-09T18:00:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Editing."
+      },
+      {
+        "id": "stream_wed",
+        "title": "Live Stream",
+        "start": "2027-06-09T20:00:00+01:00",
+        "end": "2027-06-09T23:30:00+01:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-06-10T01:30:00+01:00",
+        "end": "2027-06-10T09:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_thu",
+        "title": "Gym Workout",
+        "start": "2027-06-10T10:00:00+01:00",
+        "end": "2027-06-10T11:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout."
+      },
+      {
+        "id": "edit_thu",
+        "title": "Video Editing",
+        "start": "2027-06-10T12:30:00+01:00",
+        "end": "2027-06-10T18:00:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Editing."
+      },
+      {
+        "id": "stream_thu",
+        "title": "Live Stream",
+        "start": "2027-06-10T20:00:00+01:00",
+        "end": "2027-06-10T23:30:00+01:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-06-11T01:30:00+01:00",
+        "end": "2027-06-11T09:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_fri",
+        "title": "Gym Workout",
+        "start": "2027-06-11T10:00:00+01:00",
+        "end": "2027-06-11T11:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout."
+      },
+      {
+        "id": "edit_fri",
+        "title": "Video Editing Prep",
+        "start": "2027-06-11T12:30:00+01:00",
+        "end": "2027-06-11T16:00:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Prep work."
+      },
+      {
+        "id": "stream_fri",
+        "title": "Live Stream",
+        "start": "2027-06-11T20:00:00+01:00",
+        "end": "2027-06-11T23:30:00+01:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream."
+      },
+      {
+        "id": "anniversary_stream_fri",
+        "title": "Channel Anniversary 5-Hour Special Stream",
+        "start": "2027-06-11T19:00:00+01:00",
+        "end": "2027-06-12T00:00:00+01:00",
+        "category": "streaming",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Special stream."
+      }
+    ]
+  },
+  "user_request": "I have a technician visiting on Tuesday from 11:00 to 14:00 to upgrade my studio audio gear and deep clean the recording space. Also, Friday night features my channel's 5-hour anniversary special stream (19:00 to 00:00). Please adjust my schedule to fit these commitments while protecting my sleep and gym routines."
+}

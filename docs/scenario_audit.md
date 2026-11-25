@@ -577,7 +577,7 @@ Os 100 JSON foram analisados por `V2Scenario`; IDs, referências e offsets perma
 
 ## Sexta fase — Fecho candidato do dataset e preparação do piloto
 
-**Data:** 2026-11-20. **Entrada verificada:** `Cenarios_v2_100_candidate.zip`, SHA-256 `8b1349e14a4bad8015985c9cd414e19a0be7a46caad3a40f2a2d2c74f1ec7148`. Esta secção mantém as conclusões das cinco fases anteriores como história versionada. A única diretoria de trabalho atual passa a ser `../../scenarios/`; o ZIP autocontido correspondente é `../../Cenarios_v2_100_final.zip`, SHA-256 **`ec04108d3a39ba9dbf4b91ba4ba5f60ee7f332f207991a0ab231fa70c8cb16fd`**. O ZIP contém 100 JSON v2.0, 20 sidecars de duração, oito sidecars de alterações externas confirmadas e um manifesto de split (129 membros, CRC e bytes comparados). Não foi importado para a aplicação ativa.
+**Data:** 2026-11-20. **Entrada verificada:** `Cenarios_v2_100_candidate.zip`, SHA-256 `8b1349e14a4bad8015985c9cd414e19a0be7a46caad3a40f2a2d2c74f1ec7148`. Esta secção mantém as conclusões das cinco fases anteriores como história versionada. A diretoria de trabalho atual é a pasta versionada [`../scenarios/`](../scenarios/); o ZIP autocontido correspondente, quando presente fora do repositório, é `../../Cenarios_v2_100_final.zip`, SHA-256 **`ec04108d3a39ba9dbf4b91ba4ba5f60ee7f332f207991a0ab231fa70c8cb16fd`**. O ZIP contém 100 JSON v2.0, 20 sidecars de duração, oito sidecars de alterações externas confirmadas e um manifesto de split (129 membros, CRC e bytes comparados). A aplicação ativa usa diretamente a pasta versionada, pelo que um clone já inclui todos os ficheiros necessários para validar os hashes.
 
 ### Alterações aplicadas
 

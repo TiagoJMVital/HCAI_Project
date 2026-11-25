@@ -1,0 +1,322 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "content_creator_industry_networking_dinner_001",
+  "family_id": "content_creator_schedule_conflict",
+  "profile": {
+    "profile_id": "content_creator_streamer_01__content_creator_industry_networking_dinner_001",
+    "description": "Full-time content creator balancing video editing with evening industry networking events.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "health": 5,
+      "sponsorships": 5,
+      "streaming": 4,
+      "video_production": 4,
+      "social": 4,
+      "household": 3
+    },
+    "hard_constraints": [
+      {
+        "id": "networking_event",
+        "description": "Mandatory industry networking dinner on Wednesday from 20:00 to 23:30.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "social"
+        ]
+      },
+      {
+        "id": "health_protection",
+        "description": "Daily gym workouts are mandatory.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "health"
+        ]
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "cancel_stream",
+        "weight": 4,
+        "description": "Cancel Wednesday evening stream due to networking event."
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Wednesday networking dinner is fixed; regular Wednesday stream must be cancelled."
+    }
+  },
+  "now": "2027-05-17T10:00:00+01:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-05-17T01:30:00+01:00",
+        "end": "2027-05-17T09:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_mon",
+        "title": "Gym Workout",
+        "start": "2027-05-17T10:00:00+01:00",
+        "end": "2027-05-17T11:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout."
+      },
+      {
+        "id": "edit_mon",
+        "title": "Video Editing",
+        "start": "2027-05-17T12:30:00+01:00",
+        "end": "2027-05-17T18:00:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Editing."
+      },
+      {
+        "id": "stream_mon",
+        "title": "Live Stream",
+        "start": "2027-05-17T20:00:00+01:00",
+        "end": "2027-05-17T23:30:00+01:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-05-18T01:30:00+01:00",
+        "end": "2027-05-18T09:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_tue",
+        "title": "Gym Workout",
+        "start": "2027-05-18T10:00:00+01:00",
+        "end": "2027-05-18T11:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout."
+      },
+      {
+        "id": "edit_tue",
+        "title": "Video Editing",
+        "start": "2027-05-18T12:30:00+01:00",
+        "end": "2027-05-18T18:00:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Editing."
+      },
+      {
+        "id": "stream_tue",
+        "title": "Live Stream",
+        "start": "2027-05-18T20:00:00+01:00",
+        "end": "2027-05-18T23:30:00+01:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-05-19T01:30:00+01:00",
+        "end": "2027-05-19T09:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_wed",
+        "title": "Gym Workout",
+        "start": "2027-05-19T10:00:00+01:00",
+        "end": "2027-05-19T11:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout."
+      },
+      {
+        "id": "edit_wed",
+        "title": "Video Editing",
+        "start": "2027-05-19T12:30:00+01:00",
+        "end": "2027-05-19T18:00:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Editing."
+      },
+      {
+        "id": "networking_wed",
+        "title": "Industry Networking Dinner",
+        "start": "2027-05-19T20:00:00+01:00",
+        "end": "2027-05-19T23:30:00+01:00",
+        "category": "social",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "professionals"
+        ],
+        "description": "Networking dinner."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-05-20T01:30:00+01:00",
+        "end": "2027-05-20T09:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_thu",
+        "title": "Gym Workout",
+        "start": "2027-05-20T10:00:00+01:00",
+        "end": "2027-05-20T11:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout."
+      },
+      {
+        "id": "edit_thu",
+        "title": "Video Editing",
+        "start": "2027-05-20T12:30:00+01:00",
+        "end": "2027-05-20T18:00:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Editing."
+      },
+      {
+        "id": "stream_thu",
+        "title": "Live Stream",
+        "start": "2027-05-20T20:00:00+01:00",
+        "end": "2027-05-20T23:30:00+01:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-05-21T01:30:00+01:00",
+        "end": "2027-05-21T09:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_fri",
+        "title": "Gym Workout",
+        "start": "2027-05-21T10:00:00+01:00",
+        "end": "2027-05-21T11:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout."
+      },
+      {
+        "id": "edit_fri",
+        "title": "Video Editing",
+        "start": "2027-05-21T12:30:00+01:00",
+        "end": "2027-05-21T18:00:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Editing."
+      },
+      {
+        "id": "stream_fri",
+        "title": "Live Stream",
+        "start": "2027-05-21T20:00:00+01:00",
+        "end": "2027-05-21T23:30:00+01:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream."
+      }
+    ]
+  },
+  "user_request": "I have been invited to an exclusive industry networking dinner on Wednesday night from 20:00 to 23:30. Please cancel Wednesday's live stream to accommodate this event while keeping my daytime editing and morning gym routines fully protected."
+}

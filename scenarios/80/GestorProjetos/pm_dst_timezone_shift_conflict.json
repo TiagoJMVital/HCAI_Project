@@ -1,0 +1,328 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "pm_dst_timezone_shift_conflict_006",
+  "family_id": "international_project_manager_schedule_conflict",
+  "profile": {
+    "profile_id": "international_project_manager_01__pm_dst_timezone_shift_conflict_006",
+    "description": "International Project Manager navigating Daylight Saving Time mismatch weeks between US and Europe.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "client_meetings": 5,
+      "travel": 5,
+      "deep_work": 4,
+      "health": 4,
+      "sleep": 4,
+      "personal": 3
+    },
+    "hard_constraints": [
+      {
+        "id": "us_client_calls",
+        "description": "US client calls shift 1 hour earlier in Lisbon time during the US DST transition week.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "client_meetings"
+        ]
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "protect_gym",
+        "description": "Shift afternoon gym workout earlier so it does not collide with the 15:00 US calls.",
+        "weight": 4
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "During US DST offset weeks, US East Coast calls occur at 15:00 instead of 16:00."
+    }
+  },
+  "now": "2027-03-15T07:00:00+00:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-03-14T23:00:00+00:00",
+        "end": "2027-03-15T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "deep_work_mon",
+        "title": "Deep Work: Sprint Metrics",
+        "start": "2027-03-15T08:30:00+00:00",
+        "end": "2027-03-15T12:00:00+00:00",
+        "category": "deep_work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Metrics."
+      },
+      {
+        "id": "gym_mon",
+        "title": "Midday Gym Session",
+        "start": "2027-03-15T12:30:00+00:00",
+        "end": "2027-03-15T13:45:00+00:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Moved earlier due to DST shift."
+      },
+      {
+        "id": "us_mon",
+        "title": "US East Coast Sync (DST Shifted 15:00)",
+        "start": "2027-03-15T15:00:00+00:00",
+        "end": "2027-03-15T16:30:00+00:00",
+        "category": "client_meetings",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "us_team"
+        ],
+        "description": "DST shifted call."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-03-15T23:00:00+00:00",
+        "end": "2027-03-16T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "apac_tue",
+        "title": "Tokyo Design Alignment",
+        "start": "2027-03-16T07:30:00+00:00",
+        "end": "2027-03-16T08:30:00+00:00",
+        "category": "client_meetings",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user",
+          "tokyo_design"
+        ],
+        "description": "APAC call."
+      },
+      {
+        "id": "deep_work_tue",
+        "title": "Deep Work: Design Specs",
+        "start": "2027-03-16T09:00:00+00:00",
+        "end": "2027-03-16T12:00:00+00:00",
+        "category": "deep_work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Specs."
+      },
+      {
+        "id": "gym_tue",
+        "title": "Midday Gym Session",
+        "start": "2027-03-16T12:30:00+00:00",
+        "end": "2027-03-16T13:45:00+00:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout."
+      },
+      {
+        "id": "us_tue",
+        "title": "US Product Steering (DST Shifted 15:00)",
+        "start": "2027-03-16T15:00:00+00:00",
+        "end": "2027-03-16T16:30:00+00:00",
+        "category": "client_meetings",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "us_client"
+        ],
+        "description": "DST shifted call."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-03-16T23:00:00+00:00",
+        "end": "2027-03-17T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "deep_work_wed",
+        "title": "Deep Work: Risk & Compliance",
+        "start": "2027-03-17T08:30:00+00:00",
+        "end": "2027-03-17T12:30:00+00:00",
+        "category": "deep_work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Compliance."
+      },
+      {
+        "id": "personal_wed",
+        "title": "Lunch & Personal Errands",
+        "start": "2027-03-17T13:00:00+00:00",
+        "end": "2027-03-17T14:30:00+00:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Errands."
+      },
+      {
+        "id": "us_wed",
+        "title": "US QA Sign-off (DST Shifted 15:00)",
+        "start": "2027-03-17T15:00:00+00:00",
+        "end": "2027-03-17T16:30:00+00:00",
+        "category": "client_meetings",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user",
+          "us_qa"
+        ],
+        "description": "QA call."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-03-17T23:00:00+00:00",
+        "end": "2027-03-18T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "deep_work_thu",
+        "title": "Deep Work: Vendor Contracts",
+        "start": "2027-03-18T08:30:00+00:00",
+        "end": "2027-03-18T12:00:00+00:00",
+        "category": "deep_work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Contracts."
+      },
+      {
+        "id": "gym_thu",
+        "title": "Midday Gym Session",
+        "start": "2027-03-18T12:30:00+00:00",
+        "end": "2027-03-18T13:45:00+00:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout."
+      },
+      {
+        "id": "us_thu",
+        "title": "US Architecture Sync (DST Shifted 15:00)",
+        "start": "2027-03-18T15:00:00+00:00",
+        "end": "2027-03-18T16:30:00+00:00",
+        "category": "client_meetings",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "us_arch"
+        ],
+        "description": "Architecture call."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-03-18T23:00:00+00:00",
+        "end": "2027-03-19T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "apac_fri",
+        "title": "APAC Weekly Sync",
+        "start": "2027-03-19T08:00:00+00:00",
+        "end": "2027-03-19T09:00:00+00:00",
+        "category": "client_meetings",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user",
+          "apac_team"
+        ],
+        "description": "Sync."
+      },
+      {
+        "id": "deep_work_fri",
+        "title": "Deep Work: Weekly Status Report",
+        "start": "2027-03-19T09:30:00+00:00",
+        "end": "2027-03-19T12:30:00+00:00",
+        "category": "deep_work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Reporting."
+      },
+      {
+        "id": "gym_fri",
+        "title": "Gym Workout",
+        "start": "2027-03-19T13:30:00+00:00",
+        "end": "2027-03-19T14:45:00+00:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout."
+      }
+    ]
+  },
+  "user_request": "Because the US switched to Daylight Saving Time this week while Europe has not, all my daily US client calls moved 1 hour earlier (from 16:00 to 15:00 Lisbon time), colliding with my usual 14:00–15:15 gym slot. Please shift my gym workouts to 12:30 across the week so I can exercise and eat lunch before the 15:00 US calls."
+}

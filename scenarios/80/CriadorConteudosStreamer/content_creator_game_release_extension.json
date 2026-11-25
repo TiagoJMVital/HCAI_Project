@@ -1,0 +1,349 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "content_creator_game_release_extension_001",
+  "family_id": "content_creator_schedule_conflict",
+  "profile": {
+    "profile_id": "content_creator_streamer_01__content_creator_game_release_extension_001",
+    "description": "Full-time content creator and live streamer with a shifted circadian rhythm (sleeping 01:30 to 09:30), balancing daily video production, evening live streams, strict physical training, household chores, and external media commitments.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "health": 5,
+      "sponsorships": 5,
+      "streaming": 4,
+      "video_production": 4,
+      "social": 3,
+      "household": 3
+    },
+    "hard_constraints": [
+      {
+        "id": "health_protection",
+        "description": "Daily gym workout or physical training is mandatory for posture and physical image.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "health"
+        ]
+      },
+      {
+        "id": "sleep_protection",
+        "description": "Must maintain at least 8 hours of sleep from 01:30 to 09:30.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "sleep"
+        ]
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "video_quota",
+        "description": "Produce and edit at least 2 major YouTube videos across the week.",
+        "weight": 4
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Video editing and general tasks are flexible. Live stream durations can expand dynamically for major game launches."
+    }
+  },
+  "now": "2027-02-15T10:00:00+00:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-02-15T01:30:00+00:00",
+        "end": "2027-02-15T09:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_mon",
+        "title": "Gym & Strength Training",
+        "start": "2027-02-15T10:00:00+00:00",
+        "end": "2027-02-15T11:30:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory morning workout."
+      },
+      {
+        "id": "edit_mon",
+        "title": "Video Editing: YouTube Review",
+        "start": "2027-02-15T12:30:00+00:00",
+        "end": "2027-02-15T16:30:00+00:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Editing weekly video."
+      },
+      {
+        "id": "groceries_mon",
+        "title": "Grocery Shopping & Meal Prep",
+        "start": "2027-02-15T17:00:00+00:00",
+        "end": "2027-02-15T18:30:00+00:00",
+        "category": "household",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Weekly food shopping."
+      },
+      {
+        "id": "stream_mon",
+        "title": "Evening Live Stream: General Gaming",
+        "start": "2027-02-15T20:00:00+00:00",
+        "end": "2027-02-15T23:30:00+00:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Standard 3.5h stream."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-02-16T01:30:00+00:00",
+        "end": "2027-02-16T09:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_tue",
+        "title": "Gym & Cardio Session",
+        "start": "2027-02-16T10:00:00+00:00",
+        "end": "2027-02-16T11:30:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout."
+      },
+      {
+        "id": "edit_tue",
+        "title": "Thumbnail & Video Export",
+        "start": "2027-02-16T12:30:00+00:00",
+        "end": "2027-02-16T16:30:00+00:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Post-production."
+      },
+      {
+        "id": "stream_tue",
+        "title": "Evening Live Stream: Standard",
+        "start": "2027-02-16T20:00:00+00:00",
+        "end": "2027-02-16T23:30:00+00:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Standard stream."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-02-17T01:30:00+00:00",
+        "end": "2027-02-17T09:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_wed",
+        "title": "Gym Workout",
+        "start": "2027-02-17T10:00:00+00:00",
+        "end": "2027-02-17T11:30:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout."
+      },
+      {
+        "id": "script_wed",
+        "title": "Scriptwriting for Next Video",
+        "start": "2027-02-17T12:30:00+00:00",
+        "end": "2027-02-17T16:30:00+00:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Writing scripts."
+      },
+      {
+        "id": "social_wed",
+        "title": "Dinner with Creator Friends",
+        "start": "2027-02-17T19:30:00+00:00",
+        "end": "2027-02-17T21:30:00+00:00",
+        "category": "social",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "friends"
+        ],
+        "description": "Social dinner."
+      },
+      {
+        "id": "stream_wed",
+        "title": "Evening Live Stream: Standard",
+        "start": "2027-02-17T22:00:00+00:00",
+        "end": "2027-02-18T00:30:00+00:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Late stream."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-02-18T01:30:00+00:00",
+        "end": "2027-02-18T09:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_thu",
+        "title": "Gym Workout",
+        "start": "2027-02-18T10:00:00+00:00",
+        "end": "2027-02-18T11:30:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout."
+      },
+      {
+        "id": "record_thu",
+        "title": "Video Recording Block",
+        "start": "2027-02-18T12:30:00+00:00",
+        "end": "2027-02-18T17:30:00+00:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "A-roll and B-roll recording."
+      },
+      {
+        "id": "stream_thu",
+        "title": "Evening Live Stream: Standard",
+        "start": "2027-02-18T20:00:00+00:00",
+        "end": "2027-02-18T23:30:00+00:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Standard stream."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-02-19T01:30:00+00:00",
+        "end": "2027-02-19T09:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_fri",
+        "title": "Gym Workout",
+        "start": "2027-02-19T10:00:00+00:00",
+        "end": "2027-02-19T11:30:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout."
+      },
+      {
+        "id": "edit_fri",
+        "title": "Final Editing & Publishing",
+        "start": "2027-02-19T12:30:00+00:00",
+        "end": "2027-02-19T16:30:00+00:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Publishing video."
+      },
+      {
+        "id": "stream_fri",
+        "title": "Evening Live Stream: Standard",
+        "start": "2027-02-19T20:00:00+00:00",
+        "end": "2027-02-19T23:30:00+00:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Friday night stream."
+      }
+    ]
+  },
+  "user_request": "A major AAA video game just announced a surprise midnight launch for Thursday night, and my community is demanding a 6-hour marathon stream (19:00 to 01:00) instead of my standard stream. This cuts into my sleep block on Friday morning. Please adjust Thursday's schedule, ensure I still get my mandatory morning gym workouts, and reschedule Friday morning's sleep or shift video editing tasks to protect my health."
+}

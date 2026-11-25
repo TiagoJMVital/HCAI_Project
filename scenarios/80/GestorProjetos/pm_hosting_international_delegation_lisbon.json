@@ -1,0 +1,288 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "pm_hosting_international_delegation_lisbon_008",
+  "family_id": "international_project_manager_schedule_conflict",
+  "profile": {
+    "profile_id": "international_project_manager_01__pm_hosting_international_delegation_lisbon_008",
+    "description": "International Project Manager hosting visiting US/APAC stakeholders in Lisbon while maintaining fitness and work deadlines.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "client_meetings": 5,
+      "travel": 5,
+      "deep_work": 4,
+      "health": 4,
+      "sleep": 4,
+      "personal": 3
+    },
+    "hard_constraints": [
+      {
+        "id": "delegation_hosting",
+        "description": "On-site summit and official dinner with visiting US executives in Lisbon on Tuesday and Wednesday.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "client_meetings"
+        ]
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "morning_workouts",
+        "description": "Shift gym workouts to 07:00 before hosting duties begin.",
+        "weight": 4
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Hosting visiting executives occupies full afternoons and evenings; morning gym sessions keep health goals on track."
+    }
+  },
+  "now": "2027-04-19T07:00:00+01:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-04-18T23:00:00+01:00",
+        "end": "2027-04-19T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "deep_work_mon",
+        "title": "Deep Work: Lisbon Summit Logistics & Deck",
+        "start": "2027-04-19T08:30:00+01:00",
+        "end": "2027-04-19T12:30:00+01:00",
+        "category": "deep_work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Prep."
+      },
+      {
+        "id": "gym_mon",
+        "title": "Gym Workout",
+        "start": "2027-04-19T13:30:00+01:00",
+        "end": "2027-04-19T14:45:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout."
+      },
+      {
+        "id": "airport_pickup_mon",
+        "title": "Welcome Drinks with Visiting US Execs",
+        "start": "2027-04-19T19:00:00+01:00",
+        "end": "2027-04-19T21:00:00+01:00",
+        "category": "client_meetings",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user",
+          "us_execs"
+        ],
+        "description": "Welcome drinks."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-04-19T23:00:00+01:00",
+        "end": "2027-04-20T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "gym_tue_early",
+        "title": "Early Morning Gym Session",
+        "start": "2027-04-20T07:00:00+01:00",
+        "end": "2027-04-20T08:00:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Moved to morning."
+      },
+      {
+        "id": "summit_day1_tue",
+        "title": "Lisbon Global Summit - Day 1",
+        "start": "2027-04-20T09:30:00+01:00",
+        "end": "2027-04-20T17:30:00+01:00",
+        "category": "client_meetings",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "delegation"
+        ],
+        "description": "All-day summit."
+      },
+      {
+        "id": "gala_dinner_tue",
+        "title": "Official Delegation Dinner (Lisbon)",
+        "start": "2027-04-20T19:30:00+01:00",
+        "end": "2027-04-20T22:30:00+01:00",
+        "category": "client_meetings",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "delegation"
+        ],
+        "description": "Formal dinner."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-04-20T23:30:00+01:00",
+        "end": "2027-04-21T07:00:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "summit_day2_wed",
+        "title": "Lisbon Global Summit - Day 2 & Site Tour",
+        "start": "2027-04-21T09:30:00+01:00",
+        "end": "2027-04-21T16:30:00+01:00",
+        "category": "client_meetings",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "delegation"
+        ],
+        "description": "Site tour."
+      },
+      {
+        "id": "gym_wed",
+        "title": "Evening Gym Decompression",
+        "start": "2027-04-21T17:30:00+01:00",
+        "end": "2027-04-21T18:45:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-04-21T23:00:00+01:00",
+        "end": "2027-04-22T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "deep_work_thu",
+        "title": "Deep Work: Summit Minutes & Action Tracker",
+        "start": "2027-04-22T08:30:00+01:00",
+        "end": "2027-04-22T12:30:00+01:00",
+        "category": "deep_work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Follow-up."
+      },
+      {
+        "id": "gym_thu",
+        "title": "Gym Workout",
+        "start": "2027-04-22T13:30:00+01:00",
+        "end": "2027-04-22T14:45:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout."
+      },
+      {
+        "id": "us_thu",
+        "title": "US Post-Summit Alignment",
+        "start": "2027-04-22T16:00:00+01:00",
+        "end": "2027-04-22T17:30:00+01:00",
+        "category": "client_meetings",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user",
+          "us_team"
+        ],
+        "description": "Sync."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-04-22T23:00:00+01:00",
+        "end": "2027-04-23T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "deep_work_fri",
+        "title": "Deep Work: Q2 Budget Update",
+        "start": "2027-04-23T08:30:00+01:00",
+        "end": "2027-04-23T12:30:00+01:00",
+        "category": "deep_work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Budget."
+      },
+      {
+        "id": "personal_fri",
+        "title": "Personal Errands & Rest",
+        "start": "2027-04-23T14:00:00+01:00",
+        "end": "2027-04-23T17:00:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Recovery."
+      }
+    ]
+  },
+  "user_request": "I am hosting a visiting delegation of US executives in Lisbon on Tuesday and Wednesday, which fills my days from 09:30 until late dinner. Please move my Tuesday afternoon workout to 07:00 in the morning and schedule a decompression workout on Wednesday at 17:30 once they head to the airport."
+}

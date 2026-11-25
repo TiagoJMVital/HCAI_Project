@@ -1,0 +1,2120 @@
+{
+  "configuration": "B",
+  "scenario_id": "working_student_partial_work_leave_exam_003",
+  "family": "working_student_schedule_conflict",
+  "category": "v2",
+  "proposer_provider": "iaedu",
+  "proposer_model": "GPT-5.5",
+  "proposer_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_provider": "iaedu",
+  "critic_model": "GPT-5.5",
+  "critic_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_settings": {
+    "threshold": 4.0,
+    "max_refinements": 3,
+    "min_dimension_score": 1
+  },
+  "iterations": [
+    {
+      "index": 0,
+      "proposer_feedback": null,
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "move",
+            "event_id": "gym_tue",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-04-06T17:30:00+01:00",
+            "to_end": "2027-04-06T18:15:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Focused catch-up work tasks",
+            "from_start": null,
+            "to_start": "2027-04-07T17:30:00+01:00",
+            "to_end": "2027-04-07T18:45:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "move",
+            "event_id": "gym_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-04-07T19:00:00+01:00",
+            "to_end": "2027-04-07T20:15:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "dinner_personal_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-04-07T20:30:00+01:00",
+            "to_end": "2027-04-07T22:45:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "The protected midterm and Tuesday lecture remain unchanged.",
+            "The Tuesday workout starts after the stated worker-student leave window for exam and transit.",
+            "Only flexible user-only health and personal events are moved; fixed work, sleep, and classes are not changed.",
+            "Gym availability and actual travel time are not known from the supplied calendar."
+          ],
+          "priorities": [
+            "Education and work are prioritized while preserving a short decompression workout before class.",
+            "Wednesday catch-up is made explicit without using late-night work as the first choice.",
+            "The plan keeps Wednesday sleep intact but pushes evening personal time later."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Use only the existing Wednesday work shift for catch-up.",
+              "rejected_because": "This avoids disruption, but it is less explicit than the requested scheduled catch-up block."
+            },
+            {
+              "option": "Schedule catch-up work after Wednesday dinner.",
+              "rejected_because": "This avoids moving the gym and chores, but it creates later work close to sleep."
+            }
+          ],
+          "summary": "Tuesday is organized around the protected exam and lecture by shortening and moving the workout into a decompression slot; Wednesday gains an explicit catch-up block by shifting flexible evening gym and personal time later."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-04-04T23:45:00+01:00",
+            "end": "2027-04-05T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_mon",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-04-05T09:00:00+01:00",
+            "end": "2027-04-05T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Daytime work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_mon",
+            "title": "Evening Study: Database Systems Midterm Prep",
+            "start": "2027-04-05T18:15:00+01:00",
+            "end": "2027-04-05T21:30:00+01:00",
+            "category": "education",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Exam preparation.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-04-05T23:45:00+01:00",
+            "end": "2027-04-06T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_tue_am",
+            "title": "Daytime Job: Morning Shift (Leave at 14:30)",
+            "start": "2027-04-06T09:00:00+01:00",
+            "end": "2027-04-06T14:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Morning work before worker-student leave.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "midterm_tue",
+            "title": "University Midterm Test: Database Systems",
+            "start": "2027-04-06T15:00:00+01:00",
+            "end": "2027-04-06T17:00:00+01:00",
+            "category": "education",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "professor"
+            ],
+            "description": "Mandatory assessment.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_tue",
+            "title": "Gym: Cardio & Stretching",
+            "start": "2027-04-06T17:30:00+01:00",
+            "end": "2027-04-06T18:15:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Post-exam workout.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "class_tue",
+            "title": "Evening Lecture: Software Engineering",
+            "start": "2027-04-06T19:00:00+01:00",
+            "end": "2027-04-06T22:00:00+01:00",
+            "category": "education",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "professor",
+              "classmates"
+            ],
+            "description": "Mandatory evening class.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-04-06T23:45:00+01:00",
+            "end": "2027-04-07T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_wed",
+            "title": "Daytime Job: Core Shift + Catch-up Tasks",
+            "start": "2027-04-07T09:00:00+01:00",
+            "end": "2027-04-07T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "team"
+            ],
+            "description": "Work shift including Tuesday catch-up items.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_1",
+            "title": "Focused catch-up work tasks",
+            "start": "2027-04-07T17:30:00+01:00",
+            "end": "2027-04-07T18:45:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "gym_wed",
+            "title": "Gym: Strength Training",
+            "start": "2027-04-07T19:00:00+01:00",
+            "end": "2027-04-07T20:15:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Strength workout.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "dinner_personal_wed",
+            "title": "Dinner & Household Chores",
+            "start": "2027-04-07T20:30:00+01:00",
+            "end": "2027-04-07T22:45:00+01:00",
+            "category": "personal",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Dinner and light chores.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-04-07T23:45:00+01:00",
+            "end": "2027-04-08T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_thu",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-04-08T09:00:00+01:00",
+            "end": "2027-04-08T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Daytime job.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "class_thu",
+            "title": "Evening Lecture: Software Engineering Lab",
+            "start": "2027-04-08T18:30:00+01:00",
+            "end": "2027-04-08T21:30:00+01:00",
+            "category": "education",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "professor",
+              "classmates"
+            ],
+            "description": "Mandatory evening lab.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-04-08T23:45:00+01:00",
+            "end": "2027-04-09T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_fri",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-04-09T09:00:00+01:00",
+            "end": "2027-04-09T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Friday work shift.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_fri",
+            "title": "Gym: Full Body Workout",
+            "start": "2027-04-09T18:00:00+01:00",
+            "end": "2027-04-09T19:15:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Friday workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "social_fri",
+            "title": "Dinner with Family",
+            "start": "2027-04-09T20:00:00+01:00",
+            "end": "2027-04-09T22:30:00+01:00",
+            "category": "personal",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user",
+              "family"
+            ],
+            "description": "Family dinner.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 3,
+          "coherence": 3,
+          "alternatives": 2,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The proposal treats the Wednesday 17:30–18:45 catch-up block as a reasonable addition mainly because it avoids late-night work, but it follows directly after the existing 09:00–17:30 work shift, which already includes “Catch-up Tasks.” This creates a 09:00–18:45 work span before gym, dinner and chores, without much rationale for why the extra work is necessary or sustainable.",
+          "Wednesday becomes tightly packed: work 09:00–17:30, added focused work 17:30–18:45, gym 19:00–20:15, dinner and chores 20:30–22:45, then sleep at 23:45. That leaves little visible margin for transition, showering, eating calmly, decompression or unexpected spillover.",
+          "The proposal preserves sleep duration, but does not adequately weigh the cumulative sequence across the visible week: Monday work plus evening study, Tuesday work plus midterm plus gym plus lecture, Wednesday extended work plus gym plus late household tasks, and Thursday work plus evening lab.",
+          "The Tuesday moved gym slot may be useful as decompression, but it sits between a 15:00–17:00 midterm and a 19:00–22:00 lecture. The rationale does not fully address whether exercise in that narrow post-exam window improves recovery or adds pressure before class.",
+          "Alternatives considered are narrow. The rationale rejects late-night work and relying only on the existing Wednesday work shift, but it does not show consideration of less compressed distributions, reducing or shortening a flexible activity, or clarifying whether the existing Wednesday catch-up tasks already meet the visible work need."
+        ],
+        "feedback": "The plan is technically coherent and protects the fixed exam, classes, work shifts and sleep blocks, but the human-quality concern is the compressed midweek load. The most material issue is Wednesday: the added catch-up work is placed immediately after a full workday that already includes catch-up tasks, then pushes gym and dinner/chores later into the evening. This may be workable for some people, but the rationale does not sufficiently explain why this concentration is preferable to a less compressed approach or why the existing Wednesday work shift is inadequate. The Proposer should reconsider whether the added work block needs to be consecutive with the full workday, whether the evening health and personal activities remain realistic after that extension, and whether the plan has enough practical margin for recovery and basic transitions. The same operations might still be acceptable if the fuller context confirms the user can handle this intensity and that the added catch-up block is genuinely needed.",
+        "plausibility_review": {
+          "revision_required": true,
+          "severity": "moderate",
+          "reason": "The proposed organization creates a materially compressed Wednesday after an already demanding Monday and Tuesday. The added 17:30–18:45 work block follows a full 09:00–17:30 workday, then leaves only short gaps before gym at 19:00 and dinner/chores at 20:30, with sleep at 23:45. This could significantly affect manageability, recovery and the quality of the catch-up work, especially because the existing Wednesday work event already includes catch-up tasks. The concern is not an objective conflict, but a grounded sustainability risk visible in the resulting calendar.",
+          "suggested_improvement": "Reassess the distribution of the catch-up work and the shifted evening activities using the fuller context. In particular, justify whether the added block is necessary in addition to the existing catch-up work shift, and consider whether a less compressed arrangement or a reduction in evening load would better preserve recovery and practical margin."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Wednesday added catch-up work",
+            "assumption": "The user can reasonably perform focused catch-up work from 17:30 to 18:45 immediately after the 09:00 to 17:30 work shift.",
+            "evidence_gap": "The calendar shows a full workday already labelled as including catch-up tasks, but does not explain why an additional consecutive work block is needed or whether the user has capacity for it.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Wednesday transitions",
+            "assumption": "The 15-minute gaps from catch-up work to gym and from gym to dinner/chores are enough for the user’s actual locations, preparation, hygiene and transition needs.",
+            "evidence_gap": "Locations, travel time, showering or preparation needs are not provided; the rationale acknowledges unknown travel and gym availability generally.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Tuesday post-exam gym",
+            "assumption": "A 17:30 to 18:15 workout after the 15:00 to 17:00 midterm and before the 19:00 to 22:00 lecture is restorative rather than an additional burden.",
+            "evidence_gap": "The rationale calls it decompression, but the calendar does not show the user’s post-exam recovery needs, travel needs or meal timing before the evening lecture.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Gym availability",
+            "assumption": "The gym is available and usable at the moved Tuesday 17:30 to 18:15 slot and Wednesday 19:00 to 20:15 slot.",
+            "evidence_gap": "The proposal explicitly states that gym availability is not known from the supplied calendar.",
+            "potential_impact": "potentially_blocking",
+            "verification_source": "external_source"
+          },
+          {
+            "subject": "Midweek cumulative load",
+            "assumption": "The user can sustain the sequence of Monday work plus study, Tuesday work plus midterm plus gym plus lecture, Wednesday extended work plus gym plus late dinner/chores, and Thursday work plus evening lab.",
+            "evidence_gap": "The rationale protects fixed events and sleep but does not substantively assess cumulative fatigue or recovery across these consecutive demanding days.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          }
+        ],
+        "overall": 3.0
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": false,
+        "plausibility_revision_required": true,
+        "accepted": false,
+        "revision_causes": [
+          "numeric_criteria_failed",
+          "plausibility_revision_required"
+        ]
+      },
+      "operations_changed_from_previous": null,
+      "rationale_changed_from_previous": null,
+      "prior_critic_reviews": [],
+      "unresolved_assumptions": [
+        {
+          "subject": "Wednesday added catch-up work",
+          "assumption": "The user can reasonably perform focused catch-up work from 17:30 to 18:45 immediately after the 09:00 to 17:30 work shift.",
+          "evidence_gap": "The calendar shows a full workday already labelled as including catch-up tasks, but does not explain why an additional consecutive work block is needed or whether the user has capacity for it.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Wednesday transitions",
+          "assumption": "The 15-minute gaps from catch-up work to gym and from gym to dinner/chores are enough for the user’s actual locations, preparation, hygiene and transition needs.",
+          "evidence_gap": "Locations, travel time, showering or preparation needs are not provided; the rationale acknowledges unknown travel and gym availability generally.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Tuesday post-exam gym",
+          "assumption": "A 17:30 to 18:15 workout after the 15:00 to 17:00 midterm and before the 19:00 to 22:00 lecture is restorative rather than an additional burden.",
+          "evidence_gap": "The rationale calls it decompression, but the calendar does not show the user’s post-exam recovery needs, travel needs or meal timing before the evening lecture.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Gym availability",
+          "assumption": "The gym is available and usable at the moved Tuesday 17:30 to 18:15 slot and Wednesday 19:00 to 20:15 slot.",
+          "evidence_gap": "The proposal explicitly states that gym availability is not known from the supplied calendar.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "external_source"
+        },
+        {
+          "subject": "Midweek cumulative load",
+          "assumption": "The user can sustain the sequence of Monday work plus study, Tuesday work plus midterm plus gym plus lecture, Wednesday extended work plus gym plus late dinner/chores, and Thursday work plus evening lab.",
+          "evidence_gap": "The rationale protects fixed events and sleep but does not substantively assess cumulative fatigue or recovery across these consecutive demanding days.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "proposer_feedback": "Numeric Critic criteria failed. Scores: {\"reasoning\":3,\"coherence\":3,\"alternatives\":2,\"clarity\":4}. Plausibility revision required (moderate): The proposed organization creates a materially compressed Wednesday after an already demanding Monday and Tuesday. The added 17:30–18:45 work block follows a full 09:00–17:30 workday, then leaves only short gaps before gym at 19:00 and dinner/chores at 20:30, with sleep at 23:45. This could significantly affect manageability, recovery and the quality of the catch-up work, especially because the existing Wednesday work event already includes catch-up tasks. The concern is not an objective conflict, but a grounded sustainability risk visible in the resulting calendar. Suggested direction: Reassess the distribution of the catch-up work and the shifted evening activities using the fuller context. In particular, justify whether the added block is necessary in addition to the existing catch-up work shift, and consider whether a less compressed arrangement or a reduction in evening load would better preserve recovery and practical margin. The Critic lacks the full user constraints; explain if no better feasible option exists. Unverified conditions to reassess: [{'subject': 'Wednesday added catch-up work', 'assumption': 'The user can reasonably perform focused catch-up work from 17:30 to 18:45 immediately after the 09:00 to 17:30 work shift.', 'evidence_gap': 'The calendar shows a full workday already labelled as including catch-up tasks, but does not explain why an additional consecutive work block is needed or whether the user has capacity for it.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Wednesday transitions', 'assumption': 'The 15-minute gaps from catch-up work to gym and from gym to dinner/chores are enough for the user’s actual locations, preparation, hygiene and transition needs.', 'evidence_gap': 'Locations, travel time, showering or preparation needs are not provided; the rationale acknowledges unknown travel and gym availability generally.', 'potential_impact': 'material', 'verification_source': 'unknown'}, {'subject': 'Tuesday post-exam gym', 'assumption': 'A 17:30 to 18:15 workout after the 15:00 to 17:00 midterm and before the 19:00 to 22:00 lecture is restorative rather than an additional burden.', 'evidence_gap': 'The rationale calls it decompression, but the calendar does not show the user’s post-exam recovery needs, travel needs or meal timing before the evening lecture.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Gym availability', 'assumption': 'The gym is available and usable at the moved Tuesday 17:30 to 18:15 slot and Wednesday 19:00 to 20:15 slot.', 'evidence_gap': 'The proposal explicitly states that gym availability is not known from the supplied calendar.', 'potential_impact': 'potentially_blocking', 'verification_source': 'external_source'}, {'subject': 'Midweek cumulative load', 'assumption': 'The user can sustain the sequence of Monday work plus study, Tuesday work plus midterm plus gym plus lecture, Wednesday extended work plus gym plus late dinner/chores, and Thursday work plus evening lab.', 'evidence_gap': 'The rationale protects fixed events and sleep but does not substantively assess cumulative fatigue or recovery across these consecutive demanding days.', 'potential_impact': 'material', 'verification_source': 'user_context'}] Weaknesses: ['The proposal treats the Wednesday 17:30–18:45 catch-up block as a reasonable addition mainly because it avoids late-night work, but it follows directly after the existing 09:00–17:30 work shift, which already includes “Catch-up Tasks.” This creates a 09:00–18:45 work span before gym, dinner and chores, without much rationale for why the extra work is necessary or sustainable.', 'Wednesday becomes tightly packed: work 09:00–17:30, added focused work 17:30–18:45, gym 19:00–20:15, dinner and chores 20:30–22:45, then sleep at 23:45. That leaves little visible margin for transition, showering, eating calmly, decompression or unexpected spillover.', 'The proposal preserves sleep duration, but does not adequately weigh the cumulative sequence across the visible week: Monday work plus evening study, Tuesday work plus midterm plus gym plus lecture, Wednesday extended work plus gym plus late household tasks, and Thursday work plus evening lab.', 'The Tuesday moved gym slot may be useful as decompression, but it sits between a 15:00–17:00 midterm and a 19:00–22:00 lecture. The rationale does not fully address whether exercise in that narrow post-exam window improves recovery or adds pressure before class.', 'Alternatives considered are narrow. The rationale rejects late-night work and relying only on the existing Wednesday work shift, but it does not show consideration of less compressed distributions, reducing or shortening a flexible activity, or clarifying whether the existing Wednesday catch-up tasks already meet the visible work need.']. Actionable feedback: The plan is technically coherent and protects the fixed exam, classes, work shifts and sleep blocks, but the human-quality concern is the compressed midweek load. The most material issue is Wednesday: the added catch-up work is placed immediately after a full workday that already includes catch-up tasks, then pushes gym and dinner/chores later into the evening. This may be workable for some people, but the rationale does not sufficiently explain why this concentration is preferable to a less compressed approach or why the existing Wednesday work shift is inadequate. The Proposer should reconsider whether the added work block needs to be consecutive with the full workday, whether the evening health and personal activities remain realistic after that extension, and whether the plan has enough practical margin for recovery and basic transitions. The same operations might still be acceptable if the fuller context confirms the user can handle this intensity and that the added catch-up block is genuinely needed.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "move",
+            "event_id": "gym_tue",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-04-06T17:30:00+01:00",
+            "to_end": "2027-04-06T18:10:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "The protected midterm and Tuesday lecture remain unchanged.",
+            "The workout starts after the stated worker-student leave window for exam and transit.",
+            "Only a flexible user-only health event is changed; fixed work, sleep, and classes are not changed.",
+            "Wednesday catch-up is already present inside the fixed Wednesday work shift.",
+            "Gym availability, travel time, meal timing, and post-exam recovery needs are not supplied."
+          ],
+          "priorities": [
+            "Education and work stay protected while the Tuesday workout becomes shorter and less tight before class.",
+            "The plan avoids extending Wednesday after a full workday and preserves evening recovery margin.",
+            "Cumulative midweek load is reduced compared with adding extra Wednesday evening work."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Add a Wednesday 17:30 catch-up block after work.",
+              "rejected_because": "Rejected because the existing work shift already includes catch-up and an extra block would compress recovery."
+            },
+            {
+              "option": "Add a catch-up block inside the Wednesday work shift.",
+              "rejected_because": "Rejected because the calendar already labels that fixed shift as including catch-up tasks."
+            },
+            {
+              "option": "Keep the original Tuesday workout length.",
+              "rejected_because": "Rejected because it is less consistent with a short decompression slot before the lecture."
+            }
+          ],
+          "summary": "The selected plan shortens and moves Tuesday gym into a decompression slot after the exam while relying on the existing Wednesday catch-up work shift, trading less explicit new work blocking for better recovery and lower midweek compression."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-04-04T23:45:00+01:00",
+            "end": "2027-04-05T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_mon",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-04-05T09:00:00+01:00",
+            "end": "2027-04-05T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Daytime work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_mon",
+            "title": "Evening Study: Database Systems Midterm Prep",
+            "start": "2027-04-05T18:15:00+01:00",
+            "end": "2027-04-05T21:30:00+01:00",
+            "category": "education",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Exam preparation.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-04-05T23:45:00+01:00",
+            "end": "2027-04-06T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_tue_am",
+            "title": "Daytime Job: Morning Shift (Leave at 14:30)",
+            "start": "2027-04-06T09:00:00+01:00",
+            "end": "2027-04-06T14:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Morning work before worker-student leave.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "midterm_tue",
+            "title": "University Midterm Test: Database Systems",
+            "start": "2027-04-06T15:00:00+01:00",
+            "end": "2027-04-06T17:00:00+01:00",
+            "category": "education",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "professor"
+            ],
+            "description": "Mandatory assessment.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_tue",
+            "title": "Gym: Cardio & Stretching",
+            "start": "2027-04-06T17:30:00+01:00",
+            "end": "2027-04-06T18:10:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Post-exam workout.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "class_tue",
+            "title": "Evening Lecture: Software Engineering",
+            "start": "2027-04-06T19:00:00+01:00",
+            "end": "2027-04-06T22:00:00+01:00",
+            "category": "education",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "professor",
+              "classmates"
+            ],
+            "description": "Mandatory evening class.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-04-06T23:45:00+01:00",
+            "end": "2027-04-07T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_wed",
+            "title": "Daytime Job: Core Shift + Catch-up Tasks",
+            "start": "2027-04-07T09:00:00+01:00",
+            "end": "2027-04-07T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "team"
+            ],
+            "description": "Work shift including Tuesday catch-up items.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_wed",
+            "title": "Gym: Strength Training",
+            "start": "2027-04-07T18:00:00+01:00",
+            "end": "2027-04-07T19:15:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Strength workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "dinner_personal_wed",
+            "title": "Dinner & Household Chores",
+            "start": "2027-04-07T19:45:00+01:00",
+            "end": "2027-04-07T22:00:00+01:00",
+            "category": "personal",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Dinner and light chores.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-04-07T23:45:00+01:00",
+            "end": "2027-04-08T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_thu",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-04-08T09:00:00+01:00",
+            "end": "2027-04-08T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Daytime job.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "class_thu",
+            "title": "Evening Lecture: Software Engineering Lab",
+            "start": "2027-04-08T18:30:00+01:00",
+            "end": "2027-04-08T21:30:00+01:00",
+            "category": "education",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "professor",
+              "classmates"
+            ],
+            "description": "Mandatory evening lab.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-04-08T23:45:00+01:00",
+            "end": "2027-04-09T07:15:00+01:00",
+            "category": "sleep",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Night sleep.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_fri",
+            "title": "Daytime Job: Core Shift",
+            "start": "2027-04-09T09:00:00+01:00",
+            "end": "2027-04-09T17:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Friday work shift.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "gym_fri",
+            "title": "Gym: Full Body Workout",
+            "start": "2027-04-09T18:00:00+01:00",
+            "end": "2027-04-09T19:15:00+01:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Friday workout.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "social_fri",
+            "title": "Dinner with Family",
+            "start": "2027-04-09T20:00:00+01:00",
+            "end": "2027-04-09T22:30:00+01:00",
+            "category": "personal",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user",
+              "family"
+            ],
+            "description": "Family dinner.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 4,
+          "alternatives": 4,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The prior Wednesday compression concern is substantially addressed: the added 17:30–18:45 Wednesday catch-up block was removed, and the existing Wednesday work shift already labelled “Core Shift + Catch-up Tasks” from 09:00 to 17:30 is relied on instead. However, the rationale still cannot verify whether that built-in catch-up capacity is actually sufficient for the underlying work need because the original request and workload details are not available.",
+          "Tuesday remains a dense day: work from 09:00 to 14:30, midterm from 15:00 to 17:00, gym from 17:30 to 18:10, and lecture from 19:00 to 22:00. The moved gym is short and may be restorative, but it leaves limited visible margin for post-exam decompression, food, hygiene, travel or preparation before the evening lecture.",
+          "The plan calls the Tuesday gym a decompression slot, but that benefit is user-dependent. After a mandatory midterm, even light cardio and stretching could either help recovery or add pressure before a three-hour lecture; the proposal acknowledges recovery needs are not supplied but does not substantiate why this remains preferable.",
+          "Gym availability and actual travel or transition requirements are explicitly unknown. This is not a technical violation, but it matters because the Tuesday gym slot depends on a compact 17:30–18:10 window between fixed education events.",
+          "The visible week is still demanding overall, with Monday work plus evening study, Tuesday work plus midterm plus gym plus lecture, Wednesday full work plus gym and chores, Thursday work plus evening lab, and Friday work plus gym plus family dinner. Most of this is pre-existing rather than caused by the proposal, but the rationale could more directly acknowledge the cumulative load when defending even a short added/moved activity on Tuesday."
+        ],
+        "feedback": "The revision meaningfully improves the human manageability of the plan compared with the prior version. It removes the most concerning added Wednesday evening work block, avoids pushing Wednesday gym and dinner/chores later, and gives a grounded reason for relying on the existing Wednesday work shift that already includes catch-up tasks. The resulting calendar is still busy, especially on Tuesday, but the proposed change is now limited to a shorter flexible health event rather than adding more work after a full workday. Without the original request, I cannot verify request satisfaction, only whether the visible resulting schedule is plausible. The remaining concern is mainly conditional: the Tuesday gym slot from 17:30 to 18:10 may be sustainable if the gym is nearby, available, and genuinely restorative for the user, but it could become counterproductive if it crowds out food, transition, hygiene or post-exam recovery before the 19:00–22:00 lecture. The Proposer should either keep this as a clearly flexible, low-pressure decompression activity or substantiate from fuller context that the user can realistically use that narrow post-exam window.",
+        "plausibility_review": {
+          "revision_required": false,
+          "severity": "low",
+          "reason": "The concrete moderate concern from the prior review was the compressed Wednesday extension: work 09:00–17:30, added catch-up 17:30–18:45, gym, late dinner/chores, then sleep. The revised calendar removes that added catch-up block and preserves the original Wednesday evening structure, so the most significant human-quality risk has been addressed. The Tuesday post-exam gym remains uncertain because it sits between the 15:00–17:00 midterm and the 19:00–22:00 lecture, and if gym access, travel, meal timing or recovery needs are unfavorable, the slot could fail or add stress. There is no visible evidence of actual failure, and another revision would be unlikely to improve the plan without user-context or external availability information; the uncertainty is better retained as an unresolved assumption.",
+          "suggested_improvement": "Use the fuller context to verify whether the Tuesday 17:30–18:10 gym slot is truly restorative and practical, especially around travel, food, hygiene and post-exam recovery. If those conditions are weak, reconsider the distribution or treat the gym as optional rather than a tightly committed activity."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Tuesday post-exam gym",
+            "assumption": "The user can use the 17:30 to 18:10 gym slot after the 15:00 to 17:00 midterm without it undermining recovery or readiness for the 19:00 to 22:00 lecture.",
+            "evidence_gap": "The rationale describes the gym as decompression, but the calendar does not show the user’s post-exam state, preferred recovery pattern, meal needs or preparation needs before class.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Tuesday transitions",
+            "assumption": "The gaps from midterm ending at 17:00 to gym starting at 17:30, and from gym ending at 18:10 to lecture starting at 19:00, are sufficient for the user’s actual travel, changing, hygiene and setup needs.",
+            "evidence_gap": "Locations, travel time, changing or showering needs, and class arrival expectations are not provided.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Meal timing on Tuesday",
+            "assumption": "The user can eat adequately around the sequence of work 09:00–14:30, midterm 15:00–17:00, gym 17:30–18:10 and lecture 19:00–22:00.",
+            "evidence_gap": "No explicit meal event appears on Tuesday, and the proposal does not explain whether meals fit into the visible gaps.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Gym availability",
+            "assumption": "The gym is available and usable for the moved Tuesday 17:30 to 18:10 slot.",
+            "evidence_gap": "The rationale explicitly states that gym availability is not supplied.",
+            "potential_impact": "potentially_blocking",
+            "verification_source": "external_source"
+          },
+          {
+            "subject": "Wednesday catch-up sufficiency",
+            "assumption": "The existing Wednesday 09:00 to 17:30 work shift labelled “Core Shift + Catch-up Tasks” is sufficient for the catch-up need that motivated the schedule discussion.",
+            "evidence_gap": "The calendar title and description indicate catch-up tasks are included, but the original request and amount or urgency of catch-up work are not available.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Request satisfaction",
+            "assumption": "The no-added-work revised plan still satisfies the user’s underlying scheduling goal.",
+            "evidence_gap": "The original request is not provided, and the technical validation explicitly does not check request satisfaction or soft preference satisfaction.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          }
+        ],
+        "overall": 4.0
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": true,
+        "plausibility_revision_required": false,
+        "accepted": true,
+        "revision_causes": []
+      },
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": [
+        {
+          "iteration": 0,
+          "proposal": {
+            "changes": [
+              {
+                "type": "move",
+                "event_id": "gym_tue",
+                "title": null,
+                "from_start": null,
+                "to_start": "2027-04-06T17:30:00+01:00",
+                "to_end": "2027-04-06T18:15:00+01:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Focused catch-up work tasks",
+                "from_start": null,
+                "to_start": "2027-04-07T17:30:00+01:00",
+                "to_end": "2027-04-07T18:45:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "participants": [
+                  "user"
+                ]
+              },
+              {
+                "type": "move",
+                "event_id": "gym_wed",
+                "title": null,
+                "from_start": null,
+                "to_start": "2027-04-07T19:00:00+01:00",
+                "to_end": "2027-04-07T20:15:00+01:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "move",
+                "event_id": "dinner_personal_wed",
+                "title": null,
+                "from_start": null,
+                "to_start": "2027-04-07T20:30:00+01:00",
+                "to_end": "2027-04-07T22:45:00+01:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              }
+            ],
+            "rationale": {
+              "constraints": [
+                "The protected midterm and Tuesday lecture remain unchanged.",
+                "The Tuesday workout starts after the stated worker-student leave window for exam and transit.",
+                "Only flexible user-only health and personal events are moved; fixed work, sleep, and classes are not changed.",
+                "Gym availability and actual travel time are not known from the supplied calendar."
+              ],
+              "priorities": [
+                "Education and work are prioritized while preserving a short decompression workout before class.",
+                "Wednesday catch-up is made explicit without using late-night work as the first choice.",
+                "The plan keeps Wednesday sleep intact but pushes evening personal time later."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Use only the existing Wednesday work shift for catch-up.",
+                  "rejected_because": "This avoids disruption, but it is less explicit than the requested scheduled catch-up block."
+                },
+                {
+                  "option": "Schedule catch-up work after Wednesday dinner.",
+                  "rejected_because": "This avoids moving the gym and chores, but it creates later work close to sleep."
+                }
+              ],
+              "summary": "Tuesday is organized around the protected exam and lecture by shortening and moving the workout into a decompression slot; Wednesday gains an explicit catch-up block by shifting flexible evening gym and personal time later."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "sleep_mon",
+                "title": "Sleep",
+                "start": "2027-04-04T23:45:00+01:00",
+                "end": "2027-04-05T07:15:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Night sleep.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_mon",
+                "title": "Daytime Job: Core Shift",
+                "start": "2027-04-05T09:00:00+01:00",
+                "end": "2027-04-05T17:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "colleagues"
+                ],
+                "description": "Daytime work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "study_mon",
+                "title": "Evening Study: Database Systems Midterm Prep",
+                "start": "2027-04-05T18:15:00+01:00",
+                "end": "2027-04-05T21:30:00+01:00",
+                "category": "education",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Exam preparation.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_tue",
+                "title": "Sleep",
+                "start": "2027-04-05T23:45:00+01:00",
+                "end": "2027-04-06T07:15:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Night sleep.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_tue_am",
+                "title": "Daytime Job: Morning Shift (Leave at 14:30)",
+                "start": "2027-04-06T09:00:00+01:00",
+                "end": "2027-04-06T14:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "colleagues"
+                ],
+                "description": "Morning work before worker-student leave.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "midterm_tue",
+                "title": "University Midterm Test: Database Systems",
+                "start": "2027-04-06T15:00:00+01:00",
+                "end": "2027-04-06T17:00:00+01:00",
+                "category": "education",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "professor"
+                ],
+                "description": "Mandatory assessment.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_tue",
+                "title": "Gym: Cardio & Stretching",
+                "start": "2027-04-06T17:30:00+01:00",
+                "end": "2027-04-06T18:15:00+01:00",
+                "category": "health",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Post-exam workout.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "class_tue",
+                "title": "Evening Lecture: Software Engineering",
+                "start": "2027-04-06T19:00:00+01:00",
+                "end": "2027-04-06T22:00:00+01:00",
+                "category": "education",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "professor",
+                  "classmates"
+                ],
+                "description": "Mandatory evening class.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_wed",
+                "title": "Sleep",
+                "start": "2027-04-06T23:45:00+01:00",
+                "end": "2027-04-07T07:15:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Night sleep.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_wed",
+                "title": "Daytime Job: Core Shift + Catch-up Tasks",
+                "start": "2027-04-07T09:00:00+01:00",
+                "end": "2027-04-07T17:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "team"
+                ],
+                "description": "Work shift including Tuesday catch-up items.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_1",
+                "title": "Focused catch-up work tasks",
+                "start": "2027-04-07T17:30:00+01:00",
+                "end": "2027-04-07T18:45:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": null,
+                "participants": [
+                  "user"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "gym_wed",
+                "title": "Gym: Strength Training",
+                "start": "2027-04-07T19:00:00+01:00",
+                "end": "2027-04-07T20:15:00+01:00",
+                "category": "health",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Strength workout.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "dinner_personal_wed",
+                "title": "Dinner & Household Chores",
+                "start": "2027-04-07T20:30:00+01:00",
+                "end": "2027-04-07T22:45:00+01:00",
+                "category": "personal",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Dinner and light chores.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2027-04-07T23:45:00+01:00",
+                "end": "2027-04-08T07:15:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Night sleep.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_thu",
+                "title": "Daytime Job: Core Shift",
+                "start": "2027-04-08T09:00:00+01:00",
+                "end": "2027-04-08T17:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "colleagues"
+                ],
+                "description": "Daytime job.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "class_thu",
+                "title": "Evening Lecture: Software Engineering Lab",
+                "start": "2027-04-08T18:30:00+01:00",
+                "end": "2027-04-08T21:30:00+01:00",
+                "category": "education",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "professor",
+                  "classmates"
+                ],
+                "description": "Mandatory evening lab.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_fri",
+                "title": "Sleep",
+                "start": "2027-04-08T23:45:00+01:00",
+                "end": "2027-04-09T07:15:00+01:00",
+                "category": "sleep",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Night sleep.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_fri",
+                "title": "Daytime Job: Core Shift",
+                "start": "2027-04-09T09:00:00+01:00",
+                "end": "2027-04-09T17:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "colleagues"
+                ],
+                "description": "Friday work shift.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "gym_fri",
+                "title": "Gym: Full Body Workout",
+                "start": "2027-04-09T18:00:00+01:00",
+                "end": "2027-04-09T19:15:00+01:00",
+                "category": "health",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Friday workout.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "social_fri",
+                "title": "Dinner with Family",
+                "start": "2027-04-09T20:00:00+01:00",
+                "end": "2027-04-09T22:30:00+01:00",
+                "category": "personal",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "family"
+                ],
+                "description": "Family dinner.",
+                "origin": "existing",
+                "change_status": "preserved"
+              }
+            ],
+            "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+          },
+          "plausibility_review": {
+            "revision_required": true,
+            "severity": "moderate",
+            "reason": "The proposed organization creates a materially compressed Wednesday after an already demanding Monday and Tuesday. The added 17:30–18:45 work block follows a full 09:00–17:30 workday, then leaves only short gaps before gym at 19:00 and dinner/chores at 20:30, with sleep at 23:45. This could significantly affect manageability, recovery and the quality of the catch-up work, especially because the existing Wednesday work event already includes catch-up tasks. The concern is not an objective conflict, but a grounded sustainability risk visible in the resulting calendar.",
+            "suggested_improvement": "Reassess the distribution of the catch-up work and the shifted evening activities using the fuller context. In particular, justify whether the added block is necessary in addition to the existing catch-up work shift, and consider whether a less compressed arrangement or a reduction in evening load would better preserve recovery and practical margin."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Wednesday added catch-up work",
+              "assumption": "The user can reasonably perform focused catch-up work from 17:30 to 18:45 immediately after the 09:00 to 17:30 work shift.",
+              "evidence_gap": "The calendar shows a full workday already labelled as including catch-up tasks, but does not explain why an additional consecutive work block is needed or whether the user has capacity for it.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Wednesday transitions",
+              "assumption": "The 15-minute gaps from catch-up work to gym and from gym to dinner/chores are enough for the user’s actual locations, preparation, hygiene and transition needs.",
+              "evidence_gap": "Locations, travel time, showering or preparation needs are not provided; the rationale acknowledges unknown travel and gym availability generally.",
+              "potential_impact": "material",
+              "verification_source": "unknown"
+            },
+            {
+              "subject": "Tuesday post-exam gym",
+              "assumption": "A 17:30 to 18:15 workout after the 15:00 to 17:00 midterm and before the 19:00 to 22:00 lecture is restorative rather than an additional burden.",
+              "evidence_gap": "The rationale calls it decompression, but the calendar does not show the user’s post-exam recovery needs, travel needs or meal timing before the evening lecture.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Gym availability",
+              "assumption": "The gym is available and usable at the moved Tuesday 17:30 to 18:15 slot and Wednesday 19:00 to 20:15 slot.",
+              "evidence_gap": "The proposal explicitly states that gym availability is not known from the supplied calendar.",
+              "potential_impact": "potentially_blocking",
+              "verification_source": "external_source"
+            },
+            {
+              "subject": "Midweek cumulative load",
+              "assumption": "The user can sustain the sequence of Monday work plus study, Tuesday work plus midterm plus gym plus lecture, Wednesday extended work plus gym plus late dinner/chores, and Thursday work plus evening lab.",
+              "evidence_gap": "The rationale protects fixed events and sleep but does not substantively assess cumulative fatigue or recovery across these consecutive demanding days.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            }
+          ],
+          "weaknesses": [
+            "The proposal treats the Wednesday 17:30–18:45 catch-up block as a reasonable addition mainly because it avoids late-night work, but it follows directly after the existing 09:00–17:30 work shift, which already includes “Catch-up Tasks.” This creates a 09:00–18:45 work span before gym, dinner and chores, without much rationale for why the extra work is necessary or sustainable.",
+            "Wednesday becomes tightly packed: work 09:00–17:30, added focused work 17:30–18:45, gym 19:00–20:15, dinner and chores 20:30–22:45, then sleep at 23:45. That leaves little visible margin for transition, showering, eating calmly, decompression or unexpected spillover.",
+            "The proposal preserves sleep duration, but does not adequately weigh the cumulative sequence across the visible week: Monday work plus evening study, Tuesday work plus midterm plus gym plus lecture, Wednesday extended work plus gym plus late household tasks, and Thursday work plus evening lab.",
+            "The Tuesday moved gym slot may be useful as decompression, but it sits between a 15:00–17:00 midterm and a 19:00–22:00 lecture. The rationale does not fully address whether exercise in that narrow post-exam window improves recovery or adds pressure before class.",
+            "Alternatives considered are narrow. The rationale rejects late-night work and relying only on the existing Wednesday work shift, but it does not show consideration of less compressed distributions, reducing or shortening a flexible activity, or clarifying whether the existing Wednesday catch-up tasks already meet the visible work need."
+          ],
+          "feedback": "The plan is technically coherent and protects the fixed exam, classes, work shifts and sleep blocks, but the human-quality concern is the compressed midweek load. The most material issue is Wednesday: the added catch-up work is placed immediately after a full workday that already includes catch-up tasks, then pushes gym and dinner/chores later into the evening. This may be workable for some people, but the rationale does not sufficiently explain why this concentration is preferable to a less compressed approach or why the existing Wednesday work shift is inadequate. The Proposer should reconsider whether the added work block needs to be consecutive with the full workday, whether the evening health and personal activities remain realistic after that extension, and whether the plan has enough practical margin for recovery and basic transitions. The same operations might still be acceptable if the fuller context confirms the user can handle this intensity and that the added catch-up block is genuinely needed."
+        }
+      ],
+      "unresolved_assumptions": [
+        {
+          "subject": "Tuesday post-exam gym",
+          "assumption": "The user can use the 17:30 to 18:10 gym slot after the 15:00 to 17:00 midterm without it undermining recovery or readiness for the 19:00 to 22:00 lecture.",
+          "evidence_gap": "The rationale describes the gym as decompression, but the calendar does not show the user’s post-exam state, preferred recovery pattern, meal needs or preparation needs before class.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Tuesday transitions",
+          "assumption": "The gaps from midterm ending at 17:00 to gym starting at 17:30, and from gym ending at 18:10 to lecture starting at 19:00, are sufficient for the user’s actual travel, changing, hygiene and setup needs.",
+          "evidence_gap": "Locations, travel time, changing or showering needs, and class arrival expectations are not provided.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Meal timing on Tuesday",
+          "assumption": "The user can eat adequately around the sequence of work 09:00–14:30, midterm 15:00–17:00, gym 17:30–18:10 and lecture 19:00–22:00.",
+          "evidence_gap": "No explicit meal event appears on Tuesday, and the proposal does not explain whether meals fit into the visible gaps.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Gym availability",
+          "assumption": "The gym is available and usable for the moved Tuesday 17:30 to 18:10 slot.",
+          "evidence_gap": "The rationale explicitly states that gym availability is not supplied.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "external_source"
+        },
+        {
+          "subject": "Wednesday catch-up sufficiency",
+          "assumption": "The existing Wednesday 09:00 to 17:30 work shift labelled “Core Shift + Catch-up Tasks” is sufficient for the catch-up need that motivated the schedule discussion.",
+          "evidence_gap": "The calendar title and description indicate catch-up tasks are included, but the original request and amount or urgency of catch-up work are not available.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Request satisfaction",
+          "assumption": "The no-added-work revised plan still satisfies the user’s underlying scheduling goal.",
+          "evidence_gap": "The original request is not provided, and the technical validation explicitly does not check request satisfaction or soft preference satisfaction.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    }
+  ],
+  "initial_proposal": {
+    "changes": [
+      {
+        "type": "move",
+        "event_id": "gym_tue",
+        "title": null,
+        "from_start": null,
+        "to_start": "2027-04-06T17:30:00+01:00",
+        "to_end": "2027-04-06T18:15:00+01:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Focused catch-up work tasks",
+        "from_start": null,
+        "to_start": "2027-04-07T17:30:00+01:00",
+        "to_end": "2027-04-07T18:45:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "move",
+        "event_id": "gym_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": "2027-04-07T19:00:00+01:00",
+        "to_end": "2027-04-07T20:15:00+01:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "dinner_personal_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": "2027-04-07T20:30:00+01:00",
+        "to_end": "2027-04-07T22:45:00+01:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "The protected midterm and Tuesday lecture remain unchanged.",
+        "The Tuesday workout starts after the stated worker-student leave window for exam and transit.",
+        "Only flexible user-only health and personal events are moved; fixed work, sleep, and classes are not changed.",
+        "Gym availability and actual travel time are not known from the supplied calendar."
+      ],
+      "priorities": [
+        "Education and work are prioritized while preserving a short decompression workout before class.",
+        "Wednesday catch-up is made explicit without using late-night work as the first choice.",
+        "The plan keeps Wednesday sleep intact but pushes evening personal time later."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Use only the existing Wednesday work shift for catch-up.",
+          "rejected_because": "This avoids disruption, but it is less explicit than the requested scheduled catch-up block."
+        },
+        {
+          "option": "Schedule catch-up work after Wednesday dinner.",
+          "rejected_because": "This avoids moving the gym and chores, but it creates later work close to sleep."
+        }
+      ],
+      "summary": "Tuesday is organized around the protected exam and lecture by shortening and moving the workout into a decompression slot; Wednesday gains an explicit catch-up block by shifting flexible evening gym and personal time later."
+    }
+  },
+  "final_proposal": {
+    "changes": [
+      {
+        "type": "move",
+        "event_id": "gym_tue",
+        "title": null,
+        "from_start": null,
+        "to_start": "2027-04-06T17:30:00+01:00",
+        "to_end": "2027-04-06T18:10:00+01:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "The protected midterm and Tuesday lecture remain unchanged.",
+        "The workout starts after the stated worker-student leave window for exam and transit.",
+        "Only a flexible user-only health event is changed; fixed work, sleep, and classes are not changed.",
+        "Wednesday catch-up is already present inside the fixed Wednesday work shift.",
+        "Gym availability, travel time, meal timing, and post-exam recovery needs are not supplied."
+      ],
+      "priorities": [
+        "Education and work stay protected while the Tuesday workout becomes shorter and less tight before class.",
+        "The plan avoids extending Wednesday after a full workday and preserves evening recovery margin.",
+        "Cumulative midweek load is reduced compared with adding extra Wednesday evening work."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Add a Wednesday 17:30 catch-up block after work.",
+          "rejected_because": "Rejected because the existing work shift already includes catch-up and an extra block would compress recovery."
+        },
+        {
+          "option": "Add a catch-up block inside the Wednesday work shift.",
+          "rejected_because": "Rejected because the calendar already labels that fixed shift as including catch-up tasks."
+        },
+        {
+          "option": "Keep the original Tuesday workout length.",
+          "rejected_because": "Rejected because it is less consistent with a short decompression slot before the lecture."
+        }
+      ],
+      "summary": "The selected plan shortens and moves Tuesday gym into a decompression slot after the exam while relying on the existing Wednesday catch-up work shift, trading less explicit new work blocking for better recovery and lower midweek compression."
+    }
+  },
+  "final_score": 4.0,
+  "refinements": 1,
+  "critic_accepted": true,
+  "decision": "defer",
+  "reasons": [
+    "toca em evento importante (gym_tue, importância 4)",
+    "toca em categoria sensível (health)"
+  ],
+  "status": "proposal_ready",
+  "critic_input_version": "final_calendar_v1",
+  "critic_policy_version": "uncertainty_review_v2",
+  "result_calendar_version": "validated_added_metadata_v2",
+  "final_result_calendar": {
+    "timezone": "Europe/Lisbon",
+    "coverage": "all_events_in_scenario_after_simulation",
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-04-04T23:45:00+01:00",
+        "end": "2027-04-05T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_mon",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-04-05T09:00:00+01:00",
+        "end": "2027-04-05T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Daytime work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "study_mon",
+        "title": "Evening Study: Database Systems Midterm Prep",
+        "start": "2027-04-05T18:15:00+01:00",
+        "end": "2027-04-05T21:30:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Exam preparation.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-04-05T23:45:00+01:00",
+        "end": "2027-04-06T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_tue_am",
+        "title": "Daytime Job: Morning Shift (Leave at 14:30)",
+        "start": "2027-04-06T09:00:00+01:00",
+        "end": "2027-04-06T14:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Morning work before worker-student leave.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "midterm_tue",
+        "title": "University Midterm Test: Database Systems",
+        "start": "2027-04-06T15:00:00+01:00",
+        "end": "2027-04-06T17:00:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "professor"
+        ],
+        "description": "Mandatory assessment.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_tue",
+        "title": "Gym: Cardio & Stretching",
+        "start": "2027-04-06T17:30:00+01:00",
+        "end": "2027-04-06T18:10:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Post-exam workout.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "class_tue",
+        "title": "Evening Lecture: Software Engineering",
+        "start": "2027-04-06T19:00:00+01:00",
+        "end": "2027-04-06T22:00:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "professor",
+          "classmates"
+        ],
+        "description": "Mandatory evening class.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-04-06T23:45:00+01:00",
+        "end": "2027-04-07T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_wed",
+        "title": "Daytime Job: Core Shift + Catch-up Tasks",
+        "start": "2027-04-07T09:00:00+01:00",
+        "end": "2027-04-07T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "team"
+        ],
+        "description": "Work shift including Tuesday catch-up items.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_wed",
+        "title": "Gym: Strength Training",
+        "start": "2027-04-07T18:00:00+01:00",
+        "end": "2027-04-07T19:15:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Strength workout.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "dinner_personal_wed",
+        "title": "Dinner & Household Chores",
+        "start": "2027-04-07T19:45:00+01:00",
+        "end": "2027-04-07T22:00:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Dinner and light chores.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-04-07T23:45:00+01:00",
+        "end": "2027-04-08T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_thu",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-04-08T09:00:00+01:00",
+        "end": "2027-04-08T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Daytime job.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "class_thu",
+        "title": "Evening Lecture: Software Engineering Lab",
+        "start": "2027-04-08T18:30:00+01:00",
+        "end": "2027-04-08T21:30:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "professor",
+          "classmates"
+        ],
+        "description": "Mandatory evening lab.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-04-08T23:45:00+01:00",
+        "end": "2027-04-09T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_fri",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-04-09T09:00:00+01:00",
+        "end": "2027-04-09T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Friday work shift.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "gym_fri",
+        "title": "Gym: Full Body Workout",
+        "start": "2027-04-09T18:00:00+01:00",
+        "end": "2027-04-09T19:15:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Friday workout.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "social_fri",
+        "title": "Dinner with Family",
+        "start": "2027-04-09T20:00:00+01:00",
+        "end": "2027-04-09T22:30:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "family"
+        ],
+        "description": "Family dinner.",
+        "origin": "existing",
+        "change_status": "preserved"
+      }
+    ],
+    "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+  },
+  "final_unresolved_assumptions": [
+    {
+      "subject": "Tuesday post-exam gym",
+      "assumption": "The user can use the 17:30 to 18:10 gym slot after the 15:00 to 17:00 midterm without it undermining recovery or readiness for the 19:00 to 22:00 lecture.",
+      "evidence_gap": "The rationale describes the gym as decompression, but the calendar does not show the user’s post-exam state, preferred recovery pattern, meal needs or preparation needs before class.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Tuesday transitions",
+      "assumption": "The gaps from midterm ending at 17:00 to gym starting at 17:30, and from gym ending at 18:10 to lecture starting at 19:00, are sufficient for the user’s actual travel, changing, hygiene and setup needs.",
+      "evidence_gap": "Locations, travel time, changing or showering needs, and class arrival expectations are not provided.",
+      "potential_impact": "material",
+      "verification_source": "unknown"
+    },
+    {
+      "subject": "Meal timing on Tuesday",
+      "assumption": "The user can eat adequately around the sequence of work 09:00–14:30, midterm 15:00–17:00, gym 17:30–18:10 and lecture 19:00–22:00.",
+      "evidence_gap": "No explicit meal event appears on Tuesday, and the proposal does not explain whether meals fit into the visible gaps.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Gym availability",
+      "assumption": "The gym is available and usable for the moved Tuesday 17:30 to 18:10 slot.",
+      "evidence_gap": "The rationale explicitly states that gym availability is not supplied.",
+      "potential_impact": "potentially_blocking",
+      "verification_source": "external_source"
+    },
+    {
+      "subject": "Wednesday catch-up sufficiency",
+      "assumption": "The existing Wednesday 09:00 to 17:30 work shift labelled “Core Shift + Catch-up Tasks” is sufficient for the catch-up need that motivated the schedule discussion.",
+      "evidence_gap": "The calendar title and description indicate catch-up tasks are included, but the original request and amount or urgency of catch-up work are not available.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Request satisfaction",
+      "assumption": "The no-added-work revised plan still satisfies the user’s underlying scheduling goal.",
+      "evidence_gap": "The original request is not provided, and the technical validation explicitly does not check request satisfaction or soft preference satisfaction.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    }
+  ],
+  "uncertainty_history": [
+    {
+      "iteration": 0,
+      "unresolved_assumptions": [
+        {
+          "subject": "Wednesday added catch-up work",
+          "assumption": "The user can reasonably perform focused catch-up work from 17:30 to 18:45 immediately after the 09:00 to 17:30 work shift.",
+          "evidence_gap": "The calendar shows a full workday already labelled as including catch-up tasks, but does not explain why an additional consecutive work block is needed or whether the user has capacity for it.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Wednesday transitions",
+          "assumption": "The 15-minute gaps from catch-up work to gym and from gym to dinner/chores are enough for the user’s actual locations, preparation, hygiene and transition needs.",
+          "evidence_gap": "Locations, travel time, showering or preparation needs are not provided; the rationale acknowledges unknown travel and gym availability generally.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Tuesday post-exam gym",
+          "assumption": "A 17:30 to 18:15 workout after the 15:00 to 17:00 midterm and before the 19:00 to 22:00 lecture is restorative rather than an additional burden.",
+          "evidence_gap": "The rationale calls it decompression, but the calendar does not show the user’s post-exam recovery needs, travel needs or meal timing before the evening lecture.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Gym availability",
+          "assumption": "The gym is available and usable at the moved Tuesday 17:30 to 18:15 slot and Wednesday 19:00 to 20:15 slot.",
+          "evidence_gap": "The proposal explicitly states that gym availability is not known from the supplied calendar.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "external_source"
+        },
+        {
+          "subject": "Midweek cumulative load",
+          "assumption": "The user can sustain the sequence of Monday work plus study, Tuesday work plus midterm plus gym plus lecture, Wednesday extended work plus gym plus late dinner/chores, and Thursday work plus evening lab.",
+          "evidence_gap": "The rationale protects fixed events and sleep but does not substantively assess cumulative fatigue or recovery across these consecutive demanding days.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    },
+    {
+      "iteration": 1,
+      "unresolved_assumptions": [
+        {
+          "subject": "Tuesday post-exam gym",
+          "assumption": "The user can use the 17:30 to 18:10 gym slot after the 15:00 to 17:00 midterm without it undermining recovery or readiness for the 19:00 to 22:00 lecture.",
+          "evidence_gap": "The rationale describes the gym as decompression, but the calendar does not show the user’s post-exam state, preferred recovery pattern, meal needs or preparation needs before class.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Tuesday transitions",
+          "assumption": "The gaps from midterm ending at 17:00 to gym starting at 17:30, and from gym ending at 18:10 to lecture starting at 19:00, are sufficient for the user’s actual travel, changing, hygiene and setup needs.",
+          "evidence_gap": "Locations, travel time, changing or showering needs, and class arrival expectations are not provided.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Meal timing on Tuesday",
+          "assumption": "The user can eat adequately around the sequence of work 09:00–14:30, midterm 15:00–17:00, gym 17:30–18:10 and lecture 19:00–22:00.",
+          "evidence_gap": "No explicit meal event appears on Tuesday, and the proposal does not explain whether meals fit into the visible gaps.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Gym availability",
+          "assumption": "The gym is available and usable for the moved Tuesday 17:30 to 18:10 slot.",
+          "evidence_gap": "The rationale explicitly states that gym availability is not supplied.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "external_source"
+        },
+        {
+          "subject": "Wednesday catch-up sufficiency",
+          "assumption": "The existing Wednesday 09:00 to 17:30 work shift labelled “Core Shift + Catch-up Tasks” is sufficient for the catch-up need that motivated the schedule discussion.",
+          "evidence_gap": "The calendar title and description indicate catch-up tasks are included, but the original request and amount or urgency of catch-up work are not available.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Request satisfaction",
+          "assumption": "The no-added-work revised plan still satisfies the user’s underlying scheduling goal.",
+          "evidence_gap": "The original request is not provided, and the technical validation explicitly does not check request satisfaction or soft preference satisfaction.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    }
+  ],
+  "schema_version": "2.0",
+  "profile_id": "working_student_01__working_student_partial_work_leave_exam_003",
+  "scenario_sha256": "b55c49ce3c261d7f13f595c7c2e297f3ca0995c487f9854856561351fc34dede",
+  "aggregate_requirements_sha256": null,
+  "confirmed_changes_sha256": null,
+  "simulator_version": "calendar_v2_validated_added_metadata_v2",
+  "dataset_manifest_sha256": "28af38846fb8995651d5f63ab63402e36147dc0915a2bfcd5379747ea531ffad",
+  "split": "train",
+  "run_id": "20a35e93504d49f8a5b50ffc54228124",
+  "experiment_id": null,
+  "repeat_index": 0,
+  "generated_at": "2026-11-25T09:51:09.248941+00:00",
+  "prompt_versions": {
+    "proposer_sha256": "ae6fa59cccb86c31f34f66d07d241660b1feadf852ebf1b594bc85addab86985",
+    "proposer_wire_schema_version": "compact_proposal_v1",
+    "proposer_wire_schema_sha256": "f504fbcd7e939c43e055e2f188feb22097a284bcd9b043227d868e559547b865",
+    "proposer_revision_sha256": "3f0fe7f221013700694a22984560612013e9804072ffde4538e1329b9708ac95",
+    "critic_sha256": "1686688cdd4bc63abb12e6633ef9dbb9b62d69b69aba1c4805a201657cc5bb34"
+  },
+  "seconds": 87.604,
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [],
+    "valid": true
+  }
+}

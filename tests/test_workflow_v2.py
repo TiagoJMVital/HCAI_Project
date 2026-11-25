@@ -15,6 +15,8 @@ sys.path.insert(0, str(ROOT / "eval"))
 
 from annotation_v2 import (ProposalReview, ProposalConsensus, compare, load_review,
                            pair, save_consensus, save_review)
+import annotation_v2 as annotation_module
+import annotation_v2_ui as annotation_ui_module
 from annotation_v2_ui import preview, records, temporal_overlaps
 from benchmark_v2 import import_scenario
 from calendar_v2 import simulate
@@ -111,6 +113,20 @@ def test_progress_scan_does_not_create_blank_human_annotations(imported):
                      "family_id": artifact["family_id"],
                      "state": "not_started"}]
     assert not author_dir.exists()
+
+
+def test_progress_scan_reuses_validated_sources_without_catalog_rescan(imported, monkeypatch):
+    root, _ = imported
+    artifact, _, _ = source(root)
+    sources = training_catalog(root)
+    load_review(root, "author_a", artifact["proposal_id"], source=sources[0])
+
+    def unexpected_scan(*args, **kwargs):
+        raise AssertionError("catalogue must not be rebuilt for each review")
+
+    monkeypatch.setattr(annotation_ui_module, "training_catalog", unexpected_scan)
+    monkeypatch.setattr(annotation_module, "_source", unexpected_scan)
+    assert records(root, "author_a", training_only=True, sources=sources)[0]["state"] == "not_started"
 
 
 def test_corrupted_source_is_quarantined_without_touching_annotations_or_gate_export(imported):

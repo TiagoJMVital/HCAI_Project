@@ -1,0 +1,968 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "parent_young_children_urgent_business_trip_001",
+  "family_id": "parent_young_children_schedule_conflict",
+  "profile": {
+    "profile_id": "parent_young_children_01__parent_young_children_urgent_business_trip_001",
+    "description": "Parent of two young children (Marta, 7, and Duarte, 3) working full-time in an office with a hybrid arrangement, sharing childcare, school runs, household errands and the children's activities with a partner who works rotating shifts.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "work": 4,
+      "children": 5,
+      "health": 5,
+      "household": 3,
+      "social": 2,
+      "exercise": 2,
+      "kids_activities": 3
+    },
+    "hard_constraints": [
+      {
+        "id": "children_dropoff_pickup",
+        "description": "Both children must always be dropped off and picked up on time by the user, the partner or an authorised adult; school and daycare opening and closing times are fixed.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "childcare"
+        ]
+      },
+      {
+        "id": "work_commitments",
+        "description": "Meetings, deadlines and appointments with colleagues, managers or clients must not be moved, shortened or cancelled by the assistant unless the user asks for it.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "work"
+        ]
+      },
+      {
+        "id": "sleep_protection",
+        "description": "The user must sleep at least seven hours every night; scheduled sleep blocks must be protected.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "sleep"
+        ]
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "family_dinner",
+        "description": "Prefer dinner with the children between 19:00 and 21:00, followed by a 45-minute bedtime routine that finishes by 21:30.",
+        "weight": 4
+      },
+      {
+        "id": "lunch_times",
+        "description": "Prefer a 45-minute lunch between 12:00 and 14:00.",
+        "weight": 2
+      },
+      {
+        "id": "exercise_routine",
+        "description": "Prefer two short runs of 45 minutes per week, either in the morning from 06:30 or in the evening after the children are asleep.",
+        "weight": 2
+      },
+      {
+        "id": "groceries",
+        "description": "Prefer to complete the weekly grocery shopping by Thursday; an online delivery is acceptable if someone is at home.",
+        "weight": 2
+      },
+      {
+        "id": "kids_activities",
+        "description": "Prefer to keep the children's sports and activities, but they can be skipped in exceptional circumstances.",
+        "weight": 3
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Flexible work blocks, runs, the children's activities and the Friday dinner timing can be reorganised where necessary. The team sync, the design review, the product demo, the mentoring session, the date night and the babysitter involve other people, so changing them requires confirmation. The partner's shifts are fixed. Asking the user's mother for help is a third-party request that requires confirmation. These are user preferences, not ground-truth ACT/DEFER labels."
+    }
+  },
+  "now": "2027-01-12T16:45:00+00:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "partner_shift_tue",
+        "title": "Partner's work shift",
+        "start": "2027-01-12T05:30:00+00:00",
+        "end": "2027-01-12T13:30:00+00:00",
+        "category": "partner_work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "partner"
+        ],
+        "description": "Early shift as a bus driver; the partner is home from 14:15."
+      },
+      {
+        "id": "focus_tue",
+        "title": "Project work",
+        "start": "2027-01-12T16:30:00+00:00",
+        "end": "2027-01-12T17:00:00+00:00",
+        "category": "work_focus",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Flexible individual work that can be moved within the working day."
+      },
+      {
+        "id": "commute_home_tue",
+        "title": "Commute home",
+        "start": "2027-01-12T17:00:00+00:00",
+        "end": "2027-01-12T17:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute journey from the office to home."
+      },
+      {
+        "id": "pickup_partner_tue",
+        "title": "Pick up children (partner)",
+        "start": "2027-01-12T17:30:00+00:00",
+        "end": "2027-01-12T17:45:00+00:00",
+        "category": "childcare",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "partner",
+          "marta",
+          "duarte"
+        ],
+        "description": "The partner collects both children and takes them home."
+      },
+      {
+        "id": "dinner_tue",
+        "title": "Family dinner",
+        "start": "2027-01-12T19:30:00+00:00",
+        "end": "2027-01-12T20:30:00+00:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "One-hour dinner at home with the children."
+      },
+      {
+        "id": "bedtime_tue",
+        "title": "Children's bedtime routine",
+        "start": "2027-01-12T20:30:00+00:00",
+        "end": "2027-01-12T21:15:00+00:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Bath, story and bedtime for both children; about 45 minutes."
+      },
+      {
+        "id": "run_tue",
+        "title": "Evening run",
+        "start": "2027-01-12T21:30:00+00:00",
+        "end": "2027-01-12T22:15:00+00:00",
+        "category": "exercise",
+        "importance": 2,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "45-minute run near home after the children are asleep."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-01-12T23:00:00+00:00",
+        "end": "2027-01-13T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block; the user requires at least seven hours of sleep per night."
+      },
+      {
+        "id": "partner_shift_wed",
+        "title": "Partner's work shift",
+        "start": "2027-01-13T05:30:00+00:00",
+        "end": "2027-01-13T13:30:00+00:00",
+        "category": "partner_work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "partner"
+        ],
+        "description": "Early shift as a bus driver; the partner is home from 14:15."
+      },
+      {
+        "id": "morning_wed",
+        "title": "Morning routine with the children",
+        "start": "2027-01-13T06:45:00+00:00",
+        "end": "2027-01-13T07:45:00+00:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Breakfast, dressing and packing school bags for both children."
+      },
+      {
+        "id": "travel_to_school_wed",
+        "title": "Travel to school and daycare",
+        "start": "2027-01-13T08:00:00+00:00",
+        "end": "2027-01-13T08:15:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "15-minute car journey from home to the school and daycare, which share the same site."
+      },
+      {
+        "id": "dropoff_wed",
+        "title": "Drop-off at school and daycare",
+        "start": "2027-01-13T08:15:00+00:00",
+        "end": "2027-01-13T08:30:00+00:00",
+        "category": "childcare",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Drop-off for Marta (primary school, gates close at 08:30) and Duarte (daycare, arrival until 09:00)."
+      },
+      {
+        "id": "commute_to_work_wed",
+        "title": "Commute to office",
+        "start": "2027-01-13T08:30:00+00:00",
+        "end": "2027-01-13T09:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute car journey from the school to the office."
+      },
+      {
+        "id": "email_wed",
+        "title": "Email and planning",
+        "start": "2027-01-13T09:00:00+00:00",
+        "end": "2027-01-13T09:30:00+00:00",
+        "category": "work_focus",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Flexible individual work that can be moved within the working day."
+      },
+      {
+        "id": "sync_wed",
+        "title": "Weekly team sync",
+        "start": "2027-01-13T09:30:00+00:00",
+        "end": "2027-01-13T10:30:00+00:00",
+        "category": "work",
+        "importance": 3,
+        "fixed": true,
+        "participants": [
+          "user",
+          "team"
+        ],
+        "description": "Weekly sync with the team; can be joined by video."
+      },
+      {
+        "id": "forecast_wed",
+        "title": "Quarterly forecast",
+        "start": "2027-01-13T10:30:00+00:00",
+        "end": "2027-01-13T12:30:00+00:00",
+        "category": "work_focus",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Forecast due to finance on Friday."
+      },
+      {
+        "id": "lunch_wed",
+        "title": "Lunch",
+        "start": "2027-01-13T12:45:00+00:00",
+        "end": "2027-01-13T13:30:00+00:00",
+        "category": "meal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch at the office canteen."
+      },
+      {
+        "id": "focus_pm_wed",
+        "title": "Project work",
+        "start": "2027-01-13T13:30:00+00:00",
+        "end": "2027-01-13T15:30:00+00:00",
+        "category": "work_focus",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Flexible individual work that can be moved within the working day."
+      },
+      {
+        "id": "design_review_wed",
+        "title": "Design review",
+        "start": "2027-01-13T15:30:00+00:00",
+        "end": "2027-01-13T16:30:00+00:00",
+        "category": "work",
+        "importance": 3,
+        "fixed": true,
+        "participants": [
+          "user",
+          "product_team"
+        ],
+        "description": "In-person design review of the new onboarding flow."
+      },
+      {
+        "id": "wrap_wed",
+        "title": "Wrap-up",
+        "start": "2027-01-13T16:30:00+00:00",
+        "end": "2027-01-13T17:00:00+00:00",
+        "category": "work_focus",
+        "importance": 2,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Flexible individual work that can be moved within the working day."
+      },
+      {
+        "id": "commute_to_school_wed",
+        "title": "Commute to school",
+        "start": "2027-01-13T17:00:00+00:00",
+        "end": "2027-01-13T17:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute journey from the office to the school and daycare."
+      },
+      {
+        "id": "pickup_wed",
+        "title": "Pick up children",
+        "start": "2027-01-13T17:30:00+00:00",
+        "end": "2027-01-13T17:45:00+00:00",
+        "category": "childcare",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Pick-up from the after-school programme and daycare, which close at 18:30."
+      },
+      {
+        "id": "travel_to_ballet_wed",
+        "title": "Travel to ballet school",
+        "start": "2027-01-13T17:45:00+00:00",
+        "end": "2027-01-13T17:55:00+00:00",
+        "category": "commute",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "10-minute car journey from school to the ballet school."
+      },
+      {
+        "id": "ballet_wed",
+        "title": "Marta's ballet class",
+        "start": "2027-01-13T17:55:00+00:00",
+        "end": "2027-01-13T18:55:00+00:00",
+        "category": "kids_activity",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Weekly 1-hour class; Duarte waits with the parent in the lobby."
+      },
+      {
+        "id": "travel_home_wed",
+        "title": "Travel home from ballet",
+        "start": "2027-01-13T18:55:00+00:00",
+        "end": "2027-01-13T19:10:00+00:00",
+        "category": "commute",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "15-minute car journey home."
+      },
+      {
+        "id": "dinner_wed",
+        "title": "Family dinner",
+        "start": "2027-01-13T19:30:00+00:00",
+        "end": "2027-01-13T20:30:00+00:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "One-hour dinner at home with the children."
+      },
+      {
+        "id": "bedtime_wed",
+        "title": "Children's bedtime routine",
+        "start": "2027-01-13T20:30:00+00:00",
+        "end": "2027-01-13T21:15:00+00:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Bath, story and bedtime for both children; about 45 minutes."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-01-13T23:00:00+00:00",
+        "end": "2027-01-14T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block; the user requires at least seven hours of sleep per night."
+      },
+      {
+        "id": "morning_thu",
+        "title": "Morning routine with the children",
+        "start": "2027-01-14T06:45:00+00:00",
+        "end": "2027-01-14T07:45:00+00:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Breakfast, dressing and packing school bags for both children."
+      },
+      {
+        "id": "travel_to_school_thu",
+        "title": "Travel to school and daycare",
+        "start": "2027-01-14T08:00:00+00:00",
+        "end": "2027-01-14T08:15:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "15-minute car journey from home to the school and daycare, which share the same site."
+      },
+      {
+        "id": "dropoff_thu",
+        "title": "Drop-off at school and daycare",
+        "start": "2027-01-14T08:15:00+00:00",
+        "end": "2027-01-14T08:30:00+00:00",
+        "category": "childcare",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Drop-off for Marta (primary school, gates close at 08:30) and Duarte (daycare, arrival until 09:00). The partner works the late shift today and leaves home at 12:45."
+      },
+      {
+        "id": "commute_to_work_thu",
+        "title": "Commute to office",
+        "start": "2027-01-14T08:30:00+00:00",
+        "end": "2027-01-14T09:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute car journey from the school to the office."
+      },
+      {
+        "id": "proposal_thu",
+        "title": "Client proposal draft",
+        "start": "2027-01-14T09:00:00+00:00",
+        "end": "2027-01-14T10:30:00+00:00",
+        "category": "work_focus",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Flexible individual work that can be moved within the working day."
+      },
+      {
+        "id": "demo_thu",
+        "title": "Internal product demo",
+        "start": "2027-01-14T10:30:00+00:00",
+        "end": "2027-01-14T11:30:00+00:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user",
+          "product_team",
+          "stakeholders"
+        ],
+        "description": "In-person demo of the new feature to internal stakeholders; the user is the presenter."
+      },
+      {
+        "id": "focus_mid_thu",
+        "title": "Follow-up on demo feedback",
+        "start": "2027-01-14T11:30:00+00:00",
+        "end": "2027-01-14T12:30:00+00:00",
+        "category": "work_focus",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Flexible individual work that can be moved within the working day."
+      },
+      {
+        "id": "lunch_thu",
+        "title": "Lunch",
+        "start": "2027-01-14T12:30:00+00:00",
+        "end": "2027-01-14T13:15:00+00:00",
+        "category": "meal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch at the office canteen."
+      },
+      {
+        "id": "focus_pm_thu",
+        "title": "Project work",
+        "start": "2027-01-14T13:15:00+00:00",
+        "end": "2027-01-14T15:00:00+00:00",
+        "category": "work_focus",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Flexible individual work that can be moved within the working day."
+      },
+      {
+        "id": "partner_shift_thu",
+        "title": "Partner's work shift",
+        "start": "2027-01-14T13:30:00+00:00",
+        "end": "2027-01-14T21:30:00+00:00",
+        "category": "partner_work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "partner"
+        ],
+        "description": "Late shift as a bus driver; the partner leaves home at 12:45 and is home from 22:00."
+      },
+      {
+        "id": "mentoring_thu",
+        "title": "Mentoring session with new colleague",
+        "start": "2027-01-14T15:00:00+00:00",
+        "end": "2027-01-14T15:30:00+00:00",
+        "category": "work",
+        "importance": 3,
+        "fixed": true,
+        "participants": [
+          "user",
+          "new_colleague"
+        ],
+        "description": "Fortnightly 30-minute mentoring session; the new colleague is on a trial period and the session was already postponed once."
+      },
+      {
+        "id": "focus_end_thu",
+        "title": "Project work",
+        "start": "2027-01-14T15:30:00+00:00",
+        "end": "2027-01-14T17:00:00+00:00",
+        "category": "work_focus",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Flexible individual work that can be moved within the working day."
+      },
+      {
+        "id": "commute_to_school_thu",
+        "title": "Commute to school",
+        "start": "2027-01-14T17:00:00+00:00",
+        "end": "2027-01-14T17:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute journey from the office to the school and daycare."
+      },
+      {
+        "id": "pickup_thu",
+        "title": "Pick up children",
+        "start": "2027-01-14T17:30:00+00:00",
+        "end": "2027-01-14T17:45:00+00:00",
+        "category": "childcare",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Pick-up from the after-school programme and daycare, which close at 18:30."
+      },
+      {
+        "id": "travel_to_club_thu",
+        "title": "Travel to football club",
+        "start": "2027-01-14T17:45:00+00:00",
+        "end": "2027-01-14T18:05:00+00:00",
+        "category": "commute",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "20-minute car journey to the sports club."
+      },
+      {
+        "id": "football_thu",
+        "title": "Marta's football practice",
+        "start": "2027-01-14T18:05:00+00:00",
+        "end": "2027-01-14T19:05:00+00:00",
+        "category": "kids_activity",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Weekly practice; Duarte waits with the parent."
+      },
+      {
+        "id": "travel_home_thu",
+        "title": "Travel home from football club",
+        "start": "2027-01-14T19:05:00+00:00",
+        "end": "2027-01-14T19:25:00+00:00",
+        "category": "commute",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "20-minute car journey home."
+      },
+      {
+        "id": "dinner_thu",
+        "title": "Family dinner",
+        "start": "2027-01-14T19:30:00+00:00",
+        "end": "2027-01-14T20:30:00+00:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "One-hour dinner at home with the children."
+      },
+      {
+        "id": "bedtime_thu",
+        "title": "Children's bedtime routine",
+        "start": "2027-01-14T20:30:00+00:00",
+        "end": "2027-01-14T21:15:00+00:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Bath, story and bedtime for both children; about 45 minutes."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-01-14T23:00:00+00:00",
+        "end": "2027-01-15T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block; the user requires at least seven hours of sleep per night."
+      },
+      {
+        "id": "morning_fri",
+        "title": "Morning routine with the children",
+        "start": "2027-01-15T06:45:00+00:00",
+        "end": "2027-01-15T07:45:00+00:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Breakfast, dressing and packing school bags for both children."
+      },
+      {
+        "id": "travel_to_school_fri",
+        "title": "Travel to school and daycare",
+        "start": "2027-01-15T08:00:00+00:00",
+        "end": "2027-01-15T08:15:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "15-minute car journey from home to the school and daycare, which share the same site."
+      },
+      {
+        "id": "dropoff_fri",
+        "title": "Drop-off at school and daycare",
+        "start": "2027-01-15T08:15:00+00:00",
+        "end": "2027-01-15T08:30:00+00:00",
+        "category": "childcare",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Drop-off for Marta (primary school, gates close at 08:30) and Duarte (daycare, arrival until 09:00). The partner has the day off."
+      },
+      {
+        "id": "commute_to_work_fri",
+        "title": "Commute to office",
+        "start": "2027-01-15T08:30:00+00:00",
+        "end": "2027-01-15T09:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute car journey from the school to the office."
+      },
+      {
+        "id": "forecast_fri",
+        "title": "Finalise quarterly forecast",
+        "start": "2027-01-15T09:00:00+00:00",
+        "end": "2027-01-15T12:00:00+00:00",
+        "category": "work_focus",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Forecast due to finance at 12:00."
+      },
+      {
+        "id": "lunch_fri",
+        "title": "Lunch",
+        "start": "2027-01-15T12:15:00+00:00",
+        "end": "2027-01-15T13:00:00+00:00",
+        "category": "meal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch at the office canteen."
+      },
+      {
+        "id": "focus_fri",
+        "title": "Project work",
+        "start": "2027-01-15T13:00:00+00:00",
+        "end": "2027-01-15T17:00:00+00:00",
+        "category": "work_focus",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Flexible individual work that can be moved within the working day."
+      },
+      {
+        "id": "health_check_fri",
+        "title": "Duarte's 3-year health check",
+        "start": "2027-01-15T15:30:00+00:00",
+        "end": "2027-01-15T16:15:00+00:00",
+        "category": "medical",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "partner",
+          "duarte",
+          "doctor"
+        ],
+        "description": "Routine paediatric check at the health centre; the partner takes Duarte. The next available appointment is in six weeks."
+      },
+      {
+        "id": "commute_home_fri",
+        "title": "Commute home",
+        "start": "2027-01-15T17:00:00+00:00",
+        "end": "2027-01-15T17:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute journey from the office to home."
+      },
+      {
+        "id": "pickup_partner_fri",
+        "title": "Pick up children (partner)",
+        "start": "2027-01-15T17:30:00+00:00",
+        "end": "2027-01-15T17:45:00+00:00",
+        "category": "childcare",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "partner",
+          "marta",
+          "duarte"
+        ],
+        "description": "The partner collects both children and takes them home."
+      },
+      {
+        "id": "dinner_fri",
+        "title": "Family dinner",
+        "start": "2027-01-15T18:45:00+00:00",
+        "end": "2027-01-15T19:30:00+00:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Early dinner at home before the babysitter arrives."
+      },
+      {
+        "id": "bedtime_fri",
+        "title": "Children's bedtime routine",
+        "start": "2027-01-15T19:30:00+00:00",
+        "end": "2027-01-15T20:15:00+00:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Bath, story and bedtime for both children."
+      },
+      {
+        "id": "travel_to_restaurant_fri",
+        "title": "Taxi to restaurant",
+        "start": "2027-01-15T20:15:00+00:00",
+        "end": "2027-01-15T20:30:00+00:00",
+        "category": "commute",
+        "importance": 3,
+        "fixed": true,
+        "participants": [
+          "user",
+          "partner"
+        ],
+        "description": "15-minute taxi from home to the restaurant."
+      },
+      {
+        "id": "date_night_fri",
+        "title": "Date night with partner",
+        "start": "2027-01-15T20:30:00+00:00",
+        "end": "2027-01-15T22:30:00+00:00",
+        "category": "social",
+        "importance": 3,
+        "fixed": true,
+        "participants": [
+          "user",
+          "partner"
+        ],
+        "description": "Table booked at a restaurant; the babysitter Inês arrives at 20:15 and stays until 23:00."
+      },
+      {
+        "id": "sleep_sat",
+        "title": "Sleep",
+        "start": "2027-01-15T23:30:00+00:00",
+        "end": "2027-01-16T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block; the user requires at least seven hours of sleep per night."
+      }
+    ]
+  },
+  "user_request": "My manager has just asked me (16:40) to represent the company at a client workshop in Lisbon this Thursday from 10:00 to 17:00, because the colleague who was supposed to go is in hospital. I cannot refuse. The train from the station near home (15 minutes away) takes 1h45 and leaves at 06:19, 07:19 or 08:19; the return trains leave Lisbon at 17:41, 18:41 or 19:41. Getting between the station and the client takes 30 minutes at each end. I need about 3 hours to prepare the workshop before Thursday. My partner works the late shift on Thursday (13:30 to 21:30), the early shift tomorrow and is off on Friday. My mother Teresa might be able to help on Thursday afternoon and evening, but I would have to ask her. Please rearrange Wednesday, Thursday and Friday so that the workshop is covered, the children are always dropped off and picked up on time, and sleep and my other commitments are protected as much as possible. Tell me what needs to be confirmed with other people."
+}

@@ -1,0 +1,549 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "parent_young_children_car_breakdown_commute_001",
+  "family_id": "parent_young_children_schedule_conflict",
+  "profile": {
+    "profile_id": "parent_young_children_01__parent_young_children_car_breakdown_commute_001",
+    "description": "Parent of two young children (Marta, 7, and Duarte, 3) working full-time in an office with a hybrid arrangement, sharing childcare, school runs, household errands and the children's activities with a partner who works rotating shifts.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "work": 4,
+      "children": 5,
+      "health": 5,
+      "household": 3,
+      "social": 2,
+      "exercise": 2,
+      "kids_activities": 3
+    },
+    "hard_constraints": [
+      {
+        "id": "children_dropoff_pickup",
+        "description": "Both children must always be dropped off and picked up on time by the user, the partner or an authorised adult; school and daycare opening and closing times are fixed.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "childcare"
+        ]
+      },
+      {
+        "id": "work_commitments",
+        "description": "Meetings, deadlines and appointments with colleagues, managers or clients must not be moved, shortened or cancelled by the assistant unless the user asks for it.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "work"
+        ]
+      },
+      {
+        "id": "sleep_protection",
+        "description": "The user must sleep at least seven hours every night; scheduled sleep blocks must be protected.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "sleep"
+        ]
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "family_dinner",
+        "description": "Prefer dinner with the children between 19:00 and 21:00, followed by a 45-minute bedtime routine that finishes by 21:30.",
+        "weight": 4
+      },
+      {
+        "id": "lunch_times",
+        "description": "Prefer a 45-minute lunch between 12:00 and 14:00.",
+        "weight": 2
+      },
+      {
+        "id": "exercise_routine",
+        "description": "Prefer two short runs of 45 minutes per week, either in the morning from 06:30 or in the evening after the children are asleep.",
+        "weight": 2
+      },
+      {
+        "id": "groceries",
+        "description": "Prefer to complete the weekly grocery shopping by Thursday; an online delivery is acceptable if someone is at home.",
+        "weight": 2
+      },
+      {
+        "id": "kids_activities",
+        "description": "Prefer to keep the children's sports and activities, but they can be skipped in exceptional circumstances.",
+        "weight": 3
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Flexible work blocks, groceries, runs and the children's activities can be reorganised where necessary. Client demos, dentist appointments and changes involving the partner or school pickup authorisation require confirmation. These are user preferences, not ground-truth ACT/DEFER labels."
+    }
+  },
+  "now": "2027-03-10T07:20:00+00:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-03-09T23:00:00+00:00",
+        "end": "2027-03-10T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block; the user requires at least seven hours of sleep per night."
+      },
+      {
+        "id": "morning_wed",
+        "title": "Morning routine with the children",
+        "start": "2027-03-10T06:45:00+00:00",
+        "end": "2027-03-10T07:45:00+00:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Breakfast, dressing and packing school bags for both children."
+      },
+      {
+        "id": "travel_to_school_wed",
+        "title": "Travel to school and daycare",
+        "start": "2027-03-10T08:00:00+00:00",
+        "end": "2027-03-10T08:15:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Normally a 15-minute car journey; by bus/foot it takes 35 minutes."
+      },
+      {
+        "id": "dropoff_wed",
+        "title": "Drop-off at school and daycare",
+        "start": "2027-03-10T08:15:00+00:00",
+        "end": "2027-03-10T08:30:00+00:00",
+        "category": "childcare",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Drop-off for Marta (primary school, gates close at 08:30) and Duarte (daycare, arrival until 09:00)."
+      },
+      {
+        "id": "commute_to_work_wed",
+        "title": "Commute to office",
+        "start": "2027-03-10T08:30:00+00:00",
+        "end": "2027-03-10T09:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Normally 30 minutes by car; public transport from school to office takes 55 minutes."
+      },
+      {
+        "id": "email_wed",
+        "title": "Email and planning",
+        "start": "2027-03-10T09:00:00+00:00",
+        "end": "2027-03-10T09:30:00+00:00",
+        "category": "work_focus",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Flexible individual work that can be moved within the working day."
+      },
+      {
+        "id": "standup_wed",
+        "title": "Team stand-up",
+        "start": "2027-03-10T09:30:00+00:00",
+        "end": "2027-03-10T10:00:00+00:00",
+        "category": "work",
+        "importance": 3,
+        "fixed": true,
+        "participants": [
+          "user",
+          "team"
+        ],
+        "description": "Daily stand-up; can be joined by video."
+      },
+      {
+        "id": "focus_am_wed",
+        "title": "Prepare product roadmap slides",
+        "start": "2027-03-10T10:00:00+00:00",
+        "end": "2027-03-10T12:30:00+00:00",
+        "category": "work_focus",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Flexible individual work that can be moved within the working day."
+      },
+      {
+        "id": "lunch_wed",
+        "title": "Lunch",
+        "start": "2027-03-10T12:30:00+00:00",
+        "end": "2027-03-10T13:15:00+00:00",
+        "category": "meal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break."
+      },
+      {
+        "id": "partner_shift_wed",
+        "title": "Partner's work shift",
+        "start": "2027-03-10T13:30:00+00:00",
+        "end": "2027-03-10T21:30:00+00:00",
+        "category": "partner_work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "partner"
+        ],
+        "description": "Late shift as a bus driver; the partner leaves home at 12:45 and is at home all morning."
+      },
+      {
+        "id": "focus_pm_wed",
+        "title": "Data analysis",
+        "start": "2027-03-10T13:15:00+00:00",
+        "end": "2027-03-10T15:30:00+00:00",
+        "category": "work_focus",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Flexible individual work that can be moved within the working day."
+      },
+      {
+        "id": "demo_wed",
+        "title": "Client feature demo",
+        "start": "2027-03-10T15:30:00+00:00",
+        "end": "2027-03-10T16:30:00+00:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "client",
+          "team"
+        ],
+        "description": "Online client demonstration; user is leading the session and cannot leave before 16:30."
+      },
+      {
+        "id": "commute_to_school_wed",
+        "title": "Commute to school",
+        "start": "2027-03-10T17:00:00+00:00",
+        "end": "2027-03-10T17:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Normally 30 minutes by car; by public transport from the office to school it takes 55 minutes."
+      },
+      {
+        "id": "pickup_wed",
+        "title": "Pick up children",
+        "start": "2027-03-10T17:30:00+00:00",
+        "end": "2027-03-10T17:45:00+00:00",
+        "category": "childcare",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Pick-up from the after-school programme and daycare, which close strictly at 18:30."
+      },
+      {
+        "id": "travel_to_pool_wed",
+        "title": "Travel to pool",
+        "start": "2027-03-10T17:45:00+00:00",
+        "end": "2027-03-10T18:00:00+00:00",
+        "category": "commute",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Normally 15 minutes by car; there is no direct bus from the school to the pool (40 minutes walking/bus)."
+      },
+      {
+        "id": "swim_marta_wed",
+        "title": "Marta's swimming class",
+        "start": "2027-03-10T18:00:00+00:00",
+        "end": "2027-03-10T19:00:00+00:00",
+        "category": "kids_activity",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Weekly 1-hour class; pool is 25 minutes walking distance from home."
+      },
+      {
+        "id": "travel_home_wed",
+        "title": "Travel home from pool",
+        "start": "2027-03-10T19:00:00+00:00",
+        "end": "2027-03-10T19:15:00+00:00",
+        "category": "commute",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Normally 15 minutes by car; 25 minutes walking with two small children."
+      },
+      {
+        "id": "dinner_wed",
+        "title": "Family dinner",
+        "start": "2027-03-10T19:30:00+00:00",
+        "end": "2027-03-10T20:30:00+00:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "One-hour dinner at home with the children."
+      },
+      {
+        "id": "bedtime_wed",
+        "title": "Children's bedtime routine",
+        "start": "2027-03-10T20:30:00+00:00",
+        "end": "2027-03-10T21:15:00+00:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Bath, story and bedtime for both children; about 45 minutes."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-03-10T23:00:00+00:00",
+        "end": "2027-03-11T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block; the user requires at least seven hours of sleep per night."
+      },
+      {
+        "id": "partner_shift_thu",
+        "title": "Partner's work shift",
+        "start": "2027-03-11T05:30:00+00:00",
+        "end": "2027-03-11T13:30:00+00:00",
+        "category": "partner_work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "partner"
+        ],
+        "description": "Early shift; the partner arrives home around 14:15."
+      },
+      {
+        "id": "morning_thu",
+        "title": "Morning routine with the children",
+        "start": "2027-03-11T06:45:00+00:00",
+        "end": "2027-03-11T07:45:00+00:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Breakfast, dressing and packing school bags for both children."
+      },
+      {
+        "id": "travel_to_school_thu",
+        "title": "Travel to school and daycare",
+        "start": "2027-03-11T08:00:00+00:00",
+        "end": "2027-03-11T08:15:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "15-minute car journey from home to the school and daycare."
+      },
+      {
+        "id": "dropoff_thu",
+        "title": "Drop-off at school and daycare",
+        "start": "2027-03-11T08:15:00+00:00",
+        "end": "2027-03-11T08:30:00+00:00",
+        "category": "childcare",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Drop-off for Marta and Duarte."
+      },
+      {
+        "id": "commute_to_work_thu",
+        "title": "Commute to office",
+        "start": "2027-03-11T08:30:00+00:00",
+        "end": "2027-03-11T09:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute car journey from school to office."
+      },
+      {
+        "id": "focus_am_thu",
+        "title": "Sprint planning preparation",
+        "start": "2027-03-11T09:00:00+00:00",
+        "end": "2027-03-11T12:30:00+00:00",
+        "category": "work_focus",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Flexible individual work."
+      },
+      {
+        "id": "lunch_thu",
+        "title": "Lunch",
+        "start": "2027-03-11T12:30:00+00:00",
+        "end": "2027-03-11T13:15:00+00:00",
+        "category": "meal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break."
+      },
+      {
+        "id": "focus_pm_thu",
+        "title": "Vendor contract review",
+        "start": "2027-03-11T13:15:00+00:00",
+        "end": "2027-03-11T16:30:00+00:00",
+        "category": "work_focus",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Flexible individual work."
+      },
+      {
+        "id": "dentist_thu",
+        "title": "User's routine dental check-up",
+        "start": "2027-03-11T17:00:00+00:00",
+        "end": "2027-03-11T17:45:00+00:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user",
+          "dentist"
+        ],
+        "description": "Dental clinic is 15 minutes from the office by car (30 minutes by bus) and 20 minutes from home by car (35 minutes by bus)."
+      },
+      {
+        "id": "pickup_partner_thu",
+        "title": "Pick up children (partner)",
+        "start": "2027-03-11T17:30:00+00:00",
+        "end": "2027-03-11T17:45:00+00:00",
+        "category": "childcare",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "partner",
+          "marta",
+          "duarte"
+        ],
+        "description": "The partner collects both children and takes them home."
+      },
+      {
+        "id": "groceries_thu",
+        "title": "Weekly groceries",
+        "start": "2027-03-11T18:00:00+00:00",
+        "end": "2027-03-11T19:00:00+00:00",
+        "category": "household",
+        "importance": 2,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Weekly supermarket shop; without a car, carrying heavy groceries by bus is impractical, though online delivery can be booked for Thursday evening."
+      },
+      {
+        "id": "dinner_thu",
+        "title": "Family dinner",
+        "start": "2027-03-11T19:30:00+00:00",
+        "end": "2027-03-11T20:30:00+00:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "One-hour dinner at home with the children."
+      },
+      {
+        "id": "bedtime_thu",
+        "title": "Children's bedtime routine",
+        "start": "2027-03-11T20:30:00+00:00",
+        "end": "2027-03-11T21:15:00+00:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Bath, story and bedtime for both children; about 45 minutes."
+      }
+    ]
+  },
+  "user_request": "Our family car just failed to start (07:20) and the breakdown truck is taking it to the garage; it won't be ready until Friday afternoon. We have no second car. My partner is home all morning before their 13:30 shift, and tomorrow they finish at 13:30. I have to be at the office today for a hardware test before the 15:30 client demo, and I cannot miss the demo. Tomorrow I can work from home if needed, or go to the office, as long as I keep my 17:00 dentist appointment. Without a car, public transport takes 35 minutes from home to the school, 55 minutes between the school and the office, and 35 minutes between home and the dentist. Please reorganise today and tomorrow so the kids get dropped off and picked up on time, I make my meetings and dentist, and tell me what we should skip, change, or confirm with others."
+}

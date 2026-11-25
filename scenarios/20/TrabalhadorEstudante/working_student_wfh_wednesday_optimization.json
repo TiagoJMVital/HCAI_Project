@@ -1,0 +1,292 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "working_student_wfh_wednesday_optimization_009",
+  "family_id": "working_student_schedule_conflict",
+  "profile": {
+    "profile_id": "working_student_01__working_student_wfh_wednesday_optimization_009",
+    "description": "Working student using a work-from-home day to save commute time and add structured exercise and study blocks.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "work": 5,
+      "education": 5,
+      "sleep": 4,
+      "health": 4,
+      "personal": 3
+    },
+    "hard_constraints": [
+      {
+        "id": "wfh_work_hours",
+        "description": "Maintain full daytime work hours from 09:00 to 17:30 during work-from-home day.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "work"
+        ]
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "reclaim_commute_for_gym_and_study",
+        "description": "Use reclaimed Wednesday commute time for a gym session and focused study.",
+        "weight": 4
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "No office commute on Wednesday saves ~1.5 hours of travel."
+    }
+  },
+  "now": "2027-05-24T07:30:00+01:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-05-23T23:45:00+01:00",
+        "end": "2027-05-24T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "work_mon",
+        "title": "Daytime Job: Office Shift",
+        "start": "2027-05-24T09:00:00+01:00",
+        "end": "2027-05-24T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Office work."
+      },
+      {
+        "id": "class_mon",
+        "title": "Evening Lecture: Corporate Strategy",
+        "start": "2027-05-24T18:30:00+01:00",
+        "end": "2027-05-24T21:30:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "professor",
+          "classmates"
+        ],
+        "description": "Mandatory evening class."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-05-24T23:45:00+01:00",
+        "end": "2027-05-25T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "work_tue",
+        "title": "Daytime Job: Office Shift",
+        "start": "2027-05-25T09:00:00+01:00",
+        "end": "2027-05-25T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Office work."
+      },
+      {
+        "id": "gym_tue",
+        "title": "Gym Workout",
+        "start": "2027-05-25T18:00:00+01:00",
+        "end": "2027-05-25T19:15:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout."
+      },
+      {
+        "id": "study_tue",
+        "title": "Evening Study: Corporate Strategy Readings",
+        "start": "2027-05-25T19:45:00+01:00",
+        "end": "2027-05-25T21:45:00+01:00",
+        "category": "education",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Reading."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-05-25T23:45:00+01:00",
+        "end": "2027-05-26T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Extra 15m sleep on WFH day."
+      },
+      {
+        "id": "work_wed_wfh",
+        "title": "Daytime Job: Work From Home Shift",
+        "start": "2027-05-26T09:00:00+01:00",
+        "end": "2027-05-26T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Remote work day."
+      },
+      {
+        "id": "gym_wed",
+        "title": "Gym: Strength & Cardio Session",
+        "start": "2027-05-26T17:45:00+01:00",
+        "end": "2027-05-26T18:45:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout right after WFH."
+      },
+      {
+        "id": "study_wed",
+        "title": "Evening Study: Thesis / Term Paper Draft",
+        "start": "2027-05-26T19:15:00+01:00",
+        "end": "2027-05-26T21:30:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Focused writing block."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-05-26T23:45:00+01:00",
+        "end": "2027-05-27T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "work_thu",
+        "title": "Daytime Job: Office Shift",
+        "start": "2027-05-27T09:00:00+01:00",
+        "end": "2027-05-27T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Office work."
+      },
+      {
+        "id": "class_thu",
+        "title": "Evening Lecture: Financial Markets",
+        "start": "2027-05-27T18:30:00+01:00",
+        "end": "2027-05-27T21:30:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "professor",
+          "classmates"
+        ],
+        "description": "Mandatory evening class."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-05-27T23:45:00+01:00",
+        "end": "2027-05-28T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "work_fri",
+        "title": "Daytime Job: Office Shift",
+        "start": "2027-05-28T09:00:00+01:00",
+        "end": "2027-05-28T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Friday office shift."
+      },
+      {
+        "id": "gym_fri",
+        "title": "Gym Workout",
+        "start": "2027-05-28T18:00:00+01:00",
+        "end": "2027-05-28T19:15:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Friday workout."
+      },
+      {
+        "id": "social_fri",
+        "title": "Dinner with Friends",
+        "start": "2027-05-28T20:00:00+01:00",
+        "end": "2027-05-28T23:00:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "friends"
+        ],
+        "description": "Friday hangout."
+      }
+    ]
+  },
+  "user_request": "I am working from home on Wednesday, so I save commute time and have no evening class that night. Please schedule a 1-hour gym session right after work at 17:45 followed by a focused study block for my term paper, while keeping my sleep schedule intact."
+}

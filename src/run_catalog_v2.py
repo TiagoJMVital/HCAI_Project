@@ -55,7 +55,7 @@ def runs(root: Path, *, scenario_id: str | None = None,
         identity = path_identity(root, path, record)
         item = dict(record)
         item["_path"] = str(path.relative_to(root))
-        active_path = scenario_path(root, sid)
+        active_path = Path(row["scenario_path"])
         item["_active_scenario_sha256"] = hashlib.sha256(active_path.read_bytes()).hexdigest()
         item["_scenario_hash_matches"] = (record.get("scenario_sha256") == item["_active_scenario_sha256"]
                                            if record.get("scenario_sha256") else None)

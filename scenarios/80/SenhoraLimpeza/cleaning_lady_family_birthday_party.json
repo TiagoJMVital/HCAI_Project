@@ -1,0 +1,448 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "cleaning_lady_family_birthday_party_001",
+  "family_id": "cleaning_lady_schedule_conflict",
+  "profile": {
+    "profile_id": "cleaning_lady_flexible_01__cleaning_lady_family_birthday_party_001",
+    "description": "Independent cleaning professional balancing residential work with family social events and childcare.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "family": 5,
+      "work": 4,
+      "health": 4,
+      "household": 3,
+      "social": 4
+    },
+    "hard_constraints": [
+      {
+        "id": "family_party",
+        "description": "Mandatory family birthday party on Friday at 20:00.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "social"
+        ]
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "early_finish",
+        "weight": 3,
+        "description": "Finish Friday work tasks by 17:00 to get ready for the party."
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Friday family party is fixed."
+    }
+  },
+  "now": "2027-06-07T08:00:00+01:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-06-06T23:00:00+01:00",
+        "end": "2027-06-07T07:00:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "school_drop_mon",
+        "title": "School Drop-off",
+        "start": "2027-06-07T08:00:00+01:00",
+        "end": "2027-06-07T08:30:00+01:00",
+        "category": "family",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "child"
+        ],
+        "description": "School drop-off."
+      },
+      {
+        "id": "clean_mon",
+        "title": "Cleaning: Client A",
+        "start": "2027-06-07T09:00:00+01:00",
+        "end": "2027-06-07T13:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Morning cleaning."
+      },
+      {
+        "id": "lunch_mon",
+        "title": "Lunch",
+        "start": "2027-06-07T13:00:00+01:00",
+        "end": "2027-06-07T14:00:00+01:00",
+        "category": "household",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break."
+      },
+      {
+        "id": "clean_mon_pm",
+        "title": "Cleaning: Client B",
+        "start": "2027-06-07T14:30:00+01:00",
+        "end": "2027-06-07T16:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Afternoon cleaning."
+      },
+      {
+        "id": "school_pick_mon",
+        "title": "School Pick-up",
+        "start": "2027-06-07T16:30:00+01:00",
+        "end": "2027-06-07T17:00:00+01:00",
+        "category": "family",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "child"
+        ],
+        "description": "School pickup."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-06-07T23:00:00+01:00",
+        "end": "2027-06-08T07:00:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "school_drop_tue",
+        "title": "School Drop-off",
+        "start": "2027-06-08T08:00:00+01:00",
+        "end": "2027-06-08T08:30:00+01:00",
+        "category": "family",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "child"
+        ],
+        "description": "School drop-off."
+      },
+      {
+        "id": "clean_tue",
+        "title": "Cleaning: Client C",
+        "start": "2027-06-08T09:00:00+01:00",
+        "end": "2027-06-08T13:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Morning cleaning."
+      },
+      {
+        "id": "lunch_tue",
+        "title": "Lunch",
+        "start": "2027-06-08T13:00:00+01:00",
+        "end": "2027-06-08T14:00:00+01:00",
+        "category": "household",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break."
+      },
+      {
+        "id": "clean_tue_pm",
+        "title": "Cleaning: Client D",
+        "start": "2027-06-08T14:30:00+01:00",
+        "end": "2027-06-08T16:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Afternoon cleaning."
+      },
+      {
+        "id": "school_pick_tue",
+        "title": "School Pick-up",
+        "start": "2027-06-08T16:30:00+01:00",
+        "end": "2027-06-08T17:00:00+01:00",
+        "category": "family",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "child"
+        ],
+        "description": "School pickup."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-06-08T23:00:00+01:00",
+        "end": "2027-06-09T07:00:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "school_drop_wed",
+        "title": "School Drop-off",
+        "start": "2027-06-09T08:00:00+01:00",
+        "end": "2027-06-09T08:30:00+01:00",
+        "category": "family",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "child"
+        ],
+        "description": "School drop-off."
+      },
+      {
+        "id": "clean_wed",
+        "title": "Cleaning: Client E",
+        "start": "2027-06-09T09:00:00+01:00",
+        "end": "2027-06-09T13:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Morning cleaning."
+      },
+      {
+        "id": "lunch_wed",
+        "title": "Lunch",
+        "start": "2027-06-09T13:00:00+01:00",
+        "end": "2027-06-09T14:00:00+01:00",
+        "category": "household",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break."
+      },
+      {
+        "id": "clean_wed_pm",
+        "title": "Cleaning: Client F",
+        "start": "2027-06-09T14:30:00+01:00",
+        "end": "2027-06-09T16:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Afternoon cleaning."
+      },
+      {
+        "id": "school_pick_wed",
+        "title": "School Pick-up",
+        "start": "2027-06-09T16:30:00+01:00",
+        "end": "2027-06-09T17:00:00+01:00",
+        "category": "family",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "child"
+        ],
+        "description": "School pickup."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-06-09T23:00:00+01:00",
+        "end": "2027-06-10T07:00:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "school_drop_thu",
+        "title": "School Drop-off",
+        "start": "2027-06-10T08:00:00+01:00",
+        "end": "2027-06-10T08:30:00+01:00",
+        "category": "family",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "child"
+        ],
+        "description": "School drop-off."
+      },
+      {
+        "id": "clean_thu",
+        "title": "Cleaning: Client G",
+        "start": "2027-06-10T09:00:00+01:00",
+        "end": "2027-06-10T13:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Morning cleaning."
+      },
+      {
+        "id": "lunch_thu",
+        "title": "Lunch",
+        "start": "2027-06-10T13:00:00+01:00",
+        "end": "2027-06-10T14:00:00+01:00",
+        "category": "household",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break."
+      },
+      {
+        "id": "clean_thu_pm",
+        "title": "Cleaning: Client H",
+        "start": "2027-06-10T14:30:00+01:00",
+        "end": "2027-06-10T16:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Afternoon cleaning."
+      },
+      {
+        "id": "school_pick_thu",
+        "title": "School Pick-up",
+        "start": "2027-06-10T16:30:00+01:00",
+        "end": "2027-06-10T17:00:00+01:00",
+        "category": "family",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "child"
+        ],
+        "description": "School pickup."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-06-10T23:00:00+01:00",
+        "end": "2027-06-11T07:00:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "school_drop_fri",
+        "title": "School Drop-off",
+        "start": "2027-06-11T08:00:00+01:00",
+        "end": "2027-06-11T08:30:00+01:00",
+        "category": "family",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "child"
+        ],
+        "description": "School drop-off."
+      },
+      {
+        "id": "clean_fri",
+        "title": "Cleaning: Client I",
+        "start": "2027-06-11T09:00:00+01:00",
+        "end": "2027-06-11T13:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Morning cleaning."
+      },
+      {
+        "id": "lunch_fri",
+        "title": "Lunch",
+        "start": "2027-06-11T13:00:00+01:00",
+        "end": "2027-06-11T14:00:00+01:00",
+        "category": "household",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break."
+      },
+      {
+        "id": "clean_fri_pm",
+        "title": "Cleaning: Client J (Late afternoon)",
+        "start": "2027-06-11T14:30:00+01:00",
+        "end": "2027-06-11T17:30:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Late cleaning job to reschedule."
+      },
+      {
+        "id": "family_party_fri",
+        "title": "Family Birthday Party",
+        "start": "2027-06-11T20:00:00+01:00",
+        "end": "2027-06-11T23:30:00+01:00",
+        "category": "social",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "family"
+        ],
+        "description": "Family gathering."
+      }
+    ]
+  },
+  "user_request": "I was invited to a family birthday party this Friday at 20:00. However, my Friday afternoon cleaning job for Client J runs until 17:30, leaving me very little time to pick up my child, prepare, and travel. Please finish Friday's work earlier by redistributing part of Client J's cleaning to Thursday afternoon."
+}

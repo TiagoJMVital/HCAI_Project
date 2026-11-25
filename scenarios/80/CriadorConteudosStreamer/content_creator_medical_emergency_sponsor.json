@@ -1,0 +1,323 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "content_creator_medical_emergency_sponsor_001",
+  "family_id": "content_creator_schedule_conflict",
+  "profile": {
+    "profile_id": "content_creator_streamer_01__content_creator_medical_emergency_sponsor_001",
+    "description": "Full-time content creator balancing medical checks with strict sponsor video deadlines.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "health": 5,
+      "sponsorships": 5,
+      "streaming": 4,
+      "video_production": 4,
+      "social": 3,
+      "household": 3
+    },
+    "hard_constraints": [
+      {
+        "id": "medical_appointment",
+        "description": "Mandatory medical specialist check-up on Friday at 09:30.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "health"
+        ]
+      },
+      {
+        "id": "sponsor_deadline",
+        "description": "Sponsored video integration must be edited and uploaded by Friday at 18:00.",
+        "rule_type": "protect_events_by_id",
+        "event_ids": [
+          "sponsor_edit_fri"
+        ]
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "rest_after_medical",
+        "description": "Allow light rest after medical exams.",
+        "weight": 3
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Friday morning medical appointment is fixed and non-negotiable."
+    }
+  },
+  "now": "2027-05-10T10:00:00+01:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-05-10T01:30:00+01:00",
+        "end": "2027-05-10T09:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_mon",
+        "title": "Gym Workout",
+        "start": "2027-05-10T10:00:00+01:00",
+        "end": "2027-05-10T11:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout."
+      },
+      {
+        "id": "edit_mon",
+        "title": "Video Editing",
+        "start": "2027-05-10T12:30:00+01:00",
+        "end": "2027-05-10T18:00:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Editing."
+      },
+      {
+        "id": "stream_mon",
+        "title": "Live Stream",
+        "start": "2027-05-10T20:00:00+01:00",
+        "end": "2027-05-10T23:30:00+01:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-05-11T01:30:00+01:00",
+        "end": "2027-05-11T09:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_tue",
+        "title": "Gym Workout",
+        "start": "2027-05-11T10:00:00+01:00",
+        "end": "2027-05-11T11:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout."
+      },
+      {
+        "id": "edit_tue",
+        "title": "Video Editing",
+        "start": "2027-05-11T12:30:00+01:00",
+        "end": "2027-05-11T18:00:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Editing."
+      },
+      {
+        "id": "stream_tue",
+        "title": "Live Stream",
+        "start": "2027-05-11T20:00:00+01:00",
+        "end": "2027-05-11T23:30:00+01:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-05-12T01:30:00+01:00",
+        "end": "2027-05-12T09:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_wed",
+        "title": "Gym Workout",
+        "start": "2027-05-12T10:00:00+01:00",
+        "end": "2027-05-12T11:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout."
+      },
+      {
+        "id": "edit_wed",
+        "title": "Video Editing",
+        "start": "2027-05-12T12:30:00+01:00",
+        "end": "2027-05-12T18:00:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Editing."
+      },
+      {
+        "id": "stream_wed",
+        "title": "Live Stream",
+        "start": "2027-05-12T20:00:00+01:00",
+        "end": "2027-05-12T23:30:00+01:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-05-13T01:30:00+01:00",
+        "end": "2027-05-13T09:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_thu",
+        "title": "Gym Workout",
+        "start": "2027-05-13T10:00:00+01:00",
+        "end": "2027-05-13T11:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout."
+      },
+      {
+        "id": "edit_thu",
+        "title": "Video Editing",
+        "start": "2027-05-13T12:30:00+01:00",
+        "end": "2027-05-13T18:00:00+01:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Editing."
+      },
+      {
+        "id": "stream_thu",
+        "title": "Live Stream",
+        "start": "2027-05-13T20:00:00+01:00",
+        "end": "2027-05-13T23:30:00+01:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-05-14T01:30:00+01:00",
+        "end": "2027-05-14T09:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "medical_fri",
+        "title": "Medical Specialist Appointment",
+        "start": "2027-05-14T09:30:00+01:00",
+        "end": "2027-05-14T11:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "doctor"
+        ],
+        "description": "Doctor checkup."
+      },
+      {
+        "id": "sponsor_edit_fri",
+        "title": "Sponsor Video Final Editing",
+        "start": "2027-05-14T12:30:00+01:00",
+        "end": "2027-05-14T17:30:00+01:00",
+        "category": "video_production",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sponsor deadline."
+      },
+      {
+        "id": "stream_fri",
+        "title": "Live Stream",
+        "start": "2027-05-14T20:00:00+01:00",
+        "end": "2027-05-14T23:30:00+01:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream."
+      }
+    ]
+  },
+  "user_request": "I have a mandatory medical specialist appointment on Friday at 09:30, and my sponsored video editing deadline is Friday at 18:00. Please ensure my morning is correctly managed around the doctor's visit so I can finish the sponsored video on time without skipping my sleep."
+}

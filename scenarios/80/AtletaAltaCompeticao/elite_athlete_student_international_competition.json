@@ -1,0 +1,516 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "elite_athlete_student_international_competition_001",
+  "family_id": "elite_athlete_student_schedule_conflict",
+  "profile": {
+    "profile_id": "elite_athlete_student_01__elite_athlete_student_international_competition_001",
+    "description": "High-performance student-athlete competing at national/international level while pursuing an undergraduate degree, balancing twice-daily training sessions, strict sleep hygiene, university classes, and social life.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "training": 5,
+      "sleep": 5,
+      "exams": 4,
+      "classes": 3,
+      "physio": 3,
+      "social": 2
+    },
+    "hard_constraints": [
+      {
+        "id": "training_sessions",
+        "description": "Main training blocks and competition travel are fixed by the national federation.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "training"
+        ]
+      },
+      {
+        "id": "sleep_protection",
+        "description": "The athlete must sleep at least eight hours every night.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "sleep"
+        ]
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "study_blocks",
+        "description": "Catch up on missed university lectures with at least 5 hours of autonomous study earlier in the week.",
+        "weight": 3
+      },
+      {
+        "id": "commute_buffer",
+        "description": "Include 30-minute travel buffers between training center, university, and home.",
+        "weight": 4
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Classes can be skipped for national competition, but formal justification must be sent to professors. Group study and social events require confirmation."
+    }
+  },
+  "now": "2027-03-01T08:00:00+00:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-02-28T22:30:00+00:00",
+        "end": "2027-03-01T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block."
+      },
+      {
+        "id": "commute_hpc_am_mon",
+        "title": "Commute to HPC",
+        "start": "2027-03-01T06:30:00+00:00",
+        "end": "2027-03-01T07:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute transit."
+      },
+      {
+        "id": "training_am_mon",
+        "title": "Morning Pool Session",
+        "start": "2027-03-01T07:00:00+00:00",
+        "end": "2027-03-01T09:00:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Endurance swim."
+      },
+      {
+        "id": "commute_uni_mon",
+        "title": "Commute to University",
+        "start": "2027-03-01T09:00:00+00:00",
+        "end": "2027-03-01T09:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute transit."
+      },
+      {
+        "id": "class_bio_mon",
+        "title": "Biochemistry Lecture",
+        "start": "2027-03-01T10:00:00+00:00",
+        "end": "2027-03-01T12:00:00+00:00",
+        "category": "classes",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Morning lecture."
+      },
+      {
+        "id": "lunch_mon",
+        "title": "Lunch",
+        "start": "2027-03-01T12:30:00+00:00",
+        "end": "2027-03-01T13:30:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break."
+      },
+      {
+        "id": "study_mon",
+        "title": "Independent Study",
+        "start": "2027-03-01T14:00:00+00:00",
+        "end": "2027-03-01T16:00:00+00:00",
+        "category": "study",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Library study."
+      },
+      {
+        "id": "commute_hpc_pm_mon",
+        "title": "Commute to HPC",
+        "start": "2027-03-01T16:00:00+00:00",
+        "end": "2027-03-01T16:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute transit."
+      },
+      {
+        "id": "training_pm_mon",
+        "title": "Afternoon Gym & Power",
+        "start": "2027-03-01T16:30:00+00:00",
+        "end": "2027-03-01T18:30:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Weights session."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-03-01T22:30:00+00:00",
+        "end": "2027-03-02T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block."
+      },
+      {
+        "id": "commute_hpc_am_tue",
+        "title": "Commute to HPC",
+        "start": "2027-03-02T06:30:00+00:00",
+        "end": "2027-03-02T07:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute transit."
+      },
+      {
+        "id": "training_am_tue",
+        "title": "Morning Sprint Session",
+        "start": "2027-03-02T07:00:00+00:00",
+        "end": "2027-03-02T09:00:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "High-intensity speed training."
+      },
+      {
+        "id": "commute_uni_tue",
+        "title": "Commute to University",
+        "start": "2027-03-02T09:00:00+00:00",
+        "end": "2027-03-02T09:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute transit."
+      },
+      {
+        "id": "class_genetics_tue",
+        "title": "Genetics Seminar",
+        "start": "2027-03-02T10:00:00+00:00",
+        "end": "2027-03-02T12:00:00+00:00",
+        "category": "classes",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Seminar class."
+      },
+      {
+        "id": "lunch_tue",
+        "title": "Lunch",
+        "start": "2027-03-02T12:30:00+00:00",
+        "end": "2027-03-02T13:30:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break."
+      },
+      {
+        "id": "coffee_tue",
+        "title": "Coffee with Course Representative",
+        "start": "2027-03-02T14:00:00+00:00",
+        "end": "2027-03-02T15:00:00+00:00",
+        "category": "social",
+        "importance": 2,
+        "fixed": false,
+        "participants": [
+          "user",
+          "peer"
+        ],
+        "description": "Catch-up at campus café."
+      },
+      {
+        "id": "commute_hpc_pm_tue",
+        "title": "Commute to HPC",
+        "start": "2027-03-02T16:00:00+00:00",
+        "end": "2027-03-02T16:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute transit."
+      },
+      {
+        "id": "training_pm_tue",
+        "title": "Afternoon Technical Drill",
+        "start": "2027-03-02T16:30:00+00:00",
+        "end": "2027-03-02T18:30:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-03-02T22:30:00+00:00",
+        "end": "2027-03-03T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block."
+      },
+      {
+        "id": "commute_hpc_am_wed",
+        "title": "Commute to HPC",
+        "start": "2027-03-03T06:30:00+00:00",
+        "end": "2027-03-03T07:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute transit."
+      },
+      {
+        "id": "training_am_wed",
+        "title": "Morning Taper Session",
+        "start": "2027-03-03T07:00:00+00:00",
+        "end": "2027-03-03T09:00:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Pre-competition session."
+      },
+      {
+        "id": "commute_uni_wed",
+        "title": "Commute to University",
+        "start": "2027-03-03T09:00:00+00:00",
+        "end": "2027-03-03T09:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute transit."
+      },
+      {
+        "id": "class_bio_wed",
+        "title": "Biochemistry Lecture",
+        "start": "2027-03-03T10:00:00+00:00",
+        "end": "2027-03-03T12:00:00+00:00",
+        "category": "classes",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Morning lecture."
+      },
+      {
+        "id": "lunch_wed",
+        "title": "Lunch",
+        "start": "2027-03-03T12:30:00+00:00",
+        "end": "2027-03-03T13:30:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break."
+      },
+      {
+        "id": "physio_wed",
+        "title": "Pre-Competition Physio Check",
+        "start": "2027-03-03T14:30:00+00:00",
+        "end": "2027-03-03T15:30:00+00:00",
+        "category": "physio",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user",
+          "physiotherapist"
+        ],
+        "description": "Mandatory sports medicine clearance at HPC."
+      },
+      {
+        "id": "training_pm_wed",
+        "title": "Afternoon Team Briefing & Light Session",
+        "start": "2027-03-03T16:30:00+00:00",
+        "end": "2027-03-03T18:30:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-03-03T22:00:00+00:00",
+        "end": "2027-03-04T05:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block."
+      },
+      {
+        "id": "training_am_thu",
+        "title": "Morning Training",
+        "start": "2027-03-04T07:00:00+00:00",
+        "end": "2027-03-04T09:00:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Regular session (to be replaced by travel)."
+      },
+      {
+        "id": "class_lab_thu",
+        "title": "Biochemistry Lab",
+        "start": "2027-03-04T10:00:00+00:00",
+        "end": "2027-03-04T13:00:00+00:00",
+        "category": "classes",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lab class on Thursday."
+      },
+      {
+        "id": "training_pm_thu",
+        "title": "Afternoon Training",
+        "start": "2027-03-04T16:30:00+00:00",
+        "end": "2027-03-04T18:30:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Regular session (to be replaced by competition)."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-03-04T22:30:00+00:00",
+        "end": "2027-03-05T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block."
+      },
+      {
+        "id": "training_am_fri",
+        "title": "Morning Training",
+        "start": "2027-03-05T07:00:00+00:00",
+        "end": "2027-03-05T09:00:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Regular session (to be replaced by competition)."
+      },
+      {
+        "id": "class_genetics_fri",
+        "title": "Genetics Lecture",
+        "start": "2027-03-05T10:00:00+00:00",
+        "end": "2027-03-05T12:00:00+00:00",
+        "category": "classes",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Friday lecture."
+      },
+      {
+        "id": "student_party_fri",
+        "title": "Student Association Mid-Semester Party",
+        "start": "2027-03-05T20:00:00+00:00",
+        "end": "2027-03-05T23:00:00+00:00",
+        "category": "social",
+        "importance": 2,
+        "fixed": false,
+        "participants": [
+          "user",
+          "students"
+        ],
+        "description": "Social event (will be missed due to competition abroad)."
+      }
+    ]
+  },
+  "user_request": "I just received my official call-up (Monday 08:00) for the International Open Cup abroad! The national team departs Thursday morning at 08:00 (meaning I must be at the airport by 06:30, so I need to adjust Wednesday night's sleep slightly or pack earlier) and I will be competing all day Thursday and Friday, returning only on Sunday (arrival time unknown). Please replace my Thursday and Friday regular events with the International Competition block, cancel my Thursday/Friday classes and Friday's student association party, and schedule at least 5 hours of autonomous study between Monday and Wednesday to cover the Thursday Biochemistry Lab and Friday Genetics material I'm going to miss. Tell me what needs confirmation with my professors and friends."
+}

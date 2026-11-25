@@ -1,0 +1,427 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "elite_athlete_student_sponsor_media_day_project_001",
+  "family_id": "elite_athlete_student_schedule_conflict",
+  "profile": {
+    "profile_id": "elite_athlete_student_01__elite_athlete_student_sponsor_media_day_project_001",
+    "description": "High-performance student-athlete competing at national/international level while pursuing an undergraduate degree, balancing twice-daily training sessions, strict sleep hygiene, university classes, and social life.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "training": 5,
+      "sleep": 5,
+      "exams": 4,
+      "classes": 3,
+      "physio": 3,
+      "social": 2
+    },
+    "hard_constraints": [
+      {
+        "id": "training_sessions",
+        "description": "Twice-daily training blocks are fixed.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "training"
+        ]
+      },
+      {
+        "id": "sleep_protection",
+        "description": "The athlete must sleep at least eight hours every night.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "sleep"
+        ]
+      },
+      {
+        "id": "project_deadline",
+        "description": "Software Engineering project submission deadline on Friday at 17:00 is fixed.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "exam"
+        ]
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "project_work_blocks",
+        "description": "Reserve at least 6 hours of focused coding/project work before Friday afternoon.",
+        "weight": 4
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Sponsor media obligations are mandatory. Project partner syncs and coach adjustments for afternoon training require confirmation."
+    }
+  },
+  "now": "2027-05-03T08:00:00+01:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-05-02T22:30:00+01:00",
+        "end": "2027-05-03T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block."
+      },
+      {
+        "id": "training_am_mon",
+        "title": "Morning Strength Training",
+        "start": "2027-05-03T07:00:00+01:00",
+        "end": "2027-05-03T09:00:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Morning session."
+      },
+      {
+        "id": "class_se_mon",
+        "title": "Software Engineering Lecture",
+        "start": "2027-05-03T10:00:00+01:00",
+        "end": "2027-05-03T12:00:00+01:00",
+        "category": "classes",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Morning lecture."
+      },
+      {
+        "id": "lunch_mon",
+        "title": "Lunch",
+        "start": "2027-05-03T12:30:00+01:00",
+        "end": "2027-05-03T13:30:00+01:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break."
+      },
+      {
+        "id": "study_mon",
+        "title": "Software Project Coding",
+        "start": "2027-05-03T14:00:00+01:00",
+        "end": "2027-05-03T16:00:00+01:00",
+        "category": "study",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Project work."
+      },
+      {
+        "id": "training_pm_mon",
+        "title": "Afternoon Technical Session",
+        "start": "2027-05-03T16:30:00+01:00",
+        "end": "2027-05-03T18:30:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-05-03T22:30:00+01:00",
+        "end": "2027-05-04T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block."
+      },
+      {
+        "id": "training_am_tue",
+        "title": "Morning Conditioning",
+        "start": "2027-05-04T07:00:00+01:00",
+        "end": "2027-05-04T09:00:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Morning session."
+      },
+      {
+        "id": "class_networks_tue",
+        "title": "Computer Networks Lecture",
+        "start": "2027-05-04T10:00:00+01:00",
+        "end": "2027-05-04T12:00:00+01:00",
+        "category": "classes",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Morning lecture."
+      },
+      {
+        "id": "lunch_tue",
+        "title": "Lunch",
+        "start": "2027-05-04T12:30:00+01:00",
+        "end": "2027-05-04T13:30:00+01:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break."
+      },
+      {
+        "id": "study_tue",
+        "title": "Software Project Coding",
+        "start": "2027-05-04T14:00:00+01:00",
+        "end": "2027-05-04T16:00:00+01:00",
+        "category": "study",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Project work."
+      },
+      {
+        "id": "training_pm_tue",
+        "title": "Afternoon Tactical Session",
+        "start": "2027-05-04T16:30:00+01:00",
+        "end": "2027-05-04T18:30:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-05-04T22:30:00+01:00",
+        "end": "2027-05-05T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block."
+      },
+      {
+        "id": "training_am_wed",
+        "title": "Morning Pool Recovery",
+        "start": "2027-05-05T07:00:00+01:00",
+        "end": "2027-05-05T09:00:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Morning session."
+      },
+      {
+        "id": "study_wed",
+        "title": "Software Project Integration",
+        "start": "2027-05-05T10:00:00+01:00",
+        "end": "2027-05-05T12:00:00+01:00",
+        "category": "study",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Project work."
+      },
+      {
+        "id": "lunch_wed",
+        "title": "Lunch",
+        "start": "2027-05-05T12:30:00+01:00",
+        "end": "2027-05-05T13:30:00+01:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break."
+      },
+      {
+        "id": "training_pm_wed",
+        "title": "Afternoon Technical Training",
+        "start": "2027-05-05T16:30:00+01:00",
+        "end": "2027-05-05T18:30:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session (overlaps with sponsor event)."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-05-05T22:30:00+01:00",
+        "end": "2027-05-06T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block."
+      },
+      {
+        "id": "training_am_thu",
+        "title": "Morning Gym",
+        "start": "2027-05-06T07:00:00+01:00",
+        "end": "2027-05-06T09:00:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Morning session."
+      },
+      {
+        "id": "class_se_thu",
+        "title": "Software Engineering Lab",
+        "start": "2027-05-06T10:00:00+01:00",
+        "end": "2027-05-06T12:00:00+01:00",
+        "category": "classes",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Morning lab."
+      },
+      {
+        "id": "lunch_thu",
+        "title": "Lunch",
+        "start": "2027-05-06T12:30:00+01:00",
+        "end": "2027-05-06T13:30:00+01:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break."
+      },
+      {
+        "id": "training_pm_thu",
+        "title": "Afternoon Tactical Session",
+        "start": "2027-05-06T16:30:00+01:00",
+        "end": "2027-05-06T18:30:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-05-06T22:30:00+01:00",
+        "end": "2027-05-07T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block."
+      },
+      {
+        "id": "training_am_fri",
+        "title": "Morning Speed Session",
+        "start": "2027-05-07T07:00:00+01:00",
+        "end": "2027-05-07T09:00:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Morning session."
+      },
+      {
+        "id": "study_fri",
+        "title": "Final Project Testing & Submission",
+        "start": "2027-05-07T10:00:00+01:00",
+        "end": "2027-05-07T12:30:00+01:00",
+        "category": "study",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Final testing before 17:00 deadline."
+      },
+      {
+        "id": "training_pm_fri",
+        "title": "Afternoon Scrimmage",
+        "start": "2027-05-07T16:30:00+01:00",
+        "end": "2027-05-07T18:30:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session."
+      },
+      {
+        "id": "social_fri",
+        "title": "Student Association Trivia Night",
+        "start": "2027-05-07T20:00:00+01:00",
+        "end": "2027-05-07T22:00:00+01:00",
+        "category": "social",
+        "importance": 2,
+        "fixed": false,
+        "participants": [
+          "user",
+          "peers"
+        ],
+        "description": "Friday social."
+      }
+    ]
+  },
+  "user_request": "My club's main apparel sponsor just scheduled a mandatory contract photoshoot and media event for Wednesday afternoon from 14:30 to 17:30 downtown (30 minutes from the training center). This overlaps with my Wednesday 16:30 afternoon technical training. My coach agreed I can move Wednesday's afternoon session to 18:30–20:00 at the High-Performance Center, or double up on Thursday afternoon from 14:30 to 16:30. Also, I need to make sure I still get at least 6 hours of Software Engineering project work done before Friday's 17:00 deadline (even if I skip Thursday morning's lab). Please rearrange my week, protect my 8 hours of sleep every night, and list what needs confirmation."
+}

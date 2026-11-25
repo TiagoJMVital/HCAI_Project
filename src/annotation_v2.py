@@ -101,6 +101,20 @@ def _source(root: Path, proposal_id: str) -> dict:
         _raise("proposal not found"))
 
 
+def _resolved_source(root: Path, proposal_id: str, source: dict | None) -> dict:
+    """Use an already validated catalogue row when the caller has one.
+
+    Streamlit renders the complete reviewer progress table on every interaction.  Rebuilding
+    the proposal catalogue for every row made a single widget click perform dozens of full
+    run/scenario scans.  Callers may pass the row from that same catalogue scan; the identity
+    check below retains the provenance guard.
+    """
+    resolved = source if source is not None else _source(root, proposal_id)
+    if resolved.get("proposal_id") != proposal_id or not resolved.get("scenario_id"):
+        raise ValueError("proposal source provenance mismatch")
+    return resolved
+
+
 def _raise(message: str):
     raise ValueError(message)
 
@@ -122,11 +136,14 @@ def prepare(root: Path, author: str, proposal_ids: set[str] | None = None) -> in
     return count
 
 
-def load_review(root: Path, author: str, proposal_id: str) -> tuple[ProposalReview, str]:
-    source = _source(root, proposal_id)
+def load_review(root: Path, author: str, proposal_id: str, *,
+                source: dict | None = None) -> tuple[ProposalReview, str]:
+    source = _resolved_source(root, proposal_id, source)
     path = _path(root, author, proposal_id)
     if not path.exists():
-        prepare(root, author, {proposal_id})
+        blank = ProposalReview(proposal_id=proposal_id,
+                               scenario_id=source["scenario_id"], annotator_id=author)
+        atomic_json(path, blank.model_dump())
     raw = path.read_bytes()
     review = ProposalReview.model_validate_json(raw)
     if (review.proposal_id, review.scenario_id, review.annotator_id) != (
@@ -136,8 +153,10 @@ def load_review(root: Path, author: str, proposal_id: str) -> tuple[ProposalRevi
 
 
 def save_review(root: Path, author: str, proposal_id: str, data: dict,
-                revision: str, *, confirm_completed: bool = False) -> str:
-    old, current = load_review(root, author, proposal_id)
+                revision: str, *, confirm_completed: bool = False,
+                source: dict | None = None) -> str:
+    source = _resolved_source(root, proposal_id, source)
+    old, current = load_review(root, author, proposal_id, source=source)
     if current != revision:
         raise ValueError("review changed elsewhere; reload before saving")
     if _consensus_path(root, proposal_id).exists():
@@ -145,7 +164,7 @@ def save_review(root: Path, author: str, proposal_id: str, data: dict,
         if consensus.status == "complete":
             raise ValueError("review is frozen after completed adjudication")
     review = ProposalReview.model_validate(data)
-    if (review.status == "complete" and not _source(root, proposal_id)["technical_validation"]["valid"]
+    if (review.status == "complete" and not source["technical_validation"]["valid"]
             and review.scheduling_acceptable != "no"):
         raise ValueError("technically invalid proposal requires a quality rejection, not an autonomy label")
     if (review.proposal_id, review.scenario_id, review.annotator_id) != (

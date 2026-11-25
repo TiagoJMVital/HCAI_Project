@@ -1,0 +1,346 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "high_school_student_dentist_appointment_005",
+  "family_id": "high_school_student_schedule_conflict",
+  "profile": {
+    "profile_id": "high_school_student_01__high_school_student_dentist_appointment_005",
+    "description": "High school student balancing dental appointments with tutoring, gym, and friends.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "education": 5,
+      "health": 4,
+      "social": 4,
+      "sleep": 4,
+      "household": 2
+    },
+    "hard_constraints": [
+      {
+        "id": "dentist_fixed",
+        "description": "Dental check-up on Tuesday at 15:00 is fixed.",
+        "rule_type": "protect_events_by_id",
+        "event_ids": [
+          "dentist_tue"
+        ]
+      },
+      {
+        "id": "classes_mandatory",
+        "description": "School classes are mandatory.",
+        "rule_type": "protect_events_by_id",
+        "event_ids": [
+          "classes_mon",
+          "classes_tue_am",
+          "classes_wed",
+          "classes_thu_am",
+          "classes_fri"
+        ]
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "reschedule_tutoring",
+        "description": "Reschedule conflicting tutoring session if needed.",
+        "weight": 4
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Tuesday dental check-up takes priority over afternoon casual activities."
+    }
+  },
+  "now": "2027-06-07T07:30:00+01:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-06-06T23:30:00+01:00",
+        "end": "2027-06-07T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "classes_mon",
+        "title": "High School Classes (8h)",
+        "start": "2027-06-07T08:30:00+01:00",
+        "end": "2027-06-07T17:30:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "classmates"
+        ],
+        "description": "Classes."
+      },
+      {
+        "id": "gym_mon",
+        "title": "Gym Session",
+        "start": "2027-06-07T18:00:00+01:00",
+        "end": "2027-06-07T19:15:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout."
+      },
+      {
+        "id": "hw_mon",
+        "title": "Dinner & Homework",
+        "start": "2027-06-07T19:45:00+01:00",
+        "end": "2027-06-07T22:00:00+01:00",
+        "category": "education",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "family"
+        ],
+        "description": "Dinner and study."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-06-07T23:30:00+01:00",
+        "end": "2027-06-08T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "classes_tue_am",
+        "title": "High School Morning Classes",
+        "start": "2027-06-08T08:30:00+01:00",
+        "end": "2027-06-08T13:30:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "classmates"
+        ],
+        "description": "Morning classes."
+      },
+      {
+        "id": "dentist_tue",
+        "title": "Dental Check-up Appointment",
+        "start": "2027-06-08T15:00:00+01:00",
+        "end": "2027-06-08T16:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "dentist",
+          "mother"
+        ],
+        "description": "Fixed dentist appointment."
+      },
+      {
+        "id": "tutoring_tue",
+        "title": "Regular Math Tutoring",
+        "start": "2027-06-08T14:30:00+01:00",
+        "end": "2027-06-08T16:00:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user",
+          "tutor"
+        ],
+        "description": "Regular tutoring slot, before the requested shift to 17:00; tutor availability for the new time remains unverified."
+      },
+      {
+        "id": "gym_tue",
+        "title": "Gym Session",
+        "start": "2027-06-08T18:45:00+01:00",
+        "end": "2027-06-08T20:00:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-06-08T23:30:00+01:00",
+        "end": "2027-06-09T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "classes_wed",
+        "title": "High School Classes (8h)",
+        "start": "2027-06-09T08:30:00+01:00",
+        "end": "2027-06-09T17:30:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "classmates"
+        ],
+        "description": "Classes."
+      },
+      {
+        "id": "catechesis_wed",
+        "title": "Catechesis Class",
+        "start": "2027-06-09T18:00:00+01:00",
+        "end": "2027-06-09T19:30:00+01:00",
+        "category": "social",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user",
+          "catechist"
+        ],
+        "description": "Fixed catechesis."
+      },
+      {
+        "id": "hw_wed",
+        "title": "Dinner & Homework",
+        "start": "2027-06-09T20:00:00+01:00",
+        "end": "2027-06-09T22:00:00+01:00",
+        "category": "education",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "family"
+        ],
+        "description": "Dinner and study."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-06-09T23:30:00+01:00",
+        "end": "2027-06-10T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "classes_thu_am",
+        "title": "High School Morning Classes",
+        "start": "2027-06-10T08:30:00+01:00",
+        "end": "2027-06-10T13:30:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "classmates"
+        ],
+        "description": "Morning classes."
+      },
+      {
+        "id": "skate_thu",
+        "title": "Skateboarding with Friends",
+        "start": "2027-06-10T15:00:00+01:00",
+        "end": "2027-06-10T17:30:00+01:00",
+        "category": "social",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "friends"
+        ],
+        "description": "Afternoon skate."
+      },
+      {
+        "id": "gym_thu",
+        "title": "Gym Session",
+        "start": "2027-06-10T18:00:00+01:00",
+        "end": "2027-06-10T19:15:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-06-10T23:30:00+01:00",
+        "end": "2027-06-11T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "classes_fri",
+        "title": "High School Classes (8h)",
+        "start": "2027-06-11T08:30:00+01:00",
+        "end": "2027-06-11T17:30:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "classmates"
+        ],
+        "description": "Friday classes."
+      },
+      {
+        "id": "gym_fri",
+        "title": "Gym Session",
+        "start": "2027-06-11T18:00:00+01:00",
+        "end": "2027-06-11T19:15:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym workout."
+      },
+      {
+        "id": "social_fri",
+        "title": "Hangout with Friends",
+        "start": "2027-06-11T20:00:00+01:00",
+        "end": "2027-06-11T23:00:00+01:00",
+        "category": "social",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "friends"
+        ],
+        "description": "Social night."
+      }
+    ]
+  },
+  "user_request": "I have a dental appointment on Tuesday at 15:00, which overlaps with my regular tutoring slot. Please shift Tuesday's tutoring to 17:00 and keep my gym workout and Thursday afternoon skateboarding session intact."
+}

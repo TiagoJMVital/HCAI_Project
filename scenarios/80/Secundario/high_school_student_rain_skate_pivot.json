@@ -1,0 +1,324 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "high_school_student_rain_skate_pivot_009",
+  "family_id": "high_school_student_schedule_conflict",
+  "profile": {
+    "profile_id": "high_school_student_01__high_school_student_rain_skate_pivot_009",
+    "description": "High school student adapting outdoor plans due to bad weather while keeping study and gym goals.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "education": 5,
+      "health": 4,
+      "social": 4,
+      "sleep": 4,
+      "household": 2
+    },
+    "hard_constraints": [
+      {
+        "description": "High school classes are mandatory.",
+        "event_ids": [
+          "classes_mon",
+          "classes_tue_am",
+          "tutoring_tue",
+          "classes_wed",
+          "classes_thu_am",
+          "classes_fri"
+        ],
+        "id": "classes_mandatory",
+        "rule_type": "protect_events_by_id"
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "indoor_alternative",
+        "description": "Replace outdoor skateboarding with indoor gym or study when raining.",
+        "weight": 4
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Weather prevents outdoor skating on Thursday afternoon."
+    }
+  },
+  "now": "2027-05-24T07:30:00+01:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-05-23T23:30:00+01:00",
+        "end": "2027-05-24T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "classes_mon",
+        "title": "High School Classes (8h)",
+        "start": "2027-05-24T08:30:00+01:00",
+        "end": "2027-05-24T17:30:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "classmates"
+        ],
+        "description": "Classes."
+      },
+      {
+        "id": "gym_mon",
+        "title": "Gym Session",
+        "start": "2027-05-24T18:00:00+01:00",
+        "end": "2027-05-24T19:15:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout."
+      },
+      {
+        "id": "hw_mon",
+        "title": "Dinner & Homework",
+        "start": "2027-05-24T19:45:00+01:00",
+        "end": "2027-05-24T22:00:00+01:00",
+        "category": "education",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "family"
+        ],
+        "description": "Dinner and study."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-05-24T23:30:00+01:00",
+        "end": "2027-05-25T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "classes_tue_am",
+        "title": "High School Morning Classes",
+        "start": "2027-05-25T08:30:00+01:00",
+        "end": "2027-05-25T13:30:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "classmates"
+        ],
+        "description": "Morning classes."
+      },
+      {
+        "id": "tutoring_tue",
+        "title": "Math Tutoring",
+        "start": "2027-05-25T14:30:00+01:00",
+        "end": "2027-05-25T16:00:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "tutor"
+        ],
+        "description": "Fixed tutoring."
+      },
+      {
+        "id": "gym_tue",
+        "title": "Gym Session",
+        "start": "2027-05-25T16:30:00+01:00",
+        "end": "2027-05-25T17:45:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-05-25T23:30:00+01:00",
+        "end": "2027-05-26T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "classes_wed",
+        "title": "High School Classes (8h)",
+        "start": "2027-05-26T08:30:00+01:00",
+        "end": "2027-05-26T17:30:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "classmates"
+        ],
+        "description": "Classes."
+      },
+      {
+        "id": "catechesis_wed",
+        "title": "Catechesis Class",
+        "start": "2027-05-26T18:00:00+01:00",
+        "end": "2027-05-26T19:30:00+01:00",
+        "category": "social",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user",
+          "catechist"
+        ],
+        "description": "Fixed catechesis."
+      },
+      {
+        "id": "hw_wed",
+        "title": "Dinner & Homework",
+        "start": "2027-05-26T20:00:00+01:00",
+        "end": "2027-05-26T22:00:00+01:00",
+        "category": "education",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "family"
+        ],
+        "description": "Dinner and study."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-05-26T23:30:00+01:00",
+        "end": "2027-05-27T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "classes_thu_am",
+        "title": "High School Morning Classes",
+        "start": "2027-05-27T08:30:00+01:00",
+        "end": "2027-05-27T13:30:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "classmates"
+        ],
+        "description": "Morning classes."
+      },
+      {
+        "id": "skate_thu_cancelled",
+        "title": "Outdoor Skate with Friends (Rain)",
+        "start": "2027-05-27T15:00:00+01:00",
+        "end": "2027-05-27T17:30:00+01:00",
+        "category": "social",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "friends"
+        ],
+        "description": "Cancelled due to heavy rain."
+      },
+      {
+        "id": "gym_thu",
+        "title": "Indoor Gym Session",
+        "start": "2027-05-27T15:30:00+01:00",
+        "end": "2027-05-27T17:00:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Indoor workout."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-05-27T23:30:00+01:00",
+        "end": "2027-05-28T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "classes_fri",
+        "title": "High School Classes (8h)",
+        "start": "2027-05-28T08:30:00+01:00",
+        "end": "2027-05-28T17:30:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "classmates"
+        ],
+        "description": "Friday classes."
+      },
+      {
+        "id": "gym_fri",
+        "title": "Gym Session",
+        "start": "2027-05-28T18:00:00+01:00",
+        "end": "2027-05-28T19:15:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym workout."
+      },
+      {
+        "id": "social_fri",
+        "title": "Hangout with Friends",
+        "start": "2027-05-28T20:00:00+01:00",
+        "end": "2027-05-28T23:00:00+01:00",
+        "category": "social",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "friends"
+        ],
+        "description": "Social night."
+      }
+    ]
+  },
+  "user_request": "It's raining heavily on Thursday afternoon, so my outdoor skate session with friends is cancelled. Please replace that slot with an indoor gym session and study time, while keeping my evening free."
+}

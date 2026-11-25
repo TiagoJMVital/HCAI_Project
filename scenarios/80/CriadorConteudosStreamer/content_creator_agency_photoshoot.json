@@ -1,0 +1,323 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "content_creator_agency_photoshoot_001",
+  "family_id": "content_creator_schedule_conflict",
+  "profile": {
+    "profile_id": "content_creator_streamer_01__content_creator_agency_photoshoot_001",
+    "description": "Full-time content creator balancing video editing with mandatory talent agency meetings and professional photoshoots.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "health": 5,
+      "sponsorships": 5,
+      "streaming": 4,
+      "video_production": 4,
+      "social": 3,
+      "household": 3
+    },
+    "hard_constraints": [
+      {
+        "id": "agency_photoshoot",
+        "description": "Talent agency professional photoshoot and contract renewal meeting on Wednesday from 14:00 to 18:00 downtown.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "sponsorships"
+        ]
+      },
+      {
+        "id": "health_protection",
+        "description": "Daily gym workout is mandatory.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "health"
+        ]
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "work_balance",
+        "description": "Shift editing hours to Monday and Tuesday.",
+        "weight": 4
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Wednesday agency photoshoot is fixed and takes precedence over standard editing blocks."
+    }
+  },
+  "now": "2027-03-22T10:00:00+00:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-03-22T01:30:00+00:00",
+        "end": "2027-03-22T09:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_mon",
+        "title": "Gym Workout",
+        "start": "2027-03-22T10:00:00+00:00",
+        "end": "2027-03-22T11:30:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout."
+      },
+      {
+        "id": "edit_mon",
+        "title": "Video Editing",
+        "start": "2027-03-22T12:30:00+00:00",
+        "end": "2027-03-22T18:00:00+00:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Editing."
+      },
+      {
+        "id": "stream_mon",
+        "title": "Live Stream",
+        "start": "2027-03-22T20:00:00+00:00",
+        "end": "2027-03-22T23:30:00+00:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-03-23T01:30:00+00:00",
+        "end": "2027-03-23T09:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_tue",
+        "title": "Gym Workout",
+        "start": "2027-03-23T10:00:00+00:00",
+        "end": "2027-03-23T11:30:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout."
+      },
+      {
+        "id": "edit_tue",
+        "title": "Video Editing",
+        "start": "2027-03-23T12:30:00+00:00",
+        "end": "2027-03-23T18:00:00+00:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Editing."
+      },
+      {
+        "id": "stream_tue",
+        "title": "Live Stream",
+        "start": "2027-03-23T20:00:00+00:00",
+        "end": "2027-03-23T23:30:00+00:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-03-24T01:30:00+00:00",
+        "end": "2027-03-24T09:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_wed",
+        "title": "Gym Workout",
+        "start": "2027-03-24T10:00:00+00:00",
+        "end": "2027-03-24T11:30:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout."
+      },
+      {
+        "id": "agency_wed",
+        "title": "Talent Agency Photoshoot & Meeting",
+        "start": "2027-03-24T14:00:00+00:00",
+        "end": "2027-03-24T18:00:00+00:00",
+        "category": "sponsorships",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "agent"
+        ],
+        "description": "Fixed agency event."
+      },
+      {
+        "id": "stream_wed",
+        "title": "Live Stream",
+        "start": "2027-03-24T20:00:00+00:00",
+        "end": "2027-03-24T23:30:00+00:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-03-25T01:30:00+00:00",
+        "end": "2027-03-25T09:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_thu",
+        "title": "Gym Workout",
+        "start": "2027-03-25T10:00:00+00:00",
+        "end": "2027-03-25T11:30:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout."
+      },
+      {
+        "id": "edit_thu",
+        "title": "Video Editing",
+        "start": "2027-03-25T12:30:00+00:00",
+        "end": "2027-03-25T18:00:00+00:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Editing."
+      },
+      {
+        "id": "stream_thu",
+        "title": "Live Stream",
+        "start": "2027-03-25T20:00:00+00:00",
+        "end": "2027-03-25T23:30:00+00:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-03-26T01:30:00+00:00",
+        "end": "2027-03-26T09:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_fri",
+        "title": "Gym Workout",
+        "start": "2027-03-26T10:00:00+00:00",
+        "end": "2027-03-26T11:30:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout."
+      },
+      {
+        "id": "edit_fri",
+        "title": "Video Editing",
+        "start": "2027-03-26T12:30:00+00:00",
+        "end": "2027-03-26T18:00:00+00:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Editing."
+      },
+      {
+        "id": "stream_fri",
+        "title": "Live Stream",
+        "start": "2027-03-26T20:00:00+00:00",
+        "end": "2027-03-26T23:30:00+00:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream."
+      }
+    ]
+  },
+  "user_request": "My talent agency scheduled a mandatory professional photoshoot and contract renewal meeting downtown on Wednesday from 14:00 to 18:00. Since this blocks my Wednesday afternoon editing slot, please adjust my schedule to ensure all content production goals for the week are met."
+}

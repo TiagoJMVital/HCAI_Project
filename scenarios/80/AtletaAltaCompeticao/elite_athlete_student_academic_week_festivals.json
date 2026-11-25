@@ -1,0 +1,328 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "elite_athlete_student_academic_week_festivals_001",
+  "family_id": "elite_athlete_student_schedule_conflict",
+  "profile": {
+    "profile_id": "elite_athlete_student_01__elite_athlete_student_academic_week_festivals_001",
+    "description": "High-performance student-athlete competing at national/international level while pursuing an undergraduate degree, balancing twice-daily training sessions, strict sleep hygiene, university classes, and social life.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "training": 5,
+      "sleep": 5,
+      "exams": 4,
+      "classes": 3,
+      "physio": 3,
+      "social": 2
+    },
+    "hard_constraints": [
+      {
+        "id": "training_sessions",
+        "description": "Main training blocks at 07:00 and 16:30 are strictly maintained during Academic Week.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "training"
+        ]
+      },
+      {
+        "id": "sleep_protection",
+        "description": "The athlete must sleep at least eight hours every night; late-night concerts violating sleep before 07:00 training are prohibited.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "sleep"
+        ]
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "daytime_social",
+        "description": "Prefer daytime or early-evening student association events (lunches, afternoon gatherings) over late-night concerts.",
+        "weight": 3
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Classes are suspended by the university during Academic Week. Social RSVPs with friends require confirmation."
+    }
+  },
+  "now": "2027-05-10T08:00:00+01:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-05-09T22:30:00+01:00",
+        "end": "2027-05-10T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block."
+      },
+      {
+        "id": "training_am_mon",
+        "title": "Morning Strength Training",
+        "start": "2027-05-10T07:00:00+01:00",
+        "end": "2027-05-10T09:00:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Morning session."
+      },
+      {
+        "id": "class_mon",
+        "title": "Regular Morning Lecture (Suspended for Academic Week)",
+        "start": "2027-05-10T10:00:00+01:00",
+        "end": "2027-05-10T12:00:00+01:00",
+        "category": "classes",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "To be removed."
+      },
+      {
+        "id": "lunch_mon",
+        "title": "Lunch",
+        "start": "2027-05-10T12:30:00+01:00",
+        "end": "2027-05-10T13:30:00+01:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break."
+      },
+      {
+        "id": "training_pm_mon",
+        "title": "Afternoon Technical Training",
+        "start": "2027-05-10T16:30:00+01:00",
+        "end": "2027-05-10T18:30:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-05-10T22:30:00+01:00",
+        "end": "2027-05-11T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block."
+      },
+      {
+        "id": "training_am_tue",
+        "title": "Morning Conditioning",
+        "start": "2027-05-11T07:00:00+01:00",
+        "end": "2027-05-11T09:00:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Morning session."
+      },
+      {
+        "id": "class_tue",
+        "title": "Regular Morning Seminar (Suspended for Academic Week)",
+        "start": "2027-05-11T10:00:00+01:00",
+        "end": "2027-05-11T12:00:00+01:00",
+        "category": "classes",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "To be removed."
+      },
+      {
+        "id": "lunch_tue",
+        "title": "Lunch",
+        "start": "2027-05-11T12:30:00+01:00",
+        "end": "2027-05-11T13:30:00+01:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break."
+      },
+      {
+        "id": "training_pm_tue",
+        "title": "Afternoon Tactical Training",
+        "start": "2027-05-11T16:30:00+01:00",
+        "end": "2027-05-11T18:30:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-05-11T22:30:00+01:00",
+        "end": "2027-05-12T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block."
+      },
+      {
+        "id": "training_am_wed",
+        "title": "Morning Pool Recovery",
+        "start": "2027-05-12T07:00:00+01:00",
+        "end": "2027-05-12T09:00:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Morning session."
+      },
+      {
+        "id": "physio_wed",
+        "title": "Sports Physiotherapy",
+        "start": "2027-05-12T10:00:00+01:00",
+        "end": "2027-05-12T11:00:00+01:00",
+        "category": "physio",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user",
+          "physiotherapist"
+        ],
+        "description": "Routine recovery."
+      },
+      {
+        "id": "training_pm_wed",
+        "title": "Afternoon Technical Session",
+        "start": "2027-05-12T16:30:00+01:00",
+        "end": "2027-05-12T18:30:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-05-12T22:30:00+01:00",
+        "end": "2027-05-13T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block."
+      },
+      {
+        "id": "training_am_thu",
+        "title": "Morning Gym",
+        "start": "2027-05-13T07:00:00+01:00",
+        "end": "2027-05-13T09:00:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Morning session."
+      },
+      {
+        "id": "training_pm_thu",
+        "title": "Afternoon Scrimmage",
+        "start": "2027-05-13T16:30:00+01:00",
+        "end": "2027-05-13T18:30:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-05-13T22:30:00+01:00",
+        "end": "2027-05-14T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block."
+      },
+      {
+        "id": "training_am_fri",
+        "title": "Morning Speed Session",
+        "start": "2027-05-14T07:00:00+01:00",
+        "end": "2027-05-14T09:00:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Morning session."
+      },
+      {
+        "id": "training_pm_fri",
+        "title": "Afternoon Tactical Session",
+        "start": "2027-05-14T16:30:00+01:00",
+        "end": "2027-05-14T18:30:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session."
+      }
+    ]
+  },
+  "user_request": "It's Academic Week at the university, so all regular lectures are suspended for the whole week! My classmates and the Student Association invited me to three events: (1) Tuesday Midnight Serenata & Concert from 23:30 to 03:00, (2) Wednesday Student Association Outdoor Picnic & Lunch on campus from 12:30 to 15:00, and (3) Friday Sunset Acoustic Session & Dinner from 19:30 to 21:30. Remember that my 07:00 trainings and 8-hour sleep blocks (22:30–06:30) are non-negotiable, and I also want to use some of the freed morning hours to study 4 hours ahead of next month's exams. Please update my 5-day calendar, tell me which social events I must decline and which I can attend, and what needs confirmation."
+}

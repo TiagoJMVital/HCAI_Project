@@ -1,0 +1,566 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "university_professor_eu_grant_supervision_003",
+  "family_id": "university_professor_schedule_conflict",
+  "profile": {
+    "profile_id": "university_professor_01__university_professor_eu_grant_supervision_003",
+    "description": "University professor coordinating an EU research project, supervising students, teaching classes, and maintaining physical fitness.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "teaching_and_exams": 5,
+      "research_and_talks": 5,
+      "health_and_fitness": 4,
+      "sleep": 4,
+      "personal": 3
+    },
+    "hard_constraints": [
+      {
+        "description": "EU research project deliverable review on Wednesday from 10:00 to 13:00 is mandatory.",
+        "event_ids": [
+          "eu_project_wed"
+        ],
+        "id": "eu_consortium_review",
+        "rule_type": "protect_events_by_id"
+      },
+      {
+        "description": "Scheduled lectures and thesis supervision are mandatory.",
+        "event_ids": [
+          "lecture_mon",
+          "supervision_mon",
+          "lecture_tue",
+          "lecture_thu"
+        ],
+        "id": "classes_and_supervision",
+        "rule_type": "protect_events_by_id"
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "fitness_routine",
+        "description": "Keep 4 exercise sessions across the week with explicit travel buffers.",
+        "weight": 4
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Wednesday morning is dedicated to the EU research project review."
+    }
+  },
+  "now": "2027-03-15T07:00:00+00:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-03-14T23:00:00+00:00",
+        "end": "2027-03-15T06:45:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "breakfast_commute_mon",
+        "title": "Breakfast & Commute to University (25m drive)",
+        "start": "2027-03-15T07:15:00+00:00",
+        "end": "2027-03-15T08:15:00+00:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Breakfast and 25m drive."
+      },
+      {
+        "id": "lecture_mon",
+        "title": "University Lecture: Distributed Systems",
+        "start": "2027-03-15T08:30:00+00:00",
+        "end": "2027-03-15T10:30:00+00:00",
+        "category": "teaching_and_exams",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "students"
+        ],
+        "description": "Morning lecture."
+      },
+      {
+        "id": "supervision_mon",
+        "title": "MSc & PhD Student Thesis Supervision",
+        "start": "2027-03-15T10:45:00+00:00",
+        "end": "2027-03-15T12:30:00+00:00",
+        "category": "teaching_and_exams",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "students"
+        ],
+        "description": "Supervising graduate research students."
+      },
+      {
+        "id": "lunch_mon",
+        "title": "Lunch at Campus Canteen (45m)",
+        "start": "2027-03-15T12:30:00+00:00",
+        "end": "2027-03-15T13:15:00+00:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch."
+      },
+      {
+        "id": "research_mon",
+        "title": "Research Project: Work Package 2 Prototyping",
+        "start": "2027-03-15T13:30:00+00:00",
+        "end": "2027-03-15T16:00:00+00:00",
+        "category": "research_and_talks",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user",
+          "research_team"
+        ],
+        "description": "Institutional project prototyping."
+      },
+      {
+        "id": "commute_gym_mon",
+        "title": "Commute: University to Gym (20m drive)",
+        "start": "2027-03-15T16:15:00+00:00",
+        "end": "2027-03-15T16:35:00+00:00",
+        "category": "health_and_fitness",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "20m drive to gym."
+      },
+      {
+        "id": "gym_mon",
+        "title": "Gym Workout: Strength Training",
+        "start": "2027-03-15T16:35:00+00:00",
+        "end": "2027-03-15T17:45:00+00:00",
+        "category": "health_and_fitness",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "70m workout."
+      },
+      {
+        "id": "commute_home_dinner_mon",
+        "title": "Commute Home (15m) & Dinner",
+        "start": "2027-03-15T17:55:00+00:00",
+        "end": "2027-03-15T19:15:00+00:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "family"
+        ],
+        "description": "15m drive home and dinner."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-03-15T23:00:00+00:00",
+        "end": "2027-03-16T06:45:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "breakfast_commute_tue",
+        "title": "Breakfast & Commute to University (25m drive)",
+        "start": "2027-03-16T07:15:00+00:00",
+        "end": "2027-03-16T08:15:00+00:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Breakfast and 25m commute."
+      },
+      {
+        "id": "prep_class_tue",
+        "title": "Prepare Lecture Slides & Lab Exercises",
+        "start": "2027-03-16T08:30:00+00:00",
+        "end": "2027-03-16T11:30:00+00:00",
+        "category": "teaching_and_exams",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Preparing upcoming lectures and practical labs."
+      },
+      {
+        "id": "lunch_tue",
+        "title": "Lunch Break (45m)",
+        "start": "2027-03-16T12:00:00+00:00",
+        "end": "2027-03-16T12:45:00+00:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch."
+      },
+      {
+        "id": "lecture_tue",
+        "title": "University Lecture: Cloud Architectures",
+        "start": "2027-03-16T13:00:00+00:00",
+        "end": "2027-03-16T15:30:00+00:00",
+        "category": "teaching_and_exams",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "students"
+        ],
+        "description": "Afternoon lecture."
+      },
+      {
+        "id": "commute_swim_tue",
+        "title": "Commute: University to Pool (15m drive)",
+        "start": "2027-03-16T15:45:00+00:00",
+        "end": "2027-03-16T16:00:00+00:00",
+        "category": "health_and_fitness",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "15m drive to swimming pool."
+      },
+      {
+        "id": "swim_tue",
+        "title": "Lap Swimming Workout (50m)",
+        "start": "2027-03-16T16:00:00+00:00",
+        "end": "2027-03-16T16:50:00+00:00",
+        "category": "health_and_fitness",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "50m swimming session."
+      },
+      {
+        "id": "commute_home_dinner_tue",
+        "title": "Commute Home (20m) & Dinner",
+        "start": "2027-03-16T17:05:00+00:00",
+        "end": "2027-03-16T19:00:00+00:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "family"
+        ],
+        "description": "20m drive home and dinner."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-03-16T23:00:00+00:00",
+        "end": "2027-03-17T06:45:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "breakfast_commute_wed",
+        "title": "Breakfast & Commute to University (25m drive)",
+        "start": "2027-03-17T07:15:00+00:00",
+        "end": "2027-03-17T08:15:00+00:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Breakfast and 25m commute."
+      },
+      {
+        "id": "eu_project_wed",
+        "title": "EU Research Project Consortium Review & Deliverable",
+        "start": "2027-03-17T10:00:00+00:00",
+        "end": "2027-03-17T13:00:00+00:00",
+        "category": "research_and_talks",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "eu_partners"
+        ],
+        "description": "Mandatory EU research review."
+      },
+      {
+        "id": "lunch_wed",
+        "title": "Working Lunch & Short Walk (60m)",
+        "start": "2027-03-17T13:00:00+00:00",
+        "end": "2027-03-17T14:00:00+00:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch and break."
+      },
+      {
+        "id": "grading_wed",
+        "title": "Grade Problem Sets & Midterm Re-grades",
+        "start": "2027-03-17T14:15:00+00:00",
+        "end": "2027-03-17T16:15:00+00:00",
+        "category": "teaching_and_exams",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Grading student assignments."
+      },
+      {
+        "id": "commute_gym_wed",
+        "title": "Commute: University to Gym (20m drive)",
+        "start": "2027-03-17T16:30:00+00:00",
+        "end": "2027-03-17T16:50:00+00:00",
+        "category": "health_and_fitness",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "20m drive to gym."
+      },
+      {
+        "id": "gym_wed",
+        "title": "Gym Workout: Cardio & Core",
+        "start": "2027-03-17T16:50:00+00:00",
+        "end": "2027-03-17T17:50:00+00:00",
+        "category": "health_and_fitness",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "60m workout."
+      },
+      {
+        "id": "commute_home_dinner_wed",
+        "title": "Commute Home (15m) & Dinner",
+        "start": "2027-03-17T18:00:00+00:00",
+        "end": "2027-03-17T19:30:00+00:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "family"
+        ],
+        "description": "15m drive home and dinner."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-03-17T23:00:00+00:00",
+        "end": "2027-03-18T06:45:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "breakfast_commute_thu",
+        "title": "Breakfast & Commute to University (25m drive)",
+        "start": "2027-03-18T07:15:00+00:00",
+        "end": "2027-03-18T08:15:00+00:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Breakfast and 25m commute."
+      },
+      {
+        "id": "lecture_thu",
+        "title": "University Lecture: Distributed Systems",
+        "start": "2027-03-18T08:30:00+00:00",
+        "end": "2027-03-18T10:30:00+00:00",
+        "category": "teaching_and_exams",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "students"
+        ],
+        "description": "Lecture."
+      },
+      {
+        "id": "research_thu",
+        "title": "Research Project: Lab Experiments & Data Logs",
+        "start": "2027-03-18T10:45:00+00:00",
+        "end": "2027-03-18T12:30:00+00:00",
+        "category": "research_and_talks",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user",
+          "research_team"
+        ],
+        "description": "Research experiments."
+      },
+      {
+        "id": "lunch_thu",
+        "title": "Lunch Break (45m)",
+        "start": "2027-03-18T12:30:00+00:00",
+        "end": "2027-03-18T13:15:00+00:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch."
+      },
+      {
+        "id": "commute_gym_thu",
+        "title": "Commute: University to Gym (20m drive)",
+        "start": "2027-03-18T13:30:00+00:00",
+        "end": "2027-03-18T13:50:00+00:00",
+        "category": "health_and_fitness",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "20m drive to gym."
+      },
+      {
+        "id": "gym_thu",
+        "title": "Gym Workout: Strength & Mobility",
+        "start": "2027-03-18T13:50:00+00:00",
+        "end": "2027-03-18T15:00:00+00:00",
+        "category": "health_and_fitness",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "70m workout."
+      },
+      {
+        "id": "commute_home_dinner_thu",
+        "title": "Commute Home (15m), Dinner & Personal Evening",
+        "start": "2027-03-18T15:15:00+00:00",
+        "end": "2027-03-18T21:30:00+00:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "family"
+        ],
+        "description": "15m drive home, dinner, and personal evening."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-03-18T23:00:00+00:00",
+        "end": "2027-03-19T06:45:00+00:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "breakfast_commute_fri",
+        "title": "Breakfast & Commute to University (25m drive)",
+        "start": "2027-03-19T07:15:00+00:00",
+        "end": "2027-03-19T08:15:00+00:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Breakfast and 25m commute."
+      },
+      {
+        "id": "research_fri",
+        "title": "Research Project: Scientific Paper Revision",
+        "start": "2027-03-19T08:30:00+00:00",
+        "end": "2027-03-19T12:15:00+00:00",
+        "category": "research_and_talks",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user",
+          "coauthors"
+        ],
+        "description": "Revising paper for journal submission."
+      },
+      {
+        "id": "lunch_commute_home_fri",
+        "title": "Lunch (45m) & Commute Home (25m drive)",
+        "start": "2027-03-19T12:30:00+00:00",
+        "end": "2027-03-19T13:40:00+00:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch and 25m drive home."
+      },
+      {
+        "id": "personal_fri",
+        "title": "Personal Errands, Dinner & Social Time",
+        "start": "2027-03-19T14:00:00+00:00",
+        "end": "2027-03-19T22:00:00+00:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "friends"
+        ],
+        "description": "Personal afternoon and dinner with friends."
+      }
+    ]
+  },
+  "user_request": "I have a mandatory EU research project review on Wednesday from 10:00 to 13:00 and need to grade problem sets in the afternoon. Please keep Wednesday's schedule balanced with lunch, grading, commute to the gym, and dinner without losing sleep."
+}

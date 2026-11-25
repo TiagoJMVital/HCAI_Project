@@ -1,0 +1,311 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "working_student_work_project_launch_thesis_submission_010",
+  "family_id": "working_student_schedule_conflict",
+  "profile": {
+    "profile_id": "working_student_01__working_student_work_project_launch_thesis_submission_010",
+    "description": "Working student managing a major daytime work launch and a final university paper submission in the same week.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "work": 5,
+      "education": 5,
+      "sleep": 4,
+      "health": 4,
+      "personal": 3
+    },
+    "hard_constraints": [
+      {
+        "id": "work_launch_tue",
+        "description": "Production launch support at work on Tuesday until 18:00 is mandatory.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "work"
+        ]
+      },
+      {
+        "description": "Final university paper submission on Thursday at 21:00 is mandatory.",
+        "event_ids": [
+          "paper_submission_thu"
+        ],
+        "id": "final_paper_thu",
+        "rule_type": "protect_events_by_id"
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "protect_health_and_sleep",
+        "description": "Keep workouts on non-deadline evenings and protect at least 7h sleep each night.",
+        "weight": 4
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "High-pressure week requiring structured evening blocks without sacrificing core sleep."
+    }
+  },
+  "now": "2027-06-07T07:30:00+01:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-06-06T23:45:00+01:00",
+        "end": "2027-06-07T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "work_mon",
+        "title": "Daytime Job: Pre-Launch Readiness",
+        "start": "2027-06-07T09:00:00+01:00",
+        "end": "2027-06-07T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "team"
+        ],
+        "description": "Pre-launch checks."
+      },
+      {
+        "id": "gym_mon",
+        "title": "Gym Workout",
+        "start": "2027-06-07T18:00:00+01:00",
+        "end": "2027-06-07T19:15:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout."
+      },
+      {
+        "id": "study_mon",
+        "title": "Evening Study: Final Paper Outline & Data",
+        "start": "2027-06-07T19:45:00+01:00",
+        "end": "2027-06-07T21:45:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Paper preparation."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-06-07T23:45:00+01:00",
+        "end": "2027-06-08T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "work_tue_launch",
+        "title": "Daytime Job: Project Launch & Cutover",
+        "start": "2027-06-08T09:00:00+01:00",
+        "end": "2027-06-08T18:00:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "team",
+          "manager"
+        ],
+        "description": "Mandatory launch window."
+      },
+      {
+        "id": "dinner_rest_tue",
+        "title": "Dinner & Decompression",
+        "start": "2027-06-08T18:45:00+01:00",
+        "end": "2027-06-08T20:00:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Post-launch meal and break."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-06-08T23:45:00+01:00",
+        "end": "2027-06-09T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "work_wed",
+        "title": "Daytime Job: Post-Launch Monitoring",
+        "start": "2027-06-09T09:00:00+01:00",
+        "end": "2027-06-09T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "team"
+        ],
+        "description": "Post-launch support."
+      },
+      {
+        "id": "gym_wed",
+        "title": "Gym: Cardio & Strength",
+        "start": "2027-06-09T18:00:00+01:00",
+        "end": "2027-06-09T19:00:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout."
+      },
+      {
+        "id": "study_wed",
+        "title": "Evening Study: Final Paper Revisions",
+        "start": "2027-06-09T19:30:00+01:00",
+        "end": "2027-06-09T21:45:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Revising and formatting."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-06-09T23:45:00+01:00",
+        "end": "2027-06-10T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "work_thu",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-06-10T09:00:00+01:00",
+        "end": "2027-06-10T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Daytime work."
+      },
+      {
+        "id": "paper_submission_thu",
+        "title": "Final Paper Proofread & Official Submission",
+        "start": "2027-06-10T18:15:00+01:00",
+        "end": "2027-06-10T21:00:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "university_portal"
+        ],
+        "description": "Final submission deadline at 21:00."
+      },
+      {
+        "id": "relax_thu",
+        "title": "Dinner & Unwind After Submission",
+        "start": "2027-06-10T21:15:00+01:00",
+        "end": "2027-06-10T22:30:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Relaxation after deadline."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-06-10T23:45:00+01:00",
+        "end": "2027-06-11T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "work_fri",
+        "title": "Daytime Job: Core Shift & Launch Retrospective",
+        "start": "2027-06-11T09:00:00+01:00",
+        "end": "2027-06-11T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "team"
+        ],
+        "description": "Friday work shift."
+      },
+      {
+        "id": "gym_fri",
+        "title": "Gym: Full Body Workout",
+        "start": "2027-06-11T18:00:00+01:00",
+        "end": "2027-06-11T19:15:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Celebratory end-of-week workout."
+      },
+      {
+        "id": "social_fri",
+        "title": "Dinner with Friends",
+        "start": "2027-06-11T20:00:00+01:00",
+        "end": "2027-06-11T23:00:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "friends"
+        ],
+        "description": "Social night after a busy week."
+      }
+    ]
+  },
+  "user_request": "This week has a project launch at work on Tuesday until 18:00 and my final university paper submission on Thursday at 21:00. Please organize my evenings for drafting and submitting the paper on time while keeping my workouts on Monday, Wednesday, and Friday and protecting my sleep."
+}

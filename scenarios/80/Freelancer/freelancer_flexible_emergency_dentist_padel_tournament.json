@@ -1,0 +1,253 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "freelancer_flexible_emergency_dentist_padel_tournament_001",
+  "family_id": "freelancer_schedule_conflict",
+  "profile": {
+    "profile_id": "freelancer_flexible_01__freelancer_flexible_emergency_dentist_padel_tournament_001",
+    "description": "Freelance writer with flexible hours, handling an emergency dental appointment and a padel tournament.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "health": 5,
+      "social": 4,
+      "work": 4,
+      "sleep": 4,
+      "household": 3
+    },
+    "hard_constraints": [
+      {
+        "id": "emergency_dentist",
+        "description": "Emergency dental appointment on Tuesday at 11:00 (1.5 hours).",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "medical"
+        ]
+      },
+      {
+        "id": "padel_tournament",
+        "description": "Amateur padel tournament match on Thursday at 18:00 (2 hours).",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "social"
+        ]
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "gym",
+        "description": "Maintain gym workouts.",
+        "weight": 4
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Dentist on Tuesday and padel tournament on Thursday are fixed fixed commitments."
+    }
+  },
+  "now": "2027-06-14T08:30:00+01:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-06-13T23:30:00+01:00",
+        "end": "2027-06-14T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_mon",
+        "title": "Gym Workout",
+        "start": "2027-06-14T08:00:00+01:00",
+        "end": "2027-06-14T09:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym."
+      },
+      {
+        "id": "work_mon",
+        "title": "Writing Work Block",
+        "start": "2027-06-14T10:30:00+01:00",
+        "end": "2027-06-14T18:30:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "8 hours work."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-06-14T23:30:00+01:00",
+        "end": "2027-06-15T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "dentist_tue",
+        "title": "Emergency Dental Appointment",
+        "start": "2027-06-15T11:00:00+01:00",
+        "end": "2027-06-15T12:30:00+01:00",
+        "category": "medical",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "dentist"
+        ],
+        "description": "Fixed dental check."
+      },
+      {
+        "id": "work_tue",
+        "title": "Writing Work Block",
+        "start": "2027-06-15T13:30:00+01:00",
+        "end": "2027-06-15T18:30:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "5 hours work."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-06-15T23:30:00+01:00",
+        "end": "2027-06-16T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_wed",
+        "title": "Gym Workout",
+        "start": "2027-06-16T08:00:00+01:00",
+        "end": "2027-06-16T09:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym."
+      },
+      {
+        "id": "work_wed",
+        "title": "Writing Work Block",
+        "start": "2027-06-16T10:30:00+01:00",
+        "end": "2027-06-16T18:30:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "8 hours work."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-06-16T23:30:00+01:00",
+        "end": "2027-06-17T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "padel_thu",
+        "title": "Amateur Padel Tournament Match",
+        "start": "2027-06-17T18:00:00+01:00",
+        "end": "2027-06-17T20:00:00+01:00",
+        "category": "social",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "peers"
+        ],
+        "description": "Fixed sports match."
+      },
+      {
+        "id": "work_thu",
+        "title": "Writing Work Block",
+        "start": "2027-06-17T10:30:00+01:00",
+        "end": "2027-06-17T17:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "6.5 hours work."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-06-17T23:30:00+01:00",
+        "end": "2027-06-18T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_fri",
+        "title": "Gym Workout",
+        "start": "2027-06-18T08:00:00+01:00",
+        "end": "2027-06-18T09:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Gym."
+      },
+      {
+        "id": "work_fri",
+        "title": "Writing Work Block",
+        "start": "2027-06-18T10:30:00+01:00",
+        "end": "2027-06-18T18:00:00+01:00",
+        "category": "work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "7.5 hours work."
+      }
+    ]
+  },
+  "user_request": "I have an emergency dental appointment on Tuesday from 11:00 to 12:30 and an amateur padel tournament match on Thursday from 18:00 to 20:00. Since I need 30 hours of writing work across the week, please adjust my schedule to fit these fixed medical and sports commitments while keeping my gym routines and sleep protected."
+}

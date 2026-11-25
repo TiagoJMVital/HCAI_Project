@@ -1,0 +1,316 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "pm_annual_health_checkup_apac_sync_010",
+  "family_id": "international_project_manager_schedule_conflict",
+  "profile": {
+    "profile_id": "international_project_manager_01__pm_annual_health_checkup_apac_sync_010",
+    "description": "International Project Manager prioritizing annual preventive health screening alongside global team standups.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "client_meetings": 5,
+      "travel": 5,
+      "deep_work": 4,
+      "health": 5,
+      "sleep": 4,
+      "personal": 3
+    },
+    "hard_constraints": [
+      {
+        "description": "Annual executive health check-up and blood panel on Monday from 08:00 to 10:30 is mandatory.",
+        "event_ids": [
+          "checkup_mon"
+        ],
+        "id": "annual_checkup",
+        "rule_type": "protect_events_by_id"
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "delegate_apac",
+        "description": "Delegate Monday's 08:00 APAC standup to the technical lead while at the clinic.",
+        "weight": 4
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Annual preventive medical exams take precedence over recurring internal standups."
+    }
+  },
+  "now": "2027-06-14T07:00:00+01:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-06-13T23:00:00+01:00",
+        "end": "2027-06-14T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "checkup_mon",
+        "title": "Annual Executive Health Check-up & Blood Panel",
+        "start": "2027-06-14T08:00:00+01:00",
+        "end": "2027-06-14T10:30:00+01:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "doctor"
+        ],
+        "description": "Fasting check-up."
+      },
+      {
+        "id": "deep_work_mon",
+        "title": "Deep Work: Q3 Roadmap Review",
+        "start": "2027-06-14T11:15:00+01:00",
+        "end": "2027-06-14T14:00:00+01:00",
+        "category": "deep_work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Roadmap."
+      },
+      {
+        "id": "us_mon",
+        "title": "US East Coast Sync",
+        "start": "2027-06-14T16:00:00+01:00",
+        "end": "2027-06-14T17:30:00+01:00",
+        "category": "client_meetings",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "us_team"
+        ],
+        "description": "Sync."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-06-14T23:00:00+01:00",
+        "end": "2027-06-15T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "apac_tue",
+        "title": "APAC Engineering Standup",
+        "start": "2027-06-15T07:30:00+01:00",
+        "end": "2027-06-15T08:30:00+01:00",
+        "category": "client_meetings",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user",
+          "apac_team"
+        ],
+        "description": "Standup."
+      },
+      {
+        "id": "deep_work_tue",
+        "title": "Deep Work: Budget Sign-off",
+        "start": "2027-06-15T09:00:00+01:00",
+        "end": "2027-06-15T12:30:00+01:00",
+        "category": "deep_work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Budget."
+      },
+      {
+        "id": "gym_tue",
+        "title": "Gym Workout",
+        "start": "2027-06-15T13:30:00+01:00",
+        "end": "2027-06-15T14:45:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout."
+      },
+      {
+        "id": "us_tue",
+        "title": "US Client Steering Call",
+        "start": "2027-06-15T16:00:00+01:00",
+        "end": "2027-06-15T17:30:00+01:00",
+        "category": "client_meetings",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "us_client"
+        ],
+        "description": "Steering."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-06-15T23:00:00+01:00",
+        "end": "2027-06-16T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "deep_work_wed",
+        "title": "Deep Work: Risk Assessment",
+        "start": "2027-06-16T08:30:00+01:00",
+        "end": "2027-06-16T12:30:00+01:00",
+        "category": "deep_work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Risk."
+      },
+      {
+        "id": "gym_wed",
+        "title": "Gym Workout",
+        "start": "2027-06-16T13:30:00+01:00",
+        "end": "2027-06-16T14:45:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-06-16T23:00:00+01:00",
+        "end": "2027-06-17T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "deep_work_thu",
+        "title": "Deep Work: Vendor Contracts",
+        "start": "2027-06-17T08:30:00+01:00",
+        "end": "2027-06-17T12:30:00+01:00",
+        "category": "deep_work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Contracts."
+      },
+      {
+        "id": "gym_thu",
+        "title": "Gym Workout",
+        "start": "2027-06-17T13:30:00+01:00",
+        "end": "2027-06-17T14:45:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout."
+      },
+      {
+        "id": "us_thu",
+        "title": "US Product Demo",
+        "start": "2027-06-17T16:00:00+01:00",
+        "end": "2027-06-17T17:30:00+01:00",
+        "category": "client_meetings",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "us_client"
+        ],
+        "description": "Demo."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-06-17T23:00:00+01:00",
+        "end": "2027-06-18T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "apac_fri",
+        "title": "APAC Weekly Closeout",
+        "start": "2027-06-18T08:00:00+01:00",
+        "end": "2027-06-18T09:00:00+01:00",
+        "category": "client_meetings",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user",
+          "apac_team"
+        ],
+        "description": "Closeout."
+      },
+      {
+        "id": "deep_work_fri",
+        "title": "Deep Work: Executive Report",
+        "start": "2027-06-18T09:30:00+01:00",
+        "end": "2027-06-18T12:30:00+01:00",
+        "category": "deep_work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Report."
+      },
+      {
+        "id": "personal_fri",
+        "title": "Dinner with Family",
+        "start": "2027-06-18T19:30:00+01:00",
+        "end": "2027-06-18T22:00:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "family"
+        ],
+        "description": "Family time."
+      }
+    ]
+  },
+  "user_request": "I have my annual executive health check-up and fasting blood panel on Monday morning from 08:00 to 10:30, which overlaps with my 08:00 APAC standup. Please cancel my attendance at Monday's APAC standup so my tech lead covers it, allow buffer time for breakfast after the clinic, and keep my 16:00 US sync intact."
+}

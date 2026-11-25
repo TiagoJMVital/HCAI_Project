@@ -1,0 +1,536 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "university_professor_grant_panel_resit_exam_005",
+  "family_id": "university_professor_schedule_conflict",
+  "profile": {
+    "profile_id": "university_professor_01__university_professor_grant_panel_resit_exam_005",
+    "description": "University professor handling a research grant panel, preparing resit exams, teaching, and exercising.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "teaching_and_exams": 5,
+      "research_and_talks": 5,
+      "health_and_fitness": 4,
+      "sleep": 4,
+      "personal": 3
+    },
+    "hard_constraints": [
+      {
+        "id": "grant_panel_mandatory",
+        "description": "Research grant evaluation panel on Thursday from 14:00 to 16:30 is mandatory.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "research_and_talks"
+        ]
+      },
+      {
+        "id": "resit_exam_deadline",
+        "description": "Resit exam paper for two courses must be finalized by Friday morning.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "teaching_and_exams"
+        ]
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "workout_after_panel",
+        "description": "Allow gym workout on Thursday after the grant panel if commute time is included.",
+        "weight": 4
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Thursday afternoon features a mandatory grant panel followed by travel to the gym."
+    }
+  },
+  "now": "2027-04-19T07:00:00+01:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-04-18T23:00:00+01:00",
+        "end": "2027-04-19T06:45:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "breakfast_commute_mon",
+        "title": "Breakfast & Commute to University (25m drive)",
+        "start": "2027-04-19T07:15:00+01:00",
+        "end": "2027-04-19T08:15:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Breakfast and 25m drive."
+      },
+      {
+        "id": "lecture_mon",
+        "title": "University Lecture: Operations Research",
+        "start": "2027-04-19T08:30:00+01:00",
+        "end": "2027-04-19T10:30:00+01:00",
+        "category": "teaching_and_exams",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "students"
+        ],
+        "description": "Lecture."
+      },
+      {
+        "id": "resit_exam_mon",
+        "title": "Draft Resit Exam: Operations Research",
+        "start": "2027-04-19T10:45:00+01:00",
+        "end": "2027-04-19T12:30:00+01:00",
+        "category": "teaching_and_exams",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Drafting resit exam."
+      },
+      {
+        "id": "lunch_mon",
+        "title": "Lunch Break (45m)",
+        "start": "2027-04-19T12:30:00+01:00",
+        "end": "2027-04-19T13:15:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch."
+      },
+      {
+        "id": "research_mon",
+        "title": "Research Project: Lab Team & Budget Review",
+        "start": "2027-04-19T13:30:00+01:00",
+        "end": "2027-04-19T16:00:00+01:00",
+        "category": "research_and_talks",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user",
+          "research_team"
+        ],
+        "description": "Research project work."
+      },
+      {
+        "id": "commute_gym_mon",
+        "title": "Commute: University to Gym (20m drive)",
+        "start": "2027-04-19T16:15:00+01:00",
+        "end": "2027-04-19T16:35:00+01:00",
+        "category": "health_and_fitness",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "20m drive to gym."
+      },
+      {
+        "id": "gym_mon",
+        "title": "Gym Workout: Strength Training",
+        "start": "2027-04-19T16:35:00+01:00",
+        "end": "2027-04-19T17:45:00+01:00",
+        "category": "health_and_fitness",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "70m workout."
+      },
+      {
+        "id": "commute_home_dinner_mon",
+        "title": "Commute Home (15m) & Dinner",
+        "start": "2027-04-19T17:55:00+01:00",
+        "end": "2027-04-19T19:15:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "family"
+        ],
+        "description": "15m drive home and dinner."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-04-19T23:00:00+01:00",
+        "end": "2027-04-20T06:45:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "breakfast_commute_tue",
+        "title": "Breakfast & Commute to University (25m drive)",
+        "start": "2027-04-20T07:15:00+01:00",
+        "end": "2027-04-20T08:15:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Breakfast and 25m commute."
+      },
+      {
+        "id": "research_tue",
+        "title": "Research Project: Data Collection & Analysis",
+        "start": "2027-04-20T08:30:00+01:00",
+        "end": "2027-04-20T12:15:00+01:00",
+        "category": "research_and_talks",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user",
+          "research_team"
+        ],
+        "description": "Research work."
+      },
+      {
+        "id": "lunch_tue",
+        "title": "Lunch Break (45m)",
+        "start": "2027-04-20T12:30:00+01:00",
+        "end": "2027-04-20T13:15:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch."
+      },
+      {
+        "id": "resit_exam_tue",
+        "title": "Draft Resit Exam: Second Course & Solutions",
+        "start": "2027-04-20T13:30:00+01:00",
+        "end": "2027-04-20T15:45:00+01:00",
+        "category": "teaching_and_exams",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Drafting resit exam for second course."
+      },
+      {
+        "id": "commute_run_tue",
+        "title": "Commute to Park (15m drive) & Jog/Mobility (45m)",
+        "start": "2027-04-20T16:00:00+01:00",
+        "end": "2027-04-20T17:00:00+01:00",
+        "category": "health_and_fitness",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "15m drive and 45m outdoor session."
+      },
+      {
+        "id": "commute_home_dinner_tue",
+        "title": "Commute Home (20m) & Dinner",
+        "start": "2027-04-20T17:15:00+01:00",
+        "end": "2027-04-20T19:15:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "family"
+        ],
+        "description": "20m drive home and dinner."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-04-20T23:00:00+01:00",
+        "end": "2027-04-21T06:45:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "breakfast_commute_wed",
+        "title": "Breakfast & Commute to University (25m drive)",
+        "start": "2027-04-21T07:15:00+01:00",
+        "end": "2027-04-21T08:15:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Breakfast and 25m commute."
+      },
+      {
+        "id": "lecture_wed",
+        "title": "University Lecture: Operations Research",
+        "start": "2027-04-21T08:30:00+01:00",
+        "end": "2027-04-21T10:30:00+01:00",
+        "category": "teaching_and_exams",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "students"
+        ],
+        "description": "Lecture."
+      },
+      {
+        "id": "prep_class_wed",
+        "title": "Prepare Lecture Slides & Case Studies",
+        "start": "2027-04-21T10:45:00+01:00",
+        "end": "2027-04-21T12:30:00+01:00",
+        "category": "teaching_and_exams",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Preparing teaching materials."
+      },
+      {
+        "id": "lunch_wed",
+        "title": "Lunch Break (45m)",
+        "start": "2027-04-21T12:30:00+01:00",
+        "end": "2027-04-21T13:15:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch."
+      },
+      {
+        "id": "commute_gym_wed",
+        "title": "Commute: University to Gym (20m drive)",
+        "start": "2027-04-21T13:30:00+01:00",
+        "end": "2027-04-21T13:50:00+01:00",
+        "category": "health_and_fitness",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "20m drive to gym."
+      },
+      {
+        "id": "gym_wed",
+        "title": "Gym Workout: Full Body Conditioning",
+        "start": "2027-04-21T13:50:00+01:00",
+        "end": "2027-04-21T15:00:00+01:00",
+        "category": "health_and_fitness",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "70m workout."
+      },
+      {
+        "id": "commute_home_dinner_wed",
+        "title": "Commute Home (15m) & Dinner",
+        "start": "2027-04-21T15:15:00+01:00",
+        "end": "2027-04-21T19:15:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "family"
+        ],
+        "description": "15m drive home and dinner."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-04-21T23:00:00+01:00",
+        "end": "2027-04-22T06:45:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "breakfast_commute_thu",
+        "title": "Breakfast & Commute to University (25m drive)",
+        "start": "2027-04-22T07:15:00+01:00",
+        "end": "2027-04-22T08:15:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Breakfast and 25m commute."
+      },
+      {
+        "id": "research_prep_thu",
+        "title": "Research Project: Grant Panel Slides & Metrics",
+        "start": "2027-04-22T08:30:00+01:00",
+        "end": "2027-04-22T12:15:00+01:00",
+        "category": "research_and_talks",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user",
+          "research_team"
+        ],
+        "description": "Preparing grant review presentation."
+      },
+      {
+        "id": "lunch_thu",
+        "title": "Lunch Break (60m)",
+        "start": "2027-04-22T12:30:00+01:00",
+        "end": "2027-04-22T13:30:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch before panel."
+      },
+      {
+        "id": "grant_panel_thu",
+        "title": "Research Grant Evaluation Panel & Defense",
+        "start": "2027-04-22T14:00:00+01:00",
+        "end": "2027-04-22T16:30:00+01:00",
+        "category": "research_and_talks",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "panel",
+          "research_team"
+        ],
+        "description": "Mandatory grant panel."
+      },
+      {
+        "id": "commute_gym_thu",
+        "title": "Commute: University to Gym (20m drive)",
+        "start": "2027-04-22T16:45:00+01:00",
+        "end": "2027-04-22T17:05:00+01:00",
+        "category": "health_and_fitness",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "20m drive to gym."
+      },
+      {
+        "id": "gym_thu",
+        "title": "Post-Panel Gym Decompression Workout",
+        "start": "2027-04-22T17:05:00+01:00",
+        "end": "2027-04-22T18:05:00+01:00",
+        "category": "health_and_fitness",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "60m workout."
+      },
+      {
+        "id": "commute_home_dinner_thu",
+        "title": "Commute Home (15m) & Dinner",
+        "start": "2027-04-22T18:15:00+01:00",
+        "end": "2027-04-22T19:30:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "family"
+        ],
+        "description": "15m drive home and dinner."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-04-22T23:00:00+01:00",
+        "end": "2027-04-23T06:45:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "breakfast_commute_fri",
+        "title": "Breakfast & Commute to University (25m drive)",
+        "start": "2027-04-23T07:15:00+01:00",
+        "end": "2027-04-23T08:15:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Breakfast and 25m commute."
+      },
+      {
+        "id": "lunch_commute_home_fri",
+        "title": "Lunch (45m) & Commute Home (25m drive)",
+        "start": "2027-04-23T12:00:00+01:00",
+        "end": "2027-04-23T13:10:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch and 25m drive home."
+      },
+      {
+        "id": "personal_fri",
+        "title": "Personal Errands, Dinner & Social Evening",
+        "start": "2027-04-23T13:30:00+01:00",
+        "end": "2027-04-23T22:00:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "friends"
+        ],
+        "description": "Friday afternoon and social evening."
+      }
+    ]
+  },
+  "user_request": "I have a mandatory research grant evaluation panel on Thursday from 14:00 to 16:30 and need to finalize two resit exams by Friday. Please organize Thursday with lunch before the panel, commute to the gym afterwards, and keep Friday morning free for final exam proofreading."
+}

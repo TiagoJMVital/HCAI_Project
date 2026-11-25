@@ -1,0 +1,306 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "working_student_month_end_overtime_friday_005",
+  "family_id": "working_student_schedule_conflict",
+  "profile": {
+    "profile_id": "working_student_01__working_student_month_end_overtime_friday_005",
+    "description": "Working student handling month-end closing overtime at work while preserving evening study, exercise, and sleep.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "work": 5,
+      "education": 5,
+      "sleep": 4,
+      "health": 4,
+      "personal": 3
+    },
+    "hard_constraints": [
+      {
+        "description": "Friday evening seminar from 19:00 to 21:30 is mandatory.",
+        "event_ids": [
+          "class_tue",
+          "class_fri"
+        ],
+        "id": "evening_class_friday",
+        "rule_type": "protect_events_by_id"
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "compensate_workout_earlier",
+        "description": "Move Friday evening workout to earlier in the week or Saturday morning if overtime overlaps.",
+        "weight": 4
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Month-end closing runs until 18:30 on Friday."
+    }
+  },
+  "now": "2027-04-26T07:30:00+01:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-04-25T23:45:00+01:00",
+        "end": "2027-04-26T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "work_mon",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-04-26T09:00:00+01:00",
+        "end": "2027-04-26T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Daytime work."
+      },
+      {
+        "id": "gym_mon",
+        "title": "Gym Workout",
+        "start": "2027-04-26T18:00:00+01:00",
+        "end": "2027-04-26T19:15:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout."
+      },
+      {
+        "id": "study_mon",
+        "title": "Evening Study: Seminar Readings",
+        "start": "2027-04-26T19:45:00+01:00",
+        "end": "2027-04-26T21:45:00+01:00",
+        "category": "education",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Reading preparation."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-04-26T23:45:00+01:00",
+        "end": "2027-04-27T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "work_tue",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-04-27T09:00:00+01:00",
+        "end": "2027-04-27T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Daytime work."
+      },
+      {
+        "id": "class_tue",
+        "title": "Evening Lecture: Applied Economics",
+        "start": "2027-04-27T18:30:00+01:00",
+        "end": "2027-04-27T21:30:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "professor",
+          "classmates"
+        ],
+        "description": "Mandatory evening class."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-04-27T23:45:00+01:00",
+        "end": "2027-04-28T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "work_wed",
+        "title": "Daytime Job: Month-End Pre-Close",
+        "start": "2027-04-28T09:00:00+01:00",
+        "end": "2027-04-28T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "finance_team"
+        ],
+        "description": "Pre-closing tasks."
+      },
+      {
+        "id": "gym_wed",
+        "title": "Gym: Strength & Cardio",
+        "start": "2027-04-28T18:00:00+01:00",
+        "end": "2027-04-28T19:15:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout."
+      },
+      {
+        "id": "study_wed",
+        "title": "Evening Study: Applied Economics Exercises",
+        "start": "2027-04-28T19:45:00+01:00",
+        "end": "2027-04-28T21:45:00+01:00",
+        "category": "education",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Exercises."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-04-28T23:45:00+01:00",
+        "end": "2027-04-29T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "work_thu",
+        "title": "Daytime Job: Core Shift",
+        "start": "2027-04-29T09:00:00+01:00",
+        "end": "2027-04-29T17:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Daytime work."
+      },
+      {
+        "id": "gym_thu",
+        "title": "Gym: Conditioning Session",
+        "start": "2027-04-29T18:00:00+01:00",
+        "end": "2027-04-29T19:00:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout."
+      },
+      {
+        "id": "personal_thu",
+        "title": "Dinner & Groceries",
+        "start": "2027-04-29T19:30:00+01:00",
+        "end": "2027-04-29T21:30:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Errands and dinner."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-04-29T23:45:00+01:00",
+        "end": "2027-04-30T07:15:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Night sleep."
+      },
+      {
+        "id": "work_fri_overtime",
+        "title": "Daytime Job: Month-End Closing Overtime",
+        "start": "2027-04-30T09:00:00+01:00",
+        "end": "2027-04-30T18:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "finance_team",
+          "manager"
+        ],
+        "description": "Extended shift for month-end closing."
+      },
+      {
+        "id": "class_fri",
+        "title": "Evening Seminar: Business Ethics & Governance",
+        "start": "2027-04-30T19:00:00+01:00",
+        "end": "2027-04-30T21:30:00+01:00",
+        "category": "education",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "professor",
+          "classmates"
+        ],
+        "description": "Mandatory evening seminar."
+      },
+      {
+        "id": "gym_fri",
+        "title": "Friday Gym Workout",
+        "start": "2027-04-30T18:00:00+01:00",
+        "end": "2027-04-30T19:15:00+01:00",
+        "category": "health",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Friday workout reconstructed from the Mon/Wed/Thu 18:00 routine; conflicts with confirmed overtime and Friday seminar, so it is the requested cancellation target."
+      }
+    ]
+  },
+  "user_request": "Month-end closing at work keeps me until 18:30 on Friday, right before my 19:00 seminar. Please drop Friday's workout so I can make it to the seminar on time, and ensure my earlier workouts this week stay intact."
+}

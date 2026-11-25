@@ -1,0 +1,326 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "pm_madrid_trip_california_late_call_003",
+  "family_id": "international_project_manager_schedule_conflict",
+  "profile": {
+    "profile_id": "international_project_manager_01__pm_madrid_trip_california_late_call_003",
+    "description": "International Project Manager balancing European business travel with late-evening US Pacific Time calls.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "client_meetings": 5,
+      "travel": 5,
+      "deep_work": 4,
+      "health": 4,
+      "sleep": 4,
+      "personal": 3
+    },
+    "hard_constraints": [
+      {
+        "id": "california_launch_call",
+        "description": "US West Coast product launch alignment on Thursday from 20:00 to 21:30 is mandatory.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "client_meetings"
+        ]
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "protect_workout",
+        "description": "Fit workout before the late US call or shift Friday morning start slightly later for sleep recovery.",
+        "weight": 4
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Late evening US Pacific calls require adjusting Friday morning start times to protect 7.5h of sleep."
+    }
+  },
+  "now": "2027-04-12T07:00:00+01:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-04-11T23:00:00+01:00",
+        "end": "2027-04-12T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "deep_work_mon",
+        "title": "Deep Work: Slide Deck for Madrid Summit",
+        "start": "2027-04-12T08:30:00+01:00",
+        "end": "2027-04-12T12:30:00+01:00",
+        "category": "deep_work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Presentation prep."
+      },
+      {
+        "id": "gym_mon",
+        "title": "Gym Workout",
+        "start": "2027-04-12T13:30:00+01:00",
+        "end": "2027-04-12T14:45:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout."
+      },
+      {
+        "id": "us_call_mon",
+        "title": "US East Coast Sync",
+        "start": "2027-04-12T16:00:00+01:00",
+        "end": "2027-04-12T17:30:00+01:00",
+        "category": "client_meetings",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user",
+          "us_team"
+        ],
+        "description": "Sync."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-04-12T23:00:00+01:00",
+        "end": "2027-04-13T06:00:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "flight_mad_tue",
+        "title": "Flight LIS -> MAD (Madrid Client Summit)",
+        "start": "2027-04-13T07:30:00+01:00",
+        "end": "2027-04-13T10:30:00+01:00",
+        "category": "travel",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Flight to Madrid."
+      },
+      {
+        "id": "summit_tue",
+        "title": "Iberian Enterprise Client Summit",
+        "start": "2027-04-13T11:30:00+01:00",
+        "end": "2027-04-13T17:30:00+01:00",
+        "category": "client_meetings",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "madrid_clients"
+        ],
+        "description": "Full-day summit."
+      },
+      {
+        "id": "hotel_gym_tue",
+        "title": "Hotel Gym Session",
+        "start": "2027-04-13T18:15:00+01:00",
+        "end": "2027-04-13T19:15:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Hotel workout."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-04-13T23:00:00+01:00",
+        "end": "2027-04-14T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "client_breakfast_wed",
+        "title": "Executive Breakfast Meeting (Madrid)",
+        "start": "2027-04-14T08:00:00+01:00",
+        "end": "2027-04-14T09:30:00+01:00",
+        "category": "client_meetings",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "sponsor"
+        ],
+        "description": "Breakfast meeting."
+      },
+      {
+        "id": "flight_back_wed",
+        "title": "Flight MAD -> LIS",
+        "start": "2027-04-14T11:30:00+01:00",
+        "end": "2027-04-14T14:30:00+01:00",
+        "category": "travel",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Return flight."
+      },
+      {
+        "id": "deep_work_wed",
+        "title": "Deep Work: Contract Amendments",
+        "start": "2027-04-14T15:30:00+01:00",
+        "end": "2027-04-14T18:30:00+01:00",
+        "category": "deep_work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Contract updates."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-04-14T23:00:00+01:00",
+        "end": "2027-04-15T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Sleep."
+      },
+      {
+        "id": "deep_work_thu",
+        "title": "Deep Work: Risk Assessment & Vendor Audit",
+        "start": "2027-04-15T08:30:00+01:00",
+        "end": "2027-04-15T12:30:00+01:00",
+        "category": "deep_work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Vendor review."
+      },
+      {
+        "id": "gym_thu",
+        "title": "Gym: Strength & Cardio",
+        "start": "2027-04-15T14:00:00+01:00",
+        "end": "2027-04-15T15:15:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Afternoon workout."
+      },
+      {
+        "id": "dinner_thu",
+        "title": "Early Dinner",
+        "start": "2027-04-15T18:30:00+01:00",
+        "end": "2027-04-15T19:30:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Dinner before late call."
+      },
+      {
+        "id": "california_call_thu",
+        "title": "California Launch Readiness Call (US West Coast)",
+        "start": "2027-04-15T20:00:00+01:00",
+        "end": "2027-04-15T21:30:00+01:00",
+        "category": "client_meetings",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "sf_team"
+        ],
+        "description": "Late evening US call."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep (Delayed Start Recovery)",
+        "start": "2027-04-15T23:30:00+01:00",
+        "end": "2027-04-16T07:30:00+01:00",
+        "category": "sleep",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8h sleep."
+      },
+      {
+        "id": "deep_work_fri",
+        "title": "Deep Work: Weekly Release Notes",
+        "start": "2027-04-16T09:00:00+01:00",
+        "end": "2027-04-16T12:30:00+01:00",
+        "category": "deep_work",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Documentation."
+      },
+      {
+        "id": "gym_fri",
+        "title": "Gym Workout",
+        "start": "2027-04-16T14:00:00+01:00",
+        "end": "2027-04-16T15:15:00+01:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Workout."
+      },
+      {
+        "id": "personal_fri",
+        "title": "Groceries & Weekend Prep",
+        "start": "2027-04-16T16:30:00+01:00",
+        "end": "2027-04-16T18:00:00+01:00",
+        "category": "personal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Errands."
+      }
+    ]
+  },
+  "user_request": "The US West Coast team scheduled a mandatory launch readiness call on Thursday night from 20:00 to 21:30. Please make sure I eat dinner before the call, keep my Thursday afternoon gym workout, and shift Friday morning's start time to 09:00 so I still get a full 8 hours of sleep."
+}

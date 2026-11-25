@@ -1,0 +1,323 @@
+{
+  "schema_version": "2.0",
+  "scenario_id": "content_creator_guest_collab_recording_001",
+  "family_id": "content_creator_schedule_conflict",
+  "profile": {
+    "profile_id": "content_creator_streamer_01__content_creator_guest_collab_recording_001",
+    "description": "Full-time content creator balancing solo editing with fixed guest collaboration recordings.",
+    "timezone": "Europe/Lisbon",
+    "priorities": {
+      "health": 5,
+      "sponsorships": 5,
+      "streaming": 4,
+      "video_production": 4,
+      "social": 3,
+      "household": 3
+    },
+    "hard_constraints": [
+      {
+        "description": "Fixed video recording session with external guest creator on Wednesday from 14:00 to 17:00.",
+        "event_ids": [
+          "guest_collab_wed"
+        ],
+        "id": "guest_collab",
+        "rule_type": "protect_events_by_id"
+      },
+      {
+        "id": "health_protection",
+        "description": "Daily gym workouts are mandatory.",
+        "rule_type": "protect_events_by_category",
+        "event_categories": [
+          "health"
+        ]
+      }
+    ],
+    "soft_preferences": [
+      {
+        "id": "editing_buffer",
+        "description": "Ensure enough editing time is preserved across the week.",
+        "weight": 4
+      }
+    ],
+    "autonomy_preferences": {
+      "allow_create_in_free_slots": true,
+      "allow_move_personal_flexible_events": true,
+      "require_confirmation_for_third_party_changes": true,
+      "require_confirmation_for_health_appointments": true,
+      "require_confirmation_for_high_impact_changes": true,
+      "notes": "Wednesday guest recording is fixed and cannot be moved. Solo tasks adjust around it."
+    }
+  },
+  "now": "2027-03-01T10:00:00+00:00",
+  "calendar": {
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-03-01T01:30:00+00:00",
+        "end": "2027-03-01T09:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_mon",
+        "title": "Gym Workout",
+        "start": "2027-03-01T10:00:00+00:00",
+        "end": "2027-03-01T11:30:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout."
+      },
+      {
+        "id": "edit_mon",
+        "title": "Video Editing Block",
+        "start": "2027-03-01T12:30:00+00:00",
+        "end": "2027-03-01T18:00:00+00:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Editing."
+      },
+      {
+        "id": "stream_mon",
+        "title": "Live Stream",
+        "start": "2027-03-01T20:00:00+00:00",
+        "end": "2027-03-01T23:30:00+00:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream."
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-03-02T01:30:00+00:00",
+        "end": "2027-03-02T09:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_tue",
+        "title": "Gym Workout",
+        "start": "2027-03-02T10:00:00+00:00",
+        "end": "2027-03-02T11:30:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout."
+      },
+      {
+        "id": "edit_tue",
+        "title": "Video Editing Block",
+        "start": "2027-03-02T12:30:00+00:00",
+        "end": "2027-03-02T18:00:00+00:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Editing."
+      },
+      {
+        "id": "stream_tue",
+        "title": "Live Stream",
+        "start": "2027-03-02T20:00:00+00:00",
+        "end": "2027-03-02T23:30:00+00:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream."
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-03-03T01:30:00+00:00",
+        "end": "2027-03-03T09:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_wed",
+        "title": "Gym Workout",
+        "start": "2027-03-03T10:00:00+00:00",
+        "end": "2027-03-03T11:30:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout."
+      },
+      {
+        "id": "guest_collab_wed",
+        "title": "Collab Video Recording with Guest",
+        "start": "2027-03-03T14:00:00+00:00",
+        "end": "2027-03-03T17:00:00+00:00",
+        "category": "video_production",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "guest"
+        ],
+        "description": "Fixed guest recording."
+      },
+      {
+        "id": "stream_wed",
+        "title": "Live Stream",
+        "start": "2027-03-03T20:00:00+00:00",
+        "end": "2027-03-03T23:30:00+00:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream."
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-03-04T01:30:00+00:00",
+        "end": "2027-03-04T09:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_thu",
+        "title": "Gym Workout",
+        "start": "2027-03-04T10:00:00+00:00",
+        "end": "2027-03-04T11:30:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout."
+      },
+      {
+        "id": "edit_thu",
+        "title": "Video Editing Block",
+        "start": "2027-03-04T12:30:00+00:00",
+        "end": "2027-03-04T18:00:00+00:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Editing."
+      },
+      {
+        "id": "stream_thu",
+        "title": "Live Stream",
+        "start": "2027-03-04T20:00:00+00:00",
+        "end": "2027-03-04T23:30:00+00:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream."
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-03-05T01:30:00+00:00",
+        "end": "2027-03-05T09:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block."
+      },
+      {
+        "id": "gym_fri",
+        "title": "Gym Workout",
+        "start": "2027-03-05T10:00:00+00:00",
+        "end": "2027-03-05T11:30:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Mandatory workout."
+      },
+      {
+        "id": "edit_fri",
+        "title": "Video Editing Block",
+        "start": "2027-03-05T12:30:00+00:00",
+        "end": "2027-03-05T18:00:00+00:00",
+        "category": "video_production",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Editing."
+      },
+      {
+        "id": "stream_fri",
+        "title": "Live Stream",
+        "start": "2027-03-05T20:00:00+00:00",
+        "end": "2027-03-05T23:30:00+00:00",
+        "category": "streaming",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "chat"
+        ],
+        "description": "Stream."
+      }
+    ]
+  },
+  "user_request": "I have an external guest creator coming over to my studio on Wednesday from 14:00 to 17:00 to record a collab video. Since this takes up my Wednesday afternoon, please reorganize my solo editing tasks across Monday and Tuesday to ensure my workflow is not delayed."
+}
