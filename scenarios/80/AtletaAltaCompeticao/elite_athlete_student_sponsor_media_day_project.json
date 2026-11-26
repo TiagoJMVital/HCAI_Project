@@ -17,10 +17,18 @@
     "hard_constraints": [
       {
         "id": "training_sessions",
-        "description": "Twice-daily training blocks are fixed.",
-        "rule_type": "protect_events_by_category",
-        "event_categories": [
-          "training"
+        "description": "All training blocks except the coach-approved Wednesday afternoon move are fixed.",
+        "rule_type": "protect_events_by_id",
+        "event_ids": [
+          "training_am_mon",
+          "training_pm_mon",
+          "training_am_tue",
+          "training_pm_tue",
+          "training_am_wed",
+          "training_am_thu",
+          "training_pm_thu",
+          "training_am_fri",
+          "training_pm_fri"
         ]
       },
       {
@@ -279,12 +287,12 @@
         "end": "2027-05-05T18:30:00+01:00",
         "category": "training",
         "importance": 5,
-        "fixed": true,
+        "fixed": false,
         "participants": [
           "user",
           "coach"
         ],
-        "description": "Afternoon session (overlaps with sponsor event)."
+        "description": "Coach-approved move to Wednesday 18:30–20:00 or Thursday 14:30–16:30."
       },
       {
         "id": "sleep_thu",

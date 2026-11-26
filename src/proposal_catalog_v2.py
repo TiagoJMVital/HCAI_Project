@@ -19,6 +19,14 @@ from final_dataset_v2 import combined_manifest, final_manifest, manifest_path, s
 ROOT = Path(__file__).resolve().parent.parent
 
 
+def _canonical_validation(report: dict) -> dict:
+    """Normalize semantically unordered diagnostics for stable imports."""
+    normalized = dict(report)
+    if isinstance(normalized.get("warnings"), list):
+        normalized["warnings"] = sorted(normalized["warnings"])
+    return normalized
+
+
 def catalog(root: Path) -> list[dict]:
     rows = []
     manifest = {row["scenario_id"]: row for row in combined_manifest(root)}
@@ -243,7 +251,8 @@ def import_result(root: Path, result_path: Path) -> Path:
                 "critic_accepted": record.get("critic_accepted"),
                 "iterations": record["iterations"], "refinements": record.get("refinements"),
                 "source_status": record.get("status"),
-                "final_proposal": record["final_proposal"], "technical_validation": validation,
+                "final_proposal": record["final_proposal"],
+                "technical_validation": _canonical_validation(validation),
                 "source_result_sha256": hashlib.sha256(result_path.read_bytes()).hexdigest()}
     if "scenario_sha256" in record:
         artifact["scenario_sha256"] = record["scenario_sha256"]
@@ -261,8 +270,15 @@ def import_result(root: Path, result_path: Path) -> Path:
             artifact[field] = record[field]
     target = root / "data" / "proposals" / f"{pid}.json"
     if target.exists():
-        if json.loads(target.read_text(encoding="utf-8")) != artifact:
+        existing = json.loads(target.read_text(encoding="utf-8"))
+        comparable = dict(existing)
+        if isinstance(comparable.get("technical_validation"), dict):
+            comparable["technical_validation"] = _canonical_validation(
+                comparable["technical_validation"])
+        if comparable != artifact:
             raise ValueError("proposal identity collision or changed source")
+        if existing != artifact:
+            atomic_json(target, artifact)
         return target
     atomic_json(target, artifact)
     return target

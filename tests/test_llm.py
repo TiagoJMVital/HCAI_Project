@@ -121,6 +121,8 @@ def test_iaedu_incomplete_json_has_targeted_retry_and_safe_diagnostics(monkeypat
         "incomplete_json", "incomplete_json"]
     assert diagnostics["attempts"][0]["output_chars"] == 6
     assert "A resposta terminou antes de fechar o JSON" in calls[1]["files"]["message"][1]
+    assert calls[0]["files"]["thread_id"][1] == calls[1]["files"]["thread_id"][1]
+    assert "pedido" not in calls[1]["files"]["message"][1]
     assert "key" not in json.dumps(diagnostics)
     assert "pedido" not in json.dumps(diagnostics)
 
@@ -276,7 +278,7 @@ def test_prompt_schema_drops_metadata_but_keeps_real_title_property():
     schema = prompt_json_schema(ProposerWireProposal)
     add = schema["$defs"]["ProposerWireAdd"]
     assert "title" not in add  # generated model title metadata
-    assert "title" in add["properties"]  # actual add-operation field
+    assert "t" in add["properties"]  # compact alias for the actual title field
     assert all("default" not in field for field in add["properties"].values())
 
 

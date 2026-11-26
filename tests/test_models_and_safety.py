@@ -53,7 +53,7 @@ def test_compact_proposer_wire_round_trip_preserves_canonical_behavior(scenario)
     payload = wire.model_dump(mode="json", exclude_none=True)
     normalized = wire.to_proposal()
 
-    assert PROPOSER_WIRE_SCHEMA_VERSION == "compact_proposal_v1"
+    assert PROPOSER_WIRE_SCHEMA_VERSION == "compact_proposal_v2"
     assert payload["changes"][0] == {
         "op": "move", "event_id": "gym_mon", "start": "2026-11-09T20:00:00+00:00"}
     assert "from_start" not in json.dumps(payload)

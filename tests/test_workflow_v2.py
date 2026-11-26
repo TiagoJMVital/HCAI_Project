@@ -22,6 +22,7 @@ from benchmark_v2 import import_scenario
 from calendar_v2 import simulate
 from gate_dataset_v2 import build_rows, features, grouped_folds
 from models import Change, CurrentCriticEvaluation, CriticScores, PlausibilityReview, Proposal, Rationale
+import proposal_catalog_v2 as proposal_catalog_module
 from proposal_catalog_v2 import (canonical_training_results, catalog, import_result,
                                  import_training_results, training_catalog,
                                  training_catalog_audit)
@@ -87,6 +88,28 @@ def test_training_import_is_idempotent_and_preserves_existing_canonical(imported
     assert summary["previously_imported"] == 1
     assert summary["newly_imported"] == 0
     assert [row["proposal_id"] for row in training_catalog(root)] == [first["proposal_id"]]
+
+
+def test_import_normalizes_nondeterministic_validation_warning_order(imported, monkeypatch):
+    root, _ = imported
+    artifact, _, _ = source(root)
+    target = root / "data" / "proposals" / f"{artifact['proposal_id']}.json"
+    stored = json.loads(target.read_text())
+    stored["technical_validation"]["warnings"] = ["warning z", "warning a"]
+    target.write_text(json.dumps(stored, indent=2) + "\n")
+    source_run = next((root / "eval" / "runs").rglob("B/*.json"))
+
+    real_simulate = proposal_catalog_module.simulate
+    def simulate_with_reordered_warnings(*args, **kwargs):
+        events, report = real_simulate(*args, **kwargs)
+        report = dict(report)
+        report["warnings"] = ["warning a", "warning z"]
+        return events, report
+
+    monkeypatch.setattr(proposal_catalog_module, "simulate", simulate_with_reordered_warnings)
+    assert import_result(root, source_run) == target
+    normalized = json.loads(target.read_text())
+    assert normalized["technical_validation"]["warnings"] == ["warning a", "warning z"]
 
 
 def test_technical_result_cannot_enter_proposal_catalog(imported, tmp_path):
@@ -296,7 +319,7 @@ def test_v2_a_and_b_share_proposer_and_rules(imported):
     assert provider.calls[0][0] == proposer.calls[0][0]
     assert provider.calls[0][1] == proposer.calls[0][1]
     assert a["prompt_versions"]["proposer_sha256"] == b["prompt_versions"]["proposer_sha256"]
-    assert a["prompt_versions"]["proposer_wire_schema_version"] == "compact_proposal_v1"
+    assert a["prompt_versions"]["proposer_wire_schema_version"] == "compact_proposal_v2"
     assert (a["prompt_versions"]["proposer_wire_schema_sha256"] ==
             b["prompt_versions"]["proposer_wire_schema_sha256"])
 

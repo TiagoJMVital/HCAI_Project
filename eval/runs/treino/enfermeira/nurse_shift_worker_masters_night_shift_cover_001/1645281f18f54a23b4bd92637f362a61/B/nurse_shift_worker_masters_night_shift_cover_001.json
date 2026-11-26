@@ -1,0 +1,3218 @@
+{
+  "configuration": "B",
+  "scenario_id": "nurse_shift_worker_masters_night_shift_cover_001",
+  "family": "nurse_shift_worker_masters_schedule_conflict",
+  "category": "v2",
+  "proposer_provider": "iaedu",
+  "proposer_model": "GPT-5.5",
+  "proposer_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_provider": "iaedu",
+  "critic_model": "GPT-5.5",
+  "critic_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_settings": {
+    "threshold": 4.0,
+    "max_refinements": 3,
+    "min_dimension_score": 1
+  },
+  "iterations": [
+    {
+      "index": 0,
+      "proposer_feedback": null,
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "move",
+            "event_id": "work_tue",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-11-17T23:00:00+00:00",
+            "to_end": "2026-11-18T07:00:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "commute_to_work_tue",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-11-17T22:30:00+00:00",
+            "to_end": "2026-11-17T23:00:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "commute_home_tue",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-11-18T07:00:00+00:00",
+            "to_end": "2026-11-18T07:30:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "sleep_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-11-18T07:30:00+00:00",
+            "to_end": "2026-11-18T15:30:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Dinner",
+            "from_start": null,
+            "to_start": "2026-11-17T19:00:00+00:00",
+            "to_end": "2026-11-17T20:00:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Commute to physiotherapy",
+            "from_start": null,
+            "to_start": "2026-11-18T15:30:00+00:00",
+            "to_end": "2026-11-18T15:45:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "move",
+            "event_id": "physio_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-11-18T15:45:00+00:00",
+            "to_end": "2026-11-18T16:45:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Commute home from physiotherapy",
+            "from_start": null,
+            "to_start": "2026-11-18T16:45:00+00:00",
+            "to_end": "2026-11-18T17:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "move",
+            "event_id": "supervisor_meeting_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-11-18T17:00:00+00:00",
+            "to_end": "2026-11-18T18:00:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "lunch_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-11-18T18:00:00+00:00",
+            "to_end": "2026-11-18T19:00:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "thesis_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-11-18T19:00:00+00:00",
+            "to_end": "2026-11-18T21:00:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "dinner_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-11-18T21:00:00+00:00",
+            "to_end": "2026-11-18T22:00:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "swim_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-11-20T18:00:00+00:00",
+            "to_end": "2026-11-20T20:00:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "The exact night-shift move is externally allowed, while Thursday work and protected sleep blocks are unchanged.",
+            "The post-night-shift sleep remains one intact eight-hour daytime block after getting home.",
+            "Wednesday still contains two hours of thesis work, as do Tuesday and Thursday.",
+            "Keeping physiotherapy requires clinic confirmation because only its travel time, not later availability, is supplied.",
+            "The supervisor move uses a supplied alternative slot but still needs confirmation with the supervisor.",
+            "The ward manager or HR should confirm the swap record and the Friday day off.",
+            "Friday swimming assumes no unseen Friday commitment; only pool availability and the returned day off are known."
+          ],
+          "priorities": [
+            "Recovery and fixed hospital duties take precedence over swimming and preferred meal timing.",
+            "Physiotherapy is preserved with a small timing change rather than dropped.",
+            "Swimming is moved out of the compressed post-night-shift day to avoid reducing sleep or thesis time.",
+            "Wednesday meals are later than preferred to keep sleep, physiotherapy, supervision and thesis work."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Use the Thursday supervisor slot",
+              "rejected_because": "It conflicts with the fixed hospital shift and should not be selected without a confirmed exception."
+            },
+            {
+              "option": "Keep the original physiotherapy time",
+              "rejected_because": "It is not operationally feasible after the required sleep block because the clinic is not at home."
+            },
+            {
+              "option": "Drop the moved swim instead of placing it on Friday",
+              "rejected_because": "That would leave two swims for the week, which is acceptable only as an exceptional-week fallback."
+            },
+            {
+              "option": "Skip or shorten Wednesday thesis work",
+              "rejected_because": "That would fail the typed daily thesis-duration requirement."
+            }
+          ],
+          "summary": "The plan records the accepted night-shift swap, rebuilds the hospital commutes, protects the full recovery sleep, and fits Wednesday thesis work around physiotherapy and the supervisor meeting. The main trade-off is a very compressed Wednesday with late meals and swimming pushed to Friday, pending confirmation from HR, the supervisor and the physiotherapist."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true,
+        "aggregate_checks": [
+          {
+            "id": "thesis_daily_time_2026-11-17",
+            "status": "pass",
+            "minutes": 120.0,
+            "minimum_minutes": 120,
+            "category": "thesis",
+            "evidence": "union of final calendar intervals"
+          },
+          {
+            "id": "thesis_daily_time_2026-11-18",
+            "status": "pass",
+            "minutes": 180.0,
+            "minimum_minutes": 120,
+            "category": "thesis",
+            "evidence": "union of final calendar intervals"
+          },
+          {
+            "id": "thesis_daily_time_2026-11-19",
+            "status": "pass",
+            "minutes": 120.0,
+            "minimum_minutes": 120,
+            "category": "thesis",
+            "evidence": "union of final calendar intervals"
+          }
+        ],
+        "aggregate_validation_version": "duration_total_v1",
+        "confirmed_change_authorizations": [
+          {
+            "event_id": "work_tue",
+            "type": "move",
+            "to_start": "2026-11-17T23:00:00+00:00",
+            "to_end": "2026-11-18T07:00:00+00:00"
+          }
+        ]
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2026-11-16T22:30:00+00:00",
+            "end": "2026-11-17T06:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected eight-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "swim_tue",
+            "title": "Swimming training",
+            "start": "2026-11-17T09:00:00+00:00",
+            "end": "2026-11-17T11:00:00+00:00",
+            "category": "gym",
+            "importance": 2,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Swimming training; the pool is next to home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "thesis_tue",
+            "title": "Master's thesis",
+            "start": "2026-11-17T11:00:00+00:00",
+            "end": "2026-11-17T13:00:00+00:00",
+            "category": "thesis",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Two-hour focused work block dedicated to the master's thesis.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_tue",
+            "title": "Lunch",
+            "start": "2026-11-17T13:00:00+00:00",
+            "end": "2026-11-17T14:00:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "One-hour lunch at home before the afternoon shift.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_4",
+            "title": "Dinner",
+            "start": "2026-11-17T19:00:00+00:00",
+            "end": "2026-11-17T20:00:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "commute_to_work_tue",
+            "title": "Commute to hospital",
+            "start": "2026-11-17T22:30:00+00:00",
+            "end": "2026-11-17T23:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute journey from home to the hospital.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "work_tue",
+            "title": "Hospital shift",
+            "start": "2026-11-17T23:00:00+00:00",
+            "end": "2026-11-18T07:00:00+00:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Scheduled afternoon shift (to be cancelled/swapped per user request).",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "commute_home_tue",
+            "title": "Commute home",
+            "start": "2026-11-18T07:00:00+00:00",
+            "end": "2026-11-18T07:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute journey from the hospital to home.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2026-11-18T07:30:00+00:00",
+            "end": "2026-11-18T15:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Daytime sleep after the night shift; must remain an intact 8h block.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "new_5",
+            "title": "Commute to physiotherapy",
+            "start": "2026-11-18T15:30:00+00:00",
+            "end": "2026-11-18T15:45:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "physio_wed",
+            "title": "Physiotherapy session",
+            "start": "2026-11-18T15:45:00+00:00",
+            "end": "2026-11-18T16:45:00+00:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "physiotherapist"
+            ],
+            "description": "Shoulder rehabilitation session; clinic is 15 minutes from home.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "new_7",
+            "title": "Commute home from physiotherapy",
+            "start": "2026-11-18T16:45:00+00:00",
+            "end": "2026-11-18T17:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "supervisor_meeting_wed",
+            "title": "Thesis supervisor progress meeting",
+            "start": "2026-11-18T17:00:00+00:00",
+            "end": "2026-11-18T18:00:00+00:00",
+            "category": "thesis",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user",
+              "supervisor"
+            ],
+            "description": "Online meeting with thesis supervisor; supervisor also has an available slot on Wednesday at 17:00 or Thursday at 11:30.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "lunch_wed",
+            "title": "Lunch",
+            "start": "2026-11-18T18:00:00+00:00",
+            "end": "2026-11-18T19:00:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "One-hour lunch at home.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "thesis_wed",
+            "title": "Master's thesis",
+            "start": "2026-11-18T19:00:00+00:00",
+            "end": "2026-11-18T21:00:00+00:00",
+            "category": "thesis",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Two-hour focused work block dedicated to the master's thesis.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "dinner_wed",
+            "title": "Dinner",
+            "start": "2026-11-18T21:00:00+00:00",
+            "end": "2026-11-18T22:00:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "One-hour dinner at home.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2026-11-18T22:00:00+00:00",
+            "end": "2026-11-19T06:00:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected eight-hour sleep block before Thursday early shift.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_to_work_thu",
+            "title": "Commute to hospital",
+            "start": "2026-11-19T06:30:00+00:00",
+            "end": "2026-11-19T07:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute journey from home to the hospital.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_thu",
+            "title": "Hospital shift",
+            "start": "2026-11-19T07:00:00+00:00",
+            "end": "2026-11-19T15:00:00+00:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Fixed morning nursing shift at the hospital.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_home_thu",
+            "title": "Commute home",
+            "start": "2026-11-19T15:00:00+00:00",
+            "end": "2026-11-19T15:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute journey from hospital to home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "thesis_thu",
+            "title": "Master's thesis",
+            "start": "2026-11-19T16:00:00+00:00",
+            "end": "2026-11-19T18:00:00+00:00",
+            "category": "thesis",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Two-hour focused work block dedicated to the master's thesis.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "swim_thu",
+            "title": "Swimming training",
+            "start": "2026-11-19T18:00:00+00:00",
+            "end": "2026-11-19T20:00:00+00:00",
+            "category": "gym",
+            "importance": 2,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Swimming training; pool is next to home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "dinner_thu",
+            "title": "Dinner",
+            "start": "2026-11-19T20:00:00+00:00",
+            "end": "2026-11-19T21:00:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "One-hour dinner at home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "swim_wed",
+            "title": "Swimming training",
+            "start": "2026-11-20T18:00:00+00:00",
+            "end": "2026-11-20T20:00:00+00:00",
+            "category": "gym",
+            "importance": 2,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Swimming training; pool is next to home.",
+            "origin": "existing",
+            "change_status": "moved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 3,
+          "alternatives": 3,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "Wednesday is extremely compressed after the night shift: hospital shift 2026-11-17 23:00–2026-11-18 07:00, commute home 07:00–07:30, sleep 07:30–15:30, then immediate commute to physiotherapy 15:30–15:45 with no visible wake-up, hygiene, food, preparation or recovery margin.",
+          "The plan protects an intact eight-hour sleep block, but it treats the exact end of sleep as immediately usable time for leaving home. That may be technically valid but is a practical human-quality risk after overnight hospital work.",
+          "The post-sleep Wednesday sequence runs without meaningful slack from 15:30 to 22:00: commute to physiotherapy, physiotherapy 15:45–16:45, commute home 16:45–17:00, supervisor meeting 17:00–18:00, lunch 18:00–19:00, thesis work 19:00–21:00, dinner 21:00–22:00, then protected sleep 22:00–06:00 before Thursday work. This may preserve priorities on paper while leaving little resilience if any item overruns or the user is fatigued.",
+          "Lunch is moved to 18:00 on Wednesday, after a night shift, daytime sleep, physiotherapy travel/session, and supervisor meeting. The rationale acknowledges late meals but does not explain whether this is practically sustainable for the user on a post-night-shift day.",
+          "The supervisor meeting at 17:00 starts exactly when the commute home from physiotherapy ends. Because it is online and at home this may be possible, but the calendar leaves no visible setup or decompression time.",
+          "Moving Wednesday swimming to Friday 18:00–20:00 may be sensible, but the rationale itself says this depends on no unseen Friday commitment and returned day off; the visible calendar does not establish that Friday is otherwise manageable.",
+          "Several external confirmations remain unresolved: physiotherapy availability, supervisor acceptance, HR or ward manager swap record, Friday day off, and pool availability. These are not technical violations, but they are central to whether the proposed routine can actually happen."
+        ],
+        "feedback": "The proposal has a reasonable priority structure: it protects the night-shift recovery sleep, preserves physiotherapy, keeps the supervisor meeting and thesis work, and moves lower-priority swimming away from the most compressed part of Wednesday. However, the resulting Wednesday is only barely human-shaped. The main issue is not an overlap; it is the reliance on exact back-to-back use of time after an overnight hospital shift. The user would finish work at 07:00, get home at 07:30, sleep until 15:30, and immediately leave for physiotherapy, then continue through meeting, delayed lunch, thesis work, dinner and another protected sleep block. That may be feasible for a very resilient person with everything prepared in advance, but the rationale does not substantiate that level of precision or recovery capacity. A revision should reconsider whether the post-night-shift Wednesday needs more practical margin, or provide a grounded explanation from the fuller context for why the immediate wake-to-physio and continuous evening sequence is acceptable. The original request cannot be independently verified from the provided material, so this review is limited to the visible proposal, rationale, resulting calendar and validation report.",
+        "plausibility_review": {
+          "revision_required": true,
+          "severity": "moderate",
+          "reason": "The proposed organization creates a significant human-manageability risk on Wednesday by scheduling an immediate departure at the exact end of post-night-shift sleep and then a dense 15:30–22:00 chain before another early hospital day. The plan may technically fit and it does protect sleep duration, but it gives little evidence that the user can realistically wake, prepare, travel, attend physiotherapy, join an online meeting, eat late, and complete focused thesis work without practical margin after overnight clinical work.",
+          "suggested_improvement": "Reconsider the Wednesday distribution with the fuller context, especially the immediate transition from post-night-shift sleep to physiotherapy and the fully chained late-afternoon/evening sequence. If the same operations are kept, provide grounded support for why the exact transitions, late lunch, and post-night-shift cognitive workload are acceptable for this user."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Physiotherapy availability",
+            "assumption": "The physiotherapist or clinic can accept the moved Wednesday session at 2026-11-18 15:45–16:45.",
+            "evidence_gap": "The rationale says clinic confirmation is required and the calendar only establishes travel time, not clinic availability.",
+            "potential_impact": "material",
+            "verification_source": "third_party"
+          },
+          {
+            "subject": "Immediate wake-to-commute transition",
+            "assumption": "The user can realistically end post-night-shift sleep at 15:30 and immediately depart for physiotherapy at 15:30.",
+            "evidence_gap": "The calendar contains no visible wake-up, preparation, hygiene, food or recovery margin between sleep_wed 07:30–15:30 and the commute to physiotherapy 15:30–15:45.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Supervisor meeting confirmation",
+            "assumption": "The thesis supervisor accepts the moved online meeting on Wednesday 2026-11-18 17:00–18:00.",
+            "evidence_gap": "The event description lists a Wednesday 17:00 slot, but the rationale still says confirmation with the supervisor is needed.",
+            "potential_impact": "material",
+            "verification_source": "third_party"
+          },
+          {
+            "subject": "Online meeting readiness after physiotherapy",
+            "assumption": "The user can return home from physiotherapy at 17:00 and immediately begin the online supervisor meeting at 17:00.",
+            "evidence_gap": "The commute home from physiotherapy ends exactly when the supervisor meeting starts, with no visible setup or transition time.",
+            "potential_impact": "minor",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Hospital shift swap administration",
+            "assumption": "The ward manager or HR records the Tuesday night-shift swap and associated Friday day off as intended.",
+            "evidence_gap": "The technical validation confirms authorization for the work_tue move, but the rationale still says the swap record and Friday day off should be confirmed by HR or the ward manager.",
+            "potential_impact": "material",
+            "verification_source": "third_party"
+          },
+          {
+            "subject": "Friday swimming feasibility",
+            "assumption": "The moved swimming session on Friday 2026-11-20 18:00–20:00 is compatible with the user's Friday obligations and pool availability.",
+            "evidence_gap": "The rationale states Friday swimming assumes no unseen Friday commitment and depends on pool availability and the returned day off; the visible calendar does not show the rest of Friday.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Post-night-shift meal timing",
+            "assumption": "The user can tolerate delaying Wednesday lunch until 18:00 after the night shift, daytime sleep, physiotherapy and supervisor meeting.",
+            "evidence_gap": "The rationale acknowledges Wednesday meals are later than preferred but does not provide user-specific evidence that this timing is sustainable.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          }
+        ],
+        "overall": 3.5
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": false,
+        "plausibility_revision_required": true,
+        "accepted": false,
+        "revision_causes": [
+          "numeric_criteria_failed",
+          "plausibility_revision_required"
+        ]
+      },
+      "operations_changed_from_previous": null,
+      "rationale_changed_from_previous": null,
+      "prior_critic_reviews": [],
+      "unresolved_assumptions": [
+        {
+          "subject": "Physiotherapy availability",
+          "assumption": "The physiotherapist or clinic can accept the moved Wednesday session at 2026-11-18 15:45–16:45.",
+          "evidence_gap": "The rationale says clinic confirmation is required and the calendar only establishes travel time, not clinic availability.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Immediate wake-to-commute transition",
+          "assumption": "The user can realistically end post-night-shift sleep at 15:30 and immediately depart for physiotherapy at 15:30.",
+          "evidence_gap": "The calendar contains no visible wake-up, preparation, hygiene, food or recovery margin between sleep_wed 07:30–15:30 and the commute to physiotherapy 15:30–15:45.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Supervisor meeting confirmation",
+          "assumption": "The thesis supervisor accepts the moved online meeting on Wednesday 2026-11-18 17:00–18:00.",
+          "evidence_gap": "The event description lists a Wednesday 17:00 slot, but the rationale still says confirmation with the supervisor is needed.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Online meeting readiness after physiotherapy",
+          "assumption": "The user can return home from physiotherapy at 17:00 and immediately begin the online supervisor meeting at 17:00.",
+          "evidence_gap": "The commute home from physiotherapy ends exactly when the supervisor meeting starts, with no visible setup or transition time.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Hospital shift swap administration",
+          "assumption": "The ward manager or HR records the Tuesday night-shift swap and associated Friday day off as intended.",
+          "evidence_gap": "The technical validation confirms authorization for the work_tue move, but the rationale still says the swap record and Friday day off should be confirmed by HR or the ward manager.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Friday swimming feasibility",
+          "assumption": "The moved swimming session on Friday 2026-11-20 18:00–20:00 is compatible with the user's Friday obligations and pool availability.",
+          "evidence_gap": "The rationale states Friday swimming assumes no unseen Friday commitment and depends on pool availability and the returned day off; the visible calendar does not show the rest of Friday.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Post-night-shift meal timing",
+          "assumption": "The user can tolerate delaying Wednesday lunch until 18:00 after the night shift, daytime sleep, physiotherapy and supervisor meeting.",
+          "evidence_gap": "The rationale acknowledges Wednesday meals are later than preferred but does not provide user-specific evidence that this timing is sustainable.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "proposer_feedback": "Numeric Critic criteria failed. Scores: {\"reasoning\":4,\"coherence\":3,\"alternatives\":3,\"clarity\":4}. Plausibility revision required (moderate): The proposed organization creates a significant human-manageability risk on Wednesday by scheduling an immediate departure at the exact end of post-night-shift sleep and then a dense 15:30–22:00 chain before another early hospital day. The plan may technically fit and it does protect sleep duration, but it gives little evidence that the user can realistically wake, prepare, travel, attend physiotherapy, join an online meeting, eat late, and complete focused thesis work without practical margin after overnight clinical work. Suggested direction: Reconsider the Wednesday distribution with the fuller context, especially the immediate transition from post-night-shift sleep to physiotherapy and the fully chained late-afternoon/evening sequence. If the same operations are kept, provide grounded support for why the exact transitions, late lunch, and post-night-shift cognitive workload are acceptable for this user. The Critic lacks the full user constraints; explain if no better feasible option exists. Unverified conditions to reassess: [{'subject': 'Physiotherapy availability', 'assumption': 'The physiotherapist or clinic can accept the moved Wednesday session at 2026-11-18 15:45–16:45.', 'evidence_gap': 'The rationale says clinic confirmation is required and the calendar only establishes travel time, not clinic availability.', 'potential_impact': 'material', 'verification_source': 'third_party'}, {'subject': 'Immediate wake-to-commute transition', 'assumption': 'The user can realistically end post-night-shift sleep at 15:30 and immediately depart for physiotherapy at 15:30.', 'evidence_gap': 'The calendar contains no visible wake-up, preparation, hygiene, food or recovery margin between sleep_wed 07:30–15:30 and the commute to physiotherapy 15:30–15:45.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Supervisor meeting confirmation', 'assumption': 'The thesis supervisor accepts the moved online meeting on Wednesday 2026-11-18 17:00–18:00.', 'evidence_gap': 'The event description lists a Wednesday 17:00 slot, but the rationale still says confirmation with the supervisor is needed.', 'potential_impact': 'material', 'verification_source': 'third_party'}, {'subject': 'Online meeting readiness after physiotherapy', 'assumption': 'The user can return home from physiotherapy at 17:00 and immediately begin the online supervisor meeting at 17:00.', 'evidence_gap': 'The commute home from physiotherapy ends exactly when the supervisor meeting starts, with no visible setup or transition time.', 'potential_impact': 'minor', 'verification_source': 'user_context'}, {'subject': 'Hospital shift swap administration', 'assumption': 'The ward manager or HR records the Tuesday night-shift swap and associated Friday day off as intended.', 'evidence_gap': 'The technical validation confirms authorization for the work_tue move, but the rationale still says the swap record and Friday day off should be confirmed by HR or the ward manager.', 'potential_impact': 'material', 'verification_source': 'third_party'}, {'subject': 'Friday swimming feasibility', 'assumption': \"The moved swimming session on Friday 2026-11-20 18:00–20:00 is compatible with the user's Friday obligations and pool availability.\", 'evidence_gap': 'The rationale states Friday swimming assumes no unseen Friday commitment and depends on pool availability and the returned day off; the visible calendar does not show the rest of Friday.', 'potential_impact': 'material', 'verification_source': 'unknown'}, {'subject': 'Post-night-shift meal timing', 'assumption': 'The user can tolerate delaying Wednesday lunch until 18:00 after the night shift, daytime sleep, physiotherapy and supervisor meeting.', 'evidence_gap': 'The rationale acknowledges Wednesday meals are later than preferred but does not provide user-specific evidence that this timing is sustainable.', 'potential_impact': 'material', 'verification_source': 'user_context'}] Weaknesses: ['Wednesday is extremely compressed after the night shift: hospital shift 2026-11-17 23:00–2026-11-18 07:00, commute home 07:00–07:30, sleep 07:30–15:30, then immediate commute to physiotherapy 15:30–15:45 with no visible wake-up, hygiene, food, preparation or recovery margin.', 'The plan protects an intact eight-hour sleep block, but it treats the exact end of sleep as immediately usable time for leaving home. That may be technically valid but is a practical human-quality risk after overnight hospital work.', 'The post-sleep Wednesday sequence runs without meaningful slack from 15:30 to 22:00: commute to physiotherapy, physiotherapy 15:45–16:45, commute home 16:45–17:00, supervisor meeting 17:00–18:00, lunch 18:00–19:00, thesis work 19:00–21:00, dinner 21:00–22:00, then protected sleep 22:00–06:00 before Thursday work. This may preserve priorities on paper while leaving little resilience if any item overruns or the user is fatigued.', 'Lunch is moved to 18:00 on Wednesday, after a night shift, daytime sleep, physiotherapy travel/session, and supervisor meeting. The rationale acknowledges late meals but does not explain whether this is practically sustainable for the user on a post-night-shift day.', 'The supervisor meeting at 17:00 starts exactly when the commute home from physiotherapy ends. Because it is online and at home this may be possible, but the calendar leaves no visible setup or decompression time.', 'Moving Wednesday swimming to Friday 18:00–20:00 may be sensible, but the rationale itself says this depends on no unseen Friday commitment and returned day off; the visible calendar does not establish that Friday is otherwise manageable.', 'Several external confirmations remain unresolved: physiotherapy availability, supervisor acceptance, HR or ward manager swap record, Friday day off, and pool availability. These are not technical violations, but they are central to whether the proposed routine can actually happen.']. Actionable feedback: The proposal has a reasonable priority structure: it protects the night-shift recovery sleep, preserves physiotherapy, keeps the supervisor meeting and thesis work, and moves lower-priority swimming away from the most compressed part of Wednesday. However, the resulting Wednesday is only barely human-shaped. The main issue is not an overlap; it is the reliance on exact back-to-back use of time after an overnight hospital shift. The user would finish work at 07:00, get home at 07:30, sleep until 15:30, and immediately leave for physiotherapy, then continue through meeting, delayed lunch, thesis work, dinner and another protected sleep block. That may be feasible for a very resilient person with everything prepared in advance, but the rationale does not substantiate that level of precision or recovery capacity. A revision should reconsider whether the post-night-shift Wednesday needs more practical margin, or provide a grounded explanation from the fuller context for why the immediate wake-to-physio and continuous evening sequence is acceptable. The original request cannot be independently verified from the provided material, so this review is limited to the visible proposal, rationale, resulting calendar and validation report.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "move",
+            "event_id": "work_tue",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-11-17T23:00:00+00:00",
+            "to_end": "2026-11-18T07:00:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "commute_to_work_tue",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-11-17T22:30:00+00:00",
+            "to_end": "2026-11-17T23:00:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "commute_home_tue",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-11-18T07:00:00+00:00",
+            "to_end": "2026-11-18T07:30:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Dinner",
+            "from_start": null,
+            "to_start": "2026-11-17T19:00:00+00:00",
+            "to_end": "2026-11-17T20:00:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "move",
+            "event_id": "sleep_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-11-18T07:30:00+00:00",
+            "to_end": "2026-11-18T15:30:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "lunch_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-11-18T15:45:00+00:00",
+            "to_end": "2026-11-18T16:45:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "supervisor_meeting_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-11-18T17:00:00+00:00",
+            "to_end": "2026-11-18T18:00:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "thesis_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-11-18T18:15:00+00:00",
+            "to_end": "2026-11-18T20:15:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "dinner_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-11-18T20:30:00+00:00",
+            "to_end": "2026-11-18T21:30:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "swim_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "thesis_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-11-19T15:45:00+00:00",
+            "to_end": "2026-11-19T17:45:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Commute to physiotherapy",
+            "from_start": null,
+            "to_start": "2026-11-19T18:00:00+00:00",
+            "to_end": "2026-11-19T18:15:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "move",
+            "event_id": "physio_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-11-19T18:15:00+00:00",
+            "to_end": "2026-11-19T19:15:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Commute home from physiotherapy",
+            "from_start": null,
+            "to_start": "2026-11-19T19:15:00+00:00",
+            "to_end": "2026-11-19T19:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "move",
+            "event_id": "swim_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-11-20T18:00:00+00:00",
+            "to_end": "2026-11-20T20:00:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "The accepted night-shift move matches the only externally confirmed exception for the original Tuesday work event.",
+            "Thursday hospital work, fixed Thursday commutes, Tuesday protected sleep and Thursday protected sleep are unchanged.",
+            "Post-night-shift sleep stays as one intact eight-hour block after the stated return home time.",
+            "Tuesday, Wednesday and Thursday each keep at least two hours of thesis-category time.",
+            "The supervisor change uses the supplied Wednesday slot but still needs confirmation with the supervisor.",
+            "The physiotherapy move needs clinic confirmation because free calendar time does not prove clinic availability.",
+            "The ward manager or HR should confirm the rota record and the Friday day off.",
+            "Friday swimming uses supplied daily pool availability but still depends on no unseen Friday conflict."
+          ],
+          "priorities": [
+            "The revised plan gives Wednesday practical margins after sleep instead of an immediate departure from home.",
+            "Physiotherapy is preserved by moving it away from the compressed post-night-shift day.",
+            "Lower-priority swimming is reduced to an exceptional two-session week to protect recovery, thesis and health care.",
+            "Meals on Wednesday are later than preferred because the full daytime sleep block dominates the day."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Keep physiotherapy on Wednesday",
+              "rejected_because": "It would require travel immediately after protected sleep or would over-compress the evening before Thursday's early shift."
+            },
+            {
+              "option": "Move the supervisor meeting to Thursday 11:30",
+              "rejected_because": "That supplied slot conflicts with the fixed Thursday hospital shift."
+            },
+            {
+              "option": "Keep all swimming sessions this week",
+              "rejected_because": "That would crowd out sleep, thesis, physiotherapy or the fixed Thursday work pattern."
+            },
+            {
+              "option": "Shorten Wednesday thesis work",
+              "rejected_because": "That would fail the daily thesis-duration requirement."
+            },
+            {
+              "option": "If Thursday physiotherapy is unavailable",
+              "rejected_because": "The clinic must offer another confirmed slot or the appointment cannot be kept within the visible plan."
+            }
+          ],
+          "summary": "The plan records the night-shift swap, rebuilds the hospital commutes, protects full recovery sleep, and makes Wednesday less brittle by moving physiotherapy to Thursday with confirmation. The main trade-off is dropping one swim and moving another to Friday so recovery, thesis work, the supervisor meeting and health care can all remain plausible."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true,
+        "aggregate_checks": [
+          {
+            "id": "thesis_daily_time_2026-11-17",
+            "status": "pass",
+            "minutes": 120.0,
+            "minimum_minutes": 120,
+            "category": "thesis",
+            "evidence": "union of final calendar intervals"
+          },
+          {
+            "id": "thesis_daily_time_2026-11-18",
+            "status": "pass",
+            "minutes": 180.0,
+            "minimum_minutes": 120,
+            "category": "thesis",
+            "evidence": "union of final calendar intervals"
+          },
+          {
+            "id": "thesis_daily_time_2026-11-19",
+            "status": "pass",
+            "minutes": 120.0,
+            "minimum_minutes": 120,
+            "category": "thesis",
+            "evidence": "union of final calendar intervals"
+          }
+        ],
+        "aggregate_validation_version": "duration_total_v1",
+        "confirmed_change_authorizations": [
+          {
+            "event_id": "work_tue",
+            "type": "move",
+            "to_start": "2026-11-17T23:00:00+00:00",
+            "to_end": "2026-11-18T07:00:00+00:00"
+          }
+        ]
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2026-11-16T22:30:00+00:00",
+            "end": "2026-11-17T06:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected eight-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "swim_tue",
+            "title": "Swimming training",
+            "start": "2026-11-17T09:00:00+00:00",
+            "end": "2026-11-17T11:00:00+00:00",
+            "category": "gym",
+            "importance": 2,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Swimming training; the pool is next to home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "thesis_tue",
+            "title": "Master's thesis",
+            "start": "2026-11-17T11:00:00+00:00",
+            "end": "2026-11-17T13:00:00+00:00",
+            "category": "thesis",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Two-hour focused work block dedicated to the master's thesis.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_tue",
+            "title": "Lunch",
+            "start": "2026-11-17T13:00:00+00:00",
+            "end": "2026-11-17T14:00:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "One-hour lunch at home before the afternoon shift.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_3",
+            "title": "Dinner",
+            "start": "2026-11-17T19:00:00+00:00",
+            "end": "2026-11-17T20:00:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "commute_to_work_tue",
+            "title": "Commute to hospital",
+            "start": "2026-11-17T22:30:00+00:00",
+            "end": "2026-11-17T23:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute journey from home to the hospital.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "work_tue",
+            "title": "Hospital shift",
+            "start": "2026-11-17T23:00:00+00:00",
+            "end": "2026-11-18T07:00:00+00:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Scheduled afternoon shift (to be cancelled/swapped per user request).",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "commute_home_tue",
+            "title": "Commute home",
+            "start": "2026-11-18T07:00:00+00:00",
+            "end": "2026-11-18T07:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute journey from the hospital to home.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2026-11-18T07:30:00+00:00",
+            "end": "2026-11-18T15:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Daytime sleep after the night shift; must remain an intact 8h block.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "lunch_wed",
+            "title": "Lunch",
+            "start": "2026-11-18T15:45:00+00:00",
+            "end": "2026-11-18T16:45:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "One-hour lunch at home.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "supervisor_meeting_wed",
+            "title": "Thesis supervisor progress meeting",
+            "start": "2026-11-18T17:00:00+00:00",
+            "end": "2026-11-18T18:00:00+00:00",
+            "category": "thesis",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user",
+              "supervisor"
+            ],
+            "description": "Online meeting with thesis supervisor; supervisor also has an available slot on Wednesday at 17:00 or Thursday at 11:30.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "thesis_wed",
+            "title": "Master's thesis",
+            "start": "2026-11-18T18:15:00+00:00",
+            "end": "2026-11-18T20:15:00+00:00",
+            "category": "thesis",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Two-hour focused work block dedicated to the master's thesis.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "dinner_wed",
+            "title": "Dinner",
+            "start": "2026-11-18T20:30:00+00:00",
+            "end": "2026-11-18T21:30:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "One-hour dinner at home.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2026-11-18T22:00:00+00:00",
+            "end": "2026-11-19T06:00:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected eight-hour sleep block before Thursday early shift.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_to_work_thu",
+            "title": "Commute to hospital",
+            "start": "2026-11-19T06:30:00+00:00",
+            "end": "2026-11-19T07:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute journey from home to the hospital.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "work_thu",
+            "title": "Hospital shift",
+            "start": "2026-11-19T07:00:00+00:00",
+            "end": "2026-11-19T15:00:00+00:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Fixed morning nursing shift at the hospital.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_home_thu",
+            "title": "Commute home",
+            "start": "2026-11-19T15:00:00+00:00",
+            "end": "2026-11-19T15:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute journey from hospital to home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "thesis_thu",
+            "title": "Master's thesis",
+            "start": "2026-11-19T15:45:00+00:00",
+            "end": "2026-11-19T17:45:00+00:00",
+            "category": "thesis",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Two-hour focused work block dedicated to the master's thesis.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "new_11",
+            "title": "Commute to physiotherapy",
+            "start": "2026-11-19T18:00:00+00:00",
+            "end": "2026-11-19T18:15:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "physio_wed",
+            "title": "Physiotherapy session",
+            "start": "2026-11-19T18:15:00+00:00",
+            "end": "2026-11-19T19:15:00+00:00",
+            "category": "health",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "physiotherapist"
+            ],
+            "description": "Shoulder rehabilitation session; clinic is 15 minutes from home.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "new_13",
+            "title": "Commute home from physiotherapy",
+            "start": "2026-11-19T19:15:00+00:00",
+            "end": "2026-11-19T19:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "dinner_thu",
+            "title": "Dinner",
+            "start": "2026-11-19T20:00:00+00:00",
+            "end": "2026-11-19T21:00:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "One-hour dinner at home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "swim_thu",
+            "title": "Swimming training",
+            "start": "2026-11-20T18:00:00+00:00",
+            "end": "2026-11-20T20:00:00+00:00",
+            "category": "gym",
+            "importance": 2,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Swimming training; pool is next to home.",
+            "origin": "existing",
+            "change_status": "moved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 4,
+          "alternatives": 4,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The prior immediate wake-to-physiotherapy problem has been materially improved: Wednesday now has sleep 07:30–15:30, lunch 15:45–16:45, supervisor meeting 17:00–18:00, thesis 18:15–20:15, dinner 20:30–21:30, and then sleep 22:00–06:00. This is still a compact post-night-shift evening, but it is no longer the exact wake-and-leave sequence from the previous version.",
+          "Wednesday still relies on the user being able to transition from daytime recovery sleep ending at 15:30 into a cognitively meaningful evening, including a supervisor meeting at 17:00–18:00 and thesis work at 18:15–20:15. That may be plausible, but the plan does not show user-specific evidence that focused work after a night shift and daytime sleep is effective rather than merely reserved.",
+          "The revised plan shifts some compression onto Thursday: after protected sleep 22:00–06:00, commute 06:30–07:00, fixed hospital work 07:00–15:00, commute home 15:00–15:30, thesis work 15:45–17:45, commute to physiotherapy 18:00–18:15, physiotherapy 18:15–19:15, commute home 19:15–19:30, and dinner 20:00–21:00. This is a demanding afternoon and evening after an early hospital shift, with limited visible recovery time.",
+          "The rationale reasonably acknowledges that the physiotherapy move requires clinic confirmation and that the supervisor move requires confirmation, but these remain operational dependencies central to whether the plan can actually happen.",
+          "Friday swimming at 18:00–20:00 is presented as using supplied availability and a returned day off, but the visible calendar does not show the rest of Friday. The plan may be fine, but the review cannot verify whether Friday is otherwise sustainable or conflict-free.",
+          "The plan deletes one swim and moves another to Friday, which is proportionate if the visible priorities are recovery, thesis, work and physiotherapy. However, because the original request is not provided, request satisfaction beyond the visible proposal and validation report cannot be independently verified."
+        ],
+        "feedback": "This revision addresses the main prior human-quality concern in a grounded way. Moving physiotherapy away from Wednesday removes the exact wake-to-commute transition after post-night-shift sleep and makes the Wednesday evening less brittle. The resulting calendar still has a demanding recovery pattern: overnight hospital work, daytime sleep, a thesis meeting and thesis block on Wednesday evening, then another protected sleep block before a fixed early hospital shift on Thursday. However, compared with the previous version, the sequence now has more practical margin and a clearer prioritisation of recovery, health care, thesis work and lower-priority swimming. The main remaining concern is not an obvious need for another revision, but the cumulative load on Thursday after the early shift and the unresolved confirmations for physiotherapy, supervisor availability, HR or rota records, and Friday swimming feasibility. With the provided information, the plan looks plausibly manageable for a busy week if those confirmations hold and the user can tolerate the post-night-shift cognitive workload. The Proposer should keep the unresolved dependencies explicit and, with fuller context, check whether Thursday’s post-shift thesis-plus-physiotherapy sequence is genuinely sustainable for this user rather than only technically available.",
+        "plausibility_review": {
+          "revision_required": false,
+          "severity": "low",
+          "reason": "The concrete prior concern was substantially addressed: physiotherapy is no longer scheduled immediately after post-night-shift sleep, Wednesday lunch is no longer delayed until 18:00, and the Wednesday sequence now includes short but meaningful margins between sleep, lunch, the supervisor meeting, thesis work and dinner. The revised routine remains busy, especially Thursday after the early hospital shift, but the visible organization is not clearly unsustainable or poorly reasoned enough to require another revision. Remaining issues are mostly confirmations and user-specific tolerance for a demanding but plausible schedule.",
+          "suggested_improvement": "No further revision is required on the visible calendar alone. The Proposer should verify the external confirmations and, using fuller context, be ready to justify or adjust the Thursday post-shift thesis and physiotherapy sequence if the user’s recovery needs make that afternoon too compressed."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Physiotherapy availability",
+            "assumption": "The physiotherapist or clinic can accept the moved session on Thursday 2026-11-19 from 18:15 to 19:15.",
+            "evidence_gap": "The rationale explicitly says the physiotherapy move needs clinic confirmation, and the visible calendar only establishes a free slot and 15-minute travel time, not clinic availability.",
+            "potential_impact": "material",
+            "verification_source": "third_party"
+          },
+          {
+            "subject": "Supervisor meeting confirmation",
+            "assumption": "The thesis supervisor accepts the moved online meeting on Wednesday 2026-11-18 from 17:00 to 18:00.",
+            "evidence_gap": "The event description lists a Wednesday 17:00 slot, but the rationale still says confirmation with the supervisor is needed.",
+            "potential_impact": "material",
+            "verification_source": "third_party"
+          },
+          {
+            "subject": "Hospital rota administration",
+            "assumption": "The ward manager or HR records the Tuesday night-shift swap and associated Friday day off as intended.",
+            "evidence_gap": "The technical validation confirms the specific work_tue move authorization, but the rationale still says the rota record and Friday day off should be confirmed by the ward manager or HR.",
+            "potential_impact": "material",
+            "verification_source": "third_party"
+          },
+          {
+            "subject": "Friday swimming feasibility",
+            "assumption": "The moved swimming session on Friday 2026-11-20 from 18:00 to 20:00 is compatible with the user's Friday obligations and pool availability.",
+            "evidence_gap": "The rationale says Friday swimming uses supplied daily pool availability but depends on no unseen Friday conflict; the visible calendar does not show the rest of Friday.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Post-night-shift cognitive capacity",
+            "assumption": "The user can meaningfully attend the supervisor meeting at 17:00–18:00 and complete thesis work at 18:15–20:15 on Wednesday after the Tuesday night shift and daytime sleep.",
+            "evidence_gap": "The calendar reserves time after sleep and lunch, but it does not provide user-specific evidence about alertness or cognitive effectiveness after overnight hospital work.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Thursday post-shift capacity",
+            "assumption": "The user can sustainably complete thesis work 15:45–17:45 and physiotherapy 18:15–19:15 after the fixed Thursday hospital shift 07:00–15:00.",
+            "evidence_gap": "The revised rationale protects Wednesday better but does not specifically substantiate the Thursday post-shift workload beyond showing that it fits.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Wednesday night sleep after daytime sleep",
+            "assumption": "The user can sleep effectively from 22:00 to 06:00 on Wednesday night after having slept from 07:30 to 15:30 earlier the same day.",
+            "evidence_gap": "Both sleep blocks are visible and protected, but the proposal does not provide user-specific evidence that this quick return to night sleep is realistic after an intact daytime recovery block.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          }
+        ],
+        "overall": 4.0
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": true,
+        "plausibility_revision_required": false,
+        "accepted": true,
+        "revision_causes": []
+      },
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": [
+        {
+          "iteration": 0,
+          "proposal": {
+            "changes": [
+              {
+                "type": "move",
+                "event_id": "work_tue",
+                "title": null,
+                "from_start": null,
+                "to_start": "2026-11-17T23:00:00+00:00",
+                "to_end": "2026-11-18T07:00:00+00:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "move",
+                "event_id": "commute_to_work_tue",
+                "title": null,
+                "from_start": null,
+                "to_start": "2026-11-17T22:30:00+00:00",
+                "to_end": "2026-11-17T23:00:00+00:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "move",
+                "event_id": "commute_home_tue",
+                "title": null,
+                "from_start": null,
+                "to_start": "2026-11-18T07:00:00+00:00",
+                "to_end": "2026-11-18T07:30:00+00:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "move",
+                "event_id": "sleep_wed",
+                "title": null,
+                "from_start": null,
+                "to_start": "2026-11-18T07:30:00+00:00",
+                "to_end": "2026-11-18T15:30:00+00:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Dinner",
+                "from_start": null,
+                "to_start": "2026-11-17T19:00:00+00:00",
+                "to_end": "2026-11-17T20:00:00+00:00",
+                "category": "meal",
+                "importance": 4,
+                "participants": [
+                  "user"
+                ]
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Commute to physiotherapy",
+                "from_start": null,
+                "to_start": "2026-11-18T15:30:00+00:00",
+                "to_end": "2026-11-18T15:45:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "participants": [
+                  "user"
+                ]
+              },
+              {
+                "type": "move",
+                "event_id": "physio_wed",
+                "title": null,
+                "from_start": null,
+                "to_start": "2026-11-18T15:45:00+00:00",
+                "to_end": "2026-11-18T16:45:00+00:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Commute home from physiotherapy",
+                "from_start": null,
+                "to_start": "2026-11-18T16:45:00+00:00",
+                "to_end": "2026-11-18T17:00:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "participants": [
+                  "user"
+                ]
+              },
+              {
+                "type": "move",
+                "event_id": "supervisor_meeting_wed",
+                "title": null,
+                "from_start": null,
+                "to_start": "2026-11-18T17:00:00+00:00",
+                "to_end": "2026-11-18T18:00:00+00:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "move",
+                "event_id": "lunch_wed",
+                "title": null,
+                "from_start": null,
+                "to_start": "2026-11-18T18:00:00+00:00",
+                "to_end": "2026-11-18T19:00:00+00:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "move",
+                "event_id": "thesis_wed",
+                "title": null,
+                "from_start": null,
+                "to_start": "2026-11-18T19:00:00+00:00",
+                "to_end": "2026-11-18T21:00:00+00:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "move",
+                "event_id": "dinner_wed",
+                "title": null,
+                "from_start": null,
+                "to_start": "2026-11-18T21:00:00+00:00",
+                "to_end": "2026-11-18T22:00:00+00:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "move",
+                "event_id": "swim_wed",
+                "title": null,
+                "from_start": null,
+                "to_start": "2026-11-20T18:00:00+00:00",
+                "to_end": "2026-11-20T20:00:00+00:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              }
+            ],
+            "rationale": {
+              "constraints": [
+                "The exact night-shift move is externally allowed, while Thursday work and protected sleep blocks are unchanged.",
+                "The post-night-shift sleep remains one intact eight-hour daytime block after getting home.",
+                "Wednesday still contains two hours of thesis work, as do Tuesday and Thursday.",
+                "Keeping physiotherapy requires clinic confirmation because only its travel time, not later availability, is supplied.",
+                "The supervisor move uses a supplied alternative slot but still needs confirmation with the supervisor.",
+                "The ward manager or HR should confirm the swap record and the Friday day off.",
+                "Friday swimming assumes no unseen Friday commitment; only pool availability and the returned day off are known."
+              ],
+              "priorities": [
+                "Recovery and fixed hospital duties take precedence over swimming and preferred meal timing.",
+                "Physiotherapy is preserved with a small timing change rather than dropped.",
+                "Swimming is moved out of the compressed post-night-shift day to avoid reducing sleep or thesis time.",
+                "Wednesday meals are later than preferred to keep sleep, physiotherapy, supervision and thesis work."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Use the Thursday supervisor slot",
+                  "rejected_because": "It conflicts with the fixed hospital shift and should not be selected without a confirmed exception."
+                },
+                {
+                  "option": "Keep the original physiotherapy time",
+                  "rejected_because": "It is not operationally feasible after the required sleep block because the clinic is not at home."
+                },
+                {
+                  "option": "Drop the moved swim instead of placing it on Friday",
+                  "rejected_because": "That would leave two swims for the week, which is acceptable only as an exceptional-week fallback."
+                },
+                {
+                  "option": "Skip or shorten Wednesday thesis work",
+                  "rejected_because": "That would fail the typed daily thesis-duration requirement."
+                }
+              ],
+              "summary": "The plan records the accepted night-shift swap, rebuilds the hospital commutes, protects the full recovery sleep, and fits Wednesday thesis work around physiotherapy and the supervisor meeting. The main trade-off is a very compressed Wednesday with late meals and swimming pushed to Friday, pending confirmation from HR, the supervisor and the physiotherapist."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "sleep_tue",
+                "title": "Sleep",
+                "start": "2026-11-16T22:30:00+00:00",
+                "end": "2026-11-17T06:30:00+00:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected eight-hour sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "swim_tue",
+                "title": "Swimming training",
+                "start": "2026-11-17T09:00:00+00:00",
+                "end": "2026-11-17T11:00:00+00:00",
+                "category": "gym",
+                "importance": 2,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Swimming training; the pool is next to home.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "thesis_tue",
+                "title": "Master's thesis",
+                "start": "2026-11-17T11:00:00+00:00",
+                "end": "2026-11-17T13:00:00+00:00",
+                "category": "thesis",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Two-hour focused work block dedicated to the master's thesis.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "lunch_tue",
+                "title": "Lunch",
+                "start": "2026-11-17T13:00:00+00:00",
+                "end": "2026-11-17T14:00:00+00:00",
+                "category": "meal",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "One-hour lunch at home before the afternoon shift.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_4",
+                "title": "Dinner",
+                "start": "2026-11-17T19:00:00+00:00",
+                "end": "2026-11-17T20:00:00+00:00",
+                "category": "meal",
+                "importance": 4,
+                "fixed": null,
+                "participants": [
+                  "user"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "commute_to_work_tue",
+                "title": "Commute to hospital",
+                "start": "2026-11-17T22:30:00+00:00",
+                "end": "2026-11-17T23:00:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute journey from home to the hospital.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "work_tue",
+                "title": "Hospital shift",
+                "start": "2026-11-17T23:00:00+00:00",
+                "end": "2026-11-18T07:00:00+00:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Scheduled afternoon shift (to be cancelled/swapped per user request).",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "commute_home_tue",
+                "title": "Commute home",
+                "start": "2026-11-18T07:00:00+00:00",
+                "end": "2026-11-18T07:30:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute journey from the hospital to home.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "sleep_wed",
+                "title": "Sleep",
+                "start": "2026-11-18T07:30:00+00:00",
+                "end": "2026-11-18T15:30:00+00:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Daytime sleep after the night shift; must remain an intact 8h block.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "new_5",
+                "title": "Commute to physiotherapy",
+                "start": "2026-11-18T15:30:00+00:00",
+                "end": "2026-11-18T15:45:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": null,
+                "participants": [
+                  "user"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "physio_wed",
+                "title": "Physiotherapy session",
+                "start": "2026-11-18T15:45:00+00:00",
+                "end": "2026-11-18T16:45:00+00:00",
+                "category": "health",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "physiotherapist"
+                ],
+                "description": "Shoulder rehabilitation session; clinic is 15 minutes from home.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "new_7",
+                "title": "Commute home from physiotherapy",
+                "start": "2026-11-18T16:45:00+00:00",
+                "end": "2026-11-18T17:00:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": null,
+                "participants": [
+                  "user"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "supervisor_meeting_wed",
+                "title": "Thesis supervisor progress meeting",
+                "start": "2026-11-18T17:00:00+00:00",
+                "end": "2026-11-18T18:00:00+00:00",
+                "category": "thesis",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "supervisor"
+                ],
+                "description": "Online meeting with thesis supervisor; supervisor also has an available slot on Wednesday at 17:00 or Thursday at 11:30.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "lunch_wed",
+                "title": "Lunch",
+                "start": "2026-11-18T18:00:00+00:00",
+                "end": "2026-11-18T19:00:00+00:00",
+                "category": "meal",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "One-hour lunch at home.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "thesis_wed",
+                "title": "Master's thesis",
+                "start": "2026-11-18T19:00:00+00:00",
+                "end": "2026-11-18T21:00:00+00:00",
+                "category": "thesis",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Two-hour focused work block dedicated to the master's thesis.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "dinner_wed",
+                "title": "Dinner",
+                "start": "2026-11-18T21:00:00+00:00",
+                "end": "2026-11-18T22:00:00+00:00",
+                "category": "meal",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "One-hour dinner at home.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2026-11-18T22:00:00+00:00",
+                "end": "2026-11-19T06:00:00+00:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected eight-hour sleep block before Thursday early shift.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "commute_to_work_thu",
+                "title": "Commute to hospital",
+                "start": "2026-11-19T06:30:00+00:00",
+                "end": "2026-11-19T07:00:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute journey from home to the hospital.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "work_thu",
+                "title": "Hospital shift",
+                "start": "2026-11-19T07:00:00+00:00",
+                "end": "2026-11-19T15:00:00+00:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Fixed morning nursing shift at the hospital.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "commute_home_thu",
+                "title": "Commute home",
+                "start": "2026-11-19T15:00:00+00:00",
+                "end": "2026-11-19T15:30:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute journey from hospital to home.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "thesis_thu",
+                "title": "Master's thesis",
+                "start": "2026-11-19T16:00:00+00:00",
+                "end": "2026-11-19T18:00:00+00:00",
+                "category": "thesis",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Two-hour focused work block dedicated to the master's thesis.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "swim_thu",
+                "title": "Swimming training",
+                "start": "2026-11-19T18:00:00+00:00",
+                "end": "2026-11-19T20:00:00+00:00",
+                "category": "gym",
+                "importance": 2,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Swimming training; pool is next to home.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "dinner_thu",
+                "title": "Dinner",
+                "start": "2026-11-19T20:00:00+00:00",
+                "end": "2026-11-19T21:00:00+00:00",
+                "category": "meal",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "One-hour dinner at home.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "swim_wed",
+                "title": "Swimming training",
+                "start": "2026-11-20T18:00:00+00:00",
+                "end": "2026-11-20T20:00:00+00:00",
+                "category": "gym",
+                "importance": 2,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Swimming training; pool is next to home.",
+                "origin": "existing",
+                "change_status": "moved"
+              }
+            ],
+            "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+          },
+          "plausibility_review": {
+            "revision_required": true,
+            "severity": "moderate",
+            "reason": "The proposed organization creates a significant human-manageability risk on Wednesday by scheduling an immediate departure at the exact end of post-night-shift sleep and then a dense 15:30–22:00 chain before another early hospital day. The plan may technically fit and it does protect sleep duration, but it gives little evidence that the user can realistically wake, prepare, travel, attend physiotherapy, join an online meeting, eat late, and complete focused thesis work without practical margin after overnight clinical work.",
+            "suggested_improvement": "Reconsider the Wednesday distribution with the fuller context, especially the immediate transition from post-night-shift sleep to physiotherapy and the fully chained late-afternoon/evening sequence. If the same operations are kept, provide grounded support for why the exact transitions, late lunch, and post-night-shift cognitive workload are acceptable for this user."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Physiotherapy availability",
+              "assumption": "The physiotherapist or clinic can accept the moved Wednesday session at 2026-11-18 15:45–16:45.",
+              "evidence_gap": "The rationale says clinic confirmation is required and the calendar only establishes travel time, not clinic availability.",
+              "potential_impact": "material",
+              "verification_source": "third_party"
+            },
+            {
+              "subject": "Immediate wake-to-commute transition",
+              "assumption": "The user can realistically end post-night-shift sleep at 15:30 and immediately depart for physiotherapy at 15:30.",
+              "evidence_gap": "The calendar contains no visible wake-up, preparation, hygiene, food or recovery margin between sleep_wed 07:30–15:30 and the commute to physiotherapy 15:30–15:45.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Supervisor meeting confirmation",
+              "assumption": "The thesis supervisor accepts the moved online meeting on Wednesday 2026-11-18 17:00–18:00.",
+              "evidence_gap": "The event description lists a Wednesday 17:00 slot, but the rationale still says confirmation with the supervisor is needed.",
+              "potential_impact": "material",
+              "verification_source": "third_party"
+            },
+            {
+              "subject": "Online meeting readiness after physiotherapy",
+              "assumption": "The user can return home from physiotherapy at 17:00 and immediately begin the online supervisor meeting at 17:00.",
+              "evidence_gap": "The commute home from physiotherapy ends exactly when the supervisor meeting starts, with no visible setup or transition time.",
+              "potential_impact": "minor",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Hospital shift swap administration",
+              "assumption": "The ward manager or HR records the Tuesday night-shift swap and associated Friday day off as intended.",
+              "evidence_gap": "The technical validation confirms authorization for the work_tue move, but the rationale still says the swap record and Friday day off should be confirmed by HR or the ward manager.",
+              "potential_impact": "material",
+              "verification_source": "third_party"
+            },
+            {
+              "subject": "Friday swimming feasibility",
+              "assumption": "The moved swimming session on Friday 2026-11-20 18:00–20:00 is compatible with the user's Friday obligations and pool availability.",
+              "evidence_gap": "The rationale states Friday swimming assumes no unseen Friday commitment and depends on pool availability and the returned day off; the visible calendar does not show the rest of Friday.",
+              "potential_impact": "material",
+              "verification_source": "unknown"
+            },
+            {
+              "subject": "Post-night-shift meal timing",
+              "assumption": "The user can tolerate delaying Wednesday lunch until 18:00 after the night shift, daytime sleep, physiotherapy and supervisor meeting.",
+              "evidence_gap": "The rationale acknowledges Wednesday meals are later than preferred but does not provide user-specific evidence that this timing is sustainable.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            }
+          ],
+          "weaknesses": [
+            "Wednesday is extremely compressed after the night shift: hospital shift 2026-11-17 23:00–2026-11-18 07:00, commute home 07:00–07:30, sleep 07:30–15:30, then immediate commute to physiotherapy 15:30–15:45 with no visible wake-up, hygiene, food, preparation or recovery margin.",
+            "The plan protects an intact eight-hour sleep block, but it treats the exact end of sleep as immediately usable time for leaving home. That may be technically valid but is a practical human-quality risk after overnight hospital work.",
+            "The post-sleep Wednesday sequence runs without meaningful slack from 15:30 to 22:00: commute to physiotherapy, physiotherapy 15:45–16:45, commute home 16:45–17:00, supervisor meeting 17:00–18:00, lunch 18:00–19:00, thesis work 19:00–21:00, dinner 21:00–22:00, then protected sleep 22:00–06:00 before Thursday work. This may preserve priorities on paper while leaving little resilience if any item overruns or the user is fatigued.",
+            "Lunch is moved to 18:00 on Wednesday, after a night shift, daytime sleep, physiotherapy travel/session, and supervisor meeting. The rationale acknowledges late meals but does not explain whether this is practically sustainable for the user on a post-night-shift day.",
+            "The supervisor meeting at 17:00 starts exactly when the commute home from physiotherapy ends. Because it is online and at home this may be possible, but the calendar leaves no visible setup or decompression time.",
+            "Moving Wednesday swimming to Friday 18:00–20:00 may be sensible, but the rationale itself says this depends on no unseen Friday commitment and returned day off; the visible calendar does not establish that Friday is otherwise manageable.",
+            "Several external confirmations remain unresolved: physiotherapy availability, supervisor acceptance, HR or ward manager swap record, Friday day off, and pool availability. These are not technical violations, but they are central to whether the proposed routine can actually happen."
+          ],
+          "feedback": "The proposal has a reasonable priority structure: it protects the night-shift recovery sleep, preserves physiotherapy, keeps the supervisor meeting and thesis work, and moves lower-priority swimming away from the most compressed part of Wednesday. However, the resulting Wednesday is only barely human-shaped. The main issue is not an overlap; it is the reliance on exact back-to-back use of time after an overnight hospital shift. The user would finish work at 07:00, get home at 07:30, sleep until 15:30, and immediately leave for physiotherapy, then continue through meeting, delayed lunch, thesis work, dinner and another protected sleep block. That may be feasible for a very resilient person with everything prepared in advance, but the rationale does not substantiate that level of precision or recovery capacity. A revision should reconsider whether the post-night-shift Wednesday needs more practical margin, or provide a grounded explanation from the fuller context for why the immediate wake-to-physio and continuous evening sequence is acceptable. The original request cannot be independently verified from the provided material, so this review is limited to the visible proposal, rationale, resulting calendar and validation report."
+        }
+      ],
+      "unresolved_assumptions": [
+        {
+          "subject": "Physiotherapy availability",
+          "assumption": "The physiotherapist or clinic can accept the moved session on Thursday 2026-11-19 from 18:15 to 19:15.",
+          "evidence_gap": "The rationale explicitly says the physiotherapy move needs clinic confirmation, and the visible calendar only establishes a free slot and 15-minute travel time, not clinic availability.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Supervisor meeting confirmation",
+          "assumption": "The thesis supervisor accepts the moved online meeting on Wednesday 2026-11-18 from 17:00 to 18:00.",
+          "evidence_gap": "The event description lists a Wednesday 17:00 slot, but the rationale still says confirmation with the supervisor is needed.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Hospital rota administration",
+          "assumption": "The ward manager or HR records the Tuesday night-shift swap and associated Friday day off as intended.",
+          "evidence_gap": "The technical validation confirms the specific work_tue move authorization, but the rationale still says the rota record and Friday day off should be confirmed by the ward manager or HR.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Friday swimming feasibility",
+          "assumption": "The moved swimming session on Friday 2026-11-20 from 18:00 to 20:00 is compatible with the user's Friday obligations and pool availability.",
+          "evidence_gap": "The rationale says Friday swimming uses supplied daily pool availability but depends on no unseen Friday conflict; the visible calendar does not show the rest of Friday.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Post-night-shift cognitive capacity",
+          "assumption": "The user can meaningfully attend the supervisor meeting at 17:00–18:00 and complete thesis work at 18:15–20:15 on Wednesday after the Tuesday night shift and daytime sleep.",
+          "evidence_gap": "The calendar reserves time after sleep and lunch, but it does not provide user-specific evidence about alertness or cognitive effectiveness after overnight hospital work.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Thursday post-shift capacity",
+          "assumption": "The user can sustainably complete thesis work 15:45–17:45 and physiotherapy 18:15–19:15 after the fixed Thursday hospital shift 07:00–15:00.",
+          "evidence_gap": "The revised rationale protects Wednesday better but does not specifically substantiate the Thursday post-shift workload beyond showing that it fits.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Wednesday night sleep after daytime sleep",
+          "assumption": "The user can sleep effectively from 22:00 to 06:00 on Wednesday night after having slept from 07:30 to 15:30 earlier the same day.",
+          "evidence_gap": "Both sleep blocks are visible and protected, but the proposal does not provide user-specific evidence that this quick return to night sleep is realistic after an intact daytime recovery block.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    }
+  ],
+  "initial_proposal": {
+    "changes": [
+      {
+        "type": "move",
+        "event_id": "work_tue",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-11-17T23:00:00+00:00",
+        "to_end": "2026-11-18T07:00:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "commute_to_work_tue",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-11-17T22:30:00+00:00",
+        "to_end": "2026-11-17T23:00:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "commute_home_tue",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-11-18T07:00:00+00:00",
+        "to_end": "2026-11-18T07:30:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "sleep_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-11-18T07:30:00+00:00",
+        "to_end": "2026-11-18T15:30:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Dinner",
+        "from_start": null,
+        "to_start": "2026-11-17T19:00:00+00:00",
+        "to_end": "2026-11-17T20:00:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Commute to physiotherapy",
+        "from_start": null,
+        "to_start": "2026-11-18T15:30:00+00:00",
+        "to_end": "2026-11-18T15:45:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "move",
+        "event_id": "physio_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-11-18T15:45:00+00:00",
+        "to_end": "2026-11-18T16:45:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Commute home from physiotherapy",
+        "from_start": null,
+        "to_start": "2026-11-18T16:45:00+00:00",
+        "to_end": "2026-11-18T17:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "move",
+        "event_id": "supervisor_meeting_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-11-18T17:00:00+00:00",
+        "to_end": "2026-11-18T18:00:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "lunch_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-11-18T18:00:00+00:00",
+        "to_end": "2026-11-18T19:00:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "thesis_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-11-18T19:00:00+00:00",
+        "to_end": "2026-11-18T21:00:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "dinner_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-11-18T21:00:00+00:00",
+        "to_end": "2026-11-18T22:00:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "swim_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-11-20T18:00:00+00:00",
+        "to_end": "2026-11-20T20:00:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "The exact night-shift move is externally allowed, while Thursday work and protected sleep blocks are unchanged.",
+        "The post-night-shift sleep remains one intact eight-hour daytime block after getting home.",
+        "Wednesday still contains two hours of thesis work, as do Tuesday and Thursday.",
+        "Keeping physiotherapy requires clinic confirmation because only its travel time, not later availability, is supplied.",
+        "The supervisor move uses a supplied alternative slot but still needs confirmation with the supervisor.",
+        "The ward manager or HR should confirm the swap record and the Friday day off.",
+        "Friday swimming assumes no unseen Friday commitment; only pool availability and the returned day off are known."
+      ],
+      "priorities": [
+        "Recovery and fixed hospital duties take precedence over swimming and preferred meal timing.",
+        "Physiotherapy is preserved with a small timing change rather than dropped.",
+        "Swimming is moved out of the compressed post-night-shift day to avoid reducing sleep or thesis time.",
+        "Wednesday meals are later than preferred to keep sleep, physiotherapy, supervision and thesis work."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Use the Thursday supervisor slot",
+          "rejected_because": "It conflicts with the fixed hospital shift and should not be selected without a confirmed exception."
+        },
+        {
+          "option": "Keep the original physiotherapy time",
+          "rejected_because": "It is not operationally feasible after the required sleep block because the clinic is not at home."
+        },
+        {
+          "option": "Drop the moved swim instead of placing it on Friday",
+          "rejected_because": "That would leave two swims for the week, which is acceptable only as an exceptional-week fallback."
+        },
+        {
+          "option": "Skip or shorten Wednesday thesis work",
+          "rejected_because": "That would fail the typed daily thesis-duration requirement."
+        }
+      ],
+      "summary": "The plan records the accepted night-shift swap, rebuilds the hospital commutes, protects the full recovery sleep, and fits Wednesday thesis work around physiotherapy and the supervisor meeting. The main trade-off is a very compressed Wednesday with late meals and swimming pushed to Friday, pending confirmation from HR, the supervisor and the physiotherapist."
+    }
+  },
+  "final_proposal": {
+    "changes": [
+      {
+        "type": "move",
+        "event_id": "work_tue",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-11-17T23:00:00+00:00",
+        "to_end": "2026-11-18T07:00:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "commute_to_work_tue",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-11-17T22:30:00+00:00",
+        "to_end": "2026-11-17T23:00:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "commute_home_tue",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-11-18T07:00:00+00:00",
+        "to_end": "2026-11-18T07:30:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Dinner",
+        "from_start": null,
+        "to_start": "2026-11-17T19:00:00+00:00",
+        "to_end": "2026-11-17T20:00:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "move",
+        "event_id": "sleep_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-11-18T07:30:00+00:00",
+        "to_end": "2026-11-18T15:30:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "lunch_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-11-18T15:45:00+00:00",
+        "to_end": "2026-11-18T16:45:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "supervisor_meeting_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-11-18T17:00:00+00:00",
+        "to_end": "2026-11-18T18:00:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "thesis_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-11-18T18:15:00+00:00",
+        "to_end": "2026-11-18T20:15:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "dinner_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-11-18T20:30:00+00:00",
+        "to_end": "2026-11-18T21:30:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "swim_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "thesis_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-11-19T15:45:00+00:00",
+        "to_end": "2026-11-19T17:45:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Commute to physiotherapy",
+        "from_start": null,
+        "to_start": "2026-11-19T18:00:00+00:00",
+        "to_end": "2026-11-19T18:15:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "move",
+        "event_id": "physio_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-11-19T18:15:00+00:00",
+        "to_end": "2026-11-19T19:15:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Commute home from physiotherapy",
+        "from_start": null,
+        "to_start": "2026-11-19T19:15:00+00:00",
+        "to_end": "2026-11-19T19:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "move",
+        "event_id": "swim_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-11-20T18:00:00+00:00",
+        "to_end": "2026-11-20T20:00:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "The accepted night-shift move matches the only externally confirmed exception for the original Tuesday work event.",
+        "Thursday hospital work, fixed Thursday commutes, Tuesday protected sleep and Thursday protected sleep are unchanged.",
+        "Post-night-shift sleep stays as one intact eight-hour block after the stated return home time.",
+        "Tuesday, Wednesday and Thursday each keep at least two hours of thesis-category time.",
+        "The supervisor change uses the supplied Wednesday slot but still needs confirmation with the supervisor.",
+        "The physiotherapy move needs clinic confirmation because free calendar time does not prove clinic availability.",
+        "The ward manager or HR should confirm the rota record and the Friday day off.",
+        "Friday swimming uses supplied daily pool availability but still depends on no unseen Friday conflict."
+      ],
+      "priorities": [
+        "The revised plan gives Wednesday practical margins after sleep instead of an immediate departure from home.",
+        "Physiotherapy is preserved by moving it away from the compressed post-night-shift day.",
+        "Lower-priority swimming is reduced to an exceptional two-session week to protect recovery, thesis and health care.",
+        "Meals on Wednesday are later than preferred because the full daytime sleep block dominates the day."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Keep physiotherapy on Wednesday",
+          "rejected_because": "It would require travel immediately after protected sleep or would over-compress the evening before Thursday's early shift."
+        },
+        {
+          "option": "Move the supervisor meeting to Thursday 11:30",
+          "rejected_because": "That supplied slot conflicts with the fixed Thursday hospital shift."
+        },
+        {
+          "option": "Keep all swimming sessions this week",
+          "rejected_because": "That would crowd out sleep, thesis, physiotherapy or the fixed Thursday work pattern."
+        },
+        {
+          "option": "Shorten Wednesday thesis work",
+          "rejected_because": "That would fail the daily thesis-duration requirement."
+        },
+        {
+          "option": "If Thursday physiotherapy is unavailable",
+          "rejected_because": "The clinic must offer another confirmed slot or the appointment cannot be kept within the visible plan."
+        }
+      ],
+      "summary": "The plan records the night-shift swap, rebuilds the hospital commutes, protects full recovery sleep, and makes Wednesday less brittle by moving physiotherapy to Thursday with confirmation. The main trade-off is dropping one swim and moving another to Friday so recovery, thesis work, the supervisor meeting and health care can all remain plausible."
+    }
+  },
+  "final_score": 4.0,
+  "refinements": 1,
+  "critic_accepted": true,
+  "decision": "defer",
+  "reasons": [
+    "mais de 2 mudanças",
+    "toca em evento importante (work_tue, importância 5)",
+    "toca em evento importante (commute_to_work_tue, importância 4)",
+    "toca em evento importante (commute_home_tue, importância 4)",
+    "toca em evento importante (sleep_wed, importância 5)",
+    "toca em evento importante (lunch_wed, importância 4)",
+    "toca em evento importante (supervisor_meeting_wed, importância 5)",
+    "toca em evento importante (thesis_wed, importância 5)",
+    "toca em evento importante (dinner_wed, importância 4)",
+    "apaga evento (swim_wed)",
+    "toca em evento importante (thesis_thu, importância 5)",
+    "toca em evento importante (physio_wed, importância 4)",
+    "toca em categoria sensível (health)"
+  ],
+  "status": "proposal_ready",
+  "critic_input_version": "final_calendar_v1",
+  "critic_policy_version": "uncertainty_review_v2",
+  "result_calendar_version": "validated_added_metadata_v2",
+  "final_result_calendar": {
+    "timezone": "Europe/Lisbon",
+    "coverage": "all_events_in_scenario_after_simulation",
+    "events": [
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2026-11-16T22:30:00+00:00",
+        "end": "2026-11-17T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected eight-hour sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "swim_tue",
+        "title": "Swimming training",
+        "start": "2026-11-17T09:00:00+00:00",
+        "end": "2026-11-17T11:00:00+00:00",
+        "category": "gym",
+        "importance": 2,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Swimming training; the pool is next to home.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "thesis_tue",
+        "title": "Master's thesis",
+        "start": "2026-11-17T11:00:00+00:00",
+        "end": "2026-11-17T13:00:00+00:00",
+        "category": "thesis",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Two-hour focused work block dedicated to the master's thesis.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "lunch_tue",
+        "title": "Lunch",
+        "start": "2026-11-17T13:00:00+00:00",
+        "end": "2026-11-17T14:00:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "One-hour lunch at home before the afternoon shift.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_3",
+        "title": "Dinner",
+        "start": "2026-11-17T19:00:00+00:00",
+        "end": "2026-11-17T20:00:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "commute_to_work_tue",
+        "title": "Commute to hospital",
+        "start": "2026-11-17T22:30:00+00:00",
+        "end": "2026-11-17T23:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute journey from home to the hospital.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "work_tue",
+        "title": "Hospital shift",
+        "start": "2026-11-17T23:00:00+00:00",
+        "end": "2026-11-18T07:00:00+00:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Scheduled afternoon shift (to be cancelled/swapped per user request).",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "commute_home_tue",
+        "title": "Commute home",
+        "start": "2026-11-18T07:00:00+00:00",
+        "end": "2026-11-18T07:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute journey from the hospital to home.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2026-11-18T07:30:00+00:00",
+        "end": "2026-11-18T15:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Daytime sleep after the night shift; must remain an intact 8h block.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "lunch_wed",
+        "title": "Lunch",
+        "start": "2026-11-18T15:45:00+00:00",
+        "end": "2026-11-18T16:45:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "One-hour lunch at home.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "supervisor_meeting_wed",
+        "title": "Thesis supervisor progress meeting",
+        "start": "2026-11-18T17:00:00+00:00",
+        "end": "2026-11-18T18:00:00+00:00",
+        "category": "thesis",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user",
+          "supervisor"
+        ],
+        "description": "Online meeting with thesis supervisor; supervisor also has an available slot on Wednesday at 17:00 or Thursday at 11:30.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "thesis_wed",
+        "title": "Master's thesis",
+        "start": "2026-11-18T18:15:00+00:00",
+        "end": "2026-11-18T20:15:00+00:00",
+        "category": "thesis",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Two-hour focused work block dedicated to the master's thesis.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "dinner_wed",
+        "title": "Dinner",
+        "start": "2026-11-18T20:30:00+00:00",
+        "end": "2026-11-18T21:30:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "One-hour dinner at home.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2026-11-18T22:00:00+00:00",
+        "end": "2026-11-19T06:00:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected eight-hour sleep block before Thursday early shift.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "commute_to_work_thu",
+        "title": "Commute to hospital",
+        "start": "2026-11-19T06:30:00+00:00",
+        "end": "2026-11-19T07:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute journey from home to the hospital.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "work_thu",
+        "title": "Hospital shift",
+        "start": "2026-11-19T07:00:00+00:00",
+        "end": "2026-11-19T15:00:00+00:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Fixed morning nursing shift at the hospital.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "commute_home_thu",
+        "title": "Commute home",
+        "start": "2026-11-19T15:00:00+00:00",
+        "end": "2026-11-19T15:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute journey from hospital to home.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "thesis_thu",
+        "title": "Master's thesis",
+        "start": "2026-11-19T15:45:00+00:00",
+        "end": "2026-11-19T17:45:00+00:00",
+        "category": "thesis",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Two-hour focused work block dedicated to the master's thesis.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "new_11",
+        "title": "Commute to physiotherapy",
+        "start": "2026-11-19T18:00:00+00:00",
+        "end": "2026-11-19T18:15:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "physio_wed",
+        "title": "Physiotherapy session",
+        "start": "2026-11-19T18:15:00+00:00",
+        "end": "2026-11-19T19:15:00+00:00",
+        "category": "health",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "physiotherapist"
+        ],
+        "description": "Shoulder rehabilitation session; clinic is 15 minutes from home.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "new_13",
+        "title": "Commute home from physiotherapy",
+        "start": "2026-11-19T19:15:00+00:00",
+        "end": "2026-11-19T19:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "dinner_thu",
+        "title": "Dinner",
+        "start": "2026-11-19T20:00:00+00:00",
+        "end": "2026-11-19T21:00:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "One-hour dinner at home.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "swim_thu",
+        "title": "Swimming training",
+        "start": "2026-11-20T18:00:00+00:00",
+        "end": "2026-11-20T20:00:00+00:00",
+        "category": "gym",
+        "importance": 2,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Swimming training; pool is next to home.",
+        "origin": "existing",
+        "change_status": "moved"
+      }
+    ],
+    "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+  },
+  "final_unresolved_assumptions": [
+    {
+      "subject": "Physiotherapy availability",
+      "assumption": "The physiotherapist or clinic can accept the moved session on Thursday 2026-11-19 from 18:15 to 19:15.",
+      "evidence_gap": "The rationale explicitly says the physiotherapy move needs clinic confirmation, and the visible calendar only establishes a free slot and 15-minute travel time, not clinic availability.",
+      "potential_impact": "material",
+      "verification_source": "third_party"
+    },
+    {
+      "subject": "Supervisor meeting confirmation",
+      "assumption": "The thesis supervisor accepts the moved online meeting on Wednesday 2026-11-18 from 17:00 to 18:00.",
+      "evidence_gap": "The event description lists a Wednesday 17:00 slot, but the rationale still says confirmation with the supervisor is needed.",
+      "potential_impact": "material",
+      "verification_source": "third_party"
+    },
+    {
+      "subject": "Hospital rota administration",
+      "assumption": "The ward manager or HR records the Tuesday night-shift swap and associated Friday day off as intended.",
+      "evidence_gap": "The technical validation confirms the specific work_tue move authorization, but the rationale still says the rota record and Friday day off should be confirmed by the ward manager or HR.",
+      "potential_impact": "material",
+      "verification_source": "third_party"
+    },
+    {
+      "subject": "Friday swimming feasibility",
+      "assumption": "The moved swimming session on Friday 2026-11-20 from 18:00 to 20:00 is compatible with the user's Friday obligations and pool availability.",
+      "evidence_gap": "The rationale says Friday swimming uses supplied daily pool availability but depends on no unseen Friday conflict; the visible calendar does not show the rest of Friday.",
+      "potential_impact": "material",
+      "verification_source": "unknown"
+    },
+    {
+      "subject": "Post-night-shift cognitive capacity",
+      "assumption": "The user can meaningfully attend the supervisor meeting at 17:00–18:00 and complete thesis work at 18:15–20:15 on Wednesday after the Tuesday night shift and daytime sleep.",
+      "evidence_gap": "The calendar reserves time after sleep and lunch, but it does not provide user-specific evidence about alertness or cognitive effectiveness after overnight hospital work.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Thursday post-shift capacity",
+      "assumption": "The user can sustainably complete thesis work 15:45–17:45 and physiotherapy 18:15–19:15 after the fixed Thursday hospital shift 07:00–15:00.",
+      "evidence_gap": "The revised rationale protects Wednesday better but does not specifically substantiate the Thursday post-shift workload beyond showing that it fits.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Wednesday night sleep after daytime sleep",
+      "assumption": "The user can sleep effectively from 22:00 to 06:00 on Wednesday night after having slept from 07:30 to 15:30 earlier the same day.",
+      "evidence_gap": "Both sleep blocks are visible and protected, but the proposal does not provide user-specific evidence that this quick return to night sleep is realistic after an intact daytime recovery block.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    }
+  ],
+  "uncertainty_history": [
+    {
+      "iteration": 0,
+      "unresolved_assumptions": [
+        {
+          "subject": "Physiotherapy availability",
+          "assumption": "The physiotherapist or clinic can accept the moved Wednesday session at 2026-11-18 15:45–16:45.",
+          "evidence_gap": "The rationale says clinic confirmation is required and the calendar only establishes travel time, not clinic availability.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Immediate wake-to-commute transition",
+          "assumption": "The user can realistically end post-night-shift sleep at 15:30 and immediately depart for physiotherapy at 15:30.",
+          "evidence_gap": "The calendar contains no visible wake-up, preparation, hygiene, food or recovery margin between sleep_wed 07:30–15:30 and the commute to physiotherapy 15:30–15:45.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Supervisor meeting confirmation",
+          "assumption": "The thesis supervisor accepts the moved online meeting on Wednesday 2026-11-18 17:00–18:00.",
+          "evidence_gap": "The event description lists a Wednesday 17:00 slot, but the rationale still says confirmation with the supervisor is needed.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Online meeting readiness after physiotherapy",
+          "assumption": "The user can return home from physiotherapy at 17:00 and immediately begin the online supervisor meeting at 17:00.",
+          "evidence_gap": "The commute home from physiotherapy ends exactly when the supervisor meeting starts, with no visible setup or transition time.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Hospital shift swap administration",
+          "assumption": "The ward manager or HR records the Tuesday night-shift swap and associated Friday day off as intended.",
+          "evidence_gap": "The technical validation confirms authorization for the work_tue move, but the rationale still says the swap record and Friday day off should be confirmed by HR or the ward manager.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Friday swimming feasibility",
+          "assumption": "The moved swimming session on Friday 2026-11-20 18:00–20:00 is compatible with the user's Friday obligations and pool availability.",
+          "evidence_gap": "The rationale states Friday swimming assumes no unseen Friday commitment and depends on pool availability and the returned day off; the visible calendar does not show the rest of Friday.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Post-night-shift meal timing",
+          "assumption": "The user can tolerate delaying Wednesday lunch until 18:00 after the night shift, daytime sleep, physiotherapy and supervisor meeting.",
+          "evidence_gap": "The rationale acknowledges Wednesday meals are later than preferred but does not provide user-specific evidence that this timing is sustainable.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    },
+    {
+      "iteration": 1,
+      "unresolved_assumptions": [
+        {
+          "subject": "Physiotherapy availability",
+          "assumption": "The physiotherapist or clinic can accept the moved session on Thursday 2026-11-19 from 18:15 to 19:15.",
+          "evidence_gap": "The rationale explicitly says the physiotherapy move needs clinic confirmation, and the visible calendar only establishes a free slot and 15-minute travel time, not clinic availability.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Supervisor meeting confirmation",
+          "assumption": "The thesis supervisor accepts the moved online meeting on Wednesday 2026-11-18 from 17:00 to 18:00.",
+          "evidence_gap": "The event description lists a Wednesday 17:00 slot, but the rationale still says confirmation with the supervisor is needed.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Hospital rota administration",
+          "assumption": "The ward manager or HR records the Tuesday night-shift swap and associated Friday day off as intended.",
+          "evidence_gap": "The technical validation confirms the specific work_tue move authorization, but the rationale still says the rota record and Friday day off should be confirmed by the ward manager or HR.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Friday swimming feasibility",
+          "assumption": "The moved swimming session on Friday 2026-11-20 from 18:00 to 20:00 is compatible with the user's Friday obligations and pool availability.",
+          "evidence_gap": "The rationale says Friday swimming uses supplied daily pool availability but depends on no unseen Friday conflict; the visible calendar does not show the rest of Friday.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Post-night-shift cognitive capacity",
+          "assumption": "The user can meaningfully attend the supervisor meeting at 17:00–18:00 and complete thesis work at 18:15–20:15 on Wednesday after the Tuesday night shift and daytime sleep.",
+          "evidence_gap": "The calendar reserves time after sleep and lunch, but it does not provide user-specific evidence about alertness or cognitive effectiveness after overnight hospital work.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Thursday post-shift capacity",
+          "assumption": "The user can sustainably complete thesis work 15:45–17:45 and physiotherapy 18:15–19:15 after the fixed Thursday hospital shift 07:00–15:00.",
+          "evidence_gap": "The revised rationale protects Wednesday better but does not specifically substantiate the Thursday post-shift workload beyond showing that it fits.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Wednesday night sleep after daytime sleep",
+          "assumption": "The user can sleep effectively from 22:00 to 06:00 on Wednesday night after having slept from 07:30 to 15:30 earlier the same day.",
+          "evidence_gap": "Both sleep blocks are visible and protected, but the proposal does not provide user-specific evidence that this quick return to night sleep is realistic after an intact daytime recovery block.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    }
+  ],
+  "schema_version": "2.0",
+  "profile_id": "nurse_masters_01__nurse_shift_worker_masters_night_shift_cover_001",
+  "scenario_sha256": "cdd3583989f4047a0717aa00308540ba1a2d270f6e924488fb4e9df6c316c00c",
+  "aggregate_requirements_sha256": "161fa5eff4e86c34c74e1405322732fed99e609eb1ef9b94017361808b2d13c8",
+  "confirmed_changes_sha256": "b5a9135077ce7412c0c0b3aea6f5ea6b5049c6055e0d2ac500befe32c1d45445",
+  "simulator_version": "calendar_v2_validated_added_metadata_v2",
+  "dataset_manifest_sha256": "28af38846fb8995651d5f63ab63402e36147dc0915a2bfcd5379747ea531ffad",
+  "split": "train",
+  "run_id": "1645281f18f54a23b4bd92637f362a61",
+  "experiment_id": null,
+  "repeat_index": 0,
+  "generated_at": "2026-11-25T23:44:16.713168+00:00",
+  "prompt_versions": {
+    "proposer_sha256": "ae6fa59cccb86c31f34f66d07d241660b1feadf852ebf1b594bc85addab86985",
+    "proposer_wire_schema_version": "compact_proposal_v1",
+    "proposer_wire_schema_sha256": "f504fbcd7e939c43e055e2f188feb22097a284bcd9b043227d868e559547b865",
+    "proposer_revision_sha256": "3f0fe7f221013700694a22984560612013e9804072ffde4538e1329b9708ac95",
+    "critic_sha256": "1686688cdd4bc63abb12e6633ef9dbb9b62d69b69aba1c4805a201657cc5bb34"
+  },
+  "seconds": 167.802,
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [],
+    "valid": true,
+    "aggregate_checks": [
+      {
+        "id": "thesis_daily_time_2026-11-17",
+        "status": "pass",
+        "minutes": 120.0,
+        "minimum_minutes": 120,
+        "category": "thesis",
+        "evidence": "union of final calendar intervals"
+      },
+      {
+        "id": "thesis_daily_time_2026-11-18",
+        "status": "pass",
+        "minutes": 180.0,
+        "minimum_minutes": 120,
+        "category": "thesis",
+        "evidence": "union of final calendar intervals"
+      },
+      {
+        "id": "thesis_daily_time_2026-11-19",
+        "status": "pass",
+        "minutes": 120.0,
+        "minimum_minutes": 120,
+        "category": "thesis",
+        "evidence": "union of final calendar intervals"
+      }
+    ],
+    "aggregate_validation_version": "duration_total_v1",
+    "confirmed_change_authorizations": [
+      {
+        "event_id": "work_tue",
+        "type": "move",
+        "to_start": "2026-11-17T23:00:00+00:00",
+        "to_end": "2026-11-18T07:00:00+00:00"
+      }
+    ]
+  }
+}

@@ -183,9 +183,10 @@ def test_batch_archives_unrecovered_structured_failure_outside_active_runs(
     assert not (tmp_path / "eval/runs").exists()
 
 
-def test_real_resume_recognizes_ten_manifest_authenticated_pilot_runs(monkeypatch, capsys):
+def test_real_resume_recognizes_remaining_manifest_authenticated_pilot_runs(monkeypatch, capsys):
     pilot = historical_pilot_completed_b(ROOT)
-    assert len(pilot) == 10
+    assert len(pilot) == 9
+    assert "parent_young_children_car_breakdown_solo_001" not in pilot
     assert all(record["_completion_source"] == "historical_pilot_manifest"
                for record in pilot.values())
 
@@ -198,13 +199,13 @@ def test_real_resume_recognizes_ten_manifest_authenticated_pilot_runs(monkeypatc
         "dry-run must not execute a scenario"))
     output = capsys.readouterr().out
     assert code == 0
-    assert summary["already_completed_total"] == 10
+    assert summary["already_completed_total"] == 9
     assert summary["already_completed_compatible"] == 0
     assert summary["already_completed_current"] == 0
-    assert summary["already_completed_pilot"] == 10
-    assert summary["pending_selected"] == 50
-    assert output.count("ALREADY_COMPLETED_PILOT —") == 10
-    assert output.count("WOULD RUN —") == 50
+    assert summary["already_completed_pilot"] == 9
+    assert summary["pending_selected"] == 51
+    assert output.count("ALREADY_COMPLETED_PILOT —") == 9
+    assert output.count("WOULD RUN —") == 51
 
 
 def test_pilot_manifest_identity_takes_precedence_over_newer_compatible_run(

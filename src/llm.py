@@ -330,7 +330,7 @@ class IAeduProvider:
     def generation_config(self) -> dict:
         return {"max_retries": self.max_retries, "timeout_seconds": list(self.timeout),
                 "structured_output": "prompt_and_local_validation",
-                "thread_policy": "new_uuid_per_request",
+                "thread_policy": "one_uuid_per_structured_retry_sequence",
                 "rate_limit_max_retries": self.rate_limit_max_retries,
                 "rate_limit_base_delay_seconds": self.rate_limit_base_delay,
                 "rate_limit_max_delay_seconds": self.rate_limit_max_delay,
@@ -480,12 +480,13 @@ class IAeduProvider:
         failed_outputs: list[str] = []
         diagnostics: list[dict] = []
         retry_feedback = ""
+        structured_thread_id = str(uuid.uuid4())
         self.last_failed_outputs = []
         self.last_structured_output_diagnostics = []
         for attempt in range(self.max_retries):
-            suffix = "" if attempt == 0 else f"\n\n{retry_feedback}"
+            message = instruction if attempt == 0 else retry_feedback
             try:
-                output = self.generate_text(instruction + suffix)
+                output = self.generate_text(message, thread_id=structured_thread_id)
             except LLMError as exc:
                 category = exc.diagnostics.get("classification")
                 if category not in {"output_truncated", "stream_protocol_error"}:

@@ -1,0 +1,2577 @@
+{
+  "proposal_id": "v2p_67bcf7af31616229494fcb3e",
+  "scenario_id": "elite_athlete_student_physiological_testing_capstone_001",
+  "family_id": "elite_athlete_student_schedule_conflict",
+  "profile_id": "elite_athlete_student_01__elite_athlete_student_physiological_testing_capstone_001",
+  "split": "train",
+  "run_id": "2900c416b1674f4e9afbcb8b9d1f3bd4",
+  "configuration": "B",
+  "generated_at": "2026-11-25T23:33:38.337695+00:00",
+  "proposer_provider": "iaedu",
+  "proposer_model": "GPT-5.5",
+  "proposer_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_provider": "iaedu",
+  "critic_model": "GPT-5.5",
+  "critic_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "prompt_versions": {
+    "proposer_sha256": "ae6fa59cccb86c31f34f66d07d241660b1feadf852ebf1b594bc85addab86985",
+    "proposer_wire_schema_version": "compact_proposal_v1",
+    "proposer_wire_schema_sha256": "f504fbcd7e939c43e055e2f188feb22097a284bcd9b043227d868e559547b865",
+    "proposer_revision_sha256": "3f0fe7f221013700694a22984560612013e9804072ffde4538e1329b9708ac95",
+    "critic_sha256": "1686688cdd4bc63abb12e6633ef9dbb9b62d69b69aba1c4805a201657cc5bb34"
+  },
+  "critic_settings": {
+    "threshold": 4.0,
+    "max_refinements": 3,
+    "min_dimension_score": 1
+  },
+  "experiment_id": null,
+  "repeat_index": 0,
+  "seconds": 102.364,
+  "critic_score": 4.0,
+  "critic_accepted": true,
+  "iterations": [
+    {
+      "index": 0,
+      "proposer_feedback": null,
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "VO2 Max and Body Composition Testing",
+            "from_start": null,
+            "to_start": "2027-03-23T07:30:00+00:00",
+            "to_end": "2027-03-23T10:30:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "participants": [
+              "user",
+              "sports science lab"
+            ]
+          },
+          {
+            "type": "delete",
+            "event_id": "training_am_tue",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Post-fasting breakfast",
+            "from_start": null,
+            "to_start": "2027-03-23T10:30:00+00:00",
+            "to_end": "2027-03-23T11:00:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "move",
+            "event_id": "capstone_meeting_tue",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-03-23T14:00:00+00:00",
+            "to_end": "2027-03-23T15:00:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "Tuesday morning conditioning may be removed because the request explicitly says the lab testing replaces it.",
+            "All other protected training sessions and all protected 8-hour sleep blocks are left unchanged.",
+            "The original 10:30 in-person meeting is infeasible after testing, breakfast, and a 30-minute commute requirement.",
+            "Changing the supervisor meeting requires professor confirmation because it involves a third party.",
+            "The calendar already contains 6 hours of capstone study across the week, so no extra study block is needed.",
+            "The meeting format change to video is supported by the supplied availability but still needs professor confirmation."
+          ],
+          "priorities": [
+            "Use Tuesday 14:00 video because it solves the immediate conflict without disturbing protected training or sleep.",
+            "Keep existing capstone study blocks intact to preserve the 6-hour weekly target.",
+            "Avoid Thursday 11:00 in person because it would disrupt an existing capstone study block."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Move the supervisor meeting to Thursday 11:00 in person.",
+              "rejected_because": "This is supplied as available, but it conflicts with Thursday capstone study and would require additional rearrangement."
+            },
+            {
+              "option": "Keep the supervisor meeting at Tuesday 10:30 in person.",
+              "rejected_because": "Rejected because testing ends at 10:30 and the stated breakfast plus commute requirement makes attendance infeasible."
+            }
+          ],
+          "summary": "The plan replaces Tuesday morning conditioning with the mandatory lab testing, protects all remaining training and sleep, adds a post-fasting breakfast buffer, and moves the supervisor meeting to Tuesday 14:00 by video with professor confirmation required."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-03-21T22:30:00+00:00",
+            "end": "2027-03-22T06:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_mon",
+            "title": "Morning Strength Training",
+            "start": "2027-03-22T07:00:00+00:00",
+            "end": "2027-03-22T09:00:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_mon",
+            "title": "Capstone Project Literature Review",
+            "start": "2027-03-22T10:00:00+00:00",
+            "end": "2027-03-22T12:00:00+00:00",
+            "category": "study",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Capstone work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_mon",
+            "title": "Lunch",
+            "start": "2027-03-22T12:30:00+00:00",
+            "end": "2027-03-22T13:30:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_mon",
+            "title": "Afternoon Technical Training",
+            "start": "2027-03-22T16:30:00+00:00",
+            "end": "2027-03-22T18:30:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-03-22T22:30:00+00:00",
+            "end": "2027-03-23T06:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_0",
+            "title": "VO2 Max and Body Composition Testing",
+            "start": "2027-03-23T07:30:00+00:00",
+            "end": "2027-03-23T10:30:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": null,
+            "participants": [
+              "user",
+              "sports science lab"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "new_2",
+            "title": "Post-fasting breakfast",
+            "start": "2027-03-23T10:30:00+00:00",
+            "end": "2027-03-23T11:00:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "lunch_tue",
+            "title": "Lunch",
+            "start": "2027-03-23T12:30:00+00:00",
+            "end": "2027-03-23T13:30:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "capstone_meeting_tue",
+            "title": "Capstone Project Supervisor Meeting",
+            "start": "2027-03-23T14:00:00+00:00",
+            "end": "2027-03-23T15:00:00+00:00",
+            "category": "classes",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "professor"
+            ],
+            "description": "In-person meeting on campus (30-min commute from HPC); professor is also free Thursday 11:00–12:00 or Tuesday 14:00–15:00 via video.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "training_pm_tue",
+            "title": "Afternoon Tactical Session",
+            "start": "2027-03-23T16:30:00+00:00",
+            "end": "2027-03-23T18:30:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-03-23T22:30:00+00:00",
+            "end": "2027-03-24T06:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_wed",
+            "title": "Morning Pool Recovery",
+            "start": "2027-03-24T07:00:00+00:00",
+            "end": "2027-03-24T09:00:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "class_elective_wed",
+            "title": "Sports Economics Elective",
+            "start": "2027-03-24T10:00:00+00:00",
+            "end": "2027-03-24T12:00:00+00:00",
+            "category": "classes",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Morning class.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_wed",
+            "title": "Lunch",
+            "start": "2027-03-24T12:30:00+00:00",
+            "end": "2027-03-24T13:30:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_wed",
+            "title": "Afternoon Technical Training",
+            "start": "2027-03-24T16:30:00+00:00",
+            "end": "2027-03-24T18:30:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-03-24T22:30:00+00:00",
+            "end": "2027-03-25T06:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_thu",
+            "title": "Morning Gym",
+            "start": "2027-03-25T07:00:00+00:00",
+            "end": "2027-03-25T09:00:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_thu",
+            "title": "Capstone Data Analysis",
+            "start": "2027-03-25T10:00:00+00:00",
+            "end": "2027-03-25T12:00:00+00:00",
+            "category": "study",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Capstone work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_thu",
+            "title": "Lunch",
+            "start": "2027-03-25T12:30:00+00:00",
+            "end": "2027-03-25T13:30:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_thu",
+            "title": "Afternoon Tactical Session",
+            "start": "2027-03-25T16:30:00+00:00",
+            "end": "2027-03-25T18:30:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-03-25T22:30:00+00:00",
+            "end": "2027-03-26T06:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_fri",
+            "title": "Morning Speed Session",
+            "start": "2027-03-26T07:00:00+00:00",
+            "end": "2027-03-26T09:00:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_fri",
+            "title": "Capstone Draft Writing",
+            "start": "2027-03-26T10:00:00+00:00",
+            "end": "2027-03-26T12:00:00+00:00",
+            "category": "study",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Capstone work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_fri",
+            "title": "Afternoon Scrimmage",
+            "start": "2027-03-26T16:30:00+00:00",
+            "end": "2027-03-26T18:30:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "social_fri",
+            "title": "Student Association Coffee & Networking",
+            "start": "2027-03-26T19:30:00+00:00",
+            "end": "2027-03-26T21:00:00+00:00",
+            "category": "social",
+            "importance": 2,
+            "fixed": false,
+            "participants": [
+              "user",
+              "peers"
+            ],
+            "description": "Campus café event.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 3,
+          "coherence": 3,
+          "alternatives": 3,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The rationale protects sleep and most existing commitments, but it does not meaningfully assess the human effect of placing a 3-hour VO2 max and body composition testing block from 07:30 to 10:30 on Tuesday before an existing Afternoon Tactical Session from 16:30 to 18:30 the same day. Because VO2 max testing can be physically demanding, the preserved afternoon training is a material manageability risk even though it is not a technical overlap.",
+          "The moved supervisor meeting is described in the rationale as Tuesday 14:00 by video, but the final calendar event description still says 'In-person meeting on campus' and only notes that Tuesday 14:00–15:00 is available via video. This creates uncertainty about whether the operational change actually includes the format change needed to avoid the commute problem.",
+          "The proposal adds Post-fasting breakfast immediately from 10:30 to 11:00 after testing ends at 10:30. This is thoughtful, but it assumes the user can finish testing, transition, and eat immediately without checkout, changing, recovery, or lab delay. That may be workable, but the rationale treats it as sufficient without evidence.",
+          "The alternatives considered are relevant but narrow. The rationale compares Tuesday 14:00 video against keeping Tuesday 10:30 or moving to Thursday 11:00, but it does not discuss whether the Tuesday afternoon training load should be reconsidered, modified, or explicitly confirmed as acceptable after the testing.",
+          "Request satisfaction cannot be independently verified because the original request is not provided. The proposal claims Tuesday morning conditioning may be removed and that 6 hours of capstone study are already present, but only the visible rationale and resulting calendar support that claim."
+        ],
+        "feedback": "The schedule is mostly coherent and avoids obvious calendar collisions: sleep is preserved, the Tuesday morning training is removed rather than stacking lab testing on top of it, breakfast is added, lunch remains available, and the supervisor meeting is moved away from the infeasible 10:30 slot. The main human-quality concern is Tuesday’s physical load: a 07:30–10:30 VO2/body composition testing block, followed later by a 16:30–18:30 tactical training session, may be a demanding same-day sequence. The plan may still be acceptable if the testing protocol, coach, lab, or user context confirms that afternoon training is suitable, but the current rationale does not show that this was weighed. The meeting move is sensible in principle, but the final calendar should more clearly reflect whether the 14:00 meeting is actually by video, since the preserved description still frames it as an in-person campus meeting. A stronger revision would either substantiate why the Tuesday afternoon tactical session remains sustainable after testing or reconsider the same-day load using the Proposer’s fuller context, without assuming that a conflict-free slot is automatically a good human schedule.",
+        "plausibility_review": {
+          "revision_required": true,
+          "severity": "moderate",
+          "reason": "A concrete manageability risk remains on Tuesday: the proposed lab testing from 07:30 to 10:30 appears physically demanding and is followed the same day by a preserved 16:30 to 18:30 tactical training session. The rationale explains why Tuesday morning conditioning is replaced, but it does not address whether the afternoon session remains appropriate after VO2 testing. There is also an operational ambiguity because the rationale says the supervisor meeting becomes video, while the final event description still describes an in-person campus meeting. These issues could materially affect recovery, punctuality, and the practical success of the proposed day.",
+          "suggested_improvement": "Reconsider or substantiate the Tuesday plan with the fuller context: explicitly address whether afternoon tactical training is safe and sustainable after the lab testing, and make the supervisor meeting format unambiguous in the resulting calendar. The Proposer may keep the same timing if there is grounded support from the lab, coach, professor, or user context."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Tuesday afternoon training after lab testing",
+            "assumption": "The user can sustainably complete Afternoon Tactical Session from 16:30 to 18:30 after VO2 Max and Body Composition Testing from 07:30 to 10:30 the same day.",
+            "evidence_gap": "The rationale says the lab testing replaces Tuesday morning conditioning, but it does not provide evidence that the remaining afternoon tactical session is appropriate after a potentially demanding fitness test.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Supervisor meeting format",
+            "assumption": "The Capstone Project Supervisor Meeting at Tuesday 14:00–15:00 is actually by video rather than in person.",
+            "evidence_gap": "The rationale states that Tuesday 14:00 video is chosen, but the final calendar description still says 'In-person meeting on campus' and only mentions Tuesday 14:00–15:00 as video availability.",
+            "potential_impact": "material",
+            "verification_source": "third_party"
+          },
+          {
+            "subject": "Professor confirmation",
+            "assumption": "The professor confirms the moved Tuesday 14:00–15:00 meeting and the video format.",
+            "evidence_gap": "The rationale explicitly says professor confirmation is required, but no confirmation is included in the proposal or validation.",
+            "potential_impact": "potentially_blocking",
+            "verification_source": "third_party"
+          },
+          {
+            "subject": "Post-testing breakfast timing",
+            "assumption": "The user can finish testing at 10:30 and immediately use 10:30–11:00 for breakfast.",
+            "evidence_gap": "No transition time is shown between the end of lab testing and breakfast, and the proposal does not document lab checkout, changing, recovery, or possible overrun needs.",
+            "potential_impact": "minor",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Lab testing logistics",
+            "assumption": "The 07:30 start is realistic after sleep ending at 06:30, including any required arrival time, preparation, travel, and fasting instructions.",
+            "evidence_gap": "The calendar shows one hour between sleep ending and testing starting, but does not include preparation or travel details, and the technical validation did not check natural-language logistics.",
+            "potential_impact": "material",
+            "verification_source": "external_source"
+          }
+        ],
+        "overall": 3.25
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": false,
+        "plausibility_revision_required": true,
+        "accepted": false,
+        "revision_causes": [
+          "numeric_criteria_failed",
+          "plausibility_revision_required"
+        ]
+      },
+      "operations_changed_from_previous": null,
+      "rationale_changed_from_previous": null,
+      "prior_critic_reviews": [],
+      "unresolved_assumptions": [
+        {
+          "subject": "Tuesday afternoon training after lab testing",
+          "assumption": "The user can sustainably complete Afternoon Tactical Session from 16:30 to 18:30 after VO2 Max and Body Composition Testing from 07:30 to 10:30 the same day.",
+          "evidence_gap": "The rationale says the lab testing replaces Tuesday morning conditioning, but it does not provide evidence that the remaining afternoon tactical session is appropriate after a potentially demanding fitness test.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Supervisor meeting format",
+          "assumption": "The Capstone Project Supervisor Meeting at Tuesday 14:00–15:00 is actually by video rather than in person.",
+          "evidence_gap": "The rationale states that Tuesday 14:00 video is chosen, but the final calendar description still says 'In-person meeting on campus' and only mentions Tuesday 14:00–15:00 as video availability.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Professor confirmation",
+          "assumption": "The professor confirms the moved Tuesday 14:00–15:00 meeting and the video format.",
+          "evidence_gap": "The rationale explicitly says professor confirmation is required, but no confirmation is included in the proposal or validation.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Post-testing breakfast timing",
+          "assumption": "The user can finish testing at 10:30 and immediately use 10:30–11:00 for breakfast.",
+          "evidence_gap": "No transition time is shown between the end of lab testing and breakfast, and the proposal does not document lab checkout, changing, recovery, or possible overrun needs.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Lab testing logistics",
+          "assumption": "The 07:30 start is realistic after sleep ending at 06:30, including any required arrival time, preparation, travel, and fasting instructions.",
+          "evidence_gap": "The calendar shows one hour between sleep ending and testing starting, but does not include preparation or travel details, and the technical validation did not check natural-language logistics.",
+          "potential_impact": "material",
+          "verification_source": "external_source"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "proposer_feedback": "Numeric Critic criteria failed. Scores: {\"reasoning\":3,\"coherence\":3,\"alternatives\":3,\"clarity\":4}. Plausibility revision required (moderate): A concrete manageability risk remains on Tuesday: the proposed lab testing from 07:30 to 10:30 appears physically demanding and is followed the same day by a preserved 16:30 to 18:30 tactical training session. The rationale explains why Tuesday morning conditioning is replaced, but it does not address whether the afternoon session remains appropriate after VO2 testing. There is also an operational ambiguity because the rationale says the supervisor meeting becomes video, while the final event description still describes an in-person campus meeting. These issues could materially affect recovery, punctuality, and the practical success of the proposed day. Suggested direction: Reconsider or substantiate the Tuesday plan with the fuller context: explicitly address whether afternoon tactical training is safe and sustainable after the lab testing, and make the supervisor meeting format unambiguous in the resulting calendar. The Proposer may keep the same timing if there is grounded support from the lab, coach, professor, or user context. The Critic lacks the full user constraints; explain if no better feasible option exists. Unverified conditions to reassess: [{'subject': 'Tuesday afternoon training after lab testing', 'assumption': 'The user can sustainably complete Afternoon Tactical Session from 16:30 to 18:30 after VO2 Max and Body Composition Testing from 07:30 to 10:30 the same day.', 'evidence_gap': 'The rationale says the lab testing replaces Tuesday morning conditioning, but it does not provide evidence that the remaining afternoon tactical session is appropriate after a potentially demanding fitness test.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Supervisor meeting format', 'assumption': 'The Capstone Project Supervisor Meeting at Tuesday 14:00–15:00 is actually by video rather than in person.', 'evidence_gap': \"The rationale states that Tuesday 14:00 video is chosen, but the final calendar description still says 'In-person meeting on campus' and only mentions Tuesday 14:00–15:00 as video availability.\", 'potential_impact': 'material', 'verification_source': 'third_party'}, {'subject': 'Professor confirmation', 'assumption': 'The professor confirms the moved Tuesday 14:00–15:00 meeting and the video format.', 'evidence_gap': 'The rationale explicitly says professor confirmation is required, but no confirmation is included in the proposal or validation.', 'potential_impact': 'potentially_blocking', 'verification_source': 'third_party'}, {'subject': 'Post-testing breakfast timing', 'assumption': 'The user can finish testing at 10:30 and immediately use 10:30–11:00 for breakfast.', 'evidence_gap': 'No transition time is shown between the end of lab testing and breakfast, and the proposal does not document lab checkout, changing, recovery, or possible overrun needs.', 'potential_impact': 'minor', 'verification_source': 'unknown'}, {'subject': 'Lab testing logistics', 'assumption': 'The 07:30 start is realistic after sleep ending at 06:30, including any required arrival time, preparation, travel, and fasting instructions.', 'evidence_gap': 'The calendar shows one hour between sleep ending and testing starting, but does not include preparation or travel details, and the technical validation did not check natural-language logistics.', 'potential_impact': 'material', 'verification_source': 'external_source'}] Weaknesses: ['The rationale protects sleep and most existing commitments, but it does not meaningfully assess the human effect of placing a 3-hour VO2 max and body composition testing block from 07:30 to 10:30 on Tuesday before an existing Afternoon Tactical Session from 16:30 to 18:30 the same day. Because VO2 max testing can be physically demanding, the preserved afternoon training is a material manageability risk even though it is not a technical overlap.', \"The moved supervisor meeting is described in the rationale as Tuesday 14:00 by video, but the final calendar event description still says 'In-person meeting on campus' and only notes that Tuesday 14:00–15:00 is available via video. This creates uncertainty about whether the operational change actually includes the format change needed to avoid the commute problem.\", 'The proposal adds Post-fasting breakfast immediately from 10:30 to 11:00 after testing ends at 10:30. This is thoughtful, but it assumes the user can finish testing, transition, and eat immediately without checkout, changing, recovery, or lab delay. That may be workable, but the rationale treats it as sufficient without evidence.', 'The alternatives considered are relevant but narrow. The rationale compares Tuesday 14:00 video against keeping Tuesday 10:30 or moving to Thursday 11:00, but it does not discuss whether the Tuesday afternoon training load should be reconsidered, modified, or explicitly confirmed as acceptable after the testing.', 'Request satisfaction cannot be independently verified because the original request is not provided. The proposal claims Tuesday morning conditioning may be removed and that 6 hours of capstone study are already present, but only the visible rationale and resulting calendar support that claim.']. Actionable feedback: The schedule is mostly coherent and avoids obvious calendar collisions: sleep is preserved, the Tuesday morning training is removed rather than stacking lab testing on top of it, breakfast is added, lunch remains available, and the supervisor meeting is moved away from the infeasible 10:30 slot. The main human-quality concern is Tuesday’s physical load: a 07:30–10:30 VO2/body composition testing block, followed later by a 16:30–18:30 tactical training session, may be a demanding same-day sequence. The plan may still be acceptable if the testing protocol, coach, lab, or user context confirms that afternoon training is suitable, but the current rationale does not show that this was weighed. The meeting move is sensible in principle, but the final calendar should more clearly reflect whether the 14:00 meeting is actually by video, since the preserved description still frames it as an in-person campus meeting. A stronger revision would either substantiate why the Tuesday afternoon tactical session remains sustainable after testing or reconsider the same-day load using the Proposer’s fuller context, without assuming that a conflict-free slot is automatically a good human schedule.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "VO2 Max and Body Composition Testing",
+            "from_start": null,
+            "to_start": "2027-03-23T07:30:00+00:00",
+            "to_end": "2027-03-23T10:30:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "participants": [
+              "user",
+              "sports science lab"
+            ]
+          },
+          {
+            "type": "delete",
+            "event_id": "training_am_tue",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Post-fasting breakfast",
+            "from_start": null,
+            "to_start": "2027-03-23T10:45:00+00:00",
+            "to_end": "2027-03-23T11:30:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "delete",
+            "event_id": "capstone_meeting_tue",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Capstone Project Supervisor Meeting (video call)",
+            "from_start": null,
+            "to_start": "2027-03-23T14:00:00+00:00",
+            "to_end": "2027-03-23T15:00:00+00:00",
+            "category": "classes",
+            "importance": 4,
+            "participants": [
+              "user",
+              "professor"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Recovery buffer before afternoon training",
+            "from_start": null,
+            "to_start": "2027-03-23T15:00:00+00:00",
+            "to_end": "2027-03-23T16:00:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "Tuesday morning conditioning may be removed because the request explicitly says the lab testing replaces it.",
+            "All other protected training sessions and all protected 8-hour sleep blocks are left unchanged.",
+            "The original 10:30 in-person meeting is infeasible after testing, breakfast, and the stated commute requirement.",
+            "The professor must confirm replacing the original meeting with the Tuesday video-call slot.",
+            "The calendar already contains 6 hours of capstone study across the week, so no extra study block is needed.",
+            "Tuesday afternoon training remains a manageability risk after VO2 testing because no coach, lab, or medical guidance was supplied.",
+            "Testing arrival logistics, lab checkout, possible overrun, and post-test clearance are unknown."
+          ],
+          "priorities": [
+            "Use the Tuesday video option to avoid the campus commute and avoid disrupting Thursday capstone study.",
+            "Reserve a recovery buffer before the protected afternoon training rather than adding more tasks to Tuesday.",
+            "Keep existing capstone study blocks intact to preserve the weekly study target.",
+            "Make the meeting format explicit by replacing the in-person event with a video-call event."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Move the supervisor meeting to Thursday 11:00 in person.",
+              "rejected_because": "This is supplied as available, but it would disrupt Thursday capstone study and add in-person logistics."
+            },
+            {
+              "option": "Modify or cancel Tuesday afternoon tactical training.",
+              "rejected_because": "Rejected because that session is protected and no exact coach or lab exception was supplied."
+            },
+            {
+              "option": "Keep the supervisor meeting at Tuesday 10:30 in person.",
+              "rejected_because": "Rejected because testing ends then and the stated breakfast plus commute requirement makes attendance infeasible."
+            }
+          ],
+          "summary": "The plan replaces only the excused Tuesday morning training with lab testing, makes the supervisor meeting an explicit Tuesday video call needing professor confirmation, preserves the 6 hours of capstone study, and adds recovery space before the protected afternoon session while flagging that same-day training suitability still needs coach or lab guidance."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [
+          "new_5: added-event category, importance and participants were not supplied; simulation uses neutral internal defaults"
+        ],
+        "valid": true
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-03-21T22:30:00+00:00",
+            "end": "2027-03-22T06:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_mon",
+            "title": "Morning Strength Training",
+            "start": "2027-03-22T07:00:00+00:00",
+            "end": "2027-03-22T09:00:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_mon",
+            "title": "Capstone Project Literature Review",
+            "start": "2027-03-22T10:00:00+00:00",
+            "end": "2027-03-22T12:00:00+00:00",
+            "category": "study",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Capstone work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_mon",
+            "title": "Lunch",
+            "start": "2027-03-22T12:30:00+00:00",
+            "end": "2027-03-22T13:30:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_mon",
+            "title": "Afternoon Technical Training",
+            "start": "2027-03-22T16:30:00+00:00",
+            "end": "2027-03-22T18:30:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-03-22T22:30:00+00:00",
+            "end": "2027-03-23T06:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_0",
+            "title": "VO2 Max and Body Composition Testing",
+            "start": "2027-03-23T07:30:00+00:00",
+            "end": "2027-03-23T10:30:00+00:00",
+            "category": "health",
+            "importance": 5,
+            "fixed": null,
+            "participants": [
+              "user",
+              "sports science lab"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "new_2",
+            "title": "Post-fasting breakfast",
+            "start": "2027-03-23T10:45:00+00:00",
+            "end": "2027-03-23T11:30:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "lunch_tue",
+            "title": "Lunch",
+            "start": "2027-03-23T12:30:00+00:00",
+            "end": "2027-03-23T13:30:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_4",
+            "title": "Capstone Project Supervisor Meeting (video call)",
+            "start": "2027-03-23T14:00:00+00:00",
+            "end": "2027-03-23T15:00:00+00:00",
+            "category": "classes",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user",
+              "professor"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "new_5",
+            "title": "Recovery buffer before afternoon training",
+            "start": "2027-03-23T15:00:00+00:00",
+            "end": "2027-03-23T16:00:00+00:00",
+            "category": null,
+            "importance": null,
+            "fixed": null,
+            "participants": null,
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "training_pm_tue",
+            "title": "Afternoon Tactical Session",
+            "start": "2027-03-23T16:30:00+00:00",
+            "end": "2027-03-23T18:30:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-03-23T22:30:00+00:00",
+            "end": "2027-03-24T06:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_wed",
+            "title": "Morning Pool Recovery",
+            "start": "2027-03-24T07:00:00+00:00",
+            "end": "2027-03-24T09:00:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "class_elective_wed",
+            "title": "Sports Economics Elective",
+            "start": "2027-03-24T10:00:00+00:00",
+            "end": "2027-03-24T12:00:00+00:00",
+            "category": "classes",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Morning class.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_wed",
+            "title": "Lunch",
+            "start": "2027-03-24T12:30:00+00:00",
+            "end": "2027-03-24T13:30:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_wed",
+            "title": "Afternoon Technical Training",
+            "start": "2027-03-24T16:30:00+00:00",
+            "end": "2027-03-24T18:30:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-03-24T22:30:00+00:00",
+            "end": "2027-03-25T06:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_thu",
+            "title": "Morning Gym",
+            "start": "2027-03-25T07:00:00+00:00",
+            "end": "2027-03-25T09:00:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_thu",
+            "title": "Capstone Data Analysis",
+            "start": "2027-03-25T10:00:00+00:00",
+            "end": "2027-03-25T12:00:00+00:00",
+            "category": "study",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Capstone work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_thu",
+            "title": "Lunch",
+            "start": "2027-03-25T12:30:00+00:00",
+            "end": "2027-03-25T13:30:00+00:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_thu",
+            "title": "Afternoon Tactical Session",
+            "start": "2027-03-25T16:30:00+00:00",
+            "end": "2027-03-25T18:30:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-03-25T22:30:00+00:00",
+            "end": "2027-03-26T06:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_fri",
+            "title": "Morning Speed Session",
+            "start": "2027-03-26T07:00:00+00:00",
+            "end": "2027-03-26T09:00:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_fri",
+            "title": "Capstone Draft Writing",
+            "start": "2027-03-26T10:00:00+00:00",
+            "end": "2027-03-26T12:00:00+00:00",
+            "category": "study",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Capstone work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_fri",
+            "title": "Afternoon Scrimmage",
+            "start": "2027-03-26T16:30:00+00:00",
+            "end": "2027-03-26T18:30:00+00:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "social_fri",
+            "title": "Student Association Coffee & Networking",
+            "start": "2027-03-26T19:30:00+00:00",
+            "end": "2027-03-26T21:00:00+00:00",
+            "category": "social",
+            "importance": 2,
+            "fixed": false,
+            "participants": [
+              "user",
+              "peers"
+            ],
+            "description": "Campus café event.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied only from validated Proposal fields. Null values identify fields not supplied by the Proposal; simulator defaults are internal. Missing by event: {'new_5': ['category', 'importance', 'participants']}"
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 4,
+          "alternatives": 4,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The main remaining human-quality risk is still Tuesday's same-day physical load: VO2 Max and Body Composition Testing from 07:30 to 10:30 is followed by Afternoon Tactical Session from 16:30 to 18:30. The added 15:00 to 16:00 recovery buffer is a meaningful improvement, but it does not by itself establish that tactical training is sustainable after potentially demanding testing.",
+          "The Tuesday sequence is dense even though it is conflict-free: testing 07:30–10:30, breakfast 10:45–11:30, lunch 12:30–13:30, supervisor video call 14:00–15:00, recovery buffer 15:00–16:00, and training 16:30–18:30. This leaves some visible margin, but the practical adequacy depends on lab checkout, post-test condition, preparation for the video call, and training readiness.",
+          "The proposal relies on professor confirmation for the replacement Tuesday 14:00–15:00 video meeting. The revised calendar now makes the video format explicit, resolving the prior internal ambiguity, but the third-party confirmation remains unverified and could still affect whether the schedule works as planned.",
+          "The breakfast revision from 10:45 to 11:30 is more humane than the prior immediate 10:30 start, but it still assumes testing ends close to time and that 15 minutes is enough for checkout, changing, recovery, or any lab overrun. This is not shown to be impossible, but it remains an unsupported operational assumption.",
+          "Request satisfaction cannot be independently verified because the original request is not provided. The visible rationale supports why no extra capstone study was added and why Tuesday morning training was removed, but the review cannot confirm whether those claims fully match the user's original intent."
+        ],
+        "feedback": "The revision substantially improves the prior proposal. The supervisor meeting is now explicitly recreated as a video call from 14:00 to 15:00, which resolves the earlier contradiction with an in-person description. Breakfast has been moved later and lengthened to 10:45–11:30, giving some transition time after the 07:30–10:30 lab testing. The added 15:00–16:00 recovery buffer also shows that the proposer considered Tuesday's physical load rather than simply filling available slots. The remaining concern is not a technical conflict but a sustainability question: a 3-hour VO2/body composition testing block followed the same day by a 2-hour tactical session may be demanding, and the calendar still depends on coach, lab, or user-specific guidance that is not visible here. Because the afternoon session is described as protected and the proposer explicitly considered but rejected modifying it without an exception, another revision is not strictly required on the visible information. However, the plan should remain conditional on confirming training suitability and the professor's acceptance of the video meeting.",
+        "plausibility_review": {
+          "revision_required": false,
+          "severity": "low",
+          "reason": "The prior material concerns were mostly addressed: the meeting format is now unambiguous, breakfast has more transition time, and a recovery buffer was added before afternoon training. The same-day VO2 testing plus tactical training risk remains material if the user's post-test condition is poor, but the proposal acknowledges this risk, avoids adding more tasks, and explains that the protected afternoon session cannot be modified without coach, lab, or other contextual permission. On the visible information, a further revision would mainly restate the need for external confirmation rather than clearly improve the proposed organization.",
+          "suggested_improvement": "Keep the plan conditional and make the remaining dependencies explicit in execution: confirm with the lab or coach whether the 16:30–18:30 tactical session is appropriate after the 07:30–10:30 testing, and confirm with the professor that the 14:00–15:00 meeting is accepted as a video call. If either confirmation fails, the proposer should reconsider the Tuesday load using its fuller context."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Tuesday afternoon training after lab testing",
+            "assumption": "The user can sustainably complete Afternoon Tactical Session from 16:30 to 18:30 after VO2 Max and Body Composition Testing from 07:30 to 10:30 on the same day.",
+            "evidence_gap": "The revised proposal acknowledges the manageability risk and adds a 15:00–16:00 recovery buffer, but it does not include coach, lab, medical, or user-specific confirmation that tactical training remains appropriate after the testing.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Professor confirmation",
+            "assumption": "The professor confirms replacing the original supervisor meeting with a Tuesday 14:00–15:00 video call.",
+            "evidence_gap": "The rationale explicitly states that professor confirmation is required, but no confirmation is included in the proposal or technical validation.",
+            "potential_impact": "potentially_blocking",
+            "verification_source": "third_party"
+          },
+          {
+            "subject": "Lab testing completion and breakfast transition",
+            "assumption": "The user can complete testing by 10:30 and be ready for Post-fasting breakfast from 10:45 to 11:30.",
+            "evidence_gap": "The proposal allows 15 minutes after testing, but does not verify lab checkout, changing, post-test recovery, or possible overrun requirements.",
+            "potential_impact": "minor",
+            "verification_source": "external_source"
+          },
+          {
+            "subject": "Morning testing logistics",
+            "assumption": "The 07:30 lab testing start is realistic after sleep ending at 06:30, including preparation, travel, arrival procedures, and any fasting instructions.",
+            "evidence_gap": "The calendar shows one hour between sleep ending and testing starting, but does not include travel, preparation, or lab arrival requirements, and the validator did not check natural-language logistics.",
+            "potential_impact": "material",
+            "verification_source": "external_source"
+          },
+          {
+            "subject": "Recovery buffer usefulness",
+            "assumption": "The 15:00–16:00 recovery buffer before 16:30 training is practically usable for recovery rather than being consumed by preparation, travel, changing, or training setup.",
+            "evidence_gap": "The proposal labels the hour as recovery but provides no details on where the video call, recovery, and tactical session occur or what preparation is needed before training.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          }
+        ],
+        "overall": 4.0
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": true,
+        "plausibility_revision_required": false,
+        "accepted": true,
+        "revision_causes": []
+      },
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": [
+        {
+          "iteration": 0,
+          "proposal": {
+            "changes": [
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "VO2 Max and Body Composition Testing",
+                "from_start": null,
+                "to_start": "2027-03-23T07:30:00+00:00",
+                "to_end": "2027-03-23T10:30:00+00:00",
+                "category": "health",
+                "importance": 5,
+                "participants": [
+                  "user",
+                  "sports science lab"
+                ]
+              },
+              {
+                "type": "delete",
+                "event_id": "training_am_tue",
+                "title": null,
+                "from_start": null,
+                "to_start": null,
+                "to_end": null,
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Post-fasting breakfast",
+                "from_start": null,
+                "to_start": "2027-03-23T10:30:00+00:00",
+                "to_end": "2027-03-23T11:00:00+00:00",
+                "category": "meal",
+                "importance": 4,
+                "participants": [
+                  "user"
+                ]
+              },
+              {
+                "type": "move",
+                "event_id": "capstone_meeting_tue",
+                "title": null,
+                "from_start": null,
+                "to_start": "2027-03-23T14:00:00+00:00",
+                "to_end": "2027-03-23T15:00:00+00:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              }
+            ],
+            "rationale": {
+              "constraints": [
+                "Tuesday morning conditioning may be removed because the request explicitly says the lab testing replaces it.",
+                "All other protected training sessions and all protected 8-hour sleep blocks are left unchanged.",
+                "The original 10:30 in-person meeting is infeasible after testing, breakfast, and a 30-minute commute requirement.",
+                "Changing the supervisor meeting requires professor confirmation because it involves a third party.",
+                "The calendar already contains 6 hours of capstone study across the week, so no extra study block is needed.",
+                "The meeting format change to video is supported by the supplied availability but still needs professor confirmation."
+              ],
+              "priorities": [
+                "Use Tuesday 14:00 video because it solves the immediate conflict without disturbing protected training or sleep.",
+                "Keep existing capstone study blocks intact to preserve the 6-hour weekly target.",
+                "Avoid Thursday 11:00 in person because it would disrupt an existing capstone study block."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Move the supervisor meeting to Thursday 11:00 in person.",
+                  "rejected_because": "This is supplied as available, but it conflicts with Thursday capstone study and would require additional rearrangement."
+                },
+                {
+                  "option": "Keep the supervisor meeting at Tuesday 10:30 in person.",
+                  "rejected_because": "Rejected because testing ends at 10:30 and the stated breakfast plus commute requirement makes attendance infeasible."
+                }
+              ],
+              "summary": "The plan replaces Tuesday morning conditioning with the mandatory lab testing, protects all remaining training and sleep, adds a post-fasting breakfast buffer, and moves the supervisor meeting to Tuesday 14:00 by video with professor confirmation required."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "sleep_mon",
+                "title": "Sleep",
+                "start": "2027-03-21T22:30:00+00:00",
+                "end": "2027-03-22T06:30:00+00:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected 8-hour sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_am_mon",
+                "title": "Morning Strength Training",
+                "start": "2027-03-22T07:00:00+00:00",
+                "end": "2027-03-22T09:00:00+00:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Morning session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "study_mon",
+                "title": "Capstone Project Literature Review",
+                "start": "2027-03-22T10:00:00+00:00",
+                "end": "2027-03-22T12:00:00+00:00",
+                "category": "study",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Capstone work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "lunch_mon",
+                "title": "Lunch",
+                "start": "2027-03-22T12:30:00+00:00",
+                "end": "2027-03-22T13:30:00+00:00",
+                "category": "meal",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Lunch break.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_pm_mon",
+                "title": "Afternoon Technical Training",
+                "start": "2027-03-22T16:30:00+00:00",
+                "end": "2027-03-22T18:30:00+00:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Afternoon session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_tue",
+                "title": "Sleep",
+                "start": "2027-03-22T22:30:00+00:00",
+                "end": "2027-03-23T06:30:00+00:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected 8-hour sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_0",
+                "title": "VO2 Max and Body Composition Testing",
+                "start": "2027-03-23T07:30:00+00:00",
+                "end": "2027-03-23T10:30:00+00:00",
+                "category": "health",
+                "importance": 5,
+                "fixed": null,
+                "participants": [
+                  "user",
+                  "sports science lab"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "new_2",
+                "title": "Post-fasting breakfast",
+                "start": "2027-03-23T10:30:00+00:00",
+                "end": "2027-03-23T11:00:00+00:00",
+                "category": "meal",
+                "importance": 4,
+                "fixed": null,
+                "participants": [
+                  "user"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "lunch_tue",
+                "title": "Lunch",
+                "start": "2027-03-23T12:30:00+00:00",
+                "end": "2027-03-23T13:30:00+00:00",
+                "category": "meal",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Lunch break.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "capstone_meeting_tue",
+                "title": "Capstone Project Supervisor Meeting",
+                "start": "2027-03-23T14:00:00+00:00",
+                "end": "2027-03-23T15:00:00+00:00",
+                "category": "classes",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "professor"
+                ],
+                "description": "In-person meeting on campus (30-min commute from HPC); professor is also free Thursday 11:00–12:00 or Tuesday 14:00–15:00 via video.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "training_pm_tue",
+                "title": "Afternoon Tactical Session",
+                "start": "2027-03-23T16:30:00+00:00",
+                "end": "2027-03-23T18:30:00+00:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Afternoon session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_wed",
+                "title": "Sleep",
+                "start": "2027-03-23T22:30:00+00:00",
+                "end": "2027-03-24T06:30:00+00:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected 8-hour sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_am_wed",
+                "title": "Morning Pool Recovery",
+                "start": "2027-03-24T07:00:00+00:00",
+                "end": "2027-03-24T09:00:00+00:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Morning session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "class_elective_wed",
+                "title": "Sports Economics Elective",
+                "start": "2027-03-24T10:00:00+00:00",
+                "end": "2027-03-24T12:00:00+00:00",
+                "category": "classes",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Morning class.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "lunch_wed",
+                "title": "Lunch",
+                "start": "2027-03-24T12:30:00+00:00",
+                "end": "2027-03-24T13:30:00+00:00",
+                "category": "meal",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Lunch break.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_pm_wed",
+                "title": "Afternoon Technical Training",
+                "start": "2027-03-24T16:30:00+00:00",
+                "end": "2027-03-24T18:30:00+00:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Afternoon session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2027-03-24T22:30:00+00:00",
+                "end": "2027-03-25T06:30:00+00:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected 8-hour sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_am_thu",
+                "title": "Morning Gym",
+                "start": "2027-03-25T07:00:00+00:00",
+                "end": "2027-03-25T09:00:00+00:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Morning session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "study_thu",
+                "title": "Capstone Data Analysis",
+                "start": "2027-03-25T10:00:00+00:00",
+                "end": "2027-03-25T12:00:00+00:00",
+                "category": "study",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Capstone work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "lunch_thu",
+                "title": "Lunch",
+                "start": "2027-03-25T12:30:00+00:00",
+                "end": "2027-03-25T13:30:00+00:00",
+                "category": "meal",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Lunch break.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_pm_thu",
+                "title": "Afternoon Tactical Session",
+                "start": "2027-03-25T16:30:00+00:00",
+                "end": "2027-03-25T18:30:00+00:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Afternoon session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_fri",
+                "title": "Sleep",
+                "start": "2027-03-25T22:30:00+00:00",
+                "end": "2027-03-26T06:30:00+00:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected 8-hour sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_am_fri",
+                "title": "Morning Speed Session",
+                "start": "2027-03-26T07:00:00+00:00",
+                "end": "2027-03-26T09:00:00+00:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Morning session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "study_fri",
+                "title": "Capstone Draft Writing",
+                "start": "2027-03-26T10:00:00+00:00",
+                "end": "2027-03-26T12:00:00+00:00",
+                "category": "study",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Capstone work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_pm_fri",
+                "title": "Afternoon Scrimmage",
+                "start": "2027-03-26T16:30:00+00:00",
+                "end": "2027-03-26T18:30:00+00:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Afternoon session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "social_fri",
+                "title": "Student Association Coffee & Networking",
+                "start": "2027-03-26T19:30:00+00:00",
+                "end": "2027-03-26T21:00:00+00:00",
+                "category": "social",
+                "importance": 2,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "peers"
+                ],
+                "description": "Campus café event.",
+                "origin": "existing",
+                "change_status": "preserved"
+              }
+            ],
+            "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+          },
+          "plausibility_review": {
+            "revision_required": true,
+            "severity": "moderate",
+            "reason": "A concrete manageability risk remains on Tuesday: the proposed lab testing from 07:30 to 10:30 appears physically demanding and is followed the same day by a preserved 16:30 to 18:30 tactical training session. The rationale explains why Tuesday morning conditioning is replaced, but it does not address whether the afternoon session remains appropriate after VO2 testing. There is also an operational ambiguity because the rationale says the supervisor meeting becomes video, while the final event description still describes an in-person campus meeting. These issues could materially affect recovery, punctuality, and the practical success of the proposed day.",
+            "suggested_improvement": "Reconsider or substantiate the Tuesday plan with the fuller context: explicitly address whether afternoon tactical training is safe and sustainable after the lab testing, and make the supervisor meeting format unambiguous in the resulting calendar. The Proposer may keep the same timing if there is grounded support from the lab, coach, professor, or user context."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Tuesday afternoon training after lab testing",
+              "assumption": "The user can sustainably complete Afternoon Tactical Session from 16:30 to 18:30 after VO2 Max and Body Composition Testing from 07:30 to 10:30 the same day.",
+              "evidence_gap": "The rationale says the lab testing replaces Tuesday morning conditioning, but it does not provide evidence that the remaining afternoon tactical session is appropriate after a potentially demanding fitness test.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Supervisor meeting format",
+              "assumption": "The Capstone Project Supervisor Meeting at Tuesday 14:00–15:00 is actually by video rather than in person.",
+              "evidence_gap": "The rationale states that Tuesday 14:00 video is chosen, but the final calendar description still says 'In-person meeting on campus' and only mentions Tuesday 14:00–15:00 as video availability.",
+              "potential_impact": "material",
+              "verification_source": "third_party"
+            },
+            {
+              "subject": "Professor confirmation",
+              "assumption": "The professor confirms the moved Tuesday 14:00–15:00 meeting and the video format.",
+              "evidence_gap": "The rationale explicitly says professor confirmation is required, but no confirmation is included in the proposal or validation.",
+              "potential_impact": "potentially_blocking",
+              "verification_source": "third_party"
+            },
+            {
+              "subject": "Post-testing breakfast timing",
+              "assumption": "The user can finish testing at 10:30 and immediately use 10:30–11:00 for breakfast.",
+              "evidence_gap": "No transition time is shown between the end of lab testing and breakfast, and the proposal does not document lab checkout, changing, recovery, or possible overrun needs.",
+              "potential_impact": "minor",
+              "verification_source": "unknown"
+            },
+            {
+              "subject": "Lab testing logistics",
+              "assumption": "The 07:30 start is realistic after sleep ending at 06:30, including any required arrival time, preparation, travel, and fasting instructions.",
+              "evidence_gap": "The calendar shows one hour between sleep ending and testing starting, but does not include preparation or travel details, and the technical validation did not check natural-language logistics.",
+              "potential_impact": "material",
+              "verification_source": "external_source"
+            }
+          ],
+          "weaknesses": [
+            "The rationale protects sleep and most existing commitments, but it does not meaningfully assess the human effect of placing a 3-hour VO2 max and body composition testing block from 07:30 to 10:30 on Tuesday before an existing Afternoon Tactical Session from 16:30 to 18:30 the same day. Because VO2 max testing can be physically demanding, the preserved afternoon training is a material manageability risk even though it is not a technical overlap.",
+            "The moved supervisor meeting is described in the rationale as Tuesday 14:00 by video, but the final calendar event description still says 'In-person meeting on campus' and only notes that Tuesday 14:00–15:00 is available via video. This creates uncertainty about whether the operational change actually includes the format change needed to avoid the commute problem.",
+            "The proposal adds Post-fasting breakfast immediately from 10:30 to 11:00 after testing ends at 10:30. This is thoughtful, but it assumes the user can finish testing, transition, and eat immediately without checkout, changing, recovery, or lab delay. That may be workable, but the rationale treats it as sufficient without evidence.",
+            "The alternatives considered are relevant but narrow. The rationale compares Tuesday 14:00 video against keeping Tuesday 10:30 or moving to Thursday 11:00, but it does not discuss whether the Tuesday afternoon training load should be reconsidered, modified, or explicitly confirmed as acceptable after the testing.",
+            "Request satisfaction cannot be independently verified because the original request is not provided. The proposal claims Tuesday morning conditioning may be removed and that 6 hours of capstone study are already present, but only the visible rationale and resulting calendar support that claim."
+          ],
+          "feedback": "The schedule is mostly coherent and avoids obvious calendar collisions: sleep is preserved, the Tuesday morning training is removed rather than stacking lab testing on top of it, breakfast is added, lunch remains available, and the supervisor meeting is moved away from the infeasible 10:30 slot. The main human-quality concern is Tuesday’s physical load: a 07:30–10:30 VO2/body composition testing block, followed later by a 16:30–18:30 tactical training session, may be a demanding same-day sequence. The plan may still be acceptable if the testing protocol, coach, lab, or user context confirms that afternoon training is suitable, but the current rationale does not show that this was weighed. The meeting move is sensible in principle, but the final calendar should more clearly reflect whether the 14:00 meeting is actually by video, since the preserved description still frames it as an in-person campus meeting. A stronger revision would either substantiate why the Tuesday afternoon tactical session remains sustainable after testing or reconsider the same-day load using the Proposer’s fuller context, without assuming that a conflict-free slot is automatically a good human schedule."
+        }
+      ],
+      "unresolved_assumptions": [
+        {
+          "subject": "Tuesday afternoon training after lab testing",
+          "assumption": "The user can sustainably complete Afternoon Tactical Session from 16:30 to 18:30 after VO2 Max and Body Composition Testing from 07:30 to 10:30 on the same day.",
+          "evidence_gap": "The revised proposal acknowledges the manageability risk and adds a 15:00–16:00 recovery buffer, but it does not include coach, lab, medical, or user-specific confirmation that tactical training remains appropriate after the testing.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Professor confirmation",
+          "assumption": "The professor confirms replacing the original supervisor meeting with a Tuesday 14:00–15:00 video call.",
+          "evidence_gap": "The rationale explicitly states that professor confirmation is required, but no confirmation is included in the proposal or technical validation.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Lab testing completion and breakfast transition",
+          "assumption": "The user can complete testing by 10:30 and be ready for Post-fasting breakfast from 10:45 to 11:30.",
+          "evidence_gap": "The proposal allows 15 minutes after testing, but does not verify lab checkout, changing, post-test recovery, or possible overrun requirements.",
+          "potential_impact": "minor",
+          "verification_source": "external_source"
+        },
+        {
+          "subject": "Morning testing logistics",
+          "assumption": "The 07:30 lab testing start is realistic after sleep ending at 06:30, including preparation, travel, arrival procedures, and any fasting instructions.",
+          "evidence_gap": "The calendar shows one hour between sleep ending and testing starting, but does not include travel, preparation, or lab arrival requirements, and the validator did not check natural-language logistics.",
+          "potential_impact": "material",
+          "verification_source": "external_source"
+        },
+        {
+          "subject": "Recovery buffer usefulness",
+          "assumption": "The 15:00–16:00 recovery buffer before 16:30 training is practically usable for recovery rather than being consumed by preparation, travel, changing, or training setup.",
+          "evidence_gap": "The proposal labels the hour as recovery but provides no details on where the video call, recovery, and tactical session occur or what preparation is needed before training.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        }
+      ]
+    }
+  ],
+  "refinements": 1,
+  "source_status": "proposal_ready",
+  "final_proposal": {
+    "changes": [
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "VO2 Max and Body Composition Testing",
+        "from_start": null,
+        "to_start": "2027-03-23T07:30:00+00:00",
+        "to_end": "2027-03-23T10:30:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "participants": [
+          "user",
+          "sports science lab"
+        ]
+      },
+      {
+        "type": "delete",
+        "event_id": "training_am_tue",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Post-fasting breakfast",
+        "from_start": null,
+        "to_start": "2027-03-23T10:45:00+00:00",
+        "to_end": "2027-03-23T11:30:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "delete",
+        "event_id": "capstone_meeting_tue",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Capstone Project Supervisor Meeting (video call)",
+        "from_start": null,
+        "to_start": "2027-03-23T14:00:00+00:00",
+        "to_end": "2027-03-23T15:00:00+00:00",
+        "category": "classes",
+        "importance": 4,
+        "participants": [
+          "user",
+          "professor"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Recovery buffer before afternoon training",
+        "from_start": null,
+        "to_start": "2027-03-23T15:00:00+00:00",
+        "to_end": "2027-03-23T16:00:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "Tuesday morning conditioning may be removed because the request explicitly says the lab testing replaces it.",
+        "All other protected training sessions and all protected 8-hour sleep blocks are left unchanged.",
+        "The original 10:30 in-person meeting is infeasible after testing, breakfast, and the stated commute requirement.",
+        "The professor must confirm replacing the original meeting with the Tuesday video-call slot.",
+        "The calendar already contains 6 hours of capstone study across the week, so no extra study block is needed.",
+        "Tuesday afternoon training remains a manageability risk after VO2 testing because no coach, lab, or medical guidance was supplied.",
+        "Testing arrival logistics, lab checkout, possible overrun, and post-test clearance are unknown."
+      ],
+      "priorities": [
+        "Use the Tuesday video option to avoid the campus commute and avoid disrupting Thursday capstone study.",
+        "Reserve a recovery buffer before the protected afternoon training rather than adding more tasks to Tuesday.",
+        "Keep existing capstone study blocks intact to preserve the weekly study target.",
+        "Make the meeting format explicit by replacing the in-person event with a video-call event."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Move the supervisor meeting to Thursday 11:00 in person.",
+          "rejected_because": "This is supplied as available, but it would disrupt Thursday capstone study and add in-person logistics."
+        },
+        {
+          "option": "Modify or cancel Tuesday afternoon tactical training.",
+          "rejected_because": "Rejected because that session is protected and no exact coach or lab exception was supplied."
+        },
+        {
+          "option": "Keep the supervisor meeting at Tuesday 10:30 in person.",
+          "rejected_because": "Rejected because testing ends then and the stated breakfast plus commute requirement makes attendance infeasible."
+        }
+      ],
+      "summary": "The plan replaces only the excused Tuesday morning training with lab testing, makes the supervisor meeting an explicit Tuesday video call needing professor confirmation, preserves the 6 hours of capstone study, and adds recovery space before the protected afternoon session while flagging that same-day training suitability still needs coach or lab guidance."
+    }
+  },
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [
+      "new_5: added-event category, importance and participants were not supplied; simulation uses neutral internal defaults"
+    ],
+    "valid": true
+  },
+  "source_result_sha256": "098f5841b0c8835f48e12d59512a864276cc5d65f5964808d2a69128f79c13d6",
+  "scenario_sha256": "90c389b357c4d76336baedb51e9ccf5aabfa5b59cc1203b842355924b7227028",
+  "aggregate_requirements_sha256": null,
+  "confirmed_changes_sha256": null,
+  "critic_input_version": "final_calendar_v1",
+  "critic_policy_version": "uncertainty_review_v2",
+  "result_calendar_version": "validated_added_metadata_v2",
+  "final_result_calendar": {
+    "timezone": "Europe/Lisbon",
+    "coverage": "all_events_in_scenario_after_simulation",
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-03-21T22:30:00+00:00",
+        "end": "2027-03-22T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_am_mon",
+        "title": "Morning Strength Training",
+        "start": "2027-03-22T07:00:00+00:00",
+        "end": "2027-03-22T09:00:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Morning session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "study_mon",
+        "title": "Capstone Project Literature Review",
+        "start": "2027-03-22T10:00:00+00:00",
+        "end": "2027-03-22T12:00:00+00:00",
+        "category": "study",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Capstone work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "lunch_mon",
+        "title": "Lunch",
+        "start": "2027-03-22T12:30:00+00:00",
+        "end": "2027-03-22T13:30:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_pm_mon",
+        "title": "Afternoon Technical Training",
+        "start": "2027-03-22T16:30:00+00:00",
+        "end": "2027-03-22T18:30:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-03-22T22:30:00+00:00",
+        "end": "2027-03-23T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_0",
+        "title": "VO2 Max and Body Composition Testing",
+        "start": "2027-03-23T07:30:00+00:00",
+        "end": "2027-03-23T10:30:00+00:00",
+        "category": "health",
+        "importance": 5,
+        "fixed": null,
+        "participants": [
+          "user",
+          "sports science lab"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "new_2",
+        "title": "Post-fasting breakfast",
+        "start": "2027-03-23T10:45:00+00:00",
+        "end": "2027-03-23T11:30:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "lunch_tue",
+        "title": "Lunch",
+        "start": "2027-03-23T12:30:00+00:00",
+        "end": "2027-03-23T13:30:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_4",
+        "title": "Capstone Project Supervisor Meeting (video call)",
+        "start": "2027-03-23T14:00:00+00:00",
+        "end": "2027-03-23T15:00:00+00:00",
+        "category": "classes",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user",
+          "professor"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "new_5",
+        "title": "Recovery buffer before afternoon training",
+        "start": "2027-03-23T15:00:00+00:00",
+        "end": "2027-03-23T16:00:00+00:00",
+        "category": null,
+        "importance": null,
+        "fixed": null,
+        "participants": null,
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "training_pm_tue",
+        "title": "Afternoon Tactical Session",
+        "start": "2027-03-23T16:30:00+00:00",
+        "end": "2027-03-23T18:30:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-03-23T22:30:00+00:00",
+        "end": "2027-03-24T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_am_wed",
+        "title": "Morning Pool Recovery",
+        "start": "2027-03-24T07:00:00+00:00",
+        "end": "2027-03-24T09:00:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Morning session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "class_elective_wed",
+        "title": "Sports Economics Elective",
+        "start": "2027-03-24T10:00:00+00:00",
+        "end": "2027-03-24T12:00:00+00:00",
+        "category": "classes",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Morning class.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "lunch_wed",
+        "title": "Lunch",
+        "start": "2027-03-24T12:30:00+00:00",
+        "end": "2027-03-24T13:30:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_pm_wed",
+        "title": "Afternoon Technical Training",
+        "start": "2027-03-24T16:30:00+00:00",
+        "end": "2027-03-24T18:30:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-03-24T22:30:00+00:00",
+        "end": "2027-03-25T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_am_thu",
+        "title": "Morning Gym",
+        "start": "2027-03-25T07:00:00+00:00",
+        "end": "2027-03-25T09:00:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Morning session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "study_thu",
+        "title": "Capstone Data Analysis",
+        "start": "2027-03-25T10:00:00+00:00",
+        "end": "2027-03-25T12:00:00+00:00",
+        "category": "study",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Capstone work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "lunch_thu",
+        "title": "Lunch",
+        "start": "2027-03-25T12:30:00+00:00",
+        "end": "2027-03-25T13:30:00+00:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_pm_thu",
+        "title": "Afternoon Tactical Session",
+        "start": "2027-03-25T16:30:00+00:00",
+        "end": "2027-03-25T18:30:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-03-25T22:30:00+00:00",
+        "end": "2027-03-26T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_am_fri",
+        "title": "Morning Speed Session",
+        "start": "2027-03-26T07:00:00+00:00",
+        "end": "2027-03-26T09:00:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Morning session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "study_fri",
+        "title": "Capstone Draft Writing",
+        "start": "2027-03-26T10:00:00+00:00",
+        "end": "2027-03-26T12:00:00+00:00",
+        "category": "study",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Capstone work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_pm_fri",
+        "title": "Afternoon Scrimmage",
+        "start": "2027-03-26T16:30:00+00:00",
+        "end": "2027-03-26T18:30:00+00:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "social_fri",
+        "title": "Student Association Coffee & Networking",
+        "start": "2027-03-26T19:30:00+00:00",
+        "end": "2027-03-26T21:00:00+00:00",
+        "category": "social",
+        "importance": 2,
+        "fixed": false,
+        "participants": [
+          "user",
+          "peers"
+        ],
+        "description": "Campus café event.",
+        "origin": "existing",
+        "change_status": "preserved"
+      }
+    ],
+    "metadata_note": "Added-event metadata is copied only from validated Proposal fields. Null values identify fields not supplied by the Proposal; simulator defaults are internal. Missing by event: {'new_5': ['category', 'importance', 'participants']}"
+  },
+  "final_unresolved_assumptions": [
+    {
+      "subject": "Tuesday afternoon training after lab testing",
+      "assumption": "The user can sustainably complete Afternoon Tactical Session from 16:30 to 18:30 after VO2 Max and Body Composition Testing from 07:30 to 10:30 on the same day.",
+      "evidence_gap": "The revised proposal acknowledges the manageability risk and adds a 15:00–16:00 recovery buffer, but it does not include coach, lab, medical, or user-specific confirmation that tactical training remains appropriate after the testing.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Professor confirmation",
+      "assumption": "The professor confirms replacing the original supervisor meeting with a Tuesday 14:00–15:00 video call.",
+      "evidence_gap": "The rationale explicitly states that professor confirmation is required, but no confirmation is included in the proposal or technical validation.",
+      "potential_impact": "potentially_blocking",
+      "verification_source": "third_party"
+    },
+    {
+      "subject": "Lab testing completion and breakfast transition",
+      "assumption": "The user can complete testing by 10:30 and be ready for Post-fasting breakfast from 10:45 to 11:30.",
+      "evidence_gap": "The proposal allows 15 minutes after testing, but does not verify lab checkout, changing, post-test recovery, or possible overrun requirements.",
+      "potential_impact": "minor",
+      "verification_source": "external_source"
+    },
+    {
+      "subject": "Morning testing logistics",
+      "assumption": "The 07:30 lab testing start is realistic after sleep ending at 06:30, including preparation, travel, arrival procedures, and any fasting instructions.",
+      "evidence_gap": "The calendar shows one hour between sleep ending and testing starting, but does not include travel, preparation, or lab arrival requirements, and the validator did not check natural-language logistics.",
+      "potential_impact": "material",
+      "verification_source": "external_source"
+    },
+    {
+      "subject": "Recovery buffer usefulness",
+      "assumption": "The 15:00–16:00 recovery buffer before 16:30 training is practically usable for recovery rather than being consumed by preparation, travel, changing, or training setup.",
+      "evidence_gap": "The proposal labels the hour as recovery but provides no details on where the video call, recovery, and tactical session occur or what preparation is needed before training.",
+      "potential_impact": "material",
+      "verification_source": "unknown"
+    }
+  ],
+  "uncertainty_history": [
+    {
+      "iteration": 0,
+      "unresolved_assumptions": [
+        {
+          "subject": "Tuesday afternoon training after lab testing",
+          "assumption": "The user can sustainably complete Afternoon Tactical Session from 16:30 to 18:30 after VO2 Max and Body Composition Testing from 07:30 to 10:30 the same day.",
+          "evidence_gap": "The rationale says the lab testing replaces Tuesday morning conditioning, but it does not provide evidence that the remaining afternoon tactical session is appropriate after a potentially demanding fitness test.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Supervisor meeting format",
+          "assumption": "The Capstone Project Supervisor Meeting at Tuesday 14:00–15:00 is actually by video rather than in person.",
+          "evidence_gap": "The rationale states that Tuesday 14:00 video is chosen, but the final calendar description still says 'In-person meeting on campus' and only mentions Tuesday 14:00–15:00 as video availability.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Professor confirmation",
+          "assumption": "The professor confirms the moved Tuesday 14:00–15:00 meeting and the video format.",
+          "evidence_gap": "The rationale explicitly says professor confirmation is required, but no confirmation is included in the proposal or validation.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Post-testing breakfast timing",
+          "assumption": "The user can finish testing at 10:30 and immediately use 10:30–11:00 for breakfast.",
+          "evidence_gap": "No transition time is shown between the end of lab testing and breakfast, and the proposal does not document lab checkout, changing, recovery, or possible overrun needs.",
+          "potential_impact": "minor",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Lab testing logistics",
+          "assumption": "The 07:30 start is realistic after sleep ending at 06:30, including any required arrival time, preparation, travel, and fasting instructions.",
+          "evidence_gap": "The calendar shows one hour between sleep ending and testing starting, but does not include preparation or travel details, and the technical validation did not check natural-language logistics.",
+          "potential_impact": "material",
+          "verification_source": "external_source"
+        }
+      ]
+    },
+    {
+      "iteration": 1,
+      "unresolved_assumptions": [
+        {
+          "subject": "Tuesday afternoon training after lab testing",
+          "assumption": "The user can sustainably complete Afternoon Tactical Session from 16:30 to 18:30 after VO2 Max and Body Composition Testing from 07:30 to 10:30 on the same day.",
+          "evidence_gap": "The revised proposal acknowledges the manageability risk and adds a 15:00–16:00 recovery buffer, but it does not include coach, lab, medical, or user-specific confirmation that tactical training remains appropriate after the testing.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Professor confirmation",
+          "assumption": "The professor confirms replacing the original supervisor meeting with a Tuesday 14:00–15:00 video call.",
+          "evidence_gap": "The rationale explicitly states that professor confirmation is required, but no confirmation is included in the proposal or technical validation.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Lab testing completion and breakfast transition",
+          "assumption": "The user can complete testing by 10:30 and be ready for Post-fasting breakfast from 10:45 to 11:30.",
+          "evidence_gap": "The proposal allows 15 minutes after testing, but does not verify lab checkout, changing, post-test recovery, or possible overrun requirements.",
+          "potential_impact": "minor",
+          "verification_source": "external_source"
+        },
+        {
+          "subject": "Morning testing logistics",
+          "assumption": "The 07:30 lab testing start is realistic after sleep ending at 06:30, including preparation, travel, arrival procedures, and any fasting instructions.",
+          "evidence_gap": "The calendar shows one hour between sleep ending and testing starting, but does not include travel, preparation, or lab arrival requirements, and the validator did not check natural-language logistics.",
+          "potential_impact": "material",
+          "verification_source": "external_source"
+        },
+        {
+          "subject": "Recovery buffer usefulness",
+          "assumption": "The 15:00–16:00 recovery buffer before 16:30 training is practically usable for recovery rather than being consumed by preparation, travel, changing, or training setup.",
+          "evidence_gap": "The proposal labels the hour as recovery but provides no details on where the video call, recovery, and tactical session occur or what preparation is needed before training.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        }
+      ]
+    }
+  ]
+}

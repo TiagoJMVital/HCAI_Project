@@ -1,0 +1,2604 @@
+{
+  "proposal_id": "v2p_6b879c7ffbd44e2476420a87",
+  "scenario_id": "parent_young_children_school_strike_closure_001",
+  "family_id": "parent_young_children_schedule_conflict",
+  "profile_id": "parent_young_children_01__parent_young_children_school_strike_closure_001",
+  "split": "train",
+  "run_id": "7f5371c3917c44e9b1b1f13985aa4770",
+  "configuration": "B",
+  "generated_at": "2026-11-26T00:32:37.826848+00:00",
+  "proposer_provider": "iaedu",
+  "proposer_model": "GPT-5.5",
+  "proposer_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "one_uuid_per_structured_retry_sequence",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_provider": "iaedu",
+  "critic_model": "GPT-5.5",
+  "critic_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "one_uuid_per_structured_retry_sequence",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "prompt_versions": {
+    "proposer_sha256": "ae6fa59cccb86c31f34f66d07d241660b1feadf852ebf1b594bc85addab86985",
+    "proposer_wire_schema_version": "compact_proposal_v1",
+    "proposer_wire_schema_sha256": "f504fbcd7e939c43e055e2f188feb22097a284bcd9b043227d868e559547b865",
+    "proposer_revision_sha256": "3f0fe7f221013700694a22984560612013e9804072ffde4538e1329b9708ac95",
+    "critic_sha256": "1686688cdd4bc63abb12e6633ef9dbb9b62d69b69aba1c4805a201657cc5bb34"
+  },
+  "critic_settings": {
+    "threshold": 4.0,
+    "max_refinements": 3,
+    "min_dimension_score": 1
+  },
+  "experiment_id": null,
+  "repeat_index": 0,
+  "seconds": 121.451,
+  "critic_score": 4.0,
+  "critic_accepted": true,
+  "iterations": [
+    {
+      "index": 0,
+      "proposer_feedback": null,
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "delete",
+            "event_id": "travel_to_school_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "dropoff_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "commute_to_work_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "commute_to_school_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "pickup_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Draft Q2 operational budget",
+            "from_start": null,
+            "to_start": "2027-05-12T09:00:00+01:00",
+            "to_end": "2027-05-12T09:30:00+01:00",
+            "category": "work_focus",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Draft Q2 operational budget",
+            "from_start": null,
+            "to_start": "2027-05-12T10:00:00+01:00",
+            "to_end": "2027-05-12T10:30:00+01:00",
+            "category": "work_focus",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "move",
+            "event_id": "focus_pm_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-05-11T21:15:00+01:00",
+            "to_end": "2027-05-11T22:15:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "School and daycare closure makes the school travel, drop-off and pick-up events inapplicable.",
+            "Office commutes are removed because Wednesday is now work from home.",
+            "Fixed work meetings and protected sleep blocks are not moved.",
+            "The supplier call is kept unchanged because partner childcare is already confirmed during it.",
+            "The three budget blocks total 3 hours before Thursday afternoon.",
+            "After 12:45 the user is alone with Marta and Duarte, so the afternoon budget block is moved away from solo-childcare time.",
+            "Marta's swimming, dinner, bedtime and sleep are kept unchanged.",
+            "Confirm with the partner that the 10:30 call remains fully covered and that no extra handover is needed before 12:45.",
+            "Confirm with work only if fragmented budget work or loss of the 13:30 focus block affects expectations."
+          ],
+          "priorities": [
+            "Prioritise childcare coverage and fixed work commitments during the strike day.",
+            "Use confirmed partner childcare for quiet morning work where possible.",
+            "Use tonight after bedtime for the remaining budget hour while preserving sleep.",
+            "Keep Marta's swimming class because it remains feasible and was requested if possible."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Do the final budget hour on Wednesday 21:15-22:15 instead of tonight.",
+              "rejected_because": "This preserves tonight but risks fatigue after solo childcare and still must not cut into protected sleep."
+            },
+            {
+              "option": "Skip Marta's swimming and work 18:00-19:00 Wednesday.",
+              "rejected_because": "This would add work time but rejects a feasible children's activity the user asked to keep if possible."
+            },
+            {
+              "option": "Keep the 13:30-15:30 budget block as-is.",
+              "rejected_because": "It is calendar-free but operationally weak because the user is alone with two children, including a 3-year-old."
+            }
+          ],
+          "summary": "Remove the closed-school runs and office commutes, complete the budget in two short covered morning blocks plus one hour tonight, and keep the supplier call, swimming, evening routine and sleep intact; the main trade-off is using post-bedtime time tonight to avoid relying on focused work during solo childcare."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [
+          "new_6: overlaps contextual event partner_childcare_wed_am for another participant",
+          "new_5: overlaps contextual event partner_childcare_wed_am for another participant"
+        ],
+        "valid": true
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "dinner_tue",
+            "title": "Family dinner",
+            "start": "2027-05-11T19:30:00+01:00",
+            "end": "2027-05-11T20:30:00+01:00",
+            "category": "family",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Dinner at home with the children.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "bedtime_tue",
+            "title": "Children's bedtime routine",
+            "start": "2027-05-11T20:30:00+01:00",
+            "end": "2027-05-11T21:15:00+01:00",
+            "category": "family",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Bath, story and bedtime.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "focus_pm_wed",
+            "title": "Draft Q2 operational budget",
+            "start": "2027-05-11T21:15:00+01:00",
+            "end": "2027-05-11T22:15:00+01:00",
+            "category": "work_focus",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Flexible individual work; difficult to do uninterrupted while supervising a 3-year-old alone.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-05-11T23:00:00+01:00",
+            "end": "2027-05-12T06:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block; at least seven hours required.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "run_wed",
+            "title": "Morning run",
+            "start": "2027-05-12T06:30:00+01:00",
+            "end": "2027-05-12T07:15:00+01:00",
+            "category": "exercise",
+            "importance": 2,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "45-minute morning run near home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "morning_wed",
+            "title": "Morning routine with the children",
+            "start": "2027-05-12T07:15:00+01:00",
+            "end": "2027-05-12T08:00:00+01:00",
+            "category": "family",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Breakfast and dressing for both children.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "partner_childcare_wed_am",
+            "title": "Partner childcare at home",
+            "start": "2027-05-12T08:00:00+01:00",
+            "end": "2027-05-12T12:45:00+01:00",
+            "category": "family",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "partner",
+              "marta",
+              "duarte"
+            ],
+            "description": "Confirmed: the partner is home with the children until leaving for the 13:30 shift.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_5",
+            "title": "Draft Q2 operational budget",
+            "start": "2027-05-12T09:00:00+01:00",
+            "end": "2027-05-12T09:30:00+01:00",
+            "category": "work_focus",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "standup_wed",
+            "title": "Team stand-up",
+            "start": "2027-05-12T09:30:00+01:00",
+            "end": "2027-05-12T10:00:00+01:00",
+            "category": "work",
+            "importance": 3,
+            "fixed": true,
+            "participants": [
+              "user",
+              "team"
+            ],
+            "description": "Daily stand-up via video; informal internal meeting.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_6",
+            "title": "Draft Q2 operational budget",
+            "start": "2027-05-12T10:00:00+01:00",
+            "end": "2027-05-12T10:30:00+01:00",
+            "category": "work_focus",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "external_client_wed",
+            "title": "Contract negotiation with external supplier",
+            "start": "2027-05-12T10:30:00+01:00",
+            "end": "2027-05-12T11:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "supplier",
+              "legal"
+            ],
+            "description": "High-stakes video call requiring full concentration and a quiet background.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "focus_am_wed",
+            "title": "Draft Q2 operational budget",
+            "start": "2027-05-12T11:30:00+01:00",
+            "end": "2027-05-12T12:30:00+01:00",
+            "category": "work_focus",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Flexible individual work; needs 3 total hours before Thursday afternoon.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_wed",
+            "title": "Lunch",
+            "start": "2027-05-12T12:30:00+01:00",
+            "end": "2027-05-12T13:15:00+01:00",
+            "category": "meal",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "partner_shift_wed",
+            "title": "Partner's work shift and mandatory safety training",
+            "start": "2027-05-12T13:30:00+01:00",
+            "end": "2027-05-12T21:30:00+01:00",
+            "category": "partner_work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "partner"
+            ],
+            "description": "Partner is home until 12:45, then leaves for their bus driving shift and mandatory annual safety certification.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "team_retro_wed",
+            "title": "Sprint retrospective",
+            "start": "2027-05-12T16:00:00+01:00",
+            "end": "2027-05-12T16:45:00+01:00",
+            "category": "work",
+            "importance": 3,
+            "fixed": true,
+            "participants": [
+              "user",
+              "team"
+            ],
+            "description": "Internal video call; team is understanding if kids are in the background.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "travel_to_pool_wed",
+            "title": "Travel to pool",
+            "start": "2027-05-12T17:45:00+01:00",
+            "end": "2027-05-12T18:00:00+01:00",
+            "category": "commute",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "15-minute journey to pool (from home it is also 15 minutes).",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "swim_marta_wed",
+            "title": "Marta's swimming class",
+            "start": "2027-05-12T18:00:00+01:00",
+            "end": "2027-05-12T19:00:00+01:00",
+            "category": "kids_activity",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Weekly swimming class; municipal pool is open as normal.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "travel_home_wed",
+            "title": "Travel home from pool",
+            "start": "2027-05-12T19:00:00+01:00",
+            "end": "2027-05-12T19:15:00+01:00",
+            "category": "commute",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "15-minute journey home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "dinner_wed",
+            "title": "Family dinner",
+            "start": "2027-05-12T19:30:00+01:00",
+            "end": "2027-05-12T20:30:00+01:00",
+            "category": "family",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Dinner at home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "bedtime_wed",
+            "title": "Children's bedtime routine",
+            "start": "2027-05-12T20:30:00+01:00",
+            "end": "2027-05-12T21:15:00+01:00",
+            "category": "family",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Bath, story and bedtime.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-05-12T23:00:00+01:00",
+            "end": "2027-05-13T06:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 3,
+          "alternatives": 4,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The rationale treats the two 30-minute morning budget blocks at 09:00-09:30 and 10:00-10:30 as useful focus time, but the second ends exactly as the high-stakes supplier call begins at 10:30. The calendar gives no visible transition or preparation margin before a call described as requiring full concentration and a quiet background.",
+          "The plan preserves the 11:30-12:30 budget block immediately after the 10:30-11:30 supplier call, then lunch at 12:30-13:15. This is technically coherent, but it creates a tightly packed cognitive sequence from 09:00 to 12:30 with only meeting-shaped interruptions, not much visible recovery or setup time.",
+          "The moved budget hour from 21:15-22:15 on Tuesday follows family dinner at 19:30-20:30 and children's bedtime routine at 20:30-21:15. It preserves the 23:00 sleep block, but the plan relies on immediate post-bedtime cognitive work without much discussion of fatigue or wind-down.",
+          "The lunch block on Wednesday runs 12:30-13:15, while partner childcare ends at 12:45 and the rationale says the user is alone with Marta and Duarte after 12:45. This is not necessarily infeasible, but the calendar does not clearly show how the user's lunch and the childcare handover are handled.",
+          "The rationale notes that the 10:30 call coverage and handover should be confirmed, but the resulting plan still depends on that condition for the highest-stakes work event of the day."
+        ],
+        "feedback": "The proposal makes a sensible visible trade-off by removing inapplicable school and commute events, avoiding focused budget work during solo childcare, and preserving sleep, dinner, bedtime and swimming. The main human-quality concern is not that the calendar is overfull in a technical sense, but that the protected morning work window is used very tightly: budget work at 10:00-10:30 runs directly into the 10:30-11:30 supplier negotiation, followed immediately by another budget hour at 11:30-12:30. For a routine involving children at home, partner handover at 12:45, and a high-stakes call requiring full concentration, the rationale should better justify whether this amount of fragmentation and lack of transition margin is realistic. The post-bedtime Tuesday work block is plausible because sleep is preserved, but it is still a fatigue-sensitive choice after dinner and bedtime. A revision would be useful to reconsider whether the morning sequence needs more practical margin or to substantiate why the current fragmentation is still manageable with the confirmed childcare setup.",
+        "plausibility_review": {
+          "revision_required": true,
+          "severity": "moderate",
+          "reason": "The proposed organization could work, but it materially depends on tightly packed focus and meeting transitions during the only covered childcare window. The 10:00-10:30 budget block ends exactly when the 10:30 high-stakes supplier call starts, and the 11:30-12:30 budget block begins immediately after that call. This may reduce preparation, recovery, and work quality even though there is no technical overlap. The concern is especially relevant because the rationale itself says the supplier call requires confirmed coverage and that afternoon focus work is weak during solo childcare.",
+          "suggested_improvement": "Reconsider the distribution of the morning budget work against preparation and recovery needs around the supplier call, or provide a grounded explanation from the fuller context that the user can realistically switch tasks immediately and that the childcare handover remains quiet and reliable."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Supplier call childcare coverage",
+            "assumption": "The partner can fully cover Marta and Duarte during the 10:30-11:30 supplier call without interruption or handover needs immediately beforehand.",
+            "evidence_gap": "The rationale says this should be confirmed, while the calendar shows partner childcare at home from 08:00-12:45 but does not show the operational details needed for a quiet, interruption-free high-stakes call.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Task-switching before high-stakes call",
+            "assumption": "The user can complete budget work until 10:30 and immediately begin the supplier negotiation at full concentration.",
+            "evidence_gap": "The calendar has no visible transition or preparation time between the 10:00-10:30 budget block and the 10:30-11:30 supplier call.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Post-bedtime work capacity",
+            "assumption": "The user has enough cognitive energy to draft the operational budget from 21:15-22:15 after dinner and the children's bedtime routine.",
+            "evidence_gap": "The rationale notes the trade-off but does not substantiate whether this evening work is sustainable for this user beyond preserving the 23:00 sleep start.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Lunch and childcare transition",
+            "assumption": "The user can complete lunch from 12:30-13:15 while partner childcare ends at 12:45 and the user becomes responsible for both children.",
+            "evidence_gap": "The lunch event lists only the user, while the rationale states the user is alone with Marta and Duarte after 12:45.",
+            "potential_impact": "minor",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Budget work fragmentation",
+            "assumption": "Three hours of budget work split into 60, 30, 30 and 60 minute segments is sufficient for the visible work goal before Thursday afternoon.",
+            "evidence_gap": "The rationale states the total duration but gives limited evidence that the fragmented structure is adequate for this type of drafting work.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          }
+        ],
+        "overall": 3.75
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": false,
+        "plausibility_revision_required": true,
+        "accepted": false,
+        "revision_causes": [
+          "numeric_criteria_failed",
+          "plausibility_revision_required"
+        ]
+      },
+      "operations_changed_from_previous": null,
+      "rationale_changed_from_previous": null,
+      "prior_critic_reviews": [],
+      "unresolved_assumptions": [
+        {
+          "subject": "Supplier call childcare coverage",
+          "assumption": "The partner can fully cover Marta and Duarte during the 10:30-11:30 supplier call without interruption or handover needs immediately beforehand.",
+          "evidence_gap": "The rationale says this should be confirmed, while the calendar shows partner childcare at home from 08:00-12:45 but does not show the operational details needed for a quiet, interruption-free high-stakes call.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Task-switching before high-stakes call",
+          "assumption": "The user can complete budget work until 10:30 and immediately begin the supplier negotiation at full concentration.",
+          "evidence_gap": "The calendar has no visible transition or preparation time between the 10:00-10:30 budget block and the 10:30-11:30 supplier call.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Post-bedtime work capacity",
+          "assumption": "The user has enough cognitive energy to draft the operational budget from 21:15-22:15 after dinner and the children's bedtime routine.",
+          "evidence_gap": "The rationale notes the trade-off but does not substantiate whether this evening work is sustainable for this user beyond preserving the 23:00 sleep start.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Lunch and childcare transition",
+          "assumption": "The user can complete lunch from 12:30-13:15 while partner childcare ends at 12:45 and the user becomes responsible for both children.",
+          "evidence_gap": "The lunch event lists only the user, while the rationale states the user is alone with Marta and Duarte after 12:45.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Budget work fragmentation",
+          "assumption": "Three hours of budget work split into 60, 30, 30 and 60 minute segments is sufficient for the visible work goal before Thursday afternoon.",
+          "evidence_gap": "The rationale states the total duration but gives limited evidence that the fragmented structure is adequate for this type of drafting work.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "proposer_feedback": "Numeric Critic criteria failed. Scores: {\"reasoning\":4,\"coherence\":3,\"alternatives\":4,\"clarity\":4}. Plausibility revision required (moderate): The proposed organization could work, but it materially depends on tightly packed focus and meeting transitions during the only covered childcare window. The 10:00-10:30 budget block ends exactly when the 10:30 high-stakes supplier call starts, and the 11:30-12:30 budget block begins immediately after that call. This may reduce preparation, recovery, and work quality even though there is no technical overlap. The concern is especially relevant because the rationale itself says the supplier call requires confirmed coverage and that afternoon focus work is weak during solo childcare. Suggested direction: Reconsider the distribution of the morning budget work against preparation and recovery needs around the supplier call, or provide a grounded explanation from the fuller context that the user can realistically switch tasks immediately and that the childcare handover remains quiet and reliable. The Critic lacks the full user constraints; explain if no better feasible option exists. Unverified conditions to reassess: [{'subject': 'Supplier call childcare coverage', 'assumption': 'The partner can fully cover Marta and Duarte during the 10:30-11:30 supplier call without interruption or handover needs immediately beforehand.', 'evidence_gap': 'The rationale says this should be confirmed, while the calendar shows partner childcare at home from 08:00-12:45 but does not show the operational details needed for a quiet, interruption-free high-stakes call.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Task-switching before high-stakes call', 'assumption': 'The user can complete budget work until 10:30 and immediately begin the supplier negotiation at full concentration.', 'evidence_gap': 'The calendar has no visible transition or preparation time between the 10:00-10:30 budget block and the 10:30-11:30 supplier call.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Post-bedtime work capacity', 'assumption': \"The user has enough cognitive energy to draft the operational budget from 21:15-22:15 after dinner and the children's bedtime routine.\", 'evidence_gap': 'The rationale notes the trade-off but does not substantiate whether this evening work is sustainable for this user beyond preserving the 23:00 sleep start.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Lunch and childcare transition', 'assumption': 'The user can complete lunch from 12:30-13:15 while partner childcare ends at 12:45 and the user becomes responsible for both children.', 'evidence_gap': 'The lunch event lists only the user, while the rationale states the user is alone with Marta and Duarte after 12:45.', 'potential_impact': 'minor', 'verification_source': 'user_context'}, {'subject': 'Budget work fragmentation', 'assumption': 'Three hours of budget work split into 60, 30, 30 and 60 minute segments is sufficient for the visible work goal before Thursday afternoon.', 'evidence_gap': 'The rationale states the total duration but gives limited evidence that the fragmented structure is adequate for this type of drafting work.', 'potential_impact': 'material', 'verification_source': 'user_context'}] Weaknesses: ['The rationale treats the two 30-minute morning budget blocks at 09:00-09:30 and 10:00-10:30 as useful focus time, but the second ends exactly as the high-stakes supplier call begins at 10:30. The calendar gives no visible transition or preparation margin before a call described as requiring full concentration and a quiet background.', 'The plan preserves the 11:30-12:30 budget block immediately after the 10:30-11:30 supplier call, then lunch at 12:30-13:15. This is technically coherent, but it creates a tightly packed cognitive sequence from 09:00 to 12:30 with only meeting-shaped interruptions, not much visible recovery or setup time.', \"The moved budget hour from 21:15-22:15 on Tuesday follows family dinner at 19:30-20:30 and children's bedtime routine at 20:30-21:15. It preserves the 23:00 sleep block, but the plan relies on immediate post-bedtime cognitive work without much discussion of fatigue or wind-down.\", \"The lunch block on Wednesday runs 12:30-13:15, while partner childcare ends at 12:45 and the rationale says the user is alone with Marta and Duarte after 12:45. This is not necessarily infeasible, but the calendar does not clearly show how the user's lunch and the childcare handover are handled.\", 'The rationale notes that the 10:30 call coverage and handover should be confirmed, but the resulting plan still depends on that condition for the highest-stakes work event of the day.']. Actionable feedback: The proposal makes a sensible visible trade-off by removing inapplicable school and commute events, avoiding focused budget work during solo childcare, and preserving sleep, dinner, bedtime and swimming. The main human-quality concern is not that the calendar is overfull in a technical sense, but that the protected morning work window is used very tightly: budget work at 10:00-10:30 runs directly into the 10:30-11:30 supplier negotiation, followed immediately by another budget hour at 11:30-12:30. For a routine involving children at home, partner handover at 12:45, and a high-stakes call requiring full concentration, the rationale should better justify whether this amount of fragmentation and lack of transition margin is realistic. The post-bedtime Tuesday work block is plausible because sleep is preserved, but it is still a fatigue-sensitive choice after dinner and bedtime. A revision would be useful to reconsider whether the morning sequence needs more practical margin or to substantiate why the current fragmentation is still manageable with the confirmed childcare setup.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "delete",
+            "event_id": "travel_to_school_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "dropoff_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "commute_to_work_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "commute_to_school_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "pickup_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "run_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "focus_am_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "focus_pm_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Draft Q2 operational budget",
+            "from_start": null,
+            "to_start": "2027-05-11T21:15:00+01:00",
+            "to_end": "2027-05-11T22:15:00+01:00",
+            "category": "work_focus",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Draft Q2 operational budget",
+            "from_start": null,
+            "to_start": "2027-05-12T06:30:00+01:00",
+            "to_end": "2027-05-12T07:15:00+01:00",
+            "category": "work_focus",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Draft Q2 operational budget",
+            "from_start": null,
+            "to_start": "2027-05-12T09:00:00+01:00",
+            "to_end": "2027-05-12T09:30:00+01:00",
+            "category": "work_focus",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Supplier call setup and preparation",
+            "from_start": null,
+            "to_start": "2027-05-12T10:00:00+01:00",
+            "to_end": "2027-05-12T10:30:00+01:00",
+            "category": "work_focus",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Draft Q2 operational budget",
+            "from_start": null,
+            "to_start": "2027-05-12T11:45:00+01:00",
+            "to_end": "2027-05-12T12:30:00+01:00",
+            "category": "work_focus",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "School and daycare closure makes the school travel, drop-off and pick-up events inapplicable.",
+            "Office commutes are removed because Wednesday is now work from home.",
+            "Fixed work meetings and protected sleep blocks are not moved.",
+            "The supplier call is kept unchanged and given a preparation margin because it is high-stakes.",
+            "Budget work totals 3 hours before Thursday afternoon without using the solo-childcare afternoon block.",
+            "After 12:45 the user is alone with Marta and Duarte, so focused budget work is kept out of that period.",
+            "Lunch remains partly during solo childcare, which is an everyday-need compromise rather than protected quiet work.",
+            "Marta's swimming, dinner, bedtime and sleep are kept unchanged.",
+            "The early budget block assumes the former run slot is equally feasible for the user to be unavailable.",
+            "Confirm with the partner that supplier-call coverage is interruption-free and that the 12:45 handover is clear.",
+            "Confirm with work that the budget can be completed in shorter blocks and that the afternoon focus block is unavailable due to childcare."
+          ],
+          "priorities": [
+            "Prioritise child supervision, fixed work commitments and sleep during the strike day.",
+            "Use confirmed morning childcare for meetings and the most concentration-sensitive work.",
+            "Replace the run because the budget deadline has higher priority than exercise tomorrow.",
+            "Use only one post-bedtime work hour to reduce fatigue and preserve wind-down before sleep.",
+            "Keep Marta's swimming because it remains feasible and was requested if possible."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Keep the 13:30-15:30 budget block.",
+              "rejected_because": "It is free on the calendar but operationally weak while the user is alone with two children, including Duarte."
+            },
+            {
+              "option": "Use 10:00-10:30 for budget work instead of call preparation.",
+              "rejected_because": "That would recreate the tight transition into the high-stakes supplier negotiation."
+            },
+            {
+              "option": "Move more budget work to Wednesday night.",
+              "rejected_because": "It would protect the run but increases fatigue after solo childcare and narrows wind-down before protected sleep."
+            },
+            {
+              "option": "Skip Marta's swimming and work 18:00-19:00.",
+              "rejected_because": "This rejects a feasible children's activity the user asked to keep if possible."
+            }
+          ],
+          "summary": "Remove the closed-school and office-travel events, replace the run and the weak afternoon focus block with earlier budget work, and keep a preparation margin before the supplier negotiation; the main trade-off is losing tomorrow's run and doing one hour tonight to avoid relying on focused work during solo childcare."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [
+          "new_12: overlaps contextual event partner_childcare_wed_am for another participant",
+          "new_11: overlaps contextual event partner_childcare_wed_am for another participant",
+          "new_10: overlaps contextual event partner_childcare_wed_am for another participant"
+        ],
+        "valid": true
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "dinner_tue",
+            "title": "Family dinner",
+            "start": "2027-05-11T19:30:00+01:00",
+            "end": "2027-05-11T20:30:00+01:00",
+            "category": "family",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Dinner at home with the children.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "bedtime_tue",
+            "title": "Children's bedtime routine",
+            "start": "2027-05-11T20:30:00+01:00",
+            "end": "2027-05-11T21:15:00+01:00",
+            "category": "family",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Bath, story and bedtime.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_8",
+            "title": "Draft Q2 operational budget",
+            "start": "2027-05-11T21:15:00+01:00",
+            "end": "2027-05-11T22:15:00+01:00",
+            "category": "work_focus",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-05-11T23:00:00+01:00",
+            "end": "2027-05-12T06:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block; at least seven hours required.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_9",
+            "title": "Draft Q2 operational budget",
+            "start": "2027-05-12T06:30:00+01:00",
+            "end": "2027-05-12T07:15:00+01:00",
+            "category": "work_focus",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "morning_wed",
+            "title": "Morning routine with the children",
+            "start": "2027-05-12T07:15:00+01:00",
+            "end": "2027-05-12T08:00:00+01:00",
+            "category": "family",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Breakfast and dressing for both children.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "partner_childcare_wed_am",
+            "title": "Partner childcare at home",
+            "start": "2027-05-12T08:00:00+01:00",
+            "end": "2027-05-12T12:45:00+01:00",
+            "category": "family",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "partner",
+              "marta",
+              "duarte"
+            ],
+            "description": "Confirmed: the partner is home with the children until leaving for the 13:30 shift.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_10",
+            "title": "Draft Q2 operational budget",
+            "start": "2027-05-12T09:00:00+01:00",
+            "end": "2027-05-12T09:30:00+01:00",
+            "category": "work_focus",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "standup_wed",
+            "title": "Team stand-up",
+            "start": "2027-05-12T09:30:00+01:00",
+            "end": "2027-05-12T10:00:00+01:00",
+            "category": "work",
+            "importance": 3,
+            "fixed": true,
+            "participants": [
+              "user",
+              "team"
+            ],
+            "description": "Daily stand-up via video; informal internal meeting.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_11",
+            "title": "Supplier call setup and preparation",
+            "start": "2027-05-12T10:00:00+01:00",
+            "end": "2027-05-12T10:30:00+01:00",
+            "category": "work_focus",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "external_client_wed",
+            "title": "Contract negotiation with external supplier",
+            "start": "2027-05-12T10:30:00+01:00",
+            "end": "2027-05-12T11:30:00+01:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "supplier",
+              "legal"
+            ],
+            "description": "High-stakes video call requiring full concentration and a quiet background.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_12",
+            "title": "Draft Q2 operational budget",
+            "start": "2027-05-12T11:45:00+01:00",
+            "end": "2027-05-12T12:30:00+01:00",
+            "category": "work_focus",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "lunch_wed",
+            "title": "Lunch",
+            "start": "2027-05-12T12:30:00+01:00",
+            "end": "2027-05-12T13:15:00+01:00",
+            "category": "meal",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "partner_shift_wed",
+            "title": "Partner's work shift and mandatory safety training",
+            "start": "2027-05-12T13:30:00+01:00",
+            "end": "2027-05-12T21:30:00+01:00",
+            "category": "partner_work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "partner"
+            ],
+            "description": "Partner is home until 12:45, then leaves for their bus driving shift and mandatory annual safety certification.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "team_retro_wed",
+            "title": "Sprint retrospective",
+            "start": "2027-05-12T16:00:00+01:00",
+            "end": "2027-05-12T16:45:00+01:00",
+            "category": "work",
+            "importance": 3,
+            "fixed": true,
+            "participants": [
+              "user",
+              "team"
+            ],
+            "description": "Internal video call; team is understanding if kids are in the background.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "travel_to_pool_wed",
+            "title": "Travel to pool",
+            "start": "2027-05-12T17:45:00+01:00",
+            "end": "2027-05-12T18:00:00+01:00",
+            "category": "commute",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "15-minute journey to pool (from home it is also 15 minutes).",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "swim_marta_wed",
+            "title": "Marta's swimming class",
+            "start": "2027-05-12T18:00:00+01:00",
+            "end": "2027-05-12T19:00:00+01:00",
+            "category": "kids_activity",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Weekly swimming class; municipal pool is open as normal.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "travel_home_wed",
+            "title": "Travel home from pool",
+            "start": "2027-05-12T19:00:00+01:00",
+            "end": "2027-05-12T19:15:00+01:00",
+            "category": "commute",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "15-minute journey home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "dinner_wed",
+            "title": "Family dinner",
+            "start": "2027-05-12T19:30:00+01:00",
+            "end": "2027-05-12T20:30:00+01:00",
+            "category": "family",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Dinner at home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "bedtime_wed",
+            "title": "Children's bedtime routine",
+            "start": "2027-05-12T20:30:00+01:00",
+            "end": "2027-05-12T21:15:00+01:00",
+            "category": "family",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Bath, story and bedtime.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-05-12T23:00:00+01:00",
+            "end": "2027-05-13T06:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 4,
+          "alternatives": 4,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The revised plan improves the previous tight transition into the 10:30-11:30 high-stakes supplier call by adding 10:00-10:30 setup and preparation and delaying further budget work until 11:45. However, it still depends on the partner childcare block from 08:00-12:45 being quiet and interruption-free enough for both preparation and the call while the children are at home.",
+          "The 06:30-07:15 budget block starts exactly when the protected sleep block ends and ends exactly when the morning routine with the children begins at 07:15. This may be feasible, especially because it replaces the former run slot, but the rationale assumes that availability for a run translates into useful cognitive focus time without much evidence.",
+          "The 21:15-22:15 Tuesday budget block follows family dinner at 19:30-20:30 and the children's bedtime routine at 20:30-21:15, leaving only 45 minutes before the 23:00 sleep block. This is proportionate compared with moving more work into the night, but it remains a fatigue-sensitive part of the plan.",
+          "Lunch remains scheduled 12:30-13:15 while partner childcare ends at 12:45 and the user becomes responsible for Marta and Duarte. The rationale acknowledges this as an everyday-need compromise, which is good, but the resulting calendar still does not make the handover or practical lunch arrangement very explicit.",
+          "The budget work is split into four blocks: 21:15-22:15 Tuesday, 06:30-07:15 Wednesday, 09:00-09:30 Wednesday, and 11:45-12:30 Wednesday. The total reaches the stated three hours, but whether this fragmentation is productive enough for drafting a Q2 operational budget remains unverified."
+        ],
+        "feedback": "The revision substantially addresses the prior concern: the earlier 10:00-10:30 budget block directly before the 10:30 supplier negotiation has been replaced with preparation time, and the post-call budget work now starts at 11:45 rather than immediately at 11:30. That makes the morning sequence more human-manageable and better aligned with the visible importance of the supplier call. The plan also avoids focused work during the solo-childcare afternoon, preserves sleep, keeps the children's evening routine and swimming, and limits night work to one hour. Remaining risks are mostly plausibility assumptions rather than clear defects: early cognitive work immediately after waking, evening work after bedtime, lunch during the childcare handover, and fragmented budget drafting. Without the original request, request satisfaction cannot be independently verified, and the technical validation explicitly does not check that. Still, based on the visible calendar and rationale, the revised organization is reasonably balanced for a disrupted strike-day schedule and does not need another revision unless the proposer has contrary context about the user's focus capacity, childcare reliability, or budget-work requirements.",
+        "plausibility_review": {
+          "revision_required": false,
+          "severity": "low",
+          "reason": "The concrete issue from the prior review was meaningfully addressed by adding a 10:00-10:30 supplier preparation block and leaving a 15-minute gap after the 10:30-11:30 call before budget work resumes at 11:45. The resulting schedule is still demanding, with budget work after bedtime and immediately after waking, but these choices are proportionate to the visible goal of completing three hours before Thursday afternoon while avoiding solo-childcare focus work and preserving protected sleep.",
+          "suggested_improvement": "Keep the current distribution if the fuller context confirms that the early-morning and post-bedtime budget blocks are realistic and that the partner can maintain quiet coverage for the supplier preparation and call. If not, reconsider the balance between fragmented budget work, recovery margin, and any available flexibility outside the visible solo-childcare period."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Supplier call childcare coverage",
+            "assumption": "The partner can fully cover Marta and Duarte during 10:00-11:30 so that supplier preparation and the high-stakes call are quiet and interruption-free.",
+            "evidence_gap": "The calendar shows partner childcare at home from 08:00-12:45 and the rationale asks to confirm interruption-free coverage, but the operational reliability of that coverage is not proven in the visible data.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Early-morning budget focus",
+            "assumption": "The user can do useful Q2 budget drafting from 06:30-07:15 immediately after sleep and immediately before the children's morning routine.",
+            "evidence_gap": "The rationale says the former run slot is assumed equally feasible for the user to be unavailable, but it does not show that this slot is equally suitable for cognitively demanding budget work.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Post-bedtime work capacity",
+            "assumption": "The user has enough cognitive energy to draft the operational budget from 21:15-22:15 after family dinner and the children's bedtime routine.",
+            "evidence_gap": "The plan preserves the 23:00 sleep block and limits night work to one hour, but the user's actual evening focus capacity is not established.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Lunch and childcare handover",
+            "assumption": "The user can manage lunch from 12:30-13:15 while partner childcare ends at 12:45 and responsibility for Marta and Duarte shifts to the user.",
+            "evidence_gap": "The lunch event lists only the user, while the rationale acknowledges that lunch partly occurs during solo childcare after 12:45.",
+            "potential_impact": "minor",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Budget work fragmentation",
+            "assumption": "Three hours split across four blocks of 60, 45, 30 and 45 minutes is sufficient for the Q2 operational budget drafting goal.",
+            "evidence_gap": "The rationale confirms the total duration but does not verify whether the task can be completed effectively in these shorter segments.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Original request satisfaction",
+            "assumption": "The revised calendar satisfies the user's original goal and any soft preferences not visible in the proposal.",
+            "evidence_gap": "The original request is not provided, and the technical validation explicitly says request satisfaction and soft preference satisfaction were not checked.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          }
+        ],
+        "overall": 4.0
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": true,
+        "plausibility_revision_required": false,
+        "accepted": true,
+        "revision_causes": []
+      },
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": [
+        {
+          "iteration": 0,
+          "proposal": {
+            "changes": [
+              {
+                "type": "delete",
+                "event_id": "travel_to_school_wed",
+                "title": null,
+                "from_start": null,
+                "to_start": null,
+                "to_end": null,
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "delete",
+                "event_id": "dropoff_wed",
+                "title": null,
+                "from_start": null,
+                "to_start": null,
+                "to_end": null,
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "delete",
+                "event_id": "commute_to_work_wed",
+                "title": null,
+                "from_start": null,
+                "to_start": null,
+                "to_end": null,
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "delete",
+                "event_id": "commute_to_school_wed",
+                "title": null,
+                "from_start": null,
+                "to_start": null,
+                "to_end": null,
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "delete",
+                "event_id": "pickup_wed",
+                "title": null,
+                "from_start": null,
+                "to_start": null,
+                "to_end": null,
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Draft Q2 operational budget",
+                "from_start": null,
+                "to_start": "2027-05-12T09:00:00+01:00",
+                "to_end": "2027-05-12T09:30:00+01:00",
+                "category": "work_focus",
+                "importance": 4,
+                "participants": [
+                  "user"
+                ]
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Draft Q2 operational budget",
+                "from_start": null,
+                "to_start": "2027-05-12T10:00:00+01:00",
+                "to_end": "2027-05-12T10:30:00+01:00",
+                "category": "work_focus",
+                "importance": 4,
+                "participants": [
+                  "user"
+                ]
+              },
+              {
+                "type": "move",
+                "event_id": "focus_pm_wed",
+                "title": null,
+                "from_start": null,
+                "to_start": "2027-05-11T21:15:00+01:00",
+                "to_end": "2027-05-11T22:15:00+01:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              }
+            ],
+            "rationale": {
+              "constraints": [
+                "School and daycare closure makes the school travel, drop-off and pick-up events inapplicable.",
+                "Office commutes are removed because Wednesday is now work from home.",
+                "Fixed work meetings and protected sleep blocks are not moved.",
+                "The supplier call is kept unchanged because partner childcare is already confirmed during it.",
+                "The three budget blocks total 3 hours before Thursday afternoon.",
+                "After 12:45 the user is alone with Marta and Duarte, so the afternoon budget block is moved away from solo-childcare time.",
+                "Marta's swimming, dinner, bedtime and sleep are kept unchanged.",
+                "Confirm with the partner that the 10:30 call remains fully covered and that no extra handover is needed before 12:45.",
+                "Confirm with work only if fragmented budget work or loss of the 13:30 focus block affects expectations."
+              ],
+              "priorities": [
+                "Prioritise childcare coverage and fixed work commitments during the strike day.",
+                "Use confirmed partner childcare for quiet morning work where possible.",
+                "Use tonight after bedtime for the remaining budget hour while preserving sleep.",
+                "Keep Marta's swimming class because it remains feasible and was requested if possible."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Do the final budget hour on Wednesday 21:15-22:15 instead of tonight.",
+                  "rejected_because": "This preserves tonight but risks fatigue after solo childcare and still must not cut into protected sleep."
+                },
+                {
+                  "option": "Skip Marta's swimming and work 18:00-19:00 Wednesday.",
+                  "rejected_because": "This would add work time but rejects a feasible children's activity the user asked to keep if possible."
+                },
+                {
+                  "option": "Keep the 13:30-15:30 budget block as-is.",
+                  "rejected_because": "It is calendar-free but operationally weak because the user is alone with two children, including a 3-year-old."
+                }
+              ],
+              "summary": "Remove the closed-school runs and office commutes, complete the budget in two short covered morning blocks plus one hour tonight, and keep the supplier call, swimming, evening routine and sleep intact; the main trade-off is using post-bedtime time tonight to avoid relying on focused work during solo childcare."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "dinner_tue",
+                "title": "Family dinner",
+                "start": "2027-05-11T19:30:00+01:00",
+                "end": "2027-05-11T20:30:00+01:00",
+                "category": "family",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "Dinner at home with the children.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "bedtime_tue",
+                "title": "Children's bedtime routine",
+                "start": "2027-05-11T20:30:00+01:00",
+                "end": "2027-05-11T21:15:00+01:00",
+                "category": "family",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "Bath, story and bedtime.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "focus_pm_wed",
+                "title": "Draft Q2 operational budget",
+                "start": "2027-05-11T21:15:00+01:00",
+                "end": "2027-05-11T22:15:00+01:00",
+                "category": "work_focus",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Flexible individual work; difficult to do uninterrupted while supervising a 3-year-old alone.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "sleep_wed",
+                "title": "Sleep",
+                "start": "2027-05-11T23:00:00+01:00",
+                "end": "2027-05-12T06:30:00+01:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block; at least seven hours required.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "run_wed",
+                "title": "Morning run",
+                "start": "2027-05-12T06:30:00+01:00",
+                "end": "2027-05-12T07:15:00+01:00",
+                "category": "exercise",
+                "importance": 2,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "45-minute morning run near home.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "morning_wed",
+                "title": "Morning routine with the children",
+                "start": "2027-05-12T07:15:00+01:00",
+                "end": "2027-05-12T08:00:00+01:00",
+                "category": "family",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "Breakfast and dressing for both children.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "partner_childcare_wed_am",
+                "title": "Partner childcare at home",
+                "start": "2027-05-12T08:00:00+01:00",
+                "end": "2027-05-12T12:45:00+01:00",
+                "category": "family",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "partner",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "Confirmed: the partner is home with the children until leaving for the 13:30 shift.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_5",
+                "title": "Draft Q2 operational budget",
+                "start": "2027-05-12T09:00:00+01:00",
+                "end": "2027-05-12T09:30:00+01:00",
+                "category": "work_focus",
+                "importance": 4,
+                "fixed": null,
+                "participants": [
+                  "user"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "standup_wed",
+                "title": "Team stand-up",
+                "start": "2027-05-12T09:30:00+01:00",
+                "end": "2027-05-12T10:00:00+01:00",
+                "category": "work",
+                "importance": 3,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "team"
+                ],
+                "description": "Daily stand-up via video; informal internal meeting.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_6",
+                "title": "Draft Q2 operational budget",
+                "start": "2027-05-12T10:00:00+01:00",
+                "end": "2027-05-12T10:30:00+01:00",
+                "category": "work_focus",
+                "importance": 4,
+                "fixed": null,
+                "participants": [
+                  "user"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "external_client_wed",
+                "title": "Contract negotiation with external supplier",
+                "start": "2027-05-12T10:30:00+01:00",
+                "end": "2027-05-12T11:30:00+01:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "supplier",
+                  "legal"
+                ],
+                "description": "High-stakes video call requiring full concentration and a quiet background.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "focus_am_wed",
+                "title": "Draft Q2 operational budget",
+                "start": "2027-05-12T11:30:00+01:00",
+                "end": "2027-05-12T12:30:00+01:00",
+                "category": "work_focus",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Flexible individual work; needs 3 total hours before Thursday afternoon.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "lunch_wed",
+                "title": "Lunch",
+                "start": "2027-05-12T12:30:00+01:00",
+                "end": "2027-05-12T13:15:00+01:00",
+                "category": "meal",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Lunch break.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "partner_shift_wed",
+                "title": "Partner's work shift and mandatory safety training",
+                "start": "2027-05-12T13:30:00+01:00",
+                "end": "2027-05-12T21:30:00+01:00",
+                "category": "partner_work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "partner"
+                ],
+                "description": "Partner is home until 12:45, then leaves for their bus driving shift and mandatory annual safety certification.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "team_retro_wed",
+                "title": "Sprint retrospective",
+                "start": "2027-05-12T16:00:00+01:00",
+                "end": "2027-05-12T16:45:00+01:00",
+                "category": "work",
+                "importance": 3,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "team"
+                ],
+                "description": "Internal video call; team is understanding if kids are in the background.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "travel_to_pool_wed",
+                "title": "Travel to pool",
+                "start": "2027-05-12T17:45:00+01:00",
+                "end": "2027-05-12T18:00:00+01:00",
+                "category": "commute",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "15-minute journey to pool (from home it is also 15 minutes).",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "swim_marta_wed",
+                "title": "Marta's swimming class",
+                "start": "2027-05-12T18:00:00+01:00",
+                "end": "2027-05-12T19:00:00+01:00",
+                "category": "kids_activity",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "Weekly swimming class; municipal pool is open as normal.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "travel_home_wed",
+                "title": "Travel home from pool",
+                "start": "2027-05-12T19:00:00+01:00",
+                "end": "2027-05-12T19:15:00+01:00",
+                "category": "commute",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "15-minute journey home.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "dinner_wed",
+                "title": "Family dinner",
+                "start": "2027-05-12T19:30:00+01:00",
+                "end": "2027-05-12T20:30:00+01:00",
+                "category": "family",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "Dinner at home.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "bedtime_wed",
+                "title": "Children's bedtime routine",
+                "start": "2027-05-12T20:30:00+01:00",
+                "end": "2027-05-12T21:15:00+01:00",
+                "category": "family",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "Bath, story and bedtime.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2027-05-12T23:00:00+01:00",
+                "end": "2027-05-13T06:30:00+01:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              }
+            ],
+            "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+          },
+          "plausibility_review": {
+            "revision_required": true,
+            "severity": "moderate",
+            "reason": "The proposed organization could work, but it materially depends on tightly packed focus and meeting transitions during the only covered childcare window. The 10:00-10:30 budget block ends exactly when the 10:30 high-stakes supplier call starts, and the 11:30-12:30 budget block begins immediately after that call. This may reduce preparation, recovery, and work quality even though there is no technical overlap. The concern is especially relevant because the rationale itself says the supplier call requires confirmed coverage and that afternoon focus work is weak during solo childcare.",
+            "suggested_improvement": "Reconsider the distribution of the morning budget work against preparation and recovery needs around the supplier call, or provide a grounded explanation from the fuller context that the user can realistically switch tasks immediately and that the childcare handover remains quiet and reliable."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Supplier call childcare coverage",
+              "assumption": "The partner can fully cover Marta and Duarte during the 10:30-11:30 supplier call without interruption or handover needs immediately beforehand.",
+              "evidence_gap": "The rationale says this should be confirmed, while the calendar shows partner childcare at home from 08:00-12:45 but does not show the operational details needed for a quiet, interruption-free high-stakes call.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Task-switching before high-stakes call",
+              "assumption": "The user can complete budget work until 10:30 and immediately begin the supplier negotiation at full concentration.",
+              "evidence_gap": "The calendar has no visible transition or preparation time between the 10:00-10:30 budget block and the 10:30-11:30 supplier call.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Post-bedtime work capacity",
+              "assumption": "The user has enough cognitive energy to draft the operational budget from 21:15-22:15 after dinner and the children's bedtime routine.",
+              "evidence_gap": "The rationale notes the trade-off but does not substantiate whether this evening work is sustainable for this user beyond preserving the 23:00 sleep start.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Lunch and childcare transition",
+              "assumption": "The user can complete lunch from 12:30-13:15 while partner childcare ends at 12:45 and the user becomes responsible for both children.",
+              "evidence_gap": "The lunch event lists only the user, while the rationale states the user is alone with Marta and Duarte after 12:45.",
+              "potential_impact": "minor",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Budget work fragmentation",
+              "assumption": "Three hours of budget work split into 60, 30, 30 and 60 minute segments is sufficient for the visible work goal before Thursday afternoon.",
+              "evidence_gap": "The rationale states the total duration but gives limited evidence that the fragmented structure is adequate for this type of drafting work.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            }
+          ],
+          "weaknesses": [
+            "The rationale treats the two 30-minute morning budget blocks at 09:00-09:30 and 10:00-10:30 as useful focus time, but the second ends exactly as the high-stakes supplier call begins at 10:30. The calendar gives no visible transition or preparation margin before a call described as requiring full concentration and a quiet background.",
+            "The plan preserves the 11:30-12:30 budget block immediately after the 10:30-11:30 supplier call, then lunch at 12:30-13:15. This is technically coherent, but it creates a tightly packed cognitive sequence from 09:00 to 12:30 with only meeting-shaped interruptions, not much visible recovery or setup time.",
+            "The moved budget hour from 21:15-22:15 on Tuesday follows family dinner at 19:30-20:30 and children's bedtime routine at 20:30-21:15. It preserves the 23:00 sleep block, but the plan relies on immediate post-bedtime cognitive work without much discussion of fatigue or wind-down.",
+            "The lunch block on Wednesday runs 12:30-13:15, while partner childcare ends at 12:45 and the rationale says the user is alone with Marta and Duarte after 12:45. This is not necessarily infeasible, but the calendar does not clearly show how the user's lunch and the childcare handover are handled.",
+            "The rationale notes that the 10:30 call coverage and handover should be confirmed, but the resulting plan still depends on that condition for the highest-stakes work event of the day."
+          ],
+          "feedback": "The proposal makes a sensible visible trade-off by removing inapplicable school and commute events, avoiding focused budget work during solo childcare, and preserving sleep, dinner, bedtime and swimming. The main human-quality concern is not that the calendar is overfull in a technical sense, but that the protected morning work window is used very tightly: budget work at 10:00-10:30 runs directly into the 10:30-11:30 supplier negotiation, followed immediately by another budget hour at 11:30-12:30. For a routine involving children at home, partner handover at 12:45, and a high-stakes call requiring full concentration, the rationale should better justify whether this amount of fragmentation and lack of transition margin is realistic. The post-bedtime Tuesday work block is plausible because sleep is preserved, but it is still a fatigue-sensitive choice after dinner and bedtime. A revision would be useful to reconsider whether the morning sequence needs more practical margin or to substantiate why the current fragmentation is still manageable with the confirmed childcare setup."
+        }
+      ],
+      "unresolved_assumptions": [
+        {
+          "subject": "Supplier call childcare coverage",
+          "assumption": "The partner can fully cover Marta and Duarte during 10:00-11:30 so that supplier preparation and the high-stakes call are quiet and interruption-free.",
+          "evidence_gap": "The calendar shows partner childcare at home from 08:00-12:45 and the rationale asks to confirm interruption-free coverage, but the operational reliability of that coverage is not proven in the visible data.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Early-morning budget focus",
+          "assumption": "The user can do useful Q2 budget drafting from 06:30-07:15 immediately after sleep and immediately before the children's morning routine.",
+          "evidence_gap": "The rationale says the former run slot is assumed equally feasible for the user to be unavailable, but it does not show that this slot is equally suitable for cognitively demanding budget work.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Post-bedtime work capacity",
+          "assumption": "The user has enough cognitive energy to draft the operational budget from 21:15-22:15 after family dinner and the children's bedtime routine.",
+          "evidence_gap": "The plan preserves the 23:00 sleep block and limits night work to one hour, but the user's actual evening focus capacity is not established.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Lunch and childcare handover",
+          "assumption": "The user can manage lunch from 12:30-13:15 while partner childcare ends at 12:45 and responsibility for Marta and Duarte shifts to the user.",
+          "evidence_gap": "The lunch event lists only the user, while the rationale acknowledges that lunch partly occurs during solo childcare after 12:45.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Budget work fragmentation",
+          "assumption": "Three hours split across four blocks of 60, 45, 30 and 45 minutes is sufficient for the Q2 operational budget drafting goal.",
+          "evidence_gap": "The rationale confirms the total duration but does not verify whether the task can be completed effectively in these shorter segments.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Original request satisfaction",
+          "assumption": "The revised calendar satisfies the user's original goal and any soft preferences not visible in the proposal.",
+          "evidence_gap": "The original request is not provided, and the technical validation explicitly says request satisfaction and soft preference satisfaction were not checked.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        }
+      ]
+    }
+  ],
+  "refinements": 1,
+  "source_status": "proposal_ready",
+  "final_proposal": {
+    "changes": [
+      {
+        "type": "delete",
+        "event_id": "travel_to_school_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "dropoff_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "commute_to_work_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "commute_to_school_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "pickup_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "run_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "focus_am_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "focus_pm_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Draft Q2 operational budget",
+        "from_start": null,
+        "to_start": "2027-05-11T21:15:00+01:00",
+        "to_end": "2027-05-11T22:15:00+01:00",
+        "category": "work_focus",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Draft Q2 operational budget",
+        "from_start": null,
+        "to_start": "2027-05-12T06:30:00+01:00",
+        "to_end": "2027-05-12T07:15:00+01:00",
+        "category": "work_focus",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Draft Q2 operational budget",
+        "from_start": null,
+        "to_start": "2027-05-12T09:00:00+01:00",
+        "to_end": "2027-05-12T09:30:00+01:00",
+        "category": "work_focus",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Supplier call setup and preparation",
+        "from_start": null,
+        "to_start": "2027-05-12T10:00:00+01:00",
+        "to_end": "2027-05-12T10:30:00+01:00",
+        "category": "work_focus",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Draft Q2 operational budget",
+        "from_start": null,
+        "to_start": "2027-05-12T11:45:00+01:00",
+        "to_end": "2027-05-12T12:30:00+01:00",
+        "category": "work_focus",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "School and daycare closure makes the school travel, drop-off and pick-up events inapplicable.",
+        "Office commutes are removed because Wednesday is now work from home.",
+        "Fixed work meetings and protected sleep blocks are not moved.",
+        "The supplier call is kept unchanged and given a preparation margin because it is high-stakes.",
+        "Budget work totals 3 hours before Thursday afternoon without using the solo-childcare afternoon block.",
+        "After 12:45 the user is alone with Marta and Duarte, so focused budget work is kept out of that period.",
+        "Lunch remains partly during solo childcare, which is an everyday-need compromise rather than protected quiet work.",
+        "Marta's swimming, dinner, bedtime and sleep are kept unchanged.",
+        "The early budget block assumes the former run slot is equally feasible for the user to be unavailable.",
+        "Confirm with the partner that supplier-call coverage is interruption-free and that the 12:45 handover is clear.",
+        "Confirm with work that the budget can be completed in shorter blocks and that the afternoon focus block is unavailable due to childcare."
+      ],
+      "priorities": [
+        "Prioritise child supervision, fixed work commitments and sleep during the strike day.",
+        "Use confirmed morning childcare for meetings and the most concentration-sensitive work.",
+        "Replace the run because the budget deadline has higher priority than exercise tomorrow.",
+        "Use only one post-bedtime work hour to reduce fatigue and preserve wind-down before sleep.",
+        "Keep Marta's swimming because it remains feasible and was requested if possible."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Keep the 13:30-15:30 budget block.",
+          "rejected_because": "It is free on the calendar but operationally weak while the user is alone with two children, including Duarte."
+        },
+        {
+          "option": "Use 10:00-10:30 for budget work instead of call preparation.",
+          "rejected_because": "That would recreate the tight transition into the high-stakes supplier negotiation."
+        },
+        {
+          "option": "Move more budget work to Wednesday night.",
+          "rejected_because": "It would protect the run but increases fatigue after solo childcare and narrows wind-down before protected sleep."
+        },
+        {
+          "option": "Skip Marta's swimming and work 18:00-19:00.",
+          "rejected_because": "This rejects a feasible children's activity the user asked to keep if possible."
+        }
+      ],
+      "summary": "Remove the closed-school and office-travel events, replace the run and the weak afternoon focus block with earlier budget work, and keep a preparation margin before the supplier negotiation; the main trade-off is losing tomorrow's run and doing one hour tonight to avoid relying on focused work during solo childcare."
+    }
+  },
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [
+      "new_10: overlaps contextual event partner_childcare_wed_am for another participant",
+      "new_11: overlaps contextual event partner_childcare_wed_am for another participant",
+      "new_12: overlaps contextual event partner_childcare_wed_am for another participant"
+    ],
+    "valid": true
+  },
+  "source_result_sha256": "3f33453ffea90f47c556d52efb6cdd2afaceb42e9c3bfabc6f8a9a14535dda36",
+  "scenario_sha256": "7d178e2a740dc021cd47ec876cae7681aa57f3e33c1c46ffaa43af8a0c94a615",
+  "aggregate_requirements_sha256": null,
+  "confirmed_changes_sha256": null,
+  "critic_input_version": "final_calendar_v1",
+  "critic_policy_version": "uncertainty_review_v2",
+  "result_calendar_version": "validated_added_metadata_v2",
+  "final_result_calendar": {
+    "timezone": "Europe/Lisbon",
+    "coverage": "all_events_in_scenario_after_simulation",
+    "events": [
+      {
+        "id": "dinner_tue",
+        "title": "Family dinner",
+        "start": "2027-05-11T19:30:00+01:00",
+        "end": "2027-05-11T20:30:00+01:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Dinner at home with the children.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "bedtime_tue",
+        "title": "Children's bedtime routine",
+        "start": "2027-05-11T20:30:00+01:00",
+        "end": "2027-05-11T21:15:00+01:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Bath, story and bedtime.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_8",
+        "title": "Draft Q2 operational budget",
+        "start": "2027-05-11T21:15:00+01:00",
+        "end": "2027-05-11T22:15:00+01:00",
+        "category": "work_focus",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-05-11T23:00:00+01:00",
+        "end": "2027-05-12T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block; at least seven hours required.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_9",
+        "title": "Draft Q2 operational budget",
+        "start": "2027-05-12T06:30:00+01:00",
+        "end": "2027-05-12T07:15:00+01:00",
+        "category": "work_focus",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "morning_wed",
+        "title": "Morning routine with the children",
+        "start": "2027-05-12T07:15:00+01:00",
+        "end": "2027-05-12T08:00:00+01:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Breakfast and dressing for both children.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "partner_childcare_wed_am",
+        "title": "Partner childcare at home",
+        "start": "2027-05-12T08:00:00+01:00",
+        "end": "2027-05-12T12:45:00+01:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "partner",
+          "marta",
+          "duarte"
+        ],
+        "description": "Confirmed: the partner is home with the children until leaving for the 13:30 shift.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_10",
+        "title": "Draft Q2 operational budget",
+        "start": "2027-05-12T09:00:00+01:00",
+        "end": "2027-05-12T09:30:00+01:00",
+        "category": "work_focus",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "standup_wed",
+        "title": "Team stand-up",
+        "start": "2027-05-12T09:30:00+01:00",
+        "end": "2027-05-12T10:00:00+01:00",
+        "category": "work",
+        "importance": 3,
+        "fixed": true,
+        "participants": [
+          "user",
+          "team"
+        ],
+        "description": "Daily stand-up via video; informal internal meeting.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_11",
+        "title": "Supplier call setup and preparation",
+        "start": "2027-05-12T10:00:00+01:00",
+        "end": "2027-05-12T10:30:00+01:00",
+        "category": "work_focus",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "external_client_wed",
+        "title": "Contract negotiation with external supplier",
+        "start": "2027-05-12T10:30:00+01:00",
+        "end": "2027-05-12T11:30:00+01:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "supplier",
+          "legal"
+        ],
+        "description": "High-stakes video call requiring full concentration and a quiet background.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_12",
+        "title": "Draft Q2 operational budget",
+        "start": "2027-05-12T11:45:00+01:00",
+        "end": "2027-05-12T12:30:00+01:00",
+        "category": "work_focus",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "lunch_wed",
+        "title": "Lunch",
+        "start": "2027-05-12T12:30:00+01:00",
+        "end": "2027-05-12T13:15:00+01:00",
+        "category": "meal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "partner_shift_wed",
+        "title": "Partner's work shift and mandatory safety training",
+        "start": "2027-05-12T13:30:00+01:00",
+        "end": "2027-05-12T21:30:00+01:00",
+        "category": "partner_work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "partner"
+        ],
+        "description": "Partner is home until 12:45, then leaves for their bus driving shift and mandatory annual safety certification.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "team_retro_wed",
+        "title": "Sprint retrospective",
+        "start": "2027-05-12T16:00:00+01:00",
+        "end": "2027-05-12T16:45:00+01:00",
+        "category": "work",
+        "importance": 3,
+        "fixed": true,
+        "participants": [
+          "user",
+          "team"
+        ],
+        "description": "Internal video call; team is understanding if kids are in the background.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "travel_to_pool_wed",
+        "title": "Travel to pool",
+        "start": "2027-05-12T17:45:00+01:00",
+        "end": "2027-05-12T18:00:00+01:00",
+        "category": "commute",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "15-minute journey to pool (from home it is also 15 minutes).",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "swim_marta_wed",
+        "title": "Marta's swimming class",
+        "start": "2027-05-12T18:00:00+01:00",
+        "end": "2027-05-12T19:00:00+01:00",
+        "category": "kids_activity",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Weekly swimming class; municipal pool is open as normal.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "travel_home_wed",
+        "title": "Travel home from pool",
+        "start": "2027-05-12T19:00:00+01:00",
+        "end": "2027-05-12T19:15:00+01:00",
+        "category": "commute",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "15-minute journey home.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "dinner_wed",
+        "title": "Family dinner",
+        "start": "2027-05-12T19:30:00+01:00",
+        "end": "2027-05-12T20:30:00+01:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Dinner at home.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "bedtime_wed",
+        "title": "Children's bedtime routine",
+        "start": "2027-05-12T20:30:00+01:00",
+        "end": "2027-05-12T21:15:00+01:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Bath, story and bedtime.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-05-12T23:00:00+01:00",
+        "end": "2027-05-13T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      }
+    ],
+    "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+  },
+  "final_unresolved_assumptions": [
+    {
+      "subject": "Supplier call childcare coverage",
+      "assumption": "The partner can fully cover Marta and Duarte during 10:00-11:30 so that supplier preparation and the high-stakes call are quiet and interruption-free.",
+      "evidence_gap": "The calendar shows partner childcare at home from 08:00-12:45 and the rationale asks to confirm interruption-free coverage, but the operational reliability of that coverage is not proven in the visible data.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Early-morning budget focus",
+      "assumption": "The user can do useful Q2 budget drafting from 06:30-07:15 immediately after sleep and immediately before the children's morning routine.",
+      "evidence_gap": "The rationale says the former run slot is assumed equally feasible for the user to be unavailable, but it does not show that this slot is equally suitable for cognitively demanding budget work.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Post-bedtime work capacity",
+      "assumption": "The user has enough cognitive energy to draft the operational budget from 21:15-22:15 after family dinner and the children's bedtime routine.",
+      "evidence_gap": "The plan preserves the 23:00 sleep block and limits night work to one hour, but the user's actual evening focus capacity is not established.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Lunch and childcare handover",
+      "assumption": "The user can manage lunch from 12:30-13:15 while partner childcare ends at 12:45 and responsibility for Marta and Duarte shifts to the user.",
+      "evidence_gap": "The lunch event lists only the user, while the rationale acknowledges that lunch partly occurs during solo childcare after 12:45.",
+      "potential_impact": "minor",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Budget work fragmentation",
+      "assumption": "Three hours split across four blocks of 60, 45, 30 and 45 minutes is sufficient for the Q2 operational budget drafting goal.",
+      "evidence_gap": "The rationale confirms the total duration but does not verify whether the task can be completed effectively in these shorter segments.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Original request satisfaction",
+      "assumption": "The revised calendar satisfies the user's original goal and any soft preferences not visible in the proposal.",
+      "evidence_gap": "The original request is not provided, and the technical validation explicitly says request satisfaction and soft preference satisfaction were not checked.",
+      "potential_impact": "material",
+      "verification_source": "unknown"
+    }
+  ],
+  "uncertainty_history": [
+    {
+      "iteration": 0,
+      "unresolved_assumptions": [
+        {
+          "subject": "Supplier call childcare coverage",
+          "assumption": "The partner can fully cover Marta and Duarte during the 10:30-11:30 supplier call without interruption or handover needs immediately beforehand.",
+          "evidence_gap": "The rationale says this should be confirmed, while the calendar shows partner childcare at home from 08:00-12:45 but does not show the operational details needed for a quiet, interruption-free high-stakes call.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Task-switching before high-stakes call",
+          "assumption": "The user can complete budget work until 10:30 and immediately begin the supplier negotiation at full concentration.",
+          "evidence_gap": "The calendar has no visible transition or preparation time between the 10:00-10:30 budget block and the 10:30-11:30 supplier call.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Post-bedtime work capacity",
+          "assumption": "The user has enough cognitive energy to draft the operational budget from 21:15-22:15 after dinner and the children's bedtime routine.",
+          "evidence_gap": "The rationale notes the trade-off but does not substantiate whether this evening work is sustainable for this user beyond preserving the 23:00 sleep start.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Lunch and childcare transition",
+          "assumption": "The user can complete lunch from 12:30-13:15 while partner childcare ends at 12:45 and the user becomes responsible for both children.",
+          "evidence_gap": "The lunch event lists only the user, while the rationale states the user is alone with Marta and Duarte after 12:45.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Budget work fragmentation",
+          "assumption": "Three hours of budget work split into 60, 30, 30 and 60 minute segments is sufficient for the visible work goal before Thursday afternoon.",
+          "evidence_gap": "The rationale states the total duration but gives limited evidence that the fragmented structure is adequate for this type of drafting work.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    },
+    {
+      "iteration": 1,
+      "unresolved_assumptions": [
+        {
+          "subject": "Supplier call childcare coverage",
+          "assumption": "The partner can fully cover Marta and Duarte during 10:00-11:30 so that supplier preparation and the high-stakes call are quiet and interruption-free.",
+          "evidence_gap": "The calendar shows partner childcare at home from 08:00-12:45 and the rationale asks to confirm interruption-free coverage, but the operational reliability of that coverage is not proven in the visible data.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Early-morning budget focus",
+          "assumption": "The user can do useful Q2 budget drafting from 06:30-07:15 immediately after sleep and immediately before the children's morning routine.",
+          "evidence_gap": "The rationale says the former run slot is assumed equally feasible for the user to be unavailable, but it does not show that this slot is equally suitable for cognitively demanding budget work.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Post-bedtime work capacity",
+          "assumption": "The user has enough cognitive energy to draft the operational budget from 21:15-22:15 after family dinner and the children's bedtime routine.",
+          "evidence_gap": "The plan preserves the 23:00 sleep block and limits night work to one hour, but the user's actual evening focus capacity is not established.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Lunch and childcare handover",
+          "assumption": "The user can manage lunch from 12:30-13:15 while partner childcare ends at 12:45 and responsibility for Marta and Duarte shifts to the user.",
+          "evidence_gap": "The lunch event lists only the user, while the rationale acknowledges that lunch partly occurs during solo childcare after 12:45.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Budget work fragmentation",
+          "assumption": "Three hours split across four blocks of 60, 45, 30 and 45 minutes is sufficient for the Q2 operational budget drafting goal.",
+          "evidence_gap": "The rationale confirms the total duration but does not verify whether the task can be completed effectively in these shorter segments.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Original request satisfaction",
+          "assumption": "The revised calendar satisfies the user's original goal and any soft preferences not visible in the proposal.",
+          "evidence_gap": "The original request is not provided, and the technical validation explicitly says request satisfaction and soft preference satisfaction were not checked.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        }
+      ]
+    }
+  ]
+}

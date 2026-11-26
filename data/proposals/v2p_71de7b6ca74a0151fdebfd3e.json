@@ -1,0 +1,2602 @@
+{
+  "proposal_id": "v2p_71de7b6ca74a0151fdebfd3e",
+  "scenario_id": "elite_athlete_student_sponsor_media_day_project_001",
+  "family_id": "elite_athlete_student_schedule_conflict",
+  "profile_id": "elite_athlete_student_01__elite_athlete_student_sponsor_media_day_project_001",
+  "split": "train",
+  "run_id": "bfc19819a1e74290b523481a60836596",
+  "configuration": "B",
+  "generated_at": "2026-11-25T23:36:10.467682+00:00",
+  "proposer_provider": "iaedu",
+  "proposer_model": "GPT-5.5",
+  "proposer_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_provider": "iaedu",
+  "critic_model": "GPT-5.5",
+  "critic_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "prompt_versions": {
+    "proposer_sha256": "ae6fa59cccb86c31f34f66d07d241660b1feadf852ebf1b594bc85addab86985",
+    "proposer_wire_schema_version": "compact_proposal_v1",
+    "proposer_wire_schema_sha256": "f504fbcd7e939c43e055e2f188feb22097a284bcd9b043227d868e559547b865",
+    "proposer_revision_sha256": "3f0fe7f221013700694a22984560612013e9804072ffde4538e1329b9708ac95",
+    "critic_sha256": "1686688cdd4bc63abb12e6633ef9dbb9b62d69b69aba1c4805a201657cc5bb34"
+  },
+  "critic_settings": {
+    "threshold": 4.0,
+    "max_refinements": 3,
+    "min_dimension_score": 1
+  },
+  "experiment_id": null,
+  "repeat_index": 0,
+  "seconds": 91.557,
+  "critic_score": 4.25,
+  "critic_accepted": true,
+  "iterations": [
+    {
+      "index": 0,
+      "proposer_feedback": null,
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Mandatory sponsor photoshoot and media event",
+            "from_start": null,
+            "to_start": "2027-05-05T14:30:00+01:00",
+            "to_end": "2027-05-05T17:30:00+01:00",
+            "category": "media",
+            "importance": 5,
+            "participants": [
+              "user",
+              "club apparel sponsor"
+            ]
+          },
+          {
+            "type": "move",
+            "event_id": "training_pm_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-05-05T18:30:00+01:00",
+            "to_end": "2027-05-05T20:00:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "The sponsor event is mandatory and directly overlaps the original Wednesday afternoon technical training.",
+            "Only the Wednesday afternoon training has an externally stated exception allowing a move.",
+            "All protected sleep blocks remain unchanged at 8 hours.",
+            "Fixed training sessions other than the approved Wednesday move are not changed.",
+            "The Friday 17:00 project deadline remains protected.",
+            "Existing scheduled project work before the deadline totals at least 6 hours without skipping Thursday morning lab."
+          ],
+          "priorities": [
+            "Use the coach-approved Wednesday 18:30–20:00 option to avoid disturbing Thursday’s fixed training day.",
+            "Preserve all existing project work blocks to keep a buffer before the deadline.",
+            "Keep Thursday morning lab in place because skipping it is unnecessary for the 6-hour project target."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Move Wednesday training to Thursday 14:30–16:30",
+              "rejected_because": "Rejected because it creates a double Thursday afternoon training load immediately before the fixed 16:30 session."
+            },
+            {
+              "option": "Skip Thursday Software Engineering Lab for extra project work",
+              "rejected_because": "Rejected because the current calendar already provides enough project work before Friday 17:00."
+            }
+          ],
+          "summary": "Adds the mandatory sponsor media event and moves only the affected Wednesday training to the coach-approved evening slot; the trade-off is a later Wednesday finish, while sleep, fixed training, lab time and the project-work target are preserved. Confirm the sponsor venue timing, the coach’s final approval for the 18:30–20:00 High-Performance Center session, and whether the 30-minute downtown transfer applies to that venue."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-05-02T22:30:00+01:00",
+            "end": "2027-05-03T06:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_mon",
+            "title": "Morning Strength Training",
+            "start": "2027-05-03T07:00:00+01:00",
+            "end": "2027-05-03T09:00:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "class_se_mon",
+            "title": "Software Engineering Lecture",
+            "start": "2027-05-03T10:00:00+01:00",
+            "end": "2027-05-03T12:00:00+01:00",
+            "category": "classes",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Morning lecture.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_mon",
+            "title": "Lunch",
+            "start": "2027-05-03T12:30:00+01:00",
+            "end": "2027-05-03T13:30:00+01:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_mon",
+            "title": "Software Project Coding",
+            "start": "2027-05-03T14:00:00+01:00",
+            "end": "2027-05-03T16:00:00+01:00",
+            "category": "study",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Project work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_mon",
+            "title": "Afternoon Technical Session",
+            "start": "2027-05-03T16:30:00+01:00",
+            "end": "2027-05-03T18:30:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-05-03T22:30:00+01:00",
+            "end": "2027-05-04T06:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_tue",
+            "title": "Morning Conditioning",
+            "start": "2027-05-04T07:00:00+01:00",
+            "end": "2027-05-04T09:00:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "class_networks_tue",
+            "title": "Computer Networks Lecture",
+            "start": "2027-05-04T10:00:00+01:00",
+            "end": "2027-05-04T12:00:00+01:00",
+            "category": "classes",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Morning lecture.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_tue",
+            "title": "Lunch",
+            "start": "2027-05-04T12:30:00+01:00",
+            "end": "2027-05-04T13:30:00+01:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_tue",
+            "title": "Software Project Coding",
+            "start": "2027-05-04T14:00:00+01:00",
+            "end": "2027-05-04T16:00:00+01:00",
+            "category": "study",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Project work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_tue",
+            "title": "Afternoon Tactical Session",
+            "start": "2027-05-04T16:30:00+01:00",
+            "end": "2027-05-04T18:30:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-05-04T22:30:00+01:00",
+            "end": "2027-05-05T06:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_wed",
+            "title": "Morning Pool Recovery",
+            "start": "2027-05-05T07:00:00+01:00",
+            "end": "2027-05-05T09:00:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_wed",
+            "title": "Software Project Integration",
+            "start": "2027-05-05T10:00:00+01:00",
+            "end": "2027-05-05T12:00:00+01:00",
+            "category": "study",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Project work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_wed",
+            "title": "Lunch",
+            "start": "2027-05-05T12:30:00+01:00",
+            "end": "2027-05-05T13:30:00+01:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_0",
+            "title": "Mandatory sponsor photoshoot and media event",
+            "start": "2027-05-05T14:30:00+01:00",
+            "end": "2027-05-05T17:30:00+01:00",
+            "category": "media",
+            "importance": 5,
+            "fixed": null,
+            "participants": [
+              "user",
+              "club apparel sponsor"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "training_pm_wed",
+            "title": "Afternoon Technical Training",
+            "start": "2027-05-05T18:30:00+01:00",
+            "end": "2027-05-05T20:00:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Coach-approved move to Wednesday 18:30–20:00 or Thursday 14:30–16:30.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-05-05T22:30:00+01:00",
+            "end": "2027-05-06T06:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_thu",
+            "title": "Morning Gym",
+            "start": "2027-05-06T07:00:00+01:00",
+            "end": "2027-05-06T09:00:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "class_se_thu",
+            "title": "Software Engineering Lab",
+            "start": "2027-05-06T10:00:00+01:00",
+            "end": "2027-05-06T12:00:00+01:00",
+            "category": "classes",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Morning lab.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_thu",
+            "title": "Lunch",
+            "start": "2027-05-06T12:30:00+01:00",
+            "end": "2027-05-06T13:30:00+01:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_thu",
+            "title": "Afternoon Tactical Session",
+            "start": "2027-05-06T16:30:00+01:00",
+            "end": "2027-05-06T18:30:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-05-06T22:30:00+01:00",
+            "end": "2027-05-07T06:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_fri",
+            "title": "Morning Speed Session",
+            "start": "2027-05-07T07:00:00+01:00",
+            "end": "2027-05-07T09:00:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_fri",
+            "title": "Final Project Testing & Submission",
+            "start": "2027-05-07T10:00:00+01:00",
+            "end": "2027-05-07T12:30:00+01:00",
+            "category": "study",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Final testing before 17:00 deadline.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_fri",
+            "title": "Afternoon Scrimmage",
+            "start": "2027-05-07T16:30:00+01:00",
+            "end": "2027-05-07T18:30:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "social_fri",
+            "title": "Student Association Trivia Night",
+            "start": "2027-05-07T20:00:00+01:00",
+            "end": "2027-05-07T22:00:00+01:00",
+            "category": "social",
+            "importance": 2,
+            "fixed": false,
+            "participants": [
+              "user",
+              "peers"
+            ],
+            "description": "Friday social.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 3,
+          "alternatives": 3,
+          "clarity": 4
+        },
+        "weaknesses": [
+          "The proposal gives good priority weight to preserving sleep, fixed training, the Friday deadline, and Thursday lab, but it under-examines the practical load created on Wednesday: Morning Pool Recovery 07:00–09:00, Software Project Integration 10:00–12:00, lunch 12:30–13:30, the added sponsor photoshoot/media event 14:30–17:30, and moved technical training 18:30–20:00.",
+          "The one-hour gap between the sponsor event ending at 17:30 and training starting at 18:30 may be workable, but the rationale itself leaves venue timing, coach approval, and a possible 30-minute downtown transfer unverified. That gap may also need to cover changing, food, hydration, decompression, and arrival preparation.",
+          "The Wednesday evening move avoids the rejected Thursday double-afternoon training load, which is a sensible trade-off, but it still creates a late training finish at 20:00 followed by protected sleep at 22:30 and a fixed Thursday Morning Gym session at 07:00. The calendar preserves sleep duration, but does not show whether the evening recovery and next-morning readiness are realistic.",
+          "Alternatives considered are relevant but narrow. The proposal compares Wednesday evening against Thursday afternoon and rejects skipping Thursday lab, but it does not substantiate whether the Wednesday media-to-training sequence can be made sustainable with known logistics or whether the sponsor event has any internal flexibility."
+        ],
+        "feedback": "The proposal is mostly coherent and shows a reasonable attempt to protect the visible priorities: mandatory sponsor attendance, fixed training, sleep, lab attendance, and project work before the Friday 17:00 deadline. The main human-quality concern is not a technical conflict but the compressed Wednesday: a 3-hour media obligation from 14:30–17:30 followed by training at 18:30–20:00 after an already active morning. Because the rationale itself flags uncertainty about venue timing, coach approval, and transfer time, the schedule would benefit from a fuller check of whether that one-hour transition is genuinely usable, not merely open on the calendar. If the same operations are kept, the proposer should ground why the Wednesday evening sequence is still manageable, including logistics and basic recovery needs, rather than relying only on the existence of a free slot.",
+        "plausibility_review": {
+          "revision_required": true,
+          "severity": "moderate",
+          "reason": "The added sponsor event and moved training create a dense Wednesday with a potentially fragile 17:30–18:30 transition between media duties and training. This could materially affect manageability, especially because the user has protected sleep at 22:30, fixed Thursday training at 07:00, and a broader week already containing repeated morning and afternoon training sessions plus project work. The concern is uncertain rather than objectively incompatible, but it is concrete and directly caused by the proposed organization.",
+          "suggested_improvement": "Reconsider or substantiate the Wednesday media-to-training sequence using the fuller context: actual venue locations, whether the sponsor event end time includes wrap-up, whether the coach-approved slot is final, and whether the user can realistically eat, change, travel, and recover enough before training. If those conditions are solid, the same schedule may be defensible; otherwise, look for a less compressed distribution or added practical margin without undermining the protected priorities."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Sponsor event logistics",
+            "assumption": "The sponsor photoshoot and media event can truly end at 17:30 with the user free to leave immediately.",
+            "evidence_gap": "The calendar gives the event time as 14:30–17:30, but the rationale asks to confirm sponsor venue timing and does not state whether wrap-up, sponsor obligations, changing, or overruns are included.",
+            "potential_impact": "material",
+            "verification_source": "third_party"
+          },
+          {
+            "subject": "Transfer between sponsor event and training",
+            "assumption": "The user can get from the sponsor event to the 18:30 training location within the available one-hour gap while also handling basic preparation needs.",
+            "evidence_gap": "The rationale mentions uncertainty about whether a 30-minute downtown transfer applies, but the final calendar does not show location, travel, changing, food, or arrival preparation time.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Coach-approved Wednesday evening training slot",
+            "assumption": "The 18:30–20:00 Wednesday training move is finally approved and operationally available.",
+            "evidence_gap": "The existing event description says the move is coach-approved to Wednesday 18:30–20:00 or Thursday 14:30–16:30, while the rationale still says to confirm the coach’s final approval for the 18:30–20:00 High-Performance Center session.",
+            "potential_impact": "potentially_blocking",
+            "verification_source": "third_party"
+          },
+          {
+            "subject": "Wednesday evening recovery before Thursday morning training",
+            "assumption": "Finishing training at 20:00 leaves enough practical evening recovery before 22:30 sleep and the fixed Thursday 07:00 Morning Gym session.",
+            "evidence_gap": "The proposal preserves the 8-hour sleep block but does not substantiate post-training cooldown, meal, hygiene, recovery, or readiness for the next morning’s fixed session.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          }
+        ],
+        "overall": 3.5
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": false,
+        "plausibility_revision_required": true,
+        "accepted": false,
+        "revision_causes": [
+          "numeric_criteria_failed",
+          "plausibility_revision_required"
+        ]
+      },
+      "operations_changed_from_previous": null,
+      "rationale_changed_from_previous": null,
+      "prior_critic_reviews": [],
+      "unresolved_assumptions": [
+        {
+          "subject": "Sponsor event logistics",
+          "assumption": "The sponsor photoshoot and media event can truly end at 17:30 with the user free to leave immediately.",
+          "evidence_gap": "The calendar gives the event time as 14:30–17:30, but the rationale asks to confirm sponsor venue timing and does not state whether wrap-up, sponsor obligations, changing, or overruns are included.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Transfer between sponsor event and training",
+          "assumption": "The user can get from the sponsor event to the 18:30 training location within the available one-hour gap while also handling basic preparation needs.",
+          "evidence_gap": "The rationale mentions uncertainty about whether a 30-minute downtown transfer applies, but the final calendar does not show location, travel, changing, food, or arrival preparation time.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Coach-approved Wednesday evening training slot",
+          "assumption": "The 18:30–20:00 Wednesday training move is finally approved and operationally available.",
+          "evidence_gap": "The existing event description says the move is coach-approved to Wednesday 18:30–20:00 or Thursday 14:30–16:30, while the rationale still says to confirm the coach’s final approval for the 18:30–20:00 High-Performance Center session.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Wednesday evening recovery before Thursday morning training",
+          "assumption": "Finishing training at 20:00 leaves enough practical evening recovery before 22:30 sleep and the fixed Thursday 07:00 Morning Gym session.",
+          "evidence_gap": "The proposal preserves the 8-hour sleep block but does not substantiate post-training cooldown, meal, hygiene, recovery, or readiness for the next morning’s fixed session.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "proposer_feedback": "Numeric Critic criteria failed. Scores: {\"reasoning\":4,\"coherence\":3,\"alternatives\":3,\"clarity\":4}. Plausibility revision required (moderate): The added sponsor event and moved training create a dense Wednesday with a potentially fragile 17:30–18:30 transition between media duties and training. This could materially affect manageability, especially because the user has protected sleep at 22:30, fixed Thursday training at 07:00, and a broader week already containing repeated morning and afternoon training sessions plus project work. The concern is uncertain rather than objectively incompatible, but it is concrete and directly caused by the proposed organization. Suggested direction: Reconsider or substantiate the Wednesday media-to-training sequence using the fuller context: actual venue locations, whether the sponsor event end time includes wrap-up, whether the coach-approved slot is final, and whether the user can realistically eat, change, travel, and recover enough before training. If those conditions are solid, the same schedule may be defensible; otherwise, look for a less compressed distribution or added practical margin without undermining the protected priorities. The Critic lacks the full user constraints; explain if no better feasible option exists. Unverified conditions to reassess: [{'subject': 'Sponsor event logistics', 'assumption': 'The sponsor photoshoot and media event can truly end at 17:30 with the user free to leave immediately.', 'evidence_gap': 'The calendar gives the event time as 14:30–17:30, but the rationale asks to confirm sponsor venue timing and does not state whether wrap-up, sponsor obligations, changing, or overruns are included.', 'potential_impact': 'material', 'verification_source': 'third_party'}, {'subject': 'Transfer between sponsor event and training', 'assumption': 'The user can get from the sponsor event to the 18:30 training location within the available one-hour gap while also handling basic preparation needs.', 'evidence_gap': 'The rationale mentions uncertainty about whether a 30-minute downtown transfer applies, but the final calendar does not show location, travel, changing, food, or arrival preparation time.', 'potential_impact': 'material', 'verification_source': 'unknown'}, {'subject': 'Coach-approved Wednesday evening training slot', 'assumption': 'The 18:30–20:00 Wednesday training move is finally approved and operationally available.', 'evidence_gap': 'The existing event description says the move is coach-approved to Wednesday 18:30–20:00 or Thursday 14:30–16:30, while the rationale still says to confirm the coach’s final approval for the 18:30–20:00 High-Performance Center session.', 'potential_impact': 'potentially_blocking', 'verification_source': 'third_party'}, {'subject': 'Wednesday evening recovery before Thursday morning training', 'assumption': 'Finishing training at 20:00 leaves enough practical evening recovery before 22:30 sleep and the fixed Thursday 07:00 Morning Gym session.', 'evidence_gap': 'The proposal preserves the 8-hour sleep block but does not substantiate post-training cooldown, meal, hygiene, recovery, or readiness for the next morning’s fixed session.', 'potential_impact': 'material', 'verification_source': 'user_context'}] Weaknesses: ['The proposal gives good priority weight to preserving sleep, fixed training, the Friday deadline, and Thursday lab, but it under-examines the practical load created on Wednesday: Morning Pool Recovery 07:00–09:00, Software Project Integration 10:00–12:00, lunch 12:30–13:30, the added sponsor photoshoot/media event 14:30–17:30, and moved technical training 18:30–20:00.', 'The one-hour gap between the sponsor event ending at 17:30 and training starting at 18:30 may be workable, but the rationale itself leaves venue timing, coach approval, and a possible 30-minute downtown transfer unverified. That gap may also need to cover changing, food, hydration, decompression, and arrival preparation.', 'The Wednesday evening move avoids the rejected Thursday double-afternoon training load, which is a sensible trade-off, but it still creates a late training finish at 20:00 followed by protected sleep at 22:30 and a fixed Thursday Morning Gym session at 07:00. The calendar preserves sleep duration, but does not show whether the evening recovery and next-morning readiness are realistic.', 'Alternatives considered are relevant but narrow. The proposal compares Wednesday evening against Thursday afternoon and rejects skipping Thursday lab, but it does not substantiate whether the Wednesday media-to-training sequence can be made sustainable with known logistics or whether the sponsor event has any internal flexibility.']. Actionable feedback: The proposal is mostly coherent and shows a reasonable attempt to protect the visible priorities: mandatory sponsor attendance, fixed training, sleep, lab attendance, and project work before the Friday 17:00 deadline. The main human-quality concern is not a technical conflict but the compressed Wednesday: a 3-hour media obligation from 14:30–17:30 followed by training at 18:30–20:00 after an already active morning. Because the rationale itself flags uncertainty about venue timing, coach approval, and transfer time, the schedule would benefit from a fuller check of whether that one-hour transition is genuinely usable, not merely open on the calendar. If the same operations are kept, the proposer should ground why the Wednesday evening sequence is still manageable, including logistics and basic recovery needs, rather than relying only on the existence of a free slot.",
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Mandatory sponsor photoshoot and media event",
+            "from_start": null,
+            "to_start": "2027-05-05T14:30:00+01:00",
+            "to_end": "2027-05-05T17:30:00+01:00",
+            "category": "media",
+            "importance": 5,
+            "participants": [
+              "user",
+              "club apparel sponsor"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Transfer and training prep buffer",
+            "from_start": null,
+            "to_start": "2027-05-05T17:30:00+01:00",
+            "to_end": "2027-05-05T18:30:00+01:00",
+            "category": "travel",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "move",
+            "event_id": "training_pm_wed",
+            "title": null,
+            "from_start": null,
+            "to_start": "2027-05-05T18:30:00+01:00",
+            "to_end": "2027-05-05T20:00:00+01:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Sleep",
+            "from_start": null,
+            "to_start": "2027-05-07T22:30:00+01:00",
+            "to_end": "2027-05-08T06:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "participants": [
+              "user"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "The sponsor obligation is mandatory and conflicts with the original Wednesday afternoon training.",
+            "Only the Wednesday afternoon training has an externally stated move exception, so other protected training remains unchanged.",
+            "Protected sleep blocks are kept intact, and an additional Friday-night sleep block preserves the same 8-hour pattern.",
+            "The Friday project deadline remains fixed and unchanged.",
+            "Existing project work before the deadline already exceeds the required 6 hours without skipping Thursday lab.",
+            "The Wednesday handoff is operationally feasible only if sponsor release, transfer, changing and arrival needs fit inside the reserved buffer.",
+            "Confirmation is needed for sponsor wrap-up timing, actual downtown-to-High-Performance-Center transfer, and coach or venue final availability."
+          ],
+          "priorities": [
+            "Use the Wednesday evening coach-approved option because it avoids a four-hour Thursday afternoon training stack.",
+            "Reserve the full media-to-training gap so the plan is not relying on hidden free time.",
+            "Keep Thursday lab because the project target is already covered and skipping it adds academic disruption.",
+            "Preserve Friday morning project testing as deadline buffer."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Move Wednesday training to Thursday 14:30–16:30",
+              "rejected_because": "Rejected because it creates back-to-back Thursday afternoon training after morning gym and lab."
+            },
+            {
+              "option": "Skip Thursday Software Engineering Lab for extra project work",
+              "rejected_because": "Rejected because the required project-work total is already met without losing lab time."
+            },
+            {
+              "option": "Keep no explicit transition buffer after the sponsor event",
+              "rejected_because": "Rejected because the Wednesday sequence is tight and the travel/prep interval is a material dependency."
+            }
+          ],
+          "summary": "Adds the mandatory media event, reserves the transition gap, moves only the affected training session to the approved evening slot, and adds Friday-night sleep; the main trade-off is a compressed Wednesday evening that depends on sponsor release, transfer practicality and final coach/venue confirmation."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [],
+        "valid": true
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_mon",
+            "title": "Sleep",
+            "start": "2027-05-02T22:30:00+01:00",
+            "end": "2027-05-03T06:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_mon",
+            "title": "Morning Strength Training",
+            "start": "2027-05-03T07:00:00+01:00",
+            "end": "2027-05-03T09:00:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "class_se_mon",
+            "title": "Software Engineering Lecture",
+            "start": "2027-05-03T10:00:00+01:00",
+            "end": "2027-05-03T12:00:00+01:00",
+            "category": "classes",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Morning lecture.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_mon",
+            "title": "Lunch",
+            "start": "2027-05-03T12:30:00+01:00",
+            "end": "2027-05-03T13:30:00+01:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_mon",
+            "title": "Software Project Coding",
+            "start": "2027-05-03T14:00:00+01:00",
+            "end": "2027-05-03T16:00:00+01:00",
+            "category": "study",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Project work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_mon",
+            "title": "Afternoon Technical Session",
+            "start": "2027-05-03T16:30:00+01:00",
+            "end": "2027-05-03T18:30:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_tue",
+            "title": "Sleep",
+            "start": "2027-05-03T22:30:00+01:00",
+            "end": "2027-05-04T06:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_tue",
+            "title": "Morning Conditioning",
+            "start": "2027-05-04T07:00:00+01:00",
+            "end": "2027-05-04T09:00:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "class_networks_tue",
+            "title": "Computer Networks Lecture",
+            "start": "2027-05-04T10:00:00+01:00",
+            "end": "2027-05-04T12:00:00+01:00",
+            "category": "classes",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Morning lecture.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_tue",
+            "title": "Lunch",
+            "start": "2027-05-04T12:30:00+01:00",
+            "end": "2027-05-04T13:30:00+01:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_tue",
+            "title": "Software Project Coding",
+            "start": "2027-05-04T14:00:00+01:00",
+            "end": "2027-05-04T16:00:00+01:00",
+            "category": "study",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Project work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_tue",
+            "title": "Afternoon Tactical Session",
+            "start": "2027-05-04T16:30:00+01:00",
+            "end": "2027-05-04T18:30:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_wed",
+            "title": "Sleep",
+            "start": "2027-05-04T22:30:00+01:00",
+            "end": "2027-05-05T06:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_wed",
+            "title": "Morning Pool Recovery",
+            "start": "2027-05-05T07:00:00+01:00",
+            "end": "2027-05-05T09:00:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_wed",
+            "title": "Software Project Integration",
+            "start": "2027-05-05T10:00:00+01:00",
+            "end": "2027-05-05T12:00:00+01:00",
+            "category": "study",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Project work.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_wed",
+            "title": "Lunch",
+            "start": "2027-05-05T12:30:00+01:00",
+            "end": "2027-05-05T13:30:00+01:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_0",
+            "title": "Mandatory sponsor photoshoot and media event",
+            "start": "2027-05-05T14:30:00+01:00",
+            "end": "2027-05-05T17:30:00+01:00",
+            "category": "media",
+            "importance": 5,
+            "fixed": null,
+            "participants": [
+              "user",
+              "club apparel sponsor"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "new_1",
+            "title": "Transfer and training prep buffer",
+            "start": "2027-05-05T17:30:00+01:00",
+            "end": "2027-05-05T18:30:00+01:00",
+            "category": "travel",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "training_pm_wed",
+            "title": "Afternoon Technical Training",
+            "start": "2027-05-05T18:30:00+01:00",
+            "end": "2027-05-05T20:00:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Coach-approved move to Wednesday 18:30–20:00 or Thursday 14:30–16:30.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2027-05-05T22:30:00+01:00",
+            "end": "2027-05-06T06:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_thu",
+            "title": "Morning Gym",
+            "start": "2027-05-06T07:00:00+01:00",
+            "end": "2027-05-06T09:00:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "class_se_thu",
+            "title": "Software Engineering Lab",
+            "start": "2027-05-06T10:00:00+01:00",
+            "end": "2027-05-06T12:00:00+01:00",
+            "category": "classes",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Morning lab.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_thu",
+            "title": "Lunch",
+            "start": "2027-05-06T12:30:00+01:00",
+            "end": "2027-05-06T13:30:00+01:00",
+            "category": "meal",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch break.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_thu",
+            "title": "Afternoon Tactical Session",
+            "start": "2027-05-06T16:30:00+01:00",
+            "end": "2027-05-06T18:30:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2027-05-06T22:30:00+01:00",
+            "end": "2027-05-07T06:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected 8-hour sleep block.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_am_fri",
+            "title": "Morning Speed Session",
+            "start": "2027-05-07T07:00:00+01:00",
+            "end": "2027-05-07T09:00:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Morning session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "study_fri",
+            "title": "Final Project Testing & Submission",
+            "start": "2027-05-07T10:00:00+01:00",
+            "end": "2027-05-07T12:30:00+01:00",
+            "category": "study",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Final testing before 17:00 deadline.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "training_pm_fri",
+            "title": "Afternoon Scrimmage",
+            "start": "2027-05-07T16:30:00+01:00",
+            "end": "2027-05-07T18:30:00+01:00",
+            "category": "training",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "coach"
+            ],
+            "description": "Afternoon session.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "social_fri",
+            "title": "Student Association Trivia Night",
+            "start": "2027-05-07T20:00:00+01:00",
+            "end": "2027-05-07T22:00:00+01:00",
+            "category": "social",
+            "importance": 2,
+            "fixed": false,
+            "participants": [
+              "user",
+              "peers"
+            ],
+            "description": "Friday social.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_3",
+            "title": "Sleep",
+            "start": "2027-05-07T22:30:00+01:00",
+            "end": "2027-05-08T06:30:00+01:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 4,
+          "coherence": 4,
+          "alternatives": 4,
+          "clarity": 5
+        },
+        "weaknesses": [
+          "The prior concern was only partly resolved: the revised calendar now explicitly reserves 17:30–18:30 as a transfer and training prep buffer between the sponsor media event and the moved 18:30–20:00 training, which is a meaningful improvement, but the plan still depends on that single hour being enough for release from the sponsor event, travel, changing, arrival, and basic preparation.",
+          "Wednesday remains a demanding day: Morning Pool Recovery 07:00–09:00, Software Project Integration 10:00–12:00, lunch 12:30–13:30, the added sponsor photoshoot/media event 14:30–17:30, the transfer/prep buffer 17:30–18:30, and moved technical training 18:30–20:00. This is not objectively unworkable, but it is a compressed sequence with limited practical slack.",
+          "The schedule preserves the 22:30–06:30 sleep block after Wednesday, but the post-training window from 20:00 to 22:30 must also absorb dinner, hygiene, cooldown, and recovery before the fixed Thursday Morning Gym at 07:00. The proposal acknowledges sleep duration but gives limited support for recovery quality.",
+          "The alternatives considered are relevant and proportionate, especially rejecting the Thursday 14:30–16:30 move because it would create a heavier Thursday training stack. However, the proposal still does not show whether the sponsor event itself has any flexibility around wrap-up or departure, so the chosen plan remains dependent on third-party logistics."
+        ],
+        "feedback": "The revised proposal is stronger than the prior version because it directly addresses the main human-quality concern by adding an explicit 17:30–18:30 transfer and training prep buffer rather than treating the gap as invisible free time. It also gives a grounded reason for preferring Wednesday evening training over the Thursday alternative, since Thursday already has Morning Gym 07:00–09:00, Software Engineering Lab 10:00–12:00, and Afternoon Tactical Session 16:30–18:30. The resulting routine is still demanding, especially on Wednesday and across a week with repeated morning and afternoon training plus project work, but the plan is now more coherent and transparent about its dependencies. I cannot verify request satisfaction beyond the provided rationale and technical validation, and the operational assumptions around sponsor release, transfer, and coach or venue availability remain unresolved. Those uncertainties should be confirmed with the fuller context, but they do not by themselves require another scheduling revision if the proposer can verify them externally or with the user.",
+        "plausibility_review": {
+          "revision_required": false,
+          "severity": "low",
+          "reason": "The concrete prior concern about an unprotected media-to-training transition has received a grounded answer: the revised calendar adds a dedicated 17:30–18:30 transfer and training prep buffer and explicitly names the remaining dependencies. The Wednesday sequence is still tight and materially dependent on logistics, but the proposal now treats that dependency transparently rather than hiding it. No clearly better distribution is supported by the visible context, since the main visible alternative would add a Thursday afternoon training stack after an already demanding Thursday.",
+          "suggested_improvement": "Before relying on this schedule, verify the remaining logistics with the relevant parties: whether the sponsor event releases the user at 17:30, whether the transfer and preparation can realistically fit into 17:30–18:30, and whether the Wednesday 18:30–20:00 training slot is final. If any of those assumptions fail, reconsider the distribution using the fuller context; otherwise the current operations are plausibly defensible despite being demanding."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Sponsor event release time",
+            "assumption": "The sponsor photoshoot and media event ends at 17:30 with the user actually free to leave immediately.",
+            "evidence_gap": "The final calendar schedules the event from 14:30 to 17:30, but the rationale still says confirmation is needed for sponsor wrap-up timing and release.",
+            "potential_impact": "material",
+            "verification_source": "third_party"
+          },
+          {
+            "subject": "Transfer and training preparation",
+            "assumption": "The 17:30–18:30 buffer is sufficient for travel, changing, arrival, and basic training preparation.",
+            "evidence_gap": "The proposal reserves a full hour, but no locations, actual transfer duration, changing requirements, or arrival expectations are provided.",
+            "potential_impact": "material",
+            "verification_source": "unknown"
+          },
+          {
+            "subject": "Coach or venue availability",
+            "assumption": "The moved Wednesday training session from 18:30 to 20:00 is finally available and accepted by the coach or venue.",
+            "evidence_gap": "The existing event description says the training may move to Wednesday 18:30–20:00 or Thursday 14:30–16:30, while the rationale still says final coach or venue confirmation is needed.",
+            "potential_impact": "potentially_blocking",
+            "verification_source": "third_party"
+          },
+          {
+            "subject": "Wednesday evening recovery",
+            "assumption": "After training ends at 20:00, the user can complete dinner, hygiene, cooldown, and recovery before the protected 22:30 sleep block and still be ready for Thursday Morning Gym at 07:00.",
+            "evidence_gap": "The calendar preserves sleep duration but does not show the practical recovery routine between the end of training and sleep.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Friday late-evening routine",
+            "assumption": "The user can transition from Student Association Trivia Night ending at 22:00 to the added Sleep block at 22:30 without undermining the intended rest.",
+            "evidence_gap": "The added Friday sleep block starts 30 minutes after the social event ends, but no location, wind-down needs, or travel details are visible.",
+            "potential_impact": "minor",
+            "verification_source": "user_context"
+          }
+        ],
+        "overall": 4.25
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": true,
+        "plausibility_revision_required": false,
+        "accepted": true,
+        "revision_causes": []
+      },
+      "operations_changed_from_previous": true,
+      "rationale_changed_from_previous": true,
+      "prior_critic_reviews": [
+        {
+          "iteration": 0,
+          "proposal": {
+            "changes": [
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Mandatory sponsor photoshoot and media event",
+                "from_start": null,
+                "to_start": "2027-05-05T14:30:00+01:00",
+                "to_end": "2027-05-05T17:30:00+01:00",
+                "category": "media",
+                "importance": 5,
+                "participants": [
+                  "user",
+                  "club apparel sponsor"
+                ]
+              },
+              {
+                "type": "move",
+                "event_id": "training_pm_wed",
+                "title": null,
+                "from_start": null,
+                "to_start": "2027-05-05T18:30:00+01:00",
+                "to_end": "2027-05-05T20:00:00+01:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              }
+            ],
+            "rationale": {
+              "constraints": [
+                "The sponsor event is mandatory and directly overlaps the original Wednesday afternoon technical training.",
+                "Only the Wednesday afternoon training has an externally stated exception allowing a move.",
+                "All protected sleep blocks remain unchanged at 8 hours.",
+                "Fixed training sessions other than the approved Wednesday move are not changed.",
+                "The Friday 17:00 project deadline remains protected.",
+                "Existing scheduled project work before the deadline totals at least 6 hours without skipping Thursday morning lab."
+              ],
+              "priorities": [
+                "Use the coach-approved Wednesday 18:30–20:00 option to avoid disturbing Thursday’s fixed training day.",
+                "Preserve all existing project work blocks to keep a buffer before the deadline.",
+                "Keep Thursday morning lab in place because skipping it is unnecessary for the 6-hour project target."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Move Wednesday training to Thursday 14:30–16:30",
+                  "rejected_because": "Rejected because it creates a double Thursday afternoon training load immediately before the fixed 16:30 session."
+                },
+                {
+                  "option": "Skip Thursday Software Engineering Lab for extra project work",
+                  "rejected_because": "Rejected because the current calendar already provides enough project work before Friday 17:00."
+                }
+              ],
+              "summary": "Adds the mandatory sponsor media event and moves only the affected Wednesday training to the coach-approved evening slot; the trade-off is a later Wednesday finish, while sleep, fixed training, lab time and the project-work target are preserved. Confirm the sponsor venue timing, the coach’s final approval for the 18:30–20:00 High-Performance Center session, and whether the 30-minute downtown transfer applies to that venue."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "sleep_mon",
+                "title": "Sleep",
+                "start": "2027-05-02T22:30:00+01:00",
+                "end": "2027-05-03T06:30:00+01:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected 8-hour sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_am_mon",
+                "title": "Morning Strength Training",
+                "start": "2027-05-03T07:00:00+01:00",
+                "end": "2027-05-03T09:00:00+01:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Morning session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "class_se_mon",
+                "title": "Software Engineering Lecture",
+                "start": "2027-05-03T10:00:00+01:00",
+                "end": "2027-05-03T12:00:00+01:00",
+                "category": "classes",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Morning lecture.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "lunch_mon",
+                "title": "Lunch",
+                "start": "2027-05-03T12:30:00+01:00",
+                "end": "2027-05-03T13:30:00+01:00",
+                "category": "meal",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Lunch break.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "study_mon",
+                "title": "Software Project Coding",
+                "start": "2027-05-03T14:00:00+01:00",
+                "end": "2027-05-03T16:00:00+01:00",
+                "category": "study",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Project work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_pm_mon",
+                "title": "Afternoon Technical Session",
+                "start": "2027-05-03T16:30:00+01:00",
+                "end": "2027-05-03T18:30:00+01:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Afternoon session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_tue",
+                "title": "Sleep",
+                "start": "2027-05-03T22:30:00+01:00",
+                "end": "2027-05-04T06:30:00+01:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected 8-hour sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_am_tue",
+                "title": "Morning Conditioning",
+                "start": "2027-05-04T07:00:00+01:00",
+                "end": "2027-05-04T09:00:00+01:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Morning session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "class_networks_tue",
+                "title": "Computer Networks Lecture",
+                "start": "2027-05-04T10:00:00+01:00",
+                "end": "2027-05-04T12:00:00+01:00",
+                "category": "classes",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Morning lecture.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "lunch_tue",
+                "title": "Lunch",
+                "start": "2027-05-04T12:30:00+01:00",
+                "end": "2027-05-04T13:30:00+01:00",
+                "category": "meal",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Lunch break.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "study_tue",
+                "title": "Software Project Coding",
+                "start": "2027-05-04T14:00:00+01:00",
+                "end": "2027-05-04T16:00:00+01:00",
+                "category": "study",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Project work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_pm_tue",
+                "title": "Afternoon Tactical Session",
+                "start": "2027-05-04T16:30:00+01:00",
+                "end": "2027-05-04T18:30:00+01:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Afternoon session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_wed",
+                "title": "Sleep",
+                "start": "2027-05-04T22:30:00+01:00",
+                "end": "2027-05-05T06:30:00+01:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected 8-hour sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_am_wed",
+                "title": "Morning Pool Recovery",
+                "start": "2027-05-05T07:00:00+01:00",
+                "end": "2027-05-05T09:00:00+01:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Morning session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "study_wed",
+                "title": "Software Project Integration",
+                "start": "2027-05-05T10:00:00+01:00",
+                "end": "2027-05-05T12:00:00+01:00",
+                "category": "study",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Project work.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "lunch_wed",
+                "title": "Lunch",
+                "start": "2027-05-05T12:30:00+01:00",
+                "end": "2027-05-05T13:30:00+01:00",
+                "category": "meal",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Lunch break.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_0",
+                "title": "Mandatory sponsor photoshoot and media event",
+                "start": "2027-05-05T14:30:00+01:00",
+                "end": "2027-05-05T17:30:00+01:00",
+                "category": "media",
+                "importance": 5,
+                "fixed": null,
+                "participants": [
+                  "user",
+                  "club apparel sponsor"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "training_pm_wed",
+                "title": "Afternoon Technical Training",
+                "start": "2027-05-05T18:30:00+01:00",
+                "end": "2027-05-05T20:00:00+01:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Coach-approved move to Wednesday 18:30–20:00 or Thursday 14:30–16:30.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2027-05-05T22:30:00+01:00",
+                "end": "2027-05-06T06:30:00+01:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected 8-hour sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_am_thu",
+                "title": "Morning Gym",
+                "start": "2027-05-06T07:00:00+01:00",
+                "end": "2027-05-06T09:00:00+01:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Morning session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "class_se_thu",
+                "title": "Software Engineering Lab",
+                "start": "2027-05-06T10:00:00+01:00",
+                "end": "2027-05-06T12:00:00+01:00",
+                "category": "classes",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Morning lab.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "lunch_thu",
+                "title": "Lunch",
+                "start": "2027-05-06T12:30:00+01:00",
+                "end": "2027-05-06T13:30:00+01:00",
+                "category": "meal",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Lunch break.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_pm_thu",
+                "title": "Afternoon Tactical Session",
+                "start": "2027-05-06T16:30:00+01:00",
+                "end": "2027-05-06T18:30:00+01:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Afternoon session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_fri",
+                "title": "Sleep",
+                "start": "2027-05-06T22:30:00+01:00",
+                "end": "2027-05-07T06:30:00+01:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected 8-hour sleep block.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_am_fri",
+                "title": "Morning Speed Session",
+                "start": "2027-05-07T07:00:00+01:00",
+                "end": "2027-05-07T09:00:00+01:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Morning session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "study_fri",
+                "title": "Final Project Testing & Submission",
+                "start": "2027-05-07T10:00:00+01:00",
+                "end": "2027-05-07T12:30:00+01:00",
+                "category": "study",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Final testing before 17:00 deadline.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "training_pm_fri",
+                "title": "Afternoon Scrimmage",
+                "start": "2027-05-07T16:30:00+01:00",
+                "end": "2027-05-07T18:30:00+01:00",
+                "category": "training",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "coach"
+                ],
+                "description": "Afternoon session.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "social_fri",
+                "title": "Student Association Trivia Night",
+                "start": "2027-05-07T20:00:00+01:00",
+                "end": "2027-05-07T22:00:00+01:00",
+                "category": "social",
+                "importance": 2,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "peers"
+                ],
+                "description": "Friday social.",
+                "origin": "existing",
+                "change_status": "preserved"
+              }
+            ],
+            "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+          },
+          "plausibility_review": {
+            "revision_required": true,
+            "severity": "moderate",
+            "reason": "The added sponsor event and moved training create a dense Wednesday with a potentially fragile 17:30–18:30 transition between media duties and training. This could materially affect manageability, especially because the user has protected sleep at 22:30, fixed Thursday training at 07:00, and a broader week already containing repeated morning and afternoon training sessions plus project work. The concern is uncertain rather than objectively incompatible, but it is concrete and directly caused by the proposed organization.",
+            "suggested_improvement": "Reconsider or substantiate the Wednesday media-to-training sequence using the fuller context: actual venue locations, whether the sponsor event end time includes wrap-up, whether the coach-approved slot is final, and whether the user can realistically eat, change, travel, and recover enough before training. If those conditions are solid, the same schedule may be defensible; otherwise, look for a less compressed distribution or added practical margin without undermining the protected priorities."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Sponsor event logistics",
+              "assumption": "The sponsor photoshoot and media event can truly end at 17:30 with the user free to leave immediately.",
+              "evidence_gap": "The calendar gives the event time as 14:30–17:30, but the rationale asks to confirm sponsor venue timing and does not state whether wrap-up, sponsor obligations, changing, or overruns are included.",
+              "potential_impact": "material",
+              "verification_source": "third_party"
+            },
+            {
+              "subject": "Transfer between sponsor event and training",
+              "assumption": "The user can get from the sponsor event to the 18:30 training location within the available one-hour gap while also handling basic preparation needs.",
+              "evidence_gap": "The rationale mentions uncertainty about whether a 30-minute downtown transfer applies, but the final calendar does not show location, travel, changing, food, or arrival preparation time.",
+              "potential_impact": "material",
+              "verification_source": "unknown"
+            },
+            {
+              "subject": "Coach-approved Wednesday evening training slot",
+              "assumption": "The 18:30–20:00 Wednesday training move is finally approved and operationally available.",
+              "evidence_gap": "The existing event description says the move is coach-approved to Wednesday 18:30–20:00 or Thursday 14:30–16:30, while the rationale still says to confirm the coach’s final approval for the 18:30–20:00 High-Performance Center session.",
+              "potential_impact": "potentially_blocking",
+              "verification_source": "third_party"
+            },
+            {
+              "subject": "Wednesday evening recovery before Thursday morning training",
+              "assumption": "Finishing training at 20:00 leaves enough practical evening recovery before 22:30 sleep and the fixed Thursday 07:00 Morning Gym session.",
+              "evidence_gap": "The proposal preserves the 8-hour sleep block but does not substantiate post-training cooldown, meal, hygiene, recovery, or readiness for the next morning’s fixed session.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            }
+          ],
+          "weaknesses": [
+            "The proposal gives good priority weight to preserving sleep, fixed training, the Friday deadline, and Thursday lab, but it under-examines the practical load created on Wednesday: Morning Pool Recovery 07:00–09:00, Software Project Integration 10:00–12:00, lunch 12:30–13:30, the added sponsor photoshoot/media event 14:30–17:30, and moved technical training 18:30–20:00.",
+            "The one-hour gap between the sponsor event ending at 17:30 and training starting at 18:30 may be workable, but the rationale itself leaves venue timing, coach approval, and a possible 30-minute downtown transfer unverified. That gap may also need to cover changing, food, hydration, decompression, and arrival preparation.",
+            "The Wednesday evening move avoids the rejected Thursday double-afternoon training load, which is a sensible trade-off, but it still creates a late training finish at 20:00 followed by protected sleep at 22:30 and a fixed Thursday Morning Gym session at 07:00. The calendar preserves sleep duration, but does not show whether the evening recovery and next-morning readiness are realistic.",
+            "Alternatives considered are relevant but narrow. The proposal compares Wednesday evening against Thursday afternoon and rejects skipping Thursday lab, but it does not substantiate whether the Wednesday media-to-training sequence can be made sustainable with known logistics or whether the sponsor event has any internal flexibility."
+          ],
+          "feedback": "The proposal is mostly coherent and shows a reasonable attempt to protect the visible priorities: mandatory sponsor attendance, fixed training, sleep, lab attendance, and project work before the Friday 17:00 deadline. The main human-quality concern is not a technical conflict but the compressed Wednesday: a 3-hour media obligation from 14:30–17:30 followed by training at 18:30–20:00 after an already active morning. Because the rationale itself flags uncertainty about venue timing, coach approval, and transfer time, the schedule would benefit from a fuller check of whether that one-hour transition is genuinely usable, not merely open on the calendar. If the same operations are kept, the proposer should ground why the Wednesday evening sequence is still manageable, including logistics and basic recovery needs, rather than relying only on the existence of a free slot."
+        }
+      ],
+      "unresolved_assumptions": [
+        {
+          "subject": "Sponsor event release time",
+          "assumption": "The sponsor photoshoot and media event ends at 17:30 with the user actually free to leave immediately.",
+          "evidence_gap": "The final calendar schedules the event from 14:30 to 17:30, but the rationale still says confirmation is needed for sponsor wrap-up timing and release.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Transfer and training preparation",
+          "assumption": "The 17:30–18:30 buffer is sufficient for travel, changing, arrival, and basic training preparation.",
+          "evidence_gap": "The proposal reserves a full hour, but no locations, actual transfer duration, changing requirements, or arrival expectations are provided.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Coach or venue availability",
+          "assumption": "The moved Wednesday training session from 18:30 to 20:00 is finally available and accepted by the coach or venue.",
+          "evidence_gap": "The existing event description says the training may move to Wednesday 18:30–20:00 or Thursday 14:30–16:30, while the rationale still says final coach or venue confirmation is needed.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Wednesday evening recovery",
+          "assumption": "After training ends at 20:00, the user can complete dinner, hygiene, cooldown, and recovery before the protected 22:30 sleep block and still be ready for Thursday Morning Gym at 07:00.",
+          "evidence_gap": "The calendar preserves sleep duration but does not show the practical recovery routine between the end of training and sleep.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Friday late-evening routine",
+          "assumption": "The user can transition from Student Association Trivia Night ending at 22:00 to the added Sleep block at 22:30 without undermining the intended rest.",
+          "evidence_gap": "The added Friday sleep block starts 30 minutes after the social event ends, but no location, wind-down needs, or travel details are visible.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        }
+      ]
+    }
+  ],
+  "refinements": 1,
+  "source_status": "proposal_ready",
+  "final_proposal": {
+    "changes": [
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Mandatory sponsor photoshoot and media event",
+        "from_start": null,
+        "to_start": "2027-05-05T14:30:00+01:00",
+        "to_end": "2027-05-05T17:30:00+01:00",
+        "category": "media",
+        "importance": 5,
+        "participants": [
+          "user",
+          "club apparel sponsor"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Transfer and training prep buffer",
+        "from_start": null,
+        "to_start": "2027-05-05T17:30:00+01:00",
+        "to_end": "2027-05-05T18:30:00+01:00",
+        "category": "travel",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "move",
+        "event_id": "training_pm_wed",
+        "title": null,
+        "from_start": null,
+        "to_start": "2027-05-05T18:30:00+01:00",
+        "to_end": "2027-05-05T20:00:00+01:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Sleep",
+        "from_start": null,
+        "to_start": "2027-05-07T22:30:00+01:00",
+        "to_end": "2027-05-08T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "participants": [
+          "user"
+        ]
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "The sponsor obligation is mandatory and conflicts with the original Wednesday afternoon training.",
+        "Only the Wednesday afternoon training has an externally stated move exception, so other protected training remains unchanged.",
+        "Protected sleep blocks are kept intact, and an additional Friday-night sleep block preserves the same 8-hour pattern.",
+        "The Friday project deadline remains fixed and unchanged.",
+        "Existing project work before the deadline already exceeds the required 6 hours without skipping Thursday lab.",
+        "The Wednesday handoff is operationally feasible only if sponsor release, transfer, changing and arrival needs fit inside the reserved buffer.",
+        "Confirmation is needed for sponsor wrap-up timing, actual downtown-to-High-Performance-Center transfer, and coach or venue final availability."
+      ],
+      "priorities": [
+        "Use the Wednesday evening coach-approved option because it avoids a four-hour Thursday afternoon training stack.",
+        "Reserve the full media-to-training gap so the plan is not relying on hidden free time.",
+        "Keep Thursday lab because the project target is already covered and skipping it adds academic disruption.",
+        "Preserve Friday morning project testing as deadline buffer."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Move Wednesday training to Thursday 14:30–16:30",
+          "rejected_because": "Rejected because it creates back-to-back Thursday afternoon training after morning gym and lab."
+        },
+        {
+          "option": "Skip Thursday Software Engineering Lab for extra project work",
+          "rejected_because": "Rejected because the required project-work total is already met without losing lab time."
+        },
+        {
+          "option": "Keep no explicit transition buffer after the sponsor event",
+          "rejected_because": "Rejected because the Wednesday sequence is tight and the travel/prep interval is a material dependency."
+        }
+      ],
+      "summary": "Adds the mandatory media event, reserves the transition gap, moves only the affected training session to the approved evening slot, and adds Friday-night sleep; the main trade-off is a compressed Wednesday evening that depends on sponsor release, transfer practicality and final coach/venue confirmation."
+    }
+  },
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [],
+    "valid": true
+  },
+  "source_result_sha256": "8c97dd94e6f886c206907bdee18c01344175010373631c8eeb68b8e40c5c907b",
+  "scenario_sha256": "96c2395ceae891a213bdaf57294c992e5a88f20ac5d4999b5ffac09127b47077",
+  "aggregate_requirements_sha256": null,
+  "confirmed_changes_sha256": null,
+  "critic_input_version": "final_calendar_v1",
+  "critic_policy_version": "uncertainty_review_v2",
+  "result_calendar_version": "validated_added_metadata_v2",
+  "final_result_calendar": {
+    "timezone": "Europe/Lisbon",
+    "coverage": "all_events_in_scenario_after_simulation",
+    "events": [
+      {
+        "id": "sleep_mon",
+        "title": "Sleep",
+        "start": "2027-05-02T22:30:00+01:00",
+        "end": "2027-05-03T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_am_mon",
+        "title": "Morning Strength Training",
+        "start": "2027-05-03T07:00:00+01:00",
+        "end": "2027-05-03T09:00:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Morning session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "class_se_mon",
+        "title": "Software Engineering Lecture",
+        "start": "2027-05-03T10:00:00+01:00",
+        "end": "2027-05-03T12:00:00+01:00",
+        "category": "classes",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Morning lecture.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "lunch_mon",
+        "title": "Lunch",
+        "start": "2027-05-03T12:30:00+01:00",
+        "end": "2027-05-03T13:30:00+01:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "study_mon",
+        "title": "Software Project Coding",
+        "start": "2027-05-03T14:00:00+01:00",
+        "end": "2027-05-03T16:00:00+01:00",
+        "category": "study",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Project work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_pm_mon",
+        "title": "Afternoon Technical Session",
+        "start": "2027-05-03T16:30:00+01:00",
+        "end": "2027-05-03T18:30:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_tue",
+        "title": "Sleep",
+        "start": "2027-05-03T22:30:00+01:00",
+        "end": "2027-05-04T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_am_tue",
+        "title": "Morning Conditioning",
+        "start": "2027-05-04T07:00:00+01:00",
+        "end": "2027-05-04T09:00:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Morning session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "class_networks_tue",
+        "title": "Computer Networks Lecture",
+        "start": "2027-05-04T10:00:00+01:00",
+        "end": "2027-05-04T12:00:00+01:00",
+        "category": "classes",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Morning lecture.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "lunch_tue",
+        "title": "Lunch",
+        "start": "2027-05-04T12:30:00+01:00",
+        "end": "2027-05-04T13:30:00+01:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "study_tue",
+        "title": "Software Project Coding",
+        "start": "2027-05-04T14:00:00+01:00",
+        "end": "2027-05-04T16:00:00+01:00",
+        "category": "study",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Project work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_pm_tue",
+        "title": "Afternoon Tactical Session",
+        "start": "2027-05-04T16:30:00+01:00",
+        "end": "2027-05-04T18:30:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_wed",
+        "title": "Sleep",
+        "start": "2027-05-04T22:30:00+01:00",
+        "end": "2027-05-05T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_am_wed",
+        "title": "Morning Pool Recovery",
+        "start": "2027-05-05T07:00:00+01:00",
+        "end": "2027-05-05T09:00:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Morning session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "study_wed",
+        "title": "Software Project Integration",
+        "start": "2027-05-05T10:00:00+01:00",
+        "end": "2027-05-05T12:00:00+01:00",
+        "category": "study",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Project work.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "lunch_wed",
+        "title": "Lunch",
+        "start": "2027-05-05T12:30:00+01:00",
+        "end": "2027-05-05T13:30:00+01:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_0",
+        "title": "Mandatory sponsor photoshoot and media event",
+        "start": "2027-05-05T14:30:00+01:00",
+        "end": "2027-05-05T17:30:00+01:00",
+        "category": "media",
+        "importance": 5,
+        "fixed": null,
+        "participants": [
+          "user",
+          "club apparel sponsor"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "new_1",
+        "title": "Transfer and training prep buffer",
+        "start": "2027-05-05T17:30:00+01:00",
+        "end": "2027-05-05T18:30:00+01:00",
+        "category": "travel",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "training_pm_wed",
+        "title": "Afternoon Technical Training",
+        "start": "2027-05-05T18:30:00+01:00",
+        "end": "2027-05-05T20:00:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Coach-approved move to Wednesday 18:30–20:00 or Thursday 14:30–16:30.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2027-05-05T22:30:00+01:00",
+        "end": "2027-05-06T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_am_thu",
+        "title": "Morning Gym",
+        "start": "2027-05-06T07:00:00+01:00",
+        "end": "2027-05-06T09:00:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Morning session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "class_se_thu",
+        "title": "Software Engineering Lab",
+        "start": "2027-05-06T10:00:00+01:00",
+        "end": "2027-05-06T12:00:00+01:00",
+        "category": "classes",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Morning lab.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "lunch_thu",
+        "title": "Lunch",
+        "start": "2027-05-06T12:30:00+01:00",
+        "end": "2027-05-06T13:30:00+01:00",
+        "category": "meal",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch break.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_pm_thu",
+        "title": "Afternoon Tactical Session",
+        "start": "2027-05-06T16:30:00+01:00",
+        "end": "2027-05-06T18:30:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2027-05-06T22:30:00+01:00",
+        "end": "2027-05-07T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected 8-hour sleep block.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_am_fri",
+        "title": "Morning Speed Session",
+        "start": "2027-05-07T07:00:00+01:00",
+        "end": "2027-05-07T09:00:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Morning session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "study_fri",
+        "title": "Final Project Testing & Submission",
+        "start": "2027-05-07T10:00:00+01:00",
+        "end": "2027-05-07T12:30:00+01:00",
+        "category": "study",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Final testing before 17:00 deadline.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "training_pm_fri",
+        "title": "Afternoon Scrimmage",
+        "start": "2027-05-07T16:30:00+01:00",
+        "end": "2027-05-07T18:30:00+01:00",
+        "category": "training",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "coach"
+        ],
+        "description": "Afternoon session.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "social_fri",
+        "title": "Student Association Trivia Night",
+        "start": "2027-05-07T20:00:00+01:00",
+        "end": "2027-05-07T22:00:00+01:00",
+        "category": "social",
+        "importance": 2,
+        "fixed": false,
+        "participants": [
+          "user",
+          "peers"
+        ],
+        "description": "Friday social.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_3",
+        "title": "Sleep",
+        "start": "2027-05-07T22:30:00+01:00",
+        "end": "2027-05-08T06:30:00+01:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      }
+    ],
+    "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+  },
+  "final_unresolved_assumptions": [
+    {
+      "subject": "Sponsor event release time",
+      "assumption": "The sponsor photoshoot and media event ends at 17:30 with the user actually free to leave immediately.",
+      "evidence_gap": "The final calendar schedules the event from 14:30 to 17:30, but the rationale still says confirmation is needed for sponsor wrap-up timing and release.",
+      "potential_impact": "material",
+      "verification_source": "third_party"
+    },
+    {
+      "subject": "Transfer and training preparation",
+      "assumption": "The 17:30–18:30 buffer is sufficient for travel, changing, arrival, and basic training preparation.",
+      "evidence_gap": "The proposal reserves a full hour, but no locations, actual transfer duration, changing requirements, or arrival expectations are provided.",
+      "potential_impact": "material",
+      "verification_source": "unknown"
+    },
+    {
+      "subject": "Coach or venue availability",
+      "assumption": "The moved Wednesday training session from 18:30 to 20:00 is finally available and accepted by the coach or venue.",
+      "evidence_gap": "The existing event description says the training may move to Wednesday 18:30–20:00 or Thursday 14:30–16:30, while the rationale still says final coach or venue confirmation is needed.",
+      "potential_impact": "potentially_blocking",
+      "verification_source": "third_party"
+    },
+    {
+      "subject": "Wednesday evening recovery",
+      "assumption": "After training ends at 20:00, the user can complete dinner, hygiene, cooldown, and recovery before the protected 22:30 sleep block and still be ready for Thursday Morning Gym at 07:00.",
+      "evidence_gap": "The calendar preserves sleep duration but does not show the practical recovery routine between the end of training and sleep.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Friday late-evening routine",
+      "assumption": "The user can transition from Student Association Trivia Night ending at 22:00 to the added Sleep block at 22:30 without undermining the intended rest.",
+      "evidence_gap": "The added Friday sleep block starts 30 minutes after the social event ends, but no location, wind-down needs, or travel details are visible.",
+      "potential_impact": "minor",
+      "verification_source": "user_context"
+    }
+  ],
+  "uncertainty_history": [
+    {
+      "iteration": 0,
+      "unresolved_assumptions": [
+        {
+          "subject": "Sponsor event logistics",
+          "assumption": "The sponsor photoshoot and media event can truly end at 17:30 with the user free to leave immediately.",
+          "evidence_gap": "The calendar gives the event time as 14:30–17:30, but the rationale asks to confirm sponsor venue timing and does not state whether wrap-up, sponsor obligations, changing, or overruns are included.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Transfer between sponsor event and training",
+          "assumption": "The user can get from the sponsor event to the 18:30 training location within the available one-hour gap while also handling basic preparation needs.",
+          "evidence_gap": "The rationale mentions uncertainty about whether a 30-minute downtown transfer applies, but the final calendar does not show location, travel, changing, food, or arrival preparation time.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Coach-approved Wednesday evening training slot",
+          "assumption": "The 18:30–20:00 Wednesday training move is finally approved and operationally available.",
+          "evidence_gap": "The existing event description says the move is coach-approved to Wednesday 18:30–20:00 or Thursday 14:30–16:30, while the rationale still says to confirm the coach’s final approval for the 18:30–20:00 High-Performance Center session.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Wednesday evening recovery before Thursday morning training",
+          "assumption": "Finishing training at 20:00 leaves enough practical evening recovery before 22:30 sleep and the fixed Thursday 07:00 Morning Gym session.",
+          "evidence_gap": "The proposal preserves the 8-hour sleep block but does not substantiate post-training cooldown, meal, hygiene, recovery, or readiness for the next morning’s fixed session.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        }
+      ]
+    },
+    {
+      "iteration": 1,
+      "unresolved_assumptions": [
+        {
+          "subject": "Sponsor event release time",
+          "assumption": "The sponsor photoshoot and media event ends at 17:30 with the user actually free to leave immediately.",
+          "evidence_gap": "The final calendar schedules the event from 14:30 to 17:30, but the rationale still says confirmation is needed for sponsor wrap-up timing and release.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Transfer and training preparation",
+          "assumption": "The 17:30–18:30 buffer is sufficient for travel, changing, arrival, and basic training preparation.",
+          "evidence_gap": "The proposal reserves a full hour, but no locations, actual transfer duration, changing requirements, or arrival expectations are provided.",
+          "potential_impact": "material",
+          "verification_source": "unknown"
+        },
+        {
+          "subject": "Coach or venue availability",
+          "assumption": "The moved Wednesday training session from 18:30 to 20:00 is finally available and accepted by the coach or venue.",
+          "evidence_gap": "The existing event description says the training may move to Wednesday 18:30–20:00 or Thursday 14:30–16:30, while the rationale still says final coach or venue confirmation is needed.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Wednesday evening recovery",
+          "assumption": "After training ends at 20:00, the user can complete dinner, hygiene, cooldown, and recovery before the protected 22:30 sleep block and still be ready for Thursday Morning Gym at 07:00.",
+          "evidence_gap": "The calendar preserves sleep duration but does not show the practical recovery routine between the end of training and sleep.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Friday late-evening routine",
+          "assumption": "The user can transition from Student Association Trivia Night ending at 22:00 to the added Sleep block at 22:30 without undermining the intended rest.",
+          "evidence_gap": "The added Friday sleep block starts 30 minutes after the social event ends, but no location, wind-down needs, or travel details are visible.",
+          "potential_impact": "minor",
+          "verification_source": "user_context"
+        }
+      ]
+    }
+  ]
+}

@@ -81,38 +81,38 @@ class Proposal(BaseModel):
 
 # Compact, versioned IAedu wire contract. The rest of the application continues
 # to consume the canonical Proposal above, including historical run artifacts.
-PROPOSER_WIRE_SCHEMA_VERSION = "compact_proposal_v1"
-BriefConstraint = Annotated[str, Field(min_length=1, max_length=240)]
-BriefPriority = Annotated[str, Field(min_length=1, max_length=200)]
+PROPOSER_WIRE_SCHEMA_VERSION = "compact_proposal_v2"
+BriefConstraint = Annotated[str, Field(min_length=1, max_length=120)]
+BriefPriority = Annotated[str, Field(min_length=1, max_length=100)]
 
 
 class ProposerWireAdd(BaseModel):
-    model_config = ConfigDict(extra="forbid")
+    model_config = ConfigDict(extra="forbid", populate_by_name=True)
 
-    op: Literal["add"]
-    title: str = Field(min_length=1)
-    start: str = Field(min_length=1)
-    end: str | None = None
-    event_id: str | None = None
-    category: str | None = None
-    importance: int | None = Field(default=None, ge=1, le=5)
-    participants: list[str] | None = None
+    op: Literal["add"] = Field(alias="o")
+    title: str = Field(min_length=1, max_length=100, alias="t")
+    start: str = Field(min_length=1, alias="s")
+    end: str | None = Field(default=None, alias="e")
+    event_id: str | None = Field(default=None, alias="i")
+    category: str | None = Field(default=None, alias="c")
+    importance: int | None = Field(default=None, ge=1, le=5, alias="w")
+    participants: list[str] | None = Field(default=None, max_length=8, alias="p")
 
 
 class ProposerWireMove(BaseModel):
-    model_config = ConfigDict(extra="forbid")
+    model_config = ConfigDict(extra="forbid", populate_by_name=True)
 
-    op: Literal["move"]
-    event_id: str = Field(min_length=1)
-    start: str = Field(min_length=1)
-    end: str | None = None
+    op: Literal["move"] = Field(alias="o")
+    event_id: str = Field(min_length=1, alias="i")
+    start: str = Field(min_length=1, alias="s")
+    end: str | None = Field(default=None, alias="e")
 
 
 class ProposerWireDelete(BaseModel):
-    model_config = ConfigDict(extra="forbid")
+    model_config = ConfigDict(extra="forbid", populate_by_name=True)
 
-    op: Literal["delete"]
-    event_id: str = Field(min_length=1)
+    op: Literal["delete"] = Field(alias="o")
+    event_id: str = Field(min_length=1, alias="i")
 
 
 ProposerWireChange = Annotated[
@@ -122,28 +122,28 @@ ProposerWireChange = Annotated[
 
 
 class ProposerWireAlternative(BaseModel):
-    model_config = ConfigDict(extra="forbid")
+    model_config = ConfigDict(extra="forbid", populate_by_name=True)
 
-    option: str = Field(min_length=1, max_length=160)
-    reason: str = Field(min_length=1, max_length=240)
+    option: str = Field(min_length=1, max_length=80, alias="o")
+    reason: str = Field(min_length=1, max_length=120, alias="r")
 
 
 class ProposerWireRationale(BaseModel):
-    model_config = ConfigDict(extra="forbid")
+    model_config = ConfigDict(extra="forbid", populate_by_name=True)
 
-    constraints: list[BriefConstraint] = Field(max_length=12)
-    priorities: list[BriefPriority] = Field(max_length=8)
-    alternatives: list[ProposerWireAlternative] = Field(max_length=6)
-    summary: str = Field(min_length=1, max_length=600)
+    constraints: list[BriefConstraint] = Field(max_length=6, alias="c")
+    priorities: list[BriefPriority] = Field(max_length=5, alias="p")
+    alternatives: list[ProposerWireAlternative] = Field(max_length=3, alias="a")
+    summary: str = Field(min_length=1, max_length=300, alias="s")
 
 
 class ProposerWireProposal(BaseModel):
     """Compact model-facing representation normalized to canonical Proposal."""
 
-    model_config = ConfigDict(extra="forbid")
+    model_config = ConfigDict(extra="forbid", populate_by_name=True)
 
-    changes: list[ProposerWireChange]
-    rationale: ProposerWireRationale
+    changes: list[ProposerWireChange] = Field(max_length=16, alias="c")
+    rationale: ProposerWireRationale = Field(alias="r")
 
     def to_proposal(self) -> Proposal:
         changes: list[Change] = []

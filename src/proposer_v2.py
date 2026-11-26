@@ -98,7 +98,7 @@ def propose_v2(profile, scenario: V2RuntimeScenario, *, provider: Provider,
         previous_format = PROPOSER_WIRE_SCHEMA_VERSION
         try:
             compact_previous = ProposerWireProposal.from_proposal(previous).model_dump_json(
-                exclude_none=True)
+                exclude_none=True, by_alias=True)
         except ValueError:
             # A manually replayed historical proposal may predate compact_v1
             # and exceed its prose bounds. Preserve all prior evidence rather

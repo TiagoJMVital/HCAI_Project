@@ -455,7 +455,7 @@ def test_a_baseline_unchanged_and_b_records_version(context):
     assert a["configuration"] == "A" and "critic_policy_version" not in a
     assert b["critic_policy_version"] == CRITIC_POLICY_VERSION
     assert b["prompt_versions"]["proposer_sha256"] == a["prompt_versions"]["proposer_sha256"]
-    assert b["prompt_versions"]["proposer_wire_schema_version"] == "compact_proposal_v1"
+    assert b["prompt_versions"]["proposer_wire_schema_version"] == "compact_proposal_v2"
     assert (b["prompt_versions"]["proposer_wire_schema_sha256"] ==
             a["prompt_versions"]["proposer_wire_schema_sha256"])
     assert "proposer_revision_sha256" in b["prompt_versions"]

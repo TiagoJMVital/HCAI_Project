@@ -1,0 +1,191 @@
+{
+  "configuration": "B",
+  "scenario_id": "parent_young_children_car_breakdown_solo_001",
+  "family": "parent_young_children_schedule_conflict",
+  "category": "v2",
+  "proposer_provider": "iaedu",
+  "proposer_model": "GPT-5.5",
+  "proposer_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_provider": "iaedu",
+  "critic_model": "GPT-5.5",
+  "critic_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_settings": {
+    "threshold": 4.0,
+    "max_refinements": 3,
+    "min_dimension_score": 1
+  },
+  "iterations": [
+    {
+      "index": 0,
+      "proposer_feedback": null,
+      "proposer_source": "generated",
+      "proposal": null,
+      "validation": null,
+      "result_calendar": null,
+      "critic_evaluation": null,
+      "acceptance_policy": null,
+      "operations_changed_from_previous": null,
+      "rationale_changed_from_previous": null,
+      "prior_critic_reviews": []
+    }
+  ],
+  "initial_proposal": null,
+  "final_proposal": null,
+  "final_score": null,
+  "refinements": 0,
+  "critic_accepted": false,
+  "decision": null,
+  "reasons": [],
+  "status": "proposer_error",
+  "critic_input_version": "final_calendar_v1",
+  "critic_policy_version": "uncertainty_review_v2",
+  "result_calendar_version": "validated_added_metadata_v2",
+  "final_result_calendar": null,
+  "final_unresolved_assumptions": null,
+  "uncertainty_history": [],
+  "error": "IAedu rate limit: Rate limit reached (429)",
+  "error_stage": "proposer",
+  "safe_action": "no_autonomous_action",
+  "llm_diagnostics": {
+    "classification": "retry_exhausted",
+    "attempts": [
+      {
+        "source": "stream_event",
+        "http_status": 200,
+        "detail": "Rate limit reached (429)",
+        "headers": {},
+        "retry_after_seconds": null,
+        "limit_kind": "unspecified",
+        "quota_exhausted": false,
+        "attempt": 1,
+        "wait_seconds": 13.984
+      },
+      {
+        "source": "stream_event",
+        "http_status": 200,
+        "detail": "Rate limit reached (429)",
+        "headers": {},
+        "retry_after_seconds": null,
+        "limit_kind": "unspecified",
+        "quota_exhausted": false,
+        "attempt": 2,
+        "wait_seconds": 29.308
+      },
+      {
+        "source": "stream_event",
+        "http_status": 200,
+        "detail": "Rate limit reached (429)",
+        "headers": {},
+        "retry_after_seconds": null,
+        "limit_kind": "unspecified",
+        "quota_exhausted": false,
+        "attempt": 3,
+        "wait_seconds": 65.734
+      },
+      {
+        "source": "stream_event",
+        "http_status": 200,
+        "detail": "Rate limit reached (429)",
+        "headers": {},
+        "retry_after_seconds": null,
+        "limit_kind": "unspecified",
+        "quota_exhausted": false,
+        "attempt": 4
+      }
+    ]
+  },
+  "rate_limit_diagnostics": {
+    "classification": "retry_exhausted",
+    "attempts": [
+      {
+        "source": "stream_event",
+        "http_status": 200,
+        "detail": "Rate limit reached (429)",
+        "headers": {},
+        "retry_after_seconds": null,
+        "limit_kind": "unspecified",
+        "quota_exhausted": false,
+        "attempt": 1,
+        "wait_seconds": 13.984
+      },
+      {
+        "source": "stream_event",
+        "http_status": 200,
+        "detail": "Rate limit reached (429)",
+        "headers": {},
+        "retry_after_seconds": null,
+        "limit_kind": "unspecified",
+        "quota_exhausted": false,
+        "attempt": 2,
+        "wait_seconds": 29.308
+      },
+      {
+        "source": "stream_event",
+        "http_status": 200,
+        "detail": "Rate limit reached (429)",
+        "headers": {},
+        "retry_after_seconds": null,
+        "limit_kind": "unspecified",
+        "quota_exhausted": false,
+        "attempt": 3,
+        "wait_seconds": 65.734
+      },
+      {
+        "source": "stream_event",
+        "http_status": 200,
+        "detail": "Rate limit reached (429)",
+        "headers": {},
+        "retry_after_seconds": null,
+        "limit_kind": "unspecified",
+        "quota_exhausted": false,
+        "attempt": 4
+      }
+    ]
+  },
+  "schema_version": "2.0",
+  "profile_id": "parent_young_children_01__parent_young_children_car_breakdown_solo_001",
+  "scenario_sha256": "adaec89e9c762e9484875a40c9799fe709a08d14b68b601f076a2a7238f3d52a",
+  "aggregate_requirements_sha256": null,
+  "confirmed_changes_sha256": null,
+  "simulator_version": "calendar_v2_validated_added_metadata_v2",
+  "dataset_manifest_sha256": "28af38846fb8995651d5f63ab63402e36147dc0915a2bfcd5379747ea531ffad",
+  "split": "train",
+  "run_id": "5a2d30872f7246068d89d13d37e924ee",
+  "experiment_id": null,
+  "repeat_index": 0,
+  "generated_at": "2026-11-25T23:52:48.946137+00:00",
+  "prompt_versions": {
+    "proposer_sha256": "ae6fa59cccb86c31f34f66d07d241660b1feadf852ebf1b594bc85addab86985",
+    "proposer_wire_schema_version": "compact_proposal_v1",
+    "proposer_wire_schema_sha256": "f504fbcd7e939c43e055e2f188feb22097a284bcd9b043227d868e559547b865",
+    "proposer_revision_sha256": "3f0fe7f221013700694a22984560612013e9804072ffde4538e1329b9708ac95",
+    "critic_sha256": "1686688cdd4bc63abb12e6633ef9dbb9b62d69b69aba1c4805a201657cc5bb34"
+  },
+  "seconds": 117.815,
+  "artifact_type": "technical_failure",
+  "active_run": false
+}

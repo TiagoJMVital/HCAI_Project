@@ -17,18 +17,19 @@
     "hard_constraints": [
       {
         "id": "work_hours",
-        "description": "Hospital shifts are fixed and must not be moved, shortened or cancelled by the assistant unless requested by the user.",
-        "rule_type": "protect_events_by_category",
-        "event_categories": [
-          "work"
+        "description": "Thursday's hospital shift remains fixed; Tuesday's shift swap was requested by the user.",
+        "rule_type": "protect_events_by_id",
+        "event_ids": [
+          "work_thu"
         ]
       },
       {
         "id": "sleep_protection",
-        "description": "The user must sleep at least eight hours every day; scheduled sleep blocks must be protected or shifted intact after night shifts.",
-        "rule_type": "protect_events_by_category",
-        "event_categories": [
-          "sleep"
+        "description": "Tuesday and Thursday sleep remain protected; sleep after the night shift must stay an intact eight-hour block.",
+        "rule_type": "protect_events_by_id",
+        "event_ids": [
+          "sleep_tue",
+          "sleep_thu"
         ]
       }
     ],
@@ -120,7 +121,7 @@
         "end": "2026-11-17T15:00:00+00:00",
         "category": "commute",
         "importance": 4,
-        "fixed": true,
+        "fixed": false,
         "participants": [
           "user"
         ],
@@ -133,7 +134,7 @@
         "end": "2026-11-17T23:00:00+00:00",
         "category": "work",
         "importance": 5,
-        "fixed": true,
+        "fixed": false,
         "participants": [
           "user"
         ],
@@ -146,7 +147,7 @@
         "end": "2026-11-17T23:30:00+00:00",
         "category": "commute",
         "importance": 4,
-        "fixed": true,
+        "fixed": false,
         "participants": [
           "user"
         ],
@@ -159,11 +160,11 @@
         "end": "2026-11-18T07:30:00+00:00",
         "category": "sleep",
         "importance": 5,
-        "fixed": true,
+        "fixed": false,
         "participants": [
           "user"
         ],
-        "description": "Protected eight-hour sleep block."
+        "description": "Daytime sleep after the night shift; must remain an intact 8h block."
       },
       {
         "id": "supervisor_meeting_wed",
@@ -172,7 +173,7 @@
         "end": "2026-11-18T10:30:00+00:00",
         "category": "thesis",
         "importance": 5,
-        "fixed": true,
+        "fixed": false,
         "participants": [
           "user",
           "supervisor"
@@ -212,7 +213,7 @@
         "end": "2026-11-18T16:30:00+00:00",
         "category": "health",
         "importance": 4,
-        "fixed": true,
+        "fixed": false,
         "participants": [
           "user",
           "physiotherapist"

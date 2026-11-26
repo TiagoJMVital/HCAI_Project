@@ -31,3 +31,15 @@ def test_execute_passes_partial_b_to_documented_replay_option(monkeypatch, tmp_p
     path = pilot.execute("scenario", "B", initial_proposal_from=source)
     assert captured["command"][-2:] == ["--initial-proposal-from", str(source)]
     assert path == pilot.ROOT / "result.json"
+
+
+def test_default_dry_run_lists_only_allowlisted_b_pairs(monkeypatch, capsys):
+    monkeypatch.setattr(pilot, "latest_terminal", lambda *args, **kwargs: None)
+    monkeypatch.setattr(sys, "argv", ["run_pilot_v2.py", "--dry-run"])
+    assert pilot.main() == 0
+    lines = capsys.readouterr().out.splitlines()
+    run_lines = [line for line in lines if line.startswith("RUN ")]
+    expected = pilot.load_allowlist(pilot.DEFAULT_ALLOWLIST)
+    assert len(run_lines) == len(expected) == 10
+    assert all(line.startswith("RUN B ") for line in run_lines)
+    assert {line.split(maxsplit=2)[2] for line in run_lines} == set(expected)

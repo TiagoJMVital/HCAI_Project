@@ -98,7 +98,8 @@ def test_critic_feedback_revises_proposal(context):
     assert [step["critic_evaluation"]["overall"] for step in result["iterations"]] == [2, 5]
     assert "REVIEWER FEEDBACK" not in proposer.calls[1][0]  # v2 adapter uses its own prompt wording
     assert "Reviewer feedback" in proposer.calls[1][0]
-    compact_previous = ProposerWireProposal.from_proposal(first).model_dump_json(exclude_none=True)
+    compact_previous = ProposerWireProposal.from_proposal(first).model_dump_json(
+        exclude_none=True, by_alias=True)
     assert compact_previous in proposer.calls[1][0]
     assert first.model_dump_json() not in proposer.calls[1][0]
     assert "alternative not explained" in proposer.calls[1][0]

@@ -1,0 +1,136 @@
+{
+  "fixture_version": "deferred_invalid_repairs_v1",
+  "proposals": [
+    {
+      "scenario_id": "elite_athlete_student_doping_control_oral_presentation_001",
+      "proposal": {
+        "changes": [
+          {"type": "add", "event_id": "doping_control_tue", "title": "Mandatory anti-doping control", "to_start": "2027-02-16T09:05:00+00:00", "to_end": "2027-02-16T10:35:00+00:00", "category": "health", "importance": 5, "participants": ["user", "doping_officer"]},
+          {"type": "move", "event_id": "commute_uni_tue", "to_start": "2027-02-16T10:35:00+00:00", "to_end": "2027-02-16T11:05:00+00:00"},
+          {"type": "move", "event_id": "oral_pres_tue", "to_start": "2027-02-16T11:30:00+00:00", "to_end": "2027-02-16T12:00:00+00:00"}
+        ],
+        "rationale": {"constraints": ["Keep training and sleep intact"], "priorities": ["Complete mandatory control and graded presentation"], "alternatives_considered": [{"option": "Thursday presentation", "rejected_because": "The final Tuesday slot is feasible with professor and teammate confirmation"}], "summary": "Attend the control, commute afterwards, and use the final presentation slot."}
+      }
+    },
+    {
+      "scenario_id": "elite_athlete_student_physiological_testing_capstone_001",
+      "proposal": {
+        "changes": [
+          {"type": "delete", "event_id": "training_am_tue"},
+          {"type": "add", "event_id": "physio_lab_tue", "title": "Mandatory physiological lab testing", "to_start": "2027-03-23T07:30:00+00:00", "to_end": "2027-03-23T10:30:00+00:00", "category": "health", "importance": 5, "participants": ["user", "lab_staff"]},
+          {"type": "move", "event_id": "capstone_meeting_tue", "to_start": "2027-03-23T14:00:00+00:00", "to_end": "2027-03-23T15:00:00+00:00"}
+        ],
+        "rationale": {"constraints": ["The lab replaces Tuesday morning training"], "priorities": ["Keep remaining training, sleep, and capstone progress"], "alternatives_considered": [{"option": "Thursday supervisor meeting", "rejected_because": "Tuesday 14:00 video slot is available"}], "summary": "Replace the superseded session with testing and confirm the video meeting move."}
+      }
+    },
+    {
+      "scenario_id": "elite_athlete_student_sponsor_media_day_project_001",
+      "proposal": {
+        "changes": [
+          {"type": "add", "event_id": "sponsor_media_wed", "title": "Sponsor photoshoot and media event", "to_start": "2027-05-05T14:30:00+01:00", "to_end": "2027-05-05T17:30:00+01:00", "category": "work", "importance": 5, "participants": ["user", "sponsor"]},
+          {"type": "move", "event_id": "training_pm_wed", "to_start": "2027-05-05T18:30:00+01:00", "to_end": "2027-05-05T20:00:00+01:00"}
+        ],
+        "rationale": {"constraints": ["Protect sleep and all other training"], "priorities": ["Attend the mandatory sponsor event"], "alternatives_considered": [{"option": "Thursday training", "rejected_because": "The coach-approved Wednesday evening slot avoids doubling Thursday"}], "summary": "Add media day and use the coach-approved evening training slot."}
+      }
+    },
+    {
+      "scenario_id": "nurse_shift_worker_masters_night_shift_cover_001",
+      "proposal": {
+        "changes": [
+          {"type": "move", "event_id": "commute_to_work_tue", "to_start": "2026-11-17T22:30:00+00:00", "to_end": "2026-11-17T23:00:00+00:00"},
+          {"type": "move", "event_id": "work_tue", "to_start": "2026-11-17T23:00:00+00:00", "to_end": "2026-11-18T07:00:00+00:00"},
+          {"type": "move", "event_id": "commute_home_tue", "to_start": "2026-11-18T07:00:00+00:00", "to_end": "2026-11-18T07:30:00+00:00"},
+          {"type": "move", "event_id": "sleep_wed", "to_start": "2026-11-18T07:30:00+00:00", "to_end": "2026-11-18T15:30:00+00:00"},
+          {"type": "move", "event_id": "supervisor_meeting_wed", "to_start": "2026-11-18T17:00:00+00:00", "to_end": "2026-11-18T18:00:00+00:00"},
+          {"type": "move", "event_id": "physio_wed", "to_start": "2026-11-18T18:15:00+00:00", "to_end": "2026-11-18T19:15:00+00:00"}
+        ],
+        "rationale": {"constraints": ["Keep post-shift sleep as an intact eight-hour block"], "priorities": ["Cover the accepted night shift"], "alternatives_considered": [{"option": "Keep morning supervisor meeting", "rejected_because": "It conflicts with required recovery sleep"}], "summary": "Shift work, commutes, sleep, supervisor meeting, and physio coherently; confirm third-party moves."}
+      }
+    },
+    {
+      "scenario_id": "parent_young_children_car_breakdown_commute_001",
+      "proposal": {
+        "changes": [
+          {"type": "move", "event_id": "travel_to_school_wed", "to_start": "2027-03-10T07:40:00+00:00", "to_end": "2027-03-10T08:15:00+00:00"},
+          {"type": "move", "event_id": "commute_to_work_wed", "to_start": "2027-03-10T08:30:00+00:00", "to_end": "2027-03-10T09:25:00+00:00"},
+          {"type": "move", "event_id": "commute_to_school_wed", "to_start": "2027-03-10T16:35:00+00:00", "to_end": "2027-03-10T17:30:00+00:00"},
+          {"type": "move", "event_id": "travel_to_school_thu", "to_start": "2027-03-11T07:40:00+00:00", "to_end": "2027-03-11T08:15:00+00:00"},
+          {"type": "delete", "event_id": "commute_to_work_thu"}
+        ],
+        "rationale": {"constraints": ["Use stated public-transport durations"], "priorities": ["Keep child handovers, demo, and dentist"], "alternatives_considered": [{"option": "Office on Thursday", "rejected_because": "Working from home avoids an unnecessary car commute"}], "summary": "Use buses Wednesday, work remotely Thursday, and rely on the recorded partner pickup."}
+      }
+    },
+    {
+      "scenario_id": "parent_young_children_car_breakdown_solo_001",
+      "proposal": {
+        "changes": [
+          {"type": "move", "event_id": "travel_to_school_thu", "to_start": "2026-12-10T07:35:00+00:00", "to_end": "2026-12-10T08:15:00+00:00"},
+          {"type": "move", "event_id": "commute_to_work_thu", "to_start": "2026-12-10T08:30:00+00:00", "to_end": "2026-12-10T09:15:00+00:00"},
+          {"type": "move", "event_id": "commute_to_school_thu", "to_start": "2026-12-10T16:45:00+00:00", "to_end": "2026-12-10T17:30:00+00:00"},
+          {"type": "add", "event_id": "tow_handover_thu", "title": "Tow-truck key handover", "to_start": "2026-12-10T13:00:00+00:00", "to_end": "2026-12-10T13:15:00+00:00", "category": "errand", "importance": 5, "participants": ["user", "tow_operator"]},
+          {"type": "move", "event_id": "travel_to_school_fri", "to_start": "2026-12-11T07:35:00+00:00", "to_end": "2026-12-11T08:15:00+00:00"},
+          {"type": "move", "event_id": "commute_to_work_fri", "to_start": "2026-12-11T08:30:00+00:00", "to_end": "2026-12-11T09:15:00+00:00"},
+          {"type": "move", "event_id": "commute_to_school_fri", "to_start": "2026-12-11T16:15:00+00:00", "to_end": "2026-12-11T17:00:00+00:00"},
+          {"type": "move", "event_id": "travel_to_daycare_fri", "to_start": "2026-12-11T17:15:00+00:00", "to_end": "2026-12-11T17:30:00+00:00"},
+          {"type": "move", "event_id": "travel_to_venue_sat", "to_start": "2026-12-12T13:30:00+00:00", "to_end": "2026-12-12T14:00:00+00:00"},
+          {"type": "move", "event_id": "travel_home_sat", "to_start": "2026-12-12T17:30:00+00:00", "to_end": "2026-12-12T18:00:00+00:00"}
+        ],
+        "rationale": {"constraints": ["Preserve fixed child handovers, work commitments, and party"], "priorities": ["Use buses and complete the tow handover"], "alternatives_considered": [{"option": "Neighbour key handover", "rejected_because": "The user can attend within the window after the supplier call was moved outside it"}], "summary": "Replace major car legs with feasible transport timings and add the tow handover."}
+      }
+    },
+    {
+      "scenario_id": "parent_young_children_school_strike_closure_001",
+      "proposal": {
+        "changes": [
+          {"type": "delete", "event_id": "travel_to_school_wed"},
+          {"type": "delete", "event_id": "dropoff_wed"},
+          {"type": "delete", "event_id": "commute_to_work_wed"},
+          {"type": "delete", "event_id": "commute_to_school_wed"},
+          {"type": "delete", "event_id": "pickup_wed"}
+        ],
+        "rationale": {"constraints": ["School and daycare are closed"], "priorities": ["Work from home while maintaining childcare"], "alternatives_considered": [{"option": "Keep school runs", "rejected_because": "The destinations are closed"}], "summary": "Remove the cancelled school and office travel; partner morning care is already recorded."}
+      }
+    },
+    {
+      "scenario_id": "parent_young_children_school_strike_show_moved_001",
+      "proposal": {
+        "changes": [
+          {"type": "move", "event_id": "show_wed", "to_start": "2026-12-17T17:45:00+00:00", "to_end": "2026-12-17T18:45:00+00:00"},
+          {"type": "move", "event_id": "commute_home_thu", "to_start": "2026-12-17T18:45:00+00:00", "to_end": "2026-12-17T19:15:00+00:00"}
+        ],
+        "rationale": {"constraints": ["Do not overlap the protected CFO review"], "priorities": ["Attend the rescheduled show and keep Marta supervised"], "alternatives_considered": [{"option": "Thursday 16:30 show", "rejected_because": "It conflicts with the in-person CFO review"}], "summary": "Move the show to 17:45 Thursday and commute home afterwards; recorded cover handles Wednesday."}
+      }
+    },
+    {
+      "scenario_id": "parent_young_children_sick_child_workday_001",
+      "proposal": {
+        "changes": [
+          {"type": "add", "event_id": "collect_duarte_tue", "title": "Collect Duarte from daycare", "to_start": "2026-12-01T10:55:00+00:00", "to_end": "2026-12-01T11:40:00+00:00", "category": "family", "importance": 5, "participants": ["user", "duarte"]},
+          {"type": "add", "event_id": "duarte_care_tue", "title": "Care for Duarte at home", "to_start": "2026-12-01T11:40:00+00:00", "to_end": "2026-12-01T13:50:00+00:00", "category": "family", "importance": 5, "participants": ["user", "duarte"]}
+        ],
+        "rationale": {"constraints": ["Collect Duarte within one hour and maintain continuous care"], "priorities": ["Child health and protected meetings"], "alternatives_considered": [{"option": "Wait for partner pickup", "rejected_because": "The partner arrives after the daycare deadline"}], "summary": "Collect Duarte and care for him until the partner takes over; Wednesday cover is recorded."}
+      }
+    },
+    {
+      "scenario_id": "parent_young_children_weekend_partner_extra_shifts_001",
+      "proposal": {
+        "changes": [
+          {"type": "move", "event_id": "travel_to_match_sat", "to_start": "2027-01-30T07:50:00+00:00", "to_end": "2027-01-30T08:15:00+00:00"},
+          {"type": "move", "event_id": "match_sat", "to_start": "2027-01-30T08:30:00+00:00", "to_end": "2027-01-30T10:00:00+00:00"},
+          {"type": "move", "event_id": "travel_home_match_sat", "to_start": "2027-01-30T10:00:00+00:00", "to_end": "2027-01-30T10:25:00+00:00"},
+          {"type": "delete", "event_id": "travel_to_party_sat"},
+          {"type": "delete", "event_id": "travel_home_party_sat"},
+          {"type": "add", "event_id": "user_travel_to_party_sat", "title": "Take Marta to birthday party", "to_start": "2027-01-30T15:10:00+00:00", "to_end": "2027-01-30T15:30:00+00:00", "category": "commute", "importance": 4, "participants": ["user", "marta", "duarte"]},
+          {"type": "add", "event_id": "user_travel_home_party_sat", "title": "Collect Marta from birthday party", "to_start": "2027-01-30T17:30:00+00:00", "to_end": "2027-01-30T17:50:00+00:00", "category": "commute", "importance": 4, "participants": ["user", "marta", "duarte"]},
+          {"type": "delete", "event_id": "travel_to_inlaws_sun"},
+          {"type": "delete", "event_id": "inlaws_lunch_sun"},
+          {"type": "delete", "event_id": "travel_home_inlaws_sun"},
+          {"type": "add", "event_id": "user_travel_to_inlaws_sun", "title": "Travel to grandfather birthday lunch", "to_start": "2027-01-31T12:20:00+00:00", "to_end": "2027-01-31T13:00:00+00:00", "category": "commute", "importance": 5, "participants": ["user", "marta", "duarte"]},
+          {"type": "add", "event_id": "user_inlaws_lunch_sun", "title": "Grandfather's 70th birthday lunch", "to_start": "2027-01-31T13:00:00+00:00", "to_end": "2027-01-31T15:30:00+00:00", "category": "social", "importance": 5, "participants": ["user", "marta", "duarte", "in_laws"]},
+          {"type": "add", "event_id": "user_travel_home_inlaws_sun", "title": "Travel home from birthday lunch", "to_start": "2027-01-31T15:30:00+00:00", "to_end": "2027-01-31T16:10:00+00:00", "category": "commute", "importance": 4, "participants": ["user", "marta", "duarte"]}
+        ],
+        "rationale": {"constraints": ["Partner is unavailable during the recorded extra shifts"], "priorities": ["Keep match, party, and grandfather's lunch"], "alternatives_considered": [{"option": "Partner drives", "rejected_because": "The confirmed shifts make that impossible"}], "summary": "Move the match and transfer weekend transport and lunch responsibility to the user."}
+      }
+    }
+  ]
+}

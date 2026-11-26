@@ -1,0 +1,4628 @@
+{
+  "configuration": "B",
+  "scenario_id": "parent_young_children_car_breakdown_solo_001",
+  "family": "parent_young_children_schedule_conflict",
+  "category": "v2",
+  "proposer_provider": "iaedu",
+  "proposer_model": "GPT-5.5",
+  "proposer_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_provider": "iaedu",
+  "critic_model": "GPT-5.5",
+  "critic_generation_config": {
+    "max_retries": 2,
+    "timeout_seconds": [
+      10,
+      180
+    ],
+    "structured_output": "prompt_and_local_validation",
+    "thread_policy": "new_uuid_per_request",
+    "rate_limit_max_retries": 3,
+    "rate_limit_base_delay_seconds": 15.0,
+    "rate_limit_max_delay_seconds": 300.0,
+    "rate_limit_jitter": 0.2
+  },
+  "critic_settings": {
+    "threshold": 4.0,
+    "max_refinements": 3,
+    "min_dimension_score": 1
+  },
+  "iterations": [
+    {
+      "index": 0,
+      "proposer_feedback": null,
+      "proposer_source": "generated",
+      "proposal": {
+        "changes": [
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Call insurer to narrow tow-truck arrival or approve backup handover",
+            "from_start": null,
+            "to_start": "2026-12-10T07:20:00+00:00",
+            "to_end": "2026-12-10T07:30:00+00:00",
+            "category": "household",
+            "importance": 5,
+            "participants": [
+              "user",
+              "insurer"
+            ]
+          },
+          {
+            "type": "move",
+            "event_id": "travel_to_school_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-12-10T07:35:00+00:00",
+            "to_end": "2026-12-10T08:15:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "commute_to_work_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-12-10T08:30:00+00:00",
+            "to_end": "2026-12-10T09:15:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "prep_budget_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-12-10T09:15:00+00:00",
+            "to_end": "2026-12-10T10:00:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Bus from office to home for tow truck",
+            "from_start": null,
+            "to_start": "2026-12-10T11:30:00+00:00",
+            "to_end": "2026-12-10T12:20:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "participants": [
+              "user"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Tow-truck key handover window at home",
+            "from_start": null,
+            "to_start": "2026-12-10T12:20:00+00:00",
+            "to_end": "2026-12-10T14:00:00+00:00",
+            "category": "household",
+            "importance": 5,
+            "participants": [
+              "user",
+              "tow truck"
+            ]
+          },
+          {
+            "type": "move",
+            "event_id": "lunch_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-12-10T13:00:00+00:00",
+            "to_end": "2026-12-10T13:45:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "focus_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-12-10T14:45:00+00:00",
+            "to_end": "2026-12-10T16:00:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "followup_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-12-10T16:00:00+00:00",
+            "to_end": "2026-12-10T16:50:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "commute_to_school_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-12-10T16:50:00+00:00",
+            "to_end": "2026-12-10T17:30:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "travel_to_club_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "football_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "travel_home_thu",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Bus from school and daycare to home",
+            "from_start": null,
+            "to_start": "2026-12-10T17:45:00+00:00",
+            "to_end": "2026-12-10T18:25:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ]
+          },
+          {
+            "type": "move",
+            "event_id": "travel_to_school_fri",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-12-11T07:35:00+00:00",
+            "to_end": "2026-12-11T08:15:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "commute_to_work_fri",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-12-11T08:30:00+00:00",
+            "to_end": "2026-12-11T09:15:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Receive garage status update",
+            "from_start": null,
+            "to_start": "2026-12-11T09:00:00+00:00",
+            "to_end": "2026-12-11T09:10:00+00:00",
+            "category": "household",
+            "importance": 5,
+            "participants": [
+              "user",
+              "garage"
+            ]
+          },
+          {
+            "type": "move",
+            "event_id": "report_fri",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-12-11T09:15:00+00:00",
+            "to_end": "2026-12-11T12:00:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Confirm cake collection or delivery backup",
+            "from_start": null,
+            "to_start": "2026-12-11T13:15:00+00:00",
+            "to_end": "2026-12-11T13:30:00+00:00",
+            "category": "household",
+            "importance": 5,
+            "participants": [
+              "user",
+              "bakery"
+            ]
+          },
+          {
+            "type": "move",
+            "event_id": "focus_fri",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-12-11T13:30:00+00:00",
+            "to_end": "2026-12-11T15:15:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "move",
+            "event_id": "commute_to_school_fri",
+            "title": null,
+            "from_start": null,
+            "to_start": "2026-12-11T15:15:00+00:00",
+            "to_end": "2026-12-11T16:00:00+00:00",
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "travel_to_clinic_fri",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "dentist_fri",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "delete",
+            "event_id": "travel_to_daycare_fri",
+            "title": null,
+            "from_start": null,
+            "to_start": null,
+            "to_end": null,
+            "category": null,
+            "importance": null,
+            "participants": null
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Wait at school and daycare with Marta until Duarte pickup",
+            "from_start": null,
+            "to_start": "2026-12-11T16:15:00+00:00",
+            "to_end": "2026-12-11T17:30:00+00:00",
+            "category": "family",
+            "importance": 4,
+            "participants": [
+              "user",
+              "marta"
+            ]
+          },
+          {
+            "type": "add",
+            "event_id": null,
+            "title": "Confirm Saturday party transport plan",
+            "from_start": null,
+            "to_start": "2026-12-11T22:30:00+00:00",
+            "to_end": "2026-12-11T22:45:00+00:00",
+            "category": "household",
+            "importance": 5,
+            "participants": [
+              "user",
+              "partner"
+            ]
+          }
+        ],
+        "rationale": {
+          "constraints": [
+            "Childcare, fixed work commitments and protected sleep blocks are not moved.",
+            "Known bus times only cover home-school, school-office and office-home journeys.",
+            "The budget review prevents being home exactly at 12:00 for the tow-truck window.",
+            "The tow plan needs insurer confirmation because the user reaches home at 12:20, not 12:00.",
+            "Dona Rosa can only be a backup from 13:00 if she agrees and the insurer accepts her handover.",
+            "Football is skipped because the club is not reachable by bus in a reasonable time.",
+            "The dentist deletion needs clinic confirmation because it involves a health appointment and the next slot may be much later.",
+            "Cake collection or delivery needs confirmation because no bus time to the bakery is supplied.",
+            "Saturday party travel depends on the Friday 09:00 garage update or a confirmed backup transport plan."
+          ],
+          "priorities": [
+            "School drop-offs, pick-ups, the budget review and the report deadline are protected first.",
+            "Sleep remains above the seven-hour hard minimum on each night.",
+            "Flexible individual work is compressed or shifted before lower-priority activities.",
+            "Marta's birthday party, cake and venue setup are treated as the main Saturday priority.",
+            "The plan avoids relying on the partner before the Friday 22:00 return."
+          ],
+          "alternatives_considered": [
+            {
+              "option": "Keep Marta's football practice on Thursday",
+              "rejected_because": "Rejected because the request says the club is not reasonably reachable by bus."
+            },
+            {
+              "option": "Have the user wait at home for the full 12:00-14:00 tow window",
+              "rejected_because": "Rejected because the protected budget review ends at 11:30 and the office-home bus takes 50 minutes."
+            },
+            {
+              "option": "Move or shorten the budget review",
+              "rejected_because": "Rejected because it is a protected in-person work commitment with the director travelling for it."
+            },
+            {
+              "option": "Keep the dentist appointment unchanged",
+              "rejected_because": "Rejected unless transport is confirmed, because only a 15-minute car journey is supplied."
+            },
+            {
+              "option": "Assume the bakery or party venue is reachable by bus",
+              "rejected_because": "Rejected because the request does not supply those bus times or availability."
+            }
+          ],
+          "summary": "Use buses for school and office, work from home around the tow-truck window, skip Thursday football, compress flexible work, and cancel the dentist unless confirmed transport exists; the main trade-off is that the tow, cake and Saturday party logistics remain dependent on confirmations from the insurer, Dona Rosa, the bakery, the garage and the partner."
+        }
+      },
+      "validation": {
+        "structural": "valid",
+        "scope": "implemented_typed_checks_only",
+        "checked_rules": [
+          "event references",
+          "fixed event protection",
+          "typed category/id protection",
+          "typed daily time window",
+          "timezone offsets",
+          "positive duration",
+          "overlap with protected events"
+        ],
+        "not_checked": [
+          "natural-language constraint descriptions",
+          "request satisfaction",
+          "soft preference satisfaction",
+          "autonomy suitability"
+        ],
+        "violations": [],
+        "warnings": [
+          "new temporal overlap (not automatically a hard-rule violation): commute_to_work_fri x new_16",
+          "new temporal overlap (not automatically a hard-rule violation): lunch_thu x new_5",
+          "new temporal overlap (not automatically a hard-rule violation): morning_fri x travel_to_school_fri",
+          "new temporal overlap (not automatically a hard-rule violation): morning_thu x new_0",
+          "new temporal overlap (not automatically a hard-rule violation): morning_thu x travel_to_school_thu"
+        ],
+        "valid": true
+      },
+      "result_calendar": {
+        "timezone": "Europe/Lisbon",
+        "coverage": "all_events_in_scenario_after_simulation",
+        "events": [
+          {
+            "id": "sleep_thu",
+            "title": "Sleep",
+            "start": "2026-12-09T23:00:00+00:00",
+            "end": "2026-12-10T06:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block; the user requires at least seven hours of sleep per night.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "morning_thu",
+            "title": "Morning routine with the children",
+            "start": "2026-12-10T06:45:00+00:00",
+            "end": "2026-12-10T07:45:00+00:00",
+            "category": "family",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Breakfast, dressing and packing school bags for both children.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_0",
+            "title": "Call insurer to narrow tow-truck arrival or approve backup handover",
+            "start": "2026-12-10T07:20:00+00:00",
+            "end": "2026-12-10T07:30:00+00:00",
+            "category": "household",
+            "importance": 5,
+            "fixed": null,
+            "participants": [
+              "user",
+              "insurer"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "travel_to_school_thu",
+            "title": "Travel to school and daycare",
+            "start": "2026-12-10T07:35:00+00:00",
+            "end": "2026-12-10T08:15:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "15-minute car journey from home to the school and daycare, which share the same site.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "dropoff_thu",
+            "title": "Drop-off at school and daycare",
+            "start": "2026-12-10T08:15:00+00:00",
+            "end": "2026-12-10T08:30:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Drop-off for Marta (primary school, gates close at 08:30) and Duarte (daycare, arrival until 09:00). The partner is on a work trip in Porto until Friday 22:00, so the user handles all school runs, pick-ups and bedtimes.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_to_work_thu",
+            "title": "Commute to office",
+            "start": "2026-12-10T08:30:00+00:00",
+            "end": "2026-12-10T09:15:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute car journey from the school to the office.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "prep_budget_thu",
+            "title": "Prepare budget review documents",
+            "start": "2026-12-10T09:15:00+00:00",
+            "end": "2026-12-10T10:00:00+00:00",
+            "category": "work_focus",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Print and organise the audit folders for the review.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "budget_review_thu",
+            "title": "Quarterly budget review with director",
+            "start": "2026-12-10T10:00:00+00:00",
+            "end": "2026-12-10T11:30:00+00:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "director",
+              "finance_team"
+            ],
+            "description": "In-person review at the office; the physical audit folders must be on the table and the director travels only for this meeting.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_4",
+            "title": "Bus from office to home for tow truck",
+            "start": "2026-12-10T11:30:00+00:00",
+            "end": "2026-12-10T12:20:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "new_5",
+            "title": "Tow-truck key handover window at home",
+            "start": "2026-12-10T12:20:00+00:00",
+            "end": "2026-12-10T14:00:00+00:00",
+            "category": "household",
+            "importance": 5,
+            "fixed": null,
+            "participants": [
+              "user",
+              "tow truck"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "lunch_thu",
+            "title": "Lunch",
+            "start": "2026-12-10T13:00:00+00:00",
+            "end": "2026-12-10T13:45:00+00:00",
+            "category": "meal",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Lunch at the office canteen.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "supplier_call_thu",
+            "title": "Call with supplier",
+            "start": "2026-12-10T14:15:00+00:00",
+            "end": "2026-12-10T14:45:00+00:00",
+            "category": "work",
+            "importance": 3,
+            "fixed": true,
+            "participants": [
+              "user",
+              "supplier"
+            ],
+            "description": "Video call with the supplier in Germany; can be taken from anywhere with a stable connection.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "focus_thu",
+            "title": "Project work",
+            "start": "2026-12-10T14:45:00+00:00",
+            "end": "2026-12-10T16:00:00+00:00",
+            "category": "work_focus",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Flexible individual work that can be moved within the working day.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "followup_thu",
+            "title": "Follow-up on action points",
+            "start": "2026-12-10T16:00:00+00:00",
+            "end": "2026-12-10T16:50:00+00:00",
+            "category": "work_focus",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Flexible individual work that can be moved within the working day.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "commute_to_school_thu",
+            "title": "Commute to school",
+            "start": "2026-12-10T16:50:00+00:00",
+            "end": "2026-12-10T17:30:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute journey from the office to the school and daycare.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "pickup_thu",
+            "title": "Pick up children",
+            "start": "2026-12-10T17:30:00+00:00",
+            "end": "2026-12-10T17:45:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Pick-up from the after-school programme and daycare, which close at 18:30.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_13",
+            "title": "Bus from school and daycare to home",
+            "start": "2026-12-10T17:45:00+00:00",
+            "end": "2026-12-10T18:25:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "dinner_thu",
+            "title": "Family dinner",
+            "start": "2026-12-10T19:30:00+00:00",
+            "end": "2026-12-10T20:30:00+00:00",
+            "category": "family",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "One-hour dinner at home with the children.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "bedtime_thu",
+            "title": "Children's bedtime routine",
+            "start": "2026-12-10T20:30:00+00:00",
+            "end": "2026-12-10T21:15:00+00:00",
+            "category": "family",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Bath, story and bedtime for both children; about 45 minutes.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "sleep_fri",
+            "title": "Sleep",
+            "start": "2026-12-10T23:00:00+00:00",
+            "end": "2026-12-11T06:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block; the user requires at least seven hours of sleep per night.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "morning_fri",
+            "title": "Morning routine with the children",
+            "start": "2026-12-11T06:45:00+00:00",
+            "end": "2026-12-11T07:45:00+00:00",
+            "category": "family",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Breakfast, dressing and packing school bags for both children.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "travel_to_school_fri",
+            "title": "Travel to school and daycare",
+            "start": "2026-12-11T07:35:00+00:00",
+            "end": "2026-12-11T08:15:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "15-minute car journey from home to the school and daycare, which share the same site.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "dropoff_fri",
+            "title": "Drop-off at school and daycare",
+            "start": "2026-12-11T08:15:00+00:00",
+            "end": "2026-12-11T08:30:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Drop-off for Marta (primary school, gates close at 08:30) and Duarte (daycare, arrival until 09:00). The partner is on a work trip in Porto until Friday 22:00, so the user handles all school runs, pick-ups and bedtimes.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "commute_to_work_fri",
+            "title": "Commute to office",
+            "start": "2026-12-11T08:30:00+00:00",
+            "end": "2026-12-11T09:15:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute car journey from the school to the office.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "new_16",
+            "title": "Receive garage status update",
+            "start": "2026-12-11T09:00:00+00:00",
+            "end": "2026-12-11T09:10:00+00:00",
+            "category": "household",
+            "importance": 5,
+            "fixed": null,
+            "participants": [
+              "user",
+              "garage"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "report_fri",
+            "title": "Write quarterly sales report",
+            "start": "2026-12-11T09:15:00+00:00",
+            "end": "2026-12-11T12:00:00+00:00",
+            "category": "work_focus",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Report prepared from the budget review feedback.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "deadline_fri",
+            "title": "Submit quarterly report to director",
+            "start": "2026-12-11T12:00:00+00:00",
+            "end": "2026-12-11T12:15:00+00:00",
+            "category": "work",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "director"
+            ],
+            "description": "The report must be sent to the director by 12:15; no extension is possible.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "farewell_lunch_fri",
+            "title": "Farewell lunch for a colleague",
+            "start": "2026-12-11T12:15:00+00:00",
+            "end": "2026-12-11T13:15:00+00:00",
+            "category": "social",
+            "importance": 2,
+            "fixed": true,
+            "participants": [
+              "user",
+              "colleagues"
+            ],
+            "description": "Team lunch at a restaurant near the office to say goodbye to a colleague.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_18",
+            "title": "Confirm cake collection or delivery backup",
+            "start": "2026-12-11T13:15:00+00:00",
+            "end": "2026-12-11T13:30:00+00:00",
+            "category": "household",
+            "importance": 5,
+            "fixed": null,
+            "participants": [
+              "user",
+              "bakery"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "focus_fri",
+            "title": "Project work",
+            "start": "2026-12-11T13:30:00+00:00",
+            "end": "2026-12-11T15:15:00+00:00",
+            "category": "work_focus",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Flexible individual work that can be moved within the working day.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "commute_to_school_fri",
+            "title": "Commute to school",
+            "start": "2026-12-11T15:15:00+00:00",
+            "end": "2026-12-11T16:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "30-minute car journey from the office to the school.",
+            "origin": "existing",
+            "change_status": "moved"
+          },
+          {
+            "id": "early_pickup_fri",
+            "title": "Early pick-up of Marta",
+            "start": "2026-12-11T16:00:00+00:00",
+            "end": "2026-12-11T16:15:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "marta"
+            ],
+            "description": "Marta leaves the after-school programme early for her dentist appointment; the school allows early pick-up from 16:00.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_24",
+            "title": "Wait at school and daycare with Marta until Duarte pickup",
+            "start": "2026-12-11T16:15:00+00:00",
+            "end": "2026-12-11T17:30:00+00:00",
+            "category": "family",
+            "importance": 4,
+            "fixed": null,
+            "participants": [
+              "user",
+              "marta"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "pickup_duarte_fri",
+            "title": "Pick up Duarte",
+            "start": "2026-12-11T17:30:00+00:00",
+            "end": "2026-12-11T17:45:00+00:00",
+            "category": "childcare",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Duarte's daycare closes at 18:30.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "travel_to_bakery_fri",
+            "title": "Travel to bakery",
+            "start": "2026-12-11T17:45:00+00:00",
+            "end": "2026-12-11T18:00:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "15-minute car journey.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "cake_pickup_fri",
+            "title": "Collect Marta's birthday cake",
+            "start": "2026-12-11T18:00:00+00:00",
+            "end": "2026-12-11T18:15:00+00:00",
+            "category": "errand",
+            "importance": 4,
+            "fixed": true,
+            "participants": [
+              "user",
+              "bakery"
+            ],
+            "description": "Custom birthday cake ordered for Saturday's party; the bakery closes at 18:30 and will not hold it overnight.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "travel_home_fri",
+            "title": "Travel home",
+            "start": "2026-12-11T18:15:00+00:00",
+            "end": "2026-12-11T18:30:00+00:00",
+            "category": "commute",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "15-minute car journey home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "dinner_fri",
+            "title": "Family dinner",
+            "start": "2026-12-11T19:30:00+00:00",
+            "end": "2026-12-11T20:30:00+00:00",
+            "category": "family",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "One-hour dinner at home with the children.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "bedtime_fri",
+            "title": "Children's bedtime routine",
+            "start": "2026-12-11T20:30:00+00:00",
+            "end": "2026-12-11T21:15:00+00:00",
+            "category": "family",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Bath, story and bedtime for both children; about 45 minutes.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "party_prep_fri",
+            "title": "Prepare party bags and decorations",
+            "start": "2026-12-11T21:15:00+00:00",
+            "end": "2026-12-11T22:00:00+00:00",
+            "category": "household",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Fill 14 party bags and prepare decorations for Saturday.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "partner_return_fri",
+            "title": "Partner returns from Porto",
+            "start": "2026-12-11T22:00:00+00:00",
+            "end": "2026-12-11T22:30:00+00:00",
+            "category": "partner_work",
+            "importance": 2,
+            "fixed": true,
+            "participants": [
+              "partner"
+            ],
+            "description": "The partner arrives home from the work trip.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "new_25",
+            "title": "Confirm Saturday party transport plan",
+            "start": "2026-12-11T22:30:00+00:00",
+            "end": "2026-12-11T22:45:00+00:00",
+            "category": "household",
+            "importance": 5,
+            "fixed": null,
+            "participants": [
+              "user",
+              "partner"
+            ],
+            "description": null,
+            "origin": "proposed_addition",
+            "change_status": "added"
+          },
+          {
+            "id": "sleep_sat",
+            "title": "Sleep",
+            "start": "2026-12-11T23:00:00+00:00",
+            "end": "2026-12-12T07:30:00+00:00",
+            "category": "sleep",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user"
+            ],
+            "description": "Protected sleep block; the user requires at least seven hours of sleep per night.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "breakfast_sat",
+            "title": "Family breakfast",
+            "start": "2026-12-12T07:30:00+00:00",
+            "end": "2026-12-12T09:00:00+00:00",
+            "category": "family",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user",
+              "partner",
+              "marta",
+              "duarte"
+            ],
+            "description": "Relaxed Saturday breakfast.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "swim_duarte_sat",
+            "title": "Duarte's baby swimming class",
+            "start": "2026-12-12T09:30:00+00:00",
+            "end": "2026-12-12T10:15:00+00:00",
+            "category": "kids_activity",
+            "importance": 2,
+            "fixed": false,
+            "participants": [
+              "user",
+              "duarte"
+            ],
+            "description": "Weekly 45-minute class at the pool, a 10-minute walk from home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "snacks_sat",
+            "title": "Buy party snacks and drinks",
+            "start": "2026-12-12T10:30:00+00:00",
+            "end": "2026-12-12T11:15:00+00:00",
+            "category": "household",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user"
+            ],
+            "description": "Last supermarket shop for the party; the supermarket is 10 minutes from home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "lunch_sat",
+            "title": "Lunch",
+            "start": "2026-12-12T12:30:00+00:00",
+            "end": "2026-12-12T13:30:00+00:00",
+            "category": "meal",
+            "importance": 3,
+            "fixed": false,
+            "participants": [
+              "user",
+              "partner",
+              "marta",
+              "duarte"
+            ],
+            "description": "Family lunch at home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "travel_to_venue_sat",
+            "title": "Travel to party venue",
+            "start": "2026-12-12T13:50:00+00:00",
+            "end": "2026-12-12T14:15:00+00:00",
+            "category": "commute",
+            "importance": 5,
+            "fixed": false,
+            "participants": [
+              "user",
+              "partner",
+              "marta",
+              "duarte"
+            ],
+            "description": "25-minute car journey carrying the cake, decorations and party bags.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "venue_setup_sat",
+            "title": "Set up at party venue",
+            "start": "2026-12-12T14:15:00+00:00",
+            "end": "2026-12-12T15:00:00+00:00",
+            "category": "social",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "partner"
+            ],
+            "description": "The venue allows access from 14:15; the decorations must be in place before the guests arrive at 15:00.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "party_sat",
+            "title": "Marta's 7th birthday party",
+            "start": "2026-12-12T15:00:00+00:00",
+            "end": "2026-12-12T17:00:00+00:00",
+            "category": "social",
+            "importance": 5,
+            "fixed": true,
+            "participants": [
+              "user",
+              "partner",
+              "marta",
+              "duarte",
+              "guests"
+            ],
+            "description": "Birthday party with 14 children and their parents at a children's play venue; the room is booked and paid.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "travel_home_sat",
+            "title": "Travel home from party",
+            "start": "2026-12-12T17:00:00+00:00",
+            "end": "2026-12-12T17:25:00+00:00",
+            "category": "commute",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "partner",
+              "marta",
+              "duarte"
+            ],
+            "description": "25-minute car journey home.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "dinner_sat",
+            "title": "Family dinner",
+            "start": "2026-12-12T19:30:00+00:00",
+            "end": "2026-12-12T20:30:00+00:00",
+            "category": "family",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "One-hour dinner at home with the children.",
+            "origin": "existing",
+            "change_status": "preserved"
+          },
+          {
+            "id": "bedtime_sat",
+            "title": "Children's bedtime routine",
+            "start": "2026-12-12T20:30:00+00:00",
+            "end": "2026-12-12T21:15:00+00:00",
+            "category": "family",
+            "importance": 4,
+            "fixed": false,
+            "participants": [
+              "user",
+              "marta",
+              "duarte"
+            ],
+            "description": "Bath, story and bedtime for both children; about 45 minutes.",
+            "origin": "existing",
+            "change_status": "preserved"
+          }
+        ],
+        "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+      },
+      "critic_evaluation": {
+        "scores": {
+          "reasoning": 3,
+          "coherence": 2,
+          "alternatives": 3,
+          "clarity": 3
+        },
+        "weaknesses": [
+          "Thursday has a concrete location/practicality inconsistency: the tow-truck key handover is scheduled at home from 12:20 to 14:00, while lunch remains scheduled from 13:00 to 13:45 with the description 'Lunch at the office canteen'. This is not just a comfort issue; it directly affects whether the user can stay available for the handover window.",
+          "Several proposed movements create overlaps inside family morning routines: on Thursday the insurer call from 07:20 to 07:30 and travel to school from 07:35 to 08:15 occur during the 06:45 to 07:45 morning routine with both children; on Friday travel to school from 07:35 to 08:15 also overlaps the 06:45 to 07:45 morning routine. These may be workable if the routine can compress or travel is part of it, but the rationale does not explain that practical adjustment.",
+          "The Friday garage status update from 09:00 to 09:10 overlaps the commute to work from 08:30 to 09:15. A short call or message during travel may be possible, but the plan relies on that without saying whether the user can safely or realistically receive it during the commute.",
+          "The proposal deletes Friday dentist travel and the dentist appointment, but the calendar still preserves 'Early pick-up of Marta' from 16:00 to 16:15 specifically for the dentist appointment, followed by a 16:15 to 17:30 wait at school/daycare. If the dentist is cancelled, the human purpose of the early pickup and long wait is unclear and may create avoidable strain for the user and Marta.",
+          "The rationale says known bus times only cover certain journeys and repeatedly treats car access as uncertain, yet the resulting Friday evening cake plan preserves car-based travel to the bakery from 17:45 to 18:30. Because the cake is important and the bakery will not hold it overnight, this dependency is material.",
+          "The Thursday afternoon sequence is tight and somewhat under-explained: tow handover at home until 14:00, supplier call at 14:15, work blocks until 16:50, then immediate commute and childcare pickup. This may be manageable, but the rationale does not address transition, setup, or whether work is from home or the office after the tow window.",
+          "The plan relies on many same-day confirmations: insurer, possible Dona Rosa handover, garage, bakery, clinic, and partner transport. The rationale is transparent about this, but the resulting calendar still contains high-priority Saturday and Friday obligations whose feasibility depends on those confirmations."
+        ],
+        "feedback": "The proposal shows sensible priority awareness: school runs, fixed work, report deadline, sleep, and Saturday birthday logistics are treated as important, and it avoids assuming unavailable transport where the rationale notices gaps. However, the resulting calendar is not yet fully coherent as a lived schedule. The most important issue is not general busyness but specific practical contradictions: lunch is still described as taking place at the office during a home tow-truck handover window, the Friday early pickup remains tied to a dentist appointment that the proposal deletes, and several transport-dependent events still appear to assume car use while the broader plan is built around the car being unavailable or uncertain. The Proposer should reconsider whether these preserved events and descriptions reflect the intended real-world plan, and should either adjust the organization or give a grounded explanation from fuller context for how the user can remain available, travel, supervise the children, and complete the cake and party logistics without relying on unsupported assumptions.",
+        "plausibility_review": {
+          "revision_required": true,
+          "severity": "moderate",
+          "reason": "Revision is required because the proposed organization contains concrete practical inconsistencies that could significantly affect manageability and goal success: the Thursday lunch location conflicts with the home tow-truck handover window, Friday early pickup remains scheduled for a dentist appointment that has been deleted, and important Friday/Saturday logistics still depend on unresolved transport conditions. These are not merely preferences; they affect whether the user can be in the right place, supervise children appropriately, and secure the birthday cake and party transport.",
+          "suggested_improvement": "Recheck the resulting calendar as a lived sequence, especially Thursday 12:20-14:00, Friday 16:00-18:30, and the Friday night/Saturday party transport dependency. Clarify whether conflicting event descriptions are stale metadata or intended actions, and reconsider whether any preserved or deleted events create avoidable waiting, location conflicts, or unsupported reliance on car access."
+        },
+        "unresolved_assumptions": [
+          {
+            "subject": "Thursday lunch during tow-truck window",
+            "assumption": "The user can have lunch while remaining available at home for the tow-truck handover from 12:20 to 14:00.",
+            "evidence_gap": "The calendar places lunch from 13:00 to 13:45 inside the handover window, but the lunch description says it is at the office canteen.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Morning routine compression",
+            "assumption": "The Thursday and Friday morning routines can be shortened, overlapped with calls, or treated as including departure preparation without undermining childcare readiness.",
+            "evidence_gap": "The 06:45-07:45 morning routines overlap with the Thursday insurer call, Thursday school travel, and Friday school travel, but the rationale does not explain the practical handling of those overlaps.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Garage update during commute",
+            "assumption": "The user can safely and reliably receive the garage status update from 09:00 to 09:10 while commuting from 08:30 to 09:15 on Friday.",
+            "evidence_gap": "The update overlaps the commute, and the proposal does not specify whether it is a passive message, hands-free call, or requires action.",
+            "potential_impact": "material",
+            "verification_source": "third_party"
+          },
+          {
+            "subject": "Dentist cancellation and early pickup",
+            "assumption": "Keeping Marta's early pickup at 16:00 remains necessary or acceptable even after deleting the dentist appointment and related travel.",
+            "evidence_gap": "The early pickup description still says Marta leaves early for her dentist appointment, but the proposal deletes the dentist appointment and adds a long wait instead.",
+            "potential_impact": "material",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Friday bakery travel",
+            "assumption": "The user can still travel to the bakery and home by car on Friday evening despite the car/tow/garage uncertainty visible in the plan.",
+            "evidence_gap": "The bakery trip is preserved as 15-minute car journeys, while the rationale says bakery bus access is not supplied and Saturday transport depends on the garage or backup plan.",
+            "potential_impact": "potentially_blocking",
+            "verification_source": "external_source"
+          },
+          {
+            "subject": "Cake backup",
+            "assumption": "The bakery can support collection or delivery backup if normal collection is not feasible.",
+            "evidence_gap": "The plan adds a 13:15 confirmation call but provides no result, and the cake is described as not being held overnight.",
+            "potential_impact": "potentially_blocking",
+            "verification_source": "third_party"
+          },
+          {
+            "subject": "Saturday party transport",
+            "assumption": "A car or acceptable backup transport will be available to carry the cake, decorations, party bags, and family to the venue on Saturday.",
+            "evidence_gap": "Saturday travel is preserved as a 25-minute car journey carrying party materials, while the rationale says the party travel depends on the Friday garage update or a confirmed backup plan.",
+            "potential_impact": "potentially_blocking",
+            "verification_source": "user_context"
+          },
+          {
+            "subject": "Tow-truck handover authorization",
+            "assumption": "The insurer will narrow the tow-truck arrival time or approve a backup handover arrangement if the user cannot cover the full 12:00-14:00 window.",
+            "evidence_gap": "The plan starts the user's home availability at 12:20 and notes insurer/Dona Rosa confirmation is needed, but no confirmation is present in the resulting calendar.",
+            "potential_impact": "material",
+            "verification_source": "third_party"
+          }
+        ],
+        "overall": 2.75
+      },
+      "acceptance_policy": {
+        "numeric_criteria_passed": false,
+        "plausibility_revision_required": true,
+        "accepted": false,
+        "revision_causes": [
+          "numeric_criteria_failed",
+          "plausibility_revision_required"
+        ]
+      },
+      "operations_changed_from_previous": null,
+      "rationale_changed_from_previous": null,
+      "prior_critic_reviews": [],
+      "unresolved_assumptions": [
+        {
+          "subject": "Thursday lunch during tow-truck window",
+          "assumption": "The user can have lunch while remaining available at home for the tow-truck handover from 12:20 to 14:00.",
+          "evidence_gap": "The calendar places lunch from 13:00 to 13:45 inside the handover window, but the lunch description says it is at the office canteen.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Morning routine compression",
+          "assumption": "The Thursday and Friday morning routines can be shortened, overlapped with calls, or treated as including departure preparation without undermining childcare readiness.",
+          "evidence_gap": "The 06:45-07:45 morning routines overlap with the Thursday insurer call, Thursday school travel, and Friday school travel, but the rationale does not explain the practical handling of those overlaps.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Garage update during commute",
+          "assumption": "The user can safely and reliably receive the garage status update from 09:00 to 09:10 while commuting from 08:30 to 09:15 on Friday.",
+          "evidence_gap": "The update overlaps the commute, and the proposal does not specify whether it is a passive message, hands-free call, or requires action.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Dentist cancellation and early pickup",
+          "assumption": "Keeping Marta's early pickup at 16:00 remains necessary or acceptable even after deleting the dentist appointment and related travel.",
+          "evidence_gap": "The early pickup description still says Marta leaves early for her dentist appointment, but the proposal deletes the dentist appointment and adds a long wait instead.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Friday bakery travel",
+          "assumption": "The user can still travel to the bakery and home by car on Friday evening despite the car/tow/garage uncertainty visible in the plan.",
+          "evidence_gap": "The bakery trip is preserved as 15-minute car journeys, while the rationale says bakery bus access is not supplied and Saturday transport depends on the garage or backup plan.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "external_source"
+        },
+        {
+          "subject": "Cake backup",
+          "assumption": "The bakery can support collection or delivery backup if normal collection is not feasible.",
+          "evidence_gap": "The plan adds a 13:15 confirmation call but provides no result, and the cake is described as not being held overnight.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Saturday party transport",
+          "assumption": "A car or acceptable backup transport will be available to carry the cake, decorations, party bags, and family to the venue on Saturday.",
+          "evidence_gap": "Saturday travel is preserved as a 25-minute car journey carrying party materials, while the rationale says the party travel depends on the Friday garage update or a confirmed backup plan.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Tow-truck handover authorization",
+          "assumption": "The insurer will narrow the tow-truck arrival time or approve a backup handover arrangement if the user cannot cover the full 12:00-14:00 window.",
+          "evidence_gap": "The plan starts the user's home availability at 12:20 and notes insurer/Dona Rosa confirmation is needed, but no confirmation is present in the resulting calendar.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "proposer_feedback": "Numeric Critic criteria failed. Scores: {\"reasoning\":3,\"coherence\":2,\"alternatives\":3,\"clarity\":3}. Plausibility revision required (moderate): Revision is required because the proposed organization contains concrete practical inconsistencies that could significantly affect manageability and goal success: the Thursday lunch location conflicts with the home tow-truck handover window, Friday early pickup remains scheduled for a dentist appointment that has been deleted, and important Friday/Saturday logistics still depend on unresolved transport conditions. These are not merely preferences; they affect whether the user can be in the right place, supervise children appropriately, and secure the birthday cake and party transport. Suggested direction: Recheck the resulting calendar as a lived sequence, especially Thursday 12:20-14:00, Friday 16:00-18:30, and the Friday night/Saturday party transport dependency. Clarify whether conflicting event descriptions are stale metadata or intended actions, and reconsider whether any preserved or deleted events create avoidable waiting, location conflicts, or unsupported reliance on car access. The Critic lacks the full user constraints; explain if no better feasible option exists. Unverified conditions to reassess: [{'subject': 'Thursday lunch during tow-truck window', 'assumption': 'The user can have lunch while remaining available at home for the tow-truck handover from 12:20 to 14:00.', 'evidence_gap': 'The calendar places lunch from 13:00 to 13:45 inside the handover window, but the lunch description says it is at the office canteen.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Morning routine compression', 'assumption': 'The Thursday and Friday morning routines can be shortened, overlapped with calls, or treated as including departure preparation without undermining childcare readiness.', 'evidence_gap': 'The 06:45-07:45 morning routines overlap with the Thursday insurer call, Thursday school travel, and Friday school travel, but the rationale does not explain the practical handling of those overlaps.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Garage update during commute', 'assumption': 'The user can safely and reliably receive the garage status update from 09:00 to 09:10 while commuting from 08:30 to 09:15 on Friday.', 'evidence_gap': 'The update overlaps the commute, and the proposal does not specify whether it is a passive message, hands-free call, or requires action.', 'potential_impact': 'material', 'verification_source': 'third_party'}, {'subject': 'Dentist cancellation and early pickup', 'assumption': \"Keeping Marta's early pickup at 16:00 remains necessary or acceptable even after deleting the dentist appointment and related travel.\", 'evidence_gap': 'The early pickup description still says Marta leaves early for her dentist appointment, but the proposal deletes the dentist appointment and adds a long wait instead.', 'potential_impact': 'material', 'verification_source': 'user_context'}, {'subject': 'Friday bakery travel', 'assumption': 'The user can still travel to the bakery and home by car on Friday evening despite the car/tow/garage uncertainty visible in the plan.', 'evidence_gap': 'The bakery trip is preserved as 15-minute car journeys, while the rationale says bakery bus access is not supplied and Saturday transport depends on the garage or backup plan.', 'potential_impact': 'potentially_blocking', 'verification_source': 'external_source'}, {'subject': 'Cake backup', 'assumption': 'The bakery can support collection or delivery backup if normal collection is not feasible.', 'evidence_gap': 'The plan adds a 13:15 confirmation call but provides no result, and the cake is described as not being held overnight.', 'potential_impact': 'potentially_blocking', 'verification_source': 'third_party'}, {'subject': 'Saturday party transport', 'assumption': 'A car or acceptable backup transport will be available to carry the cake, decorations, party bags, and family to the venue on Saturday.', 'evidence_gap': 'Saturday travel is preserved as a 25-minute car journey carrying party materials, while the rationale says the party travel depends on the Friday garage update or a confirmed backup plan.', 'potential_impact': 'potentially_blocking', 'verification_source': 'user_context'}, {'subject': 'Tow-truck handover authorization', 'assumption': 'The insurer will narrow the tow-truck arrival time or approve a backup handover arrangement if the user cannot cover the full 12:00-14:00 window.', 'evidence_gap': \"The plan starts the user's home availability at 12:20 and notes insurer/Dona Rosa confirmation is needed, but no confirmation is present in the resulting calendar.\", 'potential_impact': 'material', 'verification_source': 'third_party'}] Weaknesses: [\"Thursday has a concrete location/practicality inconsistency: the tow-truck key handover is scheduled at home from 12:20 to 14:00, while lunch remains scheduled from 13:00 to 13:45 with the description 'Lunch at the office canteen'. This is not just a comfort issue; it directly affects whether the user can stay available for the handover window.\", 'Several proposed movements create overlaps inside family morning routines: on Thursday the insurer call from 07:20 to 07:30 and travel to school from 07:35 to 08:15 occur during the 06:45 to 07:45 morning routine with both children; on Friday travel to school from 07:35 to 08:15 also overlaps the 06:45 to 07:45 morning routine. These may be workable if the routine can compress or travel is part of it, but the rationale does not explain that practical adjustment.', 'The Friday garage status update from 09:00 to 09:10 overlaps the commute to work from 08:30 to 09:15. A short call or message during travel may be possible, but the plan relies on that without saying whether the user can safely or realistically receive it during the commute.', \"The proposal deletes Friday dentist travel and the dentist appointment, but the calendar still preserves 'Early pick-up of Marta' from 16:00 to 16:15 specifically for the dentist appointment, followed by a 16:15 to 17:30 wait at school/daycare. If the dentist is cancelled, the human purpose of the early pickup and long wait is unclear and may create avoidable strain for the user and Marta.\", 'The rationale says known bus times only cover certain journeys and repeatedly treats car access as uncertain, yet the resulting Friday evening cake plan preserves car-based travel to the bakery from 17:45 to 18:30. Because the cake is important and the bakery will not hold it overnight, this dependency is material.', 'The Thursday afternoon sequence is tight and somewhat under-explained: tow handover at home until 14:00, supplier call at 14:15, work blocks until 16:50, then immediate commute and childcare pickup. This may be manageable, but the rationale does not address transition, setup, or whether work is from home or the office after the tow window.', 'The plan relies on many same-day confirmations: insurer, possible Dona Rosa handover, garage, bakery, clinic, and partner transport. The rationale is transparent about this, but the resulting calendar still contains high-priority Saturday and Friday obligations whose feasibility depends on those confirmations.']. Actionable feedback: The proposal shows sensible priority awareness: school runs, fixed work, report deadline, sleep, and Saturday birthday logistics are treated as important, and it avoids assuming unavailable transport where the rationale notices gaps. However, the resulting calendar is not yet fully coherent as a lived schedule. The most important issue is not general busyness but specific practical contradictions: lunch is still described as taking place at the office during a home tow-truck handover window, the Friday early pickup remains tied to a dentist appointment that the proposal deletes, and several transport-dependent events still appear to assume car use while the broader plan is built around the car being unavailable or uncertain. The Proposer should reconsider whether these preserved events and descriptions reflect the intended real-world plan, and should either adjust the organization or give a grounded explanation from fuller context for how the user can remain available, travel, supervise the children, and complete the cake and party logistics without relying on unsupported assumptions.",
+      "proposer_source": "generated",
+      "proposal": null,
+      "validation": null,
+      "result_calendar": null,
+      "critic_evaluation": null,
+      "acceptance_policy": null,
+      "operations_changed_from_previous": null,
+      "rationale_changed_from_previous": null,
+      "prior_critic_reviews": [
+        {
+          "iteration": 0,
+          "proposal": {
+            "changes": [
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Call insurer to narrow tow-truck arrival or approve backup handover",
+                "from_start": null,
+                "to_start": "2026-12-10T07:20:00+00:00",
+                "to_end": "2026-12-10T07:30:00+00:00",
+                "category": "household",
+                "importance": 5,
+                "participants": [
+                  "user",
+                  "insurer"
+                ]
+              },
+              {
+                "type": "move",
+                "event_id": "travel_to_school_thu",
+                "title": null,
+                "from_start": null,
+                "to_start": "2026-12-10T07:35:00+00:00",
+                "to_end": "2026-12-10T08:15:00+00:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "move",
+                "event_id": "commute_to_work_thu",
+                "title": null,
+                "from_start": null,
+                "to_start": "2026-12-10T08:30:00+00:00",
+                "to_end": "2026-12-10T09:15:00+00:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "move",
+                "event_id": "prep_budget_thu",
+                "title": null,
+                "from_start": null,
+                "to_start": "2026-12-10T09:15:00+00:00",
+                "to_end": "2026-12-10T10:00:00+00:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Bus from office to home for tow truck",
+                "from_start": null,
+                "to_start": "2026-12-10T11:30:00+00:00",
+                "to_end": "2026-12-10T12:20:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "participants": [
+                  "user"
+                ]
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Tow-truck key handover window at home",
+                "from_start": null,
+                "to_start": "2026-12-10T12:20:00+00:00",
+                "to_end": "2026-12-10T14:00:00+00:00",
+                "category": "household",
+                "importance": 5,
+                "participants": [
+                  "user",
+                  "tow truck"
+                ]
+              },
+              {
+                "type": "move",
+                "event_id": "lunch_thu",
+                "title": null,
+                "from_start": null,
+                "to_start": "2026-12-10T13:00:00+00:00",
+                "to_end": "2026-12-10T13:45:00+00:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "move",
+                "event_id": "focus_thu",
+                "title": null,
+                "from_start": null,
+                "to_start": "2026-12-10T14:45:00+00:00",
+                "to_end": "2026-12-10T16:00:00+00:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "move",
+                "event_id": "followup_thu",
+                "title": null,
+                "from_start": null,
+                "to_start": "2026-12-10T16:00:00+00:00",
+                "to_end": "2026-12-10T16:50:00+00:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "move",
+                "event_id": "commute_to_school_thu",
+                "title": null,
+                "from_start": null,
+                "to_start": "2026-12-10T16:50:00+00:00",
+                "to_end": "2026-12-10T17:30:00+00:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "delete",
+                "event_id": "travel_to_club_thu",
+                "title": null,
+                "from_start": null,
+                "to_start": null,
+                "to_end": null,
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "delete",
+                "event_id": "football_thu",
+                "title": null,
+                "from_start": null,
+                "to_start": null,
+                "to_end": null,
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "delete",
+                "event_id": "travel_home_thu",
+                "title": null,
+                "from_start": null,
+                "to_start": null,
+                "to_end": null,
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Bus from school and daycare to home",
+                "from_start": null,
+                "to_start": "2026-12-10T17:45:00+00:00",
+                "to_end": "2026-12-10T18:25:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ]
+              },
+              {
+                "type": "move",
+                "event_id": "travel_to_school_fri",
+                "title": null,
+                "from_start": null,
+                "to_start": "2026-12-11T07:35:00+00:00",
+                "to_end": "2026-12-11T08:15:00+00:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "move",
+                "event_id": "commute_to_work_fri",
+                "title": null,
+                "from_start": null,
+                "to_start": "2026-12-11T08:30:00+00:00",
+                "to_end": "2026-12-11T09:15:00+00:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Receive garage status update",
+                "from_start": null,
+                "to_start": "2026-12-11T09:00:00+00:00",
+                "to_end": "2026-12-11T09:10:00+00:00",
+                "category": "household",
+                "importance": 5,
+                "participants": [
+                  "user",
+                  "garage"
+                ]
+              },
+              {
+                "type": "move",
+                "event_id": "report_fri",
+                "title": null,
+                "from_start": null,
+                "to_start": "2026-12-11T09:15:00+00:00",
+                "to_end": "2026-12-11T12:00:00+00:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Confirm cake collection or delivery backup",
+                "from_start": null,
+                "to_start": "2026-12-11T13:15:00+00:00",
+                "to_end": "2026-12-11T13:30:00+00:00",
+                "category": "household",
+                "importance": 5,
+                "participants": [
+                  "user",
+                  "bakery"
+                ]
+              },
+              {
+                "type": "move",
+                "event_id": "focus_fri",
+                "title": null,
+                "from_start": null,
+                "to_start": "2026-12-11T13:30:00+00:00",
+                "to_end": "2026-12-11T15:15:00+00:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "move",
+                "event_id": "commute_to_school_fri",
+                "title": null,
+                "from_start": null,
+                "to_start": "2026-12-11T15:15:00+00:00",
+                "to_end": "2026-12-11T16:00:00+00:00",
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "delete",
+                "event_id": "travel_to_clinic_fri",
+                "title": null,
+                "from_start": null,
+                "to_start": null,
+                "to_end": null,
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "delete",
+                "event_id": "dentist_fri",
+                "title": null,
+                "from_start": null,
+                "to_start": null,
+                "to_end": null,
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "delete",
+                "event_id": "travel_to_daycare_fri",
+                "title": null,
+                "from_start": null,
+                "to_start": null,
+                "to_end": null,
+                "category": null,
+                "importance": null,
+                "participants": null
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Wait at school and daycare with Marta until Duarte pickup",
+                "from_start": null,
+                "to_start": "2026-12-11T16:15:00+00:00",
+                "to_end": "2026-12-11T17:30:00+00:00",
+                "category": "family",
+                "importance": 4,
+                "participants": [
+                  "user",
+                  "marta"
+                ]
+              },
+              {
+                "type": "add",
+                "event_id": null,
+                "title": "Confirm Saturday party transport plan",
+                "from_start": null,
+                "to_start": "2026-12-11T22:30:00+00:00",
+                "to_end": "2026-12-11T22:45:00+00:00",
+                "category": "household",
+                "importance": 5,
+                "participants": [
+                  "user",
+                  "partner"
+                ]
+              }
+            ],
+            "rationale": {
+              "constraints": [
+                "Childcare, fixed work commitments and protected sleep blocks are not moved.",
+                "Known bus times only cover home-school, school-office and office-home journeys.",
+                "The budget review prevents being home exactly at 12:00 for the tow-truck window.",
+                "The tow plan needs insurer confirmation because the user reaches home at 12:20, not 12:00.",
+                "Dona Rosa can only be a backup from 13:00 if she agrees and the insurer accepts her handover.",
+                "Football is skipped because the club is not reachable by bus in a reasonable time.",
+                "The dentist deletion needs clinic confirmation because it involves a health appointment and the next slot may be much later.",
+                "Cake collection or delivery needs confirmation because no bus time to the bakery is supplied.",
+                "Saturday party travel depends on the Friday 09:00 garage update or a confirmed backup transport plan."
+              ],
+              "priorities": [
+                "School drop-offs, pick-ups, the budget review and the report deadline are protected first.",
+                "Sleep remains above the seven-hour hard minimum on each night.",
+                "Flexible individual work is compressed or shifted before lower-priority activities.",
+                "Marta's birthday party, cake and venue setup are treated as the main Saturday priority.",
+                "The plan avoids relying on the partner before the Friday 22:00 return."
+              ],
+              "alternatives_considered": [
+                {
+                  "option": "Keep Marta's football practice on Thursday",
+                  "rejected_because": "Rejected because the request says the club is not reasonably reachable by bus."
+                },
+                {
+                  "option": "Have the user wait at home for the full 12:00-14:00 tow window",
+                  "rejected_because": "Rejected because the protected budget review ends at 11:30 and the office-home bus takes 50 minutes."
+                },
+                {
+                  "option": "Move or shorten the budget review",
+                  "rejected_because": "Rejected because it is a protected in-person work commitment with the director travelling for it."
+                },
+                {
+                  "option": "Keep the dentist appointment unchanged",
+                  "rejected_because": "Rejected unless transport is confirmed, because only a 15-minute car journey is supplied."
+                },
+                {
+                  "option": "Assume the bakery or party venue is reachable by bus",
+                  "rejected_because": "Rejected because the request does not supply those bus times or availability."
+                }
+              ],
+              "summary": "Use buses for school and office, work from home around the tow-truck window, skip Thursday football, compress flexible work, and cancel the dentist unless confirmed transport exists; the main trade-off is that the tow, cake and Saturday party logistics remain dependent on confirmations from the insurer, Dona Rosa, the bakery, the garage and the partner."
+            }
+          },
+          "result_calendar": {
+            "timezone": "Europe/Lisbon",
+            "coverage": "all_events_in_scenario_after_simulation",
+            "events": [
+              {
+                "id": "sleep_thu",
+                "title": "Sleep",
+                "start": "2026-12-09T23:00:00+00:00",
+                "end": "2026-12-10T06:30:00+00:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block; the user requires at least seven hours of sleep per night.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "morning_thu",
+                "title": "Morning routine with the children",
+                "start": "2026-12-10T06:45:00+00:00",
+                "end": "2026-12-10T07:45:00+00:00",
+                "category": "family",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "Breakfast, dressing and packing school bags for both children.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_0",
+                "title": "Call insurer to narrow tow-truck arrival or approve backup handover",
+                "start": "2026-12-10T07:20:00+00:00",
+                "end": "2026-12-10T07:30:00+00:00",
+                "category": "household",
+                "importance": 5,
+                "fixed": null,
+                "participants": [
+                  "user",
+                  "insurer"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "travel_to_school_thu",
+                "title": "Travel to school and daycare",
+                "start": "2026-12-10T07:35:00+00:00",
+                "end": "2026-12-10T08:15:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "15-minute car journey from home to the school and daycare, which share the same site.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "dropoff_thu",
+                "title": "Drop-off at school and daycare",
+                "start": "2026-12-10T08:15:00+00:00",
+                "end": "2026-12-10T08:30:00+00:00",
+                "category": "childcare",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "Drop-off for Marta (primary school, gates close at 08:30) and Duarte (daycare, arrival until 09:00). The partner is on a work trip in Porto until Friday 22:00, so the user handles all school runs, pick-ups and bedtimes.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "commute_to_work_thu",
+                "title": "Commute to office",
+                "start": "2026-12-10T08:30:00+00:00",
+                "end": "2026-12-10T09:15:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute car journey from the school to the office.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "prep_budget_thu",
+                "title": "Prepare budget review documents",
+                "start": "2026-12-10T09:15:00+00:00",
+                "end": "2026-12-10T10:00:00+00:00",
+                "category": "work_focus",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Print and organise the audit folders for the review.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "budget_review_thu",
+                "title": "Quarterly budget review with director",
+                "start": "2026-12-10T10:00:00+00:00",
+                "end": "2026-12-10T11:30:00+00:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "director",
+                  "finance_team"
+                ],
+                "description": "In-person review at the office; the physical audit folders must be on the table and the director travels only for this meeting.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_4",
+                "title": "Bus from office to home for tow truck",
+                "start": "2026-12-10T11:30:00+00:00",
+                "end": "2026-12-10T12:20:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": null,
+                "participants": [
+                  "user"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "new_5",
+                "title": "Tow-truck key handover window at home",
+                "start": "2026-12-10T12:20:00+00:00",
+                "end": "2026-12-10T14:00:00+00:00",
+                "category": "household",
+                "importance": 5,
+                "fixed": null,
+                "participants": [
+                  "user",
+                  "tow truck"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "lunch_thu",
+                "title": "Lunch",
+                "start": "2026-12-10T13:00:00+00:00",
+                "end": "2026-12-10T13:45:00+00:00",
+                "category": "meal",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Lunch at the office canteen.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "supplier_call_thu",
+                "title": "Call with supplier",
+                "start": "2026-12-10T14:15:00+00:00",
+                "end": "2026-12-10T14:45:00+00:00",
+                "category": "work",
+                "importance": 3,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "supplier"
+                ],
+                "description": "Video call with the supplier in Germany; can be taken from anywhere with a stable connection.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "focus_thu",
+                "title": "Project work",
+                "start": "2026-12-10T14:45:00+00:00",
+                "end": "2026-12-10T16:00:00+00:00",
+                "category": "work_focus",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Flexible individual work that can be moved within the working day.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "followup_thu",
+                "title": "Follow-up on action points",
+                "start": "2026-12-10T16:00:00+00:00",
+                "end": "2026-12-10T16:50:00+00:00",
+                "category": "work_focus",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Flexible individual work that can be moved within the working day.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "commute_to_school_thu",
+                "title": "Commute to school",
+                "start": "2026-12-10T16:50:00+00:00",
+                "end": "2026-12-10T17:30:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute journey from the office to the school and daycare.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "pickup_thu",
+                "title": "Pick up children",
+                "start": "2026-12-10T17:30:00+00:00",
+                "end": "2026-12-10T17:45:00+00:00",
+                "category": "childcare",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "Pick-up from the after-school programme and daycare, which close at 18:30.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_13",
+                "title": "Bus from school and daycare to home",
+                "start": "2026-12-10T17:45:00+00:00",
+                "end": "2026-12-10T18:25:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": null,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "dinner_thu",
+                "title": "Family dinner",
+                "start": "2026-12-10T19:30:00+00:00",
+                "end": "2026-12-10T20:30:00+00:00",
+                "category": "family",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "One-hour dinner at home with the children.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "bedtime_thu",
+                "title": "Children's bedtime routine",
+                "start": "2026-12-10T20:30:00+00:00",
+                "end": "2026-12-10T21:15:00+00:00",
+                "category": "family",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "Bath, story and bedtime for both children; about 45 minutes.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "sleep_fri",
+                "title": "Sleep",
+                "start": "2026-12-10T23:00:00+00:00",
+                "end": "2026-12-11T06:30:00+00:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block; the user requires at least seven hours of sleep per night.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "morning_fri",
+                "title": "Morning routine with the children",
+                "start": "2026-12-11T06:45:00+00:00",
+                "end": "2026-12-11T07:45:00+00:00",
+                "category": "family",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "Breakfast, dressing and packing school bags for both children.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "travel_to_school_fri",
+                "title": "Travel to school and daycare",
+                "start": "2026-12-11T07:35:00+00:00",
+                "end": "2026-12-11T08:15:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "15-minute car journey from home to the school and daycare, which share the same site.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "dropoff_fri",
+                "title": "Drop-off at school and daycare",
+                "start": "2026-12-11T08:15:00+00:00",
+                "end": "2026-12-11T08:30:00+00:00",
+                "category": "childcare",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "Drop-off for Marta (primary school, gates close at 08:30) and Duarte (daycare, arrival until 09:00). The partner is on a work trip in Porto until Friday 22:00, so the user handles all school runs, pick-ups and bedtimes.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "commute_to_work_fri",
+                "title": "Commute to office",
+                "start": "2026-12-11T08:30:00+00:00",
+                "end": "2026-12-11T09:15:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute car journey from the school to the office.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "new_16",
+                "title": "Receive garage status update",
+                "start": "2026-12-11T09:00:00+00:00",
+                "end": "2026-12-11T09:10:00+00:00",
+                "category": "household",
+                "importance": 5,
+                "fixed": null,
+                "participants": [
+                  "user",
+                  "garage"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "report_fri",
+                "title": "Write quarterly sales report",
+                "start": "2026-12-11T09:15:00+00:00",
+                "end": "2026-12-11T12:00:00+00:00",
+                "category": "work_focus",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Report prepared from the budget review feedback.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "deadline_fri",
+                "title": "Submit quarterly report to director",
+                "start": "2026-12-11T12:00:00+00:00",
+                "end": "2026-12-11T12:15:00+00:00",
+                "category": "work",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "director"
+                ],
+                "description": "The report must be sent to the director by 12:15; no extension is possible.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "farewell_lunch_fri",
+                "title": "Farewell lunch for a colleague",
+                "start": "2026-12-11T12:15:00+00:00",
+                "end": "2026-12-11T13:15:00+00:00",
+                "category": "social",
+                "importance": 2,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "colleagues"
+                ],
+                "description": "Team lunch at a restaurant near the office to say goodbye to a colleague.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_18",
+                "title": "Confirm cake collection or delivery backup",
+                "start": "2026-12-11T13:15:00+00:00",
+                "end": "2026-12-11T13:30:00+00:00",
+                "category": "household",
+                "importance": 5,
+                "fixed": null,
+                "participants": [
+                  "user",
+                  "bakery"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "focus_fri",
+                "title": "Project work",
+                "start": "2026-12-11T13:30:00+00:00",
+                "end": "2026-12-11T15:15:00+00:00",
+                "category": "work_focus",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Flexible individual work that can be moved within the working day.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "commute_to_school_fri",
+                "title": "Commute to school",
+                "start": "2026-12-11T15:15:00+00:00",
+                "end": "2026-12-11T16:00:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "30-minute car journey from the office to the school.",
+                "origin": "existing",
+                "change_status": "moved"
+              },
+              {
+                "id": "early_pickup_fri",
+                "title": "Early pick-up of Marta",
+                "start": "2026-12-11T16:00:00+00:00",
+                "end": "2026-12-11T16:15:00+00:00",
+                "category": "childcare",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "marta"
+                ],
+                "description": "Marta leaves the after-school programme early for her dentist appointment; the school allows early pick-up from 16:00.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_24",
+                "title": "Wait at school and daycare with Marta until Duarte pickup",
+                "start": "2026-12-11T16:15:00+00:00",
+                "end": "2026-12-11T17:30:00+00:00",
+                "category": "family",
+                "importance": 4,
+                "fixed": null,
+                "participants": [
+                  "user",
+                  "marta"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "pickup_duarte_fri",
+                "title": "Pick up Duarte",
+                "start": "2026-12-11T17:30:00+00:00",
+                "end": "2026-12-11T17:45:00+00:00",
+                "category": "childcare",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "Duarte's daycare closes at 18:30.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "travel_to_bakery_fri",
+                "title": "Travel to bakery",
+                "start": "2026-12-11T17:45:00+00:00",
+                "end": "2026-12-11T18:00:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "15-minute car journey.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "cake_pickup_fri",
+                "title": "Collect Marta's birthday cake",
+                "start": "2026-12-11T18:00:00+00:00",
+                "end": "2026-12-11T18:15:00+00:00",
+                "category": "errand",
+                "importance": 4,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "bakery"
+                ],
+                "description": "Custom birthday cake ordered for Saturday's party; the bakery closes at 18:30 and will not hold it overnight.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "travel_home_fri",
+                "title": "Travel home",
+                "start": "2026-12-11T18:15:00+00:00",
+                "end": "2026-12-11T18:30:00+00:00",
+                "category": "commute",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "15-minute car journey home.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "dinner_fri",
+                "title": "Family dinner",
+                "start": "2026-12-11T19:30:00+00:00",
+                "end": "2026-12-11T20:30:00+00:00",
+                "category": "family",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "One-hour dinner at home with the children.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "bedtime_fri",
+                "title": "Children's bedtime routine",
+                "start": "2026-12-11T20:30:00+00:00",
+                "end": "2026-12-11T21:15:00+00:00",
+                "category": "family",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "Bath, story and bedtime for both children; about 45 minutes.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "party_prep_fri",
+                "title": "Prepare party bags and decorations",
+                "start": "2026-12-11T21:15:00+00:00",
+                "end": "2026-12-11T22:00:00+00:00",
+                "category": "household",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Fill 14 party bags and prepare decorations for Saturday.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "partner_return_fri",
+                "title": "Partner returns from Porto",
+                "start": "2026-12-11T22:00:00+00:00",
+                "end": "2026-12-11T22:30:00+00:00",
+                "category": "partner_work",
+                "importance": 2,
+                "fixed": true,
+                "participants": [
+                  "partner"
+                ],
+                "description": "The partner arrives home from the work trip.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "new_25",
+                "title": "Confirm Saturday party transport plan",
+                "start": "2026-12-11T22:30:00+00:00",
+                "end": "2026-12-11T22:45:00+00:00",
+                "category": "household",
+                "importance": 5,
+                "fixed": null,
+                "participants": [
+                  "user",
+                  "partner"
+                ],
+                "description": null,
+                "origin": "proposed_addition",
+                "change_status": "added"
+              },
+              {
+                "id": "sleep_sat",
+                "title": "Sleep",
+                "start": "2026-12-11T23:00:00+00:00",
+                "end": "2026-12-12T07:30:00+00:00",
+                "category": "sleep",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user"
+                ],
+                "description": "Protected sleep block; the user requires at least seven hours of sleep per night.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "breakfast_sat",
+                "title": "Family breakfast",
+                "start": "2026-12-12T07:30:00+00:00",
+                "end": "2026-12-12T09:00:00+00:00",
+                "category": "family",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "partner",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "Relaxed Saturday breakfast.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "swim_duarte_sat",
+                "title": "Duarte's baby swimming class",
+                "start": "2026-12-12T09:30:00+00:00",
+                "end": "2026-12-12T10:15:00+00:00",
+                "category": "kids_activity",
+                "importance": 2,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "duarte"
+                ],
+                "description": "Weekly 45-minute class at the pool, a 10-minute walk from home.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "snacks_sat",
+                "title": "Buy party snacks and drinks",
+                "start": "2026-12-12T10:30:00+00:00",
+                "end": "2026-12-12T11:15:00+00:00",
+                "category": "household",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user"
+                ],
+                "description": "Last supermarket shop for the party; the supermarket is 10 minutes from home.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "lunch_sat",
+                "title": "Lunch",
+                "start": "2026-12-12T12:30:00+00:00",
+                "end": "2026-12-12T13:30:00+00:00",
+                "category": "meal",
+                "importance": 3,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "partner",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "Family lunch at home.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "travel_to_venue_sat",
+                "title": "Travel to party venue",
+                "start": "2026-12-12T13:50:00+00:00",
+                "end": "2026-12-12T14:15:00+00:00",
+                "category": "commute",
+                "importance": 5,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "partner",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "25-minute car journey carrying the cake, decorations and party bags.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "venue_setup_sat",
+                "title": "Set up at party venue",
+                "start": "2026-12-12T14:15:00+00:00",
+                "end": "2026-12-12T15:00:00+00:00",
+                "category": "social",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "partner"
+                ],
+                "description": "The venue allows access from 14:15; the decorations must be in place before the guests arrive at 15:00.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "party_sat",
+                "title": "Marta's 7th birthday party",
+                "start": "2026-12-12T15:00:00+00:00",
+                "end": "2026-12-12T17:00:00+00:00",
+                "category": "social",
+                "importance": 5,
+                "fixed": true,
+                "participants": [
+                  "user",
+                  "partner",
+                  "marta",
+                  "duarte",
+                  "guests"
+                ],
+                "description": "Birthday party with 14 children and their parents at a children's play venue; the room is booked and paid.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "travel_home_sat",
+                "title": "Travel home from party",
+                "start": "2026-12-12T17:00:00+00:00",
+                "end": "2026-12-12T17:25:00+00:00",
+                "category": "commute",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "partner",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "25-minute car journey home.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "dinner_sat",
+                "title": "Family dinner",
+                "start": "2026-12-12T19:30:00+00:00",
+                "end": "2026-12-12T20:30:00+00:00",
+                "category": "family",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "One-hour dinner at home with the children.",
+                "origin": "existing",
+                "change_status": "preserved"
+              },
+              {
+                "id": "bedtime_sat",
+                "title": "Children's bedtime routine",
+                "start": "2026-12-12T20:30:00+00:00",
+                "end": "2026-12-12T21:15:00+00:00",
+                "category": "family",
+                "importance": 4,
+                "fixed": false,
+                "participants": [
+                  "user",
+                  "marta",
+                  "duarte"
+                ],
+                "description": "Bath, story and bedtime for both children; about 45 minutes.",
+                "origin": "existing",
+                "change_status": "preserved"
+              }
+            ],
+            "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+          },
+          "plausibility_review": {
+            "revision_required": true,
+            "severity": "moderate",
+            "reason": "Revision is required because the proposed organization contains concrete practical inconsistencies that could significantly affect manageability and goal success: the Thursday lunch location conflicts with the home tow-truck handover window, Friday early pickup remains scheduled for a dentist appointment that has been deleted, and important Friday/Saturday logistics still depend on unresolved transport conditions. These are not merely preferences; they affect whether the user can be in the right place, supervise children appropriately, and secure the birthday cake and party transport.",
+            "suggested_improvement": "Recheck the resulting calendar as a lived sequence, especially Thursday 12:20-14:00, Friday 16:00-18:30, and the Friday night/Saturday party transport dependency. Clarify whether conflicting event descriptions are stale metadata or intended actions, and reconsider whether any preserved or deleted events create avoidable waiting, location conflicts, or unsupported reliance on car access."
+          },
+          "unresolved_assumptions": [
+            {
+              "subject": "Thursday lunch during tow-truck window",
+              "assumption": "The user can have lunch while remaining available at home for the tow-truck handover from 12:20 to 14:00.",
+              "evidence_gap": "The calendar places lunch from 13:00 to 13:45 inside the handover window, but the lunch description says it is at the office canteen.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Morning routine compression",
+              "assumption": "The Thursday and Friday morning routines can be shortened, overlapped with calls, or treated as including departure preparation without undermining childcare readiness.",
+              "evidence_gap": "The 06:45-07:45 morning routines overlap with the Thursday insurer call, Thursday school travel, and Friday school travel, but the rationale does not explain the practical handling of those overlaps.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Garage update during commute",
+              "assumption": "The user can safely and reliably receive the garage status update from 09:00 to 09:10 while commuting from 08:30 to 09:15 on Friday.",
+              "evidence_gap": "The update overlaps the commute, and the proposal does not specify whether it is a passive message, hands-free call, or requires action.",
+              "potential_impact": "material",
+              "verification_source": "third_party"
+            },
+            {
+              "subject": "Dentist cancellation and early pickup",
+              "assumption": "Keeping Marta's early pickup at 16:00 remains necessary or acceptable even after deleting the dentist appointment and related travel.",
+              "evidence_gap": "The early pickup description still says Marta leaves early for her dentist appointment, but the proposal deletes the dentist appointment and adds a long wait instead.",
+              "potential_impact": "material",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Friday bakery travel",
+              "assumption": "The user can still travel to the bakery and home by car on Friday evening despite the car/tow/garage uncertainty visible in the plan.",
+              "evidence_gap": "The bakery trip is preserved as 15-minute car journeys, while the rationale says bakery bus access is not supplied and Saturday transport depends on the garage or backup plan.",
+              "potential_impact": "potentially_blocking",
+              "verification_source": "external_source"
+            },
+            {
+              "subject": "Cake backup",
+              "assumption": "The bakery can support collection or delivery backup if normal collection is not feasible.",
+              "evidence_gap": "The plan adds a 13:15 confirmation call but provides no result, and the cake is described as not being held overnight.",
+              "potential_impact": "potentially_blocking",
+              "verification_source": "third_party"
+            },
+            {
+              "subject": "Saturday party transport",
+              "assumption": "A car or acceptable backup transport will be available to carry the cake, decorations, party bags, and family to the venue on Saturday.",
+              "evidence_gap": "Saturday travel is preserved as a 25-minute car journey carrying party materials, while the rationale says the party travel depends on the Friday garage update or a confirmed backup plan.",
+              "potential_impact": "potentially_blocking",
+              "verification_source": "user_context"
+            },
+            {
+              "subject": "Tow-truck handover authorization",
+              "assumption": "The insurer will narrow the tow-truck arrival time or approve a backup handover arrangement if the user cannot cover the full 12:00-14:00 window.",
+              "evidence_gap": "The plan starts the user's home availability at 12:20 and notes insurer/Dona Rosa confirmation is needed, but no confirmation is present in the resulting calendar.",
+              "potential_impact": "material",
+              "verification_source": "third_party"
+            }
+          ],
+          "weaknesses": [
+            "Thursday has a concrete location/practicality inconsistency: the tow-truck key handover is scheduled at home from 12:20 to 14:00, while lunch remains scheduled from 13:00 to 13:45 with the description 'Lunch at the office canteen'. This is not just a comfort issue; it directly affects whether the user can stay available for the handover window.",
+            "Several proposed movements create overlaps inside family morning routines: on Thursday the insurer call from 07:20 to 07:30 and travel to school from 07:35 to 08:15 occur during the 06:45 to 07:45 morning routine with both children; on Friday travel to school from 07:35 to 08:15 also overlaps the 06:45 to 07:45 morning routine. These may be workable if the routine can compress or travel is part of it, but the rationale does not explain that practical adjustment.",
+            "The Friday garage status update from 09:00 to 09:10 overlaps the commute to work from 08:30 to 09:15. A short call or message during travel may be possible, but the plan relies on that without saying whether the user can safely or realistically receive it during the commute.",
+            "The proposal deletes Friday dentist travel and the dentist appointment, but the calendar still preserves 'Early pick-up of Marta' from 16:00 to 16:15 specifically for the dentist appointment, followed by a 16:15 to 17:30 wait at school/daycare. If the dentist is cancelled, the human purpose of the early pickup and long wait is unclear and may create avoidable strain for the user and Marta.",
+            "The rationale says known bus times only cover certain journeys and repeatedly treats car access as uncertain, yet the resulting Friday evening cake plan preserves car-based travel to the bakery from 17:45 to 18:30. Because the cake is important and the bakery will not hold it overnight, this dependency is material.",
+            "The Thursday afternoon sequence is tight and somewhat under-explained: tow handover at home until 14:00, supplier call at 14:15, work blocks until 16:50, then immediate commute and childcare pickup. This may be manageable, but the rationale does not address transition, setup, or whether work is from home or the office after the tow window.",
+            "The plan relies on many same-day confirmations: insurer, possible Dona Rosa handover, garage, bakery, clinic, and partner transport. The rationale is transparent about this, but the resulting calendar still contains high-priority Saturday and Friday obligations whose feasibility depends on those confirmations."
+          ],
+          "feedback": "The proposal shows sensible priority awareness: school runs, fixed work, report deadline, sleep, and Saturday birthday logistics are treated as important, and it avoids assuming unavailable transport where the rationale notices gaps. However, the resulting calendar is not yet fully coherent as a lived schedule. The most important issue is not general busyness but specific practical contradictions: lunch is still described as taking place at the office during a home tow-truck handover window, the Friday early pickup remains tied to a dentist appointment that the proposal deletes, and several transport-dependent events still appear to assume car use while the broader plan is built around the car being unavailable or uncertain. The Proposer should reconsider whether these preserved events and descriptions reflect the intended real-world plan, and should either adjust the organization or give a grounded explanation from fuller context for how the user can remain available, travel, supervise the children, and complete the cake and party logistics without relying on unsupported assumptions."
+        }
+      ]
+    }
+  ],
+  "initial_proposal": {
+    "changes": [
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Call insurer to narrow tow-truck arrival or approve backup handover",
+        "from_start": null,
+        "to_start": "2026-12-10T07:20:00+00:00",
+        "to_end": "2026-12-10T07:30:00+00:00",
+        "category": "household",
+        "importance": 5,
+        "participants": [
+          "user",
+          "insurer"
+        ]
+      },
+      {
+        "type": "move",
+        "event_id": "travel_to_school_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-12-10T07:35:00+00:00",
+        "to_end": "2026-12-10T08:15:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "commute_to_work_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-12-10T08:30:00+00:00",
+        "to_end": "2026-12-10T09:15:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "prep_budget_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-12-10T09:15:00+00:00",
+        "to_end": "2026-12-10T10:00:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Bus from office to home for tow truck",
+        "from_start": null,
+        "to_start": "2026-12-10T11:30:00+00:00",
+        "to_end": "2026-12-10T12:20:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Tow-truck key handover window at home",
+        "from_start": null,
+        "to_start": "2026-12-10T12:20:00+00:00",
+        "to_end": "2026-12-10T14:00:00+00:00",
+        "category": "household",
+        "importance": 5,
+        "participants": [
+          "user",
+          "tow truck"
+        ]
+      },
+      {
+        "type": "move",
+        "event_id": "lunch_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-12-10T13:00:00+00:00",
+        "to_end": "2026-12-10T13:45:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "focus_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-12-10T14:45:00+00:00",
+        "to_end": "2026-12-10T16:00:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "followup_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-12-10T16:00:00+00:00",
+        "to_end": "2026-12-10T16:50:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "commute_to_school_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-12-10T16:50:00+00:00",
+        "to_end": "2026-12-10T17:30:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "travel_to_club_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "football_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "travel_home_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Bus from school and daycare to home",
+        "from_start": null,
+        "to_start": "2026-12-10T17:45:00+00:00",
+        "to_end": "2026-12-10T18:25:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ]
+      },
+      {
+        "type": "move",
+        "event_id": "travel_to_school_fri",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-12-11T07:35:00+00:00",
+        "to_end": "2026-12-11T08:15:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "commute_to_work_fri",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-12-11T08:30:00+00:00",
+        "to_end": "2026-12-11T09:15:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Receive garage status update",
+        "from_start": null,
+        "to_start": "2026-12-11T09:00:00+00:00",
+        "to_end": "2026-12-11T09:10:00+00:00",
+        "category": "household",
+        "importance": 5,
+        "participants": [
+          "user",
+          "garage"
+        ]
+      },
+      {
+        "type": "move",
+        "event_id": "report_fri",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-12-11T09:15:00+00:00",
+        "to_end": "2026-12-11T12:00:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Confirm cake collection or delivery backup",
+        "from_start": null,
+        "to_start": "2026-12-11T13:15:00+00:00",
+        "to_end": "2026-12-11T13:30:00+00:00",
+        "category": "household",
+        "importance": 5,
+        "participants": [
+          "user",
+          "bakery"
+        ]
+      },
+      {
+        "type": "move",
+        "event_id": "focus_fri",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-12-11T13:30:00+00:00",
+        "to_end": "2026-12-11T15:15:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "commute_to_school_fri",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-12-11T15:15:00+00:00",
+        "to_end": "2026-12-11T16:00:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "travel_to_clinic_fri",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "dentist_fri",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "travel_to_daycare_fri",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Wait at school and daycare with Marta until Duarte pickup",
+        "from_start": null,
+        "to_start": "2026-12-11T16:15:00+00:00",
+        "to_end": "2026-12-11T17:30:00+00:00",
+        "category": "family",
+        "importance": 4,
+        "participants": [
+          "user",
+          "marta"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Confirm Saturday party transport plan",
+        "from_start": null,
+        "to_start": "2026-12-11T22:30:00+00:00",
+        "to_end": "2026-12-11T22:45:00+00:00",
+        "category": "household",
+        "importance": 5,
+        "participants": [
+          "user",
+          "partner"
+        ]
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "Childcare, fixed work commitments and protected sleep blocks are not moved.",
+        "Known bus times only cover home-school, school-office and office-home journeys.",
+        "The budget review prevents being home exactly at 12:00 for the tow-truck window.",
+        "The tow plan needs insurer confirmation because the user reaches home at 12:20, not 12:00.",
+        "Dona Rosa can only be a backup from 13:00 if she agrees and the insurer accepts her handover.",
+        "Football is skipped because the club is not reachable by bus in a reasonable time.",
+        "The dentist deletion needs clinic confirmation because it involves a health appointment and the next slot may be much later.",
+        "Cake collection or delivery needs confirmation because no bus time to the bakery is supplied.",
+        "Saturday party travel depends on the Friday 09:00 garage update or a confirmed backup transport plan."
+      ],
+      "priorities": [
+        "School drop-offs, pick-ups, the budget review and the report deadline are protected first.",
+        "Sleep remains above the seven-hour hard minimum on each night.",
+        "Flexible individual work is compressed or shifted before lower-priority activities.",
+        "Marta's birthday party, cake and venue setup are treated as the main Saturday priority.",
+        "The plan avoids relying on the partner before the Friday 22:00 return."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Keep Marta's football practice on Thursday",
+          "rejected_because": "Rejected because the request says the club is not reasonably reachable by bus."
+        },
+        {
+          "option": "Have the user wait at home for the full 12:00-14:00 tow window",
+          "rejected_because": "Rejected because the protected budget review ends at 11:30 and the office-home bus takes 50 minutes."
+        },
+        {
+          "option": "Move or shorten the budget review",
+          "rejected_because": "Rejected because it is a protected in-person work commitment with the director travelling for it."
+        },
+        {
+          "option": "Keep the dentist appointment unchanged",
+          "rejected_because": "Rejected unless transport is confirmed, because only a 15-minute car journey is supplied."
+        },
+        {
+          "option": "Assume the bakery or party venue is reachable by bus",
+          "rejected_because": "Rejected because the request does not supply those bus times or availability."
+        }
+      ],
+      "summary": "Use buses for school and office, work from home around the tow-truck window, skip Thursday football, compress flexible work, and cancel the dentist unless confirmed transport exists; the main trade-off is that the tow, cake and Saturday party logistics remain dependent on confirmations from the insurer, Dona Rosa, the bakery, the garage and the partner."
+    }
+  },
+  "final_proposal": {
+    "changes": [
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Call insurer to narrow tow-truck arrival or approve backup handover",
+        "from_start": null,
+        "to_start": "2026-12-10T07:20:00+00:00",
+        "to_end": "2026-12-10T07:30:00+00:00",
+        "category": "household",
+        "importance": 5,
+        "participants": [
+          "user",
+          "insurer"
+        ]
+      },
+      {
+        "type": "move",
+        "event_id": "travel_to_school_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-12-10T07:35:00+00:00",
+        "to_end": "2026-12-10T08:15:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "commute_to_work_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-12-10T08:30:00+00:00",
+        "to_end": "2026-12-10T09:15:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "prep_budget_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-12-10T09:15:00+00:00",
+        "to_end": "2026-12-10T10:00:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Bus from office to home for tow truck",
+        "from_start": null,
+        "to_start": "2026-12-10T11:30:00+00:00",
+        "to_end": "2026-12-10T12:20:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "participants": [
+          "user"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Tow-truck key handover window at home",
+        "from_start": null,
+        "to_start": "2026-12-10T12:20:00+00:00",
+        "to_end": "2026-12-10T14:00:00+00:00",
+        "category": "household",
+        "importance": 5,
+        "participants": [
+          "user",
+          "tow truck"
+        ]
+      },
+      {
+        "type": "move",
+        "event_id": "lunch_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-12-10T13:00:00+00:00",
+        "to_end": "2026-12-10T13:45:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "focus_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-12-10T14:45:00+00:00",
+        "to_end": "2026-12-10T16:00:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "followup_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-12-10T16:00:00+00:00",
+        "to_end": "2026-12-10T16:50:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "commute_to_school_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-12-10T16:50:00+00:00",
+        "to_end": "2026-12-10T17:30:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "travel_to_club_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "football_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "travel_home_thu",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Bus from school and daycare to home",
+        "from_start": null,
+        "to_start": "2026-12-10T17:45:00+00:00",
+        "to_end": "2026-12-10T18:25:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ]
+      },
+      {
+        "type": "move",
+        "event_id": "travel_to_school_fri",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-12-11T07:35:00+00:00",
+        "to_end": "2026-12-11T08:15:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "commute_to_work_fri",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-12-11T08:30:00+00:00",
+        "to_end": "2026-12-11T09:15:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Receive garage status update",
+        "from_start": null,
+        "to_start": "2026-12-11T09:00:00+00:00",
+        "to_end": "2026-12-11T09:10:00+00:00",
+        "category": "household",
+        "importance": 5,
+        "participants": [
+          "user",
+          "garage"
+        ]
+      },
+      {
+        "type": "move",
+        "event_id": "report_fri",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-12-11T09:15:00+00:00",
+        "to_end": "2026-12-11T12:00:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Confirm cake collection or delivery backup",
+        "from_start": null,
+        "to_start": "2026-12-11T13:15:00+00:00",
+        "to_end": "2026-12-11T13:30:00+00:00",
+        "category": "household",
+        "importance": 5,
+        "participants": [
+          "user",
+          "bakery"
+        ]
+      },
+      {
+        "type": "move",
+        "event_id": "focus_fri",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-12-11T13:30:00+00:00",
+        "to_end": "2026-12-11T15:15:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "move",
+        "event_id": "commute_to_school_fri",
+        "title": null,
+        "from_start": null,
+        "to_start": "2026-12-11T15:15:00+00:00",
+        "to_end": "2026-12-11T16:00:00+00:00",
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "travel_to_clinic_fri",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "dentist_fri",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "delete",
+        "event_id": "travel_to_daycare_fri",
+        "title": null,
+        "from_start": null,
+        "to_start": null,
+        "to_end": null,
+        "category": null,
+        "importance": null,
+        "participants": null
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Wait at school and daycare with Marta until Duarte pickup",
+        "from_start": null,
+        "to_start": "2026-12-11T16:15:00+00:00",
+        "to_end": "2026-12-11T17:30:00+00:00",
+        "category": "family",
+        "importance": 4,
+        "participants": [
+          "user",
+          "marta"
+        ]
+      },
+      {
+        "type": "add",
+        "event_id": null,
+        "title": "Confirm Saturday party transport plan",
+        "from_start": null,
+        "to_start": "2026-12-11T22:30:00+00:00",
+        "to_end": "2026-12-11T22:45:00+00:00",
+        "category": "household",
+        "importance": 5,
+        "participants": [
+          "user",
+          "partner"
+        ]
+      }
+    ],
+    "rationale": {
+      "constraints": [
+        "Childcare, fixed work commitments and protected sleep blocks are not moved.",
+        "Known bus times only cover home-school, school-office and office-home journeys.",
+        "The budget review prevents being home exactly at 12:00 for the tow-truck window.",
+        "The tow plan needs insurer confirmation because the user reaches home at 12:20, not 12:00.",
+        "Dona Rosa can only be a backup from 13:00 if she agrees and the insurer accepts her handover.",
+        "Football is skipped because the club is not reachable by bus in a reasonable time.",
+        "The dentist deletion needs clinic confirmation because it involves a health appointment and the next slot may be much later.",
+        "Cake collection or delivery needs confirmation because no bus time to the bakery is supplied.",
+        "Saturday party travel depends on the Friday 09:00 garage update or a confirmed backup transport plan."
+      ],
+      "priorities": [
+        "School drop-offs, pick-ups, the budget review and the report deadline are protected first.",
+        "Sleep remains above the seven-hour hard minimum on each night.",
+        "Flexible individual work is compressed or shifted before lower-priority activities.",
+        "Marta's birthday party, cake and venue setup are treated as the main Saturday priority.",
+        "The plan avoids relying on the partner before the Friday 22:00 return."
+      ],
+      "alternatives_considered": [
+        {
+          "option": "Keep Marta's football practice on Thursday",
+          "rejected_because": "Rejected because the request says the club is not reasonably reachable by bus."
+        },
+        {
+          "option": "Have the user wait at home for the full 12:00-14:00 tow window",
+          "rejected_because": "Rejected because the protected budget review ends at 11:30 and the office-home bus takes 50 minutes."
+        },
+        {
+          "option": "Move or shorten the budget review",
+          "rejected_because": "Rejected because it is a protected in-person work commitment with the director travelling for it."
+        },
+        {
+          "option": "Keep the dentist appointment unchanged",
+          "rejected_because": "Rejected unless transport is confirmed, because only a 15-minute car journey is supplied."
+        },
+        {
+          "option": "Assume the bakery or party venue is reachable by bus",
+          "rejected_because": "Rejected because the request does not supply those bus times or availability."
+        }
+      ],
+      "summary": "Use buses for school and office, work from home around the tow-truck window, skip Thursday football, compress flexible work, and cancel the dentist unless confirmed transport exists; the main trade-off is that the tow, cake and Saturday party logistics remain dependent on confirmations from the insurer, Dona Rosa, the bakery, the garage and the partner."
+    }
+  },
+  "final_score": 2.75,
+  "refinements": 0,
+  "critic_accepted": false,
+  "decision": null,
+  "reasons": [],
+  "status": "proposer_error",
+  "critic_input_version": "final_calendar_v1",
+  "critic_policy_version": "uncertainty_review_v2",
+  "result_calendar_version": "validated_added_metadata_v2",
+  "final_result_calendar": {
+    "timezone": "Europe/Lisbon",
+    "coverage": "all_events_in_scenario_after_simulation",
+    "events": [
+      {
+        "id": "sleep_thu",
+        "title": "Sleep",
+        "start": "2026-12-09T23:00:00+00:00",
+        "end": "2026-12-10T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block; the user requires at least seven hours of sleep per night.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "morning_thu",
+        "title": "Morning routine with the children",
+        "start": "2026-12-10T06:45:00+00:00",
+        "end": "2026-12-10T07:45:00+00:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Breakfast, dressing and packing school bags for both children.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_0",
+        "title": "Call insurer to narrow tow-truck arrival or approve backup handover",
+        "start": "2026-12-10T07:20:00+00:00",
+        "end": "2026-12-10T07:30:00+00:00",
+        "category": "household",
+        "importance": 5,
+        "fixed": null,
+        "participants": [
+          "user",
+          "insurer"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "travel_to_school_thu",
+        "title": "Travel to school and daycare",
+        "start": "2026-12-10T07:35:00+00:00",
+        "end": "2026-12-10T08:15:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "15-minute car journey from home to the school and daycare, which share the same site.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "dropoff_thu",
+        "title": "Drop-off at school and daycare",
+        "start": "2026-12-10T08:15:00+00:00",
+        "end": "2026-12-10T08:30:00+00:00",
+        "category": "childcare",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Drop-off for Marta (primary school, gates close at 08:30) and Duarte (daycare, arrival until 09:00). The partner is on a work trip in Porto until Friday 22:00, so the user handles all school runs, pick-ups and bedtimes.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "commute_to_work_thu",
+        "title": "Commute to office",
+        "start": "2026-12-10T08:30:00+00:00",
+        "end": "2026-12-10T09:15:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute car journey from the school to the office.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "prep_budget_thu",
+        "title": "Prepare budget review documents",
+        "start": "2026-12-10T09:15:00+00:00",
+        "end": "2026-12-10T10:00:00+00:00",
+        "category": "work_focus",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Print and organise the audit folders for the review.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "budget_review_thu",
+        "title": "Quarterly budget review with director",
+        "start": "2026-12-10T10:00:00+00:00",
+        "end": "2026-12-10T11:30:00+00:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "director",
+          "finance_team"
+        ],
+        "description": "In-person review at the office; the physical audit folders must be on the table and the director travels only for this meeting.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_4",
+        "title": "Bus from office to home for tow truck",
+        "start": "2026-12-10T11:30:00+00:00",
+        "end": "2026-12-10T12:20:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "new_5",
+        "title": "Tow-truck key handover window at home",
+        "start": "2026-12-10T12:20:00+00:00",
+        "end": "2026-12-10T14:00:00+00:00",
+        "category": "household",
+        "importance": 5,
+        "fixed": null,
+        "participants": [
+          "user",
+          "tow truck"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "lunch_thu",
+        "title": "Lunch",
+        "start": "2026-12-10T13:00:00+00:00",
+        "end": "2026-12-10T13:45:00+00:00",
+        "category": "meal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Lunch at the office canteen.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "supplier_call_thu",
+        "title": "Call with supplier",
+        "start": "2026-12-10T14:15:00+00:00",
+        "end": "2026-12-10T14:45:00+00:00",
+        "category": "work",
+        "importance": 3,
+        "fixed": true,
+        "participants": [
+          "user",
+          "supplier"
+        ],
+        "description": "Video call with the supplier in Germany; can be taken from anywhere with a stable connection.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "focus_thu",
+        "title": "Project work",
+        "start": "2026-12-10T14:45:00+00:00",
+        "end": "2026-12-10T16:00:00+00:00",
+        "category": "work_focus",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Flexible individual work that can be moved within the working day.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "followup_thu",
+        "title": "Follow-up on action points",
+        "start": "2026-12-10T16:00:00+00:00",
+        "end": "2026-12-10T16:50:00+00:00",
+        "category": "work_focus",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Flexible individual work that can be moved within the working day.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "commute_to_school_thu",
+        "title": "Commute to school",
+        "start": "2026-12-10T16:50:00+00:00",
+        "end": "2026-12-10T17:30:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute journey from the office to the school and daycare.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "pickup_thu",
+        "title": "Pick up children",
+        "start": "2026-12-10T17:30:00+00:00",
+        "end": "2026-12-10T17:45:00+00:00",
+        "category": "childcare",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Pick-up from the after-school programme and daycare, which close at 18:30.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_13",
+        "title": "Bus from school and daycare to home",
+        "start": "2026-12-10T17:45:00+00:00",
+        "end": "2026-12-10T18:25:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "dinner_thu",
+        "title": "Family dinner",
+        "start": "2026-12-10T19:30:00+00:00",
+        "end": "2026-12-10T20:30:00+00:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "One-hour dinner at home with the children.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "bedtime_thu",
+        "title": "Children's bedtime routine",
+        "start": "2026-12-10T20:30:00+00:00",
+        "end": "2026-12-10T21:15:00+00:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Bath, story and bedtime for both children; about 45 minutes.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "sleep_fri",
+        "title": "Sleep",
+        "start": "2026-12-10T23:00:00+00:00",
+        "end": "2026-12-11T06:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block; the user requires at least seven hours of sleep per night.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "morning_fri",
+        "title": "Morning routine with the children",
+        "start": "2026-12-11T06:45:00+00:00",
+        "end": "2026-12-11T07:45:00+00:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Breakfast, dressing and packing school bags for both children.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "travel_to_school_fri",
+        "title": "Travel to school and daycare",
+        "start": "2026-12-11T07:35:00+00:00",
+        "end": "2026-12-11T08:15:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "15-minute car journey from home to the school and daycare, which share the same site.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "dropoff_fri",
+        "title": "Drop-off at school and daycare",
+        "start": "2026-12-11T08:15:00+00:00",
+        "end": "2026-12-11T08:30:00+00:00",
+        "category": "childcare",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Drop-off for Marta (primary school, gates close at 08:30) and Duarte (daycare, arrival until 09:00). The partner is on a work trip in Porto until Friday 22:00, so the user handles all school runs, pick-ups and bedtimes.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "commute_to_work_fri",
+        "title": "Commute to office",
+        "start": "2026-12-11T08:30:00+00:00",
+        "end": "2026-12-11T09:15:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute car journey from the school to the office.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "new_16",
+        "title": "Receive garage status update",
+        "start": "2026-12-11T09:00:00+00:00",
+        "end": "2026-12-11T09:10:00+00:00",
+        "category": "household",
+        "importance": 5,
+        "fixed": null,
+        "participants": [
+          "user",
+          "garage"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "report_fri",
+        "title": "Write quarterly sales report",
+        "start": "2026-12-11T09:15:00+00:00",
+        "end": "2026-12-11T12:00:00+00:00",
+        "category": "work_focus",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Report prepared from the budget review feedback.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "deadline_fri",
+        "title": "Submit quarterly report to director",
+        "start": "2026-12-11T12:00:00+00:00",
+        "end": "2026-12-11T12:15:00+00:00",
+        "category": "work",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "director"
+        ],
+        "description": "The report must be sent to the director by 12:15; no extension is possible.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "farewell_lunch_fri",
+        "title": "Farewell lunch for a colleague",
+        "start": "2026-12-11T12:15:00+00:00",
+        "end": "2026-12-11T13:15:00+00:00",
+        "category": "social",
+        "importance": 2,
+        "fixed": true,
+        "participants": [
+          "user",
+          "colleagues"
+        ],
+        "description": "Team lunch at a restaurant near the office to say goodbye to a colleague.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_18",
+        "title": "Confirm cake collection or delivery backup",
+        "start": "2026-12-11T13:15:00+00:00",
+        "end": "2026-12-11T13:30:00+00:00",
+        "category": "household",
+        "importance": 5,
+        "fixed": null,
+        "participants": [
+          "user",
+          "bakery"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "focus_fri",
+        "title": "Project work",
+        "start": "2026-12-11T13:30:00+00:00",
+        "end": "2026-12-11T15:15:00+00:00",
+        "category": "work_focus",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Flexible individual work that can be moved within the working day.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "commute_to_school_fri",
+        "title": "Commute to school",
+        "start": "2026-12-11T15:15:00+00:00",
+        "end": "2026-12-11T16:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "30-minute car journey from the office to the school.",
+        "origin": "existing",
+        "change_status": "moved"
+      },
+      {
+        "id": "early_pickup_fri",
+        "title": "Early pick-up of Marta",
+        "start": "2026-12-11T16:00:00+00:00",
+        "end": "2026-12-11T16:15:00+00:00",
+        "category": "childcare",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "marta"
+        ],
+        "description": "Marta leaves the after-school programme early for her dentist appointment; the school allows early pick-up from 16:00.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_24",
+        "title": "Wait at school and daycare with Marta until Duarte pickup",
+        "start": "2026-12-11T16:15:00+00:00",
+        "end": "2026-12-11T17:30:00+00:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": null,
+        "participants": [
+          "user",
+          "marta"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "pickup_duarte_fri",
+        "title": "Pick up Duarte",
+        "start": "2026-12-11T17:30:00+00:00",
+        "end": "2026-12-11T17:45:00+00:00",
+        "category": "childcare",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Duarte's daycare closes at 18:30.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "travel_to_bakery_fri",
+        "title": "Travel to bakery",
+        "start": "2026-12-11T17:45:00+00:00",
+        "end": "2026-12-11T18:00:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "15-minute car journey.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "cake_pickup_fri",
+        "title": "Collect Marta's birthday cake",
+        "start": "2026-12-11T18:00:00+00:00",
+        "end": "2026-12-11T18:15:00+00:00",
+        "category": "errand",
+        "importance": 4,
+        "fixed": true,
+        "participants": [
+          "user",
+          "bakery"
+        ],
+        "description": "Custom birthday cake ordered for Saturday's party; the bakery closes at 18:30 and will not hold it overnight.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "travel_home_fri",
+        "title": "Travel home",
+        "start": "2026-12-11T18:15:00+00:00",
+        "end": "2026-12-11T18:30:00+00:00",
+        "category": "commute",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "15-minute car journey home.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "dinner_fri",
+        "title": "Family dinner",
+        "start": "2026-12-11T19:30:00+00:00",
+        "end": "2026-12-11T20:30:00+00:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "One-hour dinner at home with the children.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "bedtime_fri",
+        "title": "Children's bedtime routine",
+        "start": "2026-12-11T20:30:00+00:00",
+        "end": "2026-12-11T21:15:00+00:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Bath, story and bedtime for both children; about 45 minutes.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "party_prep_fri",
+        "title": "Prepare party bags and decorations",
+        "start": "2026-12-11T21:15:00+00:00",
+        "end": "2026-12-11T22:00:00+00:00",
+        "category": "household",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Fill 14 party bags and prepare decorations for Saturday.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "partner_return_fri",
+        "title": "Partner returns from Porto",
+        "start": "2026-12-11T22:00:00+00:00",
+        "end": "2026-12-11T22:30:00+00:00",
+        "category": "partner_work",
+        "importance": 2,
+        "fixed": true,
+        "participants": [
+          "partner"
+        ],
+        "description": "The partner arrives home from the work trip.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "new_25",
+        "title": "Confirm Saturday party transport plan",
+        "start": "2026-12-11T22:30:00+00:00",
+        "end": "2026-12-11T22:45:00+00:00",
+        "category": "household",
+        "importance": 5,
+        "fixed": null,
+        "participants": [
+          "user",
+          "partner"
+        ],
+        "description": null,
+        "origin": "proposed_addition",
+        "change_status": "added"
+      },
+      {
+        "id": "sleep_sat",
+        "title": "Sleep",
+        "start": "2026-12-11T23:00:00+00:00",
+        "end": "2026-12-12T07:30:00+00:00",
+        "category": "sleep",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user"
+        ],
+        "description": "Protected sleep block; the user requires at least seven hours of sleep per night.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "breakfast_sat",
+        "title": "Family breakfast",
+        "start": "2026-12-12T07:30:00+00:00",
+        "end": "2026-12-12T09:00:00+00:00",
+        "category": "family",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "partner",
+          "marta",
+          "duarte"
+        ],
+        "description": "Relaxed Saturday breakfast.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "swim_duarte_sat",
+        "title": "Duarte's baby swimming class",
+        "start": "2026-12-12T09:30:00+00:00",
+        "end": "2026-12-12T10:15:00+00:00",
+        "category": "kids_activity",
+        "importance": 2,
+        "fixed": false,
+        "participants": [
+          "user",
+          "duarte"
+        ],
+        "description": "Weekly 45-minute class at the pool, a 10-minute walk from home.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "snacks_sat",
+        "title": "Buy party snacks and drinks",
+        "start": "2026-12-12T10:30:00+00:00",
+        "end": "2026-12-12T11:15:00+00:00",
+        "category": "household",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user"
+        ],
+        "description": "Last supermarket shop for the party; the supermarket is 10 minutes from home.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "lunch_sat",
+        "title": "Lunch",
+        "start": "2026-12-12T12:30:00+00:00",
+        "end": "2026-12-12T13:30:00+00:00",
+        "category": "meal",
+        "importance": 3,
+        "fixed": false,
+        "participants": [
+          "user",
+          "partner",
+          "marta",
+          "duarte"
+        ],
+        "description": "Family lunch at home.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "travel_to_venue_sat",
+        "title": "Travel to party venue",
+        "start": "2026-12-12T13:50:00+00:00",
+        "end": "2026-12-12T14:15:00+00:00",
+        "category": "commute",
+        "importance": 5,
+        "fixed": false,
+        "participants": [
+          "user",
+          "partner",
+          "marta",
+          "duarte"
+        ],
+        "description": "25-minute car journey carrying the cake, decorations and party bags.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "venue_setup_sat",
+        "title": "Set up at party venue",
+        "start": "2026-12-12T14:15:00+00:00",
+        "end": "2026-12-12T15:00:00+00:00",
+        "category": "social",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "partner"
+        ],
+        "description": "The venue allows access from 14:15; the decorations must be in place before the guests arrive at 15:00.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "party_sat",
+        "title": "Marta's 7th birthday party",
+        "start": "2026-12-12T15:00:00+00:00",
+        "end": "2026-12-12T17:00:00+00:00",
+        "category": "social",
+        "importance": 5,
+        "fixed": true,
+        "participants": [
+          "user",
+          "partner",
+          "marta",
+          "duarte",
+          "guests"
+        ],
+        "description": "Birthday party with 14 children and their parents at a children's play venue; the room is booked and paid.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "travel_home_sat",
+        "title": "Travel home from party",
+        "start": "2026-12-12T17:00:00+00:00",
+        "end": "2026-12-12T17:25:00+00:00",
+        "category": "commute",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "partner",
+          "marta",
+          "duarte"
+        ],
+        "description": "25-minute car journey home.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "dinner_sat",
+        "title": "Family dinner",
+        "start": "2026-12-12T19:30:00+00:00",
+        "end": "2026-12-12T20:30:00+00:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "One-hour dinner at home with the children.",
+        "origin": "existing",
+        "change_status": "preserved"
+      },
+      {
+        "id": "bedtime_sat",
+        "title": "Children's bedtime routine",
+        "start": "2026-12-12T20:30:00+00:00",
+        "end": "2026-12-12T21:15:00+00:00",
+        "category": "family",
+        "importance": 4,
+        "fixed": false,
+        "participants": [
+          "user",
+          "marta",
+          "duarte"
+        ],
+        "description": "Bath, story and bedtime for both children; about 45 minutes.",
+        "origin": "existing",
+        "change_status": "preserved"
+      }
+    ],
+    "metadata_note": "Added-event metadata is copied from validated Proposal fields without inference."
+  },
+  "final_unresolved_assumptions": [
+    {
+      "subject": "Thursday lunch during tow-truck window",
+      "assumption": "The user can have lunch while remaining available at home for the tow-truck handover from 12:20 to 14:00.",
+      "evidence_gap": "The calendar places lunch from 13:00 to 13:45 inside the handover window, but the lunch description says it is at the office canteen.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Morning routine compression",
+      "assumption": "The Thursday and Friday morning routines can be shortened, overlapped with calls, or treated as including departure preparation without undermining childcare readiness.",
+      "evidence_gap": "The 06:45-07:45 morning routines overlap with the Thursday insurer call, Thursday school travel, and Friday school travel, but the rationale does not explain the practical handling of those overlaps.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Garage update during commute",
+      "assumption": "The user can safely and reliably receive the garage status update from 09:00 to 09:10 while commuting from 08:30 to 09:15 on Friday.",
+      "evidence_gap": "The update overlaps the commute, and the proposal does not specify whether it is a passive message, hands-free call, or requires action.",
+      "potential_impact": "material",
+      "verification_source": "third_party"
+    },
+    {
+      "subject": "Dentist cancellation and early pickup",
+      "assumption": "Keeping Marta's early pickup at 16:00 remains necessary or acceptable even after deleting the dentist appointment and related travel.",
+      "evidence_gap": "The early pickup description still says Marta leaves early for her dentist appointment, but the proposal deletes the dentist appointment and adds a long wait instead.",
+      "potential_impact": "material",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Friday bakery travel",
+      "assumption": "The user can still travel to the bakery and home by car on Friday evening despite the car/tow/garage uncertainty visible in the plan.",
+      "evidence_gap": "The bakery trip is preserved as 15-minute car journeys, while the rationale says bakery bus access is not supplied and Saturday transport depends on the garage or backup plan.",
+      "potential_impact": "potentially_blocking",
+      "verification_source": "external_source"
+    },
+    {
+      "subject": "Cake backup",
+      "assumption": "The bakery can support collection or delivery backup if normal collection is not feasible.",
+      "evidence_gap": "The plan adds a 13:15 confirmation call but provides no result, and the cake is described as not being held overnight.",
+      "potential_impact": "potentially_blocking",
+      "verification_source": "third_party"
+    },
+    {
+      "subject": "Saturday party transport",
+      "assumption": "A car or acceptable backup transport will be available to carry the cake, decorations, party bags, and family to the venue on Saturday.",
+      "evidence_gap": "Saturday travel is preserved as a 25-minute car journey carrying party materials, while the rationale says the party travel depends on the Friday garage update or a confirmed backup plan.",
+      "potential_impact": "potentially_blocking",
+      "verification_source": "user_context"
+    },
+    {
+      "subject": "Tow-truck handover authorization",
+      "assumption": "The insurer will narrow the tow-truck arrival time or approve a backup handover arrangement if the user cannot cover the full 12:00-14:00 window.",
+      "evidence_gap": "The plan starts the user's home availability at 12:20 and notes insurer/Dona Rosa confirmation is needed, but no confirmation is present in the resulting calendar.",
+      "potential_impact": "material",
+      "verification_source": "third_party"
+    }
+  ],
+  "uncertainty_history": [
+    {
+      "iteration": 0,
+      "unresolved_assumptions": [
+        {
+          "subject": "Thursday lunch during tow-truck window",
+          "assumption": "The user can have lunch while remaining available at home for the tow-truck handover from 12:20 to 14:00.",
+          "evidence_gap": "The calendar places lunch from 13:00 to 13:45 inside the handover window, but the lunch description says it is at the office canteen.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Morning routine compression",
+          "assumption": "The Thursday and Friday morning routines can be shortened, overlapped with calls, or treated as including departure preparation without undermining childcare readiness.",
+          "evidence_gap": "The 06:45-07:45 morning routines overlap with the Thursday insurer call, Thursday school travel, and Friday school travel, but the rationale does not explain the practical handling of those overlaps.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Garage update during commute",
+          "assumption": "The user can safely and reliably receive the garage status update from 09:00 to 09:10 while commuting from 08:30 to 09:15 on Friday.",
+          "evidence_gap": "The update overlaps the commute, and the proposal does not specify whether it is a passive message, hands-free call, or requires action.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Dentist cancellation and early pickup",
+          "assumption": "Keeping Marta's early pickup at 16:00 remains necessary or acceptable even after deleting the dentist appointment and related travel.",
+          "evidence_gap": "The early pickup description still says Marta leaves early for her dentist appointment, but the proposal deletes the dentist appointment and adds a long wait instead.",
+          "potential_impact": "material",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Friday bakery travel",
+          "assumption": "The user can still travel to the bakery and home by car on Friday evening despite the car/tow/garage uncertainty visible in the plan.",
+          "evidence_gap": "The bakery trip is preserved as 15-minute car journeys, while the rationale says bakery bus access is not supplied and Saturday transport depends on the garage or backup plan.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "external_source"
+        },
+        {
+          "subject": "Cake backup",
+          "assumption": "The bakery can support collection or delivery backup if normal collection is not feasible.",
+          "evidence_gap": "The plan adds a 13:15 confirmation call but provides no result, and the cake is described as not being held overnight.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "third_party"
+        },
+        {
+          "subject": "Saturday party transport",
+          "assumption": "A car or acceptable backup transport will be available to carry the cake, decorations, party bags, and family to the venue on Saturday.",
+          "evidence_gap": "Saturday travel is preserved as a 25-minute car journey carrying party materials, while the rationale says the party travel depends on the Friday garage update or a confirmed backup plan.",
+          "potential_impact": "potentially_blocking",
+          "verification_source": "user_context"
+        },
+        {
+          "subject": "Tow-truck handover authorization",
+          "assumption": "The insurer will narrow the tow-truck arrival time or approve a backup handover arrangement if the user cannot cover the full 12:00-14:00 window.",
+          "evidence_gap": "The plan starts the user's home availability at 12:20 and notes insurer/Dona Rosa confirmation is needed, but no confirmation is present in the resulting calendar.",
+          "potential_impact": "material",
+          "verification_source": "third_party"
+        }
+      ]
+    }
+  ],
+  "error": "IAedu rate limit: Rate limit reached (429)",
+  "error_stage": "proposer",
+  "safe_action": "no_autonomous_action",
+  "llm_diagnostics": {
+    "classification": "retry_exhausted",
+    "attempts": [
+      {
+        "source": "stream_event",
+        "http_status": 200,
+        "detail": "Rate limit reached (429)",
+        "headers": {},
+        "retry_after_seconds": null,
+        "limit_kind": "unspecified",
+        "quota_exhausted": false,
+        "attempt": 1,
+        "wait_seconds": 17.433
+      },
+      {
+        "source": "stream_event",
+        "http_status": 200,
+        "detail": "Rate limit reached (429)",
+        "headers": {},
+        "retry_after_seconds": null,
+        "limit_kind": "unspecified",
+        "quota_exhausted": false,
+        "attempt": 2,
+        "wait_seconds": 25.989
+      },
+      {
+        "source": "stream_event",
+        "http_status": 200,
+        "detail": "Rate limit reached (429)",
+        "headers": {},
+        "retry_after_seconds": null,
+        "limit_kind": "unspecified",
+        "quota_exhausted": false,
+        "attempt": 3,
+        "wait_seconds": 68.084
+      },
+      {
+        "source": "stream_event",
+        "http_status": 200,
+        "detail": "Rate limit reached (429)",
+        "headers": {},
+        "retry_after_seconds": null,
+        "limit_kind": "unspecified",
+        "quota_exhausted": false,
+        "attempt": 4
+      }
+    ]
+  },
+  "rate_limit_diagnostics": {
+    "classification": "retry_exhausted",
+    "attempts": [
+      {
+        "source": "stream_event",
+        "http_status": 200,
+        "detail": "Rate limit reached (429)",
+        "headers": {},
+        "retry_after_seconds": null,
+        "limit_kind": "unspecified",
+        "quota_exhausted": false,
+        "attempt": 1,
+        "wait_seconds": 17.433
+      },
+      {
+        "source": "stream_event",
+        "http_status": 200,
+        "detail": "Rate limit reached (429)",
+        "headers": {},
+        "retry_after_seconds": null,
+        "limit_kind": "unspecified",
+        "quota_exhausted": false,
+        "attempt": 2,
+        "wait_seconds": 25.989
+      },
+      {
+        "source": "stream_event",
+        "http_status": 200,
+        "detail": "Rate limit reached (429)",
+        "headers": {},
+        "retry_after_seconds": null,
+        "limit_kind": "unspecified",
+        "quota_exhausted": false,
+        "attempt": 3,
+        "wait_seconds": 68.084
+      },
+      {
+        "source": "stream_event",
+        "http_status": 200,
+        "detail": "Rate limit reached (429)",
+        "headers": {},
+        "retry_after_seconds": null,
+        "limit_kind": "unspecified",
+        "quota_exhausted": false,
+        "attempt": 4
+      }
+    ]
+  },
+  "schema_version": "2.0",
+  "profile_id": "parent_young_children_01__parent_young_children_car_breakdown_solo_001",
+  "scenario_sha256": "adaec89e9c762e9484875a40c9799fe709a08d14b68b601f076a2a7238f3d52a",
+  "aggregate_requirements_sha256": null,
+  "confirmed_changes_sha256": null,
+  "simulator_version": "calendar_v2_validated_added_metadata_v2",
+  "dataset_manifest_sha256": "28af38846fb8995651d5f63ab63402e36147dc0915a2bfcd5379747ea531ffad",
+  "split": "train",
+  "run_id": "9f692b3cb0dc41dfa4355c51862ede23",
+  "experiment_id": null,
+  "repeat_index": 0,
+  "generated_at": "2026-11-25T23:58:06.967315+00:00",
+  "prompt_versions": {
+    "proposer_sha256": "ae6fa59cccb86c31f34f66d07d241660b1feadf852ebf1b594bc85addab86985",
+    "proposer_wire_schema_version": "compact_proposal_v1",
+    "proposer_wire_schema_sha256": "f504fbcd7e939c43e055e2f188feb22097a284bcd9b043227d868e559547b865",
+    "proposer_revision_sha256": "3f0fe7f221013700694a22984560612013e9804072ffde4538e1329b9708ac95",
+    "critic_sha256": "1686688cdd4bc63abb12e6633ef9dbb9b62d69b69aba1c4805a201657cc5bb34"
+  },
+  "seconds": 303.328,
+  "technical_validation": {
+    "structural": "valid",
+    "scope": "implemented_typed_checks_only",
+    "checked_rules": [
+      "event references",
+      "fixed event protection",
+      "typed category/id protection",
+      "typed daily time window",
+      "timezone offsets",
+      "positive duration",
+      "overlap with protected events"
+    ],
+    "not_checked": [
+      "natural-language constraint descriptions",
+      "request satisfaction",
+      "soft preference satisfaction",
+      "autonomy suitability"
+    ],
+    "violations": [],
+    "warnings": [
+      "new temporal overlap (not automatically a hard-rule violation): commute_to_work_fri x new_16",
+      "new temporal overlap (not automatically a hard-rule violation): lunch_thu x new_5",
+      "new temporal overlap (not automatically a hard-rule violation): morning_fri x travel_to_school_fri",
+      "new temporal overlap (not automatically a hard-rule violation): morning_thu x new_0",
+      "new temporal overlap (not automatically a hard-rule violation): morning_thu x travel_to_school_thu"
+    ],
+    "valid": true
+  },
+  "artifact_type": "technical_failure",
+  "active_run": false
+}

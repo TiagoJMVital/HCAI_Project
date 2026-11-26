@@ -17,10 +17,18 @@
     "hard_constraints": [
       {
         "id": "training_sessions",
-        "description": "Sports science testing and training sessions are mandatory.",
-        "rule_type": "protect_events_by_category",
-        "event_categories": [
-          "training"
+        "description": "All training sessions except Tuesday morning's session replaced by the fasting lab testing are mandatory.",
+        "rule_type": "protect_events_by_id",
+        "event_ids": [
+          "training_am_mon",
+          "training_pm_mon",
+          "training_pm_tue",
+          "training_am_wed",
+          "training_pm_wed",
+          "training_am_thu",
+          "training_pm_thu",
+          "training_am_fri",
+          "training_pm_fri"
         ]
       },
       {
@@ -138,12 +146,12 @@
         "end": "2027-03-23T09:00:00+00:00",
         "category": "training",
         "importance": 5,
-        "fixed": true,
+        "fixed": false,
         "participants": [
           "user",
           "coach"
         ],
-        "description": "To be replaced by fasting physiological lab testing (07:30–10:30)."
+        "description": "Replaced by fasting lab testing 07:30–10:30."
       },
       {
         "id": "capstone_meeting_tue",
@@ -152,7 +160,7 @@
         "end": "2027-03-23T11:30:00+00:00",
         "category": "classes",
         "importance": 4,
-        "fixed": true,
+        "fixed": false,
         "participants": [
           "user",
           "professor"
