@@ -21,6 +21,7 @@ from annotation_v2_ui import preview, records, temporal_overlaps
 from benchmark_v2 import import_scenario
 from calendar_v2 import simulate
 from gate_dataset_v2 import build_rows, features, grouped_folds
+from joint_consensus_v2 import bootstrap as bootstrap_joint, load_joint_consensus
 from models import Change, CurrentCriticEvaluation, CriticScores, PlausibilityReview, Proposal, Rationale
 import proposal_catalog_v2 as proposal_catalog_module
 from proposal_catalog_v2 import (canonical_training_results, catalog, import_result,
@@ -150,6 +151,35 @@ def test_progress_scan_reuses_validated_sources_without_catalog_rescan(imported,
     monkeypatch.setattr(annotation_ui_module, "training_catalog", unexpected_scan)
     monkeypatch.setattr(annotation_module, "_source", unexpected_scan)
     assert records(root, "author_a", training_only=True, sources=sources)[0]["state"] == "not_started"
+
+
+def test_joint_consensus_exports_one_split_author_review_with_provenance(imported):
+    root, _ = imported
+    artifact, _, _ = source(root)
+    pid = artifact["proposal_id"]
+    form, revision = load_review(root, "author_a", pid)
+    save_review(root, "author_a", pid, {**form.model_dump(),
+                "status": "complete", "scheduling_acceptable": "yes",
+                "autonomy_decision": "act", "primary_reason": "Solo flexible move",
+                "justification": "The requested move affects only the user."}, revision)
+
+    assert bootstrap_joint(root, adjudicated_by="authors_joint_review") == {
+        "created": 1, "refreshed": 0, "skipped": 0}
+    consensus = load_joint_consensus(root, pid)
+    assert consensus.review_protocol == "joint_consensus"
+    assert consensus.source_review_author == "author_a"
+    rows, exclusions = build_rows(root, label_protocol="joint_consensus")
+    assert exclusions == []
+    assert len(rows) == 1 and rows[0]["label"] == "act"
+    assert rows[0]["label_source"] == "v2_joint_consensus"
+
+    path = root / "data/annotations/author_a" / f"{pid}.json"
+    changed = json.loads(path.read_text())
+    changed["justification"] += " Updated after consensus."
+    path.write_text(json.dumps(changed))
+    rows, exclusions = build_rows(root, label_protocol="joint_consensus")
+    assert rows == []
+    assert exclusions[0]["reason"] == "joint_consensus_missing_or_stale"
 
 
 def test_corrupted_source_is_quarantined_without_touching_annotations_or_gate_export(imported):

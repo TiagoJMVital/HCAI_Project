@@ -22,4 +22,6 @@ After both forms are complete, `src/annotation_v2.py` compares acceptability, au
 
 ## Gate export
 
-`python src/gate_dataset_v2.py --split train` exports only applicable, Critic-accepted, technically valid, human-accepted and adjudicated proposals to `data/gate_datasets/train.jsonl`, with an exclusions report. The label is the consensus `act/defer`. Human reasons, justifications and scenario/profile/family identifiers remain metadata, not predictors. The test split stays locked until the model and policy are frozen. Number of scenarios is not the number of eligible examples. No training happens during export.
+The preferred evidence path remains two independent reviews followed by adjudication. For the current time-bounded gate-development pass, proposals whose authors divided the workload use a separately declared `joint_consensus` fallback. Each joint record identifies the sole completed source-review author, stores that file's SHA-256 and becomes stale if the source changes. It is not a second review and must not be included in agreement or Cohen's kappa claims.
+
+`python src/gate_dataset_v2.py --split train --label-protocol joint_consensus` exports only applicable, Critic-accepted, technically valid and human-accepted proposals with current joint labels. The label is `act/defer`; reasons, justifications and identifiers remain metadata, not predictors. `python src/train_gate_v2.py` trains C only after export. The test split stays locked until the model and policy are frozen, and training-family grouped diagnostics are not test evidence.

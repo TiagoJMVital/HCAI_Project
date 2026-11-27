@@ -1,62 +1,28 @@
 {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GateFeaturesV2",
+  "type": "object",
+  "additionalProperties": false,
   "properties": {
-    "scenario_id": {
-      "title": "Scenario Id",
-      "type": "string"
-    },
-    "critic_score": {
-      "title": "Critic Score",
-      "type": "number"
-    },
-    "change_type": {
-      "enum": [
-        "add",
-        "move",
-        "delete"
-      ],
-      "title": "Change Type",
-      "type": "string"
-    },
-    "event_importance": {
-      "maximum": 5,
-      "minimum": 1,
-      "title": "Event Importance",
-      "type": "integer"
-    },
-    "conflict_level": {
-      "maximum": 5,
-      "minimum": 1,
-      "title": "Conflict Level",
-      "type": "integer"
-    },
-    "expected_impact": {
-      "maximum": 5,
-      "minimum": 1,
-      "title": "Expected Impact",
-      "type": "integer"
-    },
-    "defer": {
-      "anyOf": [
-        {
-          "type": "integer"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "description": "R\u00f3tulo: 1=defer, 0=act",
-      "title": "Defer"
-    }
+    "critic_score": {"type": "number", "minimum": 1, "maximum": 5},
+    "change_count": {"type": "integer", "minimum": 1},
+    "change_type": {"enum": ["add", "move", "delete", "mixed"]},
+    "max_touched_importance": {"type": "integer", "minimum": 1, "maximum": 5},
+    "touches_fixed": {"type": "boolean"},
+    "touches_third_party": {"type": "boolean"},
+    "deletes_event": {"type": "boolean"},
+    "moves_event": {"type": "boolean"},
+    "adds_event": {"type": "boolean"}
   },
   "required": [
-    "scenario_id",
     "critic_score",
+    "change_count",
     "change_type",
-    "event_importance",
-    "conflict_level",
-    "expected_impact"
-  ],
-  "title": "GateFeatures",
-  "type": "object"
+    "max_touched_importance",
+    "touches_fixed",
+    "touches_third_party",
+    "deletes_event",
+    "moves_event",
+    "adds_event"
+  ]
 }

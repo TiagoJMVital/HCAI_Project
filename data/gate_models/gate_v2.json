@@ -1,0 +1,127 @@
+{
+  "schema_version": "1.0",
+  "model_type": "deterministic_logistic_regression",
+  "task": "learning_to_defer",
+  "positive_label": "defer",
+  "created_at": "2026-11-27T00:23:16.811114+00:00",
+  "dataset_sha256": "71266ff6321fe6edffe0cc36c0ddc92c68319608ef5764e420908de02fe85997",
+  "training_examples": 43,
+  "label_counts": {
+    "act": 32,
+    "defer": 11
+  },
+  "families": [
+    "content_creator_schedule_conflict",
+    "elite_athlete_student_schedule_conflict",
+    "freelancer_schedule_conflict",
+    "nurse_shift_worker_masters_schedule_conflict",
+    "parent_young_children_schedule_conflict",
+    "working_student_schedule_conflict"
+  ],
+  "review_protocols": [
+    "joint_consensus"
+  ],
+  "feature_order": [
+    "intercept",
+    "critic_score_div_5",
+    "change_count_div_20",
+    "max_touched_importance_div_5",
+    "touches_fixed",
+    "touches_third_party",
+    "deletes_event",
+    "moves_event",
+    "adds_event",
+    "change_type_add",
+    "change_type_move",
+    "change_type_delete",
+    "change_type_mixed"
+  ],
+  "coefficients": [
+    -2.485755535521047,
+    -0.27297947965596203,
+    1.479789376832118,
+    -0.23388522738082182,
+    0.2811651973162292,
+    1.6734415417235566,
+    1.715266638563516,
+    1.1237360657712567,
+    -0.3701826114729249,
+    -0.542851951384467,
+    0.40024249263968864,
+    -0.324263127087689,
+    0.17266933991154162
+  ],
+  "decision_threshold": 0.5,
+  "training_config": {
+    "epochs": 4000,
+    "learning_rate": 0.2,
+    "l2": 0.01,
+    "grouped_folds": 5,
+    "unsafe_act_cost": 5.0
+  },
+  "grouped_oof": {
+    "folds": [
+      {
+        "fold": 0,
+        "validation_families": [
+          "content_creator_schedule_conflict",
+          "working_student_schedule_conflict"
+        ],
+        "train_examples": 25,
+        "validation_examples": 18
+      },
+      {
+        "fold": 1,
+        "validation_families": [
+          "elite_athlete_student_schedule_conflict"
+        ],
+        "train_examples": 36,
+        "validation_examples": 7
+      },
+      {
+        "fold": 2,
+        "validation_families": [
+          "freelancer_schedule_conflict"
+        ],
+        "train_examples": 34,
+        "validation_examples": 9
+      },
+      {
+        "fold": 3,
+        "validation_families": [
+          "nurse_shift_worker_masters_schedule_conflict"
+        ],
+        "train_examples": 39,
+        "validation_examples": 4
+      },
+      {
+        "fold": 4,
+        "validation_families": [
+          "parent_young_children_schedule_conflict"
+        ],
+        "train_examples": 38,
+        "validation_examples": 5
+      }
+    ],
+    "metrics": {
+      "n": 43,
+      "true_defer": 11,
+      "true_act": 32,
+      "true_positive_defer": 10,
+      "true_negative_act": 27,
+      "unsafe_act": 1,
+      "unnecessary_defer": 5,
+      "accuracy": 0.8604651162790697,
+      "defer_recall": 0.9090909090909091,
+      "act_recall": 0.84375,
+      "balanced_accuracy": 0.8764204545454546,
+      "weighted_error_cost": 10.0,
+      "unsafe_act_cost": 5.0
+    }
+  },
+  "limitations": [
+    "Training labels use the recorded review protocol and are not scheduling-quality labels.",
+    "Grouped out-of-fold metrics on this small training set are model-selection diagnostics, not test results.",
+    "The held-out test split remains locked and was not used by this trainer."
+  ]
+}

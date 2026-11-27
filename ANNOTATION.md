@@ -55,12 +55,23 @@ For `defer`, the reason vocabulary is `clarification_required`, `confirmation_re
 
 After both reviews are complete, open **Comparação e adjudicação**. It shows differences, observed autonomy agreement and Cohen's kappa when applicable. Discuss disagreements, enter a consensus decision and rationale, record disagreement fields and the adjudicator, then save. `data/annotations/adjudicated/` stores the consensus separately with hashes of both originals. The system does not invent a consensus or overwrite individual reviews. A one-class or very small sample may make kappa undefined or unstable.
 
+## Explicit joint-consensus fallback
+
+When the authors split the proposals instead of independently reviewing every proposal, do not copy forms into the missing reviewer directory. Materialize the adopted labels as a separate protocol:
+
+```bash
+python src/joint_consensus_v2.py --adjudicated-by author_a_and_author_b
+```
+
+Each file in `data/annotations/joint_consensus/` records `review_protocol: joint_consensus`, the sole completed source-review author and its SHA-256. Editing that source review makes the consensus stale until an intentional `--refresh`. These records support gate development but cannot support inter-rater agreement or Cohen's kappa claims.
+
 ## Export for the future gate
 
 ```bash
-python src/gate_dataset_v2.py --split train
+python src/gate_dataset_v2.py --split train --label-protocol joint_consensus
+python src/train_gate_v2.py
 ```
 
-The exporter writes `data/gate_datasets/train.jsonl` and an exclusions report. It requires an integrity-verified, technically valid, accepted B proposal, two complete reviews and a current complete consensus with acceptable scheduling and an `act/defer` label. Quarantined imports are reported as `source_run_integrity_failed`; their proposal and human annotation files remain untouched. It excludes failures and missing/quality-rejected cases; scenario count is not example count. Identifiers and human reasons are metadata, never predictive features. The test split remains locked: `--split test --unlock-test` is reserved for after freezing features, model and evaluation policy. Never tune using test-family labels. No classifier is trained by this command.
+The exporter writes `data/gate_datasets/train.jsonl` and an exclusions report. Under the default independent protocol it requires two complete reviews and adjudication; under `joint_consensus` it requires a current hash-bound joint record. Both modes still require an integrity-verified, technically valid, Critic-accepted B proposal, acceptable scheduling and an `act/defer` label. Quarantined imports are reported as `source_run_integrity_failed`; their proposal and human annotation files remain untouched. Identifiers and human reasons are metadata, never predictive features. The test split remains locked. `train_gate_v2.py` fits the deterministic logistic gate, selects its threshold from grouped training-family out-of-fold predictions with a higher unsafe-ACT cost, and writes `data/gate_models/gate_v2.json`; those diagnostics are not held-out test results.
 
 See [docs/04_ANNOTATION_PROTOCOL.md](docs/04_ANNOTATION_PROTOCOL.md) for methodological detail and [docs/08_AUTONOMY_POLICY_DRAFT.md](docs/08_AUTONOMY_POLICY_DRAFT.md) for provisional discussion examples.

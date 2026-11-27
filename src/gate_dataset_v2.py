@@ -1,4 +1,4 @@
-"""Export only adjudicated, applicable B v2 proposals; no classifier training."""
+"""Export labelled, applicable B v2 proposals; no classifier training."""
 from __future__ import annotations
 
 import argparse
@@ -11,6 +11,7 @@ from models import Proposal
 from proposal_catalog_v2 import catalog, training_catalog_audit
 from scenario_v2 import load_scenario
 from final_dataset_v2 import combined_manifest, scenario_path
+from joint_consensus_v2 import load_joint_consensus
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -30,11 +31,14 @@ def features(scenario, proposal: Proposal, score: float) -> dict:
             "adds_event": any(c.type == "add" for c in proposal.changes)}
 
 
-def build_rows(root: Path, *, split: str = "train", unlock_test: bool = False) -> tuple[list[dict], list[dict]]:
+def build_rows(root: Path, *, split: str = "train", unlock_test: bool = False,
+               label_protocol: str = "independent_adjudication") -> tuple[list[dict], list[dict]]:
     if split not in {"train", "dev", "test"}:
         raise ValueError("split must be train, dev or test")
     if split == "test" and not unlock_test:
         raise ValueError("test remains locked until model and evaluation policy are frozen")
+    if label_protocol not in {"independent_adjudication", "joint_consensus"}:
+        raise ValueError("unknown label protocol")
     manifest = combined_manifest(root)
     family_split = {}
     for entry in manifest:
@@ -67,14 +71,20 @@ def build_rows(root: Path, *, split: str = "train", unlock_test: bool = False) -
         elif not isinstance(source["critic_score"], (int, float)) or not 1 <= source["critic_score"] <= 5:
             reason = "critic_score_missing"
         else:
+            consensus = None
             try:
-                _, _, hashes = pair(root, pid)
-                path = _consensus_path(root, pid)
-                consensus = ProposalConsensus.model_validate_json(path.read_text())
+                if label_protocol == "joint_consensus":
+                    consensus = load_joint_consensus(root, pid, scenario_id=source["scenario_id"])
+                    hashes = None
+                else:
+                    _, _, hashes = pair(root, pid)
+                    path = _consensus_path(root, pid)
+                    consensus = ProposalConsensus.model_validate_json(path.read_text())
             except (ValueError, OSError):
-                reason = "independent_reviews_or_consensus_missing"
+                reason = ("joint_consensus_missing_or_stale" if label_protocol == "joint_consensus"
+                          else "independent_reviews_or_consensus_missing")
             else:
-                if consensus.original_review_sha256 != hashes:
+                if hashes is not None and consensus.original_review_sha256 != hashes:
                     reason = "consensus_stale_against_original_reviews"
                 elif consensus.status != "complete":
                     reason = "consensus_incomplete"
@@ -92,7 +102,9 @@ def build_rows(root: Path, *, split: str = "train", unlock_test: bool = False) -
                                  "configuration": source["configuration"],
                                  "features": predictors, "critic_score": source["critic_score"],
                                  "label": consensus.autonomy_decision,
-                                 "label_source": "v2_proposal_adjudication"})
+                                 "label_source": ("v2_joint_consensus" if label_protocol == "joint_consensus"
+                                                  else "v2_proposal_adjudication"),
+                                 "review_protocol": label_protocol})
         if reason:
             exclusions.append({"proposal_id": pid, "reason": reason})
     return rows, exclusions
@@ -115,8 +127,12 @@ def main() -> None:
     parser.add_argument("--split", choices=("train", "dev", "test"), default="train")
     parser.add_argument("--unlock-test", action="store_true",
                         help="only after freezing features, classifier and evaluation policy")
+    parser.add_argument("--label-protocol",
+                        choices=("independent_adjudication", "joint_consensus"),
+                        default="independent_adjudication")
     args = parser.parse_args()
-    rows, exclusions = build_rows(ROOT, split=args.split, unlock_test=args.unlock_test)
+    rows, exclusions = build_rows(ROOT, split=args.split, unlock_test=args.unlock_test,
+                                  label_protocol=args.label_protocol)
     out = ROOT / "data" / "gate_datasets" / f"{args.split}.jsonl"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text("".join(json.dumps(row, ensure_ascii=False) + "\n" for row in rows), encoding="utf-8")

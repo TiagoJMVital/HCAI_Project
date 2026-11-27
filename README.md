@@ -1,6 +1,6 @@
 # Human-Centered AI calendar assistant
 
-This research prototype compares **A** (Proposer and fixed autonomy rules), **B** (the same Proposer, an independent Critic with up to three revisions, then the same rules), and the planned **C** (a learned Learning-to-Defer gate). All calendars are synthetic and `act` is a simulated decision; there is no Google Calendar write integration or trained gate.
+This research prototype compares **A** (Proposer and fixed autonomy rules), **B** (the same Proposer, an independent Critic with up to three revisions, then the same rules), and **C** (a learned Learning-to-Defer gate). The current C artefact is a deterministic logistic model trained on eligible training-family proposals with grouped out-of-fold diagnostics; it has not been evaluated on the locked test split. All calendars are synthetic and `act` is a simulated decision; there is no Google Calendar write integration.
 
 In B, the Critic evaluates the structured operations, the Proposer's rationale, and the **complete calendar resulting from deterministic in-memory simulation**, plus the limited technical validation report. It receives the calendar timezone but no separate original request, full profile, original calendar or human labels. It distinguishes objective contradictions, evidence-backed plausibility risks and subjective improvements; consecutive events are not automatically invalid. A remains unchanged. The four scoring dimensions and the 4.0 threshold/three-revision limit are unchanged. See [Architecture](docs/02_ARCHITECTURE.md).
 
@@ -19,8 +19,8 @@ On a revised proposal, the Critic examines **both** whether the earlier concern 
 1. Create a standalone `schema_version: "2.0"` scenario using [`working_student_deadline_001.json`](data/scenarios/working_student_deadline_001.json) as the checked-in contract example. Keep profile, calendar, reference time and request in the scenario; do not add labels or expected solutions. See [benchmark specification](docs/03_BENCHMARK.md).
 2. Validate and import it. Assign the entire family to `train` or `test` **before** importing. The active corpus lives in `data/scenarios/`, and the split manifest is `data/benchmark_manifest.json`.
 3. Explicitly run configuration B to generate a proposal, then import its result into `data/proposals/`. Generation invokes the configured LLM and is never triggered by opening Streamlit. Configuration A is available as the paired baseline.
-4. Two authors independently review the same imported proposal in Streamlit. Reviews and consensus live in `data/annotations/author_a/`, `author_b/`, and `adjudicated/`.
-5. Export eligible, adjudicated training examples to `data/gate_datasets/`. The test split remains locked until the model and evaluation policy are frozen.
+4. The preferred protocol remains two independent reviews plus adjudication. The current time-bounded training pass instead records the split-author labels transparently as `joint_consensus`, linked by SHA-256 to the sole completed source review; these labels must not be used to claim inter-rater agreement.
+5. Export eligible labels to `data/gate_datasets/`, then train C. The test split remains locked until the model and evaluation policy are frozen.
 
 ```bash
 source .venv/bin/activate
@@ -36,7 +36,12 @@ python src/proposal_catalog_v2.py eval/runs/treino/<family>/<scenario_id>/<run_i
 # Or idempotently import all eligible canonical training B results:
 python src/proposal_catalog_v2.py --training
 streamlit run annotation_app.py --server.address 127.0.0.1
+# Preferred independent-adjudication export:
 python src/gate_dataset_v2.py --split train
+# Explicit non-independent protocol used by the current training artefact:
+python src/joint_consensus_v2.py --adjudicated-by author_a_and_author_b
+python src/gate_dataset_v2.py --split train --label-protocol joint_consensus
+python src/train_gate_v2.py
 ```
 
 New results use `eval/runs/treino/<family>/<scenario_id>/<run_id>/A|B/<scenario_id>.json` for training, `eval/runs/avaliacao/desenvolvimento/...` for development and `eval/runs/avaliacao/teste/...` for test. Discovery and replay remain compatible with historical layouts. The final training batch is sequential and resumable: `python eval/run_training_b_v2.py --resume`; inspect its selection without provider calls with `python eval/run_training_b_v2.py --dry-run --resume`. A technically completed result is imported into the annotation catalogue immediately. Completion is verified from the proposal, validation, calendar and Critic history rather than trusting the top-level status. The source hash and the same integrity contract protect annotation loading and gate export. A failed import is preserved but quarantined; existing annotations are never rewritten. The resume scan skips only integrity-verified terminal B results and leaves pending or technically failed scenarios eligible for a later bounded retry. Failed attempts remain outside active `eval/runs/`, with raw model output and sanitized diagnostics archived under `eval/technical_failures/`. Never re-import the included example scenario, which is already in `data/scenarios/`.

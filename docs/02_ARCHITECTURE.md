@@ -15,9 +15,13 @@ flowchart LR
   R --> O[Run result]
   A --> O
   O --> I[Explicit B proposal import]
-  I --> H[Two independent human reviews]
-  H --> C[Adjudication]
+  I --> H[Human proposal review]
+  H -->|preferred| C[Two independent reviews + adjudication]
+  H -->|current fallback| J[Hash-bound joint consensus]
   C --> G[Eligible gate dataset export]
+  J --> G
+  G --> T[Grouped training-family model selection]
+  T --> M[C: versioned logistic gate]
 ```
 
 `src/scenario_v2.py` validates the schema `2.0` profile/calendar/request; `src/proposer_v2.py` adapts it for the existing structured `Proposal` contract in `src/models.py`. The Proposer receives the complete scenario. `src/llm.py` selects IAedu or Ollama from configuration; API credentials stay in ignored `.env` or environment. B now invokes `src/calendar_v2.py` once per proposal to obtain the exact resulting events and technical report. `src/critic.py` receives **the proposal and structured rationale, the complete resulting calendar, the limited technical validation report and the calendar timezone**. On revisions it also receives its own previous concerns, feedback, proposal and simulated resulting calendar, allowing it to judge the Proposer's response and any new regression. It does not receive the source profile, original calendar as a separate input, original request, annotation or autonomy labels. The Critic scores reasoning, coherence, alternatives and clarity from 1 to 5; its assessment now includes practical temporal plausibility and agreement between rationale and resulting calendar. It does not certify constraints beyond the validator's stated scope.
@@ -73,7 +77,7 @@ Within `uncertainty_review_v2`, listing a condition and requesting a revision re
 
 ## Safety and evidence boundaries
 
-Structural validity, computable hard constraints, scheduling acceptability, contextual plausibility and autonomy are distinct judgments. A technically invalid proposal cannot become an `act` or a normal supervised gate example. Human reviewers can mark an otherwise technical proposal as unacceptable; this is a quality rejection with no autonomy label. The Critic distinguishes demonstrable contradictions from plausible risks and subjective preferences; it may suggest transition time when the visible schedule warrants it but cannot impose a universal buffer or infer unknown travel needs. A Critic score is not scheduling or autonomy ground truth. The future C gate must use only permitted pre-label features and keep test families locked during training.
+Structural validity, computable hard constraints, scheduling acceptability, contextual plausibility and autonomy are distinct judgments. A technically invalid proposal cannot become an `act` or a normal supervised gate example. Human reviewers can mark an otherwise technical proposal as unacceptable; this is a quality rejection with no autonomy label. The Critic distinguishes demonstrable contradictions from plausible risks and subjective preferences; it may suggest transition time when the visible schedule warrants it but cannot impose a universal buffer or infer unknown travel needs. A Critic score is not scheduling or autonomy ground truth. The current C prototype uses only the frozen pre-label feature object in `schemas/gatefeatures.schema.json`; it fits a deterministic logistic model, selects its threshold from family-grouped training predictions and keeps test families locked. Joint-consensus provenance is retained as label metadata, never a predictor.
 
 The policy exists because a four-dimension average of 4.25 previously approved a proposal despite a concrete plausibility concern. The explicit review decision is produced by the Critic, not inferred from the average. A moderate concern may be logged with `revision_required=false` when evidence or expected benefit is insufficient. A revision requests another Proposer attempt; compare initial and final proposals and use later human review to determine whether scheduling actually improved.
 
